@@ -20,7 +20,7 @@ build:
   script:
     - docker build -t cmc_prebuild -f DockerfilePrebuild .
     - ls
-    - docker build -t cmc -f Dockerfile .
+    - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
 rspec:
