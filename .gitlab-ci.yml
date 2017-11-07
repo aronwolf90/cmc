@@ -1,7 +1,7 @@
 image: docker:latest
 services:
   - docker:dind
-  - postgress:latest
+  - postgres:latest
 
 stages:
   - build
