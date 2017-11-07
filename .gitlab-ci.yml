@@ -1,25 +1,39 @@
-image: "ruby:2.4"
+image: docker:latest
+services:
+  - docker:dind
+  - postgress:latest
 
-cache:
-  paths:
-    - vendor/ruby
+stages:
+  - build
+  - test
+  - release
+
+variables:
+  CONTAINER_TEST_IMAGE: registry.example.com/my-group/my-project/my-image:$CI_COMMIT_REF_NAME
+  CONTAINER_RELEASE_IMAGE: registry.example.com/my-group/my-project/my-image:latest
 
 before_script:
-  - apt-get update -qq && apt-get install -yqq nodejs libpq-dev
-  - gem install bundler  --no-ri --no-rdoc
-  - bundle install -j $(nproc) --path vendor
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
 
-rails:
-  variables:
-    POSTGRES_USER: test
-    POSTGRES_PASSSWORD: test-password
-    POSTGRES_DB: test
-    DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSSWORD}@postgres/${POSTGRES_DB}
-    RAILS_ENV: test
-  services:
-    - postgres:alpine
+build:
+  stage: build
   script:
-  - rails db:migrate
-  - rails db:seed
-  - rails test
+    - docker build --pull -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+
+rspec:
+  stage: test
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker run $CONTAINER_TEST_IMAGE rspec
+
+release-image:
+  stage: release
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+    - master
+
 
