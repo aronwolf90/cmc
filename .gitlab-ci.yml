@@ -9,8 +9,8 @@ stages:
   - release
 
 variables:
-  CONTAINER_TEST_IMAGE: registry.example.com/my-group/my-project/my-image:$CI_COMMIT_REF_NAME
-  CONTAINER_RELEASE_IMAGE: registry.example.com/my-group/my-project/my-image:latest
+  CONTAINER_TEST_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:$CI_COMMIT_REF_NAME
+  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:latest
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
@@ -19,7 +19,7 @@ build:
   stage: build
   script:
     - docker build -t cmc_prebuild -f DockerfilePrebuild .
-    - docker build --pull -t $CONTAINER_TEST_IMAGE .
+    - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
 rspec:
