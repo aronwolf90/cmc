@@ -1,4 +1,4 @@
-FROM cmc_prebuild
+FROM registry.gitlab.com/cmc_system/cmc/cmc_prebuild
 
 WORKDIR /app
 
