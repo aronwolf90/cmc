@@ -7,6 +7,7 @@ stages:
   - build
   - test
   - release
+  - deploy
 
 variables:
   CONTAINER_TEST_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:$CI_COMMIT_REF_NAME
@@ -36,4 +37,15 @@ release-image:
   only:
     - master
 
+deploy:
+  stage: deploy
+  script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ssh root@staging.example.com "kubectl apply cmc_deploy"
+  only:
+    - master
 
