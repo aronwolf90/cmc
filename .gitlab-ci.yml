@@ -46,7 +46,7 @@ deploy:
     - bash -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - ssh root@aronwolf.tk "kubectl kubectl replace -f cmc_deploy/web_deployment.yml --record"
+    - ssh root@aronwolf.tk "kubectl replace -f cmc_deploy/web_deployment.yml --record"
   only:
     - master
 
