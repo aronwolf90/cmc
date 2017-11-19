@@ -10,7 +10,7 @@ stages:
 
 variables:
   CONTAINER_TEST_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:$CI_COMMIT_REF_NAME
-  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:latest
+  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:$CI_COMMIT_SHA
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
@@ -46,6 +46,6 @@ deploy:
     - bash -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - ssh root@aronwolf.tk "kubectl replace -f cmc_deploy/web_deployment.yml --record"
+    - echo ssh "kubectl set image deployment cmc-web $CONTAINER_RELEASE_IMAGE" | root@aronwolf.tk 
   only:
     - master
