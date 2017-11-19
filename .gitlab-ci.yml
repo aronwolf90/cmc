@@ -1,11 +1,6 @@
 image: docker:latest
 services:
   - docker:dind
-  - postgres:latest
-variables:
-  - POSTGRES_USER=root
-  - POSTGRES_PASSWORD=password
-  - POSTGRES_DB=root
 
 stages:
   - build
@@ -30,6 +25,7 @@ rspec:
   stage: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
+    - docker run -d -e POSTGRES_USER='root' -e POSTGRES_PASSWORD='password' -e POSTGRES_DB='root' postgres:latest
     - docker run -e DATABASE_URL='postgres://root:password@postgres/root' $CONTAINER_TEST_IMAGE rspec
 
 release-image:
