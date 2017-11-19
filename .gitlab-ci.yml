@@ -2,6 +2,11 @@ image: docker:latest
 services:
   - docker:dind
   - postgres:latest
+variables:
+  - POSTGRES_USER=root
+  - POSTGRES_PASSWORD=password
+  - POSTGRES_DB=root
+  - DATABASE_URL=postgres://root:password@postgres/root
 
 stages:
   - build
@@ -24,6 +29,7 @@ build:
 
 rspec:
   stage: test
+  enviroment
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run $CONTAINER_TEST_IMAGE rspec
@@ -49,4 +55,3 @@ deploy:
     - ssh root@aronwolf.tk "kubectl replace -f cmc_deploy/web_deployment.yml --record"
   only:
     - master
-
