@@ -46,6 +46,6 @@ deploy:
     - bash -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - echo ssh "kubectl set image deployment cmc-web $CONTAINER_RELEASE_IMAGE" | root@aronwolf.tk 
+    - ssh root@aronwolf.tk "kubectl set image deployment cmc-web $CONTAINER_RELEASE_IMAGE"  
   only:
     - master
