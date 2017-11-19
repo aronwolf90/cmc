@@ -26,6 +26,7 @@ rspec:
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run -d -e POSTGRES_USER='root' -e POSTGRES_PASSWORD='password' -e POSTGRES_DB='root' postgres:latest
+    - docker ps
     - docker run -e DATABASE_URL='postgres://root:password@db/root' --link=postgres:db $CONTAINER_TEST_IMAGE rspec
 
 release-image:
