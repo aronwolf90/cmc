@@ -11,8 +11,23 @@ RUN apk add postgresql-dev
 RUN apk add postgresql-client
 RUN apk add openssh-client
 RUN apk add bash
+RUN apk add nodejs-npm
+RUN apk add gnupg
 
 COPY Gemfile Gemfile.lock ./
 
 RUN gem install bundler
 RUN bundle install
+
+COPY yarn.lock ./
+COPY package.json ./
+
+ENV PATH /root/.yarn/bin:$PATH
+
+RUN apk add curl bash binutils tar \
+  && rm -rf /var/cache/apk/* \
+  && /bin/bash \
+  && touch ~/.bashrc \
+  && curl -o- -L https://yarnpkg.com/install.sh | bash \
+  && apk del git curl tar binutils
+RUN yarn install

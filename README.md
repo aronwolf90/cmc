@@ -1,28 +1,20 @@
-This project is created from a GitLab [Project Template](https://docs.gitlab.com/ce/gitlab-basics/create-project.html)
+Requirements:
+ - docker (e.g. sudo apt-get install docker.io)
+ - docker-compose (e.g. sudo apt-get install docker-compose)
+ - bash (present in all UNIX operating systems, like ubuntu)
 
-Additions and changes to the project can be proposed [on the original project](https://gitlab.com/gitlab-org/project-templates/rails)
+the first time you have to execute the following command:
+  - Execute: scripts/build.sh
 
-# README
+To run project you have to follow this steps:
+  - Execute: scripts/docker-compose up
+  - In the browser go to: http://localhost:3000
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+When you make changes on Gemfile, Gemfile.lock, yarn.lock or package.json, execute the following command:
+  - scipts/build.sh
 
-Things you may want to cover:
+When the build command (scripts/build.sh) become to slow, execute this:
+  - build_prebuild
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+When the automatic test become to slow, it can help that a administrator (e.g. Aron Wolf) execute:
+  - scripts/build_and_push_cmc_prebuild.sh
