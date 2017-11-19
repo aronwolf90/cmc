@@ -6,7 +6,6 @@ variables:
   - POSTGRES_USER=root
   - POSTGRES_PASSWORD=password
   - POSTGRES_DB=root
-  - DATABASE_URL=postgres://root:password@postgres/root
 
 stages:
   - build
@@ -31,7 +30,7 @@ rspec:
   stage: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run $CONTAINER_TEST_IMAGE rspec
+    - docker run $CONTAINER_TEST_IMAGE rspec -e 'DATABASE_URL=postgres://root:password@postgres/root'
 
 release-image:
   stage: release
