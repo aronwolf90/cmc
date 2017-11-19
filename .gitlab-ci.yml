@@ -29,7 +29,6 @@ build:
 
 rspec:
   stage: test
-  enviroment
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run $CONTAINER_TEST_IMAGE rspec
