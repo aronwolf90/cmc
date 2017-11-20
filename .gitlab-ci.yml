@@ -1,44 +1,43 @@
-image: docker:latest
-services:
-  - docker:dind
-
 stages:
-  - build
   - test
-  - release
+  - build
   - deploy
 
 variables:
   CONTAINER_TEST_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:$CI_COMMIT_REF_NAME
   CONTAINER_RELEASE_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:$CI_COMMIT_SHA
-
-before_script:
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-
-build:
-  stage: build
-  script:
-    - docker build -t $CONTAINER_TEST_IMAGE .
-    - docker push $CONTAINER_TEST_IMAGE
+  CONTAINER_RELEASE_IMAGE_LATEST: registry.gitlab.com/cmc_system/cmc/cmc:latest
 
 rspec:
   stage: test
+  image: registry.gitlab.com/cmc_system/cmc/cmc:test
+  services:
+    - postgres:latest
+  variables:
+    POSTGRES_PASSWORD: password
+    POSTGRES_DB: root
   script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker run -d -e POSTGRES_USER='root' -e POSTGRES_PASSWORD='password' -e POSTGRES_DB='root' --name postgres postgres:latest
-    - docker run -e DATABASE_URL='postgres://root:password@db/root' --link=postgres:db $CONTAINER_TEST_IMAGE rspec
+    - ./alphine_shared_install.sh
+    - bundle install
+    - yarn install
+    - rspec
 
-release-image:
-  stage: release
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker build -t $CONTAINER_RELEASE_IMAGE .
+    - docker tag $CONTAINER_RELEASE_IMAGE CONTAINER_RELEASE_IMAGE_LATEST
     - docker push $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE_LATEST
   only:
     - master
 
 deploy:
   stage: deploy
+  image: registry.gitlab.com/cmc_system/cmc/cmc:test
   script:
     - 'which ssh-agent || ( apk update  && apk add openssh-client  )'
     - eval $(ssh-agent -s)
