@@ -8,6 +8,12 @@ variables:
   CONTAINER_RELEASE_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:$CI_COMMIT_SHA
   CONTAINER_RELEASE_IMAGE_LATEST: registry.gitlab.com/cmc_system/cmc/cmc:latest
 
+cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - node_modules/
+
 rspec:
   stage: test
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
@@ -21,6 +27,7 @@ rspec:
   script:
     - ./alphine_shared_install.sh
     - bundle install
+    - ln node_modules /root/node_modules
     - yarn install
     - rspec
 

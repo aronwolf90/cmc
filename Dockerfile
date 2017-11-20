@@ -8,13 +8,11 @@ RUN /app/alphine_shared_install.sh
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
-COPY yarn.lock ./
-COPY package.json ./
-
 ENV PATH /root/.yarn/bin:$PATH
-
-RUN yarn install
-
 
 COPY . /app
 
+RUN yarn install
+
+# speed up gitlab-cl
+RUN ln node_modules /root/node_modules
