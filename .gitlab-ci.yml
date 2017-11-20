@@ -21,7 +21,7 @@ rspec:
   script:
     - ./alphine_shared_install.sh
     - bundle install
-    - ln /root/node_modules node_modules
+    - ln -s /root/node_modules node_modules
     - yarn install
     - rspec
 

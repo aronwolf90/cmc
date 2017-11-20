@@ -1,4 +1,5 @@
 FROM ruby:2.4.2-alpine3.6
+ARG GITLAB_CI=false
 
 WORKDIR /app
 
@@ -15,4 +16,5 @@ COPY . /app
 RUN yarn install
 
 # speed up gitlab-cl
-RUN ln node_modules /root/node_modules
+RUN echo $GITLAB_CI
+RUN [ $GITLAB_CI ] && mkdir -p /root/node_modules && cp -R node_modules /root/node_modules
