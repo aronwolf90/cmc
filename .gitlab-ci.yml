@@ -16,6 +16,7 @@ rspec:
   variables:
     POSTGRES_PASSWORD: password
     POSTGRES_DB: root
+    DATABASE_URL: postgres://root:password@postgres/root
   script:
     - ./alphine_shared_install.sh
     - bundle install
