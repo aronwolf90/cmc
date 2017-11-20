@@ -46,10 +46,10 @@ deploy:
     - bash -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - sed -i -e "/cmc:[0-9a-fA-F]+/cmc:$CONTAINER_RELEASE_IMAGE/g" cmc_deploy/web_deployment.yml
-    - sed -i -e "/cmc:[0-9a-fA-F]+/cmc:$CONTAINER_RELEASE_IMAGE/g" cmc_deploy/migrate_job.yml
-    - ssh root@aronwolf.tk "kubectl replace -f cmc_deploy/web_deployment.yml -record
-    - ssh root@aronwolf.tk "kubectl apply -f cmc_deploy/migrate_job.yml --record
+    - ssh root@aronwolf.tk 'sed -i -e "/cmc:[0-9a-fA-F]+/cmc:$CONTAINER_RELEASE_IMAGE/g" cmc_deploy/web_deployment.yml'
+    - ssh root@aronwolf.tk 'sed -i -e "/cmc:[0-9a-fA-F]+/cmc:$CONTAINER_RELEASE_IMAGE/g" cmc_deploy/migrate_job.yml'
+    - ssh root@aronwolf.tk "kubectl replace -f cmc_deploy/web_deployment.yml -record"
+    - ssh root@aronwolf.tk "kubectl apply -f cmc_deploy/migrate_job.yml"
     - ssh root@aronwolf.tk "bash -c \"cd cmc_deploy; git commit -am 'deploy to image cmc:$CONTAINER_RELEASE_IMAGE'; git push origin\""
   only:
     - master
