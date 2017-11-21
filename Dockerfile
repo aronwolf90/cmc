@@ -17,4 +17,4 @@ RUN yarn install
 
 # speed up gitlab-cl
 RUN echo $GITLAB_CI
-RUN [ $GITLAB_CI ] && mkdir -p /root/node_modules && cp -R node_modules /root/node_modules
+RUN [ $GITLAB_CI ] && mkdir -p /root/node_modules && cp -R node_modules /root/
