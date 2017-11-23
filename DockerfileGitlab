@@ -13,4 +13,7 @@ RUN bundle install
 
 COPY . /app
 
-RUN yarn install
+# speed up tests on gitlab-ci
+RUN mkdir -p /root/node_modules
+RUN cp -R node_modules /root/
+
