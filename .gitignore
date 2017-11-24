@@ -26,3 +26,5 @@
 /node_modules
 /databases
 /bundle
+
+public/assets/
