@@ -22,5 +22,5 @@ if ! [ -x "$(command -v yarn)" ]; then
   rm -rf /var/cache/apk/*
   touch ~/.bashrc
   curl -o- -L https://yarnpkg.com/install.sh | bash
-  apk del git curl tar binutils
 fi
+
