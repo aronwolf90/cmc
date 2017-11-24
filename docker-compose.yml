@@ -1,0 +1,82 @@
+version: '2'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=root
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+  webpack:
+    image: cmc
+    command:  /bin/sh -c "bundle exec webpack-dev-server"
+    ports:
+      - "3035:3035"
+    volumes:
+      - .:/app
+      - bundle:/usr/local/bundle
+      - node_modules:/app/node_modules
+
+  spring:
+    build: .
+    volumes:
+      - .:/app
+    command: spring server
+    environment:
+      - DATABASE_URL=postgres://root:password@db/root
+      - SPRING_SOCKET=tmp/sockets/spring.sock
+
+  web:
+    image: cmc
+    environment:
+      - DATABASE_URL=postgres://root:password@db/root
+      - SPRING_SOCKET=tmp/sockets/spring.sock
+    command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
+    tty: true
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - bundle:/usr/local/bundle
+      - node_modules:/app/node_modules
+    depends_on:
+      - db
+
+  spring_test:
+    build: .
+    volumes:
+      - .:/app
+    command: spring server
+    environment:
+      - DATABASE_URL=postgres://root:password@db%5Ftest/root
+      - SPRING_SOCKET=tmp/sockets/spring_test.sock
+
+  db_test:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=root
+
+  test:
+    image: cmc
+    environment:
+      - DATABASE_URL=postgres://root:password@db%5Ftest/root
+      - SPRING_SOCKET=tmp/sockets/spring_test.sock
+    volumes:
+      - .:/app
+      - bundle:/usr/local/bundle
+      - node_modules:/app/node_modules
+    depends_on:
+      - db_test
+      - spring_test
+
+volumes:
+  bundle:
+    driver: local
+  node_modules:
+    driver: local
+  db_volume:
+    driver: local
