@@ -11,9 +11,17 @@ gem 'devise'
 gem 'devise_invitable'
 
 # Lovlevel
-gem 'trailblazer-rails'
+gem 'carrierwave'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 3.0'
+
+# Trailblazer
+gem 'cells-rails'
+gem 'cells-slim'
+gem 'trailblazer'
+gem 'trailblazer-cells'
+gem 'trailblazer-rails'
+
 
 # Preprocessors
 gem 'coffee-rails', '~> 4.2'

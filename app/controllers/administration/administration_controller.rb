@@ -1,5 +1,5 @@
 module Administration
-  class AdministrationController < ActionController::Base
+  class AdministrationController < ApplicationController
     layout 'administration'
 
     before_action :authenticate_user!

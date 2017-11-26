@@ -5,12 +5,12 @@ nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
 
   ul.navbar-nav
      a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-       = 'Action'
+       = image_tag current_user.avatar_url.to_s, class: 'rounded-circle', size: 24
      .dropdown-menu.dropdown-menu-right
        a class="dropdown-item"
-         = 'Action'
-       = link_to administration_user_settings_users_path, class: 'dropdown-item'
+         = current_user
+       = link_to [:edit, :administration, :user_settings, current_user], class: 'dropdown-item'
          = 'Settings'
        div class="dropdown-divider">
        = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item'
-         =  'Sigen out'
+         =  'Sign out'

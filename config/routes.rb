@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resource :dashboard, only: :index
 
     namespace :user_settings do
-      resource :users, only: %i[show edit]
+      resources :users, only: %i[edit update]
     end
   end
 

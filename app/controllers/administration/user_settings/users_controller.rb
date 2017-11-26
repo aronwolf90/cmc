@@ -1,12 +1,19 @@
 module Administration
   module UserSettings
     class UsersController < UserSettingsController
-      def show
-        render inline: 'hi', layout: true
+      def edit
+        run User::Update::Present
+
+        render cell(User::Cell::Edit, @form)
       end
 
-      def edit
-        render inline: 'hi', layout: true
+      def update
+        run User::Update do
+          flash[:notice] = 'Successful update'
+          return render cell(User::Cell::Edit, @form)
+        end
+
+        render cell(User::Cell::Edit, @form)
       end
     end
   end
