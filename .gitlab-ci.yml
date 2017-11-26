@@ -49,8 +49,8 @@ deploy:
     - bash -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - ssh root@aronwolf.tk 'sed -i -e "/cmc:[0-9a-fA-F]+/cmc:$CI_COMMIT_SHA/g" cmc_deploy/web_deployment.yml'
-    - ssh root@aronwolf.tk 'sed -i -e "/cmc:[0-9a-fA-F]+/cmc:$CI_COMMIT_SHA/g" cmc_deploy/migrate_job.yml'
+    - ssh root@aronwolf.tk 'sed -i -E \"/cmc:[0-9a-fA-F]+/cmc:$CI_COMMIT_SHA/g\" cmc_deploy/web_deployment.yml'
+    - ssh root@aronwolf.tk 'sed -i -E \"/cmc:[0-9a-fA-F]+/cmc:$CI_COMMIT_SHA/g\" cmc_deploy/migrate_job.yml'
     - ssh root@aronwolf.tk "kubectl replace -f cmc_deploy/web_deployment.yml --record"
     - ssh root@aronwolf.tk "kubectl delete -f cmc_deploy/migrate_job.yml"
     - ssh root@aronwolf.tk "kubectl apply -f cmc_deploy/migrate_job.yml"
