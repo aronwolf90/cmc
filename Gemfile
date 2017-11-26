@@ -8,6 +8,7 @@ gem 'puma', '~> 3.7'
 
 # Engines
 gem 'devise'
+gem 'devise_invitable'
 
 # Lovlevel
 gem 'trailblazer-rails'
@@ -20,10 +21,13 @@ gem 'sass-rails', '~> 5.0'
 
 # Frontent libraries
 gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 
 # Template
+gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.5'
+gem 'simple_form'
 gem 'slim-rails'
 
 group :development, :test do

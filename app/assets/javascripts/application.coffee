@@ -1,7 +1,7 @@
-@require rails-ujs
-@require jquery3
-@require popper
-@require bootstrap
-@require turbolinks
+#= require jquery
+#= require rails-ujs
+#= require popper
+#= require bootstrap
+#= require turbolinks
 
-@require cable
+#= require cable

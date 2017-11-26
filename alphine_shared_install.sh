@@ -15,6 +15,7 @@ apk add openssh-client
 apk add bash
 apk add nodejs-npm
 apk add gnupg
+
 gem install bundler
 
 if ! [ -x "$(command -v yarn)" ]; then
@@ -24,3 +25,8 @@ if ! [ -x "$(command -v yarn)" ]; then
   curl -o- -L https://yarnpkg.com/install.sh | bash
 fi
 
+wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.11.tar.gz
+tar -xvzf libiconv-1.11.tar.gz
+cd libiconv-1.11
+./configure --prefix=/usr/local/libiconv
+make install
