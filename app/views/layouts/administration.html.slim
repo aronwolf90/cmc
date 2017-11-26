@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+html
+  head
+    title TemplateProject
+    = csrf_meta_tags
+
+    = stylesheet_link_tag 'administration', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    = render 'administration/shared/navbar'
+    - if content_for? :side_menu
+      = :side_menu
+    - else
+      = render @side_menu
+    .container-fluid
+      .side-body
+        = yield

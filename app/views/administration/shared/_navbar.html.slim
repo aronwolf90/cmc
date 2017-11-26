@@ -1,0 +1,16 @@
+nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
+  .mr-auto
+    = link_to administration_root_path
+      = image_tag 'logo.png', id: 'logo', size: 24
+
+  ul.navbar-nav
+     a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+       = 'Action'
+     .dropdown-menu.dropdown-menu-right
+       a class="dropdown-item"
+         = 'Action'
+       = link_to administration_user_settings_users_path, class: 'dropdown-item'
+         = 'Settings'
+       div class="dropdown-divider">
+       = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item'
+         =  'Sigen out'
