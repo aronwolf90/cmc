@@ -1,0 +1,32 @@
+= simple_form_for [:administration, :user_settings, model] do |f|
+
+  .row
+    .col-md-6
+      h5 = 'Avatar'
+      | This information will appear on your profile.
+
+  hr.divider
+
+  .row
+    .col-lg-6
+      h5 = 'Main settings'
+      | This information will appear on your profile.
+    .col-lg-6
+      = f.input :firstname
+      = f.input :lastname
+      = f.input :email
+
+  hr.divider
+
+  .row
+    .col-lg-6
+      h5 = 'Contact data'
+      | This information will appear on your profile.
+
+  br
+
+  .row
+    .col-lg-6
+    .col-lg-6
+      = f.submit class: 'btn btn-success'
+      = link_to 'Cancel', cancel_path, class: 'btn btn-secondary pull-right'
