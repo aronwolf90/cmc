@@ -9,10 +9,10 @@ html
 
   body
     = render 'administration/shared/navbar'
-    - if content_for? :side_menu
-      = :side_menu
-    - else
-      = render @side_menu
-    .container-fluid
-      .side-body
+    .wraper
+      - if content_for? :side_menu
+        = :side_menu
+      - else
+        = render @side_menu_path
+      section.side-body.container-fluid
         = yield

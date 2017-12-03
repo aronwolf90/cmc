@@ -12,9 +12,9 @@
       h5 = 'Main settings'
       | This information will appear on your profile.
     .col-lg-6
-      = f.input :firstname
-      = f.input :lastname
-      = f.input :email
+      = f.input :firstname, required: false
+      = f.input :lastname, required: false
+      = f.input :email, required: false
 
   hr.divider
 

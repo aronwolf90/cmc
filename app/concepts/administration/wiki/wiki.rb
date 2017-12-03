@@ -1,0 +1,1 @@
+module Administration::Wiki; end

@@ -1,23 +1,20 @@
 module Administration
-  class UsersController < AdministrationController
-    def index
-      render inline: 'hi', layout: true
-    end
+  module UserSettings
+    class UsersController < BaseController
+      def edit
+        run User::Update::Present
 
-    def show
-      render inline: 'hi', layout: true
-    end
+        render cell(User::Cell::Edit, @form)
+      end
 
-    def new
-      render inline: 'hi', layout: true
-    end
+      def update
+        run User::Update do
+          flash[:notice] = 'Successful update'
+          return render cell(User::Cell::Edit, @form)
+        end
 
-    def edit
-      render inline: 'hi', layout: true
-    end
-
-    def destroy
-      render inline: 'hi', layout: true
+        render cell(User::Cell::Edit, @form)
+      end
     end
   end
 end
