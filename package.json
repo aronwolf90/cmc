@@ -3,9 +3,22 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
-    "coffeescript": "1.12.7"
+    "bootstrap": "4.0.0-beta.2",
+    "bootstrap-vue": "^1.3.0",
+    "bootstrap.native": "^2.0.21",
+    "coffeescript": "1.12.7",
+    "pug": "^2.0.0-rc.4",
+    "vue": "^2.5.9",
+    "vue-awesome": "^2.3.4",
+    "vue-loader": "^13.5.0",
+    "vue-resource": "^1.3.4",
+    "vue-store": "^0.3.1-moved",
+    "vue-template-compiler": "^2.5.9",
+    "vue-turbolinks": "^2.0.0",
+    "vuedraggable": "^2.15.0",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "webpack-dev-server": "^2.9.4"
+    "webpack-dev-server": "^2.9.5"
   }
 }

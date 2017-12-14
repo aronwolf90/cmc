@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171203000209) do
+ActiveRecord::Schema.define(version: 20171209115742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "board_lists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "departments", force: :cascade do |t|
     t.string "name"
@@ -24,6 +30,10 @@ ActiveRecord::Schema.define(version: 20171203000209) do
   create_table "issues", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.bigint "board_list_id"
+    t.index ["board_list_id"], name: "index_issues_on_board_list_id"
   end
 
   create_table "projects", force: :cascade do |t|

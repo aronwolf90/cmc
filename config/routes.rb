@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
     resource :dashboard, only: :show
     resource :board, only: :show
-    resource :issues, only: %i[new update]
+    resources :board_lists
+    resources :issues, only: %i[new create edit update]
 
     resources :users, only: %i[edit update]
 
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
 
       resources :pages
     end
+
+    get '*path' => redirect('/administration')
   end
 
   root to: 'health#index'

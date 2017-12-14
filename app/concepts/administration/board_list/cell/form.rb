@@ -1,10 +1,15 @@
-module Administration::Board
+module Administration::BoardList
   module Cell
-    class Show < Trailblazer::Cell
+    class Form < Trailblazer::Cell
       include ActionView::RecordIdentifier
       include ActionView::Helpers::FormOptionsHelper
       include SimpleForm::ActionViewExtensions::FormHelper
-      include Webpacker::Helper
+
+      private
+
+      def cancel_path
+        administration_board_path
+      end
     end
   end
 end

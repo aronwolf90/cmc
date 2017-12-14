@@ -1,0 +1,9 @@
+= simple_form_for [:administration, model] do |f|
+  .row
+    .col-lg-12
+      = f.input :name, required: false
+
+  .row
+    .col-lg-12
+      = f.submit class: 'btn btn-success'
+      = link_to 'Cancel', cancel_path, class: 'btn btn-secondary pull-right'
