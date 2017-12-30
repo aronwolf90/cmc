@@ -20,7 +20,6 @@ gem 'webpacker', '~> 3.0'
 # Trailblazer
 gem 'cells-rails'
 gem 'cells-slim'
-gem 'roar-jsonapi'
 gem 'trailblazer'
 gem 'trailblazer-cells'
 gem 'trailblazer-rails'
@@ -30,9 +29,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 5.0'
 
 # Frontent libraries
+gem 'active_model_serializers', '~> 0.10.0'
 gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'jquery-rails'
-gem 'turbolinks', '~> 5'
+gem 'turbolinks'
 
 # Template
 gem 'font-awesome-rails'

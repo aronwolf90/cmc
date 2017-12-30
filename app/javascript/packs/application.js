@@ -12,7 +12,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import Store from '../store'
 
-import IssuesBoard from '../../concepts/administration/board/view/show.vue'
+import IssuesBoard from '../board.vue'
 
 Vue.use(Vuex)
 Vue.use(TurbolinksAdapter)
@@ -23,6 +23,9 @@ Vue.use(Dropdown)
 
 Vue.component('issues_board', IssuesBoard)
 Vue.component('issues_board', IssuesBoard)
+
+Vue.http.headers.common['X-CSRF-Token'] =
+  document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
 const store = new Vuex.Store(Store)
 

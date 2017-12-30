@@ -1,3 +1,3 @@
 class Issue < ApplicationRecord
-  belongs_to :board_list
+  has_many :board_list_issue_relations
 end

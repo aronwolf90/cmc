@@ -5,9 +5,10 @@ Rails.application.routes.draw do
     root to: 'dashboards#show'
 
     resource :dashboard, only: :show
-    resource :board, only: :show
-    resources :board_lists
-    resources :issues, only: %i[new create edit update]
+    resource :board, only: %i[show update]
+    resources :board_lists do
+      resources :issues, only: %i[new create edit update]
+    end
 
     resources :users, only: %i[edit update]
 
@@ -22,6 +23,13 @@ Rails.application.routes.draw do
     end
 
     get '*path' => redirect('/administration')
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :board_lists, only: %i[index update destroy]
+      patch :board_lists, to: 'board_lists#patch_update', as: :patch_update
+    end
   end
 
   root to: 'health#index'

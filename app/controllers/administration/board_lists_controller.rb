@@ -9,18 +9,29 @@ module Administration
     end
 
     def new
-      run BoardList::Create::Present
+      board_list_form = Administration::BoardListForm.new
 
-      render cell(BoardList::Cell::Form, @form)
+      render cell(BoardList::Cell::Form, board_list_form)
     end
 
     def create
-      run BoardList::Create do
-        flash[:notice] = 'Successful created'
-        return redirect_to administration_board_path
-      end
+      board_list_form = Administration::BoardListForm.new(board_list_params)
 
-      render cell(BoardList::Cell::Form, @form)
+      if board_list_form.save
+        redirect_to administration_board_path
+      else
+        render cell(BoardList::Cell::Form, board_list_form)
+      end
+    end
+
+    private
+
+    def board_list
+      @board_list ||= BoardList.find
+    end
+
+    def board_list_params
+      params.require(:board_list).permit(:name)
     end
   end
 end

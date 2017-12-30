@@ -7,5 +7,10 @@ module Administration
 
       render cell(Board::Cell::Show)
     end
+
+    def update
+      debugger
+      run Board::Update
+    end
   end
 end
