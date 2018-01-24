@@ -15,7 +15,7 @@ export default {
   props: ['issue_id', 'board_list_id'],
   computed: {
     issue() {
-      return this.$store.state.issues.find(issue => issue.id == this.issue_id)
+      return this.$store.getters.get({type: 'issues', id: this.issue_id})
     },
     show_path() {
       return `/administration/board_lists/${this.board_list_id}/issues/${this.issue_id}`

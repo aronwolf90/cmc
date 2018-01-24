@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resource :dashboard, only: :show
     resource :board, only: %i[show update]
     resources :board_lists do
-      resources :issues, only: %i[new create edit update]
+      resources :issues, only: %i[show new create edit update]
     end
 
     resources :users, only: %i[edit update]
@@ -29,6 +29,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :board_lists, only: %i[index update destroy]
       patch :board_lists, to: 'board_lists#patch_update', as: :patch_update
+
+      resources :issues, only: %i[show update] do
+        resources :comments, only: :create
+      end
+
+      resources :users, only: :index
     end
   end
 

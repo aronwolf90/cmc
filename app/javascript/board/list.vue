@@ -26,7 +26,7 @@ export default {
   props: ['list_id'],
   computed: {
     board_list() {
-      return this.$store.state.board_lists.find(board_list => this.list_id == board_list.id)
+      return this.$store.getters.get({ type: 'board_lists', id: this.list_id })
     },
     add_link() {
       return `/administration/board_lists/${this.board_list.id}/issues/new`
@@ -45,7 +45,7 @@ export default {
       return this.$store.getters.getIssue(id)
     },
     destroy() {
-      return this.$store.dispatch('destroyBoardList', this.list_id)
+      return this.$store.dispatch('destroy', this.board_list)
     },
     visitAdd(event) {
       Turbolinks.visit(this.add_link)

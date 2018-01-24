@@ -26,11 +26,13 @@ export default {
       draggable,
       'list': list
   },
+  created() {
+    this.$store.dispatch('initBoardsLists')
+  },
   computed: {
     board_lists: {
       get() {
-        this.$store.dispatch('initBoardsLists')
-        return this.$store.state.board_lists
+        return this.$store.getters.getAll('board_lists')
       },
       set(value) {
         this.$store.dispatch('updateBoardLists', value)
@@ -41,11 +43,6 @@ export default {
     }
   },
   methods: {
-    getIssue(id) {
-      for (let entry of this.$store.state.issues) {
-        if (entry.id == id) return entry
-      }
-    },
     visitAdd(event) {
       Turbolinks.visit(this.add_link)
       event.preventDefault()

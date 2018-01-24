@@ -4,7 +4,13 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable, :invitable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def to_s
+  has_many :issues
+
+  def name
     [firstname, lastname].join(' ')
+  end
+
+  def to_s
+    name
   end
 end

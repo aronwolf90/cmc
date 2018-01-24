@@ -3,7 +3,7 @@ module Api
     class BaseForm
       include ActiveModel::Model
 
-      attr_reader :relationships, :param_attributes, :id
+      attr_reader :relationships, :param_attributes, :model
 
       class << self
         def attributes(*array)
@@ -14,12 +14,6 @@ module Api
           end
         end
 
-        def clazz(constant)
-          define_method :clazz do
-            constant
-          end
-        end
-
         def associations(array)
           define_method :associations do
             array
@@ -27,47 +21,16 @@ module Api
         end
       end
 
-      def initialize(params)
-        @relationships = params[:relationships]
-        @param_attributes = params[:attributes]
-        @id = params[:id]
+      def initialize(model, params:)
+        @relationships = params[:data][:relationships]
+        @param_attributes = params[:data][:attributes] || {}
+        @model = model
 
-        super(
-          model.attributes
-               .slice(*attributes.map(&:to_s))
-               .merge(params[:attributes])
-        )
+        super(param_attributes)
       end
 
-      def model
-        if @model.nil?
-          @model = clazz.find(id)
-          @model.assign_attributes(param_attributes)
-        end
-
-        @model
-      end
-
-      def save
-        return false if invalid?
-
-        model.save!
-        save_relationships!
-      end
-
-      protected
-
-      def save_relationships!
-        relationships.each do |type, data|
-          model.send(type + '=', new_relations(type, data))
-          raise 'invalid' if model.invalid?
-        end
-      end
-
-      def new_relations(type, data)
-        data[:data].map { |entry| entry[:id] }.map do |id|
-          type.singularize.capitalize.constantize.find(id)
-        end
+      def params_contains?(field)
+        param_attributes.key?(field)
       end
     end
   end

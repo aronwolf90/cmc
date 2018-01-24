@@ -25,6 +25,8 @@ module Api
 
       def destroy
         board_list.destroy!
+
+        head :ok
       end
 
       private

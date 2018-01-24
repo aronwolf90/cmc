@@ -3,7 +3,7 @@ module Administration
     side_menu :administration
 
     def show
-      render cell(Issue::ShowCell, issue)
+      render cell(Issue::Cell::Show, issue)
     end
 
     def new

@@ -9,7 +9,11 @@
       "useBuiltIns": true
     }]
   ],
-
+   "env": {
+    "test": {
+      "plugins": ["istanbul"]
+    }
+  },
   "plugins": [
     "syntax-dynamic-import",
     "transform-object-rest-spread",

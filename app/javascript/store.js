@@ -1,85 +1,43 @@
-import Vue from 'vue/dist/vue.esm'
-
-var refresh = (state, payload) => {
-  var map = {}
-
-  for (var entry of payload) {
-    var type = entry.type.replace('-', '_')
-
-    if (!state[type]) state[type] = []
-
-    if (!map[type]) {
-      map[type] = {}
-      for (var stored_entry of state[type]) {
-        map[type][entry.id] = stored_entry
-      }
-    }
-    map[type][entry.id] = entry
-  }
-
-  for (let type_data of Object.entries(map)) {
-    let data = []
-
-    for (let entry of Object.entries(type_data[1])) {
-      data.push(entry[1])
-    }
-
-    state[type] = data
-  }
-}
+import Vue from 'vue/dist/vue.common'
+import JsonApi from 'store/json_api'
 
 export default {
   strict: true,
+  modules: {
+    json_api: JsonApi
+  },
   state: {
-    board_lists: [],
-    issues: []
-  },
-  mutations: {
-    refreshBoardLists(state, payload) {
-      state.board_lists = payload.data
-      if (payload['included']) refresh(state, payload.included)
-    },
-    updateBoardListIssues(state, { id, issues }) {
-      let index = state.board_lists.findIndex(entry => entry.id == id)
-      state.board_lists[index].relationships.issues.data = issues
-    },
-    destroyBoardList(state, id) {
-      let index = state.board_lists.findIndex(entry => entry.id == id)
-      state.board_lists.splice(index, 1)
-    }
-  },
-  getters: {
-    getBoardListIssues(state) {
-      return board_list => {
-        let ids = board_list.relationships.issues.data.map(issue_reference => issue_reference.id)
-        return state.issues.filter(issue => ids.includes(issue.id))
-      }
-    },
-    getIssue(state) {
-      return id => {
-        return state.issues.find(issue => issue.id == id)
-      }
-    }
   },
   actions: {
+    initIssue(context, issue_id) {
+      context.dispatch('initEntry', {
+        url: `/api/v1/issues/${issue_id}`, type: 'issues'
+      })
+    },
+    refreshIssue(context) {
+      context.dispatch('refresh', '/api/v1/issues')
+    },
     initBoardsLists(context) {
-      if (this.state.board_lists.length) return
-      this.dispatch('refreshBoardLists')
+      context.dispatch('initCollection', {
+        url: '/api/v1/board_lists', type: 'board_lists'
+      })
     },
     refreshBoardLists(context) {
-      Vue.http.get('/api/v1/board_lists').then(response => {
-
-        context.commit('refreshBoardLists', response.data)
-      }, response => {
-        alert(response)
+      this.dispatch('refresh', '/api/v1/board_lists')
+    },
+    initUsers(context) {
+      context.dispatch('initCollection', {
+        url: '/api/v1/users/', type: 'users'
       })
+    },
+    refreshUsers(context) {
+      this.dispatch('refresh', '/api/v1/users')
     },
     updateBoardListIssues(context, { id, issues }) {
       context.commit('updateBoardListIssues', { id: id, issues: issues})
       let board_list = context.state.board_lists.find(board_list => board_list.id == id)
 
       Vue.http.put(`/api/v1/board_lists/${board_list.id}`, { board_list }).then(response => {
-        // context.commit('updateBoardListIssues', { response.data })
       }, response => {
         alert(response)
       })
@@ -105,11 +63,44 @@ export default {
         alert(response)
       })
     },
-    destroyBoardList(context, id) {
-      context.commit('destroyBoardList', id)
+    createComment(context, { issue_id, payload, func_success }) {
+      context.dispatch('create', {
+        url: `/api/v1/issues/${issue_id}/comments`,
+        payload: { data: payload },
+        func_success: func_success
+      })
+    },
+    changeIssueToUserReference(context, { issue, user, func_success }) {
+      context.dispatch('changeOneToManyReference', {
+        child: issue,
+        parent: user,
+        child_relationship_name: 'user',
+        parent_relationship_name: 'issues',
+      })
+    },
+    changeOneToManyReference(context, { child, parent, parent_relationship_name, child_relationship_name, func_success }) {
+      let data = { data: { relationships: { }}}
+      data.data.relationships[child_relationship_name] = { data: { id: parent.id, type: parent.type }}
 
-      Vue.http.delete(`/api/v1/board_lists/${id}`)
-        .then(response => {}, response => {
+      Vue.http.put(child.links.self, data)
+        .then(response => {
+          context.commit('removeFromAll', {
+            child: child,
+            parent: parent,
+            child_relationship_name: child_relationship_name,
+            parent_relationship_name: parent_relationship_name
+          })
+          context.commit('addToMultiple', {
+            parent: parent,
+            child: child,
+            relationship_name: parent_relationship_name })
+          context.commit('setAssotiation', {
+            parent: parent,
+            child: child,
+            relationship_name: child_relationship_name
+          })
+          if (func_success) func_success()
+        }, response => {
           alert(response)
         })
     }
