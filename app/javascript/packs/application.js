@@ -2,7 +2,7 @@ import Vue from 'vue/dist/vue.common'
 import Vuex from 'vuex'
 import Store from '../store'
 
-require('../../config/config')
+require('../config')
 
 document.addEventListener('turbolinks:before-visit', () => {
   store.commit('clear', storeState);
