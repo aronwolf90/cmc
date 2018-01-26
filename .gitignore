@@ -16,6 +16,9 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+.tmp/
+.nyc_output/
+coverage/
 
 /node_modules
 /yarn-error.log

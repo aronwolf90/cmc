@@ -22,8 +22,17 @@ rspec:
     - ./alphine_shared_install.sh
     - bundle install
     - ln -s /root/node_modules node_modules
-    - yarn install
     - rspec
+
+mocha:
+  stage: test
+  image: registry.gitlab.com/cmc_system/cmc/cmc:test
+  script:
+    - ./alphine_shared_install.sh
+    - bundle install
+    - ln -s /root/node_modules node_modules
+    - yarn install
+    - yarn test 
 
 build:
   stage: build

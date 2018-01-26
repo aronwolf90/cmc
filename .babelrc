@@ -1,22 +1,18 @@
 {
-  "presets": [
-    ["env", {
-      "modules": false,
-      "targets": {
-        "browsers": "> 1%",
-        "uglify": true
-      },
-      "useBuiltIns": true
-    }]
-  ],
-   "env": {
+  "env": {
+    "development": {
+      "presets": [
+        ["env", { "modules": false }]
+      ]
+    },
     "test": {
+      "presets": [
+        ["env", {
+          "modules": false,
+          "targets": { "node": "current" }
+        }]
+      ],
       "plugins": ["istanbul"]
     }
-  },
-  "plugins": [
-    "syntax-dynamic-import",
-    "transform-object-rest-spread",
-    ["transform-class-properties", { "spec": true }]
-  ]
+  }
 }
