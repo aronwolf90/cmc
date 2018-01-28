@@ -15,7 +15,7 @@ export default class {
     Utils.init(this.state, this._type())
   }
   _add() {
-    if (this._is_present()) return
+    if (this._isPresent()) return
 
     this._collection().push(this.payload)
   }
@@ -27,7 +27,7 @@ export default class {
     return this.state[this._type()]
   }
 
-  _is_present() {
+  _isPresent() {
     return Utils.get(this.state, {
       type: this._type(),
       id: this.payload.id

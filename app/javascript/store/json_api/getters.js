@@ -19,6 +19,10 @@ export default {
   },
   getAssociatedEntries(state) {
     return ({entry, name}) => {
+      if (!entry.relationships) return []
+      if (!entry.relationships[name]) return []
+      if (!entry.relationships[name].data) return []
+
       return entry.relationships[name].data.map(local_entry => {
         return Utils.get(state, Utils.underscore(local_entry.type), local_entry.id)
       })
@@ -26,6 +30,10 @@ export default {
   },
   getAssociatedEntry(state) {
     return ({entry, name}) => {
+      if (!entry.relationships) return
+      if (!entry.relationships[name]) return
+      if (!entry.relationships[name].data) return
+
       let associated = entry.relationships[name].data
       if (!entry.relationships || !entry.relationships[name]) return
       return Utils.get(state, Utils.underscore(associated.type), associated.id)

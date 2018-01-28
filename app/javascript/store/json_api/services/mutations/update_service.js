@@ -8,16 +8,16 @@ export default class {
   }
   perform() {
     if (this.payload.attributes) this._update_attributes()
-    if (this.entry.links) this._update_links()
+    if (this.payload.links) this._update_links()
   }
 
   _update_attributes() {
-    if (!this.entry.attributes) this.entry.attributes = []
+    if (!this.entry.attributes) Vue.set(this.entry, 'attributes', {})
 
     let attributes = this.entry.attributes
 
     for (let key of Object.keys(this.payload.attributes)) {
-      attributes[key] = this.payload.attributes[key]
+      Vue.set(attributes, key, this.payload.attributes[key])
     }
   }
   _update_links() {

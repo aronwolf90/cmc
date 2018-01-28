@@ -4,7 +4,7 @@
       .col-12
         b-form-input(
           type="text",
-          v-model="form.data.attributes.title",
+          v-model="form.attributes.title",
           required,
           placeholder="Title"
         )
@@ -37,11 +37,9 @@ export default {
       is_saving: false,
       is_loaded: false,
       form_data: {
-        data: {
-          attributes: {
-            name: '',
-            description: ''
-          }
+        attributes: {
+          name: '',
+          description: ''
         }
       }
     }
@@ -52,7 +50,7 @@ export default {
       initialEditType: 'markdown',
       previewStyle: 'tab',
       height: '300px',
-      initialValue: this.form.data.attributes.description,
+      initialValue: this.form.attributes.description,
       events: {
         change: (event) => {
           this.setDescription(editor.getValue())
@@ -64,14 +62,14 @@ export default {
     form: {
       get() {
         if (!this.is_loaded) {
-          this.form_data = { data: JSON.parse(JSON.stringify(this.$store.getters.get({type: 'issues', id: this.issue_id}))) }
+          this.form_data = JSON.parse(JSON.stringify(this.$store.getters.get({type: 'issues', id: this.issue_id})))
           this.is_loaded = true
         }
         return this.form_data
       }
     },
     issue() {
-      return this.$store.getters.getIssue(this.issue_id)
+      return this.$store.getters.get({type: 'issues', id: this.issue_id})
     }
   },
   methods: {
@@ -81,7 +79,7 @@ export default {
       this.is_saving = true
 
       this.$store.dispatch('update', {
-        entity: this.issue,
+        entry: this.issue,
         payload: this.form_data,
         func_success: () => {
           this.is_saving = false
@@ -90,7 +88,7 @@ export default {
       })
     },
     setDescription(data) {
-      this.form.data.attributes.description = data
+      this.form.attributes.description = data
     }
   }
 }

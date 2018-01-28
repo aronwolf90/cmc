@@ -45,11 +45,17 @@ export default {
     comments() {
       let issue = this.$store.getters.get({type: 'issues', id: this.issue_id})
       return this.$store.getters.getAssociatedEntries({entry: issue, name: 'comments'})
+    },
+    issue() {
+      return this.$store.getters.get({id: this.issue_id, type: 'issues'})
     }
   },
   methods: {
     comment() {
-      this.$store.dispatch('createComment', { issue_id: this.issue_id, payload: this.new_comment_data } )
+      this.$store.dispatch('createComment', {
+        issue: this.issue,
+        payload: this.new_comment_data
+      })
     }
   }
 }
