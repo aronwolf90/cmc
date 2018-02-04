@@ -13,7 +13,5 @@ RUN bundle install
 
 COPY . /app
 
-RUN yarn install
-
 # secret key is not really used hear, it is only added to avoid the crash on compile
 RUN RAILS_ENV=production SECRET_KEY_BASE='9479a648d2fb' rake assets:precompile

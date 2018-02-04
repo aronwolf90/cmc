@@ -29,6 +29,7 @@ services:
 
   web:
     image: cmc
+    build: .
     environment:
       - DATABASE_URL=postgres://root:password@db/root
       - SPRING_SOCKET=tmp/sockets/spring.sock

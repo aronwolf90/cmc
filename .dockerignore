@@ -1,4 +1,7 @@
-node_modules
-logs
-.git
-tmp
+node_modules/
+public/assets/
+public/packs/
+coverage/
+log/
+.git/
+tmp/

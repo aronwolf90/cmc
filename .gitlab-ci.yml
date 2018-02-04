@@ -17,7 +17,7 @@ gitlint:
     - apk add git
     - pip install gitlint
     - git log -1 --pretty=%B | gitlint
- 
+
 rspec:
   stage: test
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
@@ -42,7 +42,23 @@ mocha:
     - bundle install
     - ln -s /root/node_modules node_modules
     - yarn install
-    - yarn test 
+    - yarn test
+
+cucumber:
+  stage: test
+  image: registry.gitlab.com/cmc_system/cmc/cmc:test
+  services:
+    - postgres:latest
+  variables:
+    POSTGRES_PASSWORD: password
+    POSTGRES_DB: root
+    POSTGRES_USER: root
+    DATABASE_URL: postgres://root:password@postgres/root
+  script:
+    - ./alphine_shared_install.sh
+    - bundle install
+    - ln -s /root/node_modules node_modules
+    - cucumber
 
 build:
   stage: build

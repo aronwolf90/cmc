@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       end
 
       resources :users, only: :index
+      resources :records, only: %i[create update]
     end
   end
 
