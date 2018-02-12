@@ -55,7 +55,7 @@ services:
       - SPRING_SOCKET=tmp/sockets/spring_test.sock
 
   db_test:
-    image: postgres:latest
+    image: labianchin/docker-postgres-for-testing
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=password

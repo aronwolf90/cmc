@@ -1,6 +1,6 @@
 module Administration
   class AdministrationController < ApplicationController
-    layout 'administration'
+    layout "administration"
 
     before_action :authenticate_user!
     before_action :set_side_menu_path
@@ -11,7 +11,7 @@ module Administration
       end
     end
 
-    private
+  private
 
     def set_side_menu_path
       @side_menu_path ||= "#{side_menu}/shared/side_menu"

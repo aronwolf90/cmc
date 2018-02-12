@@ -1,6 +1,6 @@
 module Api
   module V1
-    class CommentsController < ApplicationController
+    class CommentsController < ApiController
       def create
         comment = issue.comments.build
         form = CommentForm.new(comment, params: issue_params)

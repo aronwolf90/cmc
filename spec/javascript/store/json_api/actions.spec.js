@@ -396,4 +396,45 @@ describe("Actions", () => {
       })
     })
   })
+  describe('#create', () => {
+    it("call func_success with the corespondig created entry", (done) => {
+      let issue = {
+        id: '1',
+        type: 'issues',
+        links: { self: '/issues/1' }
+      }
+      let comment = {
+          attributes: { content: 'hi' },
+          relationships: { issue: { data: { id: '1', type: 'issues' }}}
+      }
+      let url = '/comments/1'
+
+      let context = {
+        state: {
+          issues: [issue]
+        },
+        dispatch: (method, params) => {
+          if (method == 'request') {
+            return params.success_funtion({ data: comment })
+          }
+          else throw new Error('Unspecified action')
+        },
+        commit: (method, params) => {
+          if (method == 'add') {
+            if (!context.state.comments) context.state.comments = []
+            context.state.comments.push(params)
+          }
+          else throw new Error('Unspecified mutation')
+        },
+        getters: { get: (params) => {
+          return () => { return context.state.comments[0] }
+        }}
+      }
+
+      Actions.create(context, { url, payload: { data: comment }, func_success: (response) => {
+        expect(context.state.comments[0]).to.eql(comment)
+        done()
+      }})
+    })
+  })
 })

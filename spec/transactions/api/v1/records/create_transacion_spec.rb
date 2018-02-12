@@ -20,13 +20,13 @@ describe Api::V1::Records::CreateTransacion do
 
   before do
     allow(Api::V1::Records::CreateForm).to receive(:call).and_return(double('success?': true))
-    allow(Api::V1::Records::CreateDeserializer).to receive(:normalize).and_return(start_time: Time.zone.now, user_id: 1, issue_id: 1)
+    allow(Api::V1::RecordDeserializer).to receive(:normalize).and_return(start_time: Time.zone.now, user_id: 1, issue_id: 1)
     allow(Record).to receive(:create!)
   end
 
   it 'correct classes have been called' do
     expect(Api::V1::Records::CreateForm).to receive(:call)
-    expect(Api::V1::Records::CreateDeserializer).to receive(:normalize)
+    expect(Api::V1::RecordDeserializer).to receive(:normalize)
     expect(Record).to receive(:create!)
 
     subject

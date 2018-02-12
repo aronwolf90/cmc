@@ -19,6 +19,7 @@ export default {
   },
   getAssociatedEntries(state) {
     return ({entry, name}) => {
+      if (!entry) return []
       if (!entry.relationships) return []
       if (!entry.relationships[name]) return []
       if (!entry.relationships[name].data) return []
@@ -30,6 +31,7 @@ export default {
   },
   getAssociatedEntry(state) {
     return ({entry, name}) => {
+      if (!entry) return
       if (!entry.relationships) return
       if (!entry.relationships[name]) return
       if (!entry.relationships[name].data) return

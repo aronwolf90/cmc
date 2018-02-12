@@ -1,5 +1,6 @@
-module Api::V1::Records
-  class CreateForm < ApiForm
+module Api::V1
+  module Records
+    class CreateForm < ApiForm
     @form = Dry::Validation.Schema do
       configure do
         predicates(ApiPredicates)
@@ -25,5 +26,6 @@ module Api::V1::Records
         end
       end
     end
+  end
   end
 end

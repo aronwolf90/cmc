@@ -1,6 +1,6 @@
 module Api
   module V1
-    class BoardListsController < ApplicationController
+    class BoardListsController < ApiController
       def index
         render json: BoardList.all.order(:ordinal_number), include: :issues
       end

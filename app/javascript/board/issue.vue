@@ -5,23 +5,24 @@
         a(v-bind:href="show_path")
           | {{ issue.attributes.title }}
       .col-2
-        .text-muted(v-bind:href="edit_path")
-          .fa.fa-edit
+        issues_record_section
 </template>
 
 <script>
 
+import IssuesRecordSection from '../components/issues_record_section'
+
 export default {
   props: ['issue_id', 'board_list_id'],
+  components: {
+    'issues_record_section': IssuesRecordSection
+  },
   computed: {
     issue() {
       return this.$store.getters.get({type: 'issues', id: this.issue_id})
     },
     show_path() {
       return `/administration/board_lists/${this.board_list_id}/issues/${this.issue_id}`
-    },
-    edit_path() {
-      return `/administration/board_lists/${this.board_list_id}/issues/${this.issue_id}/edit`
     }
   }
 }

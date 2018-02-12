@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api::V1
   class RecordsController < ApiController
     def create
@@ -11,22 +13,23 @@ module Api::V1
     end
 
     def update
-      result = Records:UpdateOperation.call(record_params)
+      result = Records::UpdateTransaction.call(params: record_params, record: record)
 
       if result.success?
-        head :ok
+        head :no_content
       else
         render_errors(result.failure)
       end
     end
 
-    private
+  private
 
     def record_params
       ActiveSupport::JSON.decode(request.body.read).deep_symbolize_keys
     end
 
     def record
+      @record ||= Record.find(params[:id])
     end
   end
 end

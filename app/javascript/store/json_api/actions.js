@@ -62,18 +62,15 @@ export default {
       })
   },
   create(context, { url, payload, func_success }) {
-    Vue.http.post(url, { data: payload })
-      .then(response => {
-        context.commit('add', response.data.data)
-        if (func_success) {
-          func_success(context.getters.get({
-            type: response.data.data.type,
-            id: response.data.data.id
-          }))
-        }
-      }, response => {
-        alert(response)
-      })
+    context.dispatch('request', { url, method: 'post', payload, success_funtion: (response)=> {
+      context.commit('add', response.data)
+      if (func_success) {
+        func_success(context.getters.get({
+          type: response.data.type,
+          id: response.data.id
+        }))
+      }
+    }})
   },
   destroy(context, entry, func_success) {
     Vue.http.delete(entry.links.self)

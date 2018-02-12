@@ -1,14 +1,16 @@
 require 'rails_helper'
 
-describe Api::V1::Records::CreateDeserializer do
+describe Api::V1::RecordDeserializer do
   subject { described_class.normalize(params) }
 
   let(:start_time) { Time.zone.now }
+  let(:end_time) { 2.hours.from_now }
   let(:params) do
     {
       data: {
         attributes: {
-          start_time: start_time
+          start_time: start_time,
+          end_time: end_time
         },
         relationships: {
           user: { data: { id: 1, type: 'users' }},
@@ -20,6 +22,7 @@ describe Api::V1::Records::CreateDeserializer do
   let(:result) do
     {
       start_time: start_time,
+      end_time: end_time,
       user_id: 1,
       issue_id: 1
     }

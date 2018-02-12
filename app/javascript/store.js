@@ -47,6 +47,20 @@ export default {
         }
       })
     },
+    createRecord(context, attributes, user, issue, func_success) {
+      context.dispatch('create', {
+        url: `/api/v1/records`,
+        payload,
+        func_success: (issue) => {
+          context.commit('addToMultiple', {
+            parent: user,
+            child: issue,
+            relationship_name: 'records'
+          })
+          if (func_success) func_success()
+        }
+      })
+    },
     changeIssueToUserReference(context, { issue, user, func_success }) {
       context.dispatch('changeOneToManyReference', {
         child: issue,

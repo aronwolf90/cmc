@@ -1,6 +1,6 @@
 module Api
   module V1
-    class IssuesController < ApplicationController
+    class IssuesController < ApiController
       def show
         render json: issue, include: :comments
       end

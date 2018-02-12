@@ -1,6 +1,6 @@
 module Api
   module V1
-    class GeneralBoardsController < ApplicationController
+    class GeneralBoardsController < ApiController
       def show
         render json: GeneralBoard.new
       end
