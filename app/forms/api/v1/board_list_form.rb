@@ -1,7 +1,7 @@
 module Api
   module V1
     class BoardListForm < BaseForm
-      clazz BoardList
+      #clazz BoardList
       associations %i[issues]
 
       attributes :name, :ordinal_number

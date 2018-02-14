@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cmc-web
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: cmc-web
+    spec:
+      containers:
+        - name: cmc-web
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          command: ["rails"]
+          args: ["s", "-b", "0.0.0.0"]
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              value: 'postgres://root:password@cmc-database/database'
+            - name: SECRET_KEY_BASE
+              value: {{ .Values.secret_key_base }}
+            - name: RAILS_ENV
+              value: {{ .Values.enviroment }}
+      {{ if .Values.remote }}
+      imagePullSecrets:
+        - name: regsecret
+      {{ end }}

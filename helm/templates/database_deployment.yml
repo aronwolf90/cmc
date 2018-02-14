@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cmc-database
+  labels:
+    name: cmc-database
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: cmc-database
+    spec:
+      containers:
+        - image: postgres:latest
+          name: cmc-database
+          env:
+            - name: POSTGRES_DB
+              value: database
+            - name: POSTGRES_USER
+              value: root
+            - name: POSTGRES_PASSWORD
+              value: password
+            {{ if .Values.remote }}
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            {{ end }}
+          ports:
+            - containerPort: 5432
+              name: cmc-database
+          {{ if .Values.remote }}
+          volumeMounts:
+            - name: cmc-database-volume
+              mountPath: /var/lib/postgresql/data
+          {{ end }}
+
+      {{ if .Values.remote }}
+      volumes:
+        - name: cmc-database-volume
+          hostPath:
+            path: "/databases/cmc"
+      {{ end }}

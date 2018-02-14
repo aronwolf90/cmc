@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cmc-migrate-task
+spec:
+  template:
+    metadata:
+      name: cmc-migrate-task
+      labels:
+        name: cmc-migrate-task
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: cmc-migrate-task
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          command: ["rake"]
+          args: ["db:migrate"]
+          imagePullPolicy: "Always"
+          env:
+            - name: DATABASE_URL
+              value: 'postgres://root:password@cmc-database/database'
+            - name: SECRET_KEY_BASE
+              value: {{ .Values.secret_key_base }}
+      {{ if .Values.remote }}
+      imagePullSecrets:
+        - name: regsecret
+      {{ end }}
