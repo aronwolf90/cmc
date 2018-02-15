@@ -17,8 +17,6 @@ spec:
       containers:
         - name: cmc-web
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          command: ["rails"]
-          args: ["s", "-b", "0.0.0.0"]
           imagePullPolicy: "Always"
           ports:
             - containerPort: 3000
@@ -29,6 +27,8 @@ spec:
               value: {{ .Values.secret_key_base }}
             - name: RAILS_ENV
               value: {{ .Values.enviroment }}
+            - name: RAILS_SERVE_STATIC_FILES
+              value: "true"
       {{ if .Values.remote }}
       imagePullSecrets:
         - name: regsecret

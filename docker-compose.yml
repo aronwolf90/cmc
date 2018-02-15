@@ -35,7 +35,7 @@ services:
       - SPRING_SOCKET=tmp/sockets/spring.sock
       #- RAILS_ENV=production
       #- SECRET_KEY_BASE=04e7dbda80b8aca916d937c278ff9b76f8cb7a3487dbbc47960442ec4d2f74f73f1bd47f7b499fee61c885e29ad2e7b22c169bcf5c5d4a1cf4eee9cddbe22e7d
-    command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
+    # command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
     tty: true
     stdin_open: true
     ports:
