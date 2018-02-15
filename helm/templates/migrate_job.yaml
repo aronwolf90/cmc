@@ -2,6 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: cmc-migrate-task
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
 spec:
   template:
     metadata:
@@ -21,7 +24,3 @@ spec:
               value: 'postgres://root:password@cmc-database/database'
             - name: SECRET_KEY_BASE
               value: {{ .Values.secret_key_base }}
-      {{ if .Values.remote }}
-      imagePullSecrets:
-        - name: regsecret
-      {{ end }}
