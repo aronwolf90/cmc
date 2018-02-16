@@ -14,6 +14,11 @@ export default {
         url: `/api/v1/issues/${issue_id}`, type: 'issues'
       })
     },
+    initContext(context, issue_id) {
+      context.dispatch('initEntry', {
+        url: '/api/v1/context', type: 'contexts'
+      })
+    },
     initBoardsLists(context) {
       context.dispatch('initCollection', {
         url: '/api/v1/board_lists', type: 'board_lists'
@@ -33,13 +38,35 @@ export default {
         alert(response)
       })
     },
-    createComment(context, { issue, payload, func_success }) {
+    createComment(context, { issue, user, attributes, func_success }) {
+      let payload = { "data": {
+        "attributes": attributes,
+        "relationships": {
+          "issue": {
+            "data": {
+              "id": issue.id,
+              "type": issue.type
+            }
+          },
+          "user": {
+            "data": {
+              "id": user.id,
+              "type": user.type
+            }
+         } }
+      } }
+
       context.dispatch('create', {
-        url: `/api/v1/issues/${issue.id}/comments`,
+        url: `/api/v1/comments`,
         payload,
         func_success: (comment) => {
           context.commit('addToMultiple', {
             parent: issue,
+            child: comment,
+            relationship_name: 'comments'
+          })
+          context.commit('addToMultiple', {
+            parent: user,
             child: comment,
             relationship_name: 'comments'
           })

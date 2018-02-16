@@ -3,7 +3,10 @@
 module Api
   module V1
     class CommentSerializer < ActiveModel::Serializer
-      attributes :issue_id, :content
+      attributes :content
+
+      belongs_to :issue, serializer: IssueSerializer
+      belongs_to :user, serializer: UserSerializer
     end
   end
 end

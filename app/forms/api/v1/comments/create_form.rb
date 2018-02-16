@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 module Api::V1
-  module Records
-    class UpdateForm < ApiForm
+  module Comments
+    class CreateForm < ApiForm
       @form = Dry::Validation.Schema do
         configure do
           predicates(ApiPredicates)
         end
 
         required(:data).schema do
-          optional(:attributes).schema do
-            optional(:'start-time').filled
+          required(:attributes).schema do
+            required(:content).filled
           end
-          optional(:relationships).schema do
-            optional(:user).filled(:record_exists?).schema do
+          required(:relationships).schema do
+            required(:user).filled(:record_exists?).schema do
               required(:data).schema do
                 required(:id).filled
                 required(:type).filled
               end
             end
-            optional(:issue).filled(:record_exists?).schema do
+            required(:issue).filled(:record_exists?).schema do
               required(:data).schema do
                 required(:id).filled
                 required(:type).filled

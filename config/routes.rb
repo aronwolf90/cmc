@@ -37,9 +37,8 @@ Rails.application.routes.draw do
       resources :board_lists, only: %i[index update destroy]
       patch :board_lists, to: "board_lists#patch_update", as: :patch_update
 
-      resources :issues, only: %i[show update] do
-        resources :comments, only: :create
-      end
+      resources :issues, only: %i[show update]
+      resources :comments, only: :create
 
       resources :users, only: :index do
         resource :current_record, only: :show

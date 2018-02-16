@@ -1,34 +1,16 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class CommentsController < ApiController
       def create
-        comment = issue.comments.build
-        form = CommentForm.new(comment, params: issue_params)
-        service = Comments::CreateService.new(comment, params: issue_params)
+        result = Comments::CreateTransacion.call(params.to_unsafe_h)
 
-        if form.valid?
-          service.perform
-
-          render json: comment
+        if result.success?
+          render json: result.success, status: :created
         else
-          render json: form.errors
+          render_errors(result.failure)
         end
-      end
-
-      private
-
-      def issue
-        @issue ||= Issue.find(params[:issue_id])
-      end
-
-      def issue_params
-        params.permit(
-          [
-            data: [
-              attributes: %i[content]
-            ]
-          ]
-        )
       end
     end
   end

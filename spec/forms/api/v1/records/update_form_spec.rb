@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 describe Api::V1::Records::UpdateForm do
   subject { described_class.call(params) }
@@ -7,14 +9,14 @@ describe Api::V1::Records::UpdateForm do
     {
       data: {
         id: 1,
-        type: 'records',
+        type: "records",
         attributes: {
-          'start-time': Time.zone.now,
-          'end-time': 1.hour.from_now
+          "start-time": Time.zone.now,
+          "end-time": 1.hour.from_now
         },
         relationships: {
-          user: { data: { id: 1, type: 'users' }},
-          issue: { data: { id: 1, type: 'issues' }}
+          user: { data: { id: 1, type: "users" } },
+          issue: { data: { id: 1, type: "issues" } }
         }
       }
     }
@@ -25,17 +27,17 @@ describe Api::V1::Records::UpdateForm do
     allow(Issue).to receive(:exists?).with(1).and_return(true)
   end
 
-  context 'with valid params' do
-    it 'form is valid' do
+  context "with valid params" do
+    it "form is valid" do
       expect(subject).to be_success
     end
   end
 
-  context 'without start_time' do
-    before { params[:data][:attributes][:'start-time'] = nil }
+  context "without start_time" do
+    before { params[:data][:attributes][:"start-time"] = nil }
 
-    it 'has an error' do
-      expect(subject.errors).to eq(data: { attributes: { 'start-time': ["must be filled"] }})
+    it "has an error" do
+      expect(subject.errors).to eq(data: { attributes: { "start-time": ["must be filled"] } })
     end
   end
 end
