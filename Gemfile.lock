@@ -187,6 +187,8 @@ GEM
     factory_bot_rails (4.8.2)
       factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
+    faraday (0.14.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
@@ -232,6 +234,7 @@ GEM
     minitest (5.11.3)
     multi_json (1.12.2)
     multi_test (0.1.2)
+    multipart-post (2.0.0)
     nio4r (2.1.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -340,6 +343,8 @@ GEM
     selenium-webdriver (3.7.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    sentry-raven (2.7.2)
+      faraday (>= 0.7.6, < 1.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
     simple_form (3.5.0)
@@ -449,6 +454,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   seed-fu
   selenium-webdriver
+  sentry-raven
   shoulda-matchers
   simple_form
   slim-rails
