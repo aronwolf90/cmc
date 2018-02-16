@@ -1,5 +1,5 @@
 stages:
-  - gitlint
+  - lint
   - test
   - build
   - deploy
@@ -10,13 +10,25 @@ variables:
   CONTAINER_RELEASE_IMAGE_LATEST: registry.gitlab.com/cmc_system/cmc/cmc:latest
 
 gitlint:
-  stage: gitlint
+  stage: lint
   image: python:3.7.0a4-alpine3.7
   script:
     - apk update
     - apk add git
     - pip install gitlint
     - git log -1 --pretty=%B | gitlint
+
+rubocop:
+  stage: lint
+  image: registry.gitlab.com/cmc_system/cmc/cmc:test
+  script:
+    - apk update
+    - apk add cmake
+    - gem install pronto
+    - gem install pronto-rubocop
+    - gem install rubocop-rails
+    - gem install rubocop-rspec
+    - pronto run -c=HEAD^ --exit-code
 
 rspec:
   stage: test
