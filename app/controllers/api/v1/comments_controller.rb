@@ -3,14 +3,10 @@
 module Api
   module V1
     class CommentsController < ApiController
-      def create
-        result = Comments::CreateTransacion.call(params.to_unsafe_h)
+      include StandartActions
 
-        if result.success?
-          render json: result.success, status: :created
-        else
-          render_errors(result.failure)
-        end
+      def create
+        super(operation: Comments::CreateOperation)
       end
     end
   end

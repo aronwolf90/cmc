@@ -2,25 +2,25 @@
 
 require "rails_helper"
 
-describe Api::V1::CommentDeserializer do
+describe Api::V1::GeneralBoardDeserializer do
   subject { described_class.normalize(params) }
 
   let(:params) do
     {
-      attributes: {
-        content: "comment"
-      },
       relationships: {
-        user: { data: { id: 1, type: "users" } },
-        issue: { data: { id: 1, type: "issues" } }
+        "board-lists": {
+          data: [{
+            id: "1",
+            type: "board-lists",
+            relationships: { issues: { data: [{ id: "1", type: "issues" }] } }
+          }]
+        }
       }
     }
   end
   let(:result) do
     {
-      content: "comment",
-      user_id: 1,
-      issue_id: 1
+      board_lists_attributes: [{ issue_ids: ["1"], id: "1" }]
     }
   end
 

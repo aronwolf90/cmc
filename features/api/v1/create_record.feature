@@ -10,7 +10,7 @@ Scenario: Post an valid record using json in POST body
     """
     {
       "data": {
-        "attributes": { "start_time": "2018-02-04T12:00:00.000Z" },
+        "attributes": { "start-time": "2018-02-04T12:00:00.000Z" },
         "relationships": {
           "user": { "data": { "id": 1, "type": "users" } },
           "issue": { "data": { "id": 1, "type": "issues" } }

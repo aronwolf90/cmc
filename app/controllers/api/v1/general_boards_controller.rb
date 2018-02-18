@@ -1,40 +1,16 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class GeneralBoardsController < ApiController
+      include StandartActions
+
       def show
         render json: GeneralBoard.new
       end
 
       def update
-        form = IssueForm.new(issue, params: issue_params)
-        service = Issues::UpdateService.new(issue, params: issue_params)
-
-        if form.valid?
-          service.perform
-
-          render json: issue
-        else
-          render json: form.errors
-        end
-      end
-
-      private
-
-      def issue
-        @issue ||= Issue.find(params[:id])
-      end
-
-      def issue_params
-        params.permit(
-          [
-            data: [
-              attributes: %i[title description],
-              relationships: [
-                user: [ data: [ :id ] ]
-              ]
-            ]
-          ]
-        )
+        super(operation: GeneralBoards::UpdateOperation, model: GeneralBoard)
       end
     end
   end

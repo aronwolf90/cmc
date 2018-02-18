@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 describe Api::V1::RecordDeserializer do
   subject { described_class.normalize(params) }
@@ -7,15 +9,13 @@ describe Api::V1::RecordDeserializer do
   let(:end_time) { 2.hours.from_now }
   let(:params) do
     {
-      data: {
-        attributes: {
-          start_time: start_time,
-          end_time: end_time
-        },
-        relationships: {
-          user: { data: { id: 1, type: 'users' }},
-          issue: { data: { id: 1, type: 'issues' }}
-        }
+      attributes: {
+        "start-time": start_time,
+        "end-time": end_time
+      },
+      relationships: {
+        user: { data: { id: 1, type: "users" } },
+        issue: { data: { id: 1, type: "issues" } }
       }
     }
   end
@@ -28,8 +28,8 @@ describe Api::V1::RecordDeserializer do
     }
   end
 
-  context 'with valid params' do
-    it 'form is valid' do
+  context "with valid params" do
+    it "form is valid" do
       expect(subject).to eq(result)
     end
   end

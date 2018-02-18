@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
       resource :context, only: :show
 
-      resource :general_board, only: :show
+      resource :general_board, only: %i[show update]
       resources :board_lists, only: %i[index update destroy]
       patch :board_lists, to: "board_lists#patch_update", as: :patch_update
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class IssuesController < ApiController
@@ -18,23 +20,10 @@ module Api
         end
       end
 
-      private
+    private
 
       def issue
         @issue ||= Issue.find(params[:id])
-      end
-
-      def issue_params
-        params.permit(
-          [
-            data: [
-              attributes: %i[title description],
-              relationships: [
-                user: [ data: [ :id ] ]
-              ]
-            ]
-          ]
-        )
       end
     end
   end

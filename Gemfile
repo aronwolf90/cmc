@@ -28,7 +28,7 @@ gem "cells-rails"
 gem "cells-slim"
 gem "trailblazer"
 gem "trailblazer-cells"
-gem "trailblazer-rails"
+gem "trailblazer-rails", "~> 2.1"
 
 # Preprocessors
 gem "coffee-rails", "~> 4.2"

@@ -9,7 +9,7 @@ describe Api::V1::Records::CreateForm do
     {
       data: {
         attributes: {
-          start_time: Time.zone.now
+          "start-time": Time.zone.now
         },
         relationships: {
           user: { data: { id: 1, type: "users" } },
@@ -31,10 +31,10 @@ describe Api::V1::Records::CreateForm do
   end
 
   context "without start_time" do
-    before { params[:data][:attributes].delete :start_time }
+    before { params[:data][:attributes].delete :"start-time" }
 
     it "has an error" do
-      expect(subject.errors).to eq(data: { attributes: { start_time: ["is missing"] } })
+      expect(subject.errors).to eq(data: { attributes: { "start-time": ["is missing"] } })
     end
   end
 

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Api::V1
-  module Records
-    class UpdateTransaction < ApiTransacion
-      step :validate
+  module Issues
+    class UpdateTransaction < ApiTransaction
+      step :validate, with: ValidateOperation(form: UpdateForm)
       step :deserialize!
       step :create!
 
@@ -17,7 +19,7 @@ module Api::V1
 
       def deserialize!(params:, record:)
         Right(
-          deserialized_params: RecordDeserializer.normalize(params),
+          deserialized_params: IssueDeserializer.normalize(params[:data]),
           record: record
         )
       end

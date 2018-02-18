@@ -10,7 +10,7 @@ module Api::V1
 
         required(:data).schema do
           required(:attributes).schema do
-            required(:start_time).filled
+            required(:"start-time").filled
           end
           required(:relationships).schema do
             required(:user).filled(:record_exists?).schema do
