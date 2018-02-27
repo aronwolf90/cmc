@@ -3,21 +3,14 @@
 module Api
   module V1
     class IssuesController < ApiController
+      include StandartActions
+
       def show
         render json: issue, include: :comments
       end
 
       def update
-        form = IssueForm.new(issue, params: issue_params)
-        service = Issues::UpdateService.new(issue, params: issue_params)
-
-        if form.valid?
-          service.perform
-
-          render json: issue
-        else
-          render json: form.errors
-        end
+        super(operation: Issues::UpdateOperation, model: issue)
       end
 
     private

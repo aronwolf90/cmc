@@ -18,6 +18,8 @@ import IssuesBoard from './board.vue'
 import Issue from './issue.vue'
 import Router from 'vue-router'
 
+require("./polyfill")
+
 Vue.use(Vuex)
 Vue.use(Router)
 Vue.use(TurbolinksAdapter)
