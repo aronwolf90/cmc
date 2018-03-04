@@ -32,7 +32,7 @@ export default {
   computed: {
     board_lists: {
       get() {
-        return this.$store.getters.getAll('board_lists')
+        return this.$store.getters.getAll("board_lists")
       },
       set(value) {
         this.$store.dispatch('updateBoardLists', value)

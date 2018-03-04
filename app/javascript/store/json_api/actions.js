@@ -6,82 +6,103 @@ import * as Utils from './utils'
 Vue.use(VueResource)
 
 export default {
-  initEntry(context, { url, id, type }) {
-    if (context.getters.get({ type, id })) return
-    context.dispatch('add', url)
+  initEntry(context, url) {
+    if (context.getters.wasUrlCalled(url)) {
+      return context.getters.getPromiseByUrl(url)
+		    .then(request => request.data)
+    }
+    return context.dispatch('add', url)
   },
-  initCollection(context, { url, type }) {
-    console.log(type)
-    if (context.getters.getCollection(type)) return
-    context.dispatch('addCollection', url)
-    if (!context.getters.getCollection(type)) context.commit('init', type)
+  initCollection(context, url) {
+    if (context.getters.wasUrlCalled(url)) {
+      return context.getters.getPromiseByUrl(url)
+	            .then(request => request.data)
+    }
+    return context.dispatch('addCollection', url)
+  },
+  initRelatedEntry(context, { entry, name }) {
+    if (!entry.relationships || !entry.relationships[name] ||
+        !entry.relationships[name].data) {
+      return new Promise(resolve => resolve(null)  )
+    }
+
+    let related_entry_reference = entry.relationships[name].data
+
+    if (context.getters.getAssociatedEntry({ entry, name })) {
+      return context.getters.getAssociatedEntry({ entry, name })
+    }
+    return context.dispatch('add',
+	     related_entry_reference.links.url)
+  },
+  initRelatedCollection(context, { entry, name }) {
+    let related_entries_reference = entry.relationships[name].data
+
+    if (context.getters.getAssociatedEntries({ entry, name }) != []) {
+      return new Promise((resolve, reject) => {
+        resolve(context.getters.getAssociatedEntries({ entry, name }))
+      })
+    }
+    return context.dispatch('addCollection',
+	     related_entries_reference.links.url)
   },
   add(context, url) {
-    context.dispatch('request', { url, success_funtion: (response) => {
+    return context.dispatch('request', { url }).then(response => {
       context.commit('add', response.data)
       for (let entry of response.included || []) {
         context.commit('add', entry)
       }
-    }})
+      return response.data
+    })
   },
   addCollection(context, url) {
-    context.dispatch('request', { url, success_funtion: (response) => {
+    return context.dispatch('request', { url }).then((response) => {
       for (let entry of response.data) {
         context.commit('add', entry)
       }
       for (let entry of response.included || []) {
         context.commit('add', entry)
       }
-    }})
-  },
-  request(context, { url, method, payload, success_funtion }) {
-    let test = eval(Vue.http, `${method || 'get'}`)(url)
-
-    Vue.http[method || 'get'](url, payload).then(response => {
-      success_funtion(response.data)
-    }, response => {
-      alert(JSON.stringify(response.data))
+      return response.data
     })
   },
-  destroy(context, entry, func_success) {
-    Vue.http.delete(entry.links.self)
-      .then(response => {
-        context.commit('destroy', entry)
-        if (func_success) func_success()
-      }, response => {
-        alert(response)
+  request(context, { url, method, payload }) {
+    let promise = Vue.http[method || 'get'](url, { data: payload }).then(
+      response => {
+         return response.data
+      },
+      response => {
+        alert(JSON.stringify(response.data))
       })
+
+    context.commit("addCalledUrl", { url, promise })
+
+    return promise
   },
-  update(context, { entry, payload, func_success }) {
-    Vue.http.put(entry.links.self, { data: payload })
-      .then(response => {
-        context.commit('update', { entry, payload })
-        if (func_success) func_success()
-      }, response => {
-        alert(response)
-      })
+  destroy(context, entry, url) {
+    return context.dispatch("request", {
+      url: url || entry.links.self,
+      method: "delete"
+    } )
+  },
+  update(context, { entry, payload, url }) {
+    return context.dispatch("request", {
+      url: url || entry.links.self,
+      method: "put",
+      payload
+    } )
   },
   create(context, { url, payload, func_success }) {
-    context.dispatch('request', { url, method: 'post', payload, success_funtion: (response)=> {
-      context.commit('add', response.data)
-      if (func_success) {
-        func_success(context.getters.get({
-          type: response.data.type,
-          id: response.data.id
-        }))
-      }
-    }})
-  },
-  destroy(context, entry, func_success) {
-    Vue.http.delete(entry.links.self)
-      .then(response => {
-        context.commit('destroy', entry)
-        if (func_success) func_success()
-      }, response => {
-        alert(response)
+    return new Promise((success) => {
+      context.dispatch('request', { url, method: 'post', payload }).then(
+      response => {
+        context.commit('add', response.data)
+        success(response.data)
       })
+    })
   },
-  changeOneToManyReference(context, { child, parent, parent_relationship_name, child_relationship_name, func_success }) {
+  changeOneToManyReference(context, { child, parent,
+    parent_relationship_name, child_relationship_name }) {
+
     context.dispatch('changeRelationship', {
       child, parent,
       parent_relationship_name,
@@ -91,11 +112,19 @@ export default {
       data: { id: parent.id, type: parent.type }
     })
   },
-  changeRelationship(context, { url, child, parent, parent_relationship_name, child_relationship_name, data, func_success }) {
+  changeRelationship(context, { url, child, parent,
+    parent_relationship_name, child_relationship_name, data }) {
+
     let local_data = { data: { relationships: { }}}
     local_data.data.relationships[child_relationship_name] = { data }
 
-    context.dispatch('request', { url, method: 'put', payload: local_data, success_funtion: (response) => {
+    let params = {
+      url,
+      method: "put",
+      payload: local_data
+    }
+    context.dispatch('request', params).then(
+    response => {
       context.commit('removeFromAll', {
         child: child,
         parent_type: parent.type,
@@ -110,7 +139,6 @@ export default {
         child: child,
         relationship_name: child_relationship_name
       })
-      if (func_success) func_success()
-    }})
+    })
   }
 }

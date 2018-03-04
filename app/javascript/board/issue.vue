@@ -5,7 +5,7 @@
         a(v-bind:href="show_path")
           | {{ issue.attributes.title }}
       .col-2
-        issues_record_section
+        issues_record_section(:issue_id="issue_id")
 </template>
 
 <script>

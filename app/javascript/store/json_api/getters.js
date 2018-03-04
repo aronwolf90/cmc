@@ -25,7 +25,9 @@ export default {
       if (!entry.relationships[name].data) return []
 
       return entry.relationships[name].data.map(local_entry => {
-        return Utils.get(state, Utils.underscore(local_entry.type), local_entry.id)
+        entries = Utils.get(state, Utils.underscore(local_entry.type), local_entry.id)
+        if (entries.includes(null)) return []
+        else return entries
       })
     }
   },
@@ -39,6 +41,17 @@ export default {
       let associated = entry.relationships[name].data
       if (!entry.relationships || !entry.relationships[name]) return
       return Utils.get(state, Utils.underscore(associated.type), associated.id)
+    }
+  },
+  wasUrlCalled(state) {
+    return (url) => {
+      if (!state["called_urls"]) return
+      return state["called_urls"][url] != undefined
+    }
+  },
+  getPromiseByUrl(state) {
+    return (url) => {
+      return state["called_urls"][url]
     }
   }
 }

@@ -1,7 +1,7 @@
 <template lang="pug">
   .issues_record_section
-    .clock(v-if="currentRecord")
-      | {{ time }}
+    .clock(v-if="record", @click="clickStop")
+      .fa.fa-stop
     .play_btn(v-else, @click="clickPlay")
       .fa.fa-play
 </template>
@@ -15,29 +15,24 @@ export default {
   },
   mounted() {
     setInterval(() => {
-      if (!this.currentRecord) return
-
-      let start_time = (new Date(this.currentRecord.attributes["start_time"])).getTime()
-      let current_time = (new Date).getTime()
-      let interval = (current_time - start_time)/1000
-
-      let hours = Math.floor(interval/3600).toString()
-      let minutes = Math.floor(interval/60-hours*60).toString()
-      let seconds = Math.floor(interval-minutes*60-hours*120).toString()
-      console.log("hours:" + "hours".padStart(2, "0"))
-      self.time = `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}:${minutes.padStart(2, "0")}`
-      console.log(self.time)
+      this.time = this.consumedTime()
     }, 1000)
+
+    this.$store.dispatch("initCurrentUser")
+    this.$store.dispatch("initCurrentRecord")
   },
   computed: {
     issue() {
       return this.$store.getters.get({type: "issues", id: this.issue_id})
     },
-    getGlobalConfig() {
-      return this.$store.getters.getGlobalConfig()
+    currentUser() {
+      return this.$store.getters.currentUser
     },
-    currentRecord() {
-      return this.$store.getters.getAssociatedEntry({entry: this.getGlobalConfig, name: "current-record"})
+    record() {
+      let global_record = this.$store.getters.currentRecord
+      if (global_record && global_record.relationships.issue.data.id == this.issue.id) {
+        return global_record
+      }
     }
   },
   methods: {
@@ -47,6 +42,24 @@ export default {
         user: this.currentUser,
         issue: this.issue
       })
+    },
+    clickStop() {
+      this.$store.dispatch("updateRecord", {
+        entry: this.record,
+        payload: { attributes: { "end-time": (new Date()).toString() }}
+      })
+    },
+    consumedTime() {
+      if (!this.record) return "00:00:00"
+
+      let start_time = (new Date(this.record.attributes["start-time"])).getTime()
+      let current_time = (new Date).getTime()
+      let interval = (current_time - start_time)/1000
+
+      let hours = Math.floor(interval/3600).toString()
+      let minutes = Math.floor(interval/60-hours*60).toString()
+      let seconds = Math.floor(interval-minutes*60-hours*120).toString()
+      return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}:${seconds.padStart(2, "0")}`
     }
   }
 }

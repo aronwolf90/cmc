@@ -35,5 +35,9 @@ export default {
     for (let key of Object.keys(state)) {
       delete state[key]
     }
+  },
+  addCalledUrl(state, { url, promise }) {
+    if (!state["called_urls"]) Vue.set(state, "called_urls", {})
+    Vue.set(state["called_urls"], url, promise)
   }
 }

@@ -1,6 +1,8 @@
 import Vue from 'vue/dist/vue.common'
 import JsonApi from 'store/json_api'
 
+import JsonApiGetters from "store/json_api/getters"
+
 export default {
   strict: true,
   modules: {
@@ -8,26 +10,63 @@ export default {
   },
   state: {
   },
-  actions: {
-    initIssue(context, issue_id) {
-      context.dispatch('initEntry', {
-        url: `/api/v1/issues/${issue_id}`, type: 'issues'
+  getters: {
+    currentUser(store) {
+      let entry = JsonApiGetters.get(store.json_api)({
+	type: "contexts",
+	id: "context"
+      })
+
+      return JsonApiGetters.getAssociatedEntry(store.json_api)({
+	entry,
+	name: "current-user"
       })
     },
-    initContext(context, issue_id) {
-      context.dispatch('initEntry', {
-        url: '/api/v1/context', type: 'contexts'
+    currentRecord(store) {
+      let context = JsonApiGetters.get(store.json_api)({
+        type: "contexts",
+        id: "context"
       })
+
+      let current_user = JsonApiGetters.getAssociatedEntry(store.json_api)({
+	entry: context,
+        name: "current-user"
+      })
+
+      return JsonApiGetters.getAssociatedEntry(store.json_api)({
+        entry: current_user,
+	name: "current-record"
+      })
+    }
+  },
+  actions: {
+    initCurrentUser(context) {
+      return context.dispatch("initContext").then(context_entry => {
+        return context.dispatch("initRelatedEntry", {
+          entry: context_entry,
+	  name: "current-user"
+	})
+      })
+    },
+    initCurrentRecord(context) {
+      return context.dispatch("initCurrentUser").then(current_user => {
+        return context.dispatch("initRelatedEntry", {
+	  entry: current_user,
+	  name: "current-record"
+	})
+      })
+    },
+    initIssue(context, issue_id) {
+      return context.dispatch('initEntry', `/api/v1/issues/${issue_id}`)
+    },
+    initContext(context) {
+      return context.dispatch('initEntry', '/api/v1/context')
     },
     initBoardsLists(context) {
-      context.dispatch('initCollection', {
-        url: '/api/v1/board_lists', type: 'board_lists'
-      })
+      return context.dispatch('initCollection', '/api/v1/board_lists')
     },
     initUsers(context) {
-      context.dispatch('initCollection', {
-        url: '/api/v1/users/', type: 'users'
-      })
+      return context.dispatch('initCollection', '/api/v1/users/')
     },
     updateBoardListIssues(context, { id, issues }) {
       context.commit('updateBoardListIssues', { id: id, issues: issues})
@@ -38,9 +77,12 @@ export default {
         alert(response)
       })
     },
+    updateContext(context, board_lists) {
+
+    },
     createComment(context, { issue, user, attributes, func_success }) {
-      let payload = { "data": {
-        "attributes": attributes,
+      let payload = {
+        attributes,
         "relationships": {
           "issue": {
             "data": {
@@ -54,7 +96,7 @@ export default {
               "type": user.type
             }
          } }
-      } }
+      }
 
       context.dispatch('create', {
         url: `/api/v1/comments`,
@@ -74,19 +116,32 @@ export default {
         }
       })
     },
-    createRecord(context, attributes, user, issue, func_success) {
+    createRecord(context, { attributes, user, issue, func_success }) {
       context.dispatch('create', {
         url: `/api/v1/records`,
-        payload,
-        func_success: (issue) => {
-          context.commit('addToMultiple', {
-            parent: user,
-            child: issue,
-            relationship_name: 'records'
-          })
-          if (func_success) func_success()
-        }
+        payload: {
+          attributes,
+          relationships: {
+	    user: { data: user },
+	    issue: { data: issue }
+	} }
+      }).then(record => {
+        context.commit("setAssociation", {
+          parent: record,
+          child: user,
+          relationship_name: 'current-record'
+        })
       })
+    },
+    updateRecord(context, { entry, payload }) {
+      context.dispatch("update", { entry, payload })
+      if (payload.attributes["end-time"] && context.getters.currentRecord.id == entry.id) {
+	context.commit("setAssociation", {
+          parent: null,
+          child: context.getters.currentUser,
+          relationship_name: "current-record"
+        })
+      }
     },
     changeIssueToUserReference(context, { issue, user, func_success }) {
       context.dispatch('changeOneToManyReference', {

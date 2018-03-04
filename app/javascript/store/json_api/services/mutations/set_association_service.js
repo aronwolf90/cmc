@@ -28,6 +28,7 @@ export default class {
     return this._relationships()[this.relationship_name]
   }
   _relationship_entry() {
+    if (!this.parent) return null
     return { id: this.parent.id, type: this.parent.type }
   }
 }

@@ -15,7 +15,7 @@ export default class {
 
   _initialize() {
     if (!this.parent.relationships) this.parent.relationships = {}
-    if (!this._relationship()) parent.relationships[this.relationship_name] = {}
+    if (!this._relationship()) this.parent.relationships[this.relationship_name] = {}
     if (!this._relationship_data()) this._relationship().data = []
   }
   _add_to_relationship() {
