@@ -13,34 +13,6 @@ describe("IssuesRecordSection", () => {
   let state = {}
   let store
 
-  describe("#consumedTime", () => {
-    beforeEach(() => {
-      getters = {
-        get() {
-          return () => { return { id: 1, type: "issues" } }
-        },
-        currentRecord() {
-          return () => { return {
-            id: 1, type: "records",
-            attributes: { "start_time": "02.21.2018 11:00:00" },
-            relationships: { issue: { data: { id: 1, type: "issues" } } }
-          } }
-        }
-      }
-      store = new Vuex.Store({
-        state,
-        getters,
-        actions
-      })
-    })
-
-    it("returns the correct time as string", () => {
-      this.clock = sinon.useFakeTimers(new Date("02.21.2018 12:30:10"));
-      const wrapper = shallow(IssuesRecordSection, { store, localVue })
-      expect(wrapper.vm.consumedTime()).to.be.eq("01:30:30")
-    })
-  })
-
   describe("clicks", () => {
     let user =  { id: 1, type: "users" }
     let issue = { id: 1, type: "issues" }
@@ -52,10 +24,10 @@ describe("IssuesRecordSection", () => {
           return () => { return issue }
         },
         currentUser() {
-          return () => { return user }
+          return user
         },
         currentRecord() {
-          return () => { return null }
+          return undefined
         }
       }
 
@@ -71,8 +43,9 @@ describe("IssuesRecordSection", () => {
         actions
       })
     })
+    beforeEach(() => this.clock = sinon.useFakeTimers(new Date("Wed Feb 21 2018 12:30:10 GMT+0000 (UTC)")))
 
-    it("returns the correct time as string", () => {
+    it("create record", () => {
       const wrapper = shallow(IssuesRecordSection, { store, localVue })
       wrapper.find(".fa-play").trigger("click")
       expect(create_record_spy).to.have.been.calledWith({

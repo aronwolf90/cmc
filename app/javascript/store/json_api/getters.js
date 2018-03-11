@@ -23,11 +23,10 @@ export default {
       if (!entry.relationships) return []
       if (!entry.relationships[name]) return []
       if (!entry.relationships[name].data) return []
-
       return entry.relationships[name].data.map(local_entry => {
-        entries = Utils.get(state, Utils.underscore(local_entry.type), local_entry.id)
-        if (entries.includes(null)) return []
-        else return entries
+        return Utils.get(
+          state, Utils.underscore(local_entry.type), local_entry.id
+        )
       })
     }
   },

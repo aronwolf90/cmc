@@ -28,6 +28,7 @@
     "@vue/test-utils": "^1.0.0-beta.12",
     "babel-core": "^6.26.0",
     "babel-plugin-istanbul": "^4.1.5",
+    "bdd-lazy-var": "^2.1.2",
     "chai": "^4.1.2",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.9.0",
@@ -36,11 +37,12 @@
     "regenerator-runtime": "^0.11.1",
     "sinon": "^4.2.1",
     "sinon-chai": "^2.14.0",
+    "sinon-stub-promise": "^4.0.0",
     "timekeeper": "^2.0.0",
     "webpack-dev-server": "^2.9.5"
   },
   "scripts": {
-    "test": "cross-env NODE_ENV=test nyc  mocha-webpack --webpack-config config/webpack/test.js --require spec/mocha.js spec/load_all.js spec/javascript/**/*.spec.js spec/javascript/**/**/*.spec.js",
+    "test": "cross-env NODE_ENV=test nyc mocha-webpack --webpack-config config/webpack/test.js -u bdd-lazy-var/global --require spec/mocha.js spec/load_all.js --recursive spec/javascript/",
     "report": "cross-env NODE_ENV=test nyc report"
   },
   "nyc": {

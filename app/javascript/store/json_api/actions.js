@@ -123,22 +123,19 @@ export default {
       method: "put",
       payload: local_data
     }
-    context.dispatch('request', params).then(
-    response => {
-      context.commit('removeFromAll', {
-        child: child,
-        parent_type: parent.type,
-        parent_relationship_name: parent_relationship_name
+    return context.dispatch('request', params).then(
+      response => {
+        context.commit('removeFromAll', {
+          child: child,
+          parent_type: parent.type,
+          parent_relationship_name: parent_relationship_name
+        })
+        context.commit('addToMultiple', {
+          parent, child, relationship_name: parent_relationship_name })
+        context.commit('setAssociation', {
+          parent, child, relationship_name: child_relationship_name
+        })
+        return undefined
       })
-      context.commit('addToMultiple', {
-        parent: parent,
-        child: child,
-        relationship_name: parent_relationship_name })
-      context.commit('setAssociation', {
-        parent: parent,
-        child: child,
-        relationship_name: child_relationship_name
-      })
-    })
   }
 }

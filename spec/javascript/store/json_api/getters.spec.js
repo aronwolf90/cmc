@@ -82,8 +82,7 @@ describe('Getters', () => {
       it("return the expected collection", () => {
         let user = { id: '1', type: 'users' }
         let issue = { id: '1', type: 'issues', relationships: { users: { data: [{ id: '1', type: 'users' }] } } }
-        let state = { issue: [ issue ], users: [ user ] }
-
+        let state = { issues: [ issue ], users: [ user ] }
         expect(Getters.getAssociatedEntries(state)({entry: issue, name: 'users'})).to.eql([user])
       })
     })
