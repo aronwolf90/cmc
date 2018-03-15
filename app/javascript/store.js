@@ -13,13 +13,13 @@ export default {
   getters: {
     currentUser(store) {
       let entry = JsonApiGetters.get(store.json_api)({
-	type: "contexts",
-	id: "context"
+        type: "contexts",
+        id: "context"
       })
 
       return JsonApiGetters.getAssociatedEntry(store.json_api)({
-	entry,
-	name: "current-user"
+        entry,
+        name: "current-user"
       })
     },
     currentRecord(store) {
@@ -29,13 +29,13 @@ export default {
       })
 
       let current_user = JsonApiGetters.getAssociatedEntry(store.json_api)({
-	entry: context,
+        entry: context,
         name: "current-user"
       })
 
       return JsonApiGetters.getAssociatedEntry(store.json_api)({
         entry: current_user,
-	name: "current-record"
+        name: "current-record"
       })
     }
   },
@@ -44,16 +44,16 @@ export default {
       return context.dispatch("initContext").then(context_entry => {
         return context.dispatch("initRelatedEntry", {
           entry: context_entry,
-	  name: "current-user"
-	})
+          name: "current-user"
+        })
       })
     },
     initCurrentRecord(context) {
       return context.dispatch("initCurrentUser").then(current_user => {
         return context.dispatch("initRelatedEntry", {
-	  entry: current_user,
-	  name: "current-record"
-	})
+          entry: current_user,
+          name: "current-record"
+        })
       })
     },
     initIssue(context, issue_id) {
@@ -122,9 +122,9 @@ export default {
         payload: {
           attributes,
           relationships: {
-	    user: { data: user },
-	    issue: { data: issue }
-	} }
+            user: { data: user },
+            issue: { data: issue }
+	    } }
       }).then(record => {
         context.commit("setAssociation", {
           parent: record,
@@ -136,7 +136,7 @@ export default {
     updateRecord(context, { entry, payload }) {
       context.dispatch("update", { entry, payload })
       if (payload.attributes["end-time"] && context.getters.currentRecord.id == entry.id) {
-	context.commit("setAssociation", {
+        context.commit("setAssociation", {
           parent: null,
           child: context.getters.currentUser,
           relationship_name: "current-record"

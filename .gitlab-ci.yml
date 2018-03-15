@@ -99,11 +99,11 @@ deploy:
     - mkdir ~/.kube
     - echo $KUBE_CONFIG | base64 -d > ~/.kube/config
     - kubectl config use-context kubernetes-admin@kubernetes
-    - helm init
+    - helm init --client-only
     - export DEPLOYS=$(helm ls | grep cmc-production | wc -l)
     - if [ ${DEPLOYS}  -eq 0 ]; then
         helm install chart --name cmc-production --set image.tag=$CI_COMMIT_SHA --set remote=true;
       else
-        helm upgrade cmc-production helm --set image.tag=$CI_COMMIT_SHA --set remote=true; fi
+        helm upgrade cmc-production chart --set image.tag=$CI_COMMIT_SHA --set remote=true; fi
   only:
     - master
