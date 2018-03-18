@@ -68,14 +68,14 @@ export default {
     initUsers(context) {
       return context.dispatch('initCollection', '/api/v1/users/')
     },
-    updateBoardListIssues(context, { id, issues }) {
-      context.commit('updateBoardListIssues', { id: id, issues: issues})
-      let board_list = context.state.board_lists.find(board_list => board_list.id == id)
-
-      Vue.http.put(`/api/v1/board_lists/${board_list.id}`, { board_list }).then(response => {
-      }, response => {
-        alert(response)
-      })
+    updateBoardList(context, { entry, attributes }) {
+      let payload = {
+        id: entry.id,
+        type: entry.type,
+        attributes
+      }
+      context.commit("update", { entry, payload })
+      return context.dispatch("update", { entry, payload })
     },
     updateContext(context, board_lists) {
 
@@ -148,7 +148,15 @@ export default {
         child: issue,
         parent: user,
         child_relationship_name: 'user',
-        parent_relationship_name: 'issues',
+        parent_relationship_name: 'issues'
+      })
+    },
+    updateBoardListIssues(context, { board_list, issues }) {
+      context.dispatch('changeManyToOneReference', {
+        children: issues,
+        parent: board_list,
+        child_relationship_name: 'board-list',
+        parent_relationship_name: 'issues'
       })
     }
   }

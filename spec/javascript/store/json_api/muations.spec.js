@@ -105,7 +105,7 @@ describe("Mutations", function() {
     });
   })
 
-  describe("#setAssctiation", function() {
+  describe("#setAssociation", function() {
     it("add to association", function() {
       let user = { id: 1, type: 'users' }
       let issue = { id: 1, type: 'issues'}
@@ -118,5 +118,42 @@ describe("Mutations", function() {
 
       expect(state.issues[0].relationships.user.data).to.eql(user)
     });
+  })
+  describe("#changeManyToOneReference", () =>{
+    def("issue1", () => ({
+      id: 1, type: "issues",
+      relationships: { user: { data: { id: 1, type: "users"  } }}
+    }))
+    def("issue2", () => ({
+      id: 2, type: "issues",
+      relationships: { user: { data: { id: 1, type: "users"  } }}
+    }))
+    def("user1", () => ({
+      id: 1, type: "users",
+      relationships: { issues: { data: [$issue1, $issue2] } }
+    }))
+    def("user2", () => ({ id: 2, type: "users"  }))
+    def("state", () => { return {
+      issues: [$issue1, $issue2],
+      users: [$user1, $user2]
+    }})
+
+    beforeEach(() => {
+      Mutations.changeManyToOneReference($state, {
+        parent: $user2,
+        children: [$issue1, $issue2],
+        parent_types: ["users"],
+        parent_relationship_name: "issues",
+        child_relationship_name: "user"
+      })
+    })
+
+    it("remove from old parent", () => {
+      expect($user1.relationships.issues.data).to.eql([])
+    })
+    it("assigen to the new parent", () => {
+      expect($user2.relationships.issues.data).to
+        .eql([{ id: 1, type: "issues"  }, { id: 2, type: "issues"  }])
+    })
   })
 })

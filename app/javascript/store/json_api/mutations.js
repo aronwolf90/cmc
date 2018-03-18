@@ -8,6 +8,7 @@ import RemoveService from './services/mutations/remove_service'
 import RemoveFromAllService from './services/mutations/remove_from_all_service'
 import AddToMultipleService from './services/mutations/add_to_multiple_service'
 import SetAssociationService from './services/mutations/set_association_service'
+import ChangeManyToOneReferenceService from './services/mutations/change_many_to_one_reference_service'
 
 export default {
   init(state, type) {
@@ -39,5 +40,12 @@ export default {
   addCalledUrl(state, { url, promise }) {
     if (!state["called_urls"]) Vue.set(state, "called_urls", {})
     Vue.set(state["called_urls"], url, promise)
+  },
+  changeManyToOneReference(state, { children, parent, parent_types,
+    parent_relationship_name, child_relationship_name }) {
+
+    new ChangeManyToOneReferenceService(state, { children, parent,
+      parent_types, parent_relationship_name,
+      child_relationship_name }).perform()
   }
 }

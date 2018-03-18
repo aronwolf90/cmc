@@ -28,9 +28,7 @@ export default class {
   }
 
   _isPresent() {
-    return Utils.get(this.state, {
-      type: this._type(),
-      id: this.payload.id
-    }) != undefined
+    return Utils.get(this.state, this._type(),
+      this.payload.id) != undefined
   }
 }

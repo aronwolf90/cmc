@@ -112,6 +112,22 @@ export default {
       data: { id: parent.id, type: parent.type }
     })
   },
+  changeManyToOneReference(context, { children, parent,
+    parent_relationship_name, child_relationship_name }) {
+
+    context.commit("changeManyToOneReference", {
+      children: children.map((child) => context.getters.get(child)),
+      parent, parent_types: ["board-lists"],
+      parent_relationship_name, child_relationship_name
+    })
+    return context.dispatch("update", { entry: parent, payload: {
+      id: parent.id,
+      type: parent.type,
+      relationships: {
+        [parent_relationship_name]: { data: children }
+      }
+    }})
+  },
   changeRelationship(context, { url, child, parent,
     parent_relationship_name, child_relationship_name, data }) {
 

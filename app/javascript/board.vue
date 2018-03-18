@@ -32,10 +32,20 @@ export default {
   computed: {
     board_lists: {
       get() {
-        return this.$store.getters.getAll("board_lists")
+        return this.$store.getters.getAll("board_lists").slice().sort(
+          (first, second) => {
+            return first.attributes["ordinal-number"] -
+              second.attributes["ordinal-number"]
+          }
+        )
       },
       set(value) {
-        this.$store.dispatch('updateBoardLists', value)
+        for (let i = 0; i < value.length; i++) {
+          this.$store.dispatch('updateBoardList', {
+            entry: value[i],
+            attributes: { "ordinal-number": i }
+          })
+        }
       }
     },
     add_link() {

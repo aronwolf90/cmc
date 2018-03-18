@@ -36,7 +36,7 @@ export default {
         return this.board_list.relationships.issues.data
       },
       set(issues) {
-        this.$store.dispatch('updateBoardListIssues', { id: this.board_list.id, issues: issues })
+        this.$store.dispatch('updateBoardListIssues', { board_list: this.board_list, issues: issues })
       }
     }
   },
