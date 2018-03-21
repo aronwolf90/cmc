@@ -8,6 +8,7 @@
 
 <script>
 
+
 export default {
   props: ["issue_id", "board_list_id"],
   data() {

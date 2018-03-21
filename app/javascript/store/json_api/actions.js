@@ -133,7 +133,6 @@ export default {
 
     let local_data = { data: { relationships: { }}}
     local_data.data.relationships[child_relationship_name] = { data }
-
     let params = {
       url,
       method: "put",

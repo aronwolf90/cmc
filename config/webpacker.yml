@@ -50,8 +50,6 @@ test:
   <<: *default
   compile: true
 
-  devtool: "inline-cheap-module-source-map"
-
   # Compile test packs to a separate directory
   public_output_path: packs-test
 

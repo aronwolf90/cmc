@@ -6,6 +6,7 @@ import Actions from '../../../../app/javascript/store/json_api/actions'
 import sinon from "sinon"
 import sinonStubPromise from "sinon-stub-promise"
 
+
 Vue.use(VueResource)
 sinonStubPromise(sinon);
 

@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(version: 20180216175602) do
     t.string "lastname"
     t.integer "gender"
     t.string "avatar"
-    t.string "password_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"

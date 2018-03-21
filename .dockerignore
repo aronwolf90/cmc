@@ -5,3 +5,5 @@ coverage/
 log/
 .git/
 tmp/
+spec/
+chart/

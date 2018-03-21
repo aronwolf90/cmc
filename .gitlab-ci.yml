@@ -41,7 +41,6 @@ rspec:
     POSTGRES_USER: root
     DATABASE_URL: postgres://root:password@postgres/root
   script:
-    - ./alphine_shared_install.sh
     - bundle install
     - ln -s /root/node_modules node_modules
     - rspec
@@ -50,8 +49,6 @@ mocha:
   stage: test
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
   script:
-    - ./alphine_shared_install.sh
-    - bundle install
     - ln -s /root/node_modules node_modules
     - yarn install
     - yarn test
@@ -67,8 +64,8 @@ cucumber:
     POSTGRES_USER: root
     DATABASE_URL: postgres://root:password@postgres/root
   script:
-    - ./alphine_shared_install.sh
     - bundle install
+    - yarn install
     - ln -s /root/node_modules node_modules
     - cucumber
 
