@@ -86,6 +86,9 @@ build:
 deploy:
   stage: deploy
   image: lwolf/helm-kubectl-docker:latest
+  environment:
+    name: production
+    url: http://178.3.116.212:30928
   script:
     - 'which ssh-agent || ( apk update  && apk add openssh-client  )'
     - eval $(ssh-agent -s)
