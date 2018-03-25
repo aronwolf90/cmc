@@ -8,7 +8,6 @@
     .right-aside
       assigen(:issue_id='issue_id')
 
-
 </template>
 
 <script>

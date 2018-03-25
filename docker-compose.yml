@@ -19,20 +19,10 @@ services:
       - bundle:/usr/local/bundle
       - node_modules:/app/node_modules
 
-  spring:
-    image: cmc
-    volumes:
-      - .:/app
-    command: spring server
-    environment:
-      - DATABASE_URL=postgres://root:password@db/root
-      - SPRING_SOCKET=tmp/sockets/spring.sock
-
   web:
     image: cmc
     environment:
       - DATABASE_URL=postgres://root:password@db/root
-      - SPRING_SOCKET=tmp/sockets/spring.sock
     command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
     tty: true
     stdin_open: true
@@ -49,10 +39,13 @@ services:
     image: cmc
     volumes:
       - .:/app
+      - bundle:/usr/local/bundle
+      - node_modules:/app/node_modules
     command: spring server
     environment:
       - DATABASE_URL=postgres://root:password@db%5Ftest/root
       - SPRING_SOCKET=tmp/sockets/spring_test.sock
+      - RAILS_ENV=test
 
   db_test:
     image: labianchin/docker-postgres-for-testing

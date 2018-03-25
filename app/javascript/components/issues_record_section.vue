@@ -1,8 +1,8 @@
 <template lang="pug">
   .issues_record_section
-    .clock(v-if="record", @click="clickStop")
+    .clock(v-if="record", @click="clickStop($event)")
       .fa.fa-stop
-    .play_btn(v-else, @click="clickPlay")
+    .play_btn(v-else, @click="clickPlay($event)")
       .fa.fa-play
 </template>
 
@@ -37,14 +37,17 @@ export default {
     }
   },
   methods: {
-    clickPlay() {
+    clickPlay(event) {
+      event.preventDefault()
       this.$store.dispatch("createRecord", {
         attributes: { "start-time": (new Date()).toString() },
         user: this.currentUser,
         issue: this.issue
       })
+
     },
-    clickStop() {
+    clickStop(event) {
+      event.preventDefault()
       this.$store.dispatch("updateRecord", {
         entry: this.record,
         payload: { attributes: { "end-time": (new Date()).toString() }}

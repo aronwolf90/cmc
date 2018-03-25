@@ -8,6 +8,7 @@ module Api
       attributes :title, :description
 
       belongs_to :user, serializer: UserSerializer
+      has_one :board_list
       has_many :comments, serializer: CommentSerializer
 
       link(:self) { api_v1_issue_path(object) }

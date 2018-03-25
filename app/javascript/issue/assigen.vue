@@ -1,7 +1,12 @@
 <template lang='pug'>
   div
     label Assignment
-    basic-select(:options="options", :selected-option="item", placeholder="select item", @select="onSelect")
+    basic-select(
+      :options="options",
+      :selected-option="item",
+      placeholder="select item",
+      @select="onSelect"
+    )
     hr.divider
 </template>
 
@@ -27,29 +32,36 @@
           }
         })
       },
+      issue() {
+        return this.$store.getters.get({
+          type: 'issues',
+          id: this.issue_id
+        })
+      },
+      user() {
+        return this.$store.getters.getAssociatedEntry({
+          entry: this.issue,
+          name: 'user'
+        })
+      },
       item: {
         get() {
-          let issue = this.$store.getters.get({type: 'issues', id: this.issue_id})
-
-          let user = this.$store.getters.getAssociatedEntry({entry: issue, name: 'user'})
-
-          if (!user) return
-
-          return { value: user.id, text: user.attributes.firstname }
-        },
-        set(value) {
-
+          if (!this.user) return
+          return {
+            value: this.user.id,
+            text: this.user.attributes.firstname
+          }
         }
       }
     },
     methods: {
       onSelect (item) {
         this.$store.dispatch('changeIssueToUserReference', {
-          issue: this.$store.getters.get({type: 'issues', id: this.issue_id}),
-          user: this.$store.getters.get({type: 'users', id: item.value}),
-          func_success: () => {
-            this.item = item
-          }
+          issue: this.issue,
+          user: this.$store.getters.get({
+            type: 'users',
+            id: item.value
+          })
         })
       }
     },

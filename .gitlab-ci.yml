@@ -5,9 +5,8 @@ stages:
   - deploy
 
 variables:
-  CONTAINER_TEST_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:$CI_COMMIT_REF_NAME
-  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/cmc_system/cmc/cmc:$CI_COMMIT_SHA
-  CONTAINER_RELEASE_IMAGE_LATEST: registry.gitlab.com/cmc_system/cmc/cmc:latest
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  CONTAINER_RELEASE_IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
 
 gitlint:
   stage: lint
@@ -75,7 +74,7 @@ build:
   services:
     - docker:dind
   script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker build -t $CONTAINER_RELEASE_IMAGE .
     - docker tag $CONTAINER_RELEASE_IMAGE $CONTAINER_RELEASE_IMAGE_LATEST
     - docker push $CONTAINER_RELEASE_IMAGE
@@ -88,7 +87,7 @@ deploy:
   image: lwolf/helm-kubectl-docker:latest
   environment:
     name: production
-    url: http://178.3.116.212:30928
+    url: http://159.65.252.140:30928
   script:
     - 'which ssh-agent || ( apk update  && apk add openssh-client  )'
     - eval $(ssh-agent -s)
@@ -102,8 +101,13 @@ deploy:
     - helm init --client-only
     - export DEPLOYS=$(helm ls | grep cmc-production | wc -l)
     - if [ ${DEPLOYS}  -eq 0 ]; then
-        helm install chart --name cmc-production --set image.tag=$CI_COMMIT_SHA --set remote=true;
+        helm install chart --name cmc-production
+          --set image.tag=$CI_COMMIT_SHA
+          --set remote=true;
       else
-        helm upgrade cmc-production chart --set image.tag=$CI_COMMIT_SHA --set remote=true; fi
+        helm upgrade cmc-production chart
+          --set image.tag=$CI_COMMIT_SHA
+          --set remote=true;
+      fi
   only:
     - master

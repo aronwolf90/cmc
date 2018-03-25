@@ -2,8 +2,7 @@
 
 module Api
   module V1
-    class ApiStep
-      include Uber::Callable
+    class ApiStep < ApplicationStep
     end
   end
 end

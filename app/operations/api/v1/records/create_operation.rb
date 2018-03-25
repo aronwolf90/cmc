@@ -5,7 +5,7 @@ module Api::V1
     class CreateOperation < ApiOperation
       step ValidateStep.new(form: CreateForm)
       success DeserializeStep.new(deserializer: RecordDeserializer)
-      success CreateStep.new(model_class: Record)
+      success CreateByOperationStep.new(operation: ::Records::CreateOperation)
     end
   end
 end

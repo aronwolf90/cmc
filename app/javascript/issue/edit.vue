@@ -81,10 +81,9 @@ export default {
       this.$store.dispatch('update', {
         entry: this.issue,
         payload: this.form_data,
-        func_success: () => {
+      }).then(() => {
           this.is_saving = false
           this.$router.replace('/')
-        }
       })
     },
     setDescription(data) {

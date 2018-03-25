@@ -1,5 +1,6 @@
 import Vue from 'vue/dist/vue.common'
 import JsonApi from 'store/json_api'
+import * as Utils from './store/json_api/utils'
 
 import JsonApiGetters from "store/json_api/getters"
 
@@ -80,43 +81,33 @@ export default {
     updateContext(context, board_lists) {
 
     },
-    createComment(context, { issue, user, attributes, func_success }) {
+    createComment(context, { issue, user, attributes }) {
       let payload = {
         attributes,
         "relationships": {
-          "issue": {
-            "data": {
-              "id": issue.id,
-              "type": issue.type
-            }
-          },
-          "user": {
-            "data": {
-              "id": user.id,
-              "type": user.type
-            }
-         } }
+          "issue": { "data": Utils.entryToRef(issue) },
+          "user": { "data": Utils.entryToRef(user) }
+         }
       }
 
       context.dispatch('create', {
         url: `/api/v1/comments`,
         payload,
-        func_success: (comment) => {
-          context.commit('addToMultiple', {
-            parent: issue,
-            child: comment,
-            relationship_name: 'comments'
-          })
-          context.commit('addToMultiple', {
-            parent: user,
-            child: comment,
-            relationship_name: 'comments'
-          })
-          if (func_success) func_success()
-        }
+      }).then(comment => {
+        context.commit('addToMultiple', {
+          parent: issue,
+          child: comment,
+          relationship_name: 'comments'
+        })
+        context.commit('addToMultiple', {
+          parent: user,
+          child: comment,
+          relationship_name: 'comments'
+        })
+        return comment
       })
     },
-    createRecord(context, { attributes, user, issue, func_success }) {
+    createRecord(context, { attributes, user, issue }) {
       context.dispatch('create', {
         url: `/api/v1/records`,
         payload: {
@@ -135,7 +126,9 @@ export default {
     },
     updateRecord(context, { entry, payload }) {
       context.dispatch("update", { entry, payload })
-      if (payload.attributes["end-time"] && context.getters.currentRecord.id == entry.id) {
+      if (payload.attributes["end-time"] &&
+        context.getters.currentRecord.id == entry.id) {
+
         context.commit("setAssociation", {
           parent: null,
           child: context.getters.currentUser,
@@ -143,7 +136,7 @@ export default {
         })
       }
     },
-    changeIssueToUserReference(context, { issue, user, func_success }) {
+    changeIssueToUserReference(context, { issue, user }) {
       context.dispatch('changeOneToManyReference', {
         child: issue,
         parent: user,

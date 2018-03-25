@@ -16,10 +16,6 @@ module Api
         render json: OpenStruct.new(errors: OpenStruct.new(messages: errors)), status: :bad_request,
                serializer: ActiveModel::Serializer::ErrorSerializer
       end
-
-      def _run_params(params)
-        params.to_unsafe_h
-      end
     end
   end
 end

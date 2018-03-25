@@ -16,6 +16,7 @@ import Store from './store'
 
 import IssuesBoard from './board.vue'
 import Issue from './issue.vue'
+import SharedIssueSection from './shared_issue_section'
 import Router from 'vue-router'
 
 require("./polyfill")
@@ -33,3 +34,4 @@ Vue.use(FormGroup)
 
 Vue.component('issues_board', IssuesBoard)
 Vue.component('issue', Issue)
+Vue.component("shared-issue-section", SharedIssueSection)

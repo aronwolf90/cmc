@@ -107,7 +107,6 @@ export default {
       child, parent,
       parent_relationship_name,
       child_relationship_name,
-      func_success,
       url: child.links.self,
       data: { id: parent.id, type: parent.type }
     })
@@ -131,26 +130,23 @@ export default {
   changeRelationship(context, { url, child, parent,
     parent_relationship_name, child_relationship_name, data }) {
 
-    let local_data = { data: { relationships: { }}}
-    local_data.data.relationships[child_relationship_name] = { data }
-    let params = {
-      url,
-      method: "put",
-      payload: local_data
-    }
-    return context.dispatch('request', params).then(
-      response => {
-        context.commit('removeFromAll', {
-          child: child,
-          parent_type: parent.type,
-          parent_relationship_name: parent_relationship_name
-        })
-        context.commit('addToMultiple', {
-          parent, child, relationship_name: parent_relationship_name })
-        context.commit('setAssociation', {
-          parent, child, relationship_name: child_relationship_name
-        })
-        return undefined
+    return context.dispatch('request', {
+      url, method: "put",
+      payload: { relationships: {
+        [child_relationship_name]: { data: data }
+      }}
+    }).then(response => {
+      context.commit('removeFromAll', {
+        child: child,
+        parent_type: parent.type,
+        parent_relationship_name: parent_relationship_name
       })
+      context.commit('addToMultiple', {
+        parent, child, relationship_name: parent_relationship_name })
+      context.commit('setAssociation', {
+        parent, child, relationship_name: child_relationship_name
+      })
+      return undefined
+    })
   }
 }

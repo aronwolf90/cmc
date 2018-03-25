@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class ApiOperation < Trailblazer::Operation
+    class ApiOperation < ApplicationOperation
     end
   end
 end
