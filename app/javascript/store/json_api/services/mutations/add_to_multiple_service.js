@@ -1,34 +1,30 @@
-import Vue from 'vue/dist/vue.common'
-import * as Utils from '../../utils'
-
 export default class {
-  constructor(state, parent, child, relationship_name) {
-    this.state =  state
+  constructor ({ parent, child, relationshipName }) {
     this.parent = parent
     this.child = child
-    this.relationship_name = relationship_name
+    this.relationshipName = relationshipName
   }
-  perform() {
+  perform () {
     this._initialize()
-    this._add_to_relationship()
+    this._addToRelationship()
   }
 
-  _initialize() {
+  _initialize () {
     if (!this.parent.relationships) this.parent.relationships = {}
-    if (!this._relationship()) this.parent.relationships[this.relationship_name] = {}
-    if (!this._relationship_data()) this._relationship().data = []
+    if (!this._relationship()) this.parent.relationships[this.relationshipName] = {}
+    if (!this._relationshipData()) this._relationship().data = []
   }
-  _add_to_relationship() {
-    this._relationship_data().push(this._associated_entry())
+  _addToRelationship () {
+    this._relationshipData().push(this._associatedEntry())
   }
 
-  _relationship() {
-    return this.parent.relationships[this.relationship_name]
+  _relationship () {
+    return this.parent.relationships[this.relationshipName]
   }
-  _relationship_data() {
+  _relationshipData () {
     return this._relationship().data
   }
-  _associated_entry() {
+  _associatedEntry () {
     return { id: this.child.id, type: this.child.type }
   }
 }

@@ -1,8 +1,7 @@
 import Vue from 'vue/dist/vue.common'
 
-import * as Utils from './utils'
-
-import AddService from './services/mutations/add_service'
+import Add from './services/mutations/add_service'
+import AddByNormalizeService from './services/mutations/add_by_normalize_service'
 import UpdateService from './services/mutations/update_service'
 import RemoveService from './services/mutations/remove_service'
 import RemoveFromAllService from './services/mutations/remove_from_all_service'
@@ -11,41 +10,49 @@ import SetAssociationService from './services/mutations/set_association_service'
 import ChangeManyToOneReferenceService from './services/mutations/change_many_to_one_reference_service'
 
 export default {
-  init(state, type) {
-    Utils.init(state, type)
+  add (state, payload) {
+    new Add({ state, payload }).perform()
   },
-  add(state, payload) {
-    new AddService(state, payload).perform()
+  update (state, { entry, payload }) {
+    new UpdateService({ entry, payload }).perform()
   },
-  update(state, { entry, payload }) {
-    new UpdateService(entry, payload).perform()
+  remove (state, entry) {
+    new RemoveService({state, entry}).perform()
   },
-  remove(state, entry) {
-    new RemoveService(state, entry).perform()
+  removeFromAll (state, { child, parentType, parentRelationshipName }) {
+    new RemoveFromAllService({ state, child, parentType, parentRelationshipName }).perform()
   },
-  removeFromAll(state, { child, parent_type, parent_relationship_name }) {
-    new RemoveFromAllService(state, child, parent_type, parent_relationship_name).perform()
+  addToMultiple (state, { parent, child, relationshipName }) {
+    new AddToMultipleService({ parent, child, relationshipName }).perform()
   },
-  addToMultiple(state, { parent, child, relationship_name }) {
-    new AddToMultipleService(state, parent, child, relationship_name).perform()
+  setAssociation (state, { child, parent, relationshipName }) {
+    new SetAssociationService({ parent, child, relationshipName }).perform()
   },
-  setAssociation(state, { child, parent, relationship_name }) {
-    new SetAssociationService(state, parent, child, relationship_name).perform()
-  },
-  clear(state) {
+  clear (state) {
     for (let key of Object.keys(state)) {
-      delete state[key]
+      Vue.delete(state, key)
     }
   },
-  addCalledUrl(state, { url, promise }) {
-    if (!state["called_urls"]) Vue.set(state, "called_urls", {})
-    Vue.set(state["called_urls"], url, promise)
+  clearCalledUrls (state) {
+    if (!state['called_urls']) return
+    Vue.delete(state, 'called_urls')
   },
-  changeManyToOneReference(state, { children, parent, parent_types,
-    parent_relationship_name, child_relationship_name }) {
-
-    new ChangeManyToOneReferenceService(state, { children, parent,
-      parent_types, parent_relationship_name,
-      child_relationship_name }).perform()
+  addCalledUrl (state, { url, promise }) {
+    if (!state['called_urls']) Vue.set(state, 'called_urls', {})
+    Vue.set(state['called_urls'], url, promise)
+  },
+  changeManyToOneReference (state, { children, parent, parentTypes,
+    parentRelationshipName, childRelationshipName }) {
+    new ChangeManyToOneReferenceService({
+      state,
+      children,
+      parent,
+      parentTypes,
+      parentRelationshipName,
+      childRelationshipName
+    }).perform()
+  },
+  addByNormalize (state, { payload, resource }) {
+    new AddByNormalizeService({ state, payload, resource }).perform()
   }
 }

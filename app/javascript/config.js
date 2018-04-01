@@ -1,25 +1,24 @@
 import Vue from 'vue/dist/vue.common'
 import Vuex from 'vuex'
-import { Button } from 'bootstrap-vue/es/components'
-import { FormInput } from 'bootstrap-vue/es/components'
-import { Modal } from 'bootstrap-vue/es/components'
-import { Dropdown } from 'bootstrap-vue/es/components'
-import { FormTextarea } from 'bootstrap-vue/es/components'
-import { FormGroup } from 'bootstrap-vue/es/components'
-import { Form } from 'bootstrap-vue/es/components'
+import {
+  Button,
+  FormInput,
+  Dropdown,
+  FormTextarea,
+  FormGroup,
+  Form
+} from 'bootstrap-vue/es/components'
 import TurbolinksAdapter from 'vue-turbolinks'
 import VueResource from 'vue-resource'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
-import Store from './store'
 
 import IssuesBoard from './board.vue'
 import Issue from './issue.vue'
 import SharedIssueSection from './shared_issue_section'
 import Router from 'vue-router'
 
-require("./polyfill")
+require('./polyfill')
 
 Vue.use(Vuex)
 Vue.use(Router)
@@ -34,4 +33,4 @@ Vue.use(FormGroup)
 
 Vue.component('issues_board', IssuesBoard)
 Vue.component('issue', Issue)
-Vue.component("shared-issue-section", SharedIssueSection)
+Vue.component('shared-issue-section', SharedIssueSection)

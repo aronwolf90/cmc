@@ -26,8 +26,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-
 import Editor from 'tui-editor'
 
 export default {
@@ -44,7 +42,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     var editor = new Editor({
       el: document.querySelector('#text'),
       initialEditType: 'markdown',
@@ -60,33 +58,35 @@ export default {
   },
   computed: {
     form: {
-      get() {
+      get () {
         if (!this.is_loaded) {
+          /* eslint-disable */
           this.form_data = JSON.parse(JSON.stringify(this.$store.getters.get({type: 'issues', id: this.issue_id})))
           this.is_loaded = true
+          /* eslint-enable */
         }
         return this.form_data
       }
     },
-    issue() {
+    issue () {
       return this.$store.getters.get({type: 'issues', id: this.issue_id})
     }
   },
   methods: {
-    submit(event) {
+    submit (event) {
       event.preventDefault()
 
       this.is_saving = true
 
       this.$store.dispatch('update', {
         entry: this.issue,
-        payload: this.form_data,
+        payload: this.form_data
       }).then(() => {
-          this.is_saving = false
-          this.$router.replace('/')
+        this.is_saving = false
+        this.$router.replace('/')
       })
     },
-    setDescription(data) {
+    setDescription (data) {
       this.form.attributes.description = data
     }
   }

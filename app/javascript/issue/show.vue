@@ -19,7 +19,7 @@ import Editor from 'tui-editor'
 
 export default {
   props: ['issue_id'],
-  mounted() {
+  mounted () {
     Editor.factory({
       el: document.querySelector('#description'),
       viewer: true,
@@ -28,7 +28,7 @@ export default {
     })
   },
   computed: {
-    issue() {
+    issue () {
       return this.$store.getters.get({type: 'issues', id: this.issue_id})
     }
   }

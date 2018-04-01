@@ -1,6 +1,6 @@
-<template lang="pug">
+<template lang='pug'>
   .comments
-    .row(v-for="comment in comments")
+    .row(v-for='comment in comments')
       .col-12
         | {{ comment.attributes.content }}
         hr.divider
@@ -10,34 +10,34 @@
         br
     .row
       .col-12
-        .btn.btn-sm.btn-success(@click="comment") Comment
+        .btn.btn-sm.btn-success(@click='comment') Comment
 
 </template>
 
 <script>
-import Editor from "tui-editor"
+import Editor from 'tui-editor'
 
 export default {
-  props: ["issue_id"],
-  data() {
+  props: ['issue_id'],
+  data () {
     return {
       new_comment_data: {
         attributes: {
-          content: ""
+          content: ''
         }
       },
       editor: null
     }
   },
-  created() {
+  created () {
     this.$store.dispatch('initContext', this.issue_id)
   },
-  mounted() {
+  mounted () {
     this.editor = new Editor({
-      el: document.querySelector("#new_comment"),
-      initialEditType: "markdown",
-      previewStyle: "tab",
-      height: "150px",
+      el: document.querySelector('#new_comment'),
+      initialEditType: 'markdown',
+      previewStyle: 'tab',
+      height: '150px',
       events: {
         change: (event) => {
           this.new_comment_data.attributes.content = this.editor.getValue()
@@ -46,35 +46,35 @@ export default {
     })
   },
   computed: {
-    comments() {
+    comments () {
       let issue = this.$store.getters.get({
-        type: "issues",
+        type: 'issues',
         id: this.issue_id
       })
       return this.$store.getters.getAssociatedEntries({
         entry: issue,
-        name: "comments"
+        name: 'comments'
       })
     },
-    issue() {
-      return this.$store.getters.get({id: this.issue_id, type: "issues"})
+    issue () {
+      return this.$store.getters.get({id: this.issue_id, type: 'issues'})
     },
-    currentUser() {
+    currentUser () {
       return this.$store.getters.currentUser
     }
   },
   methods: {
-    comment() {
-      this.$store.dispatch("createComment", {
+    comment () {
+      this.$store.dispatch('createComment', {
         issue: this.issue,
         user: this.currentUser,
         attributes: this.new_comment_data.attributes
       })
-      this.editor.setMarkdown("")
+      this.editor.setMarkdown('')
     }
   }
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang='sass' scoped>
 </style>

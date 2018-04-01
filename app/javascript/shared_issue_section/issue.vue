@@ -1,17 +1,17 @@
 <template lang='pug'>
-  a.issue.row(v-bind:href="showPath")
+  a.issue.row(v-bind:href='showPath')
     .col-10
       | {{ issue.attributes.title }}
     .col-2
-      issue-record-section(:issue_id="issue.id")
+      issue-record-section(:issue_id='issue.id')
 </template>
 
 <script>
-import IssueRecordSection from "components/issues_record_section"
+import IssueRecordSection from 'components/issues_record_section'
 
 export default {
   components: {
-    "issue-record-section": IssueRecordSection
+    'issue-record-section': IssueRecordSection
   },
   props: {
     issueId: {
@@ -20,15 +20,15 @@ export default {
     }
   },
   computed: {
-    issue() {
+    issue () {
       return this.$store.getters.get({
-        type: "issues",
+        type: 'issues',
         id: this.issueId
       })
     },
-    showPath() {
+    showPath () {
       if (!this.issue) return
-      let boardListsId = this.issue.relationships["board-list"].data.id
+      let boardListsId = this.issue.relationships['board-list'].data.id
       return `/administration/board_lists/${boardListsId}/issues/${this.issue.id}`
     }
   }

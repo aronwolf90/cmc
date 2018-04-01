@@ -1,17 +1,16 @@
 import Vue from 'vue/dist/vue.common'
-import * as Utils from '../../utils'
 
 export default class {
-  constructor(entry, payload) {
+  constructor ({ entry, payload }) {
     this.entry = entry
     this.payload = payload
   }
-  perform() {
-    if (this.payload.attributes) this._update_attributes()
-    if (this.payload.links) this._update_links()
+  perform () {
+    if (this.payload.attributes) this._updateAttributes()
+    if (this.payload.relationships) this._updateRelationships()
   }
 
-  _update_attributes() {
+  _updateAttributes () {
     if (!this.entry.attributes) Vue.set(this.entry, 'attributes', {})
 
     let attributes = this.entry.attributes
@@ -20,13 +19,13 @@ export default class {
       Vue.set(attributes, key, this.payload.attributes[key])
     }
   }
-  _update_links() {
-    if (!this.entry.links) this.entry.links = []
+  _updateRelationships () {
+    if (!this.entry.relationships) this.entry.relationships = []
 
-    let links = this.entry.links
+    let relationships = this.entry.relationships
 
-    for (let key of Object.keys(this.payload.links)) {
-      links[key] = this.payload.links[key]
+    for (let key of Object.keys(this.payload.relationships)) {
+      relationships[key] = this.payload.relationships[key]
     }
   }
 }

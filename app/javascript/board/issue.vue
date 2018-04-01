@@ -18,10 +18,10 @@ export default {
     'issues_record_section': IssuesRecordSection
   },
   computed: {
-    issue() {
+    issue () {
       return this.$store.getters.get({type: 'issues', id: this.issue_id})
     },
-    show_path() {
+    show_path () {
       return `/administration/board_lists/${this.board_list_id}/issues/${this.issue_id}`
     }
   }

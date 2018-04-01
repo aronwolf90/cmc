@@ -11,64 +11,65 @@
 </template>
 
 <script>
-  import { BasicSelect } from 'vue-search-select'
+import { BasicSelect } from 'vue-search-select'
 
-  export default {
-    props: ['issue_id'],
-    data () {
-      return {
-        searchText: '',
-      }
+export default {
+  props: ['issue_id'],
+  data () {
+    return {
+      searchText: ''
+    }
+  },
+  created () {
+    this.$store.dispatch('initUsers')
+  },
+  computed: {
+    options () {
+      this.$store.getters.test
+      return this.$store.getters.getAll('users').map((user) => {
+        return {
+          value: user.id,
+          text: user.attributes.firstname
+        }
+      })
     },
-    created() {
-      this.$store.dispatch('initUsers')
+    issue () {
+      return this.$store.getters.get({
+        type: 'issues',
+        id: this.issue_id
+      })
     },
-    computed: {
-      options() {
-        return this.$store.getters.getAll('users').map((user) => {
-          return {
-            value: user.id,
-            text: user.attributes.firstname
-          }
-        })
-      },
-      issue() {
-        return this.$store.getters.get({
-          type: 'issues',
-          id: this.issue_id
-        })
-      },
-      user() {
-        return this.$store.getters.getAssociatedEntry({
-          entry: this.issue,
-          name: 'user'
-        })
-      },
-      item: {
-        get() {
-          if (!this.user) return
-          return {
-            value: this.user.id,
-            text: this.user.attributes.firstname
-          }
+    user () {
+      return this.$store.getters.getAssociatedEntry({
+        entry: this.issue,
+        name: 'user'
+      })
+    },
+    item: {
+      get () {
+        if (!this.user) return
+        return {
+          value: this.user.id,
+          text: this.user.attributes.firstname
         }
       }
-    },
-    methods: {
-      onSelect (item) {
-        this.$store.dispatch('changeIssueToUserReference', {
-          issue: this.issue,
-          user: this.$store.getters.get({
-            type: 'users',
-            id: item.value
-          })
-        })
-      }
-    },
-    components: {
-      BasicSelect
     }
+  },
+  methods: {
+    onSelect (item) {
+      this.$store.dispatch('changeIssueToUserReference', {
+        issue: this.issue,
+        user: this.$store.getters.get({
+          type: 'users',
+          id: item.value
+        })
+      })
+    }
+  },
+  components: {
+    BasicSelect
   }
+}
 </script>
 
 <style lang='sass' scoped>

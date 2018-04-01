@@ -1,1 +1,1 @@
-Rake::Task['db:seed_fu'].invoke
+Rake::Task["db:seed_fu"].invoke

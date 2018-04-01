@@ -1,34 +1,29 @@
 import Vue from 'vue/dist/vue.common'
 
-export const underscore = (type) => {
-  if (!type) return ""
-  return type.replace('-', '_')
-}
-
 export const init = (state, type) => {
   if (state[type]) return
   Vue.set(state, type, [])
 }
 
 export const get = (state, type, id) => {
-  if (!getCollection(state, type)) return
-  return getCollection(state, type).find(entry => entry.id == id)
+  if (!state[type]) return
+  return state[type][id]
 }
 
 export const getCollection = (state, type) => {
-  return state[underscore(type)]
+  if (!state[type]) return
+  return Object.values(state[type])
 }
 
 export const clearFromCollection = (state, entry,
-  type, relationship_name) => {
+  type, relationshipName) => {
+  for (let collectionEntry of getCollection(state, type)) {
+    if (!collectionEntry.relationships) continue
+    if (!collectionEntry.relationships[relationshipName]) continue
 
-  for (let collection_entry of getCollection(state, type)) {
-    if (!collection_entry.relationships) continue
-    if (!collection_entry.relationships[relationship_name]) continue
-
-    let relationship = collection_entry.relationships[relationship_name].data
-    let index = relationship.findIndex((ref_entry) => {
-      return ref_entry.id == entry.id && ref_entry.type == entry.type
+    let relationship = collectionEntry.relationships[relationshipName].data
+    let index = relationship.findIndex((refEntry) => {
+      return refEntry.id === entry.id && refEntry.type === entry.type
     })
     if (index > -1) relationship.splice(index, 1)
   }
@@ -38,24 +33,32 @@ export const entryToRef = (entry) => {
   return { id: entry.id, type: entry.type }
 }
 
-export const initRelationshipCollection = (entry, relationship_name) => {
-  if (!entry.relationships) Vue.set(entry, "relationships", {})
-  if (!entry.relationships[relationship_name]) {
-    Vue.set(entry.relationships, relationship_name, {})
+export const sameRef = (entry1, entry2) => {
+  return entry1.type === entry2.type &&
+    entry1.id === entry2.id
+}
+
+export const entryArrayToRef = (entryArray) => {
+  return entryArray.map(entry => entryToRef(entry))
+}
+
+export const initRelationshipCollection = (entry, relationshipName) => {
+  if (!entry.relationships) Vue.set(entry, 'relationships', {})
+  if (!entry.relationships[relationshipName]) {
+    Vue.set(entry.relationships, relationshipName, {})
   }
-  if (!entry.relationships[relationship_name].data) {
-    Vue.set(entry.relationships[relationship_name], "data", [])
+  if (!entry.relationships[relationshipName].data) {
+    Vue.set(entry.relationships[relationshipName], 'data', [])
   }
 }
 
-export const setRelationshipEntry = (entry, relationship_name,
-  associated_entry) => {
-
-  if (!entry.relationships) Vue.set(entry, "relationships", {})
-  if (!entry.relationships[relationship_name]) {
-    Vue.set(entry.relationships, relationship_name, {})
+export const setRelationshipEntry = (entry, relationshipName,
+  associatedEntry) => {
+  if (!entry.relationships) Vue.set(entry, 'relationships', {})
+  if (!entry.relationships[relationshipName]) {
+    Vue.set(entry.relationships, relationshipName, {})
   }
-  if (!entry.relationships[relationship_name].data) {
-    Vue.set(entry.relationships[relationship_name], "data", associated_entry)
+  if (!entry.relationships[relationshipName].data) {
+    Vue.set(entry.relationships[relationshipName], 'data', associatedEntry)
   }
 }

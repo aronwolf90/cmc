@@ -44,19 +44,19 @@ export default {
     'comments': Comments
 
   },
-  created() {
+  created () {
     this.$store.dispatch('initIssue', this.issue_id)
     if (!window.location.hash) router.replace('/')
   },
   computed: {
-    is_loaded() {
-      return this.$store.getters.get({type: 'issues', id: this.issue_id}) != undefined
+    is_loaded () {
+      return this.$store.getters.get({type: 'issues', id: this.issue_id}) !== undefined
     },
     issue: {
-      get() {
+      get () {
         return this.$store.getters.get({type: 'issues', id: this.issue_id})
       },
-      set(value) {
+      set (value) {
         // this.$store.dispatch('updateIssue', value)
       }
     }
@@ -67,9 +67,9 @@ export default {
 <style lang='sass' scoped>
 #issue
   display: flex
-  margin-right: -15px;
+  margin-right: -15px
   .container-fluid
-    overflow-y: scroll;
+    overflow-y: scroll
     height: calc(100vh - 60px)
   .right-aside
     background-color: #f8f8f8
@@ -77,6 +77,5 @@ export default {
     border-left: 2px solid #e7e7e7
     width: 200px
     height: 100vh
-
 
 </style>

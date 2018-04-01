@@ -20,35 +20,35 @@ import issue from './issue'
 
 export default {
   components: {
-      draggable,
-      'issue': issue
+    draggable,
+    'issue': issue
   },
   props: ['list_id'],
   computed: {
-    board_list() {
-      return this.$store.getters.get({ type: 'board_lists', id: this.list_id })
+    board_list () {
+      return this.$store.getters.get({ type: 'board-lists', id: this.list_id })
     },
-    add_link() {
+    add_link () {
       return `/administration/board_lists/${this.board_list.id}/issues/new`
     },
     issues: {
-      get() {
+      get () {
         return this.board_list.relationships.issues.data
       },
-      set(issues) {
+      set (issues) {
         this.$store.dispatch('updateBoardListIssues', { board_list: this.board_list, issues: issues })
       }
     }
   },
   methods: {
-    getIssue(id) {
+    getIssue (id) {
       return this.$store.getters.getIssue(id)
     },
-    destroy() {
+    destroy () {
       return this.$store.dispatch('destroy', this.board_list)
     },
-    visitAdd(event) {
-      Turbolinks.visit(this.add_link)
+    visitAdd (event) {
+      Turbolinks.visit(this.add_link) /* eslint-disable-line no-undef */
       event.preventDefault()
     }
   }
