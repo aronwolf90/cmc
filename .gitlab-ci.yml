@@ -107,7 +107,8 @@ deploy:
       else
         helm upgrade cmc-production chart
           --set image.tag=$CI_COMMIT_SHA
-          --set remote=true;
+          --set remote=true
+          --force;
       fi
   only:
     - master
