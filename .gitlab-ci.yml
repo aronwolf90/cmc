@@ -17,6 +17,20 @@ gitlint:
     - pip install gitlint
     - git log -1 --pretty=%B | gitlint
 
+eslint:
+  stage: lint
+  image: node:9.9.0-alpine
+  script:
+    - npm install -g
+      eslint eslint-config-standard
+      eslint-plugin-import
+      eslint-plugin-node
+      eslint-plugin-standard
+      eslint-config-standart
+      eslint-plugin-promise
+      eslint-plugin-vue
+    - eslint app/javascript
+
 rubocop:
   stage: lint
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
