@@ -3,7 +3,7 @@ import * as Utils from './utils'
 export default {
   get (state) {
     return ({type, id}) => {
-      return Utils.get(state, type, id)
+      return Utils.get(state, { type, id })
     }
   },
   getAll (state) {
@@ -16,6 +16,28 @@ export default {
       return Utils.getCollection(state, type)
     }
   },
+  getMetaEntry (state) {
+    return (name) => {
+      if (!state.meta) return
+      if (!state.meta[name]) return
+      return Utils.get(state, state.meta[name].data)
+    }
+  },
+  getMetaInfo (state) {
+    return (name) => {
+      if (!state.meta) return
+      if (!state.meta[name]) return
+      return state.meta[name].info
+    }
+  },
+  getMetaCollection (state) {
+    return (name) => {
+      if (!state.meta) return
+      if (!state.meta[name]) return
+      if (!state.meta[name].data) return
+      return state.meta[name].data.map(entryRef => Utils.get(state, entryRef))
+    }
+  },
   getAssociatedEntries (state) {
     return ({entry, name}) => {
       if (!entry) return []
@@ -23,9 +45,7 @@ export default {
       if (!entry.relationships[name]) return []
       if (!entry.relationships[name].data) return []
       return entry.relationships[name].data.map(localEntry => {
-        return Utils.get(
-          state, localEntry.type, localEntry.id
-        )
+        return Utils.get(state, localEntry)
       }).filter(entry => entry !== undefined)
     }
   },
@@ -38,7 +58,7 @@ export default {
 
       let associated = entry.relationships[name].data
       if (!entry.relationships || !entry.relationships[name]) return
-      return Utils.get(state, associated.type, associated.id)
+      return Utils.get(state, associated)
     }
   },
   wasUrlCalled (state) {

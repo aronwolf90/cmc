@@ -5,7 +5,7 @@ export const init = (state, type) => {
   Vue.set(state, type, [])
 }
 
-export const get = (state, type, id) => {
+export const get = (state, { type, id }) => {
   if (!state[type]) return
   return state[type][id]
 }

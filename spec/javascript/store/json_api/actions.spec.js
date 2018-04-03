@@ -48,8 +48,9 @@ describe('Actions', () => {
   describe('#initEntry', () => {
     describe('when the url has not be called before', () => {
       it('call Actions#add', () => {
-        Actions.initEntry($context, $user_url)
-        expect($context.dispatch).to.have.been.calledWith('add', { url: $user_url })
+        Actions.initEntry($context, { endpoint: 'api/v1', resource: 'users' })
+        expect($context.dispatch).to.have.been.calledWith('add', {
+          endpoint: 'api/v1', resource: 'users', url: 'api/v1/users' })
       })
     })
 
@@ -58,8 +59,9 @@ describe('Actions', () => {
       beforeEach(() => $urlPromise.resolves($user))
 
       it('not call Actions#add', () => {
-        Actions.initEntry($context, $user_url)
-        expect($context.dispatch).to.not.have.been.calledWith('add', { url: $user_url })
+        Actions.initEntry($context, { endpoint: 'api/v1', resource: 'users' })
+        expect($context.dispatch).to.not.have.been.calledWith('add', {
+          endpoint: 'api/v1', resource: 'users' })
       })
     })
   })
@@ -72,9 +74,9 @@ describe('Actions', () => {
     beforeEach(() => $request.resolves($userResponse))
 
     it('call commit #addByNormalize', () => {
-      Actions.add($context, { url: $user_url })
+      Actions.add($context, { endpoint: 'api/v1', resource: 'users' })
       expect($context.commit).to.have.been.calledWith('addByNormalize', {
-        payload: $userResponse, endpoint: undefined
+        payload: $userResponse, resource: 'users'
       })
     })
   })

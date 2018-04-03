@@ -9,7 +9,12 @@ Vue.use(VueResource)
 
 describe('Getters', () => {
   def('user', () => ({ id: '1', type: 'users' }))
-  def('state', () => ({ users: { 1: $user } }))
+  def('state', () => ({
+    users: { 1: $user },
+    meta: {
+      users: { data: [{ id: '1', type: 'users' }] }
+    }
+  }))
 
   describe('#get', () => {
     describe('with the expected entry', () => {
@@ -51,6 +56,20 @@ describe('Getters', () => {
 
       it('return undefined', () => {
         expect(Getters.getCollection($state)('users')).to.eql(undefined)
+      })
+    })
+  })
+  describe('#getMetaCollection', () => {
+    describe('with the coresponding collection', () => {
+      it('return the expected collection', () => {
+        expect(Getters.getMetaCollection($state)('users')).to.eql([$user])
+      })
+    })
+    describe('without the coresponding collection', () => {
+      def('state', () => ({ }))
+
+      it('return undefined', () => {
+        expect(Getters.getMetaCollection($state)('users')).to.eql(undefined)
       })
     })
   })

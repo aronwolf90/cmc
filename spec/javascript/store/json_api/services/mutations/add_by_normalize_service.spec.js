@@ -6,7 +6,7 @@ require('../../../../../mocha')
 
 describe('AddByNormalizeService', () => {
   describe('when no data is present in the store and response is an entry', () => {
-    def('resource', () => '/post-blocks/2620')
+    def('resource', () => '/post-blocks/2620?include[]=question')
     def('state', () => ({}))
     def('payload', () => ({
       data: {
@@ -36,8 +36,13 @@ describe('AddByNormalizeService', () => {
     def('expectedResult', () => ({
       meta: {
         '/post-blocks/2620': {
-          type: 'post-blocks',
-          id: '2620'
+          info: {
+            include: ['question']
+          },
+          data: {
+            type: 'post-blocks',
+            id: '2620'
+          }
         }
       },
       'post-blocks': {
@@ -80,7 +85,7 @@ describe('AddByNormalizeService', () => {
   })
 
   describe('when no data is present in the store and response is an array', () => {
-    def('resource', () => '/post-blocks')
+    def('resource', () => '/post-blocks?include[]=question')
     def('state', () => ({}))
     def('payload', () => ({
       data: [{
@@ -109,10 +114,15 @@ describe('AddByNormalizeService', () => {
 
     def('expectedResult', () => ({
       meta: {
-        '/post-blocks': [{
-          type: 'post-blocks',
-          id: '2620'
-        }]
+        '/post-blocks': {
+          info: {
+            include: ['question']
+          },
+          data: [{
+            type: 'post-blocks',
+            id: '2620'
+          }]
+        }
       },
       'post-blocks': {
         2620: {
@@ -153,7 +163,7 @@ describe('AddByNormalizeService', () => {
     })
   })
   describe('when data is present in the store and response is an entry', () => {
-    def('resource', () => '/post-blocks/2620')
+    def('resource', () => '/post-blocks/2620?include[]=question')
     def('state', () => ({
       'post-blocks': {
         2620: {
@@ -194,8 +204,13 @@ describe('AddByNormalizeService', () => {
     def('expectedResult', () => ({
       meta: {
         '/post-blocks/2620': {
-          type: 'post-blocks',
-          id: '2620'
+          info: {
+            include: ['question']
+          },
+          data: {
+            type: 'post-blocks',
+            id: '2620'
+          }
         }
       },
       'post-blocks': {

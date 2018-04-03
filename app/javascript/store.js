@@ -3,6 +3,8 @@ import * as Utils from './store/json_api/utils'
 
 import JsonApiGetters from 'store/json_api/getters'
 
+const endpoint = '/api/v1'
+
 export default {
   strict: true,
   modules: {
@@ -55,16 +57,16 @@ export default {
       })
     },
     initIssue (context, issueId) {
-      return context.dispatch('initEntry', `/api/v1/issues/${issueId}`)
+      return context.dispatch('initEntry', { endpoint, resource: `issues/${issueId}` })
     },
     initContext (context) {
-      return context.dispatch('initEntry', '/api/v1/context')
+      return context.dispatch('initEntry', { endpoint, resource: 'context' })
     },
     initBoardsLists (context) {
-      return context.dispatch('initEntry', '/api/v1/board_lists')
+      return context.dispatch('initEntry', { endpoint, resource: 'board_lists' })
     },
     initUsers (context) {
-      return context.dispatch('initEntry', '/api/v1/users/')
+      return context.dispatch('initEntry', { endpoint, resource: 'users' })
     },
     updateBoardList (context, { entry, attributes }) {
       let payload = {
@@ -145,8 +147,9 @@ export default {
       context.dispatch('changeManyToOneReference', {
         children: issues,
         parent: boardList,
-        childRelationship_name: 'board-list',
-        parentRelationship_name: 'issues'
+        childRelationshipName: 'board-list',
+        parentRelationshipName: 'issues',
+        endpoint
       })
     }
   }

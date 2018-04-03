@@ -32,12 +32,13 @@ export default {
   computed: {
     board_lists: {
       get () {
-        return this.$store.getters.getAll('board-lists').slice().sort(
-          (first, second) => {
+        let boardLists = this.$store.getters.getMetaCollection('board_lists') || []
+
+        return boardLists.slice()
+          .sort((first, second) => {
             return first.attributes['ordinal-number'] -
               second.attributes['ordinal-number']
-          }
-        )
+          })
       },
       set (value) {
         for (let i = 0; i < value.length; i++) {

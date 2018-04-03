@@ -8,7 +8,7 @@ import {
   FormGroup,
   Form
 } from 'bootstrap-vue/es/components'
-import TurbolinksAdapter from 'vue-turbolinks'
+import TurbolinksAdapter from './vue_turbolinks'
 import VueResource from 'vue-resource'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
