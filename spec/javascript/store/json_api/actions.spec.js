@@ -35,7 +35,7 @@ describe('Actions', () => {
     get: () => $user,
     getCollection: () => [$user],
     wasUrlCalled: $wasUrlCalled,
-    getPromiseByUrl: $urlPromise
+    urlPromise: $urlPromise
   }))
   def('commit', () => sinon.spy())
   def('dispatch', () => sinon.spy())

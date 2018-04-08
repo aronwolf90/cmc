@@ -17,7 +17,7 @@
     .row
       .col-6
         button.btn.btn-sm.btn-success(type='submit')
-          .fa.fa-spinner.fa-spin(v-if='is_saving')
+          .fa.fa-spinner.fa-spin(v-if='isSaving')
           | Save
       .col-6
         .btn-group.float-right
@@ -32,7 +32,7 @@ export default {
   props: ['issue_id'],
   data () {
     return {
-      is_saving: false,
+      isSaving: false,
       is_loaded: false,
       form_data: {
         attributes: {
@@ -78,11 +78,11 @@ export default {
 
       this.is_saving = true
 
-      this.$store.dispatch('update', {
+      this.$store.dispatch('updateIssue', {
         entry: this.issue,
-        payload: this.form_data
+        attributes: this.form_data.attributes
       }).then(() => {
-        this.is_saving = false
+        this.isSaving = false
         this.$router.replace('/')
       })
     },

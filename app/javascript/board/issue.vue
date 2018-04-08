@@ -2,10 +2,10 @@
   .card.issue
     .card-body.issue-body.row
       .col-10.text
-        a(v-bind:href="show_path")
+        a(v-bind:href='showPath', v-on:click='visitShow($event)')
           | {{ issue.attributes.title }}
       .col-2
-        issues_record_section(:issue_id="issue_id")
+        issues_record_section(:issue_id="issueId")
 </template>
 
 <script>
@@ -13,16 +13,22 @@
 import IssuesRecordSection from '../components/issues_record_section'
 
 export default {
-  props: ['issue_id', 'board_list_id'],
+  props: { 'issue-id': { required: true }, 'board-list-id': { required: true } },
   components: {
     'issues_record_section': IssuesRecordSection
   },
   computed: {
     issue () {
-      return this.$store.getters.get({type: 'issues', id: this.issue_id})
+      return this.$store.getters.entry({type: 'issues', id: this.issueId})
     },
-    show_path () {
-      return `/administration/board_lists/${this.board_list_id}/issues/${this.issue_id}`
+    showPath () {
+      return `/administration/board_lists/${this.boardListId}/issues/${this.issueId}`
+    }
+  },
+  methods: {
+    visitShow (event) {
+      Turbolinks.visit(this.showPath) /* eslint-disable-line no-undef */
+      event.preventDefault()
     }
   }
 }

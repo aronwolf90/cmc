@@ -1,75 +1,43 @@
 import * as Utils from './utils'
 
-export default {
-  get (state) {
-    return ({type, id}) => {
-      return Utils.get(state, { type, id })
-    }
-  },
-  getAll (state) {
-    return (type) => {
-      return Utils.getCollection(state, type) || []
-    }
-  },
-  getCollection (state) {
-    return (type) => {
-      return Utils.getCollection(state, type)
-    }
-  },
-  getMetaEntry (state) {
-    return (name) => {
-      if (!state.meta) return
-      if (!state.meta[name]) return
-      return Utils.get(state, state.meta[name].data)
-    }
-  },
-  getMetaInfo (state) {
-    return (name) => {
-      if (!state.meta) return
-      if (!state.meta[name]) return
-      return state.meta[name].info
-    }
-  },
-  getMetaCollection (state) {
-    return (name) => {
-      if (!state.meta) return
-      if (!state.meta[name]) return
-      if (!state.meta[name].data) return
-      return state.meta[name].data.map(entryRef => Utils.get(state, entryRef))
-    }
-  },
-  getAssociatedEntries (state) {
-    return ({entry, name}) => {
-      if (!entry) return []
-      if (!entry.relationships) return []
-      if (!entry.relationships[name]) return []
-      if (!entry.relationships[name].data) return []
-      return entry.relationships[name].data.map(localEntry => {
-        return Utils.get(state, localEntry)
-      }).filter(entry => entry !== undefined)
-    }
-  },
-  getAssociatedEntry (state) {
-    return ({entry, name}) => {
-      if (!entry) return
-      if (!entry.relationships) return
-      if (!entry.relationships[name]) return
-      if (!entry.relationships[name].data) return
+import MetaEntryService from './services/getters/meta_entry_service'
+import MetaInfoService from './services/getters/meta_info_service'
+import MetaCollectionService from './services/getters/meta_collection_service'
+import AssociatedEntriesService from './services/getters/associated_entries_service'
+import AssociatedEntryService from './services/getters/associated_entry_service'
 
-      let associated = entry.relationships[name].data
-      if (!entry.relationships || !entry.relationships[name]) return
-      return Utils.get(state, associated)
-    }
+export default {
+  entry (state) {
+    return ({type, id}) => Utils.get(state, { type, id })
+  },
+  collection (state) {
+    return (type) => Utils.getCollection(state, type)
+  },
+  metaEntry (state) {
+    return (name) => new MetaEntryService({ state, name }).perform()
+  },
+  metaInfo (state) {
+    return (name) => new MetaInfoService({ state, name }).perform()
+  },
+  metaCollection (state) {
+    return (name) => new MetaCollectionService({ state, name }).perform()
+  },
+  associatedEntries (state) {
+    return ({entry, name}) => new AssociatedEntriesService({state, entry, name}).perform()
+  },
+  associatedEntry (state) {
+    return ({entry, name}) => new AssociatedEntryService({state, entry, name}).perform()
   },
   wasUrlCalled (state) {
     return (url) => {
-      if (!state['called_urls']) return
-      return state['called_urls'][url] !== undefined
+      if (!state['called-urls']) return false
+      return state['called-urls'][url] !== undefined
     }
   },
-  getPromiseByUrl (state) {
+  urlPromise (state) {
     return (url) => {
-      return state['called_urls'][url]
+      if (!state['called-urls']) return
+      return state['called-urls'][url]
     }
   }
 }

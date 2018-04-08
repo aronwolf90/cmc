@@ -4,6 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
     "@std/esm": "^0.19.7",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bootstrap": "4.0.0-beta.2",
     "bootstrap-vue": "^1.3.0",
     "cross-env": "^5.1.3",
@@ -43,7 +44,8 @@
     "webpack-dev-server": "^2.9.5"
   },
   "scripts": {
-    "test": "cross-env NODE_ENV=test nyc mocha-webpack --webpack-config config/webpack/test.js -u bdd-lazy-var/global --require spec/mocha.js spec/load_all.js --recursive spec/javascript/",
+    "test": "./scripts/test_js.sh",
+    "test:watch": "./scripts/test_js.sh spec/javascript --watch",
     "report": "cross-env NODE_ENV=test nyc report"
   },
   "nyc": {

@@ -1,54 +1,55 @@
 <template lang='pug'>
-  .card.column
+  .card.column(v-if='boardList')
     .card-header
-      | {{ board_list.attributes.name }}
-      span(v-on:click="visitAdd($event)")
-        b-button.pull-right(variant="outline-secondary", size="sm", v-bind:href="`${add_link}`")
-          .fa.fa-plus
-      b-button.pull-right.text-muted(variant="link", size="sm", @click="destroy()")
+      | {{ name }}
+      a.btn.btn-sm.btn-outline-secondary.pull-right(v-on:click="visitAdd($event)", :href="addLink")
+        .fa.fa-plus
+      a.btn.btn-sm.btn-link.pull-right.text-muted(v-on:click="destroy()")
         .fa.fa-trash
       .clearfix
     draggable.body(v-model="issues", :options="{group:'issues'}")
-      template(v-for="issue in issues")
-        issue(:issue_id="issue.id", :board_list_id="board_list.id")
+      issue(v-for='issue in issues', :key='issue.id', :issue-id="issue.id", :board-list-id="boardList.id")
 
 </template>
 
 <script>
 import draggable from 'vuedraggable'
 import issue from './issue'
+import * as Utils from '../store/json_api/utils'
 
 export default {
   components: {
     draggable,
     'issue': issue
   },
-  props: ['list_id'],
+  props: { 'list-id': { required: true } },
   computed: {
-    board_list () {
-      return this.$store.getters.get({ type: 'board-lists', id: this.list_id })
+    boardList () {
+      return this.$store.getters.entry({ type: 'board-lists', id: this.listId })
     },
-    add_link () {
-      return `/administration/board_lists/${this.board_list.id}/issues/new`
+    name () {
+      return Utils.attribute(this.boardList, 'name')
+    },
+    addLink () {
+      return `/administration/board_lists/${this.boardList.id}/issues/new`
     },
     issues: {
       get () {
-        return this.board_list.relationships.issues.data
+        return this.$store.getters.associatedEntries({ entry: this.boardList, name: 'issues' })
       },
       set (issues) {
-        this.$store.dispatch('updateBoardListIssues', { boardList: this.board_list, issues: issues })
+        this.$store.dispatch('updateBoardListIssues', {
+          boardList: this.board_list, issues: issues
+        })
       }
     }
   },
   methods: {
-    getIssue (id) {
-      return this.$store.getters.getIssue(id)
-    },
     destroy () {
-      return this.$store.dispatch('destroy', this.board_list)
+      return this.$store.dispatch('destroy', this.boardList)
     },
     visitAdd (event) {
-      Turbolinks.visit(this.add_link) /* eslint-disable-line no-undef */
+      Turbolinks.visit(this.addLink) /* eslint-disable-line no-undef */
       event.preventDefault()
     }
   }

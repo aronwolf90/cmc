@@ -12,7 +12,8 @@ export default class {
   }
 
   _init () {
-    Utils.init(this.state, this._type())
+    if (this.state[this._type()]) return
+    Vue.set(this.state, this._type(), {})
   }
   _add () {
     if (this._isPresent()) return

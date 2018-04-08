@@ -2,7 +2,15 @@ import Vue from 'vue/dist/vue.common'
 import Vuex from 'vuex'
 import Store from '../store'
 
+import IssuesBoard from '../board.vue'
+import Issue from '../issue.vue'
+import SharedIssueSection from '../shared_issue_section'
+
 require('../config')
+
+Vue.component('issues_board', IssuesBoard)
+Vue.component('issue', Issue)
+Vue.component('shared-issue-section', SharedIssueSection)
 
 let store = new Vuex.Store(Store)
 

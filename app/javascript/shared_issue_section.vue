@@ -1,60 +1,75 @@
 <template lang='pug'>
   #shared-issue-section
     .container-fluid
-      .row.current-record(v-if="currentRecord")
+      .row.current-record(v-if='currentRecord')
         .col-2
         .col-8
-          | 00:10:00
+          | {{ time }}
         .col-2
-          issue-record-section(v-if="issue", :issue_id="issue.id")
-    .current-issue(v-if="issue")
-      a(v-bind:href="showPath")
+          issue-record-section(v-if='issue', :issue_id='issue.id')
+    .current-issue(v-if='issue')
+      a(v-bind:href='showPath')
         | {{ issue.attributes.title }}
     .relevant-issues.container-fluid
-      issue(v-for="relevantIssue in relevantIssues", :issue-id="relevantIssue.id")
-    input.search-section(type="text", placeholder="\uf002", v-model="search_text")
+      issue(v-for='relevantIssue in relevantIssues', :issue-id='relevantIssue.id')
+    input.search-section(type='text', placeholder='\uf002', v-model='search_text')
 
 </template>
 
 <script>
-import IssueRecordSection from "components/issues_record_section"
-import Issue from "shared_issue_section/issue"
+import IssueRecordSection from 'components/issues_record_section'
+import Issue from 'shared_issue_section/issue'
 
 export default {
-  created() {
+  data: () => ({ search_text: '', time: '00:00:00' }),
+  mounted () {
     this.$store.dispatch('initBoardsLists')
+    this.$store.dispatch('initCurrentRecord')
+
+    setInterval(() => {
+      this.time = this.consumedTime()
+    }, 1000)
   },
   components: {
-    "issue-record-section": IssueRecordSection,
-    "issue": Issue
+    'issue-record-section': IssueRecordSection,
+    'issue': Issue
   },
-  data: () => ({ search_text: "" }),
   computed: {
-    issue() {
-      return this.$store.getters.getAssociatedEntry({
+    issue () {
+      return this.$store.getters.associatedEntry({
         entry: this.currentRecord,
         name: 'issue'
       })
     },
-    showPath() {
+    showPath () {
       if (!this.issue) return
-      let board_lists_id = this.issue.relationships["board-list"].data.id
-      return `/administration/board_lists/${board_lists_id}/issues/${this.issue.id}`
+      let boardListsId = this.issue.relationships['board-list'].data.id
+      return `/administration/board_lists/${boardListsId}/issues/${this.issue.id}`
     },
-    currentRecord() {
+    currentRecord () {
       return this.$store.getters.currentRecord
     },
-    relevantIssues() {
-      if (!this.$store.getters.getCollection('issues')) return
-      let relevantIssues = this.$store.getters.getCollection('issues').slice()
+    relevantIssues () {
+      let relevantIssues = this.$store.getters.relevantIssues(this.search_text)
       let currentIssueIndex = relevantIssues.findIndex(entry => {
         if (!this.issue) return false
-        return entry.id == this.issue.id
+        return entry.id === this.issue.id
       })
       if (currentIssueIndex >= 0) relevantIssues.splice(currentIssueIndex, 1)
-      return relevantIssues.filter(relevantIssue => {
-        return relevantIssue.attributes.title.includes(this.search_text)
-      })
+      return relevantIssues
+    }
+  },
+  methods: {
+    consumedTime () {
+      if (!this.currentRecord) return '00:00:00'
+
+      let startTime = (new Date(this.currentRecord.attributes['start-time'])).getTime()
+      let currentTime = new Date().getTime()
+      let interval = (currentTime - startTime) / 1000
+      let hours = Math.floor(interval / 3600).toString()
+      let minutes = Math.floor(interval / 60 - hours * 60).toString()
+      let seconds = Math.floor(interval - minutes * 60 - hours * 3600).toString()
+      return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`
     }
   }
 }

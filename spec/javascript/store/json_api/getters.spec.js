@@ -16,10 +16,10 @@ describe('Getters', () => {
     }
   }))
 
-  describe('#get', () => {
+  describe('#entry', () => {
     describe('with the expected entry', () => {
       it('return the expected entry', () => {
-        expect(Getters.get($state)({ type: 'users', id: '1' })).to.eql($user)
+        expect(Getters.entry($state)({ type: 'users', id: '1' })).to.eql($user)
       })
     })
 
@@ -27,85 +27,21 @@ describe('Getters', () => {
       def('state', () => ({ }))
 
       it('return the expected entry', () => {
-        expect(Getters.get($state)({ type: 'users', id: '1' })).to.eql(undefined)
+        expect(Getters.entry($state)({ type: 'users', id: '1' })).to.eql(undefined)
       })
     })
   })
-  describe('#getAll', () => {
+  describe('#collection', () => {
     describe('with the coresponding collection', () => {
       it('return the expected collection', () => {
-        expect(Getters.getAll($state)('users')).to.eql([$user])
-      })
-    })
-    describe('without the coresponding collection', () => {
-      def('state', () => ({ }))
-
-      it('return an empty array', () => {
-        expect(Getters.getAll($state)('users')).to.eql([])
-      })
-    })
-  })
-  describe('#getCollection', () => {
-    describe('with the coresponding collection', () => {
-      it('return the expected collection', () => {
-        expect(Getters.getCollection($state)('users')).to.eql([$user])
+        expect(Getters.collection($state)('users')).to.eql([$user])
       })
     })
     describe('without the coresponding collection', () => {
       def('state', () => ({ }))
 
       it('return undefined', () => {
-        expect(Getters.getCollection($state)('users')).to.eql(undefined)
-      })
-    })
-  })
-  describe('#getMetaCollection', () => {
-    describe('with the coresponding collection', () => {
-      it('return the expected collection', () => {
-        expect(Getters.getMetaCollection($state)('users')).to.eql([$user])
-      })
-    })
-    describe('without the coresponding collection', () => {
-      def('state', () => ({ }))
-
-      it('return undefined', () => {
-        expect(Getters.getMetaCollection($state)('users')).to.eql(undefined)
-      })
-    })
-  })
-  describe('#getAssociatedEntry', () => {
-    describe('with the coresponding association entry', () => {
-      it('return the expected entry', () => {
-        let issue = { id: '1', type: 'issues', relationships: { user: { data: { id: '1', type: 'users' } } } }
-        let state = { issue: { 1: issue }, users: { 1: $user } }
-
-        expect(Getters.getAssociatedEntry(state)({entry: issue, name: 'user'})).to.eql($user)
-      })
-    })
-    describe('without the coresponding association entry', () => {
-      it('return undefined', () => {
-        let issue = { id: '1', type: 'issues' }
-        let state = { issue: { 1: issue } }
-
-        expect(Getters.getAssociatedEntry(state)({entry: issue, name: 'user'})).to.eql(undefined)
-      })
-    })
-  })
-  describe('#getAssociatedEntries', () => {
-    describe('with the coresponding associated collection', () => {
-      it('return the expected collection', () => {
-        let user = { id: '1', type: 'users' }
-        let issue = { id: '1', type: 'issues', relationships: { users: { data: [{ id: '1', type: 'users' }] } } }
-        let state = { issues: { 1: issue }, users: { 1: user } }
-        expect(Getters.getAssociatedEntries(state)({entry: issue, name: 'users'})).to.eql([user])
-      })
-    })
-    describe('without the coresponding associated collection', () => {
-      it('return undefined', () => {
-        let issue = { id: '1', type: 'issues' }
-        let state = { issue: { 1: issue } }
-
-        expect(Getters.getAssociatedEntries(state)({entry: issue, name: 'user'})).to.eql([])
+        expect(Getters.collection($state)('users')).to.eql(undefined)
       })
     })
   })

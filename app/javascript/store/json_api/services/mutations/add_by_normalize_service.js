@@ -64,6 +64,9 @@ export default class {
     let queryString = this.resource.replace(new RegExp('^[^?]*.'), '')
     let keyValuePairs = queryString.split('&')
     let result = {}
+
+    if (!queryString) return
+
     for (const keyValuePair of keyValuePairs) {
       let key = keyValuePair.split('=')[0]
       let value = keyValuePair.split('=')[1]

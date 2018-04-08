@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     issue () {
-      return this.$store.getters.get({
+      return this.$store.getters.entry({
         type: 'issues',
         id: this.issueId
       })

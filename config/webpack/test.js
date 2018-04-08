@@ -8,3 +8,7 @@ module.exports.externals = [nodeExternals({
 })]
 
 module.exports.devtool = "inline-cheap-module-source-map"
+
+module.exports.watchOptions = {
+  poll: 1000
+}

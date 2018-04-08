@@ -24,7 +24,7 @@ export default {
     let url = calculeUrl({ endpoint, resource })
 
     if (context.getters.wasUrlCalled(url)) {
-      return context.getters.getPromiseByUrl(url)
+      return context.getters.urlPromise(url)
         .then(request => request.data)
     }
     return context.dispatch('add', { endpoint, resource, url })
@@ -39,8 +39,8 @@ export default {
 
     let relatedEntryReference = entry.relationships[name].data
 
-    if (context.getters.getAssociatedEntry({ entry, name })) {
-      return context.getters.getAssociatedEntry({ entry, name })
+    if (context.getters.associatedEntry({ entry, name })) {
+      return context.getters.associatedEntry({ entry, name })
     }
     return context.dispatch('add',
       relatedEntryReference.links.url)
@@ -50,9 +50,9 @@ export default {
 
     let relatedEntriesReference = entry.relationships[name].data
 
-    if (context.getters.getAssociatedEntries({ entry, name }) !== []) {
+    if (context.getters.associatedEntries({ entry, name }) !== []) {
       return new Promise((resolve, reject) => {
-        resolve(context.getters.getAssociatedEntries({ entry, name }))
+        resolve(context.getters.associatedEntries({ entry, name }))
       })
     }
     return context.dispatch('addCollection',
@@ -133,7 +133,7 @@ export default {
     required({ children, parent, parentRelationshipName, childRelationshipName, endpoint })
 
     context.commit('changeManyToOneReference', {
-      children: children.map((child) => context.getters.get(child)),
+      children: children.map((child) => context.getters.entry(child)),
       parent,
       parentTypes: ['board-lists'],
       parentRelationshipName,

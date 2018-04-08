@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     issue () {
-      return this.$store.getters.get({type: 'issues', id: this.issue_id})
+      return this.$store.getters.entry({type: 'issues', id: this.issue_id})
     },
     currentUser () {
       return this.$store.getters.currentUser

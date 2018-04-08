@@ -1,19 +1,18 @@
 <template lang='pug'>
-  .issues_board
-    .issues_board-header
+  .issues-board
+    .issues-board-header
       .row
-        .col-md-10
+        .col-sm-5
           b-form-input(type='text', placeholder='Search', size='sm')
-        .col-md-2
-          span(v-on:click='visitAdd($event)')
-            b-button.pull-right(variant='outline-secondary', size='sm', href='`${add_link}`')
-              .fa.fa-plus
-              |&nbsp add list
+        .col-sm-5
+        .col-sm-2
+          a.btn.btn-sm.btn-outline-secondary(v-on:click='visitAdd($event)', :href='addLink')
+            .fa.fa-plus
+            |&nbsp add list
 
-    .row.issues_board-row
-      draggable.body.issues_board-body(v-model='board_lists')
-        template(v-for='board_list in board_lists')
-          list(:list_id='board_list.id')
+    .row.issues-board-row
+      draggable.body.issues-board-body(v-model='boardLists')
+        list(v-for='boardList in boardLists', :key='boardList.id', :list-id='boardList.id')
 
 </template>
 
@@ -30,32 +29,21 @@ export default {
     this.$store.dispatch('initBoardsLists')
   },
   computed: {
-    board_lists: {
+    boardLists: {
       get () {
-        let boardLists = this.$store.getters.getMetaCollection('board_lists') || []
-
-        return boardLists.slice()
-          .sort((first, second) => {
-            return first.attributes['ordinal-number'] -
-              second.attributes['ordinal-number']
-          })
+        return this.$store.getters.metaCollection('board_lists') || []
       },
-      set (value) {
-        for (let i = 0; i < value.length; i++) {
-          this.$store.dispatch('updateBoardList', {
-            entry: value[i],
-            attributes: { 'ordinal-number': i }
-          })
-        }
+      set (boardLists) {
+        this.$store.dispatch('updateBoardListOrder', boardLists)
       }
     },
-    add_link () {
+    addLink () {
       return '/administration/board_lists/new'
     }
   },
   methods: {
     visitAdd (event) {
-      Turbolinks.visit(this.add_link) /* eslint-disable-line no-undef */
+      Turbolinks.visit(this.addLink) /* eslint-disable-line no-undef */
       event.preventDefault()
     }
   }
@@ -63,13 +51,14 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-  .issues_board-row
+  .issues-board-row
     height: 100%
-  .issues_board
+  .issues-board
     height: 100%
-    .issues_board-header
+    .issues-board-header
       margin-bottom: 10px
-    .issues_board-body
+      margin-right: 7px
+    .issues-board-body
       overflow-x: scroll
       white-space: nowrap
       heigth: 100%

@@ -1,6 +1,6 @@
 import Vue from 'vue/dist/vue.common'
 
-import Add from './services/mutations/add_service'
+import AddService from './services/mutations/add_service'
 import AddByNormalizeService from './services/mutations/add_by_normalize_service'
 import UpdateService from './services/mutations/update_service'
 import RemoveService from './services/mutations/remove_service'
@@ -8,10 +8,11 @@ import RemoveFromAllService from './services/mutations/remove_from_all_service'
 import AddToMultipleService from './services/mutations/add_to_multiple_service'
 import SetAssociationService from './services/mutations/set_association_service'
 import ChangeManyToOneReferenceService from './services/mutations/change_many_to_one_reference_service'
+import ClearService from './services/mutations/clear_service'
 
 export default {
   add (state, payload) {
-    new Add({ state, payload }).perform()
+    new AddService({ state, payload }).perform()
   },
   update (state, { entry, payload }) {
     new UpdateService({ entry, payload }).perform()
@@ -28,18 +29,16 @@ export default {
   setAssociation (state, { child, parent, relationshipName }) {
     new SetAssociationService({ parent, child, relationshipName }).perform()
   },
-  clear (state) {
-    for (let key of Object.keys(state)) {
-      Vue.delete(state, key)
-    }
+  clear (state, { exclude }) {
+    new ClearService({ exclude }).perform()
   },
   clearCalledUrls (state) {
     if (!state['called_urls']) return
     Vue.delete(state, 'called_urls')
   },
   addCalledUrl (state, { url, promise }) {
-    if (!state['called_urls']) Vue.set(state, 'called_urls', {})
-    Vue.set(state['called_urls'], url, promise)
+    if (!state['called-urls']) Vue.set(state, 'called-urls', {})
+    Vue.set(state['called-urls'], url, promise)
   },
   changeManyToOneReference (state, { children, parent, parentTypes,
     parentRelationshipName, childRelationshipName }) {
