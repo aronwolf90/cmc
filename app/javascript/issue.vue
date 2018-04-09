@@ -50,11 +50,11 @@ export default {
   },
   computed: {
     is_loaded () {
-      return this.$store.getters.get({type: 'issues', id: this.issue_id}) !== undefined
+      return this.$store.getters.entry({type: 'issues', id: this.issue_id}) !== undefined
     },
     issue: {
       get () {
-        return this.$store.getters.get({type: 'issues', id: this.issue_id})
+        return this.$store.getters.entry({type: 'issues', id: this.issue_id})
       },
       set (value) {
         // this.$store.dispatch('updateIssue', value)

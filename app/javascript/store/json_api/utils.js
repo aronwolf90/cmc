@@ -13,7 +13,8 @@ export const entryToRef = (entry) => {
 }
 
 export const sameRef = (entry1, entry2) => {
-  return entry1.type === entry2.type &&
+  return entry1 && entry2 &&
+    entry1.type === entry2.type &&
     entry1.id === entry2.id
 }
 
@@ -25,4 +26,11 @@ export const attribute = (entry, name) => {
   if (!entry) return
   if (!entry.attributes) return
   return entry.attributes[name]
+}
+
+export const relationship = (entry, name) => {
+  if (!entry) return
+  if (!entry.relationships) return
+  if (!entry.relationships[name]) return
+  return entry.relationships[name].data
 }

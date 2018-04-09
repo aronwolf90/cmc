@@ -13,12 +13,7 @@ export default {
   components: {
     'issue-record-section': IssueRecordSection
   },
-  props: {
-    issueId: {
-      type: String,
-      required: true
-    }
-  },
+  props: { issueId: { required: true } },
   computed: {
     issue () {
       return this.$store.getters.entry({

@@ -41,6 +41,12 @@ export default {
         name: 'current-record'
       })
     },
+    currentIssue (state, getters) {
+      return getters.associatedEntry({
+        entry: getters.currentRecord,
+        name: 'issue'
+      })
+    },
     relevantIssues (state, getters) {
       return (searchText) => {
         if (!getters.collection('issues')) return

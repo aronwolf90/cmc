@@ -25,8 +25,7 @@ export default {
   },
   computed: {
     options () {
-      this.$store.getters.test
-      return this.$store.getters.getAll('users').map((user) => {
+      return (this.$store.getters.collection('users') || []).map((user) => {
         return {
           value: user.id,
           text: user.attributes.firstname
@@ -34,13 +33,13 @@ export default {
       })
     },
     issue () {
-      return this.$store.getters.get({
+      return this.$store.getters.entry({
         type: 'issues',
         id: this.issue_id
       })
     },
     user () {
-      return this.$store.getters.getAssociatedEntry({
+      return this.$store.getters.associatedEntry({
         entry: this.issue,
         name: 'user'
       })
@@ -59,7 +58,7 @@ export default {
     onSelect (item) {
       this.$store.dispatch('changeIssueToUserReference', {
         issue: this.issue,
-        user: this.$store.getters.get({
+        user: this.$store.getters.entry({
           type: 'users',
           id: item.value
         })

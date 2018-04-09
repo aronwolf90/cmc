@@ -47,11 +47,11 @@ export default {
   },
   computed: {
     comments () {
-      let issue = this.$store.getters.get({
+      let issue = this.$store.getters.entry({
         type: 'issues',
         id: this.issue_id
       })
-      return this.$store.getters.getAssociatedEntries({
+      return this.$store.getters.associatedEntries({
         entry: issue,
         name: 'comments'
       })

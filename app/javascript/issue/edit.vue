@@ -61,7 +61,7 @@ export default {
       get () {
         if (!this.is_loaded) {
           /* eslint-disable */
-          this.form_data = JSON.parse(JSON.stringify(this.$store.getters.get({type: 'issues', id: this.issue_id})))
+          this.form_data = JSON.parse(JSON.stringify(this.$store.getters.entry({type: 'issues', id: this.issue_id})))
           this.is_loaded = true
           /* eslint-enable */
         }
@@ -69,7 +69,7 @@ export default {
       }
     },
     issue () {
-      return this.$store.getters.get({type: 'issues', id: this.issue_id})
+      return this.$store.getters.entry({type: 'issues', id: this.issue_id})
     }
   },
   methods: {

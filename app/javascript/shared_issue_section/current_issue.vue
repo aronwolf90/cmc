@@ -1,0 +1,48 @@
+<template lang='pug'>
+  .current-issue(v-if='currentIssue')
+    a(v-bind:href='showPath', v-on:click='visitShow($event)')
+      | {{ title }}
+
+</template>
+
+<script>
+import * as Utils from '../store/json_api/utils'
+
+export default {
+  mounted () {
+    this.$store.dispatch('initCurrentIssue')
+  },
+  computed: {
+    currentIssue () {
+      return this.$store.getters.currentIssue
+    },
+    title () {
+      return Utils.attribute(this.currentIssue, 'title')
+    },
+    boardListId () {
+      if (!Utils.relationship(this.currentIssue, 'board-list')) return
+      return (!Utils.relationship(this.currentIssue, 'board-list')).id
+    },
+    showPath () {
+      if (!this.currentIssue) return
+      return `/administration/board_lists/${this.boardListId}/issues/${this.currentIssue.id}`
+    }
+  },
+  methods: {
+    visitShow (event) {
+      Turbolinks.visit(this.showPath) /* eslint-disable-line no-undef */
+      event.preventDefault()
+    }
+  }
+}
+</script>
+
+<style lang='sass' scoped>
+.current-issue
+  padding: 10px
+  text-align: center
+  border-bottom: 1px solid #e7e7e7
+  a
+    color: grey
+
+</style>

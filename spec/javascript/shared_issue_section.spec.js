@@ -1,6 +1,7 @@
 import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import SharedIssueSection from '../../app/javascript/shared_issue_section'
+import CurrentIssue from '../../app/javascript/shared_issue_section/current_issue'
 import sinon from 'sinon'
 
 const localVue = createLocalVue()
@@ -16,7 +17,7 @@ describe('SharedIssueSection', () => {
   def('getters', () => ({
     associatedEntry () { return () => $currentIssue },
     currentRecord () { return $currentRecord },
-    collection () { return () => [$currentIssue] }
+    relevantIssues () { return () => [$currentIssue] }
   }))
   def('actions', () => ({ initBoardsLists () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
@@ -43,30 +44,8 @@ describe('SharedIssueSection', () => {
     def('currentBoardList', () => ({ id: 1, type: 'board-lists' }))
     def('startTime', () => 'Wed Feb 21 2018 12:30:10 GMT+0000 (UTC)')
 
-    it("has currentsIssue's title", () => {
-      expect($subject.html()).to.include('current issue title')
-    })
-
-    describe('when start-time is some seconds in the past', () => {
-      def('startTime', () => 'Wed Feb 21 2018 12:30:8 GMT+0000 (UTC)')
-
-      it('return the correct spended time', () => {
-        expect($subject.vm.consumedTime()).to.eq('00:00:02')
-      })
-    })
-    describe('when start-time is some minutes in the past', () => {
-      def('startTime', () => 'Wed Feb 21 2018 12:28:10 GMT+0000 (UTC)')
-
-      it('return the correct spended time', () => {
-        expect($subject.vm.consumedTime()).to.eq('00:02:00')
-      })
-    })
-    describe('when start-time is some hours in the past', () => {
-      def('startTime', () => 'Wed Feb 21 2018 10:30:10 GMT+0000 (UTC)')
-
-      it('return the correct spended time', () => {
-        expect($subject.vm.consumedTime()).to.eq('02:00:00')
-      })
+    it('contain currentIssue', () => {
+      expect($subject.find(CurrentIssue).exists()).to.be.true
     })
   })
 })

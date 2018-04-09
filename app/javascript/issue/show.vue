@@ -9,7 +9,6 @@
             .fa.fa-edit
           .btn.btn-sm.btn-outline-danger
             .fa.fa-trash
-
     .body
       #description
 </template>
@@ -29,7 +28,7 @@ export default {
   },
   computed: {
     issue () {
-      return this.$store.getters.get({type: 'issues', id: this.issue_id})
+      return this.$store.getters.entry({type: 'issues', id: this.issue_id})
     }
   }
 }
