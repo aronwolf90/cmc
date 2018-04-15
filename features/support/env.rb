@@ -57,3 +57,27 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+Capybara.server_host = "0.0.0.0"
+Capybara.server_port = ENV["TEST_PORT"]
+Capybara.app_host = "http://#{Socket.ip_address_list.detect { |intf| intf.ipv4_private? }.ip_address}:#{ENV['TEST_PORT']}"
+Capybara.javascript_driver = :selenium
+
+# Configure the Chrome driver capabilities & register
+args = %w[--no-default-browser-check --start-maximized]
+caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => { "args" => args })
+Capybara.register_driver :selenium do |app|
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  client.timeout = 120
+
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :remote,
+    url: "http://#{ENV['SELENIUM_HOST']}:#{ENV['SELENIUM_PORT']}/wd/hub",
+    desired_capabilities: caps,
+    http_client: client
+  )
+end
+
+Capybara.server = :puma # Until your setup is working
+Capybara.server = :puma, { Silent: true } # To clean up your test output

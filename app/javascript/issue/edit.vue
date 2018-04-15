@@ -1,5 +1,5 @@
 <template lang='pug'>
-  b-form(@submit="submit")
+  b-form(@submit="submit", v-if='form')
     .row
       .col-12
         b-form-input(
@@ -11,8 +11,7 @@
         br
     .row
       .col-12
-        #text
-        input(id="hidden_text" type="hidden")
+        markdown-editor(:value='form.attributes.description', v-on:valueChange='setDescription')
         br
     .row
       .col-6
@@ -26,61 +25,33 @@
 </template>
 
 <script>
-import Editor from 'tui-editor'
+import MarkdownEditor from '../markdown_editor'
 
 export default {
-  props: ['issue_id'],
-  data () {
-    return {
-      isSaving: false,
-      is_loaded: false,
-      form_data: {
-        attributes: {
-          name: '',
-          description: ''
-        }
-      }
-    }
+  props: ['issueId'],
+  data () { return { form: null, isSaving: false } },
+  components: {
+    'markdown-editor': MarkdownEditor
   },
   mounted () {
-    var editor = new Editor({
-      el: document.querySelector('#text'),
-      initialEditType: 'markdown',
-      previewStyle: 'tab',
-      height: '300px',
-      initialValue: this.form.attributes.description,
-      events: {
-        change: (event) => {
-          this.setDescription(editor.getValue())
-        }
-      }
+    this.$store.dispatch('initIssue', this.issueId).then(() => {
+      this.form = JSON.parse(JSON.stringify(this.$store.getters.entry({type: 'issues', id: this.issueId})))
     })
   },
   computed: {
-    form: {
-      get () {
-        if (!this.is_loaded) {
-          /* eslint-disable */
-          this.form_data = JSON.parse(JSON.stringify(this.$store.getters.entry({type: 'issues', id: this.issue_id})))
-          this.is_loaded = true
-          /* eslint-enable */
-        }
-        return this.form_data
-      }
-    },
     issue () {
-      return this.$store.getters.entry({type: 'issues', id: this.issue_id})
+      return this.$store.getters.entry({type: 'issues', id: this.issueId})
     }
   },
   methods: {
     submit (event) {
       event.preventDefault()
 
-      this.is_saving = true
+      this.isSaving = true
 
       this.$store.dispatch('updateIssue', {
         entry: this.issue,
-        attributes: this.form_data.attributes
+        attributes: this.form.attributes
       }).then(() => {
         this.isSaving = false
         this.$router.replace('/')

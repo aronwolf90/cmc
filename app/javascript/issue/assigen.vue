@@ -14,7 +14,7 @@
 import { BasicSelect } from 'vue-search-select'
 
 export default {
-  props: ['issue_id'],
+  props: ['issueId'],
   data () {
     return {
       searchText: ''
@@ -35,7 +35,7 @@ export default {
     issue () {
       return this.$store.getters.entry({
         type: 'issues',
-        id: this.issue_id
+        id: this.issueId
       })
     },
     user () {

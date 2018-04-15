@@ -7,11 +7,12 @@ html
     <link rel="stylesheet" href="https://nhnent.github.io/tui.editor/api/latest/lib/codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="https://nhnent.github.io/tui.editor/api/latest/lib/highlightjs/styles/github.css">
 
+    = javascript_pack_tag 'application'
+    = stylesheet_pack_tag 'application'
+
     = stylesheet_link_tag 'administration', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
-    = javascript_pack_tag 'application'
-    = stylesheet_pack_tag 'application'
   body
     #app
       = render 'administration/shared/navbar'
@@ -21,4 +22,6 @@ html
         - else
           = render @side_menu_path
         section#side-body.container-fluid
+          .flash-messages
+            = render 'shared/flash_messages'
           = yield

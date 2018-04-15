@@ -14,8 +14,10 @@ Vue.component('shared-issue-section', SharedIssueSection)
 
 let store = new Vuex.Store(Store)
 
-Vue.http.headers.common['X-CSRF-Token'] =
-  document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+if (document.querySelector('meta[name="csrf-token"]')) {
+  Vue.http.headers.common['X-CSRF-Token'] =
+    document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+}
 Vue.http.headers.common['Content-Type'] = 'application/vnd.api+json'
 
 document.addEventListener('turbolinks:before-visit', () => {

@@ -1,12 +1,12 @@
 <template lang='pug'>
-  #issue(v-if="is_loaded")
+  #issue(v-if='issue')
     .container-fluid
-      router-view(:issue_id='issue_id')
+      router-view(:issue-id='issueId')
       hr.divider
-      comments(:issue_id='issue_id')
+      comments(:issue-id='issueId')
       br
     .right-aside
-      assigen(:issue_id='issue_id')
+      assigen(:issue-id='issueId')
 
 </template>
 
@@ -35,7 +35,7 @@ const router = new Router({
 })
 
 export default {
-  props: ['issue_id'],
+  props: ['issueId'],
   router,
   components: {
     Show,
@@ -45,20 +45,12 @@ export default {
 
   },
   created () {
-    this.$store.dispatch('initIssue', this.issue_id)
+    this.$store.dispatch('initIssue', this.issueId)
     if (!window.location.hash) router.replace('/')
   },
   computed: {
-    is_loaded () {
-      return this.$store.getters.entry({type: 'issues', id: this.issue_id}) !== undefined
-    },
-    issue: {
-      get () {
-        return this.$store.getters.entry({type: 'issues', id: this.issue_id})
-      },
-      set (value) {
-        // this.$store.dispatch('updateIssue', value)
-      }
+    issue () {
+      return this.$store.getters.entry({type: 'issues', id: this.issueId})
     }
   }
 }

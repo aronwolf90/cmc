@@ -5,6 +5,10 @@ module Api
     class IssuesController < ApiController
       include StandartActions
 
+      def index
+        render json: Issue.all
+      end
+
       def show
         render json: issue, include: :comments
       end

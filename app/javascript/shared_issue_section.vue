@@ -12,6 +12,9 @@ import CurrentIssue from 'shared_issue_section/current_issue'
 import IssuesSearchSection from 'shared_issue_section/issues_search_section'
 
 export default {
+  mounted () {
+    this.$store.dispatch('initIssues')
+  },
   components: {
     'current-record': CurrentRecord,
     'current-issue': CurrentIssue,

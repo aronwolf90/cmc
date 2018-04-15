@@ -6,7 +6,7 @@
         hr.divider
     .row
       .col-12
-        #new_comment
+        markdown-editor(ref='markdownEditor', v-on:valueChange='newCommentData.attributes.content=$event')
         br
     .row
       .col-12
@@ -15,13 +15,16 @@
 </template>
 
 <script>
-import Editor from 'tui-editor'
+import MarkdownEditor from '../markdown_editor'
 
 export default {
-  props: ['issue_id'],
+  props: ['issueId'],
+  components: {
+    'markdown-editor': MarkdownEditor
+  },
   data () {
     return {
-      new_comment_data: {
+      newCommentData: {
         attributes: {
           content: ''
         }
@@ -30,34 +33,17 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('initContext', this.issue_id)
-  },
-  mounted () {
-    this.editor = new Editor({
-      el: document.querySelector('#new_comment'),
-      initialEditType: 'markdown',
-      previewStyle: 'tab',
-      height: '150px',
-      events: {
-        change: (event) => {
-          this.new_comment_data.attributes.content = this.editor.getValue()
-        }
-      }
-    })
+    this.$store.dispatch('initContext', this.issueId)
   },
   computed: {
     comments () {
-      let issue = this.$store.getters.entry({
-        type: 'issues',
-        id: this.issue_id
-      })
       return this.$store.getters.associatedEntries({
-        entry: issue,
+        entry: this.issue,
         name: 'comments'
       })
     },
     issue () {
-      return this.$store.getters.get({id: this.issue_id, type: 'issues'})
+      return this.$store.getters.entry({id: this.issueId, type: 'issues'})
     },
     currentUser () {
       return this.$store.getters.currentUser
@@ -65,16 +51,13 @@ export default {
   },
   methods: {
     comment () {
+      this.$refs.markdownEditor.clear()
       this.$store.dispatch('createComment', {
         issue: this.issue,
         user: this.currentUser,
-        attributes: this.new_comment_data.attributes
+        attributes: this.newCommentData.attributes
       })
-      this.editor.setMarkdown('')
     }
   }
 }
 </script>
-
-<style lang='sass' scoped>
-</style>

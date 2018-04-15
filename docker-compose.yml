@@ -60,6 +60,10 @@ services:
       - DATABASE_URL=postgres://root:password@db%5Ftest/root
       - SPRING_SOCKET=tmp/sockets/spring_test.sock
       - RAILS_ENV=test
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4444
+      - TEST_APP_HOST=test
+      - TEST_PORT=3001
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
@@ -67,6 +71,19 @@ services:
     depends_on:
       - db_test
       - spring_test
+      - selenium
+
+  selenium:
+    image: selenium/standalone-chrome-debug:3.0.1-germanium
+    ports:
+      - "4444:4444"
+      - "5900:5900"
+    volumes:
+      - /dev/shm:/dev/shm
+    logging:
+      driver: none
+    stdin_open: true
+    tty: true
 
 volumes:
   bundle:
