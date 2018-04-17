@@ -1,30 +1,38 @@
 <template lang='pug'>
-  a.issue.row(v-bind:href='showPath')
+  a.issue.row(v-bind:href='showPath', v-on:click='visitShow($event)')
     .col-10
       | {{ issue.attributes.title }}
     .col-2
-      issue-record-section(:issue_id='issue.id')
+      issues-record-section(:issue-id='issue.id')
 </template>
 
 <script>
-import IssueRecordSection from 'components/issues_record_section'
+import * as Utils from '../store/json_api/utils'
+import IssuesRecordSection from 'components/issues_record_section'
 
 export default {
   components: {
-    'issue-record-section': IssueRecordSection
+    'issues-record-section': IssuesRecordSection
   },
   props: { issueId: { required: true } },
+  created () {
+    this.$store.dispatch('initCurrentIssue')
+  },
   computed: {
     issue () {
-      return this.$store.getters.entry({
-        type: 'issues',
-        id: this.issueId
-      })
+      return this.$store.getters.entry({type: 'issues', id: this.issueId})
+    },
+    boardListId () {
+      return Utils.relationship(this.issue, 'board-list').id
     },
     showPath () {
-      if (!this.issue) return
-      let boardListsId = this.issue.relationships['board-list'].data.id
-      return `/administration/board_lists/${boardListsId}/issues/${this.issue.id}`
+      return `/administration/board_lists/${this.boardListId}/issues/${this.issueId}`
+    }
+  },
+  methods: {
+    visitShow (event) {
+      Turbolinks.visit(this.showPath) /* eslint-disable-line no-undef */
+      event.preventDefault()
     }
   }
 }

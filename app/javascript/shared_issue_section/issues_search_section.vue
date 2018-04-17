@@ -1,7 +1,7 @@
 <template lang='pug'>
   .issues-search-section
     .relevant-issues.container-fluid
-      issue(v-for='relevantIssue in relevantIssues', :key='relevantIssue.id', :issue-id='relevantIssue.id')
+      issue(v-for='issue in issues', :key='issue.id', :issue-id='issue.id')
     input.search-section(type='text', placeholder='\uf002', v-model='search_text')
 
 </template>
@@ -12,19 +12,23 @@ import * as Utils from '../store/json_api/utils'
 
 export default {
   data: () => ({ search_text: '', time: '00:00:00' }),
-  mounted () {
+  created () {
+    this.$store.dispatch('initIssues')
     this.$store.dispatch('initCurrentIssue')
   },
   components: {
     'issue': Issue
   },
   computed: {
-    issue () {
+    currentIssue () {
       return this.$store.getters.currentIssue
     },
     relevantIssues () {
-      return (this.$store.getters.relevantIssues(this.search_text) || []).filter(entry => {
-        return !Utils.sameRef(this.issue, entry)
+      return this.$store.getters.relevantIssues(this.search_text) || []
+    },
+    issues () {
+      return this.relevantIssues.filter(entry => {
+        return !Utils.sameRef(this.currentIssue, entry)
       })
     }
   }

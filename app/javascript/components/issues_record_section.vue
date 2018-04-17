@@ -9,7 +9,7 @@
 <script>
 
 export default {
-  props: ['issue_id', 'board_list_id'],
+  props: ['issueId', 'board_list_id'],
   data () {
     return { time: '00:00:00' }
   },
@@ -23,15 +23,19 @@ export default {
   },
   computed: {
     issue () {
-      return this.$store.getters.entry({type: 'issues', id: this.issue_id})
+      return this.$store.getters.entry({type: 'issues', id: this.issueId})
     },
     currentUser () {
       return this.$store.getters.currentUser
     },
+    currentRecord () {
+      return this.$store.getters.currentRecord
+    },
     record () {
-      let globalRecord = this.$store.getters.currentRecord
-      if (globalRecord && globalRecord.relationships.issue.data.id === this.issue.id) {
-        return globalRecord
+      if (!this.issue) return
+      if (!this.currentRecord) return
+      if (this.currentRecord.relationships.issue.data.id === this.issue.id) {
+        return this.currentRecord
       }
     }
   },

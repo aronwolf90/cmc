@@ -9,7 +9,7 @@
 import * as Utils from '../store/json_api/utils'
 
 export default {
-  mounted () {
+  created () {
     this.$store.dispatch('initCurrentIssue')
   },
   computed: {
@@ -21,7 +21,7 @@ export default {
     },
     boardListId () {
       if (!Utils.relationship(this.currentIssue, 'board-list')) return
-      return (!Utils.relationship(this.currentIssue, 'board-list')).id
+      return Utils.relationship(this.currentIssue, 'board-list').id
     },
     showPath () {
       if (!this.currentIssue) return

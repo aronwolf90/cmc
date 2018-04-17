@@ -68,7 +68,7 @@ args = %w[--no-default-browser-check --start-maximized]
 caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => { "args" => args })
 Capybara.register_driver :selenium do |app|
   client = Selenium::WebDriver::Remote::Http::Default.new
-  client.timeout = 120
+  client.timeout = 200
 
   Capybara::Selenium::Driver.new(
     app,

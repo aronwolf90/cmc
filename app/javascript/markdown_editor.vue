@@ -23,10 +23,15 @@ export default {
         }
       }
     })
+    this.$el.editor = this // hack to allow integration tests
   },
   methods: {
     clear () {
       this.editor.setMarkdown('')
+    },
+    setValue (text) { // hack to allow integration tests
+      this.editor.setMarkdown(text)
+      this.$emit('valueChange', this.editor.getValue())
     }
   }
 }

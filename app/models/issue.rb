@@ -5,6 +5,7 @@ class Issue < ApplicationRecord
 
   has_one :board_list_issue_relation
   has_one :board_list, through: :board_list_issue_relation
+  has_one :record
 
   has_many :board_list_issue_relations
   has_many :comments

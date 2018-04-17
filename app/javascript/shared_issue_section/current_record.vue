@@ -5,7 +5,7 @@
       .col-8
         | {{ time }}
       .col-2
-        issue-record-section(:issue_id='currentIssueID')
+        issue-record-section(:issue-id='currentIssueID')
 </template>
 
 <script>

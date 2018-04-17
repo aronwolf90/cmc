@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+def find_or_create_current_user
+  User.create_with(password: "testtest", password_confirmation: "testtest")
+    .find_or_create_by!(email: "aronwolf90@gmail.com")
+end
+
 Given /^I am registered$/ do
   User.create!(email: "aronwolf90@gmail.com", password: "testtest", password_confirmation: "testtest")
 end
@@ -7,7 +12,7 @@ end
 Given /^I am not registered$/ do; end
 
 Given /^I am signed in$/ do
-  User.create!(email: "aronwolf90@gmail.com", password: "testtest", password_confirmation: "testtest")
+  find_or_create_current_user
   visit "/users/sign_in"
   fill_in "user_email", with: "aronwolf90@gmail.com"
   fill_in "user_password", with: "testtest"
@@ -19,6 +24,25 @@ Given /^an issue exists$/ do
   Issue.create!(title: "issues title", description: "issues content", board_list: board_list)
 end
 
+Given /^an issue with title "([^\"]*)" exists$/ do |title|
+  board_list = BoardList.create!(name: "Backlog")
+  Issue.create!(title: title, description: "issues content", board_list: board_list)
+end
+
+Given /^an issue with title "([^\"]*)" and content "([^\"]*)" exists$/ do |title, content|
+  board_list = BoardList.create!(name: "Backlog")
+  Issue.create!(title: title, description: content, board_list: board_list)
+end
+
+Given /^an acive issue exists$/ do
+  board_list = BoardList.create!(name: "Backlog")
+  issue = Issue.create!(
+    title: "issues title", description: "issues content",
+    board_list: board_list
+  )
+  issue.create_record(start_time: Time.zone.now, user: find_or_create_current_user)
+end
+
 When(/^I navigate to "([^\"]*)"$/) do |link|
   visit link
 end
@@ -27,17 +51,47 @@ When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
   fill_in name, with: text
 end
 
+When(/^I replace the text "([^\"]*)" from the markdown editor "([^\"]*)"$/) do |text, element|
+  js_comand = "$('#{element}')[0].editor.setValue('#{text}')"
+  page.driver.browser.execute_script(js_comand)
+end
+
+When(/^I enter "([^\"]*)" into "([^\"]*)"$/) do |text, element|
+  find(element).set(text)
+end
+
 When(/^I click on submit$/) do
-  find('input[name="commit"]').click
+  find('input[name="commit"], button[type="submit"]').click
 end
 
 When(/^I click on "([^\"]*)"$/) do |element|
   find(element).click
 end
 
+When(/^I click on link "([^\"]*)"$/) do |text|
+  find("a", text: text).click
+end
+
 Then(/^the page contain the text "([^\"]*)"$/) do |text|
   expect(page).to have_content text
 end
+
+Then(/^the page does not contain the text "([^\"]*)"$/) do |text|
+  expect(page).not_to have_content text
+end
+
+Then(/^the element "([^\"]*)" contain the text "([^\"]*)"$/) do |element, text|
+  within element do
+    expect(page).to have_content text
+  end
+end
+
+Then(/^the element "([^\"]*)" does not contain the text "([^\"]*)"$/) do |element, text|
+  within element do
+    expect(page).not_to have_content text
+  end
+end
+
 
 Then(/^the page contain the element "([^\"]*)"$/) do |text|
   expect(page).to have_css text

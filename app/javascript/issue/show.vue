@@ -10,7 +10,7 @@
           .btn.btn-sm.btn-outline-danger(v-on:click='deleteIssue($event)')
             .fa.fa-trash
     .body
-      markdown-viewer(value='description')
+      markdown-viewer(:value='description')
 </template>
 
 <script>

@@ -27,3 +27,4 @@ document.addEventListener('turbolinks:before-visit', () => {
 document.addEventListener('turbolinks:load', () => {
   var app = new Vue({el: '#app', store}) /* eslint-disable-line no-unused-vars */
 })
+

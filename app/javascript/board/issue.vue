@@ -5,7 +5,7 @@
         a(v-bind:href='showPath', v-on:click='visitShow($event)')
           | {{ issue.attributes.title }}
       .col-2
-        issues_record_section(:issue_id="issueId")
+        issues-record-section(:issue-id="issueId")
 </template>
 
 <script>
@@ -15,7 +15,7 @@ import IssuesRecordSection from '../components/issues_record_section'
 export default {
   props: { 'issue-id': { required: true }, 'board-list-id': { required: true } },
   components: {
-    'issues_record_section': IssuesRecordSection
+    'issues-record-section': IssuesRecordSection
   },
   computed: {
     issue () {

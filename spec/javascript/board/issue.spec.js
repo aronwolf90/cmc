@@ -1,6 +1,7 @@
 import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import Issue from '../../../app/javascript/board/issue'
+import IssuesRecordSection from '../../../app/javascript/components/issues_record_section'
 import draggable from 'vuedraggable'
 import sinon from 'sinon'
 
@@ -43,6 +44,10 @@ describe('Issue', () => {
 
     it('include show link', () => {
       expect($subject.html()).to.include('href="/administration/board_lists/1/issues/1"')
+    })
+
+    it('pass issueId to issue-record-section', () => {
+      expect($subject.find(IssuesRecordSection).props().issueId).to.eq(1)
     })
   })
 })

@@ -1,4 +1,4 @@
-version: '2'
+version: '2.2'
 services:
   db:
     image: postgres:latest
@@ -49,6 +49,8 @@ services:
 
   db_test:
     image: labianchin/docker-postgres-for-testing
+    logging:
+      driver: none
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=password
@@ -56,6 +58,7 @@ services:
 
   test:
     image: cmc
+    scale: 0
     environment:
       - DATABASE_URL=postgres://root:password@db%5Ftest/root
       - SPRING_SOCKET=tmp/sockets/spring_test.sock
@@ -78,12 +81,9 @@ services:
     ports:
       - "4444:4444"
       - "5900:5900"
-    volumes:
-      - /dev/shm:/dev/shm
+    shm_size: 2g
     logging:
       driver: none
-    stdin_open: true
-    tty: true
 
 volumes:
   bundle:

@@ -3,6 +3,12 @@ import Vuex from 'vuex'
 import IssuesSearchSection from '../../../app/javascript/shared_issue_section/issues_search_section'
 import Issue from '../../../app/javascript/shared_issue_section/issue'
 import sinon from 'sinon'
+import {
+  helperState,
+  helperMutations,
+  helperGetters,
+  helperActions
+} from '../../helpers/store'
 
 const localVue = createLocalVue()
 
@@ -14,12 +20,18 @@ localVue.use(Vuex)
 describe('IssuesSearchSection', () => {
   subject(() => shallow(IssuesSearchSection, { store: $store, localVue }))
 
-  def('getters', () => ({
-    currentIssue () { return $currentIssue },
-    relevantIssues () { return () => [$issue1, $issue2] }
-  }))
-  def('actions', () => ({ initCurrentIssue () {} }))
-  def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
+  def('store', () => (new Vuex.Store({
+    state: {
+      ...helperState,
+      getterData: {
+        currentIssue: $currentIssue,
+        relevantIssues: () => [$issue1, $issue2]
+      }
+    },
+    mutations: helperMutations,
+    getters: helperGetters,
+    actions: helperActions
+  })))
   def('Turbolinks', () => ({ visit: sinon.spy() }))
 
   def('issue1', () => ({ id: 1, type: 'issues' }))
@@ -34,7 +46,7 @@ describe('IssuesSearchSection', () => {
       expect($subject.findAll(Issue).length).to.eq(1)
     })
   })
-  describe('without currentRecord', () => {
+  describe('without currentIssue', () => {
     def('currentIssue', () => undefined)
 
     it('render two issue', () => {

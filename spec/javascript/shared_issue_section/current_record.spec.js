@@ -36,9 +36,10 @@ describe('CurrentRecord', () => {
     }))
     def('startTime', () => 'Wed Feb 21 2018 12:30:10 GMT+0000 (UTC)')
 
-    it('pass issue_id to issue-record-section', () => {
-      expect($subject.find(IssuesRecordSection).props().issue_id).to.eq(1)
+    it('pass issueId to issue-record-section', () => {
+      expect($subject.find(IssuesRecordSection).props().issueId).to.eq(1)
     })
+
     describe('when start-time is some seconds in the past', () => {
       def('startTime', () => 'Wed Feb 21 2018 12:30:8 GMT+0000 (UTC)')
 
