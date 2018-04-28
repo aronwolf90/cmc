@@ -1,0 +1,3 @@
+en:
+  errors:
+    board_list_exists?: Board list does not exist

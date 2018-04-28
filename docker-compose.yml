@@ -77,7 +77,7 @@ services:
       - selenium
 
   selenium:
-    image: selenium/standalone-chrome-debug:3.0.1-germanium
+    image: selenium/standalone-chrome-debug:latest
     ports:
       - "4444:4444"
       - "5900:5900"

@@ -14,10 +14,12 @@ gem "devise_invitable"
 
 # Lovlevel
 gem "active_model_serializers"
+gem "attr_extras"
 gem "carrierwave"
 gem "config"
 gem "dry-transaction"
 gem "hash_mapper"
+gem "kaminari", "~> 1.0.0"
 gem "knock"
 gem "seed-fu"
 gem "uglifier", ">= 1.3.0"
@@ -26,6 +28,9 @@ gem "webpacker", "~> 3.0"
 # Trailblazer
 gem "cells-rails"
 gem "cells-slim"
+gem "kaminari-cells"
+gem "reform", ">= 2.3.0.rc1"
+gem "reform-rails"
 gem "trailblazer"
 gem "trailblazer-cells"
 gem "trailblazer-rails", "~> 2.1"
@@ -56,6 +61,7 @@ group :development, :test do
   # required only be cucumber-rails, not used in the project
   gem "database_cleaner"
   gem "factory_bot_rails"
+  gem "rspec-cells"
   gem "rspec-rails"
   gem "selenium-webdriver"
 
@@ -65,6 +71,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "guard-rspec", require: false
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "rubocop-rails"
   gem "rubocop-rspec"

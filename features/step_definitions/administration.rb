@@ -5,13 +5,13 @@ def find_or_create_current_user
     .find_or_create_by!(email: "aronwolf90@gmail.com")
 end
 
-Given /^I am registered$/ do
+Given(/^I am registered$/) do
   User.create!(email: "aronwolf90@gmail.com", password: "testtest", password_confirmation: "testtest")
 end
 
-Given /^I am not registered$/ do; end
+Given(/^I am not registered$/) do; end
 
-Given /^I am signed in$/ do
+Given(/^I am signed in$/) do
   find_or_create_current_user
   visit "/users/sign_in"
   fill_in "user_email", with: "aronwolf90@gmail.com"
@@ -19,28 +19,46 @@ Given /^I am signed in$/ do
   find('input[name="commit"]').click
 end
 
-Given /^an issue exists$/ do
+Given(/I have an old record/) do
+  issue = Issue.create!(
+    title: "issues title",
+    description: "issues content",
+  )
+
+  Record.create(
+    start_time: 2.hour.ago,
+    end_time: 1.hour.ago,
+    issue: issue,
+    user: find_or_create_current_user
+  )
+end
+
+Given(/^an issue exists$/) do
   board_list = BoardList.create!(name: "Backlog")
   Issue.create!(title: "issues title", description: "issues content", board_list: board_list)
 end
 
-Given /^an issue with title "([^\"]*)" exists$/ do |title|
+Given(/^an issue with title "([^\"]*)" exists$/) do |title|
   board_list = BoardList.create!(name: "Backlog")
   Issue.create!(title: title, description: "issues content", board_list: board_list)
 end
 
-Given /^an issue with title "([^\"]*)" and content "([^\"]*)" exists$/ do |title, content|
+Given(/^an issue with title "([^\"]*)" and content "([^\"]*)" exists$/) do |title, content|
   board_list = BoardList.create!(name: "Backlog")
   Issue.create!(title: title, description: content, board_list: board_list)
 end
 
-Given /^an acive issue exists$/ do
+Given(/^an acive issue exists$/) do
   board_list = BoardList.create!(name: "Backlog")
   issue = Issue.create!(
     title: "issues title", description: "issues content",
     board_list: board_list
   )
   issue.create_record(start_time: Time.zone.now, user: find_or_create_current_user)
+end
+
+Given(/^a board list named "([^\"]*)"$/) do |name|
+  BoardList.create(name: name)
 end
 
 When(/^I navigate to "([^\"]*)"$/) do |link|
@@ -72,6 +90,10 @@ When(/^I click on link "([^\"]*)"$/) do |text|
   find("a", text: text).click
 end
 
+When(/^select "([^\"]*)" from select box "([^\"]*)"$/) do |text, name|
+  select text, from: name
+end
+
 Then(/^the page contain the text "([^\"]*)"$/) do |text|
   expect(page).to have_content text
 end
@@ -91,7 +113,6 @@ Then(/^the element "([^\"]*)" does not contain the text "([^\"]*)"$/) do |elemen
     expect(page).not_to have_content text
   end
 end
-
 
 Then(/^the page contain the element "([^\"]*)"$/) do |text|
   expect(page).to have_css text

@@ -1,8 +1,13 @@
-
 function handleVueDestructionOn (turbolinksEvent, vue) {
+  window.addEventListener('popstate', function restoreTurbolinksRoute (o) {
+    if (!window.history.state.turbolinks) {
+      Turbolinks.visit(o.pathname, {action: 'replace'}) /* eslint-disable-line no-undef */
+    }
+  })
   document.addEventListener(turbolinksEvent, function teardown () {
     vue.$destroy()
     document.removeEventListener(turbolinksEvent, teardown)
+    document.removeEventListener('popstate', restoreTurbolinksRoute) /* eslint-disable-line no-undef */
   })
 }
 
@@ -19,7 +24,6 @@ function plugin (Vue, options) {
         this.$originalEl = this.$el.outerHTML
       }
     },
-
     destroyed: function () {
       // We only need to revert the html for the root component
       if (this === this.$root && this.$el) {

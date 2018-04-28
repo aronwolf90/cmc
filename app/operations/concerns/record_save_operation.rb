@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-module Records
-  module SaveOperation
+module Concerns
+  module RecordSaveOperation
     extend ActiveSupport::Concern
 
     included do
-      success AssigenAttributesStep.new
-      success EnsureUniqueActiveStep.new
+      success ::Records::EnsureUniqueActiveStep.new
       success SaveStep.new
     end
   end

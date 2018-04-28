@@ -9,4 +9,6 @@ class Issue < ApplicationRecord
 
   has_many :board_list_issue_relations
   has_many :comments
+
+  alias_attribute :to_s, :title
 end

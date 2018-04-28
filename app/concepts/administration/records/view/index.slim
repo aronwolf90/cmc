@@ -1,0 +1,26 @@
+.row.align-items-center
+  .col-sm-6.font-weight-bold
+    | You have worked #{this_mounth_spended_time} hours this month
+  .col-sm-6
+    .pull-right = add_link
+br
+.autopagerize_page_element
+  .table-responsive
+    table.table
+      tbody
+        - model.each do |day, records|
+          tr
+            td colspan=3
+              .font-weight-bold = l(day, format: '%A %d.%m.%Y')
+            td
+              .pull-right = spended_time(records)
+          - records.each do |record|
+            tr
+              td = record.issue.title
+              td = l(record.start_time, format: "%I:%M %P")
+              td = l(record.end_time, format: "%I:%M %P")
+              td
+                .btn-group.pull-right
+                  = edit_btn(record)
+                  = destroy_btn(record)
+  = paginate @options[:records]

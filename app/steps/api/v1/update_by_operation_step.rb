@@ -12,7 +12,7 @@ module Api::V1
       operation.(
         model: model,
         current_user: current_user,
-        params: options[:deserialized_params]
+        params: { data: options[:deserialized_params] }
       )
     end
   end

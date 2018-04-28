@@ -10,6 +10,8 @@ import SetAssociationService from './services/mutations/set_association_service'
 import ChangeManyToOneReferenceService from './services/mutations/change_many_to_one_reference_service'
 import ClearService from './services/mutations/clear_service'
 
+import * as Utils from './utils'
+
 export default {
   add (state, payload) {
     new AddService({ state, payload }).perform()
@@ -53,5 +55,8 @@ export default {
   },
   addByNormalize (state, { payload, resource }) {
     new AddByNormalizeService({ state, payload, resource }).perform()
+  },
+  changeMetaCollection (state, { name, collection }) {
+    state.meta[name].data = Utils.entryArrayToRef(collection)
   }
 }

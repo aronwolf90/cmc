@@ -11,7 +11,7 @@ module Api::V1
     def call(options, current_user:, **args)
       result = operation.(
         current_user: current_user,
-        params: options[:deserialized_params]
+        params: { data: options[:deserialized_params] }
       )
 
       options[:model] = result[:model]

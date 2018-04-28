@@ -36,7 +36,7 @@ describe('Board', () => {
 
     it('change board_list order', (done) => {
       let boardLists = [$boardList2, $boardList1]
-      $actions.updateBoardListOrder = function updateBoardListOrder (context, localBoardLists) {
+      $actions.sortBoardLists = function sortBoardLists (context, localBoardLists) {
         expect(localBoardLists).to.eq(boardLists)
         done()
       }

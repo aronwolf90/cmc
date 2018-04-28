@@ -10,9 +10,8 @@
             .fa.fa-plus
             |&nbsp add list
 
-    .row.issues-board-row
-      draggable.body.issues-board-body(v-model='boardLists')
-        list(v-for='boardList in boardLists', :key='boardList.id', :list-id='boardList.id')
+    draggable.body.issues-board-body(v-model='boardLists')
+      list(v-for='boardList in boardLists', :key='boardList.id', :list-id='boardList.id')
 
 </template>
 
@@ -34,7 +33,7 @@ export default {
         return this.$store.getters.metaCollection('board_lists') || []
       },
       set (boardLists) {
-        this.$store.dispatch('updateBoardListOrder', boardLists)
+        this.$store.dispatch('sortBoardLists', boardLists)
       }
     },
     addLink () {
@@ -51,16 +50,17 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-  .issues-board-row
-    height: 100%
   .issues-board
-    height: 100%
+    height: calc(100% + 7px)
     .issues-board-header
-      margin-bottom: 10px
+      padding-bottom: 10px
       margin-right: 7px
+      height: 38px
     .issues-board-body
       overflow-x: scroll
       white-space: nowrap
-      heigth: 100%
+      margin-right: -15px
+      margin-left: -15px
+      height: calc(100% - 38px)
       padding-left: 13px
 </style>

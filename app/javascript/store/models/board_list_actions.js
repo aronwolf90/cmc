@@ -1,6 +1,18 @@
 const endpoint = '/api/v1'
 
 export default {
+  sortBoardLists (context, boardLists) {
+    context.commit('changeMetaCollection', {
+      name: 'board_lists',
+      collection: boardLists
+    })
+
+    context.dispatch('request', {
+      url: endpoint + '/board_lists/sort',
+      method: 'put',
+      payload: boardLists.map(entry => entry.id)
+    })
+  },
   initBoardsLists (context) {
     return context.dispatch('initEntry', { endpoint, resource: 'board_lists' })
   },

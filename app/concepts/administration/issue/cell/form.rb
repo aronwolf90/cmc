@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Administration::Issue
   module Cell
     class Form < Trailblazer::Cell
@@ -5,7 +7,7 @@ module Administration::Issue
       include ActionView::Helpers::FormOptionsHelper
       include SimpleForm::ActionViewExtensions::FormHelper
 
-      private
+    private
 
       def board_lists
         @board_lists || BoardList.all

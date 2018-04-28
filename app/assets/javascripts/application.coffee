@@ -1,4 +1,4 @@
-#= require jquery
+#= require jquery2
 #= require rails-ujs
 #= require popper
 #= require bootstrap

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Administration
   class IssuesController < AdministrationController
     side_menu :administration
@@ -44,7 +46,7 @@ module Administration
       end
     end
 
-    private
+  private
 
     def issue
       @issue ||= ::Issue.find(params[:id])

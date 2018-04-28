@@ -39,7 +39,7 @@ export default {
       },
       set (issues) {
         this.$store.dispatch('updateBoardListIssues', {
-          boardList: this.board_list, issues: issues
+          boardList: this.boardList, issues: issues
         })
       }
     }

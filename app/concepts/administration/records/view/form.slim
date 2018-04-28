@@ -1,0 +1,12 @@
+= simple_form_for [:administration, model], as: :data do |f|
+  .row
+    .col-lg-12
+      = f.input :issue_id, collection: issues_collection
+      = f.input :start_time
+      = f.input :end_time
+
+  .row
+    .col-lg-12
+      = f.submit class: 'btn btn-success'
+      = cancell_btn
+

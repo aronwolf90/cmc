@@ -5,7 +5,7 @@ module Api
     class BoardListSerializer < ActiveModel::Serializer
       include Rails.application.routes.url_helpers
 
-      attributes :name, :ordinal_number
+      attributes :name
 
       has_many :issues
 
