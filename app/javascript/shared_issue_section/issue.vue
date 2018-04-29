@@ -31,8 +31,8 @@ export default {
   },
   methods: {
     visitShow (event) {
-      Turbolinks.visit(this.showPath) /* eslint-disable-line no-undef */
       event.preventDefault()
+      Turbolinks.visit(this.showPath) /* eslint-disable-line no-undef */
     }
   }
 }
