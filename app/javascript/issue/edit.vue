@@ -11,7 +11,10 @@
         br
     .row
       .col-12
-        markdown-editor(:value='form.attributes.description', v-on:valueChange='setDescription')
+        markdown-editor(
+          :value='form.attributes.description',
+          v-on:valueChange='setDescription'
+        )
         br
     .row
       .col-6

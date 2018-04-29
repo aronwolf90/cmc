@@ -17,6 +17,10 @@ module Api
         super(operation: Issues::UpdateOperation, model: issue)
       end
 
+      def destroy
+        super(model: issue)
+      end
+
     private
 
       def issue

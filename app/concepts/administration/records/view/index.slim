@@ -16,7 +16,7 @@ br
               .pull-right = spended_time(records)
           - records.each do |record|
             tr
-              td = record.issue.title
+              td = record.issue&.title
               td = l(record.start_time, format: "%I:%M %P")
               td = l(record.end_time, format: "%I:%M %P")
               td

@@ -43,7 +43,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :issues, only: %i[index show update]
+      resources :issues, only: %i[index show update destroy]
       resources :comments, only: :create
 
       resources :users, only: :index do

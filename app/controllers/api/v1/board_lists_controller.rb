@@ -6,7 +6,7 @@ module Api
       include StandartActions
 
       def index
-        render json: BoardList.all.order(:ordinal_number), include: :issues
+        render json: BoardList.order(:ordinal_number), include: :issues
       end
 
       def update
