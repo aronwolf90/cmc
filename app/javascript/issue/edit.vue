@@ -24,7 +24,7 @@
       .col-6
         .btn-group.float-right
           router-link.btn.btn-sm.btn-secondary(to='/') Cancel
-          .btn.btn-sm.btn-danger Delete
+          .btn.btn-sm.btn-danger(v-on:click='deleteIssue($event)') Delete
 </template>
 
 <script>
@@ -62,6 +62,10 @@ export default {
     },
     setDescription (data) {
       this.form.attributes.description = data
+    },
+    deleteIssue (event) {
+      this.$store.dispatch('destroy', { entry: this.issue, endpoint: '/api/v1' })
+      Turbolinks.visit('/administration/board') /* eslint-disable-line no-undef */
     }
   }
 }

@@ -24,10 +24,15 @@ describe('Edit', () => {
   subject(() => mount(Edit, { store: $store, localVue, router: new VueRouter(), stubs: { 'markdown-editor': '<div/>' } }))
 
   def('getters', () => ({ entry () { return () => $issue } }))
-  def('actions', () => ({ initIssue () { return $sinonPromise }, updateIssue () { return $sinonPromise } }))
+  def('actions', () => ({
+    initIssue () { return $sinonPromise },
+    updateIssue () { return $sinonPromise },
+    destroy (params) { return $destroySpy('destroy', params) }
+  }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
   def('Turbolinks', () => ({ visit: sinon.spy() }))
   def('sinonPromise', () => sinon.stub().returnsPromise())
+  def('destroySpy', () => sinon.spy())
 
   beforeEach(() => {
     global.Turbolinks = $Turbolinks
@@ -62,6 +67,17 @@ describe('Edit', () => {
     it('setDescription set description value on form', () => {
       $subject.vm.setDescription('test')
       expect($subject.vm.form.attributes.description).to.eq('test')
+    })
+
+    it('call visit on click on the destroy btn', () => {
+      $subject.find('.btn-danger').trigger('click')
+      expect($Turbolinks.visit).to
+        .have.been.calledWith('/administration/board')
+    })
+
+    it('call destroy action', () => {
+      $subject.find('.btn-danger').trigger('click')
+      expect($destroySpy).to.have.been.called
     })
 
     describe('submit', () => {
