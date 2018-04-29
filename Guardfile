@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 guard :rspec, cmd: "spring rspec -f doc" do
   watch("spec/spec_helper.rb")                        { "spec" }
   watch("config/routes.rb")                           { "spec/routing" }

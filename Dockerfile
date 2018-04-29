@@ -1,4 +1,4 @@
-FROM ruby:2.4.2-alpine3.7
+FROM ruby:2.5.1-alpine3.7
 
 WORKDIR  /app
 
@@ -21,7 +21,7 @@ COPY . /app
 # secret key is not really used hear, it is only added to avoid the crash on compile
 RUN SECRET_KEY_BASE='9479a648d2fb' rake assets:precompile
 
-FROM ruby:2.4.2-alpine3.7
+FROM ruby:2.5.1-alpine3.7
 
 WORKDIR  /app
 
