@@ -88,6 +88,7 @@ export default {
     required({ entry, endpoint })
     let url = calculeUrl({ endpoint, resource, url: entry.links.self })
 
+    context.commit('remove', entry)
     return context.dispatch('request', { url, method: 'delete' })
   },
   update (context, { entry, payload, endpoint, resource, delayed }) {
