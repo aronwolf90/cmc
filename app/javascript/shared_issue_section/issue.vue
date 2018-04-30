@@ -1,6 +1,6 @@
 <template lang='pug'>
   a.issue.row(v-bind:href='showPath', v-on:click='visitShow($event)')
-    .col-10
+    .col-10.text-section
       | {{ issue.attributes.title }}
     .col-2
       issues-record-section(:issue-id='issue.id')
@@ -48,6 +48,9 @@ export default {
   &:hover
     background-color: #e7e7e7
     text-decoration: none
+  .text-section
+    text-overflow: ellipsis
+    overflow: hidden
   .col-2
     padding: 0
 

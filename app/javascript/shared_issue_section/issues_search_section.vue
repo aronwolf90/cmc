@@ -36,20 +36,22 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-.relevant-issues
-  padding-left: 0 !important
-  height: 250px
-  .issue
-    margin-left: 0
-.search-section
-  position: absolute
-  bottom: 19px
-  width: 100% !important
-  border-right: 0
-  border-left: 0
-  border-bottom: 0
-  border-top: 0
-  font-family: FontAwesome
-  &::placeholder
-    text-align: center
+.issues-search-section
+  padding-bottom: 19px
+  .relevant-issues
+    padding-left: 0 !important
+    min-height: 220px
+    max-height: 220px
+    overflow: auto
+    .issue
+      margin-left: 0
+  .search-section
+    width: 100% !important
+    border-right: 0
+    border-left: 0
+    border-bottom: 0
+    border-top: 0
+    font-family: FontAwesome
+    &::placeholder
+      text-align: center
 </style>

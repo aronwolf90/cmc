@@ -44,5 +44,9 @@ export default {
   border-bottom: 1px solid #e7e7e7
   a
     color: grey
+    display: table-caption
+    text-overflow: ellipsis
+    overflow: hidden
+    width: 153px
 
 </style>
