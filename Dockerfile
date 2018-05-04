@@ -18,8 +18,8 @@ RUN bundle install --without test development
 
 COPY . /app
 
-# secret key is not really used hear, it is only added to avoid the crash on compile
-RUN SECRET_KEY_BASE='9479a648d2fb' rake assets:precompile
+# secret key  and database url is not really used hear, it is only added to avoid the crash on compile
+RUN SECRET_KEY_BASE='9479a648d2fb' DATABASE_URL=postgres://root:password@db%5Ftest/root rake assets:precompile
 
 FROM ruby:2.5.1-alpine3.7
 
