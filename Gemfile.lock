@@ -304,6 +304,7 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    numeric (0.2.0)
     orm_adapter (0.5.0)
     parallel (1.12.1)
     parser (2.4.0.2)
@@ -348,7 +349,7 @@ GEM
     rainbow (2.2.2)
       rake
     rake (12.3.0)
-    rb-fsevent (0.10.2)
+    rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     reek (4.7.3)
@@ -556,6 +557,7 @@ DEPENDENCIES
   kaminari-cells
   knock
   listen (>= 3.0.5, < 3.2)
+  numeric
   pg
   puma (~> 3.7)
   rails (~> 5.1.3)

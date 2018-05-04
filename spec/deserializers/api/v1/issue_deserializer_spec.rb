@@ -9,7 +9,8 @@ describe Api::V1::IssueDeserializer do
     {
       attributes: {
         title: "title",
-        description: "description"
+        description: "description",
+        complexity: "0.5"
       },
       relationships: {
         user: { data: { id: 1, type: "users" } }
@@ -20,6 +21,7 @@ describe Api::V1::IssueDeserializer do
     {
       title: "title",
       description: "description",
+      complexity: "0.5",
       user_id: 1
     }
   end

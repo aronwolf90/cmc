@@ -14,7 +14,6 @@ gem "devise_invitable"
 
 # Lovlevel
 gem "active_model_serializers"
-gem "attr_extras"
 gem "carrierwave"
 gem "config"
 gem "dry-transaction"
@@ -24,6 +23,10 @@ gem "knock"
 gem "seed-fu"
 gem "uglifier", ">= 1.3.0"
 gem "webpacker", "~> 3.0"
+
+# ruby extensions
+gem "attr_extras"
+gem "numeric"
 
 # Trailblazer
 gem "cells-rails"

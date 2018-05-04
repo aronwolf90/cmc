@@ -32,7 +32,6 @@ describe('Comments', () => {
       attributes: { title: 'issue title', description: 'description' }
     }))
 
-
     it('contain comment', () => {
       expect($subject.html()).to.include('comment content')
     })

@@ -7,6 +7,7 @@
       br
     .right-aside
       assigen(:issue-id='issueId')
+      complexity(:issue-id='issueId')
 
 </template>
 
@@ -17,6 +18,7 @@ import Show from 'issue/show'
 import Edit from 'issue/edit'
 
 import Assigen from 'issue/assigen'
+import Complexity from 'issue/complexity'
 import Comments from 'issue/comments'
 
 const router = new Router({
@@ -41,8 +43,8 @@ export default {
     Show,
     Edit,
     'assigen': Assigen,
-    'comments': Comments
-
+    'comments': Comments,
+    'complexity': Complexity
   },
   created () {
     this.$store.dispatch('initIssue', this.issueId)

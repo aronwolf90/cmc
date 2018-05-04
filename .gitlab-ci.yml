@@ -30,6 +30,7 @@ eslint:
       eslint-plugin-promise
       eslint-plugin-vue
     - eslint app/javascript
+    - eslint spec/javascript
 
 rubocop:
   stage: lint

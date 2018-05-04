@@ -1,17 +1,14 @@
 <template lang='pug'>
-  div
-    label Assignment
-    basic-select(
-      :options="options",
-      :selected-option="item",
-      placeholder="select item",
-      @select="onSelect"
-    )
-    hr.divider
+  right-aside-select(
+    :label='"Assignment"',
+    :options='options',
+    :item='item',
+    @select="onSelect"
+  )
 </template>
 
 <script>
-import { BasicSelect } from 'vue-search-select'
+import Select from './right_aside_select'
 
 export default {
   props: ['issueId'],
@@ -66,25 +63,7 @@ export default {
     }
   },
   components: {
-    BasicSelect
+    'right-aside-select': Select
   }
 }
 </script>
-
-<style lang='sass' scoped>
-label
-  margin-top: 8px
-  margin-left: 18px
-  margin-bottom: 0
-  color: grey
-.divider
-  margin-top: 0
-  margin-bottom: 0
-</style>
-
-<style lang='sass'>
-.dropdown
-  background-color: #f8f8f8 !important
-  border: none !important
-  color: grey !important
-</style>

@@ -1,3 +1,4 @@
 en:
   errors:
     board_list_exists?: Board list does not exist
+    numeric_format?: Is not in a numeric compatible format

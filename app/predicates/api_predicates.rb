@@ -7,4 +7,8 @@ module ApiPredicates
     value.dig(:data, :type)&.singularize
       &.underscore&.camelize&.constantize&.exists?(value.dig(:data, :id))
   end
+
+  predicate(:numeric_format?) do |value|
+    value.numeric?
+  end
 end

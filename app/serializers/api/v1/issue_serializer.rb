@@ -5,7 +5,7 @@ module Api
     class IssueSerializer < ActiveModel::Serializer
       include Rails.application.routes.url_helpers
 
-      attributes :title, :description
+      attributes :title, :description, :complexity
 
       belongs_to :user, serializer: UserSerializer
       has_one :board_list

@@ -11,6 +11,7 @@ module Api::V1
         required(:data).schema do
           optional(:attributes).schema do
             optional(:'start-time').filled
+            optional(:complexity).maybe(:numeric_format?)
           end
           optional(:relationships).schema do
             optional(:user).filled(:record_exists?).schema do
@@ -21,7 +22,7 @@ module Api::V1
             end
             optional(:issue).filled(:record_exists?).schema do
               required(:data).schema do
-                required(:id).filled
+                required(:id).filled(:numeric_format?)
                 required(:type).filled
               end
             end
