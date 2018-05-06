@@ -64,7 +64,7 @@ describe('Complexity', () => {
     it('call updateIssue', () => {
       expect($actions.updateIssue).to.have.been.calledWith(
         sinon.match.any,
-        { entry: $issue, attributes: { complexity: 0.5 } }
+        { entry: $issue, attributes: { complexity: '0.5' } }
       )
     })
   })

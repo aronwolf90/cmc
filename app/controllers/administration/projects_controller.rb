@@ -1,17 +1,40 @@
+# frozen_string_literal: true
+
 module Administration
   class ProjectsController < AdministrationController
-    side_menu 'administration/projects'
+    side_menu "administration/projects"
 
     def index
-      run Project::Index
-
-      render cell(Project::Cell::Index, result['model'])
+      run Projects::IndexOperation
+      render cell(Projects::Cell::Index, result["model"])
     end
 
-    def show
-      run Project::Show
+    def new
+      run Projects::CreateOperation::Present
+      render cell(Projects::Cell::Form, @form)
+    end
 
-      render cell(Project::Cell::Show)
+    def create
+      run Projects::CreateOperation do |result|
+        flash[:notice] = "project has been created"
+        return redirect_to [:administration, :projects]
+      end
+
+      render cell(Projects::Cell::Form, @form)
+    end
+
+    def edit
+      run Projects::UpdateOperation::Present
+      render cell(Projects::Cell::Form, @form)
+    end
+
+    def update
+      run Projects::UpdateOperation do |result|
+        flash[:notice] = "project has been updated"
+        return redirect_to [:administration, :projects]
+      end
+
+      render cell(Projects::Cell::Form, @form)
     end
   end
 end

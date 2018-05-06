@@ -58,7 +58,11 @@ Given(/^an acive issue exists$/) do
 end
 
 Given(/^a board list named "([^\"]*)"$/) do |name|
-  BoardList.create(name: name)
+  BoardList.create!(name: name)
+end
+
+Given(/^a project exists$/) do
+  Project.create!(name: "project name")
 end
 
 When(/^I navigate to "([^\"]*)"$/) do |link|
@@ -83,10 +87,12 @@ When(/^I click on submit$/) do
 end
 
 When(/^I click on "([^\"]*)"$/) do |element|
+  sleep 0.1
   find(element).click
 end
 
 When(/^I click on link "([^\"]*)"$/) do |text|
+  sleep 0.1
   find("a", text: text).click
 end
 

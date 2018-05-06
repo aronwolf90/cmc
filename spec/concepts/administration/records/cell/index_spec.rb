@@ -6,7 +6,7 @@ RSpec.describe Administration::Records::Cell::Index, type: :cell do
   controller Administration::RecordsController
 
   let(:model) { { record1.start_time => [record1, record2] } }
-  let(:records) { Kaminari.paginate_array([record1, record2] ).page(1) }
+  let(:records) { Kaminari.paginate_array([record1, record2]).page(1) }
   let(:issue) { build_stubbed(:issue, title: "issues title")  }
   let(:record1) do
     build_stubbed(

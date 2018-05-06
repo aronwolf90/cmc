@@ -1,4 +1,6 @@
-module Administration::Project
+# frozen_string_literal: true
+
+module Administration::Projects
   module Cell
     class Show < Trailblazer::Cell
       include ActionView::RecordIdentifier

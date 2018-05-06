@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
     resources :users, only: %i[edit update]
 
-    resources :projects
+    resources :projects, except: :show do
+      scope module: :projects do
+        resource :dashboard, only: :show
+      end
+    end
 
     resources :departments
 

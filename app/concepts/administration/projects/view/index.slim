@@ -3,7 +3,7 @@
     input.form-control placeholder='Search'
   .col-md-4
     br.d-md-none
-    = link_to 'New project', '#', class: 'btn btn-success btn-block'
+    = new_btn
 
 br
 br
@@ -11,4 +11,6 @@ br
 ul.list-group.list-lines
   - model.each do |project|
     li.list-group-item
-      = link_to project.to_s, [:administration, project], class: 'text-dark'
+      = link_to project.to_s, [:administration, project, :dashboard], class: "text-dark"
+      .pull-right
+        = edit_btn(project)
