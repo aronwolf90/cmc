@@ -22,7 +22,7 @@ gem "kaminari", "~> 1.0.0"
 gem "knock"
 gem "seed-fu"
 gem "uglifier", ">= 1.3.0"
-gem "webpacker", "~> 3.0"
+gem "webpacker", "3.2.2"
 
 # ruby extensions
 gem "attr_extras"

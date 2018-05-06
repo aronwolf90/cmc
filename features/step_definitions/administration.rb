@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 def find_or_create_current_user
-  User.create_with(password: "testtest", password_confirmation: "testtest")
+  User.create_with(password: "testtest", password_confirmation: "testtest", firstname: "aron")
     .find_or_create_by!(email: "aronwolf90@gmail.com")
 end
 
@@ -92,6 +92,11 @@ end
 
 When(/^select "([^\"]*)" from select box "([^\"]*)"$/) do |text, name|
   select text, from: name
+end
+
+When(/^I reload the page$/) do
+  sleep 0.1 # wait for for unfinished requests
+  page.driver.browser.navigate.refresh
 end
 
 Then(/^the page contain the text "([^\"]*)"$/) do |text|

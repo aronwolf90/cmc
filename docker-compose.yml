@@ -11,7 +11,7 @@ services:
 
   webpack:
     image: cmc
-    command:  /bin/sh -c "bundle exec webpack-dev-server"
+    command: webpack-dev-server
     ports:
       - "3035:3035"
     volumes:
@@ -55,6 +55,7 @@ services:
       context: .
     environment:
       - DATABASE_URL=postgres://root:password@db%5Ftest/root
+      - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
       - RAILS_ENV=test
       - SELENIUM_HOST=selenium
       - SELENIUM_PORT=4444

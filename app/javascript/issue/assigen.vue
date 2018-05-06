@@ -1,5 +1,6 @@
 <template lang='pug'>
   right-aside-select(
+    id='assigen',
     :label='"Assignment"',
     :options='options',
     :item='item',
