@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180503232032) do
+ActiveRecord::Schema.define(version: 20180508010259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20180503232032) do
     t.string "lastname"
     t.integer "gender"
     t.string "avatar"
+    t.integer "selected_project_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
@@ -118,4 +119,5 @@ ActiveRecord::Schema.define(version: 20180503232032) do
   add_foreign_key "comments", "users"
   add_foreign_key "records", "issues", on_delete: :nullify
   add_foreign_key "records", "users"
+  add_foreign_key "users", "projects", column: "selected_project_id"
 end

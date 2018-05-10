@@ -2,6 +2,7 @@ import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import Board from '../../app/javascript/board'
 import List from '../../app/javascript/board/list'
+import ProjectSelect from '../../app/javascript/board/project_select'
 import draggable from 'vuedraggable'
 import sinon from 'sinon'
 import { FormInput } from 'bootstrap-vue/es/components'
@@ -32,6 +33,10 @@ describe('Board', () => {
     it('contain the list element', () => {
       expect($subject.findAll(List).at(0).props().listId).to.be.eq(1)
       expect($subject.findAll(List).at(1).props().listId).to.be.eq(2)
+    })
+
+    it('contain the board-select element', () => {
+      expect($subject.find(ProjectSelect).exists()).to.be.true
     })
 
     it('change board_list order', (done) => {

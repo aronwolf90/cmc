@@ -4,8 +4,8 @@ module ApiPredicates
   include Dry::Logic::Predicates
 
   predicate(:record_exists?) do |value|
-    value.dig(:data, :type)&.singularize
-      &.underscore&.camelize&.constantize&.exists?(value.dig(:data, :id))
+    value.dig(:type)&.singularize
+      &.underscore&.camelize&.constantize&.exists?(value&.dig(:id))
   end
 
   predicate(:numeric_format?) do |value|

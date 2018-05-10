@@ -2,8 +2,20 @@
 
 module Api::V1
   class UsersController < ApiController
+    include StandartActions
+
     def index
       render json: User.all, include: :current_record
+    end
+
+    def update
+      super(operation: Users::UpdateOperation, model: user)
+    end
+
+  private
+
+    def user
+      @user ||= User.find(params[:id])
     end
   end
 end

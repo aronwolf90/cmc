@@ -50,10 +50,11 @@ Rails.application.routes.draw do
       resources :issues, only: %i[index show update destroy]
       resources :comments, only: :create
 
-      resources :users, only: :index do
+      resources :users, only: %i[index update] do
         resource :current_record, only: :show
       end
       resources :records, only: %i[create update]
+      resources :projects, only: :index
     end
   end
 

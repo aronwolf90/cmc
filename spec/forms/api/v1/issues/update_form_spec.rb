@@ -7,18 +7,21 @@ describe Api::V1::Issues::UpdateForm do
 
   let(:params) do
     {
-      attributes: {
-        title: "title",
-        description: "description"
-      },
-      relationships: {
-        user: { data: { id: 1, type: "users" } }
+      data: {
+        attributes: {
+          title: "title",
+          description: "description"
+        },
+        relationships: {
+          user: { data: { id: 1, type: "users" } }
+        }
       }
     }
   end
 
   before do
-    allow(User).to receive(:exists?).with("1").and_return(true)
+    allow(User).to receive(:exists?).with(1).and_return(true)
+    allow(User).to receive(:exists?).with(nil).and_return(false)
   end
 
   context "with valid params" do
@@ -28,12 +31,12 @@ describe Api::V1::Issues::UpdateForm do
   end
 
   context "without user id" do
-    before { params[:data][:relationships][:user][:data][0][:id] = nil }
+    before { params[:data][:relationships][:user][:data][:id] = nil }
 
     it "it has an error: id must be filled" do
       expect(subject.errors).to eq(
         data: { relationships: {
-          user: { data: { id: ["must be filled"] } }
+          user: { data: ["Does not exists"] }
         } })
     end
   end

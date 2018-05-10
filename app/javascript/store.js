@@ -6,6 +6,7 @@ import recordActions from 'store/models/record_actions'
 import issueActions from 'store/models/issue_actions'
 import commentActions from 'store/models/comment_actions'
 import boardListActions from 'store/models/board_list_actions'
+import projectActions from 'store/models/project_actions'
 import userActions from 'store/models/user_actions'
 
 export default {
@@ -25,19 +26,9 @@ export default {
         name: 'current-user'
       })
     },
-    currentRecord (store) {
-      let context = JsonApiGetters.entry(store.json_api)({
-        type: 'contexts',
-        id: 'context'
-      })
-
-      let currentUser = JsonApiGetters.associatedEntry(store.json_api)({
-        entry: context,
-        name: 'current-user'
-      })
-
+    currentRecord (store, getters) {
       return JsonApiGetters.associatedEntry(store.json_api)({
-        entry: currentUser,
+        entry: getters.currentUser,
         name: 'current-record'
       })
     },
@@ -61,6 +52,7 @@ export default {
     ...boardListActions,
     ...commentActions,
     ...issueActions,
+    ...projectActions,
     ...recordActions,
     ...userActions,
 

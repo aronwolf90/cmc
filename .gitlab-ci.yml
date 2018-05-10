@@ -74,7 +74,7 @@ cucumber:
     - selenium
   services:
     - postgres:latest
-    - name: selenium/standalone-chrome-debug:3.0.1-germanium
+    - name: selenium/standalone-chrome-debug:latest
       alias: selenium
   variables:
     POSTGRES_PASSWORD: password
@@ -88,8 +88,8 @@ cucumber:
     DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: 'true'
   script:
     - bundle install
-    - yarn install
     - ln -s /root/node_modules node_modules
+    - yarn install
     - cucumber
 
 build:

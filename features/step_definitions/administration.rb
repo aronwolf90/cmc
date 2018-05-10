@@ -110,6 +110,7 @@ Then(/^the page contain the text "([^\"]*)"$/) do |text|
 end
 
 Then(/^the page does not contain the text "([^\"]*)"$/) do |text|
+  sleep(0.1)
   expect(page).not_to have_content text
 end
 
@@ -126,9 +127,11 @@ Then(/^the element "([^\"]*)" does not contain the text "([^\"]*)"$/) do |elemen
 end
 
 Then(/^the page contain the element "([^\"]*)"$/) do |text|
+  sleep(0.1)
   expect(page).to have_css text
 end
 
 Then(/^I am on page "([^\"]*)"$/) do |link|
+  sleep(0.1)
   expect(page).to have_current_path(link)
 end

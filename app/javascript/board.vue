@@ -2,9 +2,10 @@
   .issues-board
     .issues-board-header
       .row
-        .col-sm-5
+        .col-sm-8
           b-form-input(type='text', placeholder='Search', size='sm')
-        .col-sm-5
+        .col-sm-2
+          project-select
         .col-sm-2
           a.btn.btn-sm.btn-outline-secondary(v-on:click='visitAdd($event)', :href='addLink')
             .fa.fa-plus
@@ -18,11 +19,13 @@
 <script>
 import draggable from 'vuedraggable'
 import list from 'board/list'
+import projectSelect from 'board/project_select'
 
 export default {
   components: {
     draggable,
-    'list': list
+    list,
+    projectSelect
   },
   created () {
     this.$store.dispatch('initBoardsLists')

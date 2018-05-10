@@ -2,8 +2,8 @@
 
 module Api::V1
   class UpdateStep < ApiStep
-    def call(options, model:, **args)
-      model.update!(options[:deserialized_params])
+    def call(options, deserialized_params:, model:, **args)
+      model.update!(deserialized_params)
     end
   end
 end

@@ -15,8 +15,10 @@ Scenario: Get
         "attributes": { "firstname": null },
         "relationships": {
           "issues": { "data": [] },
-          "current-record": { "data": null }
-        }
+          "current-record": { "data": null },
+          "selected-project": { "data": null }
+        },
+        "links": { "self": "/api/v1/users/1" }
       }]
     }
     """

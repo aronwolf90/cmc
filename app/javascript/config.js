@@ -6,7 +6,8 @@ import {
   Dropdown,
   FormTextarea,
   FormGroup,
-  Form
+  Form,
+  FormSelect
 } from 'bootstrap-vue/es/components'
 import TurbolinksAdapter from './vue_turbolinks'
 import VueResource from 'vue-resource'
@@ -26,3 +27,4 @@ Vue.use(Dropdown)
 Vue.use(Form)
 Vue.use(FormTextarea)
 Vue.use(FormGroup)
+Vue.use(FormSelect)

@@ -20,7 +20,12 @@ Scenario: Get
         "id": "1",
         "type": "users",
         "attributes": { "firstname": null },
-        "relationships": { "issues": { "data": [] }, "current-record": { "data": null } }
+        "relationships": {
+          "selected-project": { "data": null },
+          "issues": { "data": [] },
+          "current-record": { "data": null }
+        },
+        "links": { "self": "/api/v1/users/1"}
       }]
     }
     """

@@ -6,6 +6,8 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable, :invitable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  belongs_to :selected_project, class_name: "Project"
+
   has_many :issues
   has_many :records
   has_one :current_record, -> { where(end_time: nil).order(created_at: :desc) }, class_name: "Record"

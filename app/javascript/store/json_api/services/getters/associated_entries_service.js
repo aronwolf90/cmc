@@ -14,6 +14,6 @@ export default class {
 
     return this.entry.relationships[this.name].data.map(localEntry => {
       return Utils.get(this.state, localEntry)
-    }).filter(entry => entry !== undefined)
+    }).filter(entry => entry)
   }
 }
