@@ -31,7 +31,7 @@ module Administration
     end
 
     def board_list_params
-      params.require(:board_list).permit(:name)
+      params.require(:board_list).permit(:name, :project_id)
     end
   end
 end

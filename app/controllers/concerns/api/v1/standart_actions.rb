@@ -30,6 +30,14 @@ module Api
 
         head :ok
       end
+
+    protected
+
+      def filter
+        (params[:filter]&.to_unsafe_h || {}).map do |key, value|
+          [key, value != "null" ? value : nil]
+        end.to_h
+      end
     end
   end
 end

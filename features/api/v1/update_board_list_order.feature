@@ -22,13 +22,19 @@ Scenario: valid data
         "id": "2",
         "type": "board-lists",
         "attributes": { "name": "name" },
-        "relationships": { "issues": {"data": []} },
+        "relationships": {
+          "issues": {"data": []},
+          "project": {"data": null}
+        },
         "links": {"self": "/api/v1/board_lists/2"}
       }, {
         "id": "1",
         "type": "board-lists",
         "attributes": { "name": "name" },
-        "relationships": { "issues": {"data": []} },
+        "relationships": {
+          "issues": {"data": []},
+          "project": {"data": null}
+        },
         "links": {"self": "/api/v1/board_lists/1"}
       }]
     }
@@ -48,4 +54,3 @@ Scenario: inalid data
     }
     """
   Then the response status should be "400"
-

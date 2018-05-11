@@ -13,7 +13,8 @@ RSpec.describe Api::V1::ContextSerializer, type: :serializer do
         type: "contexts",
         relationships: {
           "current-user": { data: { id: user.id.to_s, type: "users" } }
-        } }
+        }
+      }
     }
   end
 

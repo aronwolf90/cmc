@@ -10,6 +10,12 @@ module Administration::BoardList
       def cancel_path
         administration_board_path
       end
+
+      def project_collection
+        Project.all.map do |project|
+          [project.name, project.id]
+        end
+      end
     end
   end
 end

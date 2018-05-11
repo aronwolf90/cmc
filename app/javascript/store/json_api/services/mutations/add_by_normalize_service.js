@@ -70,7 +70,7 @@ export default class {
     for (const keyValuePair of keyValuePairs) {
       let key = keyValuePair.split('=')[0]
       let value = keyValuePair.split('=')[1]
-      let match = key.match(/([a-zA-Z0-9]*)\[([a-zA-Z0-9]*)\]/)
+      let match = key.match(/([a-zA-Z0-9]*)\[([a-zA-Z0-9_]*)\]/)
 
       if (match.length === 3) {
         if (match[2] === '') {

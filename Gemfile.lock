@@ -57,6 +57,8 @@ GEM
     backports (3.11.3)
     bcrypt (3.1.11)
     bindex (0.5.0)
+    bootsnap (1.3.0)
+      msgpack (~> 1.0)
     bootstrap (4.0.0)
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
@@ -244,9 +246,6 @@ GEM
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     inflecto (0.0.2)
-    jbuilder (2.7.0)
-      activesupport (>= 4.2.0)
-      multi_json (>= 1.2)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -294,6 +293,7 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    msgpack (1.2.4)
     multi_json (1.13.1)
     multi_test (0.1.2)
     multipart-post (2.0.0)
@@ -537,6 +537,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   attr_extras
+  bootsnap
   bootstrap (~> 4.0.0.beta2.1)
   byebug
   capybara (~> 2.13)
@@ -555,7 +556,6 @@ DEPENDENCIES
   font-awesome-rails
   guard-rspec
   hash_mapper
-  jbuilder (~> 2.5)
   jquery-rails
   kaminari (~> 1.0.0)
   kaminari-cells
@@ -591,6 +591,9 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
   webpacker (= 3.2.2)
+
+RUBY VERSION
+   ruby 2.5.1p57
 
 BUNDLED WITH
    1.16.1

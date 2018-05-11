@@ -30,13 +30,18 @@ export default {
     },
     selected: {
       get () {
-        if (this.selectedProject) return this.selectedProject.id
+        if (this.selectedProject) {
+          this.$store.dispatch('loadBoardLists', this.selectedProject.id)
+          return this.selectedProject.id
+        }
+        this.$store.dispatch('loadBoardLists', undefined)
         return null
       },
       set (value) {
         this.$store.dispatch('updateUser', {
           entry: this.currentUser,
-          selectedProject: this.$store.getters.entry({ id: value, type: 'projects' })
+          selectedProject: this.$store.getters.entry({
+            id: value, type: 'projects' }) || null
         })
       }
     }

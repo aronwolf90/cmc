@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508010259) do
+ActiveRecord::Schema.define(version: 20180510222857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20180508010259) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "ordinal_number"
+    t.bigint "project_id"
+    t.index ["project_id"], name: "index_board_lists_on_project_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -116,6 +118,7 @@ ActiveRecord::Schema.define(version: 20180508010259) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "board_lists", "projects"
   add_foreign_key "comments", "users"
   add_foreign_key "records", "issues", on_delete: :nullify
   add_foreign_key "records", "users"

@@ -26,6 +26,7 @@ services:
       context: .
     environment:
       - DATABASE_URL=postgres://root:password@db/root
+      - BUNDLE_BIN=false
     command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
     tty: true
     stdin_open: true
@@ -61,6 +62,7 @@ services:
       - SELENIUM_PORT=4444
       - TEST_APP_HOST=test
       - TEST_PORT=3001
+      - BUNDLE_BIN=false
     volumes:
       - .:/app
       - bundle:/usr/local/bundle

@@ -1,3 +1,4 @@
+# Setup up rails server
 Requirements:
  - docker (e.g. sudo apt-get install docker.io)
  - docker-compose (e.g. sudo apt-get install docker-compose)
@@ -13,8 +14,39 @@ To run project you have to follow this steps:
 When you make changes on Gemfile, Gemfile.lock, yarn.lock or package.json, execute the following command:
   - scipts/build.sh
 
-When the build command (scripts/build.sh) become to slow, execute this:
-  - build_prebuild
+# Setup up linters (e.g for atom)
+rubocop:
+- install ruby (see version on Gemfile)
+- install cmake (eg. sudo apt-get install cmake)
+- gem install pronto
+- gem install pronto-rubocop
+- gem install rubocop-rails
+- gem install rubocop-rspec
 
+eslint:
+- npm install -g \
+  eslint eslint-config-standard \
+  eslint-plugin-import \
+  eslint-plugin-node \
+  eslint-plugin-standard \
+  eslint-config-standart \
+  eslint-plugin-promise \
+  eslint-plugin-vue
+
+gitlinter:
+- install pip (eg. sudo apt-get install pip)
+- pip install gitlint
+- git log -1 --pretty=%B | gitlint
+
+atom:
+- apm install linter-rubocop
+- apm install linter-eslint
+- select global npm option (eslint package)
+
+# CI
 When the automatic test become to slow, it can help that an administrator (e.g. Aron Wolf) execute:
   - scripts/build_and_push_cmc_prebuild.sh
+
+# Notices
+When the build command (scripts/build.sh) become to slow, execute this:
+  - build_prebuild

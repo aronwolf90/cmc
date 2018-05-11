@@ -5,6 +5,8 @@ class BoardList < ApplicationRecord
   has_many :issues, -> { order("board_list_issue_relations.ordinal_number") },
            through: :board_list_issue_relations
 
+  belongs_to :project
+
   before_create :assigen_ordinal_number
 
 private

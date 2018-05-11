@@ -1,4 +1,3 @@
-# verlappingRecordsQuery
 # frozen_string_literal: true
 
 require "rails_helper"
@@ -10,6 +9,7 @@ RSpec.describe Record, type: :model do
   it "raise an error on create a second active record" do
     user = create(:user)
     create(:record, user: user, end_time: nil)
-    expect { create(:record, user: user, end_time: nil) }.to raise_error
+    expect { create(:record, user: user, end_time: nil) }
+      .to raise_error(ActiveRecord::RecordNotUnique)
   end
 end

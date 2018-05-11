@@ -8,6 +8,7 @@
 
 require "cucumber/api_steps"
 require "cucumber/rails"
+require "selenium-webdriver"
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you"d prefer to use XPath, just uncomment this line and adjust any

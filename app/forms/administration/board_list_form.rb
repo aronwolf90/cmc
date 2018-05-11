@@ -3,8 +3,10 @@ module Administration
     include ActiveModel::Model
 
     attr_accessor :name
+    attr_accessor :project_id
 
     validates :name, presence: true
+    validates :project_id, presence: true
 
     def self.model_name
       ::BoardList.model_name
@@ -21,7 +23,7 @@ module Administration
     private
 
     def board_list
-      @board_list ||= ::BoardList.new(name: name)
+      @board_list ||= ::BoardList.new(name: name, project_id: project_id)
     end
   end
 end
