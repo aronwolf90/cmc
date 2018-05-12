@@ -124,6 +124,11 @@ deploy:
     - kubectl config use-context kubernetes-admin@kubernetes
     - helm init --client-only
     - export DEPLOYS=$(helm ls | grep cmc-production | wc -l)
+    - export LOGS_COMAND="\$(kubectl get pods -l name=cmc-migrate-task | sed -n 2p | awk '{print \$1}')"
+    - sleep 2 &&
+      until kubectl logs $(eval echo $LOGS_COMAND) && kubectl logs -f $(eval echo $LOGS_COMAND); do
+        sleep 0.2;
+      done &
     - if [ ${DEPLOYS}  -eq 0 ]; then
         helm install chart --name cmc-production
           --set image.tag=$CI_COMMIT_SHA

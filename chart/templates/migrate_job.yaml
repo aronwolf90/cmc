@@ -16,8 +16,8 @@ spec:
       containers:
         - name: cmc-migrate-task
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          command: ["rake"]
-          args: ["db:migrate"]
+          command: ["/bin/sh","-c"]
+          args: ["rake db:migrate && echo 'migrated successfully'"]
           imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
