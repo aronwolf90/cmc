@@ -1,8 +1,11 @@
 import Vue from 'vue/dist/vue.common'
 
 import VueResource from 'vue-resource'
+import PQueue from 'p-queue'
 
 Vue.use(VueResource)
+
+const queue = new PQueue({concurrency: 1})
 
 const required = (params) => {
   for (const [paramsName, paramValue] of Object.entries(params)) {
@@ -72,13 +75,26 @@ export default {
   request (context, { url, method, payload }) {
     required({ url })
 
-    let promise = Vue.http[method || 'get'](url, { data: payload }).then(
-      response => {
-        return response.data
-      },
-      response => {
-        alert(JSON.stringify(response.data))
+    let promise = null
+    if (method === 'get' || !method) {
+      promise = Vue.http['get'](url, { data: payload }).then(
+        response => {
+          return response.data
+        },
+        response => {
+          alert(JSON.stringify(response.data))
+        })
+    } else {
+      promise = queue.add(() => {
+        return Vue.http[method](url, { data: payload }).then(
+          response => {
+            return response.data
+          },
+          response => {
+            alert(JSON.stringify(response.data))
+          })
       })
+    }
 
     context.commit('addCalledUrl', { url, promise })
 
@@ -130,19 +146,14 @@ export default {
     })
   },
   changeManyToOneReference (context, { children, parent,
-    parentRelationshipName, childRelationshipName, endpoint }) {
+    parentRelationshipName, childRelationshipName, endpoint, parentTypes }) {
     required({ children, parent, parentRelationshipName, childRelationshipName, endpoint })
 
     context.commit('changeManyToOneReference', {
-      children: children.map((child) => context.getters.entry(child)),
-      parent,
-      parentTypes: ['board-lists'],
-      parentRelationshipName,
-      childRelationshipName
+      children, parent, parentTypes, parentRelationshipName, childRelationshipName
     })
     return context.dispatch('update', {
-      entry:
-      parent,
+      entry: parent,
       endpoint,
       payload: {
         id: parent.id,

@@ -31,13 +31,14 @@ export default {
     selected: {
       get () {
         if (this.selectedProject) {
-          this.$store.dispatch('loadBoardLists', this.selectedProject.id)
+          this.selectedChanged(this.selectedProject.id)
           return this.selectedProject.id
         }
-        this.$store.dispatch('loadBoardLists', undefined)
+        this.selectedChanged(null)
         return null
       },
       set (value) {
+        this.$store.dispatch('loadBoardLists', value)
         this.$store.dispatch('updateUser', {
           entry: this.currentUser,
           selectedProject: this.$store.getters.entry({
@@ -46,20 +47,23 @@ export default {
       }
     }
   },
-  watch: {
+  methods: {
     /*
     * HACK: when click and return to this page turbolinks not preserve
     * the selected option so a few milliseconds appear wrong option. This
     * hack sole this
     */
-    selected (value) {
+    selectedChanged (value) {
       setTimeout(() => {
+        let option = null
         if (value) {
-          $(`#complexity option[value="${value}"]`).attr('selected', true)
+          option = document.querySelectorAll(`#complexity option[value="${value}"]`)
         }
         else {
-          $('#complexity option').first().attr('selected', true)
+          option = document.querySelectorAll('#complexity option')
         }
+
+        if (option.length) option[0].setAttribute('selected', true)
       }, 10)
     }
   }

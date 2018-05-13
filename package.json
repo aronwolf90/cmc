@@ -12,6 +12,7 @@
     "jsdom-global": "^3.0.2",
     "json-api-normalizer": "^0.4.10",
     "nyc": "^11.4.1",
+    "p-queue": "^2.4.2",
     "pug": "^2.0.0-rc.4",
     "tui-editor": "^1.0.0",
     "vue": "^2.5.9",

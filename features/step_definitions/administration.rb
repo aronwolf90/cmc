@@ -20,9 +20,12 @@ Given(/^I am signed in$/) do
 end
 
 Given(/I have an old record/) do
+  board_list = BoardList.create!(name: "Backlog")
+
   issue = Issue.create!(
     title: "issues title",
     description: "issues content",
+    board_list: board_list
   )
 
   Record.create(

@@ -16,7 +16,12 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
       },
       relationships: {
         user: { data: nil },
-        "board-list": { data: nil },
+        "board-list": {
+          data: {
+            id: issue.board_list.id.to_s,
+            type: "board-lists"
+          }
+        },
         comments: { data: [] }
       },
       links: { self: "/api/v1/issues/#{issue.id.to_s}" }

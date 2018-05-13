@@ -2,12 +2,10 @@
 
 class Issue < ApplicationRecord
   belongs_to :user
+  belongs_to :board_list
 
-  has_one :board_list_issue_relation
-  has_one :board_list, through: :board_list_issue_relation
   has_one :record
 
-  has_many :board_list_issue_relations
   has_many :comments
 
   alias_attribute :to_s, :title

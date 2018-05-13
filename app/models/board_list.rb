@@ -1,17 +1,21 @@
 # frozen_string_literal: true
 
 class BoardList < ApplicationRecord
-  has_many :board_list_issue_relations
-  has_many :issues, -> { order("board_list_issue_relations.ordinal_number") },
-           through: :board_list_issue_relations
+  has_many :issues, (lambda do
+    order("ordinal_number ASC NULLS LAST")
+    .order(created_at: :desc)
+  end), autosave: true
 
   belongs_to :project
 
-  before_create :assigen_ordinal_number
+  def issue_ids=(ids)
+    self.issues = Issue.where(id: ids)
+  end
 
-private
-
-  def assigen_ordinal_number
-    self.ordinal_number = BoardList.count
+  def issues=(issues)
+    issues.each_with_index do |issue, index|
+      issue.assign_attributes(ordinal_number: index)
+    end
+    super(issues)
   end
 end

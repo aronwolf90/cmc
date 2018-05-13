@@ -17,11 +17,13 @@ Given /^I am an user with an email "test@localhost.de" and a password "testtest"
 end
 
 Given /^an issue exists with an id of 1$/ do
-  Issue.create!(id: 1, title: "title")
+  board_list = BoardList.create!(name: "Test", id: 10)
+  Issue.create!(id: 1, title: "title", board_list: board_list)
 end
 
 Given /^an issue exists with an id of 2$/ do
-  Issue.create!(id: 2, title: "title")
+  board_list = BoardList.create!(name: "Test", id: 11)
+  Issue.create!(id: 2, title: "title", board_list: board_list)
 end
 
 Given /^an record exists with an id of 1$/ do

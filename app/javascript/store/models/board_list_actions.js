@@ -47,7 +47,8 @@ export default {
       parent: boardList,
       childRelationshipName: 'board-list',
       parentRelationshipName: 'issues',
-      endpoint
+      endpoint,
+      parentTypes: ['board-lists']
     })
   }
 }

@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180512104724) do
+ActiveRecord::Schema.define(version: 20180513040925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "board_list_issue_relations", force: :cascade do |t|
-    t.bigint "board_list_id"
-    t.bigint "issue_id"
-    t.integer "ordinal_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["board_list_id"], name: "index_board_list_issue_relations_on_board_list_id"
-    t.index ["issue_id"], name: "index_board_list_issue_relations_on_issue_id"
-  end
 
   create_table "board_lists", force: :cascade do |t|
     t.string "name"
@@ -57,6 +47,9 @@ ActiveRecord::Schema.define(version: 20180512104724) do
     t.text "description"
     t.bigint "user_id"
     t.decimal "complexity", precision: 2, scale: 1
+    t.integer "board_list_id", null: false
+    t.integer "ordinal_number"
+    t.index ["board_list_id"], name: "index_issues_on_board_list_id"
     t.index ["user_id"], name: "index_issues_on_user_id"
   end
 
@@ -120,6 +113,7 @@ ActiveRecord::Schema.define(version: 20180512104724) do
 
   add_foreign_key "board_lists", "projects"
   add_foreign_key "comments", "users"
+  add_foreign_key "issues", "board_lists"
   add_foreign_key "records", "issues", on_delete: :nullify
   add_foreign_key "records", "users"
   add_foreign_key "users", "projects", column: "selected_project_id"

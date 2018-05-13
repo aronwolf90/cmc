@@ -33,5 +33,4 @@ Scenario: Record destroy
   Given I am signed in
   When I click on link "Records"
   And I click on ".fa-trash"
-  Then the page does not contain the text "issues title"
-
+  Then the element "#side-body" does not contain the text "issues title"

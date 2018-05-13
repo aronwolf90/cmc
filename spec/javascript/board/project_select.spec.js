@@ -53,7 +53,7 @@ describe('ProjectSelect', () => {
       expect($subject.html()).to.include('project name')
     })
 
-    it('project board option is present', () => {
+    it('call updateUser when value change', () => {
       $subject.find('select').element.value = 1
       $subject.find('select').trigger('change')
 
@@ -61,6 +61,26 @@ describe('ProjectSelect', () => {
         sinon.match.any,
         { entry: $user, selectedProject: $project }
       )
+    })
+
+    describe('when the current user has an selected project', () => {
+      def('user', () => ({
+        id: 1,
+        type: 'users',
+        relationships: {
+          'selected-project': { data: $project }
+        }
+      }))
+
+      it('not call updateUser when value not change', () => {
+        $subject.find('select').element.value = 1
+        $subject.find('select').trigger('change')
+
+        expect($actions.updateUser).to.not.have.been.calledWith(
+          sinon.match.any,
+          { entry: $user, selectedProject: $project }
+        )
+      })
     })
   })
 
