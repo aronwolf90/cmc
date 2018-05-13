@@ -18,7 +18,8 @@ describe Api::V1::BoardListDeserializer do
   let(:result) do
     {
       name: "name",
-      issue_ids: [1]
+      issue_ids: [1],
+      issues_attributes: [{ id: 1, ordinal_number: 0 }]
     }
   end
 

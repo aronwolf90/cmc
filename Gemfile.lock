@@ -48,7 +48,7 @@ GEM
     arel (8.0.0)
     ast (2.4.0)
     attr_extras (5.2.0)
-    autoprefixer-rails (8.4.1)
+    autoprefixer-rails (8.5.0)
       execjs
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -59,19 +59,19 @@ GEM
     bindex (0.5.0)
     bootsnap (1.3.0)
       msgpack (~> 1.0)
-    bootstrap (4.0.0)
+    bootstrap (4.1.1)
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.2)
-    capybara (2.18.0)
+    capybara (3.1.0)
       addressable
       mini_mime (>= 0.1.3)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (>= 2.0, < 4.0)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      xpath (~> 3.0)
     carrierwave (1.2.2)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -522,7 +522,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webpacker (3.2.2)
+    webpacker (3.5.3)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
       railties (>= 4.2)
@@ -539,13 +539,13 @@ DEPENDENCIES
   active_model_serializers
   attr_extras
   bootsnap
-  bootstrap (~> 4.0.0.beta2.1)
+  bootstrap (~> 4)
   byebug
-  capybara (~> 2.13)
+  capybara
   carrierwave
   cells-rails
   cells-slim
-  coffee-rails (~> 4.2)
+  coffee-rails
   config
   cucumber-api-steps
   cucumber-rails
@@ -574,7 +574,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   rubycritic
-  sass-rails (~> 5.0)
+  sass-rails
   seed-fu
   selenium-webdriver
   sentry-raven
@@ -583,16 +583,16 @@ DEPENDENCIES
   slim-rails
   spring
   spring-commands-rspec
-  spring-watcher-listen (~> 2.0.0)
+  spring-watcher-listen
   timecop
   traceroute
   trailblazer
   trailblazer-cells
   trailblazer-rails (~> 2.1)
   turbolinks
-  uglifier (>= 1.3.0)
+  uglifier
   web-console (>= 3.3.0)
-  webpacker (= 3.2.2)
+  webpacker
 
 RUBY VERSION
    ruby 2.5.1p57

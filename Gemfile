@@ -24,8 +24,8 @@ gem "hash_mapper"
 gem "kaminari", "~> 1.0.0"
 gem "knock"
 gem "seed-fu"
-gem "uglifier", ">= 1.3.0"
-gem "webpacker", "3.2.2"
+gem "uglifier"
+gem "webpacker"
 
 # ruby extensions
 gem "attr_extras"
@@ -42,11 +42,11 @@ gem "trailblazer-cells"
 gem "trailblazer-rails", "~> 2.1"
 
 # Preprocessors
-gem "coffee-rails", "~> 4.2"
-gem "sass-rails", "~> 5.0"
+gem "coffee-rails"
+gem "sass-rails"
 
 # Frontent libraries
-gem "bootstrap", "~> 4.0.0.beta2.1"
+gem "bootstrap", "~> 4"
 gem "jquery-rails"
 gem "turbolinks"
 
@@ -59,7 +59,7 @@ gem "slim-rails"
 gem "bootsnap", require: false
 gem "spring"
 gem "spring-commands-rspec"
-gem "spring-watcher-listen", "~> 2.0.0"
+gem "spring-watcher-listen"
 
 group :production do
   gem "sentry-raven"
@@ -78,13 +78,13 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rspec-rails"
 
-  # static code analizers
+  # static code analyzers
   gem "rubycritic", require: false
   gem "traceroute", require: false
 end
 
 group :test do
-  gem "capybara", "~> 2.13"
+  gem "capybara"
   gem "cucumber-api-steps", require: false
   gem "cucumber-rails", require: false
   gem "database_cleaner", require: false

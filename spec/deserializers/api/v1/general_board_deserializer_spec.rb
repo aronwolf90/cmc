@@ -20,7 +20,11 @@ describe Api::V1::GeneralBoardDeserializer do
   end
   let(:result) do
     {
-      board_lists_attributes: [{ issue_ids: ["1"], id: "1" }]
+      board_lists_attributes: [{
+        issue_ids: ["1"],
+        issues_attributes: [{ id: "1", ordinal_number: 0 }],
+        id: "1"
+      }]
     }
   end
 
