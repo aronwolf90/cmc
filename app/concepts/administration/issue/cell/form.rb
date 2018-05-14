@@ -9,6 +9,10 @@ module Administration::Issue
 
     private
 
+      def board_list
+        model.model.board_list
+      end
+
       def board_lists
         @board_lists || BoardList.all
       end

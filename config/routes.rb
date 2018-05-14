@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resource :dashboard, only: :show
     resources :records, except: :show
     resource :board, only: %i[show update]
-    resources :board_lists do
+    resources :board_lists, only: %i[new create] do
       resources :issues, only: %i[show new create edit update]
     end
 

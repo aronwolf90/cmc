@@ -1,4 +1,4 @@
-= simple_form_for [:administration, model.board_list, model] do |f|
+= simple_form_for [:administration, board_list, model], as: :data do |f|
   .row
     .col-lg-12
       = f.input :title, required: false

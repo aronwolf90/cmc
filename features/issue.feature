@@ -1,6 +1,18 @@
 Feature: Issue
 
 @javascript
+Scenario: create board list
+  Given an issue with title "issue title 1" and content "issues content" exists
+  And I am signed in
+  And I click on link "Issues"
+  And I click on ".issues-board-body .fa-plus"
+  And I enter "issue name" into input named "data_title"
+  And I enter "description" into input named "data_description"
+  And I click on submit
+  And I reload the page
+  Then the page contain the text "issue name"
+
+@javascript
 Scenario: Show issue
   Given an issue with title "issue title 1" and content "issues content" exists
   And I am signed in

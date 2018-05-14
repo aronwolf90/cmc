@@ -6,7 +6,7 @@ module Administration
 
     def show
       run Dashboard::Show
-      render cell(Dashboard::Cell::Show, @form)
+      render cell(Dashboard::Cell::Show, result["model"])
     end
   end
 end

@@ -1,29 +1,18 @@
+# frozen_string_literal: true
+
+require "reform/form/coercion"
+
 module Administration
-  class BoardListForm
-    include ActiveModel::Model
+  class BoardListForm < Reform::Form
+    property :name
+    property :project_id
 
-    attr_accessor :name
-    attr_accessor :project_id
+    validation do
+      configure do
+        predicates(ReformPredicates)
+      end
 
-    validates :name, presence: true
-    validates :project_id, presence: true
-
-    def self.model_name
-      ::BoardList.model_name
-    end
-
-    def save
-      return false if invalid?
-
-      board_list.save!
-
-      true
-    end
-
-    private
-
-    def board_list
-      @board_list ||= ::BoardList.new(name: name, project_id: project_id)
+      required(:name).filled
     end
   end
 end
