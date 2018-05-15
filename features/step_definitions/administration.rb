@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 def find_or_create_current_user
-  User.create_with(password: "testtest", password_confirmation: "testtest", firstname: "aron")
-    .find_or_create_by!(email: "aronwolf90@gmail.com")
+  User.create_with(
+    password: "testtest",
+    password_confirmation: "testtest",
+    firstname: "aron",
+    lastname: "wolf"
+  ).find_or_create_by!(email: "aronwolf90@gmail.com")
 end
 
 Given(/^I am registered$/) do
@@ -137,4 +141,9 @@ end
 Then(/^I am on page "([^\"]*)"$/) do |link|
   sleep(0.1)
   expect(page).to have_current_path(link)
+end
+
+Then(/^the input "([^\"]*)" has the value "([^\"]*)"$/) do |input_name, value|
+  sleep(0.1)
+  expect(find_field(input_name).value).to eq value
 end

@@ -9,6 +9,10 @@ module Api
         render json: BoardList.where(filter).order(:ordinal_number), include: :issues
       end
 
+      def show
+        render json: board_list
+      end
+
       def update
         super(operation: BoardLists::UpdateOperation, model: board_list)
       end

@@ -24,6 +24,26 @@ Scenario: Put an valid board lists using json in PUT body
     }
     """
   Then the response status should be "204"
+  When I send a GET request to "/api/v1/board_lists/1"
+  Then the JSON response should be:
+    """
+    {
+      "data": {
+        "id": "1",
+        "type": "board-lists",
+        "attributes": { "name": "name" },
+        "relationships": {
+          "issues": { "data": [
+            { "id": "2", "type": "issues" },
+            { "id": "1", "type": "issues" }
+          ] },
+          "project": { "data": null }
+        },
+        "links": { "self": "/api/v1/board_lists/1" }
+      }
+    }
+    """
+  And the response status should be "200"
 
 Scenario: Put an invalid board lists using json in PUT body
   Given a board list exists with an id of 1
