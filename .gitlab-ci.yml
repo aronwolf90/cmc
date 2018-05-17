@@ -58,6 +58,7 @@ rspec:
   artifacts:
     paths:
       - coverage/
+    expire_in: 30 days
   script:
     - bundle install
     - ln -s /root/node_modules node_modules
@@ -143,5 +144,19 @@ deploy:
           --set remote=true
           --force;
       fi
+  only:
+    - master
+
+pages:
+  stage: deploy
+  image: alpine:latest
+  dependencies:
+    - rspec
+  script:
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
   only:
     - master
