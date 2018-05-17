@@ -5,8 +5,7 @@ module Api::V1
     class UpdateOperation < ApiOperation
       step ValidateStep.new(form: UpdateForm)
       success DeserializeStep.new(deserializer: RecordDeserializer)
-      success AssigenAttributesStep.new(key: :deserialized_params)
-      include Concerns::RecordSaveOperation
+      success UpdateMutationStep.new(mutation: ::Records::UpdateMutation)
     end
   end
 end

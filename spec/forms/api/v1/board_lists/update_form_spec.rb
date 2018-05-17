@@ -10,7 +10,10 @@ describe Api::V1::BoardLists::UpdateForm do
       data: {
         id: "1",
         type: "board-lists",
-        relationships: { issues: { data: [{ id: "1", type: "issues" }] } }
+        attributes: { name: "name" },
+        relationships: {
+          issues: { data: [{ id: "1", type: "issues" }] }
+        }
       }
     }
   end
