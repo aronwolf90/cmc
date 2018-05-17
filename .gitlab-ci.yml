@@ -54,6 +54,10 @@ rspec:
     POSTGRES_DB: root
     POSTGRES_USER: root
     DATABASE_URL: postgres://root:password@postgres/root
+    COVERAGE: "true"
+  artifacts:
+    paths:
+      - coverage/
   script:
     - bundle install
     - ln -s /root/node_modules node_modules

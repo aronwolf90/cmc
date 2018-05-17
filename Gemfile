@@ -87,6 +87,7 @@ group :test do
   gem "cucumber-rails", require: false
   gem "database_cleaner", require: false
   gem "selenium-webdriver", require: false
+  gem "simplecov", require: false
   gem "rspec-cells"
   gem "shoulda-matchers"
   gem "timecop"
