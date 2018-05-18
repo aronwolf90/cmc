@@ -1,0 +1,17 @@
+UnusedParameters:
+  enabled: true
+  exclude:
+    - !ruby/regexp /Step#call/
+FeatureEnvy:
+  enabled: true
+  exclude:
+    - !ruby/regexp /Step#call/
+UncommunicativeModuleName:
+  enabled: true
+  reject:
+    - Api::V1
+IrresponsibleModule:
+  enabled: false
+exclude_paths:
+  - db/
+  - db/migrate/

@@ -8,13 +8,12 @@ module Administration
         step Contract::Build(constant: RecordForm)
       end
 
-      step :set_user!
+      step :set_user
       step Nested(Present)
       step Contract::Validate(key: :data)
-      step Contract::Persist(method: :sync)
-      include Concerns::RecordSaveOperation
+      step CreateMutationStep.new(mutation: ::Records::CreateMutation)
 
-      def set_user!(options, current_user:, **)
+      def set_user(options, current_user:, **)
         options[:params][:data][:user_id] = current_user.id
       end
     end

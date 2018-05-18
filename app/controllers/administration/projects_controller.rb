@@ -11,7 +11,7 @@ module Administration
 
     def new
       run Projects::CreateOperation::Present
-      render cell(Projects::Cell::Form, @form)
+      render cell(Projects::Cell::Form, result["contract.default"])
     end
 
     def create
@@ -20,12 +20,12 @@ module Administration
         return redirect_to [:administration, :projects]
       end
 
-      render cell(Projects::Cell::Form, @form)
+      render cell(Projects::Cell::Form, result["contract.default"])
     end
 
     def edit
       run Projects::UpdateOperation::Present
-      render cell(Projects::Cell::Form, @form)
+      render cell(Projects::Cell::Form, result["contract.default"])
     end
 
     def update
@@ -34,7 +34,7 @@ module Administration
         return redirect_to [:administration, :projects]
       end
 
-      render cell(Projects::Cell::Form, @form)
+      render cell(Projects::Cell::Form, result["contract.default"])
     end
   end
 end

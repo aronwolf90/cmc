@@ -3,18 +3,20 @@
 module Records
   class CreateMutation < ApplicationMutation
     pattr_initialize %i[attributes! current_user!]
+    attr_private :record
 
     def call
       ActiveRecord::Base.transaction do
-        deactivate_active_records if active?
+        initialize_record
+        deactivate_active_records if record.active?
         create
       end
     end
 
   private
 
-    def active?
-      attributes[:end_time].nil?
+    def initialize_record
+      @record = current_user.records.build(attributes)
     end
 
     def deactivate_active_records
@@ -22,7 +24,7 @@ module Records
     end
 
     def create
-      current_user.records.create!(attributes)
+      record.tap(&:save!)
     end
   end
 end

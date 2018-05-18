@@ -44,6 +44,17 @@ rubocop:
     - gem install rubocop-rspec
     - pronto run -c=HEAD^ --exit-code
 
+rubycritic:
+  stage: lint
+  image: registry.gitlab.com/cmc_system/cmc/cmc:test
+  artifacts:
+    paths:
+      - tmp/rubycritic
+    expire_in: 30 days
+  script:
+    - gem install rubycritic
+    - rubycritic app/ -s 96.32
+
 rspec:
   stage: test
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
@@ -152,8 +163,10 @@ pages:
   image: alpine:latest
   dependencies:
     - rspec
+    - rubycritic
   script:
     - mv coverage/ public/
+    - mv tmp/rubycritic public/
   artifacts:
     paths:
       - public

@@ -5,12 +5,12 @@ module Administration
     side_menu :administration
 
     def show
-      render cell(Issue::Cell::Show, ::Issue.find(params[:id]))
+      render cell(Issues::Cell::Show, ::Issue.find(params[:id]))
     end
 
     def new
       run Issues::CreateOperation::Present
-      render cell(Issue::Cell::Form, @form)
+      render cell(Issues::Cell::Form, @form)
     end
 
     def create
@@ -19,7 +19,7 @@ module Administration
         return redirect_to administration_board_path
       end
 
-      render cell(Issue::Cell::Form, @form)
+      render cell(Issues::Cell::Form, @form)
     end
   end
 end

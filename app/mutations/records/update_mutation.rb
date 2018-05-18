@@ -6,15 +6,16 @@ module Records
 
     def call
       ActiveRecord::Base.transaction do
-        deactivate_active_records if active?
+        assign_attributes
+        deactivate_active_records if record.active?
         update
       end
     end
 
   private
 
-    def active?
-      attributes[:end_time].nil?
+    def assign_attributes
+      record.assign_attributes(attributes)
     end
 
     def deactivate_active_records
@@ -23,7 +24,7 @@ module Records
     end
 
     def update
-      record.update!(attributes)
+      record.save!
     end
   end
 end

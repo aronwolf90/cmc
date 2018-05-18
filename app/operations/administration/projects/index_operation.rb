@@ -3,9 +3,9 @@
 module Administration
   module Projects
     class IndexOperation < AdministrationOperation
-      step :model!
+      step :model
 
-      def model!(options, *)
+      def model(options, *)
         options["model"] = ::Project.all
       end
     end

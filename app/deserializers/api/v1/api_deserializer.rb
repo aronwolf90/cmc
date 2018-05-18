@@ -11,15 +11,8 @@ module Api::V1
 
       def map_relationship(name, array: false, sort_attribute: nil)
         map_relationship(name, array: array) if sort_attribute
-
-        if array
-          map from("relationships/#{name.to_s.tr("_", "-")}/data"), to(mapped_relationship_name(name, sort_attribute)) do |data|
-            mapped_relationship_values(data, sort_attribute)
-          end
-        else
-          map from("relationships/#{name.to_s.tr("_", "-")}/data"), to(name.to_s + "_id") do |data|
-            data&.dig(:id)
-          end
+        map from("relationships/#{name.to_s.tr("_", "-")}/data"), to(mapped_relationship_name(name, sort_attribute, array)) do |data|
+          array ? mapped_relationship_values(data, sort_attribute) : data&.dig(:id)
         end
       end
 
@@ -41,8 +34,10 @@ module Api::V1
 
     private
 
-      def mapped_relationship_name(name, sort_attribute)
-        if sort_attribute
+      def mapped_relationship_name(name, sort_attribute, array)
+        if !array
+          "#{name.to_s}_id"
+        elsif sort_attribute
           "#{name.to_s}_attributes"
         else
           "#{name.to_s.singularize}_ids"

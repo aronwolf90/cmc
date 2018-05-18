@@ -10,8 +10,7 @@ module Administration
 
       step Nested(Present)
       step Contract::Validate(key: :data)
-      step Contract::Persist(method: :sync)
-      include Concerns::RecordSaveOperation
+      step UpdateMutationStep.new(mutation: ::Records::UpdateMutation)
     end
   end
 end
