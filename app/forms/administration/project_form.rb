@@ -5,6 +5,7 @@ require "reform/form/coercion"
 module Administration
   class ProjectForm < Reform::Form
     feature Coercion
+    model ::Project
 
     property :name
 

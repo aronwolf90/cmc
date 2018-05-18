@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      issue:
+        one: board list
+        other: board lists

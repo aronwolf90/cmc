@@ -2,7 +2,9 @@
 
 module Api::V1
   class RecordDeserializer < ApiDeserializer
-    map_attributes :start_time, :end_time
-    map_relationships :user, :issue
+    attribute :start_time
+    attribute :end_time
+    belongs_to :user
+    belongs_to :issue
   end
 end

@@ -2,7 +2,8 @@
 
 module Api::V1
   class CommentDeserializer < ApiDeserializer
-    map_attribute :content
-    map_relationships :user, :issue
+    attribute :content
+    belongs_to :user
+    belongs_to :issue
   end
 end

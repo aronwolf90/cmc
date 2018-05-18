@@ -8,9 +8,7 @@ module Administration
         step Contract::Build(constant: ProjectForm)
       end
 
-      step Nested(Present)
-      step Contract::Validate(key: :data)
-      step Contract::Persist()
+      include Concerns::StandartTrailblazerSteps
     end
   end
 end

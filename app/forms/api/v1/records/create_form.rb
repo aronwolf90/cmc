@@ -13,18 +13,8 @@ module Api::V1
             required(:"start-time").filled
           end
           required(:relationships).schema do
-            required(:user).schema do
-              required(:data).filled(:record_exists?).schema do
-                required(:id).filled
-                required(:type).filled
-              end
-            end
-            required(:issue).schema do
-              required(:data).filled(:record_exists?).schema do
-                required(:id).filled
-                required(:type).filled
-              end
-            end
+            required(:user).schema(RequiredBelongsToSchema)
+            required(:issue).schema(RequiredBelongsToSchema)
           end
         end
       end

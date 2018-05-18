@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      issue:
+        one: issue
+        other: issues

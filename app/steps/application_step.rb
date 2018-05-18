@@ -2,4 +2,5 @@
 
 class ApplicationStep
   include Uber::Callable
+  extend Uber::Callable
 end

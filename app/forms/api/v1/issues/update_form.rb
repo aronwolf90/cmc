@@ -14,12 +14,7 @@ module Api::V1
             optional(:description).filled
           end
           optional(:relationships).schema do
-            optional(:user).schema do
-              required(:data).filled(:record_exists?).schema do
-                required(:id).filled
-                required(:type).filled
-              end
-            end
+            optional(:user).schema(RequiredBelongsToSchema)
           end
         end
       end

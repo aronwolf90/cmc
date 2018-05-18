@@ -4,7 +4,7 @@ module Administration
   module Records
     class DestroyOperation < AdministrationOperation
       step Model(Record, :find)
-      step DestroyStep.new
+      step DestroyStep
     end
   end
 end

@@ -2,7 +2,9 @@
 
 module Api::V1
   class BoardListDeserializer < ApiDeserializer
-    map_attributes :name, :ordinal_number
-    map_relationship :issues, array: true, sort_attribute: :ordinal_number
+    attribute :name
+    attribute :ordinal_number
+    has_many :issues
+    has_many_sort :issues, attribute: :ordinal_number
   end
 end

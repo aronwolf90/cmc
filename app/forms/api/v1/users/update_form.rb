@@ -10,14 +10,7 @@ module Api::V1
 
         required(:data).schema do
           optional(:relationships).schema do
-            optional(:'selected-project').schema do
-              optional(:data).maybe(:record_exists?) do
-                hash? do
-                  required(:id).filled
-                  required(:type).filled
-                end
-              end
-            end
+            optional(:'selected-project').schema(OptionalBelongsToSchema)
           end
         end
       end

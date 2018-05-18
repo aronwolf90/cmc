@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+module Administration
+  class UpdateMutationStep < ApplicationStep
+    pattr_initialize %i[mutation!]
+
+    def call(options, model:, current_user:, **args)
+      options["contract.default"].save do |hash|
+        mutation.call(model, attributes: hash, current_user: current_user)
+      end
+    end
+  end
+end

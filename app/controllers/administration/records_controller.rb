@@ -2,6 +2,7 @@
 
 module Administration
   class RecordsController < AdministrationController
+    include Concerns::Administration::StandardActions
     side_menu :administration
 
     def index
@@ -15,37 +16,23 @@ module Administration
     end
 
     def new
-      run Records::CreateOperation::Present
-      render cell(Records::Cell::Form, @form)
+      super(Records::CreateOperation::Present, Records::Cell::Form)
     end
 
     def create
-      run Records::CreateOperation do
-        flash[:notice] = "record has been created"
-        return redirect_to [:administration, :records]
-      end
-
-      render cell(Records::Cell::Form, @form)
+      super(Records::CreateOperation, Records::Cell::Form, [:administration, :records])
     end
 
     def edit
-      run Records::UpdateOperation::Present
-      render cell(Records::Cell::Form, @form)
+      super(Records::UpdateOperation::Present, Records::Cell::Form)
     end
 
     def update
-      run Records::UpdateOperation do
-        flash[:notice] = "record has been update"
-        return redirect_to [:administration, :records]
-      end
-
-      render cell(Records::Cell::Form, @form)
+      super(Records::UpdateOperation, Records::Cell::Form, [:administration, :records])
     end
 
     def destroy
-      run Records::DestroyOperation
-      flash[:notice] = "record has been destroyed"
-      redirect_to %i[administration records]
+      super(Records::DestroyOperation, %i[administration records])
     end
   end
 end

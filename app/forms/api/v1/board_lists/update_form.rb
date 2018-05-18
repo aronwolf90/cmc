@@ -10,14 +10,7 @@ module Api::V1
 
         optional(:data).schema do
           optional(:relationships).schema do
-            optional(:issues).schema do
-              required(:data).each do
-                schema do
-                  required(:id).filled
-                  required(:type).filled
-                end
-              end
-            end
+            optional(:issues).schema(RequiredMasManySchema)
           end
         end
       end

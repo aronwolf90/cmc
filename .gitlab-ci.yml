@@ -53,7 +53,7 @@ rubycritic:
     expire_in: 30 days
   script:
     - gem install rubycritic
-    - rubycritic app/ -s 96.32
+    - rubycritic app/ -s 98.00
 
 rspec:
   stage: test

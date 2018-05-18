@@ -5,6 +5,7 @@ require "reform/form/coercion"
 module Administration
   class RecordForm < Reform::Form
     feature Coercion
+    model ::Record
 
     property :id
     property :start_time, type: Types::Form::DateTime

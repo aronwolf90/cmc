@@ -2,6 +2,7 @@
 
 module Administration
   class IssuesController < AdministrationController
+    include Concerns::Administration::StandardActions
     side_menu :administration
 
     def show
@@ -9,17 +10,11 @@ module Administration
     end
 
     def new
-      run Issues::CreateOperation::Present
-      render cell(Issues::Cell::Form, @form)
+      super(Issues::CreateOperation::Present, Issues::Cell::Form)
     end
 
     def create
-      run Issues::CreateOperation do
-        flash[:notice] = "issue has been created"
-        return redirect_to administration_board_path
-      end
-
-      render cell(Issues::Cell::Form, @form)
+      super(Issues::CreateOperation, Issues::Cell::Form, administration_board_path)
     end
   end
 end

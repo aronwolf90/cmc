@@ -14,18 +14,8 @@ module Api::V1
             required(:content).filled
           end
           required(:relationships).schema do
-            required(:user).filled.schema do
-              required(:data).filled(:record_exists?).schema do
-                required(:id).filled
-                required(:type).filled
-              end
-            end
-            required(:issue).filled.schema do
-              required(:data).filled(:record_exists?).schema do
-                required(:id).filled
-                required(:type).filled
-              end
-            end
+            required(:user).filled.schema(RequiredBelongsToSchema)
+            required(:issue).filled.schema(RequiredBelongsToSchema)
           end
         end
       end

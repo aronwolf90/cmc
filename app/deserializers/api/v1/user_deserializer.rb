@@ -2,6 +2,6 @@
 
 module Api::V1
   class UserDeserializer < ApiDeserializer
-    map_relationship :selected_project
+    belongs_to :selected_project
   end
 end

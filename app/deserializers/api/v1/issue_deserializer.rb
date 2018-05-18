@@ -2,7 +2,9 @@
 
 module Api::V1
   class IssueDeserializer < ApiDeserializer
-    map_attributes :title, :description, :complexity
-    map_relationship :user
+    attribute :title
+    attribute :description
+    attribute :complexity
+    belongs_to :user
   end
 end

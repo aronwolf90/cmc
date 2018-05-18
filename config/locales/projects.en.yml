@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      project:
+        one: project
+        other: projects

@@ -14,18 +14,8 @@ module Api::V1
             optional(:complexity).maybe(:numeric_format?)
           end
           optional(:relationships).schema do
-            optional(:user).schema do
-              required(:data).filled(:record_exists?).schema do
-                required(:id).filled
-                required(:type).filled
-              end
-            end
-            optional(:issue).schema do
-              required(:data).filled(:record_exists?).schema do
-                required(:id).filled(:numeric_format?)
-                required(:type).filled
-              end
-            end
+            optional(:user).schema(RequiredBelongsToSchema)
+            optional(:issue).schema(RequiredBelongsToSchema)
           end
         end
       end

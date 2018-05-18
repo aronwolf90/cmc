@@ -5,7 +5,7 @@ module Administration
   private
 
     def issues_collection
-      Issue.all.map do |issue|
+      ::Issue.all.map do |issue|
         [issue, issue.id]
       end
     end

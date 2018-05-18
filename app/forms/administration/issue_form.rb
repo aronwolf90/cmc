@@ -4,6 +4,8 @@ require "reform/form/coercion"
 
 module Administration
   class IssueForm < Reform::Form
+    model ::Issue
+
     property :title
     property :description
     property :board_list_id
