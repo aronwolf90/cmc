@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Administration::Dashboard
   module Cell
     class Show < Trailblazer::Cell

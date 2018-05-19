@@ -38,11 +38,9 @@ rubocop:
   script:
     - apk update
     - apk add cmake
-    - gem install pronto
-    - gem install pronto-rubocop
     - gem install rubocop-rails
     - gem install rubocop-rspec
-    - pronto run -c=HEAD^ --exit-code
+    - rubocop
 
 rubycritic:
   stage: lint

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Administration::BoardList
   module Cell
     class Form < Trailblazer::Cell
@@ -7,15 +9,15 @@ module Administration::BoardList
 
       private
 
-      def cancel_path
-        administration_board_path
-      end
-
-      def project_collection
-        Project.all.map do |project|
-          [project.name, project.id]
+        def cancel_path
+          administration_board_path
         end
-      end
+
+        def project_collection
+          Project.all.map do |project|
+            [project.name, project.id]
+          end
+        end
     end
   end
 end

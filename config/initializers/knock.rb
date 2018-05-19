@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Knock.setup do |config|
 
   ## Expiration claim
@@ -56,4 +58,3 @@ Knock.setup do |config|
   ## Default:
   # config.not_found_exception_class_name = 'ActiveRecord::RecordNotFound'
 end
-

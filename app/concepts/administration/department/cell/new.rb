@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Administration::Project
   module Cell
     class Create < Trailblazer::Cell

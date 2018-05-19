@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Administration::Wiki::Page
   module Cell
     class Index < Trailblazer::Cell

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Administration::Wiki
   class PagesController < WikiController
-    side_menu 'administration/wiki'
+    side_menu "administration/wiki"
 
     def index
       run Page::Index
