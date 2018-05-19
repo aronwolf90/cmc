@@ -1,0 +1,9 @@
+ignore_unreachable_actions:
+- ^devise
+- authenticate!$
+- authenticate_for$
+- ^knock
+- user_tokens
+ignore_unused_routes:
+- ^devise
+- user_tokens

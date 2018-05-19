@@ -11,6 +11,7 @@ module Administration
       define_method :side_menu do
         menu
       end
+      private :side_menu
     end
 
   private

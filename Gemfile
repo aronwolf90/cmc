@@ -77,8 +77,10 @@ group :development, :test do
   gem "rspec-rails"
 
   # static code analyzers
+  gem "active_record_doctor"
+  gem "rails_best_practices", require: false
   gem "rubycritic", require: false
-  gem "traceroute", require: false
+  gem "traceroute"
 end
 
 group :test do

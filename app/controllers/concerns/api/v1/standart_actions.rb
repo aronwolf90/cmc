@@ -5,6 +5,8 @@ module Api
     module StandartActions
       extend ActiveSupport::Concern
 
+    protected
+
       def create(operation:)
         result = run operation
 
@@ -30,8 +32,6 @@ module Api
 
         head :ok
       end
-
-    protected
 
       def filter
         (params[:filter]&.to_unsafe_h || {}).map do |key, value|

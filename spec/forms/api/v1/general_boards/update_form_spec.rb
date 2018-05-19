@@ -50,7 +50,7 @@ describe Api::V1::GeneralBoards::UpdateForm do
     end
 
     it "it has an error: id must be filled" do
-      expect(subject.errors.to_json).to include({id: ["must be filled"]}.to_json)
+      expect(subject.errors.to_json).to include({ id: ["must be filled"] }.to_json)
     end
   end
 end

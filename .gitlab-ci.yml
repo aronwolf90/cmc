@@ -42,7 +42,7 @@ rubocop:
     - gem install rubocop-rspec
     - rubocop
 
-rubycritic:
+detect_code_problems:
   stage: lint
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
   artifacts:
@@ -50,8 +50,10 @@ rubycritic:
       - tmp/rubycritic
     expire_in: 30 days
   script:
-    - gem install rubycritic
+    - bundle update
     - rubycritic app/ -s 98.00
+    - rails_best_practices
+    - FAIL_ON_ERROR=1 DATABASE_URL=postgres://root:password@postgres/root rake traceroute
 
 rspec:
   stage: test
@@ -161,7 +163,7 @@ pages:
   image: alpine:latest
   dependencies:
     - rspec
-    - rubycritic
+    - detect_code_problems
   script:
     - mv coverage/ public/
     - mv tmp/rubycritic public/

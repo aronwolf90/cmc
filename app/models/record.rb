@@ -11,4 +11,8 @@ class Record < ApplicationRecord
   def active?
     !inactive?
   end
+
+  def description
+    issue&.title
+  end
 end
