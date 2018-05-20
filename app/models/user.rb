@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_many :issues
   has_many :records
+  has_many :record_days
   has_one :current_record, -> { active.order(created_at: :desc) }, class_name: "Record"
 
   # Knock requires :authenticate

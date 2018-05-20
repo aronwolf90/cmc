@@ -24,7 +24,7 @@ RemoveEmptyHelpersCheck: { }
 #RemoveTabCheck: { }
 RemoveTrailingWhitespaceCheck: { }
 #RemoveUnusedMethodsInControllersCheck: { except_methods: [] }
-RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }
+#RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }
 RemoveUnusedMethodsInModelsCheck: { except_methods: [User#authenticate, Context#current_user_id] }
 ReplaceComplexCreationWithFactoryMethodCheck: { attribute_assignment_count: 2 }
 ReplaceInstanceVariableWithLocalVariableCheck: { ignored_files: "_side_menu.html.slim" }

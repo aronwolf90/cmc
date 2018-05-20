@@ -7,15 +7,19 @@ class HasManyBaseMapper < BaseMapper
 
   def call
     map from(from_name), to(to_name) do |entries|
-      entries.to_a.map.with_index do |entry, index|
-        process(entry, index)
-      end
+      map_entries(entries)
     end
   end
 
 protected
 
-  def process(entry, index)
+  def map_entries(entries)
+    entries.to_a.map.with_index do |entry, index|
+      process(entry, index)
+    end
+  end
+
+  def process(_entry, _index)
     raise NotImplementedError
   end
 

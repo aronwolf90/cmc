@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180519220707) do
+ActiveRecord::Schema.define(version: 20180520123954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,4 +118,12 @@ ActiveRecord::Schema.define(version: 20180519220707) do
   add_foreign_key "records", "issues", on_delete: :nullify
   add_foreign_key "records", "users"
   add_foreign_key "users", "projects", column: "selected_project_id"
+
+  create_view "record_days",  sql_definition: <<-SQL
+      SELECT (records.start_time)::date AS day,
+      records.user_id
+     FROM records
+    GROUP BY ((records.start_time)::date), records.user_id;
+  SQL
+
 end

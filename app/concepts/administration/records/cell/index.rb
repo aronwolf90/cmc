@@ -19,20 +19,12 @@ module Administration
         class: "btn btn-sm btn-danger", method: :delete
     end
 
-    def spended_time(records)
-      miliseconds = records.inject(0) do |sum, record|
-        end_time = record.end_time || Time.zone.now
-        sum + (end_time - record.start_time)
-      end
-      Time.at(miliseconds / 1000).strftime("%H:%M:%S")
+    def spended_time(record_day)
+      seconds_to_time(SpentTimeCalculator.call(record_day.records))
     end
 
-    def this_mounth_spended_time
-      spended_time(@options[:records_for_month])
-    end
-
-    def l(object, options = {})
-      super(object, options) if object
+    def month_spendet_time
+      seconds_to_time(@options[:this_mounth_spended_time])
     end
   end
 end

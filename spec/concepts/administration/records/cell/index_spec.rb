@@ -5,7 +5,15 @@ require "rails_helper"
 RSpec.describe Administration::Records::Cell::Index, type: :cell do
   controller Administration::RecordsController
 
-  let(:model) { { record1.start_time => [record1, record2] } }
+  subject { cell(described_class, model, this_mounth_spended_time: this_mounth_spended_time).().text }
+
+  let(:model) { Kaminari.paginate_array([record_day]).page(1) }
+  let(:record_day) do
+    build_stubbed(:record_day, day: Date.current).tap do |record_day|
+      allow(record_day).to receive(:records).and_return([record1, record2])
+    end
+  end
+  let(:this_mounth_spended_time) { 3600 * 3 }
   let(:records) { Kaminari.paginate_array([record1, record2]).page(1) }
   let(:issue) { build_stubbed(:issue, title: "issues title")  }
   let(:record1) do
@@ -25,22 +33,30 @@ RSpec.describe Administration::Records::Cell::Index, type: :cell do
     )
   end
 
-  before { Timecop.freeze }
+  before { Timecop.freeze("01.01.2018") }
   after { Timecop.return }
 
   it "record1 start_time is present" do
-    expect(cell(described_class, model, records: records, records_for_month: records).().text).to include(1.hour.ago.strftime("%I:%M %P"))
+    expect(subject).to include(1.hour.ago.strftime("%I:%M %P"))
   end
 
   it "record2 start_time is present" do
-    expect(cell(described_class, model, records: records, records_for_month: records).().text).to include(3.hour.ago.strftime("%I:%M %P"))
+    expect(subject).to include(3.hour.ago.strftime("%I:%M %P"))
   end
 
   it "record2 end_time is present" do
-    expect(cell(described_class, model, records: records, records_for_month: records).().text).to include(2.hour.ago.strftime("%I:%M %P"))
+    expect(subject).to include(2.hour.ago.strftime("%I:%M %P"))
   end
 
   it "record2 end_time is present" do
-    expect(cell(described_class, model, records: records, records_for_month: records).().text).to include("issues title")
+    expect(subject).to include("issues title")
+  end
+
+  it "spendet time on day is present" do
+    expect(subject).to include("02:00:00")
+  end
+
+  it "spendet time at this mounth" do
+    expect(subject).to include("03:00:00")
   end
 end

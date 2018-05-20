@@ -10,6 +10,7 @@ module Administration
       include FontAwesome::Rails::IconHelper
       include Kaminari::Cells
       include SimpleForm::ActionViewExtensions::FormHelper
+      include ApplicationHelper
     end
   end
 end

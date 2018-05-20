@@ -1,6 +1,6 @@
 .row.align-items-center
   .col-sm-6.font-weight-bold
-    | You have worked #{this_mounth_spended_time} hours this month
+    | You have worked #{month_spendet_time} hours this month
   .col-sm-6
     .pull-right = add_link
 br
@@ -8,13 +8,13 @@ br
   .table-responsive
     table.table
       tbody
-        - model.each do |day, records|
+        - model.each do |record_day|
           tr
             td colspan=3
-              .font-weight-bold = l(day, format: '%A %d.%m.%Y')
+              .font-weight-bold = l(record_day.day, format: '%A %d.%m.%Y')
             td
-              .pull-right = spended_time(records)
-          - records.each do |record|
+              .pull-right = spended_time(record_day)
+          - record_day.records.each do |record|
             tr
               td = record.description
               td = l(record.start_time, format: "%I:%M %P")
@@ -23,4 +23,4 @@ br
                 .btn-group.pull-right
                   = edit_btn(record)
                   = destroy_btn(record)
-  = paginate @options[:records]
+  = paginate model

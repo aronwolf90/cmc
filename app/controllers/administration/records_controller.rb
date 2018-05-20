@@ -10,8 +10,7 @@ module Administration
       render cell(
         Records::Cell::Index,
         result["model"],
-        records: result["records"],
-        records_for_month: result["records_for_month"]
+        this_mounth_spended_time: result["this_mounth_spended_time"]
       )
     end
 

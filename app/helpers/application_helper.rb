@@ -9,4 +9,14 @@ module ApplicationHelper
     when :alert then "alert alert-error"
     end
   end
+
+  def seconds_to_time(seconds)
+    [seconds / 3600, seconds / 60 % 60, seconds % 60].map do |time|
+      time.to_s.rjust(2, "0")
+    end.join(":")
+  end
+
+  def l(object, options = {})
+    super(object, options) if object
+  end
 end
