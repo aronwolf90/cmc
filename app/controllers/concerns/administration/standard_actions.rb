@@ -14,6 +14,11 @@ module Concerns
         render cell(cell, result["contract.default"])
       end
 
+      def show(operation, cell)
+        run operation
+        render cell(cell, result["model"])
+      end
+
       def create(operation, cell, path)
         saved(operation, cell, path, :created)
       end

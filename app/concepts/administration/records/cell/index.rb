@@ -24,7 +24,7 @@ module Administration
     end
 
     def month_spendet_time
-      seconds_to_time(@options[:this_mounth_spended_time])
+      seconds_to_time(options[:this_mounth_spended_time])
     end
   end
 end

@@ -2,11 +2,11 @@
 
 module Administration
   class DashboardsController < AdministrationController
+    include Concerns::Administration::StandardActions
     side_menu :administration
 
     def show
-      run Dashboard::Show
-      render cell(Dashboard::Cell::Show, result["model"])
+      super(Dashboard::ShowOperation, Dashboard::Cell::Show)
     end
   end
 end

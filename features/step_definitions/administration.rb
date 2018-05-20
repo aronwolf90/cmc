@@ -45,6 +45,18 @@ Given(/^an issue exists$/) do
   Issue.create!(title: "issues title", description: "issues content", board_list: board_list)
 end
 
+Given(/^I have spent time one a project$/) do
+  project = Project.create!(name: "project")
+  board_list = BoardList.create!(name: "Backlog", project: project)
+  issue = Issue.create!(title: "issues title", description: "issues content", board_list: board_list)
+  Record.create(
+    start_time: 2.hour.ago,
+    end_time: 1.hour.ago,
+    issue: issue,
+    user: find_or_create_current_user
+  )
+end
+
 Given(/^an issue with title "([^\"]*)" exists$/) do |title|
   board_list = BoardList.create!(name: "Backlog")
   Issue.create!(title: title, description: "issues content", board_list: board_list)

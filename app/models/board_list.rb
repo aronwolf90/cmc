@@ -2,7 +2,7 @@
 
 class BoardList < ApplicationRecord
   has_many :issues, (lambda do
-    order("ordinal_number ASC NULLS LAST").order(created_at: :desc)
+    order("issues.ordinal_number ASC NULLS LAST").order(created_at: :desc)
   end)
 
   belongs_to :project

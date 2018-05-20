@@ -3,5 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Project, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to have_many :board_lists }
+  it { is_expected.to have_many :issues }
+  it { is_expected.to have_many :records }
 end

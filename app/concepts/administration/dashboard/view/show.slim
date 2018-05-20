@@ -1,1 +1,10 @@
-b-button dsfsd
+.table-resposive
+  table.table
+    thead
+      th scope="col" Project
+      th scope="col" Spendet time
+    tbody
+      - model[:projects].each do |project, spended_time|
+        tr
+          td = project.name
+          td = seconds_to_time(spended_time)
