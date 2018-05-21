@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Administration::BoardList
+module Administration::BoardLists
   module Cell
     class Form < Trailblazer::Cell
       include ActionView::RecordIdentifier

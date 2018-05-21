@@ -4,6 +4,7 @@ module Administration
   class RecordsController < AdministrationController
     include Concerns::Administration::StandardActions
     side_menu :administration
+    namespace Records
 
     def index
       run Records::IndexOperation
@@ -15,23 +16,23 @@ module Administration
     end
 
     def new
-      super(Records::CreateOperation::Present, Records::Cell::Form)
+      super
     end
 
     def create
-      super(Records::CreateOperation, Records::Cell::Form, [:administration, :records])
+      super { [:administration, :records] }
     end
 
     def edit
-      super(Records::UpdateOperation::Present, Records::Cell::Form)
+      super
     end
 
     def update
-      super(Records::UpdateOperation, Records::Cell::Form, [:administration, :records])
+      super { [:administration, :records] }
     end
 
     def destroy
-      super(Records::DestroyOperation, %i[administration records])
+      super(%i[administration records])
     end
   end
 end

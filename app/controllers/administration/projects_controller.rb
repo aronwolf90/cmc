@@ -4,25 +4,26 @@ module Administration
   class ProjectsController < AdministrationController
     include Concerns::Administration::StandardActions
     side_menu "administration/projects"
+    namespace Projects
 
     def index
-      super(Projects::IndexOperation, Projects::Cell::Index)
+      super
     end
 
     def new
-      super(Projects::CreateOperation::Present, Projects::Cell::Form)
+      super
     end
 
     def create
-      super(Projects::CreateOperation, Projects::Cell::Form, %i[administration projects])
+      super { %i[administration projects] }
     end
 
     def edit
-      super(Projects::UpdateOperation::Present, Projects::Cell::Form)
+      super
     end
 
     def update
-      super(Projects::UpdateOperation, Projects::Cell::Form, %i[administration projects])
+      super { %i[administration projects] }
     end
   end
 end

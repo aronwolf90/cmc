@@ -14,6 +14,13 @@ module Administration
       private :side_menu
     end
 
+    def self.namespace(namespace)
+      define_method :namespace do
+        namespace
+      end
+      private :namespace
+    end
+
   private
 
     def set_side_menu_path

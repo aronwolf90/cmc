@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Administration::Department
-  class Index < Trailblazer::Operation
+module Administration::Departments
+  class IndexOperation < Trailblazer::Operation
     step :model!
 
     def model!(options, *)

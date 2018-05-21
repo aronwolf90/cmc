@@ -2,20 +2,18 @@
 
 module Administration
   class UsersController < AdministrationController
+    include Concerns::Administration::StandardActions
     side_menu "administration/users"
+    namespace Users
 
     def edit
-      run Administration::Users::UpdateOperation::Present
-      render cell(Users::Cell::Form, @form)
+      super
     end
 
     def update
-      run Administration::Users::UpdateOperation do |result|
-        flash[:notice] = "user has been update"
-        return redirect_to [:edit, :administration, result[:model]]
+      super do |model|
+        [:edit, :administration, model]
       end
-
-      render cell(Users::Cell::Form, @form)
     end
   end
 end

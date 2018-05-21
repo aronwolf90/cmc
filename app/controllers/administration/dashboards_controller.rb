@@ -4,9 +4,10 @@ module Administration
   class DashboardsController < AdministrationController
     include Concerns::Administration::StandardActions
     side_menu :administration
+    namespace Dashboard
 
     def show
-      super(Dashboard::ShowOperation, Dashboard::Cell::Show)
+      super
     end
   end
 end

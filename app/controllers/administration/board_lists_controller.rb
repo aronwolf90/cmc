@@ -4,20 +4,14 @@ module Administration
   class BoardListsController < AdministrationController
     include Concerns::Administration::StandardActions
     side_menu :administration
+    namespace BoardLists
 
     def new
-      super(
-        ::Administration::BoardLists::CreateOperation::Present,
-        BoardList::Cell::Form
-      )
+      super
     end
 
     def create
-      super(
-        Administration::BoardLists::CreateOperation,
-        BoardList::Cell::Form,
-        administration_board_path
-      )
+      super { %i[administration board] }
     end
   end
 end
