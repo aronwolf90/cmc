@@ -4,7 +4,6 @@ if ENV["COVERAGE"]
   require "simplecov"
 
   SimpleCov.start "rails" do
-    add_filter "/controllers/"
     add_filter "/lib/"
   end
 end
