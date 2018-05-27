@@ -1,13 +1,23 @@
 # frozen_string_literal: true
 
-module Administration::Wiki
-  class PagesController < WikiController
-    side_menu "administration/wiki"
+module Administration
+  module Wiki
+    class PagesController < WikiController
+      include Concerns::Administration::StandardActions
+      namespace WikiPages
 
-    def index
-      run Page::Index
+      def show
+        super
+      end
 
-      render cell(Page::Cell::Index)
+
+      def new
+        super
+      end
+
+      def create
+        super { [:administration, :wiki, :content] }
+      end
     end
   end
 end

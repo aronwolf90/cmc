@@ -44,7 +44,7 @@ RSpec.describe Api::V1::UserSerializer, type: :serializer do
             }
           }
         },
-        links: { self: "/api/v1/users/#{user.id.to_s}" }
+        links: { self: "/api/v1/users/#{user.id}" }
       }
     }
   end

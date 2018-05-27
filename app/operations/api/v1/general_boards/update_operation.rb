@@ -3,9 +3,9 @@
 module Api::V1
   module GeneralBoards
     class UpdateOperation < ApiOperation
-      step ValidateStep.new(form: UpdateForm)
-      success DeserializeStep.new(deserializer: GeneralBoardDeserializer)
-      success UpdateStep.new
+      @form = UpdateForm
+      @deserializer = GeneralBoardDeserializer
+      include StandardUpdateOperationConcern
     end
   end
 end

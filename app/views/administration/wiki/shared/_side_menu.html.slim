@@ -1,4 +1,4 @@
 .side-menu
   ul.nav.navbar-nav
-    li class=('active' if current_page?(controller: :pages))
+    li class=('active' if current_page?(controller: :contents, action: :show))
       = link_to 'Content', administration_wiki_root_path

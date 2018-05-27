@@ -5,12 +5,16 @@ import Store from '../store'
 import IssuesBoard from '../board.vue'
 import Issue from '../issue.vue'
 import SharedIssueSection from '../shared_issue_section'
+import WikiContent from '../wiki_content'
+import WikiPage from '../wiki_page'
 
 require('../config')
 
 Vue.component('issues_board', IssuesBoard)
 Vue.component('issue', Issue)
 Vue.component('shared-issue-section', SharedIssueSection)
+Vue.component('wiki-content', WikiContent)
+Vue.component('wiki-page', WikiPage)
 
 let store = new Vuex.Store(Store)
 

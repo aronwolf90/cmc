@@ -17,7 +17,7 @@ module Concerns
 
       def show
         result = run namespace::ShowOperation
-        render cell(namespace::Cell::Show, result["model"])
+        render cell(namespace::Cell::Show, result["model"] || result[:model])
       end
 
       def edit

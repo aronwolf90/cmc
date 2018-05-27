@@ -24,9 +24,11 @@ Rails.application.routes.draw do
     resources :departments, only: :index
 
     namespace :wiki do
-      root to: "pages#index"
+      root to: "contents#show"
 
-      resources :pages, only: :index
+      resources :categories, only: %i[new create]
+      resource :content, only: :show
+      resources :pages, only: %i[show new create]
     end
 
     get "*path" => redirect("/administration")
@@ -55,6 +57,8 @@ Rails.application.routes.draw do
       end
       resources :records, only: %i[create update]
       resources :projects, only: :index
+      resources :wiki_categories, only: :index
+      resources :wiki_pages, only: %i[show update]
     end
   end
 

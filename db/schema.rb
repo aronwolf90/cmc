@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180520123954) do
+ActiveRecord::Schema.define(version: 20180524232615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,10 +106,21 @@ ActiveRecord::Schema.define(version: 20180520123954) do
     t.index ["selected_project_id"], name: "index_users_on_selected_project_id"
   end
 
+  create_table "wiki_categories", force: :cascade do |t|
+    t.string "title"
+    t.bigint "wiki_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wiki_category_id"], name: "index_wiki_categories_on_wiki_category_id"
+  end
+
   create_table "wiki_pages", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "wiki_category_id", null: false
+    t.text "content"
+    t.index ["wiki_category_id"], name: "index_wiki_pages_on_wiki_category_id"
   end
 
   add_foreign_key "board_lists", "projects"

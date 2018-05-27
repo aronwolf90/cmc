@@ -1,10 +1,23 @@
+FROM jare/alpine-vim:latest as vim
+
 FROM ruby:2.5.1-alpine3.7
 
 WORKDIR  /app
 
 ENV PATH /app/bin:/root/.yarn/bin:$PATH
 ENV BUNDLE_BIN /app/bin
+ENV HISTFILE=/app/tmp/bash_history
 
 COPY alphine_minimum_shared_install.sh ./
 COPY alphine_shared_install.sh ./
 RUN /app/alphine_shared_install.sh
+
+RUN apk add vim
+ 
+COPY .vimrc /root/.vimrc
+RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+RUN vim +PluginInstall +qall
+
+RUN apk add tmux
+COPY .tmux.conf /root/.tmux.conf
+RUN echo 'export PATH="/app/bin:$PATH"' >> /etc/profile

@@ -26,6 +26,10 @@ Given /^an issue exists with an id of 2$/ do
   Issue.create!(id: 2, title: "title", board_list: board_list)
 end
 
+Given /^a wiki category with an id of 1 exists$/ do
+  WikiCategory.create!(id: 1, title: "wiki category title")
+end
+
 Given /^an record exists with an id of 1$/ do
   Record.create!(id: 1)
 end
@@ -40,4 +44,12 @@ end
 
 Given /^a board list exists with an id of 2$/ do
   BoardList.create!(id: 2, name: "name")
+end
+
+Given /^a wiki page exists with an id of 1$/ do
+  wiki_category = WikiCategory.create!(id: 1, title: "title")
+  WikiPage.create!(
+    id: 1, title: "wiki page title",
+    wiki_category: wiki_category, content: "content"
+  )
 end

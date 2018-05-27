@@ -3,9 +3,9 @@
 module Api::V1
   module BoardLists
     class UpdateOperation < ApiOperation
-      step ValidateStep.new(form: UpdateForm)
-      success DeserializeStep.new(deserializer: BoardListDeserializer)
-      success UpdateStep.new
+      @form = UpdateForm
+      @deserializer = BoardListDeserializer
+      include StandardUpdateOperationConcern
     end
   end
 end

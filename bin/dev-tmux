@@ -1,0 +1,5 @@
+#!/bin/sh 
+tmux set-option -g utf8 on
+tmux new-session -d "vim" 
+tmux split-window -v
+tmux -2 attach-session -d 

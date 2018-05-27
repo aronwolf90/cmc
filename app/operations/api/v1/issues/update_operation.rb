@@ -3,9 +3,9 @@
 module Api::V1
   module Issues
     class UpdateOperation < ApiOperation
-      step ValidateStep.new(form: UpdateForm)
-      success DeserializeStep.new(deserializer: IssueDeserializer)
-      success UpdateStep.new
+      @form = UpdateForm
+      @deserializer = IssueDeserializer
+      include StandardUpdateOperationConcern
     end
   end
 end

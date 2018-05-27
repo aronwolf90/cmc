@@ -25,7 +25,7 @@ RSpec.describe Api::V1::RecordSerializer, type: :serializer do
           type: "issues"
         } }
       },
-      links: { self: "/api/v1/records/#{record.id.to_s}" }
+      links: { self: "/api/v1/records/#{record.id}" }
     } }
   end
 

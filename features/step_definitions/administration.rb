@@ -84,6 +84,23 @@ Given(/^a project exists$/) do
   Project.create!(name: "project name")
 end
 
+Given(/^a wiki category exists$/) do
+  WikiCategory.create!(title: "wiki category title")
+end
+
+Given(/^an wiki page with title "([^\"]*)" and content "([^\"]*)" exists/) do |title, content|
+  wiki_category = WikiCategory.create!(title: "wiki category title")
+  WikiPage.create!(
+    title: title,
+    content: content,
+    wiki_category: wiki_category
+  )
+end
+
+Given(/^an wiki page with title "([^\"]*)" exists$/) do |title|
+  WikiCategory.create!(title: title)
+end
+
 When(/^I navigate to "([^\"]*)"$/) do |link|
   visit link
 end

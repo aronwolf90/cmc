@@ -8,6 +8,8 @@ import commentActions from 'store/models/comment_actions'
 import boardListActions from 'store/models/board_list_actions'
 import projectActions from 'store/models/project_actions'
 import userActions from 'store/models/user_actions'
+import wikiCategoryActions from 'store/models/wiki_category_actions'
+import wikiPageActions from 'store/models/wiki_page_actions'
 
 export default {
   strict: true,
@@ -55,6 +57,8 @@ export default {
     ...projectActions,
     ...recordActions,
     ...userActions,
+    ...wikiCategoryActions,
+    ...wikiPageActions,
 
     initCurrentUser (context) {
       return context.dispatch('initContext').then(contextEntry => {

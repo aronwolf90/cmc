@@ -24,7 +24,7 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
         },
         comments: { data: [] }
       },
-      links: { self: "/api/v1/issues/#{issue.id.to_s}" }
+      links: { self: "/api/v1/issues/#{issue.id}" }
     } }
   end
 
