@@ -3,6 +3,16 @@
 * coverage: https://cmc_system.gitlab.io/cmc/coverage/
 * rubycritic: https://cmc_system.gitlab.io/cmc/rubycritic/code_index.html
 
+# About
+CMC is a feature-rich time tracker. Its features include
+* easy session tracking
+* scrum project management
+* extended project information including prioritizing
+* wiki
+
+I wrote this because I was unsatisfied with existing solutions.
+
+
 # Setup up rails server
 Requirements:
  - docker (e.g. sudo apt-get install docker.io)
