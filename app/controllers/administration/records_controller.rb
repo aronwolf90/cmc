@@ -11,7 +11,7 @@ module Administration
       render cell(
         Records::Cell::Index,
         result["model"],
-        this_mounth_spended_time: result["this_mounth_spended_time"]
+        this_month_spended_time: result["this_month_spended_time"]
       )
     end
 

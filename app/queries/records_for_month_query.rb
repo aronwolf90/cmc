@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class RecordsForMonthQuery < ApplicationQuery
-  attr_reader :relation, :mounth
+  attr_reader :relation, :month
 
-  def initialize(relation, mounth: Time.zone.now)
+  def initialize(relation, month: Time.zone.now)
     @relation = relation
-    @mounth = mounth
+    @month = month
   end
 
   def call
@@ -15,6 +15,6 @@ class RecordsForMonthQuery < ApplicationQuery
 private
 
   def interval
-    mounth.at_beginning_of_month..mounth.at_end_of_month
+    month.at_beginning_of_month..month.at_end_of_month
   end
 end

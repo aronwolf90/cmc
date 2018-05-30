@@ -13,7 +13,7 @@ RSpec.describe Administration::Records::ModelStep do
     subject
   end
 
-  it "set on options the correct spendet Time" do
+  it "set on options the correct spended Time" do
     expect(options["model"].as_json).to eq([RecordDay.first.as_json])
   end
 end

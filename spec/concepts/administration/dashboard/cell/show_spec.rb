@@ -17,7 +17,7 @@ RSpec.describe Administration::Dashboard::Cell::Show, type: :cell do
     expect(subject).to include(project.name)
   end
 
-  it "spendet time at this mounth" do
+  it "spended time at this month" do
     expect(subject).to include("01:00:00")
   end
 end
