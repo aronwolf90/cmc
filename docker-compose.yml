@@ -12,6 +12,8 @@ services:
   webpack:
     image: cmc
     command: webpack-dev-server
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=webpack
     ports:
       - "3035:3035"
     volumes:
@@ -27,6 +29,7 @@ services:
     environment:
       - DATABASE_URL=postgres://root:password@db/root
       - BUNDLE_BIN=false
+      - WEBPACKER_DEV_SERVER_HOST=webpack
     command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
     tty: true
     stdin_open: true
