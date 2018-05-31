@@ -9,7 +9,7 @@ RSpec.describe Administration::Records::IndexOperation do
 
   before do
     allow(Administration::Records::ThisMonthSpentTimeStep).to receive(:call) do |options|
-      options["this_mounth_spended_time"] = 0
+      options["this_month_spended_time"] = 0
     end
 
     allow(Administration::Records::ModelStep).to receive(:call) do |options|
@@ -21,7 +21,7 @@ RSpec.describe Administration::Records::IndexOperation do
     expect(subject["model"]).to eq([])
   end
 
-  it "this_mounth_spended_time has correct value" do
-    expect(subject["this_mounth_spended_time"]).to eq(0)
+  it "this_month_spended_time has correct value" do
+    expect(subject["this_month_spended_time"]).to eq(0)
   end
 end

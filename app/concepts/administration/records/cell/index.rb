@@ -23,8 +23,8 @@ module Administration
       seconds_to_time(SpentTimeCalculator.call(record_day.records))
     end
 
-    def month_spendet_time
-      seconds_to_time(options[:this_mounth_spended_time])
+    def month_spended_time
+      seconds_to_time(options[:this_month_spended_time])
     end
   end
 end

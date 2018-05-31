@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Administration::Records::Cell::Index, type: :cell do
   controller Administration::RecordsController
 
-  subject { cell(described_class, model, this_mounth_spended_time: this_mounth_spended_time).().text }
+  subject { cell(described_class, model, this_month_spended_time: this_month_spended_time).().text }
 
   let(:model) { Kaminari.paginate_array([record_day]).page(1) }
   let(:record_day) do
@@ -13,7 +13,7 @@ RSpec.describe Administration::Records::Cell::Index, type: :cell do
       allow(record_day).to receive(:records).and_return([record1, record2])
     end
   end
-  let(:this_mounth_spended_time) { 3600 * 3 }
+  let(:this_month_spended_time) { 3600 * 3 }
   let(:records) { Kaminari.paginate_array([record1, record2]).page(1) }
   let(:issue) { build_stubbed(:issue, title: "issues title")  }
   let(:record1) do
@@ -52,11 +52,11 @@ RSpec.describe Administration::Records::Cell::Index, type: :cell do
     expect(subject).to include("issues title")
   end
 
-  it "spendet time on day is present" do
+  it "spended time on day is present" do
     expect(subject).to include("02:00:00")
   end
 
-  it "spendet time at this mounth" do
+  it "spended time at this month" do
     expect(subject).to include("03:00:00")
   end
 end
