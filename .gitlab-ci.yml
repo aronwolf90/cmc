@@ -138,7 +138,7 @@ deploy:
     - mkdir ~/.kube
     - echo $KUBE_CONFIG | base64 -d > ~/.kube/config
     - kubectl config use-context kubernetes-admin@kubernetes
-    - helm init --client-only
+    - helm init --upgrade
     - export DEPLOYS=$(helm ls | grep cmc-production | wc -l)
     - export LOGS_COMAND="\$(kubectl get pods -l name=cmc-migrate-task | sed -n 2p | awk '{print \$1}')"
     - sleep 2 &&
