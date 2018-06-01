@@ -9,8 +9,10 @@ nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
       = link_to 'Projects', administration_projects_path, class: 'nav-link small'
     li.nav-item class=('active' if request.url.include?('department'))
       = link_to 'Departments', administration_departments_path, class: 'nav-link small'
-      li.nav-item class=('active' if request.url.include?('wiki'))
-        = link_to 'Wiki', administration_wiki_root_path, class: 'nav-link small'
+    li.nav-item class=('active' if request.url.include?('wiki'))
+      = link_to 'Wiki', administration_wiki_root_path, class: 'nav-link small'
+    li.nav-item class=('active' if request.url.include?('users'))
+      = link_to 'Users', administration_users_path, class: 'nav-link small'
 
   ul.navbar-nav
      a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -18,7 +20,7 @@ nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
      .dropdown-menu.dropdown-menu-right
        a class="dropdown-item"
          = current_user
-       = link_to [:edit, :administration, current_user], class: 'dropdown-item'
+       = link_to [:edit, :administration, :settings, current_user], class: 'dropdown-item'
          = 'Settings'
        div class="dropdown-divider">
        = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item'

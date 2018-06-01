@@ -6,14 +6,16 @@ module Administration
     side_menu "administration/users"
     namespace Users
 
-    def edit
+    def index
       super
     end
 
-    def update
-      super do |model|
-        [:edit, :administration, model]
-      end
+    def new
+      super
+    end
+
+    def create
+      super { %i[administration users] }
     end
   end
 end

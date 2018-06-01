@@ -2,9 +2,9 @@
 
 module Administration
   module Users
-    class UpdateOperation < AdministrationOperation
+    class CreateOperation < AdministrationOperation
       class Present < Trailblazer::Operation
-        step Model(User, :find)
+        step Model(User, :new)
         step Contract::Build(constant: UserForm)
       end
 

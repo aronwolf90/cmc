@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Administration
-  module Users::Cell
+  module SettingsUsers::Cell
     class Form < Trailblazer::Cell
       include ActionView::RecordIdentifier
       include ActionView::Helpers::FormOptionsHelper

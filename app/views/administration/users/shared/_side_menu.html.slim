@@ -1,8 +1,4 @@
 .side-menu
   ul.nav.navbar-nav
-    li = link_to [:edit, :administration, current_user] do
-      = fa_icon 'user', class: 'fa-lg'
-      | &nbsp &nbsp
-      = 'User Settings'
-  ul.nav.navbar-nav
-    li.active = link_to 'Edit', [:edit, :administration, current_user]
+    li class=('active' if current_page?(controller: :users))
+      = link_to 'All', administration_users_path

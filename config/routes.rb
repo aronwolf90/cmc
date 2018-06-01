@@ -13,7 +13,11 @@ Rails.application.routes.draw do
       resources :issues, only: %i[show new create]
     end
 
-    resources :users, only: %i[edit update]
+    namespace :settings do
+      resources :users, only: %i[edit update]
+    end
+
+    resources :users, only: %i[index new create]
 
     resources :projects, except: %i[show destroy] do
       scope module: :projects do

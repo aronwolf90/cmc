@@ -1,0 +1,15 @@
+.row
+  .col-md-8
+    input.form-control placeholder='Search'
+  .col-md-4
+    br.d-md-none
+    = new_btn
+
+br
+br
+
+ul.list-group.list-lines
+  - model.each do |user|
+    li.list-group-item
+      = user
+      .pull-right = edit_btn(user)
