@@ -1,23 +1,20 @@
 # frozen_string_literal: true
 
-module Administration::BoardLists
-  module Cell
-    class Form < Trailblazer::Cell
-      include ActionView::RecordIdentifier
-      include ActionView::Helpers::FormOptionsHelper
-      include SimpleForm::ActionViewExtensions::FormHelper
+module Administration
+  module BoardLists::Cell
+    class Form < ApplicationCell
+    private
 
-      private
+      def cancel_btn
+        link_to "Cancel", administration_board_path,
+          class: "btn btn-secondary pull-right"
+      end
 
-        def cancel_path
-          administration_board_path
+      def project_collection
+        Project.all.map do |project|
+          [project.name, project.id]
         end
-
-        def project_collection
-          Project.all.map do |project|
-            [project.name, project.id]
-          end
-        end
+      end
     end
   end
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Administration
-  class WikiPages::Cell::Form < Cell::BaseWiki
+  module WikiPages::Cell
+    class Form < BaseWikiCell
+    end
   end
 end

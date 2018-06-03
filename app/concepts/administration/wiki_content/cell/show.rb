@@ -2,7 +2,7 @@
 
 module Administration
   module WikiContent::Cell
-    class Show < Cell::Application
+    class Show < ApplicationCell
     private
 
       def add_category_btn

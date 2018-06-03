@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Administration
-  class Dashboard::Cell::Show < Cell::Application
+  module Dashboard::Cell
+    class Show < ApplicationCell
+    end
   end
 end

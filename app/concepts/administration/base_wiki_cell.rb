@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Administration
-  class Cell::BaseWiki < Cell::Application
+  class BaseWikiCell < ApplicationCell
   private
 
     def categories_collection

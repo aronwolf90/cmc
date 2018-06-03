@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Administration
-  class WikiPages::Cell::Show < Cell::Application
+  module WikiPages::Cell
+    class Show < ApplicationCell
+    end
   end
 end

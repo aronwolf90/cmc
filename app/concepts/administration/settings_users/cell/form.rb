@@ -2,11 +2,7 @@
 
 module Administration
   module SettingsUsers::Cell
-    class Form < Trailblazer::Cell
-      include ActionView::RecordIdentifier
-      include ActionView::Helpers::FormOptionsHelper
-      include SimpleForm::ActionViewExtensions::FormHelper
-
+    class Form < ApplicationCell
     private
 
       def cancel_path

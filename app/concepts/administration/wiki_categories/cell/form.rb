@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Administration
-  class WikiCategories::Cell::Form < Cell::BaseWiki
+  module WikiCategories::Cell
+    class Form < BaseWikiCell
+    end
   end
 end
