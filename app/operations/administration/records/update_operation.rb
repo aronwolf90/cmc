@@ -8,9 +8,9 @@ module Administration
         step Contract::Build(constant: RecordForm)
       end
 
-      step Nested(Present)
+      success Nested(Present)
       step Contract::Validate(key: :data)
-      step UpdateMutationStep.new(mutation: ::Records::UpdateMutation)
+      success UpdateMutationStep.new(mutation: ::Records::UpdateMutation)
     end
   end
 end

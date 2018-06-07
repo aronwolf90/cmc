@@ -8,10 +8,10 @@ module Administration
         step Contract::Build(constant: RecordForm)
       end
 
-      step :set_user
-      step Nested(Present)
+      success :set_user
+      success Nested(Present)
       step Contract::Validate(key: :data)
-      step CreateMutationStep.new(mutation: ::Records::CreateMutation)
+      success CreateMutationStep.new(mutation: ::Records::CreateMutation)
 
       def set_user(options, current_user:, **)
         options[:params][:data][:user_id] = current_user.id

@@ -5,6 +5,7 @@ if ENV["COVERAGE"]
 
   SimpleCov.start "rails" do
     add_group "Cells", "app/concepts"
+    add_group "Operations", "app/operations"
     add_filter "/lib/"
   end
 end

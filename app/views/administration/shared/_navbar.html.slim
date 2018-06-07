@@ -7,8 +7,6 @@ nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
       = link_to 'Time Tracking', administration_root_path, class: 'nav-link small'
     li.nav-item class=('active' if request.url.include?('projects'))
       = link_to 'Projects', administration_projects_path, class: 'nav-link small'
-    li.nav-item class=('active' if request.url.include?('department'))
-      = link_to 'Departments', administration_departments_path, class: 'nav-link small'
     li.nav-item class=('active' if request.url.include?('wiki'))
       = link_to 'Wiki', administration_wiki_root_path, class: 'nav-link small'
     li.nav-item class=('active' if request.url.include?('users'))

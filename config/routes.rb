@@ -25,8 +25,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :departments, only: :index
-
     namespace :wiki do
       root to: "contents#show"
 
