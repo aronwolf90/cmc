@@ -10,6 +10,7 @@ import projectActions from 'store/models/project_actions'
 import userActions from 'store/models/user_actions'
 import wikiCategoryActions from 'store/models/wiki_category_actions'
 import wikiPageActions from 'store/models/wiki_page_actions'
+import folderActions from 'store/models/folder_actions'
 
 export default {
   strict: true,
@@ -59,6 +60,7 @@ export default {
     ...userActions,
     ...wikiCategoryActions,
     ...wikiPageActions,
+    ...folderActions,
 
     initCurrentUser (context) {
       return context.dispatch('initContext').then(contextEntry => {

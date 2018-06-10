@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180607014617) do
+ActiveRecord::Schema.define(version: 20180608142000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,23 @@ ActiveRecord::Schema.define(version: 20180607014617) do
     t.bigint "user_id"
     t.index ["issue_id"], name: "index_comments_on_issue_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "file", null: false
+    t.bigint "folder_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["folder_id"], name: "index_documents_on_folder_id"
+  end
+
+  create_table "folders", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "folder_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["folder_id"], name: "index_folders_on_folder_id"
   end
 
   create_table "issues", force: :cascade do |t|
@@ -119,6 +136,8 @@ ActiveRecord::Schema.define(version: 20180607014617) do
 
   add_foreign_key "board_lists", "projects"
   add_foreign_key "comments", "users"
+  add_foreign_key "documents", "folders"
+  add_foreign_key "folders", "folders"
   add_foreign_key "issues", "board_lists"
   add_foreign_key "records", "issues", on_delete: :nullify
   add_foreign_key "records", "users"
@@ -128,7 +147,7 @@ ActiveRecord::Schema.define(version: 20180607014617) do
       SELECT (records.start_time)::date AS day,
       records.user_id
      FROM records
-    GROUP BY (records.start_time)::date, records.user_id;
+    GROUP BY ((records.start_time)::date), records.user_id;
   SQL
 
 end

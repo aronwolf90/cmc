@@ -2,6 +2,7 @@
 
 module Administration
   class AdministrationController < ApplicationController
+    include Concerns::Administration::StandardActions
     layout "administration"
 
     before_action :authenticate_user!

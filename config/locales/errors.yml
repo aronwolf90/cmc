@@ -3,3 +3,4 @@ en:
     board_list_exists?: Board list does not exist
     numeric_format?: Is not in a numeric compatible format
     record_exists?: Does not exists
+    file_present?: muss be filled

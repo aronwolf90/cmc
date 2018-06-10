@@ -101,6 +101,10 @@ Given(/^an wiki page with title "([^\"]*)" exists$/) do |title|
   WikiCategory.create!(title: title)
 end
 
+Given(/^a folder exists with name "([^\"]*)"$/) do |name|
+  Folder.create!(name: name)
+end
+
 When(/^I navigate to "([^\"]*)"$/) do |link|
   visit link
 end
@@ -143,6 +147,10 @@ end
 
 Then(/^the page contain the text "([^\"]*)"$/) do |text|
   expect(page).to have_content text
+end
+
+Then (/^I enter enter a file into input named "([^\"]*)"$/) do |element|
+  page.attach_file(element, "/etc/hostname")
 end
 
 Then(/^the page does not contain the text "([^\"]*)"$/) do |text|

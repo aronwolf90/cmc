@@ -9,6 +9,8 @@ nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
       = link_to 'Projects', administration_projects_path, class: 'nav-link small'
     li.nav-item class=('active' if request.url.include?('wiki'))
       = link_to 'Wiki', administration_wiki_root_path, class: 'nav-link small'
+    li.nav-item class=('active' if request.url.include?('archive'))
+      = link_to 'Archive', administration_archive_root_path, class: 'nav-link small'
     li.nav-item class=('active' if request.url.include?('users'))
       = link_to 'Users', administration_users_path, class: 'nav-link small'
 

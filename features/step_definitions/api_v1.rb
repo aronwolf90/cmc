@@ -8,6 +8,10 @@ Given /^an project with an id of 1 exists$/ do
   Project.create!(id: 1, name: "project name")
 end
 
+Given /^a folder with an id of 1 exists$/ do
+  Folder.create!(id: 1, name: "folder name")
+end
+
 Given /^I am an user with an id of 1$/ do
   User.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
 end

@@ -7,6 +7,7 @@ import Issue from '../issue.vue'
 import SharedIssueSection from '../shared_issue_section'
 import WikiContent from '../wiki_content'
 import WikiPage from '../wiki_page'
+import ArchiveContent from '../archive_content'
 
 require('../config')
 
@@ -15,6 +16,7 @@ Vue.component('issue', Issue)
 Vue.component('shared-issue-section', SharedIssueSection)
 Vue.component('wiki-content', WikiContent)
 Vue.component('wiki-page', WikiPage)
+Vue.component('archive-content', ArchiveContent)
 
 let store = new Vuex.Store(Store)
 

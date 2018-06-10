@@ -14,7 +14,7 @@ Scenario: Get the current record from an user
         "id": "1",
         "type": "records",
         "attributes": {
-          "start-time": "2018-02-04T12:00:00.000Z",
+          "start-time": "2018-02-04T13:00:00.000+01:00",
           "end-time": null
         },
         "relationships": {
