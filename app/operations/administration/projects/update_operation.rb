@@ -3,12 +3,8 @@
 module Administration
   module Projects
     class UpdateOperation < AdministrationOperation
-      class Present < Trailblazer::Operation
-        step Model(::Project, :find)
-        step Contract::Build(constant: ProjectForm)
-      end
-
-      include Concerns::StandartTrailblazerSteps
+      @form = ProjectForm
+      include StandardUpdateOperationConcern
     end
   end
 end

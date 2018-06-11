@@ -3,12 +3,8 @@
 module Administration
   module ArchiveFolders
     class CreateOperation < AdministrationOperation
-      class Present < Trailblazer::Operation
-        step Model(Folder, :new)
-        step Contract::Build(constant: ArchiveFolderForm)
-      end
-
-      include Concerns::StandartTrailblazerSteps
+      @form = ArchiveFolderForm
+      include StandardCreateOperationConcern
     end
   end
 end
