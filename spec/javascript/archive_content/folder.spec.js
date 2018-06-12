@@ -44,6 +44,10 @@ describe('Folder', () => {
     expect($subject.html()).to.include('fa-tags')
   })
 
+  it('eit btn is present', () => {
+    expect($subject.html()).to.include('/administration/archive/folders/1/edit')
+  })
+
   it('render the child folder', () => {
     expect($subject.find(Folder).exists()).to.be.true
   })

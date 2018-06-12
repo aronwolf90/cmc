@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 module Administration
-  module Records
+  module ArchiveDocuments
     class UpdateOperation < AdministrationOperation
-      @form = RecordForm
-      @mutation = ::Records::UpdateMutation
-
+      @form = ArchiveDocumentForm
       include StandardUpdateOperationConcern
     end
   end

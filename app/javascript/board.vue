@@ -20,7 +20,7 @@
 import draggable from 'vuedraggable'
 import list from 'board/list'
 import projectSelect from 'board/project_select'
-
+ 
 export default {
   components: {
     draggable,

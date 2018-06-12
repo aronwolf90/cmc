@@ -2,7 +2,9 @@
   .document.archive-tree-item 
     a(:href='link', target="_blank")
       .fa.fa-file-text-o 
-        | {{ name }}
+        | {{ name }}&nbsp;&nbsp;
+    a.edit-btn(:href='editLink')
+      .fa.fa-edit
 </template>
 
 <script>
@@ -22,6 +24,9 @@ export default {
     },
     link () {
       return `/administration/archive/documents/${this.document.id}`
+    },
+    editLink () {
+      return this.link + '/edit'
     }
   }
 }
@@ -29,6 +34,10 @@ export default {
 </script>
 
 <style lang='sass' scoped>
- a
-   color: black
+.document
+  a
+    color: black
+  .edit-btn
+    font-size: 12px
+
 </style>

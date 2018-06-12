@@ -6,14 +6,23 @@ module Administration
 
     included do |base|
       form = @form
+      default_value_step = @default_value_step
+
       base.const_set("Present", Class.new(Trailblazer::Operation) do
-        step base::Model(form.model_options.first, :new)
-        step base::Contract::Build(constant: form)
+        success self::Model(form.model_options.first, :new)
+        if default_value_step.present?
+          success default_value_step
+        end
+        success self::Contract::Build(constant: form)
       end)
 
       step base::Nested(base::Present)
       step base::Contract::Validate(key: :data)
-      step base::Contract::Persist()
+      if @mutation.present?
+        success CreateMutationStep.new(mutation: @mutation)
+      else
+        success base::Contract::Persist()
+      end
     end
   end
 end

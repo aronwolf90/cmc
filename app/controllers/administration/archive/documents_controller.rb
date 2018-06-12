@@ -21,6 +21,14 @@ module Administration
       def create
         super { %i[administration archive content] }
       end
+
+      def edit
+        super
+      end
+
+      def update
+        super { %i[administration archive content] }
+      end
     end
   end
 end

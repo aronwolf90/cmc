@@ -1,7 +1,10 @@
 <template lang='pug'>
   .folder.archive-tree-item
-    .name.fa.fa-tags 
-      | {{ name }}
+    .item
+      .name.fa.fa-tags 
+        | {{ name }}&nbsp;&nbsp;
+      a(:href='link')
+        .fa.fa-edit
     .child-documents
       document(
         v-for='document in documents', 
@@ -47,6 +50,9 @@ export default {
     },
     name () {
       return Utils.attribute(this.folder, 'name')
+    },
+    link () {
+      return `/administration/archive/folders/${this.folder.id}/edit`
     }
   }
 }
@@ -56,4 +62,8 @@ export default {
 <style lang='sass' scoped>
   .name
     font-weight: bold
+  a
+   color: black
+   font-size: 12px;
+
 </style>

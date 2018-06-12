@@ -1,7 +1,7 @@
 Feature: Issue
 
 @javascript
-Scenario: create board list
+Scenario: Create Issue
   Given an issue with title "issue title 1" and content "issues content" exists
   And I am signed in
   And I click on link "Issues"

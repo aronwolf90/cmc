@@ -6,13 +6,11 @@ module Administration
     private
 
       def add_folder_btn
-        link_to "add folder", %i[new administration archive folder],
-          class: "btn btn-success"
+        standard_btn "add folder", %i[new administration archive folder]
       end
 
       def add_document_btn
-        link_to "add document", %i[new administration archive document],
-          class: "btn btn-success"
+        standard_btn "add document", %i[new administration archive document]
       end
     end
   end

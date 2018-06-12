@@ -3,15 +3,12 @@
 module Administration
   module Records
     class CreateOperation < AdministrationOperation
-      class Present < Trailblazer::Operation
-        step Model(Record, :new)
-        step Contract::Build(constant: RecordForm)
-      end
+      @form = RecordForm
+      @mutation = ::Records::CreateMutation
 
-      success :set_user
-      success Nested(Present)
-      step Contract::Validate(key: :data)
-      success CreateMutationStep.new(mutation: ::Records::CreateMutation)
+      include StandardCreateOperationConcern
+
+      success :set_user, before: "contract.default.validate"
 
       def set_user(options, current_user:, **)
         options[:params][:data][:user_id] = current_user.id

@@ -12,12 +12,13 @@ module Administration
     property :file
     property :file_cache
 
-    validation do
+    validation with: { form: true } do
       configure do
         predicates(ReformPredicates)
 
         def file_present?(file)
-          file.respond_to?(:original_filename)
+          file.respond_to?(:original_filename) ||
+            form.model.file.file.respond_to?(:original_filename)
         end
       end
 

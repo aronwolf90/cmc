@@ -33,6 +33,7 @@ coverage/
 /databases
 /bundle
 /uploads
+public/uploads/tmp
 
 public/assets/
 

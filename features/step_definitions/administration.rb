@@ -80,6 +80,14 @@ Given(/^a board list named "([^\"]*)"$/) do |name|
   BoardList.create!(name: name)
 end
 
+Given(/^a document exists with name "([^\"]*)" exists$/) do |name|
+  Document.create(
+    name: name,
+    folder: Folder.create!(name: "fodler"),
+    file: File.open("/etc/hostname")
+  )
+end
+
 Given(/^a project exists$/) do
   Project.create!(name: "project name")
 end

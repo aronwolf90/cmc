@@ -37,8 +37,8 @@ Rails.application.routes.draw do
       root to: "contents#show"
 
       resource :content, only: :show
-      resources :folders, only: %i[new create]
-      resources :documents, only:  %i[show new create]
+      resources :folders, only: %i[new create edit update]
+      resources :documents, only:  %i[show new create edit update]
     end
 
     get "*path" => redirect("/administration")

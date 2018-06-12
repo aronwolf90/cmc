@@ -21,3 +21,11 @@ RUN vim +PluginInstall +qall
 RUN apk add tmux
 COPY .tmux.conf /root/.tmux.conf
 RUN echo 'export PATH="/app/bin:$PATH"' >> /etc/profile
+
+RUN yarn global add eslint eslint-config-standard \
+  eslint-plugin-import \
+  eslint-plugin-node \
+  eslint-plugin-standard \
+  eslint-config-standart \
+  eslint-plugin-promise \
+  eslint-plugin-vue

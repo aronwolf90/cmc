@@ -3,17 +3,9 @@
 module Administration
   module Issues
     class CreateOperation < AdministrationOperation
-      class Present < Trailblazer::Operation
-        step Model(::Issue, :new)
-        step :assigen_board_list
-        step Contract::Build(constant: IssueForm)
-
-        def assigen_board_list(options, params:, **args)
-          options[:model].board_list = ::BoardList.find(params[:board_list_id])
-        end
-      end
-
-      include Concerns::StandartTrailblazerSteps
+      @form = IssueForm
+      @default_value_step = SetDefaultValueStep
+      include StandardCreateOperationConcern
     end
   end
 end

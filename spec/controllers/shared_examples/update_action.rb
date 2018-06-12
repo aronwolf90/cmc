@@ -14,7 +14,7 @@ RSpec.shared_examples "standart update action" do |namespace, redirect|
       subject
     end
 
-    subject { get :update, params: { id: model } }
+    subject { put :update, params: { id: model } }
 
     let(:operation) { namespace::UpdateOperation }
     let(:cell) { namespace::Cell::Form }

@@ -26,4 +26,9 @@ describe('Document', () => {
   it('the document icon is present', () => {
     expect($subject.html()).to.include('fa-file-text-o')
   })
+
+  it('edit link is presetnt', () => {
+    expect($subject.html()).to
+      .include('/administration/archive/documents/1/edit')
+  })
 })

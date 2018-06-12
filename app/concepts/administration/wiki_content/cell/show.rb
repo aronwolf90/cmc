@@ -6,13 +6,11 @@ module Administration
     private
 
       def add_category_btn
-        link_to "add category", %i[new administration wiki category],
-          class: "btn btn-success"
+        standard_btn "add category", %i[new administration wiki category]
       end
 
       def add_page_btn
-        link_to "add page", %i[new administration wiki page],
-          class: "btn btn-success"
+        standard_btn "add page", %i[new administration wiki page]
       end
     end
   end

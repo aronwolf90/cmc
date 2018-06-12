@@ -3,25 +3,23 @@
 require "rails_helper"
 require_relative "../shared_examples/standard_update_operation"
 
-RSpec.describe Administration::Projects::UpdateOperation do
-  subject { described_class.(params: params) }
+RSpec.describe Administration::ArchiveFolders::UpdateOperation do
+  let(:folder) { build_stubbed(:folder, id: 1)  }
 
-  let(:project) { build_stubbed(:project) }
-
-  before do
-    allow(Project).to receive(:find).and_return(project)
-  end
+  before { allow(Folder).to receive(:find).and_return(folder) }
 
   it_should_behave_like "standard update operation",
-    Administration::ProjectForm,
+    Administration::ArchiveFolderForm,
       {
         data: {
           name: "name"
-        }
+        },
+        folder_id: 1
       },
       {
         data: {
           name: nil
-        }
+        },
+        folder_id: 1
       }
 end

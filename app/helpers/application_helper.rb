@@ -19,4 +19,8 @@ module ApplicationHelper
   def l(object, options = {})
     super(object, options) if object
   end
+
+  def standard_btn(name, link)
+    link_to name, link, class: "btn btn-success"
+  end
 end

@@ -14,4 +14,9 @@ RSpec.describe Administration::Archive::DocumentsController, type: :controller d
   include_examples "standart create action",
     Administration::ArchiveDocuments,
     %i[administration archive content]
+  include_examples "standart edit action",
+    Administration::ArchiveDocuments
+  include_examples "standart update action",
+    Administration::ArchiveDocuments,
+    %i[administration archive content]
 end
