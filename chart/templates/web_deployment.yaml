@@ -31,3 +31,15 @@ spec:
               value: "true"
             - name: SENTRY_DSN
               value: https://2c9ff5941e854f7d86b5b485068054a5:b2ef518f3a9b4a6ab4c8d5d6fc893357@sentry.io/289461
+          {{ if .Values.remote }}
+          volumeMounts:
+            - name: cmc-files-volume
+              mountPath: /app/uploads
+          {{ end }}
+
+      {{ if .Values.remote }}
+      volumes:
+        - name: cmc-files-volume
+          hostPath:
+            path: "/files/cmc"
+      {{ end }}
