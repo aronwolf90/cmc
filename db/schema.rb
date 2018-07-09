@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180608142000) do
+ActiveRecord::Schema.define(version: 20180708115054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,17 @@ ActiveRecord::Schema.define(version: 20180608142000) do
       records.user_id
      FROM records
     GROUP BY ((records.start_time)::date), records.user_id;
+  SQL
+
+  create_view "user_issues",  sql_definition: <<-SQL
+      SELECT users.id AS user_id,
+      issues.id AS issue_id,
+      sum((records.end_time - records.start_time)) AS spent_time,
+      min(records.start_time) AS start_time
+     FROM ((users
+       JOIN records ON ((records.user_id = users.id)))
+       JOIN issues ON ((issues.id = records.issue_id)))
+    GROUP BY users.id, issues.id;
   SQL
 
 end

@@ -1,3 +1,5 @@
+FROM node:10.6.0-alpine
+
 FROM ruby:2.5.1-alpine3.7
 
 WORKDIR  /app
@@ -5,9 +7,15 @@ WORKDIR  /app
 ENV PATH /root/.yarn/bin:$PATH
 ENV BUNDLE_BIN /app/bin
 ENV RAILS_ENV production
+ENV YARN_VERSION 1.7.0
 
-COPY alphine_shared_install.sh ./
+RUN apk add rsync
+RUN mkdir /tmp/local
+COPY --from=0 /usr/local /tmp/local
+RUN rsync -a /tmp/local/ /usr/local
+
 COPY alphine_minimum_shared_install.sh ./
+COPY alphine_shared_install.sh ./
 RUN /app/alphine_shared_install.sh
 
 COPY yarn.lock ./
@@ -29,8 +37,8 @@ ENV BUNDLE_BIN /app/bin
 ENV RAILS_ENV production
 
 COPY . /app
-COPY --from=0 /app/public/ /app/public/
-COPY --from=0 /usr/local/bundle /usr/local/bundle
+COPY --from=1 /app/public/ /app/public/
+COPY --from=1 /usr/local/ /usr/local/
 
 RUN /app/alphine_minimum_shared_install.sh
 

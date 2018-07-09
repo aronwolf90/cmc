@@ -1,4 +1,4 @@
-FROM jare/alpine-vim:latest as vim
+FROM node:10.6.0-alpine
 
 FROM ruby:2.5.1-alpine3.7
 
@@ -7,6 +7,12 @@ WORKDIR  /app
 ENV PATH /app/bin:/root/.yarn/bin:$PATH
 ENV BUNDLE_BIN /app/bin
 ENV HISTFILE=/app/tmp/bash_history
+ENV YARN_VERSION 1.7.0
+
+RUN apk add rsync
+RUN mkdir /tmp/local
+COPY --from=0 /usr/local /tmp/local
+RUN rsync -a /tmp/local/ /usr/local
 
 COPY alphine_minimum_shared_install.sh ./
 COPY alphine_shared_install.sh ./

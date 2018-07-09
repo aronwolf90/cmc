@@ -11,7 +11,7 @@ Scenario: Put an valid issue using json in PUT body
     {
       "data": {
         "id": 1,
-        "type": "records",
+        "type": "issues",
         "attributes": { "title": "title" }
       }
     }

@@ -11,7 +11,24 @@ apk add postgresql-dev
 apk add bash
 apk add curl
 apk add openssh-client
-apk add yarn
+apk add tar
+apk add gzip
+apk add binutils-gold
+apk add gnupg
+apk add libgcc
+apk add linux-headers
+apk add python
+apk add xz
+apk add rsync
+
+addgroup -g 1000 node \
+    && adduser -u 1000 -G node -s /bin/sh -D node
+
+curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz"
+mkdir -p /opt
+tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/
+ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/bin/yarn
+rm yarn-v$YARN_VERSION.tar.gz
 
 wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.11.tar.gz
 tar -xvzf libiconv-1.11.tar.gz

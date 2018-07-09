@@ -15,7 +15,7 @@ RSpec.describe Administration::Records::ThisMonthSpentTimeStep do
 
   before do
     allow(RecordsIntervalQuery).to receive(:call).and_return([record1, record2])
-    allow(SpentTimeCalculator).to receive(:call).and_return(7200.seconds)
+    allow(SpendedTimeCalculator).to receive(:call).and_return(7200.seconds)
     subject
   end
 

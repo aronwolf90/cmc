@@ -6,7 +6,7 @@ module Api
       include StandartActions
 
       def index
-        render json: Issue.all
+        render json: Issue.where(filter)
       end
 
       def show

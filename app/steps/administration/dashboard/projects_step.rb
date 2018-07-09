@@ -23,11 +23,11 @@ module Administration::Dashboard
     end
 
     def self.general_project_spent_time(current_user)
-      SpentTimeCalculator.call(RecordsWithoutProjectQuery.call(current_user.records))
+      SpendedTimeCalculator.call(RecordsWithoutProjectQuery.call(current_user.records))
     end
 
     def self.spent_time(current_user, project)
-      SpentTimeCalculator.call(records(current_user, project))
+      SpendedTimeCalculator.call(records(current_user, project))
     end
 
     def self.records(current_user, project)
