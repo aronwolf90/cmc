@@ -14,4 +14,10 @@ RSpec.describe Record, type: :model do
       expect(Record.ordered).to eq([new_record, old_record])
     end
   end
+
+  describe "#spended_time" do
+    subject { build_stubbed(:record) }
+
+    it { expect(subject.spended_time).to eq(1 * 60)  }
+  end
 end

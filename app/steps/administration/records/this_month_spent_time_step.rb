@@ -4,7 +4,7 @@ module Administration
   module Records
     class ThisMonthSpentTimeStep < ApplicationStep
       def self.call(options, current_user:, **)
-        seconds = SpentTimeCalculator.call(records(current_user))
+        seconds = SpendedTimeCalculator.call(records(current_user))
         options["this_month_spended_time"] = seconds
       end
 

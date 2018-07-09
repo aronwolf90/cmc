@@ -70,6 +70,7 @@ Rails.application.routes.draw do
       resources :wiki_categories, only: :index
       resources :wiki_pages, only: %i[show update]
       resources :folders, only: :index
+      resources :user_issues, only: :index
     end
   end
 

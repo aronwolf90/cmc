@@ -33,8 +33,8 @@ module Api
         head :ok
       end
 
-      def filter
-        (params[:filter]&.to_unsafe_h || {}).map do |key, value|
+      def filter(filter_hash = params[:filter]&.to_unsafe_h)
+        (filter_hash || {}).map do |key, value|
           [key, value != "null" ? value : nil]
         end.to_h
       end

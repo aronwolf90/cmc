@@ -21,7 +21,7 @@ module Administration
       end
 
       def spended_time(record_day)
-        seconds_to_time(SpentTimeCalculator.call(record_day.records))
+        seconds_to_time(SpendedTimeCalculator.call(record_day.records))
       end
 
       def month_spended_time

@@ -40,9 +40,28 @@ Given(/I have an old record/) do
   )
 end
 
+Given(/An record for user "([^\"]*)" and issue "([^\"]*)"/) do |user_id, issue_id|
+  Record.create!(
+    user_id: user_id,
+    issue_id: issue_id,
+    start_time: DateTime.parse("2018-06-11T16:59:00.049+02:00") - 1.minute,
+    end_time: DateTime.parse("2018-06-11T16:59:00.049+02:00")
+  )
+end
+
 Given(/^an issue exists$/) do
   board_list = BoardList.create!(name: "Backlog")
   Issue.create!(title: "issues title", description: "issues content", board_list: board_list)
+end
+
+Given(/^an issue with id of "([^\"]*)" exists$/) do |id|
+  board_list = BoardList.create!(name: "Backlog")
+  Issue.create!(
+    id: id,
+    title: "issues title",
+    description: "issues content",
+    board_list: board_list
+  )
 end
 
 Given(/^I have spent time one a project$/) do
@@ -73,7 +92,7 @@ Given(/^an acive issue exists$/) do
     title: "issues title", description: "issues content",
     board_list: board_list
   )
-  issue.create_record(start_time: Time.zone.now, user: find_or_create_current_user)
+  issue.records.create(start_time: Time.zone.now, user: find_or_create_current_user)
 end
 
 Given(/^a board list named "([^\"]*)"$/) do |name|

@@ -16,4 +16,12 @@ class Record < ApplicationRecord
   def description
     issue&.title
   end
+
+  def calculed_end_time
+    end_time || Time.zone.now
+  end
+
+  def spended_time
+    (calculed_end_time.to_i - start_time.to_i).seconds
+  end
 end

@@ -5,12 +5,19 @@ require "rails_helper"
 RSpec.describe Administration::Records::Cell::Index, type: :cell do
   controller Administration::RecordsController
 
-  subject { cell(described_class, model, this_month_spended_time: this_month_spended_time).().text }
+  subject do
+    cell(
+      described_class,
+      model,
+      this_month_spended_time: this_month_spended_time
+    ).().text
+  end
 
   let(:model) { Kaminari.paginate_array([record_day]).page(1) }
   let(:record_day) do
     build_stubbed(:record_day, day: Date.current).tap do |record_day|
-      allow(record_day).to receive(:records).and_return([record1, record2])
+      allow(record_day).to receive(:records)
+        .and_return([record1, record2])
     end
   end
   let(:this_month_spended_time) { 3600 * 3 }

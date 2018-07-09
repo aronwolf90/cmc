@@ -30,7 +30,7 @@ ENV RAILS_ENV production
 
 COPY . /app
 COPY --from=0 /app/public/ /app/public/
-COPY --from=0 /usr/local/bundle /usr/local/bundle
+COPY --from=0 /usr/local/ /usr/local/
 
 RUN /app/alphine_minimum_shared_install.sh
 

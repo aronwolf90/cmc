@@ -12,8 +12,8 @@ RSpec.describe Administration::Dashboard::ProjectsStep do
 
   before do
     allow(RecordsUserProjectQuery).to receive(:call).and_return([record])
-    allow(SpentTimeCalculator).to receive(:call).with([record]).and_return(3600.seconds)
-    allow(SpentTimeCalculator).to receive(:call).with([]).and_return(0.seconds)
+    allow(SpendedTimeCalculator).to receive(:call).with([record]).and_return(3600.seconds)
+    allow(SpendedTimeCalculator).to receive(:call).with([]).and_return(0.seconds)
     allow(RecordsWithoutProjectQuery).to receive(:call).and_return([])
     allow(Project).to receive(:find_each).and_yield(project)
     subject
