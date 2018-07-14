@@ -2,9 +2,8 @@
   #personal-dashboard-graph
     svg(
       width="100%", 
-      height="auto", 
       preserveAspectRatio="xMidYMid meet",
-      viewBox="0 0 900 650"
+      viewBox="0 0 900 350"
     )
 
 </template>
@@ -37,11 +36,19 @@ export default {
       mx: null,
       my: null,
       mouseX: null,
-      mouseY: null
+      mouseY: null,
+      div: null,
+      pointLine: null
     }
   },
   created () {
     this.$store.dispatch('initUserIssuesForCurrentUser')
+
+    this.div = d3
+      .select("body")
+      .append("div") 
+      .attr("class", "tooltip")       
+      .style("opacity", 0);
 
     this.grid3d = _3d()
       .shape('GRID', 40)
@@ -74,6 +81,12 @@ export default {
       .rotateY( this.startAngle)
       .rotateX(-this.startAngle)
       .scale(this.scale);
+
+    this.pointLine = _3d()
+      .shape('LINE_STRIP')
+      .rotateY( this.startAngle)
+      .rotateX(-this.startAngle)
+      .scale(this.scale);
   },
   computed: {
     userIssues () {
@@ -88,6 +101,7 @@ export default {
           name: 'issue'
         })
         this.addPoint(
+          Utils.attribute(issue, 'title'),
           new Date(Utils.attribute(userIssue, 'start-time')),
           Utils.attribute(userIssue, 'spent-time')/3600,
           Utils.attribute(issue, 'complexity')/1
@@ -111,13 +125,31 @@ export default {
     key (d) { 
       return d.id; 
     }, 
-    addPoint(date, hours, complexity) {
+    addPoint (title, date, hours, complexity) {
       if (date < new Date() - 40*7*24*3600*1000) return
+      if (!complexity) return
       this.points.push({
-        x: -18 + (new Date() - date)/(24*3600*1000*7),
-        y: 17 - hours,
-        z: -5 + complexity
+        x: -20 + (new Date() - date)/(24*3600*1000*7),
+        y: -hours,
+        z: -6 + complexity,
+        date: date,
+        hours: hours,
+        complexity: complexity,
+        title: title
       })
+
+      this.svg
+        .selectAll('path.point-line')
+        .data(this.pointLine(this.points.map(d => [
+          [d.x, 0, d.z], [d.x, d.y, d.z]
+        ])))
+        .enter()
+        .append('path')
+        .attr('class', '_3d point-line')
+        .attr('stroke', 'black')
+        .attr('stroke-width', .5)
+        .attr('d', this.pointLine.draw)
+        .style('transform', 'translate(50%, 50%)')
 
       this.svg
         .selectAll('circle')
@@ -128,14 +160,33 @@ export default {
         .attr('opacity', 0)
         .attr('cx', this.posPointX)
         .attr('cy', this.posPointY)
-        .transition().duration(0.1)
         .attr('r', 3)
         .attr('stroke', function(d){ return d3.rgb(12, 67, 199) })
         .attr('fill', function(d){ return d3.rgb(12, 67, 199) })
         .attr('opacity', 1)
+        .on('mouseover', d => {   
+          this.div
+            .transition()   
+            .duration(200)   
+            .style("opacity", .9) 
+          this.div.html(
+              '<center><b>' + d.title + '</b></center><br/>' +
+              "date: " + d.date.toLocaleDateString() + "<br/>" +  
+              "hours: " + d.hours.toFixed(2) + "<br/>" +
+              "complexity: " + d.complexity
+            )
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY - 28) + "px")     
+        })
+        .on('mouseout', d => {
+          this.div
+            .transition()
+            .duration(500)
+            .style("opacity", 0)
+        })
         .style('transform', 'translate(50%, 50%)')
     },
-    init(){
+    init () {
       let cnt = 0;
       this.xGridData = []
       this.scatter = []
@@ -171,7 +222,7 @@ export default {
 
       this.processData(data, 1000);
     },
-    createXZGrid(data) {
+    createXZGrid (data) {
       let grid3d = _3d()
         .shape('GRID', 40)
         .rotateY( this.startAngle)
@@ -251,11 +302,12 @@ export default {
       this.svg
         .append('g')
         .append('text')
+        .attr('dy', '12px')
         .style("font-size", "15px")
         .append("textPath")
         .attr("xlink:href", "#y-axe")
         .attr('startOffset', '35px')
-        .text("Consumed hours");
+        .text("Consumed hours")
 
       this.svg
         .selectAll('text.yText')
@@ -269,8 +321,9 @@ export default {
         })
         .attr('x', function(d){ return d.projected.x; })
         .attr('y', function(d){ return d.projected.y; })
-        .text(function(d){ return d[1] <= 0 ? d[1] : ''; })
+        .text(d => d[1] <= 0 ? - d[1] : '')
         .style('transform', 'translate(50%, 50%)')
+        .style('padding-left', '5px')
 
     },
     createZAxe (data) {
@@ -312,21 +365,36 @@ export default {
       this.svg
         .append('g')
         .append('text')
-        .style("font-size", "15px")
-        .append("textPath")
-        .attr("xlink:href", "#z-axe")
+        .attr('dx', '-5px')
+        .attr('dy', '-5px')
+        .style('font-size', '15px')
+        .append('textPath')
+        .attr('xlink:href', '#z-axe')
         .attr('startOffset', '35px')
-        .text("Complexity");
+        .text('Complexity');
     },
-    processData(data, tt) {
-      this.createXZGrid(data)
-      this.createXAxe(data)
-      this.createYAxe(data)
-      this.createZAxe(data)
+    processData() {
+      this.createXZGrid()
+      this.createXAxe()
+      this.createYAxe()
+      this.createZAxe()
     }
   }
 }
 </script>
 
 <style lang='sass'>
+#personal-dashboard-graph
+  svg
+    max-height: 400px
+  div.tooltip
+    position: absolute
+    width: 120px
+    height: 80px
+    padding: 2px
+    font: 12px sans-serif
+    background: lightsteelblue
+    border: 0px
+    border-radius: 8px    
+    pointer-events: none 
 </style>

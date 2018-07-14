@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
+source "https://rails-assets.org"
 
 gem "rails", "~> 5.1.3"
 
@@ -48,6 +49,7 @@ gem "sass-rails"
 gem "bootstrap", "~> 4"
 gem "jquery-rails"
 gem "turbolinks"
+gem "rails-assets-datetimepicker"
 
 # Template
 gem "font-awesome-rails"

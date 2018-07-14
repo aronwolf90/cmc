@@ -3,5 +3,11 @@
 #= require popper
 #= require bootstrap
 #= require turbolinks
+#= require datetimepicker
 
 #= require cable
+
+document.addEventListener 'turbolinks:load', =>
+  setTimeout ( =>
+    $('.datetimepicker').datetimepicker()
+  ), 100

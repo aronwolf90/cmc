@@ -1,2 +1,5 @@
 en:
   board_list_exists?: Board list does not exist
+  time:
+    formats:
+      long: "%d/%m/%y %I:%M:%S"
