@@ -52,7 +52,7 @@ describe('IssuesRecordSection', () => {
       const wrapper = shallow(IssuesRecordSection, { store, localVue })
       wrapper.find('.fa-play').trigger('click')
       expect(createRecordSpy).to.have.been.calledWith({
-        attributes: { 'start-time': 'Wed Feb 21 2018 12:30:10 GMT+0000 (UTC)' },
+        attributes: { 'start-time': 'Wed Feb 21 2018 12:30:10 GMT+0000 (Coordinated Universal Time)' },
         user,
         issue
       })

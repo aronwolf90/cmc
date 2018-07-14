@@ -37,9 +37,8 @@ rubocop:
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
   script:
     - apk update
-    - apk add cmake
-    - gem install rubocop-rails
-    - gem install rubocop-rspec
+    - ln -s /root/node_modules node_modules
+    - bundle install
     - rubocop
 
 detect_code_problems:
@@ -50,7 +49,7 @@ detect_code_problems:
       - tmp/rubycritic
     expire_in: 30 days
   script:
-    - bundle update
+    - bundle install
     - rubycritic app/ lib/ -s 98.00
     - rails_best_practices
     - FAIL_ON_ERROR=1 DATABASE_URL=postgres://root:password@postgres/root rake traceroute

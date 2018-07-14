@@ -3,7 +3,7 @@
     svg(
       width="100%", 
       preserveAspectRatio="xMidYMid meet",
-      viewBox="0 0 900 350"
+      viewBox="0 0 900 650"
     )
 
 </template>
@@ -95,19 +95,7 @@ export default {
   },
   watch: {
     userIssues (newUserIssues, _oldUserIssues) {
-      for (let userIssue of newUserIssues) {
-        let issue = this.$store.getters.associatedEntry({
-          entry: userIssue, 
-          name: 'issue'
-        })
-        this.addPoint(
-          Utils.attribute(issue, 'title'),
-          new Date(Utils.attribute(userIssue, 'start-time')),
-          Utils.attribute(userIssue, 'spent-time')/3600,
-          Utils.attribute(issue, 'complexity')/1
-        )
-        console.log(Utils.attribute(issue, 'complexity'))
-      }
+      this.updatePoints(newUserIssues)
     }
   },
   mounted () {
@@ -160,14 +148,14 @@ export default {
         .attr('opacity', 0)
         .attr('cx', this.posPointX)
         .attr('cy', this.posPointY)
-        .attr('r', 3)
+        .attr('r', 5)
         .attr('stroke', function(d){ return d3.rgb(12, 67, 199) })
         .attr('fill', function(d){ return d3.rgb(12, 67, 199) })
         .attr('opacity', 1)
         .on('mouseover', d => {   
           this.div
             .transition()   
-            .duration(200)   
+            .duration(10)   
             .style("opacity", .9) 
           this.div.html(
               '<center><b>' + d.title + '</b></center><br/>' +
@@ -175,8 +163,8 @@ export default {
               "hours: " + d.hours.toFixed(2) + "<br/>" +
               "complexity: " + d.complexity
             )
-            .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY - 28) + "px")     
+            .style("left", (d3.event.pageX + 4) + "px")
+            .style("top", (d3.event.pageY - 28 + 4) + "px")     
         })
         .on('mouseout', d => {
           this.div
@@ -283,7 +271,7 @@ export default {
     },
     createYAxe (data) {
       let yLine = []
-      for (let i = 0; i < 11; i++) {
+      for (let i = 0; i < 19; i++) {
         yLine.push([-20, -i, -6])
       }
 
@@ -306,7 +294,7 @@ export default {
         .style("font-size", "15px")
         .append("textPath")
         .attr("xlink:href", "#y-axe")
-        .attr('startOffset', '35px')
+        .attr('startOffset', '100px')
         .text("Consumed hours")
 
       this.svg
@@ -323,8 +311,6 @@ export default {
         .attr('y', function(d){ return d.projected.y; })
         .text(d => d[1] <= 0 ? - d[1] : '')
         .style('transform', 'translate(50%, 50%)')
-        .style('padding-left', '5px')
-
     },
     createZAxe (data) {
       let zLine = []
@@ -378,15 +364,107 @@ export default {
       this.createXAxe()
       this.createYAxe()
       this.createZAxe()
-    }
+      this.updatePoints(this.userIssues)
+    },
+    posPointX (d) {
+      return d.projected.x;
+    },
+    posPointY (d) {
+      return d.projected.y;
+    },
+    key (d) { 
+      return d.id; 
+    }, 
+    addPoint (title, date, hours, complexity) {
+      if (date < new Date() - 40*7*24*3600*1000) return
+      if (!complexity) return
+      this.points.push({
+        x: -20 + (new Date() - date)/(24*3600*1000*7),
+        y: hours > 17 ? -17 : -hours,
+        z: -6 + complexity,
+        date: date,
+        hours: hours,
+        complexity: complexity,
+        title: title
+      })
+
+      this.svg
+        .selectAll('path.point-line')
+        .data(this.pointLine(this.points.map(d => [
+          [d.x, 0, d.z], [d.x, d.y, d.z]
+        ])))
+        .enter()
+        .append('path')
+        .attr('class', '_3d point-line')
+        .attr('stroke', 'black')
+        .attr('stroke-width', .5)
+        .attr('d', this.pointLine.draw)
+        .style('transform', 'translate(50%, 50%)')
+
+      this.svg
+        .selectAll('circle')
+        .data(this.point3d(this.points), this.key)
+        .enter()
+        .append('circle')
+        .attr('class', '_3d')
+        .attr('opacity', 0)
+        .attr('cx', this.posPointX)
+        .attr('cy', this.posPointY)
+        .attr('r', 5)
+        .attr('stroke', function(d){ return d3.rgb(12, 67, 199) })
+        .attr('fill', function(d){ return d3.rgb(12, 67, 199) })
+        .attr('opacity', 1)
+        .on('mouseover', d => {   
+          this.div
+            .transition()   
+            .duration(10)   
+            .style("opacity", .9) 
+          this.div.html(
+              '<center><b>' + d.title + '</b></center><br/>' +
+              "date: " + d.date.toLocaleDateString() + "<br/>" +  
+              "hours: " + d.hours.toFixed(2) + "<br/>" +
+              "complexity: " + d.complexity
+            )
+            .style("left", (d3.event.pageX + 4) + "px")
+            .style("top", (d3.event.pageY - 28 + 4) + "px")     
+        })
+        .on('mouseout', d => {
+          this.div
+            .transition()
+            .duration(500)
+            .style("opacity", 0)
+        })
+        .style('transform', 'translate(50%, 50%)')
+    },
+    updatePoints (userIssues) {
+      for (let userIssue of userIssues) {
+        let issue = this.$store.getters.associatedEntry({
+          entry: userIssue, 
+          name: 'issue'
+        })
+        this.addPoint(
+          Utils.attribute(issue, 'title'),
+          new Date(Utils.attribute(userIssue, 'start-time')),
+          Utils.attribute(userIssue, 'spent-time')/3600,
+          Utils.attribute(issue, 'complexity')/1
+        )
+      }
+    },
+  },
+  mounted () {
+    this.svg = d3.select('svg').append('g'); 
+    this.init()
   }
 }
 </script>
 
-<style lang='sass'>
+<style lang='sass' scoped>
 #personal-dashboard-graph
   svg
-    max-height: 400px
+    max-height: 500px
+</style>
+
+<style lang='sass'>
   div.tooltip
     position: absolute
     width: 120px
@@ -397,4 +475,5 @@ export default {
     border: 0px
     border-radius: 8px    
     pointer-events: none 
+    z-index: 1000000
 </style>

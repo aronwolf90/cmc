@@ -138,6 +138,8 @@ end
 
 When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
   fill_in name, with: text
+  sleep 0.1
+  find("body").click
 end
 
 When(/^I replace the text "([^\"]*)" from the markdown editor "([^\"]*)"$/) do |text, element|
@@ -150,6 +152,7 @@ When(/^I enter "([^\"]*)" into "([^\"]*)"$/) do |text, element|
 end
 
 When(/^I click on submit$/) do
+  sleep 0.1
   find('input[name="commit"], button[type="submit"]').click
 end
 
@@ -173,6 +176,7 @@ When(/^I reload the page$/) do
 end
 
 Then(/^the page contain the text "([^\"]*)"$/) do |text|
+  sleep 0.1
   expect(page).to have_content text
 end
 

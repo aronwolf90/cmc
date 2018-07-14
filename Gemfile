@@ -69,7 +69,7 @@ end
 group :development do
   gem "guard-rspec", require: false
   gem "listen", ">= 3.0.5", "< 3.2"
-  gem "rubocop-rails", require: false
+  gem "rubocop-rails_config", require: false
   gem "rubocop-rspec", require: false
   gem "web-console", ">= 3.3.0"
 end
