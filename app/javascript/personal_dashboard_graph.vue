@@ -5,7 +5,6 @@
       preserveAspectRatio="xMidYMid meet",
       viewBox="0 0 900 650"
     )
-
 </template>
 
 <script>
@@ -32,13 +31,15 @@ export default {
       svg: null,
       startAngle: Math.PI/9,
       points: [],
+      arrows: [],
       yText: null,
       mx: null,
       my: null,
       mouseX: null,
       mouseY: null,
       div: null,
-      pointLine: null
+      pointLine: null,
+      arrowLine: null
     }
   },
   created () {
@@ -57,12 +58,21 @@ export default {
       .scale(this.scale);
 
     this.point3d = _3d()
-      .x(function(d) { return d.x })
-      .y(function(d) { return d.y })
-      .z(function(d) { return d.z })
+      .x(d => d.x)
+      .y(d => d.y)
+      .z(d => d.z)
       .rotateY( this.startAngle)
       .rotateX(-this.startAngle)
       .scale(this.scale);
+
+    this.arrow3d = _3d()
+      .shape('TRIANGLE')
+      .rotateY( this.startAngle)
+      .rotateX(-this.startAngle)
+      .x(d => d.x)
+      .y(d => d.y)
+      .z(d => d.z)
+      .scale(this.scale)
 
     this.xScale3d = _3d()
       .shape('LINE_STRIP')
@@ -87,6 +97,12 @@ export default {
       .rotateY( this.startAngle)
       .rotateX(-this.startAngle)
       .scale(this.scale);
+
+    this.arrowLine = _3d()
+      .shape('LINE_STRIP')
+      .rotateY( this.startAngle)
+      .rotateX(-this.startAngle)
+      .scale(this.scale); 
   },
   computed: {
     userIssues () {
@@ -113,67 +129,6 @@ export default {
     key (d) { 
       return d.id; 
     }, 
-    addPoint (title, date, hours, complexity) {
-      if (date < new Date() - 40*7*24*3600*1000) return
-      if (!complexity) return
-      this.points.push({
-        x: -20 + (new Date() - date)/(24*3600*1000*7),
-        y: -hours,
-        z: -6 + complexity,
-        date: date,
-        hours: hours,
-        complexity: complexity,
-        title: title
-      })
-
-      this.svg
-        .selectAll('path.point-line')
-        .data(this.pointLine(this.points.map(d => [
-          [d.x, 0, d.z], [d.x, d.y, d.z]
-        ])))
-        .enter()
-        .append('path')
-        .attr('class', '_3d point-line')
-        .attr('stroke', 'black')
-        .attr('stroke-width', .5)
-        .attr('d', this.pointLine.draw)
-        .style('transform', 'translate(50%, 50%)')
-
-      this.svg
-        .selectAll('circle')
-        .data(this.point3d(this.points), this.key)
-        .enter()
-        .append('circle')
-        .attr('class', '_3d')
-        .attr('opacity', 0)
-        .attr('cx', this.posPointX)
-        .attr('cy', this.posPointY)
-        .attr('r', 5)
-        .attr('stroke', function(d){ return d3.rgb(12, 67, 199) })
-        .attr('fill', function(d){ return d3.rgb(12, 67, 199) })
-        .attr('opacity', 1)
-        .on('mouseover', d => {   
-          this.div
-            .transition()   
-            .duration(10)   
-            .style("opacity", .9) 
-          this.div.html(
-              '<center><b>' + d.title + '</b></center><br/>' +
-              "date: " + d.date.toLocaleDateString() + "<br/>" +  
-              "hours: " + d.hours.toFixed(2) + "<br/>" +
-              "complexity: " + d.complexity
-            )
-            .style("left", (d3.event.pageX + 4) + "px")
-            .style("top", (d3.event.pageY - 28 + 4) + "px")     
-        })
-        .on('mouseout', d => {
-          this.div
-            .transition()
-            .duration(500)
-            .style("opacity", 0)
-        })
-        .style('transform', 'translate(50%, 50%)')
-    },
     init () {
       let cnt = 0;
       this.xGridData = []
@@ -378,15 +333,32 @@ export default {
     addPoint (title, date, hours, complexity) {
       if (date < new Date() - 40*7*24*3600*1000) return
       if (!complexity) return
-      this.points.push({
-        x: -20 + (new Date() - date)/(24*3600*1000*7),
-        y: hours > 17 ? -17 : -hours,
-        z: -6 + complexity,
-        date: date,
-        hours: hours,
-        complexity: complexity,
-        title: title
-      })
+
+      let x = -20 + (new Date() - date)/(24*3600*1000*7)
+      let z = -6 + complexity
+
+      if (hours < 17) {
+        this.points.push({
+          x: x,
+          y: -hours,
+          z: z,
+          date: date,
+           hours: hours,
+          complexity: complexity,
+          title: title
+        })
+      }
+      else {
+        this.arrows.push({
+          x: x,
+          y: -16,
+          z: z,
+          date: date,
+          hours: hours,
+          complexity: complexity,
+          title: title
+        })
+      }
 
       this.svg
         .selectAll('path.point-line')
@@ -399,6 +371,19 @@ export default {
         .attr('stroke', 'black')
         .attr('stroke-width', .5)
         .attr('d', this.pointLine.draw)
+        .style('transform', 'translate(50%, 50%)')
+
+      this.svg
+        .selectAll('path.arrow-line')
+        .data(this.arrowLine(this.arrows.map(d => [
+          [d.x, d.y, d.z], [d.x, 0, d.z]
+        ])))
+        .enter()
+        .append('path')
+        .attr('class', '_3d arrow-line')
+        .attr('stroke', 'black')
+        .attr('stroke-width', .5)
+        .attr('d', this.arrowLine.draw)
         .style('transform', 'translate(50%, 50%)')
 
       this.svg
@@ -424,6 +409,51 @@ export default {
               "date: " + d.date.toLocaleDateString() + "<br/>" +  
               "hours: " + d.hours.toFixed(2) + "<br/>" +
               "complexity: " + d.complexity
+            )
+            .style("left", (d3.event.pageX + 4) + "px")
+            .style("top", (d3.event.pageY - 28 + 4) + "px")     
+        })
+        .on('mouseout', d => {
+          this.div
+            .transition()
+            .duration(500)
+            .style("opacity", 0)
+        })
+        .style('transform', 'translate(50%, 50%)')
+
+      this.svg
+        .selectAll('.arrow')
+        .data(this.arrow3d(
+          this.arrows.map(d => {
+            return [
+              {
+                x: d.x-0.5, y: d.y, z: d.z, 
+                date: d.date, 
+                complexity: d.complexity,
+                title: d.title,
+                hours: d.hours
+              }, 
+              {x: d.x,     y: d.y-0.5, z: d.z}, 
+              {x: d.x+0.5, y: d.y,     z: d.z}
+            ]
+          })
+        ))
+        .enter()
+        .append('path')
+        .attr('class', '_3d arrow')
+        .attr('stroke', 'black')
+        .attr('fill', d => d3.rgb(12, 67, 199))
+        .attr('d', this.arrow3d.draw)
+        .on('mouseover', d => {   
+          this.div
+            .transition()   
+            .duration(10)   
+            .style("opacity", .9) 
+          this.div.html(
+              '<center><b>' + d[0].title + '</b></center><br/>' +
+              "date: " + d[0].date.toLocaleDateString() + "<br/>" +  
+              "hours: " + d[0].hours.toFixed(2) + "<br/>" +
+              "complexity: " + d[0].complexity
             )
             .style("left", (d3.event.pageX + 4) + "px")
             .style("top", (d3.event.pageY - 28 + 4) + "px")     

@@ -28,7 +28,7 @@ Record.seed do |s|
   s.id          = 4
   s.user_id     = 1
   s.issue_id    = 8
-  s.start_time  = 12.weeks.ago - 4.hours
+  s.start_time  = 12.weeks.ago - 20.hours
   s.end_time    = 12.weeks.ago
 end
 
