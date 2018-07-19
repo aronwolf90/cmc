@@ -21,60 +21,37 @@ services:
       - bundle:/usr/local/bundle
       - node_modules:/app/node_modules
 
-  web:
+  app:
     image: cmc
     build:
       dockerfile: DockerfileDevelop
       context: .
+      args:
+        - UID=${uid}
+        - GID=${gid}
     environment:
-      - DATABASE_URL=postgres://root:password@db/root
+      - DB_PASSWORD=password
+      - DB_HOST=db
       - BUNDLE_BIN=false
       - WEBPACKER_DEV_SERVER_HOST=webpack
+      - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4444
+      - TEST_APP_HOST=app
+      - TEST_PORT=3001
     command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
-    tty: true
-    stdin_open: true
     ports:
       - "3000:3000"
+      - "4444:4444"
+      - "5900:5900"
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
       - node_modules:/app/node_modules
+      - ~/.gitconfig:/root/.gitconfig
     depends_on:
       - db
       - webpack
-
-  db_test:
-    image: labianchin/docker-postgres-for-testing
-    logging:
-      driver: none
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=root
-
-  test:
-    image: cmc
-    build:
-      dockerfile: DockerfileDevelop
-      context: .
-    environment:
-      - DATABASE_URL=postgres://root:password@db%5Ftest/root
-      - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
-      - RAILS_ENV=test
-      - SELENIUM_HOST=selenium
-      - SELENIUM_PORT=4444
-      - TEST_APP_HOST=test
-      - TEST_PORT=3001
-      - BUNDLE_BIN=false
-    volumes:
-      - .:/app
-      - bundle:/usr/local/bundle
-      - node_modules:/app/node_modules
-      - ~/.ssh:/root/.ssh
-      - ~/.gitconfig:/root/.gitconfig
-    depends_on:
-      - db_test
-      - selenium
 
   selenium:
     image: selenium/standalone-chrome-debug:latest

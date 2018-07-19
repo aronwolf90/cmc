@@ -1,0 +1,8 @@
+#/bin/bash
+
+if ! docker ps | grep cmc_app_run_1 1>/dev/null; then
+  uid=$(id -u) gid=$(id -u)
+  docker-compose run --rm -p 3000:3000 -d app sleep
+fi
+
+docker exec -i cmc_app_run_1 $@

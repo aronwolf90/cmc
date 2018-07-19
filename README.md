@@ -13,21 +13,21 @@ CMC is a feature-rich time tracker. Its features include
 I wrote this because I was unsatisfied with existing solutions.
 
 
-# Setup up rails server
-Requirements:
- - docker (e.g. sudo apt-get install docker.io)
- - docker-compose (e.g. sudo apt-get install docker-compose)
- - bash (present in all UNIX operating systems, like ubuntu or mac)
+# Setup for development
+On linux and mac:
+- Install make (sudo apt-get install make or brew install make)
+- make install_develop
+- xmake server (or xmake rails s)
 
-the first time you have to execute the following command:
-  - scripts/build.sh
+On windows:
+- Install docker and docker compose
+- Enable virtualizaton
+- docker-compose up
 
-To run project you have to follow this steps:
-  - Execute: scripts/docker-compose up
-  - In the browser go to: http://localhost:3000/administration
-
-When you make changes on Gemfile, Gemfile.lock, yarn.lock or package.json, execute the following command:
-  - scipts/build.sh
+note: you can execute every command prefixing t with xmake. E.g
+- xmake ls
+- xmake rspec
+- ...
 
 # Setup up linters (e.g for atom)
 rubocop:

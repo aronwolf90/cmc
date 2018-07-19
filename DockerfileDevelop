@@ -2,14 +2,22 @@ FROM node:10.6.0-alpine
 
 FROM ruby:2.5.1-alpine3.7
 
+ARG UID=0
+ARG GID=0
+
+RUN echo "test"
+RUN echo $UID
+
 WORKDIR  /app
 
 ENV PATH /app/bin:/root/.yarn/bin:$PATH
 ENV BUNDLE_BIN /app/bin
 ENV HISTFILE=/app/tmp/bash_history
 ENV YARN_VERSION 1.7.0
+ENV HOME /root
 
-RUN apk --no-cache add rsync
+RUN apk update
+RUN apk add rsync less
 RUN mkdir /tmp/local
 COPY --from=0 /usr/local /tmp/local
 RUN rsync -a /tmp/local/ /usr/local
@@ -35,3 +43,6 @@ RUN yarn global add eslint eslint-config-standard \
   eslint-config-standart \
   eslint-plugin-promise \
   eslint-plugin-vue
+
+RUN chown -R $UID /root
+USER $UID:$GID
