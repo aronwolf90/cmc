@@ -4,7 +4,7 @@ gid=id -g
 
 docker_compose=uid=$$($(uid)) gid=$$($(gid)) docker-compose
 docker_exec_app=docker exec -it $$($(container))
-docker_start=if ! docker ps | grep cmc_app_run_1 1>/dev/null; then uid=$($(uid)) gid=$($(gid)) docker-compose run --rm --service-ports -d app sleep 7200; fi
+docker_start=if ! docker ps | grep $$($(container)) 1>/dev/null; then uid=$($(uid)) gid=$($(gid)) docker-compose run --rm --service-ports -d app sleep 7200; fi
 
 install_develop:
 	@if ! docker -v > /dev/null && docker-compose -v > /dev/null; then \

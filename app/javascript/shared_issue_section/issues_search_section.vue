@@ -46,7 +46,7 @@ export default {
     .issue
       margin-left: 0
   .search-section
-    width: 100% !important
+    width: calc(100% - 2px)
     border-right: 0
     border-left: 0
     border-bottom: 0

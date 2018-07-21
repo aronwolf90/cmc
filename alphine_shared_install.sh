@@ -19,6 +19,7 @@ apk add libgcc
 apk add linux-headers
 apk add python
 apk add xz
+apk add openssh-client
 apk add rsync
 
 addgroup -g 1000 node \

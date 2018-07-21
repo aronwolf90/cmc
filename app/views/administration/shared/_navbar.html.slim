@@ -3,8 +3,6 @@ nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
     = image_tag 'logo.png', id: 'logo', height: 21, width: 40
 
   ul.navbar-nav.mr-auto.ml-4
-    li.nav-item
-      = link_to 'Time Tracking', administration_root_path, class: 'nav-link small'
     li.nav-item class=('active' if request.url.include?('projects'))
       = link_to 'Projects', administration_projects_path, class: 'nav-link small'
     li.nav-item class=('active' if request.url.include?('wiki'))

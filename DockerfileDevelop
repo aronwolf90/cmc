@@ -45,4 +45,5 @@ RUN yarn global add eslint eslint-config-standard \
   eslint-plugin-vue
 
 RUN chown -R $UID /root
+RUN chown -R $GID /root
 USER $UID:$GID

@@ -1,7 +1,7 @@
 <template lang='pug'>
   .card.column(v-if='boardList')
     .card-header
-      | {{ name }}
+      .text.pull-left {{ name }}
       a.btn.btn-sm.btn-outline-secondary.pull-right(v-on:click="visitAdd($event)", :href="addLink")
         .fa.fa-plus
       a.btn.btn-sm.btn-link.pull-right.text-muted(v-on:click="destroy()")
