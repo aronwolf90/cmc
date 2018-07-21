@@ -120,6 +120,22 @@ build:
     - docker push $CONTAINER_RELEASE_IMAGE_LATEST
   only:
     - master
+  except:
+    - schedules
+
+build_test:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - apk update
+    - apk add make
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - make build_and_push_test_image
+  only:
+    - master
+    - schedules
 
 deploy:
   stage: deploy
@@ -156,6 +172,8 @@ deploy:
       fi
   only:
     - master
+  except:
+    - schedules
 
 pages:
   stage: deploy
@@ -172,3 +190,7 @@ pages:
     expire_in: 30 days
   only:
     - master
+  except:
+    - schedules
+  except:
+    - schedules

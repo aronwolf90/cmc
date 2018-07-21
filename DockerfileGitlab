@@ -24,6 +24,11 @@ COPY yarn.lock package.json ./
 RUN yarn install
 
 COPY . /app
+RUN [ -e config/database.yml ] && rm config/database.yml || true
+
+RUN RAILS_ENV=production SECRET_KEY_BASE='9479a648d2fb' \
+  DATABASE_URL=postgres://root:password@db%5Ftest/root \
+  rake assets:precompile
 
 # speed up tests on gitlab-ci
 RUN mkdir -p /root/node_modules
