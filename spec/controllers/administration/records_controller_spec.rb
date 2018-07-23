@@ -13,5 +13,5 @@ RSpec.describe Administration::RecordsController, type: :controller do
   include_examples "standart edit action", Administration::Records
   include_examples "standart create action", Administration::Records, %i[administration records]
   include_examples "standart update action", Administration::Records, %i[administration records]
-  include_examples "standart destroy action", Administration::Records
+  include_examples "standart destroy action", Administration::Records, %i[administration records]
 end

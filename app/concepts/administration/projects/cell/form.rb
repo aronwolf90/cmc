@@ -2,12 +2,13 @@
 
 module Administration
   module Projects::Cell
-    class Form < ApplicationCell
+    class Form < BaseFormCell
     private
 
-      def cancel_btn
-        link_to "Cancel", administration_projects_path,
-          class: "btn btn-secondary pull-right"
+      def actions(form)
+        path = [:administration, model.model]
+
+        super(form: form, cancell_path: path, destroy_path: path)
       end
     end
   end

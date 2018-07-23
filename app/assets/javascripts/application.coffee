@@ -10,4 +10,5 @@
 document.addEventListener 'turbolinks:load', =>
   setTimeout ( =>
     $('.datetimepicker').datetimepicker()
+    $('[data-toggle="tooltip"]').tooltip()
   ), 100

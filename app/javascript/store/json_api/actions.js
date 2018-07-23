@@ -101,8 +101,12 @@ export default {
     return promise
   },
   destroy (context, { entry, endpoint, resource }) {
-    required({ entry, endpoint })
-    let url = calculeUrl({ endpoint, resource, url: entry.links.self })
+    required({ entry })
+    let url = calculeUrl({
+      endpoint: endpoint || this.getters.endpoint,
+      resource,
+      url: entry.links.self
+    })
 
     context.commit('remove', entry)
     return context.dispatch('request', { url, method: 'delete' })

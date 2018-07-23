@@ -48,7 +48,7 @@ export default {
     this.div = d3
       .select("body")
       .append("div") 
-      .attr("class", "tooltip")       
+      .attr("class", "personal-graph-tooltip")       
       .style("opacity", 0);
 
     this.grid3d = _3d()
@@ -495,7 +495,7 @@ export default {
 </style>
 
 <style lang='sass'>
-  div.tooltip
+  div.personal-graph-tooltip
     position: absolute
     width: 120px
     height: 80px

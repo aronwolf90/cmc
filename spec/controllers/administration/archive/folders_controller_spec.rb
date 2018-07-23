@@ -18,4 +18,7 @@ RSpec.describe Administration::Archive::FoldersController, type: :controller do
   include_examples "standart update action",
     Administration::ArchiveFolders,
     %i[administration archive content]
+  include_examples "standart destroy action",
+    Administration::ArchiveFolders,
+    %i[administration archive content]
 end

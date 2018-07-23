@@ -1,7 +1,9 @@
 <template lang='pug'>
   .category.category-item
     .title.fa.fa-tags 
-      | {{ title }}
+      | {{ title }}&nbsp;&nbsp
+    a(:href='editLink')
+      .fa.fa-edit
     .child-pages
       page(
         v-for='page in pages', 
@@ -46,8 +48,10 @@ export default {
       })
     },
     title () {
-      console.log(this.category)
       return Utils.attribute(this.category, 'title')
+    },
+    editLink () {
+      return `/administration/wiki/categories/${this.categoryId}/edit`
     }
   }
 }
@@ -57,4 +61,7 @@ export default {
 <style lang='sass' scoped>
   .title
     font-weight: bold
+  a
+   color: black
+   font-size: 12px;
 </style>

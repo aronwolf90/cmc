@@ -4,8 +4,9 @@
       .text.pull-left {{ name }}
       a.btn.btn-sm.btn-outline-secondary.pull-right(v-on:click="visitAdd($event)", :href="addLink")
         .fa.fa-plus
-      a.btn.btn-sm.btn-link.pull-right.text-muted(v-on:click="destroy()")
-        .fa.fa-trash
+      a.btn.btn-sm.btn-link.pull-right.text-muted(:href="editLink")
+        .fa.fa-edit
+
       .clearfix
     draggable.body(v-model="issues", :options="{group:'issues'}")
       issue(v-for='issue in issues', :key='issue.id', :issue-id="issue.id", :board-list-id="boardList.id")
@@ -33,6 +34,9 @@ export default {
     addLink () {
       return `/administration/board_lists/${this.boardList.id}/issues/new`
     },
+    editLink () {
+      return `/administration/board_lists/${this.boardList.id}/edit`
+    },
     issues: {
       get () {
         return this.$store.getters.associatedEntries({ entry: this.boardList, name: 'issues' })
@@ -46,7 +50,7 @@ export default {
   },
   methods: {
     destroy () {
-      return this.$store.dispatch('destroy', this.boardList)
+      return this.$store.dispatch('destroy', { entry: this.boardList })
     },
     visitAdd (event) {
       Turbolinks.visit(this.addLink) /* eslint-disable-line no-undef */

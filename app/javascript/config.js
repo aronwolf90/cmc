@@ -7,7 +7,8 @@ import {
   FormTextarea,
   FormGroup,
   Form,
-  FormSelect
+  FormSelect,
+  Tooltip
 } from 'bootstrap-vue/es/components'
 import TurbolinksAdapter from './vue_turbolinks'
 import VueResource from 'vue-resource'
@@ -28,3 +29,4 @@ Vue.use(Form)
 Vue.use(FormTextarea)
 Vue.use(FormGroup)
 Vue.use(FormSelect)
+Vue.use(Tooltip)

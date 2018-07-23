@@ -21,6 +21,7 @@ Vue.component('archive-content', ArchiveContent)
 Vue.component('personal_dashboard_graph', PersonalDashboardGraph)
 
 let store = new Vuex.Store(Store)
+store.commit('setEndpoint', '/api/v1/')
 
 if (document.querySelector('meta[name="csrf-token"]')) {
   Vue.http.headers.common['X-CSRF-Token'] =

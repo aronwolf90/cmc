@@ -12,4 +12,9 @@ RSpec.describe Administration::Wiki::CategoriesController, type: :controller do
   include_examples "standart new action", Administration::WikiCategories
   include_examples "standart create action",
     Administration::WikiCategories, %i[administration wiki content]
+  include_examples "standart edit action", Administration::WikiCategories
+  include_examples "standart update action", Administration::WikiCategories,
+    %i[administration wiki content]
+  include_examples "standart destroy action", Administration::WikiCategories,
+    %i[administration wiki content]
 end

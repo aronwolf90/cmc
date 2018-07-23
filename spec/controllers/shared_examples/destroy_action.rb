@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standart destroy action" do |namespace|
+RSpec.shared_examples "standart destroy action" do |namespace, redirect|
   describe "DELETE destroy" do
     let(:user) { build_stubbed(:user) }
 
@@ -16,7 +16,7 @@ RSpec.shared_examples "standart destroy action" do |namespace|
     let(:operation_result) { OpenStruct.new("model" => model) }
 
     it "redirect" do
-      expect(response).to redirect_to(%i[administration records])
+      expect(response).to redirect_to(redirect)
     end
   end
 end

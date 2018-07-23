@@ -3,8 +3,14 @@
 require "rails_helper"
 require_relative "../shared_examples/standart_actions"
 
-RSpec.describe Administration::Wiki::PagesController, type: :controller do
-  let(:model) { build_stubbed(:wiki_page) }
+RSpec.describe Administration::ProjectsController, type: :controller do
+  let(:model) { build_stubbed(:project) }
+  let(:params) { {} }
 
-  include_examples "standart show action", Administration::WikiPages
+  include_examples "standart index action", Administration::Projects
+  include_examples "standart new action", Administration::Projects
+  include_examples "standart edit action", Administration::Projects
+  include_examples "standart create action", Administration::Projects
+  include_examples "standart destroy action", Administration::Projects,
+    %i[administration projects]
 end

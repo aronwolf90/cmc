@@ -12,5 +12,6 @@ export default class {
 
     return this.state.meta[this.name].data
       .map(entryRef => Utils.get(this.state, entryRef))
+      .filter(entry => entry)
   }
 }

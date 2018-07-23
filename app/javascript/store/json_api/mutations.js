@@ -58,5 +58,8 @@ export default {
   },
   changeMetaCollection (state, { name, collection }) {
     state.meta[name].data = Utils.entryArrayToRef(collection)
+  },
+  setEndpoint (state, endpoint) {
+    state.endpoint = endpoint
   }
 }

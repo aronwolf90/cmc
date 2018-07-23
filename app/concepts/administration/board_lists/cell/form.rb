@@ -2,12 +2,29 @@
 
 module Administration
   module BoardLists::Cell
-    class Form < ApplicationCell
+    class Form < BaseFormCell
     private
+      def actions(form)
+        super(
+          form: form,
+          destroy_path: [:administration, model.model],
+          cancell_path: %i[administration board]
+        )
+      end
 
-      def cancel_btn
-        link_to "Cancel", administration_board_path,
-          class: "btn btn-secondary pull-right"
+      def destroy_btn(path)
+        if model.model.issues.any?
+          content_tag(
+            :span,
+            class: "btn-group",
+            "data-toggle": :tooltip,
+            title: "you have to remove first the issues from the list"
+          ) do
+            super(path, class: "disabled")
+          end
+        else
+          super(path)
+        end
       end
 
       def project_collection

@@ -2,18 +2,14 @@
 
 module Administration
   module Records::Cell
-    class Form < ApplicationCell
+    class Form < BaseFormCell
     private
-
-      def issues_collection
-        ::Issue.all.map do |issue|
-          [issue, issue.id]
-        end
-      end
-
-      def cancell_btn
-        link_to "Cancel", administration_records_path,
-          class: "btn btn-secondary pull-right"
+      def actions(form)
+        super(
+          form: form,
+          destroy_path: [:administration, model.model],
+          cancell_path: %i[administration records]
+        )
       end
     end
   end

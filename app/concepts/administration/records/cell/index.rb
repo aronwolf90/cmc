@@ -15,11 +15,6 @@ module Administration
           class: "btn btn-sm btn-secondary"
       end
 
-      def destroy_btn(record)
-        link_to fa_icon(:trash), [:administration, record],
-          class: "btn btn-sm btn-danger", method: :delete
-      end
-
       def spended_time(record_day)
         seconds_to_time(SpendedTimeCalculator.call(record_day.records))
       end

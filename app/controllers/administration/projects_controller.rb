@@ -25,5 +25,9 @@ module Administration
     def update
       super { %i[administration projects] }
     end
+
+    def destroy
+      super %i[administration projects]
+    end
   end
 end

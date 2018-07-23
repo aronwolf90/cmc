@@ -13,5 +13,17 @@ module Administration
     def create
       super { %i[administration board] }
     end
+
+    def edit
+      super
+    end
+
+    def update
+      super { %i[administration board] }
+    end
+
+    def destroy
+      super(%i[administration board])
+    end
   end
 end

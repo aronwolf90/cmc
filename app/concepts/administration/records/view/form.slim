@@ -1,11 +1,10 @@
 = simple_form_for [:administration, model], as: :data do |f|
   .row
     .col-lg-12
-      = f.input :issue_id, collection: issues_collection
+      = f.input :issue_id, collection: Issue.all
       = f.input :start_time, as: :date_time
       = f.input :end_time, as: :date_time
 
   .row
     .col-lg-12
-      = f.submit class: 'btn btn-success'
-      = cancell_btn
+      = actions(f)

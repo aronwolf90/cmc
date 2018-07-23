@@ -26,11 +26,3 @@ Scenario: Record edit
   And I enter "2020.01.01 01:41:43" into input named "data[end_time]"
   And I click on submit
   Then the page contain the text "2018"
-
-@javascript
-Scenario: Record destroy
-  Given I have an old record
-  Given I am signed in
-  When I click on link "Records"
-  And I click on ".fa-trash"
-  Then the element "#side-body" does not contain the text "issues title"

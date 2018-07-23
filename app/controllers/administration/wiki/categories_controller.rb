@@ -11,7 +11,19 @@ module Administration
       end
 
       def create
-        super { [:administration, :wiki, :content] }
+        super { %i[administration wiki content] }
+      end
+
+      def edit
+        super
+      end
+
+      def update
+        super { %i[administration wiki content] }
+      end
+
+      def destroy
+        super %i[administration wiki content]
       end
     end
   end

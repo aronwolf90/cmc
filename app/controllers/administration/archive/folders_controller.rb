@@ -21,6 +21,10 @@ module Administration
       def update
         super { %i[administration archive content] }
       end
+
+      def destroy
+        super %i[administration archive content]
+      end
     end
   end
 end

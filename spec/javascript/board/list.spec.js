@@ -59,14 +59,6 @@ describe('List', () => {
       $subject.find('.fa-plus').trigger('click')
       expect($Turbolinks.visit).to.have.been.called
     })
-
-    it('call destroy on trash btn', (done) => {
-      $actions.destroy = function destroy (context, boardList) {
-        expect($boardList).to.eq(boardList)
-        done()
-      }
-      $subject.find('.fa-trash').trigger('click')
-    })
   })
 
   describe('when the boardList is not present', () => {

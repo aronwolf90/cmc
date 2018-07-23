@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root to: redirect("/users/sign_in")
   devise_for :users
 
   namespace :administration do
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
     resource :dashboard, only: :show
     resources :records, except: :show
     resource :board, only: :show
-    resources :board_lists, only: %i[new create] do
+    resources :board_lists, only: %i[new create edit update destroy] do
       resources :issues, only: %i[show new create]
     end
 
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
 
     resources :users, only: %i[index new create]
 
-    resources :projects, except: %i[show destroy] do
+    resources :projects, except: :show do
       scope module: :projects do
         resource :dashboard, only: :show
       end
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
     namespace :wiki do
       root to: "contents#show"
 
-      resources :categories, only: %i[new create]
+      resources :categories, except: %i[index show]
       resource :content, only: :show
       resources :pages, only: %i[show new create]
     end
@@ -37,8 +38,8 @@ Rails.application.routes.draw do
       root to: "contents#show"
 
       resource :content, only: :show
-      resources :folders, only: %i[new create edit update]
-      resources :documents, only:  %i[show new create edit update]
+      resources :folders, except: %i[index show]
+      resources :documents, except: :index
     end
 
     get "*path" => redirect("/administration")
