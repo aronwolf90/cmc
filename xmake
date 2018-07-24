@@ -1,2 +1,2 @@
 #/bin/bash
-eval "$(make $1) ${@:2}"
+eval "$(make $1 | sed '$!d') ${@:2}"

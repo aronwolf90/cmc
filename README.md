@@ -29,39 +29,36 @@ note: you can execute every command prefixing t with xmake. E.g
 - xmake rspec
 - ...
 
-# Setup up linters (e.g for atom)
-rubocop:
-- install ruby (see version on Gemfile)
-- install cmake (eg. sudo apt-get install cmake)
-- gem install pronto
-- gem install pronto-rubocop
-- gem install rubocop-rails
-- gem install rubocop-rspec
+NOTICE: You can also use it without docker, but because we rarelly test
+it without it, there can be some configuration errors. If this is the case,
+pleas feal free to submit a MR or an issue.
 
+# Setup for production
+on Upuntu (should also work on debian):
+- make install_production
+
+On other:
+- Install kuberntics
+- Install helm (kubernetics packet manager)
+- Eexecute: helm install chart --name cmc-production \
+             --set image.tag=latest \
+             --set remote=true \
+             --force
+
+# Setup up linters (e.g for atom)
 eslint:
-- npm install -g \
-  eslint eslint-config-standard \
-  eslint-plugin-import \
-  eslint-plugin-node \
-  eslint-plugin-standard \
-  eslint-config-standart \
-  eslint-plugin-promise \
-  eslint-plugin-vue
+- Execute: xmake eslint app/javascipt spec
 
 gitlinter:
-- install pip (eg. sudo apt-get install pip)
+- Install pip (eg. sudo apt-get install pip)
 - pip install gitlint
 - git log -1 --pretty=%B | gitlint
 
 atom:
-- apm install linter-rubocop
-- apm install linter-eslint
-- select global npm option (eslint package)
-
-# CI
-When the automatic test become to slow, it can help that an administrator (e.g. Aron Wolf) execute:
-  - scripts/build_and_push_cmc_prebuild.sh
-
-# Notices
-When the build command (scripts/build.sh) become to slow, execute this:
-  - build_prebuild
+- eslinter
+  * apm install linter-eslint
+  * select global npm option
+  * set command: xmake eslint (to execute it inside docker)
+- rubocop:
+  * apm install linter-rubocop
+  * set command: xmake rubocop (to execute it inside docker)

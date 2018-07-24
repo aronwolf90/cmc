@@ -4,6 +4,7 @@ FROM ruby:2.5.1-alpine3.7
 
 ARG UID=0
 ARG GID=0
+ARG USER_NAME=root
 
 RUN echo "test"
 RUN echo $UID
@@ -14,10 +15,9 @@ ENV PATH /app/bin:/root/.yarn/bin:$PATH
 ENV BUNDLE_BIN /app/bin
 ENV HISTFILE=/app/tmp/bash_history
 ENV YARN_VERSION 1.7.0
-ENV HOME /root
 
 RUN apk update
-RUN apk add rsync less
+RUN apk add rsync less shadow
 RUN mkdir /tmp/local
 COPY --from=0 /usr/local /tmp/local
 RUN rsync -a /tmp/local/ /usr/local
@@ -26,14 +26,6 @@ COPY alphine_minimum_shared_install.sh ./
 COPY alphine_shared_install.sh ./
 RUN /app/alphine_shared_install.sh
 
-RUN apk add vim
- 
-COPY .vimrc /root/.vimrc
-RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-RUN vim +PluginInstall +qall
-
-RUN apk add tmux
-COPY .tmux.conf /root/.tmux.conf
 RUN echo 'export PATH="/app/bin:$PATH"' >> /etc/profile
 
 RUN yarn global add eslint eslint-config-standard \
@@ -44,6 +36,12 @@ RUN yarn global add eslint eslint-config-standard \
   eslint-plugin-promise \
   eslint-plugin-vue
 
-RUN chown -R $UID /root
-RUN chown -R $GID /root
+RUN apk add vim tmux
+
+RUN usermod -m -d /user node
 USER $UID:$GID
+
+RUN git clone https://github.com/VundleVim/Vundle.vim.git /user/.vim/bundle/Vundle.vim
+COPY .tmux.conf /user/.tmux.conf
+COPY .vimrc /user/.vimrc
+RUN vim +PluginInstall +qall
