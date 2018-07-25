@@ -16,34 +16,42 @@ I wrote this because I was unsatisfied with existing solutions.
 # Setup for development
 On linux and mac:
 - Install make (sudo apt-get install make or brew install make)
-- make install_develop
-- xmake server (or xmake rails s)
+- Execute: make install_develop
+- Execute: xmake server (or execute xmake rails s)
 
 On windows:
 - Install docker and docker compose
 - Enable virtualizaton
 - docker-compose up
 
-note: you can execute every command prefixing t with xmake. E.g
+NOTE: you can execute every command prefixing t with xmake. E.g
 - xmake ls
 - xmake rspec
 - ...
 
-NOTICE: You can also use it without docker, but because we rarelly test
+NOTE: You can also use it without docker, but because we rarelly test
 it without it, there can be some configuration errors. If this is the case,
 pleas feal free to submit a MR or an issue.
 
 # Setup for production
-on Upuntu (should also work on debian):
+Using make (ubuntu only):
 - make install_production
 
-On other:
+Or do the following (recomended):
 - Install kuberntics
 - Install helm (kubernetics packet manager)
-- Eexecute: helm install chart --name cmc-production \
-             --set image.tag=latest \
-             --set remote=true \
-             --force
+- Execute: helm install chart --name cmc-production 
+             --set image.tag=latest 
+             --set remote=true 
+
+NOTE: the `make install_production` install a kubernetics
+server and enable to deploy pods on the same host 
+(` kubectl taint nodes mymasternode dedicated-`). This allow
+to use a single server insted multiple.
+
+NOTE: You can also use the tradicional way to install it. There
+should no be problems. But we strong recomend to use the above method
+because is is hard tested on our servers.
 
 # Setup up linters (e.g for atom)
 eslint:
@@ -62,3 +70,6 @@ atom:
 - rubocop:
   * apm install linter-rubocop
   * set command: xmake rubocop (to execute it inside docker)
+
+vim:
+. Execute: xmake dev-tmux
