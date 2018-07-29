@@ -6,11 +6,11 @@ module Api
       include StandartActions
 
       def index
-        render json: Issue.where(filter)
+        super(Issue)
       end
 
       def show
-        render json: issue, include: :comments
+        super(issue)
       end
 
       def update

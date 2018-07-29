@@ -2,9 +2,8 @@
   .row
     .col-lg-12
       = f.input :title
-      = f.input :wiki_category_id, collection: categories_collection
+      = f.input :wiki_category_id, collection: WikiCategory.all
 
   .row
     .col-lg-12
-      = f.submit class: 'btn btn-success'
-      = cancell_btn
+      = actions(f)

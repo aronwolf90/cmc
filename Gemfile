@@ -92,6 +92,7 @@ group :test do
   gem "cucumber-api-steps", require: false
   gem "cucumber-rails", require: false
   gem "database_cleaner", require: false
+  gem "db-query-matchers"
   gem "selenium-webdriver", require: false
   gem "simplecov", require: false
   gem "rspec-cells"

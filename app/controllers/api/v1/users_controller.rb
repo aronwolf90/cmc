@@ -5,7 +5,7 @@ module Api::V1
     include StandartActions
 
     def index
-      render json: User.all, include: :current_record
+      super(User)
     end
 
     def update

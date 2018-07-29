@@ -14,7 +14,7 @@ RSpec.shared_examples "standart show action" do |namespace|
       subject
     end
 
-    subject { get :show, params: { id: model.id } }
+    subject { get :show, params: params.merge(id: model.id) }
 
     let(:operation_result) { OpenStruct.new("model" => model) }
     let(:operation) { namespace::ShowOperation }

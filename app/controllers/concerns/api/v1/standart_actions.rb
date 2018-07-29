@@ -7,6 +7,17 @@ module Api
 
     protected
 
+      def index(model_class)
+        render_json_api json: JsonApiQuery.(
+          model_class.all,
+          params.to_unsafe_h.deep_symbolize_keys
+        )
+      end
+
+      def show(model)
+        render_json_api json: model
+      end
+
       def create(operation:)
         result = run operation
 
@@ -37,6 +48,10 @@ module Api
         (filter_hash || {}).map do |key, value|
           [key, value != "null" ? value : nil]
         end.to_h
+      end
+
+      def render_json_api(json:)
+        render json: json, include: params[:include]
       end
     end
   end

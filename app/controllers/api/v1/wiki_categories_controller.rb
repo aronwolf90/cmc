@@ -2,8 +2,10 @@
 
 module Api::V1
   class WikiCategoriesController < ApiController
+    include StandartActions
+
     def index
-      render json: WikiCategory.all, include: :wiki_pages
+      super(WikiCategory)
     end
   end
 end

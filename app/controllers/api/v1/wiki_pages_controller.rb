@@ -6,7 +6,7 @@ module Api
       include StandartActions
 
       def show
-        render json: wiki_page
+        super(wiki_page)
       end
 
       def update

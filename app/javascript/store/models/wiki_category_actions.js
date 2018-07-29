@@ -2,6 +2,9 @@ const endpoint = '/api/v1'
 
 export default {
   initWikiCategories (context) {
-    return context.dispatch('initEntry', { endpoint, resource: 'wiki_categories' })
+    return context.dispatch('initEntry', {
+      endpoint,
+      resource: 'wiki_categories?include[]=wiki_pages'
+    })
   }
 }

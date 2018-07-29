@@ -3,7 +3,7 @@
 module Administration
   class BaseFormCell < ApplicationCell
   private
-    def actions(form:, destroy_path:, cancell_path:)
+    def actions(form:, destroy_path: nil, cancell_path:)
       capture do
         concat success_btn(form)
         concat(content_tag(:div, class: "btn-group pull-right") do

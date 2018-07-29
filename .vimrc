@@ -20,14 +20,13 @@ Plugin 'w0rp/ale'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-wombat-scheme'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-rails'
 
 call vundle#end()
 
 filetype plugin indent on
 
 set backspace=2
-
-set mouse=a
 let NERDTreeShowHidden=1
 let g:ctrlp_root_markers = ['Gemfile.lock']
 let g:ctrlp_custom_ignore = '\v[\/]\.(git)$'
@@ -36,4 +35,3 @@ set wildignore+=*/tmp/*,*/node_modules/*,*/.tmp/*,*/coverage/*,*/uploads/*
 :syntax enable
 
 au VimEnter *  NERDTree
-

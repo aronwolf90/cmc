@@ -2,8 +2,10 @@
 
 module Api::V1
   class FoldersController < ApiController
+    include StandartActions
+
     def index
-      render json: Folder.all, include: :documents
+      super(Folder)
     end
   end
 end

@@ -51,7 +51,6 @@ Rails.application.routes.draw do
 
       resource :context, only: :show
 
-      resource :general_board, only: %i[show update]
       resources :board_lists, only: %i[index show update destroy] do
         scope module: :board_lists do
           collection do

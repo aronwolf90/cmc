@@ -2,6 +2,9 @@ const endpoint = '/api/v1'
 
 export default {
   initFolders (context) {
-    return context.dispatch('initEntry', { endpoint, resource: 'folders' })
+    return context.dispatch('initEntry', {
+      endpoint,
+      resource: 'folders?include[]=documents'
+    })
   }
 }

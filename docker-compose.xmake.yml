@@ -1,0 +1,4 @@
+version: '2.2'
+services:
+  app:
+    command: bash -c "spring server || sleep 10000000"

@@ -5,7 +5,10 @@ export default {
     return context.dispatch('initEntry', { endpoint, resource: `issues/${issueId}` })
   },
   initIssues (context) {
-    return context.dispatch('initEntry', { endpoint, resource: `issues` })
+    return context.dispatch('initEntry', {
+      endpoint,
+      resource: 'issues?include[]=comments'
+    })
   },
   initCurrentIssue () {
 

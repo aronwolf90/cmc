@@ -7,7 +7,7 @@ module Administration
     namespace Issues
 
     def show
-      render cell(Issues::Cell::Show, ::Issue.find(params[:id]))
+      super
     end
 
     def new

@@ -6,11 +6,11 @@ module Api
       include StandartActions
 
       def index
-        render json: BoardList.where(filter).order(:ordinal_number), include: :issues
+        super(BoardList)
       end
 
       def show
-        render json: board_list
+        super(board_list)
       end
 
       def update

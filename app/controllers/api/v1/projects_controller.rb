@@ -5,7 +5,7 @@ module Api::V1
     include StandartActions
 
     def index
-      render json: Project.all, include: :current_record
+      super(Project)
     end
   end
 end

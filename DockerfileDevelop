@@ -38,6 +38,9 @@ RUN yarn global add eslint eslint-config-standard \
 
 RUN apk add vim tmux
 
+RUN chown -R $UID /usr/local/bundle
+RUN chown -R $UID /usr/local/bundle
+
 RUN usermod -m -d /user node
 USER $UID:$GID
 

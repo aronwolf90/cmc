@@ -5,7 +5,7 @@ module Api::V1
     include StandartActions
 
     def index
-      render json: UserIssue.where(filter)
+      super(UserIssue)
     end
   end
 end

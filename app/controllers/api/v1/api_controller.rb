@@ -7,7 +7,6 @@ module Api
     class ApiController < ApplicationController
       include Knock::Authenticable
       include Hack::KnockDevise::Authenticable
-
       before_action :authenticate!
 
     private
