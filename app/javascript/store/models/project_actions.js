@@ -4,7 +4,7 @@ export default {
   initProjects (context) {
     return context.dispatch('initEntry', {
       endpoint,
-      resource: 'projects?include[]=current_record'
+      resource: 'projects'
     })
   }
 }
