@@ -3,14 +3,16 @@
   .row
     .col-md-6
       h5 = 'Avatar'
-      | This information will appear on your profile.
+      | This information will appear on the profile.
+    .col-md-6
+      = f.input :avatar ,as: :image_preview, label: false
 
   hr.divider
 
   .row
     .col-lg-6
       h5 = 'Main settings'
-      | This information will appear on your profile.
+      | This information will appear on the profile.
     .col-lg-6
       = f.input :firstname, required: false
       = f.input :lastname, required: false
@@ -21,7 +23,9 @@
   .row
     .col-lg-6
       h5 = 'Contact data'
-      | This information will appear on your profile.
+      | This information will appear on the profile.
+    .col-lg-6
+      = f.input :telephone_number, required: false
 
   br
 

@@ -11,4 +11,5 @@ describe Administration::SettingsUserForm do
   it { expect(subject.validate(firstname: nil)).to be false }
   it { expect(subject.validate(lastname: nil)).to be false }
   it { expect(subject.validate(email: nil)).to be false }
+  it { expect(subject.validate(telephon_number: nil)).to be true }
 end

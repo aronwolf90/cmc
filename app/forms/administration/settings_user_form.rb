@@ -10,6 +10,9 @@ module Administration
     property :firstname
     property :lastname
     property :email
+    property :avatar
+    property :avatar_cache
+    property :telephone_number
 
     validation do
       configure do

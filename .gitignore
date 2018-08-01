@@ -32,7 +32,7 @@ coverage/
 /node_modules
 /databases
 /bundle
-/uploads
+public/uploads
 public/uploads/tmp
 
 public/assets/

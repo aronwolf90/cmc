@@ -6,5 +6,11 @@ FactoryBot.define do
     firstname "firstname"
     lastname "lastname"
     password "testtest"
+
+    avatar do
+      Rack::Test::UploadedFile.new(
+        Rails.root.join("spec", "fixures", "image.png")
+      )
+    end
   end
 end

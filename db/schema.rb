@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180708115054) do
+ActiveRecord::Schema.define(version: 20180801003653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20180708115054) do
     t.integer "gender"
     t.string "avatar"
     t.integer "selected_project_id"
+    t.string "telephone_number"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
@@ -147,7 +148,7 @@ ActiveRecord::Schema.define(version: 20180708115054) do
       SELECT (records.start_time)::date AS day,
       records.user_id
      FROM records
-    GROUP BY (records.start_time)::date, records.user_id;
+    GROUP BY ((records.start_time)::date), records.user_id;
   SQL
 
   create_view "user_issues",  sql_definition: <<-SQL
