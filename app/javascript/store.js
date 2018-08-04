@@ -50,6 +50,15 @@ export default {
           return relevantIssue.attributes.title.includes(searchText)
         })
       }
+    },
+    relevantProjects (state, getters) {
+      return (searchText) => {
+        if (!getters.collection('projects')) return
+        let relevantProjects = getters.collection('projects').slice()
+        return relevantProjects.filter(relevantProject => {
+          return relevantProject.attributes.name.includes(searchText)
+        })
+      }
     }
   },
   actions: {

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Board from '../../app/javascript/board'
 import List from '../../app/javascript/board/list'
 import ProjectSelect from '../../app/javascript/board/project_select'
+import SearchSelect from '../../app/javascript/board/search_select'
 import draggable from 'vuedraggable'
 import sinon from 'sinon'
 import { FormInput } from 'bootstrap-vue/es/components'
@@ -22,8 +23,13 @@ describe('Board', () => {
   def('actions', () => ({ initBoardsLists () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
   def('Turbolinks', () => ({ visit: sinon.spy() }))
+  def('boardLists', () => [])
 
   beforeEach(() => (global.Turbolinks = $Turbolinks))
+
+  it('the SearchSelect is present', () => {
+    expect($subject.find(SearchSelect).exists()).to.be.true
+  })
 
   describe('with boardLists', () => {
     def('boardList1', () => ({ id: 1, name: 'name', 'ordinal-number': '1' }))
@@ -59,8 +65,6 @@ describe('Board', () => {
   })
 
   describe('without boardLists', () => {
-    def('boardLists', () => [])
-
     it('contain the list element', () => {
       expect($subject.findAll(List).length).to.eq(0)
     })

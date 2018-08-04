@@ -9,6 +9,7 @@ import WikiContent from '../wiki_content'
 import WikiPage from '../wiki_page'
 import ArchiveContent from '../archive_content'
 import PersonalDashboardGraph from '../personal_dashboard_graph'
+import ProjectSearchSelect from '../project_search_select'
 
 require('../config')
 
@@ -19,6 +20,7 @@ Vue.component('wiki-content', WikiContent)
 Vue.component('wiki-page', WikiPage)
 Vue.component('archive-content', ArchiveContent)
 Vue.component('personal_dashboard_graph', PersonalDashboardGraph)
+Vue.component('project-search-select', ProjectSearchSelect)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')
