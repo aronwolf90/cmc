@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   root to: redirect("/users/sign_in")
-  devise_for :users
+  devise_for :users, controllers: { sessions: "sessions" }
 
   namespace :administration do
     root to: "dashboards#show"

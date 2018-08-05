@@ -13,4 +13,12 @@ spec:
           backend:
             serviceName: cmc-service
             servicePort: 80
+  - host: "*.{{ .Values.url }}"
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: cmc-service
+            servicePort: 80
+
 

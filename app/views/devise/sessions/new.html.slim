@@ -1,14 +1,22 @@
 = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   = render 'shared/errors', object: f.object
   #box
-    = f.input :email, required: false, autofocus: true, label: fa_icon(:user, text: 'Email')
-      = f.input_field :email, required: false, autofocus: true, class: 'string email optional form-control'
-    br
-    = f.input :password, required: false, label: fa_icon(:lock, text: 'Password')
-      = f.input_field :password, required: false, class: 'form-control'
+    - if Apartment::Tenant.current == "public" && Settings.multi_tenant
+      = label_tag :organization, "Organization"
+      = text_field_tag :organization, nil, class: "form-control"
+      br
+      br
+      fieldset.login
+        = f.button :submit, 'Go', class: 'btn btn-success btn-block'
+    - else
+      = f.input :email, required: false, autofocus: true, label: fa_icon(:user, text: 'Email')
+        = f.input_field :email, required: false, autofocus: true, class: 'string email optional form-control'
+      br
+      = f.input :password, required: false, label: fa_icon(:lock, text: 'Password')
+        = f.input_field :password, required: false, class: 'form-control'
 
-    br
-    fieldset.login
-      = f.button :submit, 'Loggin', class: 'btn btn-success btn-block'
+      br
+      fieldset.login
+        = f.button :submit, 'Loggin', class: 'btn btn-success btn-block'
 
-    = render "devise/shared/links"
+      = render "devise/shared/links"

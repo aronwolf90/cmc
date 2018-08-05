@@ -7,6 +7,13 @@ stages:
 variables:
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   CONTAINER_RELEASE_IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
+  POSTGRES_PASSWORD: password
+  POSTGRES_DB: root
+  POSTGRES_USER: root
+  DATABASE_URL: postgres://root:password@postgres/root
+
+services:
+  - postgres:latest
 
 gitlint:
   stage: lint
@@ -51,19 +58,13 @@ detect_code_problems:
   script:
     - bundle install
     - rubycritic app/ lib/ -s 98.00
-    - rails_best_practices
+    - rails_best_practices -e "db/migrate"
     - FAIL_ON_ERROR=1 DATABASE_URL=postgres://root:password@postgres/root rake traceroute
 
 rspec:
   stage: test
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
-  services:
-    - postgres:latest
   variables:
-    POSTGRES_PASSWORD: password
-    POSTGRES_DB: root
-    POSTGRES_USER: root
-    DATABASE_URL: postgres://root:password@postgres/root
     COVERAGE: "true"
   artifacts:
     paths:
