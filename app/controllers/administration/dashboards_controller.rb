@@ -2,7 +2,6 @@
 
 module Administration
   class DashboardsController < AdministrationController
-    include Concerns::Administration::StandardActions
     side_menu :administration
     namespace Dashboard
 

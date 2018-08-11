@@ -4,7 +4,7 @@ module Administration
   module WikiPages
     class CreateOperation < AdministrationOperation
       @form = WikiPageForm
-      include StandardCreateOperationConcern
+      include MvcStandardCreateOperationConcern
     end
   end
 end

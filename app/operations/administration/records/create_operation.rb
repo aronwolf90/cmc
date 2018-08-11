@@ -5,8 +5,7 @@ module Administration
     class CreateOperation < AdministrationOperation
       @form = RecordForm
       @mutation = ::Records::CreateMutation
-
-      include StandardCreateOperationConcern
+      include MvcStandardCreateOperationConcern
 
       success :set_user, before: "contract.default.validate"
 

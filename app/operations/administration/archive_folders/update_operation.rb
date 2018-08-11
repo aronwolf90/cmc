@@ -4,7 +4,7 @@ module Administration
   module ArchiveFolders
     class UpdateOperation < AdministrationOperation
       @form = ArchiveFolderForm
-      include StandardUpdateOperationConcern
+      include MvcStandardUpdateOperationConcern
     end
   end
 end

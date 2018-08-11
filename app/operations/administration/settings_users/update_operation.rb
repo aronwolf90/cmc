@@ -4,7 +4,7 @@ module Administration
   module SettingsUsers
     class UpdateOperation < AdministrationOperation
       @form = SettingsUserForm
-      include StandardUpdateOperationConcern
+      include MvcStandardUpdateOperationConcern
     end
   end
 end

@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
 
 protected
 
+  def self.namespace(namespace)
+    define_method :namespace do
+      namespace
+    end
+    private :namespace
+  end
+
   def _run_options(options)
     options.merge(current_user: current_user)
   end

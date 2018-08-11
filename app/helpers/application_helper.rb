@@ -19,4 +19,11 @@ module ApplicationHelper
   def standard_btn(name, link)
     link_to name, link, class: "btn btn-success"
   end
+
+  def organization_sign_in_url(organization)
+    request.protocol + [
+      organization.name,
+      "#{request.host_with_port}/users/sign_in"
+    ].join(".")
+  end
 end

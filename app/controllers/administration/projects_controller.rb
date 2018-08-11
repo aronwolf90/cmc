@@ -2,7 +2,6 @@
 
 module Administration
   class ProjectsController < AdministrationController
-    include Concerns::Administration::StandardActions
     side_menu "administration/projects"
     namespace Projects
 

@@ -2,7 +2,6 @@
 
 module Administration
   class IssuesController < AdministrationController
-    include Concerns::Administration::StandardActions
     side_menu :administration
     namespace Issues
 

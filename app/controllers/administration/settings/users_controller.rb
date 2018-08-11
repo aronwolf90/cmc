@@ -3,7 +3,6 @@
 module Administration
   module Settings
     class UsersController < AdministrationController
-      include Concerns::Administration::StandardActions
       side_menu "administration/settings"
       namespace SettingsUsers
 

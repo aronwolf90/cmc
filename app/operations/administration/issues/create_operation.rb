@@ -5,7 +5,7 @@ module Administration
     class CreateOperation < AdministrationOperation
       @form = IssueForm
       @default_value_step = SetDefaultValueStep
-      include StandardCreateOperationConcern
+      include MvcStandardCreateOperationConcern
     end
   end
 end

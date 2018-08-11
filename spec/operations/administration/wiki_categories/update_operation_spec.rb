@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require_relative "../shared_examples/standard_update_operation"
+require_relative "../../shared_examples/standard_update_operation"
 
 RSpec.describe Administration::WikiCategories::UpdateOperation do
   subject { described_class.(params: params) }

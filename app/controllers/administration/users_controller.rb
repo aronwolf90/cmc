@@ -2,7 +2,6 @@
 
 module Administration
   class UsersController < AdministrationController
-    include Concerns::Administration::StandardActions
     side_menu "administration/users"
     namespace Users
 

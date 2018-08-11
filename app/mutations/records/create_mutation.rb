@@ -2,8 +2,12 @@
 
 module Records
   class CreateMutation < ApplicationMutation
-    pattr_initialize %i[attributes! current_user!]
-    attr_private :record
+    attr_private :record, :attributes, :current_user
+
+    def initialize(attributes:, current_user:, **)
+      @attributes = attributes
+      @current_user = current_user
+    end
 
     def call
       ActiveRecord::Base.transaction do

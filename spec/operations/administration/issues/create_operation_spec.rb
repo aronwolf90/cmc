@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require_relative "../shared_examples/standard_create_operation"
+require_relative "../../shared_examples/standard_create_operation"
 
 RSpec.describe Administration::Issues::CreateOperation do
   let(:board_list) { build_stubbed(:board_list) }

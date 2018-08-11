@@ -1,12 +1,12 @@
 def create_organization?(name)
-  ENV["RAILS_ENV"] == "development" && 
+  ENV["RAILS_ENV"] == "development" &&
     Organization.find_by(name: name).nil?
 end
 
 def create_organization(name)
   Organization.create name: name
-    super { %i[administration board] }
-    super { %i[administration board] }
+  super { %i[administration board] }
+  super { %i[administration board] }
   Apartment::Tenant.create(name) if Settings.multi_tenant
 end
 

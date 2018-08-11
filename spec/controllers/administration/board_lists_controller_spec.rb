@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require_relative "./shared_examples/standart_actions"
+require_relative "../shared_examples/standart_actions"
 
 RSpec.describe Administration::BoardListsController, type: :controller do
-  let(:model) { build_stubbed(:record) }
-  let(:form) { Administration::BaordListsForm }
+  let(:model) { build_stubbed(:board_list) }
+  let(:form) { Administration::BoardListForm }
   let(:params) { {} }
 
   include_examples "standart new action", Administration::BoardLists

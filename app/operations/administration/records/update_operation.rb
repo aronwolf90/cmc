@@ -5,8 +5,7 @@ module Administration
     class UpdateOperation < AdministrationOperation
       @form = RecordForm
       @mutation = ::Records::UpdateMutation
-
-      include StandardUpdateOperationConcern
+      include MvcStandardUpdateOperationConcern
     end
   end
 end

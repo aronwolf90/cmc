@@ -56,7 +56,7 @@ Apartment.configure do |config|
       if Settings.multi_tenant
         Organization.pluck :name
       else
-	[:public]
+        [:public]
       end
     end
   rescue

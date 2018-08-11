@@ -4,3 +4,6 @@ en:
     numeric_format?: Is not in a numeric compatible format
     record_exists?: Does not exists
     file_present?: muss be filled
+    same_password?: password is not equal
+    uniq_organization_name?: already exist
+    password_length?: to short

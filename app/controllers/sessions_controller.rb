@@ -3,12 +3,15 @@
 class SessionsController < Devise::SessionsController
   def create
     if Apartment::Tenant.current == "public" && Settings.multi_tenant
-      redirect_to request.protocol + [
-        params[:organization],
-        "#{request.host_with_port}/users/sign_in"
-      ].join(".")
+      redirect_to organization_sign_in_url(organization)
     else
       super
     end
+  end
+
+private
+
+  def organization
+    @organization ||= Organization.find_by(name: params[:organization])
   end
 end

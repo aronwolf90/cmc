@@ -2,7 +2,10 @@
 
 Rails.application.routes.draw do
   root to: redirect("/users/sign_in")
+
   devise_for :users, controllers: { sessions: "sessions" }
+
+  resources :registrations, only: %i[new create]
 
   namespace :administration do
     root to: "dashboards#show"

@@ -1,0 +1,12 @@
+= simple_form_for model, as: :data do |f|
+  #box
+    = f.input :name
+    br
+    = f.input :firstname
+    = f.input :lastname
+    = f.input :email
+    = f.input :password
+    = f.input :confirmation_password
+
+    .fieldset
+      = f.submit class: "btn btn-success"

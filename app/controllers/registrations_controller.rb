@@ -1,18 +1,17 @@
 # frozen_string_literal: true
 
-class RegistrationsController < ApplicationsController
-  layout: :device 
+class RegistrationsController < ApplicationController
+  include MvcStandardActionsConcern
+  layout "devise"
+  namespace Registrations
 
   def new
-    result = run Registration::CreateOperation::Present
-    render cell(Registration::Cell::Form, result["contract.default"])
+    super
   end
 
   def create
-    run operation do |result|
-      flash[:notice] = "Organization has been created"
-      return redirect_to organization_sign_in_path
+    super do |model|
+      helpers.organization_sign_in_url(model[:organization])
     end
-    render cell(Registration::Cell::Form, result["contract.default"])
   end
 end

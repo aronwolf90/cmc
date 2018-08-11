@@ -3,7 +3,6 @@
 module Administration
   module Wiki
     class PagesController < WikiController
-      include Concerns::Administration::StandardActions
       namespace WikiPages
 
       def show

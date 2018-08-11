@@ -4,7 +4,7 @@ module Administration
   module BoardLists
     class CreateOperation < AdministrationOperation
       @form = BoardListForm
-      include StandardCreateOperationConcern
+      include MvcStandardCreateOperationConcern
     end
   end
 end

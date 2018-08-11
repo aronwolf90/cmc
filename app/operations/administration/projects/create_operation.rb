@@ -4,7 +4,7 @@ module Administration
   module Projects
     class CreateOperation < AdministrationOperation
       @form = ProjectForm
-      include StandardCreateOperationConcern
+      include MvcStandardCreateOperationConcern
     end
   end
 end

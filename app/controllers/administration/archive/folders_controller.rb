@@ -3,7 +3,6 @@
 module Administration
   module Archive
     class FoldersController < ArchiveBaseController
-      include Concerns::Administration::StandardActions
       namespace ArchiveFolders
 
       def new

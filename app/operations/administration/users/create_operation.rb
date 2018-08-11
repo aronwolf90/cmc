@@ -4,7 +4,7 @@ module Administration
   module Users
     class CreateOperation < AdministrationOperation
       @form = UserForm
-      include StandardCreateOperationConcern
+      include MvcStandardCreateOperationConcern
     end
   end
 end
