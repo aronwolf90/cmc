@@ -16,6 +16,7 @@ RSpec.describe Registrations::CreateMutation do
     {
       organization: {
         name: "test",
+        time_zone: "Berlin"
       },
       user: {
         firstname: "Bob",

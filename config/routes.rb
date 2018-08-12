@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       resources :issues, only: %i[show new create]
     end
 
+    resource :organization, only: %i[edit update]
+
     namespace :settings do
       resources :users, only: %i[edit update]
     end

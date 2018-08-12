@@ -4,7 +4,7 @@ def create_organization?(name)
 end
 
 def create_organization(name)
-  Organization.create name: name
+  Organization.create name: name, time_zone: "Berlin"
   Apartment::Tenant.create(name) if Settings.multi_tenant
 end
 

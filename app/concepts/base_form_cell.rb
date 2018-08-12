@@ -6,7 +6,9 @@ private
     capture do
       concat success_btn(form)
       concat(content_tag(:div, class: "btn-group pull-right") do
-        concat destroy_btn(destroy_path) if model.model.persisted?
+        if destroy_path && model.model.persisted?
+          concat destroy_btn(destroy_path)
+        end
         concat cancell_btn(cancell_path)
       end)
     end

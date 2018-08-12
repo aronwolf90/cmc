@@ -399,9 +399,6 @@ GEM
     reform-rails (0.1.7)
       activemodel (>= 3.2)
       reform (>= 2.2.0)
-    rein (3.5.0)
-      activerecord (>= 4.0.0, < 6)
-      activesupport (>= 4.0.0, < 6)
     representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
@@ -623,7 +620,6 @@ DEPENDENCIES
   rails_best_practices
   reform (>= 2.3.0.rc1)
   reform-rails
-  rein
   rspec-cells
   rspec-rails
   rubocop-rails_config

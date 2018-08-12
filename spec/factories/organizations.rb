@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :organization do
-    name "MyString"
+    name "test-organization"
+    time_zone "Berlin"
   end
 end

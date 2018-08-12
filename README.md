@@ -18,6 +18,7 @@ On linux and mac:
 - Install make (sudo apt-get install make or brew install make)
 - Execute: make install_develop
 - Execute: xmake server (or execute xmake rails s)
+- browse to: http://lvh.me:3000
 
 On windows:
 - Install docker and docker compose
