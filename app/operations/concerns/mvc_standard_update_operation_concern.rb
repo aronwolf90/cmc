@@ -13,7 +13,7 @@ module MvcStandardUpdateOperationConcern
     step base::Nested(base::Present)
     step base::Contract::Validate(key: :data)
     if @mutation.present?
-      success UpdateMutationStep.new(mutation: @mutation)
+      success MvcUpdateMutationStep.new(mutation: @mutation)
     else
       success base::Contract::Persist()
     end

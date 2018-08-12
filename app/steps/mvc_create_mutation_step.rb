@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateMutationStep < ApplicationStep
+class MvcCreateMutationStep < ApplicationStep
   pattr_initialize %i[mutation!]
 
   def call(options, current_user:, model:, **)

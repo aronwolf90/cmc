@@ -5,8 +5,6 @@ end
 
 def create_organization(name)
   Organization.create name: name
-  super { %i[administration board] }
-  super { %i[administration board] }
   Apartment::Tenant.create(name) if Settings.multi_tenant
 end
 

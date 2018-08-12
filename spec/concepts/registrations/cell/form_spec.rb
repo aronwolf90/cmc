@@ -15,6 +15,7 @@ RSpec.describe Registrations::Cell::Form, type: :cell do
   end
 
   it { is_expected.to have_selector("#data_name") }
+  it { is_expected.to have_selector("#data_time_zone") }
   it { is_expected.to have_selector("#data_firstname") }
   it { is_expected.to have_selector("#data_lastname") }
   it { is_expected.to have_selector("#data_email") }

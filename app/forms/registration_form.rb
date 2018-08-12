@@ -7,6 +7,7 @@ class RegistrationForm < Reform::Form
   feature Coercion
 
   property :name, on: :organization
+  property :time_zone, on: :organization
 
   property :firstname, on: :user
   property :lastname, on: :user

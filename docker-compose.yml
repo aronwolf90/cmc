@@ -46,7 +46,7 @@ services:
       - .:/app
       - bundle:/usr/local/bundle
       - ~/.ssh:/user/.ssh
-      - ~/.gitconfig:/root/.gitconfig
+      - ~/.gitconfig:/user/.gitconfig
     depends_on:
       - db
       - selenium
