@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Administration::Records::ModelStep do
   subject { described_class.call(options, params: {}, current_user: current_user) }
 
-  let(:current_user) { create(:user) }
+  let(:current_user) { create(:admin) }
   let(:options) { {} }
 
   before do

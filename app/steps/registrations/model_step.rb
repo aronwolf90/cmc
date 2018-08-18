@@ -5,7 +5,7 @@ module Registrations
     def self.call(options, **)
       options[:model] = {
         organization: Organization.new,
-        user: User.new
+        user: Admin.new
       }
     end
   end

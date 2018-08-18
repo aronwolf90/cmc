@@ -3,8 +3,11 @@
   = f.input :firstname
   = f.input :lastname
   = f.input :email
+  = f.input :type, collection: User.descendants
   = f.input :password, as: :password
   = f.input :password_confirmation, as: :password
+  = f.input :project_ids, collection: Project.all,
+            required: false, multiple: true, label: "Projects"
 
   = f.submit class: 'btn btn-success'
   = link_to 'Cancel', cancel_path, class: 'btn btn-secondary pull-right'

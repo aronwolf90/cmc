@@ -12,7 +12,7 @@ module Administration
 
       def update
         super do |model|
-          [:edit, :administration, :settings, model]
+          edit_administration_settings_user_path(model)
         end
       end
     end

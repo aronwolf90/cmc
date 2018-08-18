@@ -12,7 +12,7 @@ Scenario: Post an valid record using json in POST body
       "data": {
         "attributes": { "start-time": "2018-02-04T12:00:00.000Z" },
         "relationships": {
-          "user": { "data": { "id": 1, "type": "users" } },
+          "user": { "data": { "id": 1, "type": "admins" } },
           "issue": { "data": { "id": 1, "type": "issues" } }
         }
       }
@@ -26,7 +26,7 @@ Scenario: Post an valid record using json in POST body
         "type": "records",
         "attributes": { "start-time": "2018-02-04T13:00:00.000+01:00", "end-time": null },
         "relationships": {
-          "user": {"data": {"id": "1", "type": "users"}},
+          "user": {"data": {"id": "1", "type": "admins"}},
           "issue": {"data": {"id": "1", "type": "issues"}}
         },
         "links": {"self": "/api/v1/records/1"}
@@ -47,7 +47,7 @@ Scenario: Post an valid record using json in POST body
         "data": {
           "attributes": { "start_time": null },
           "relationships": {
-            "user": { "data": { "id": 1, "type": "users" } },
+            "user": { "data": { "id": 1, "type": "admins" } },
             "issue": { "data": { "id": 1, "type": "issues" } }
           }
         }

@@ -7,7 +7,7 @@ describe Administration::UserForm do
 
   let(:user) do
     build_stubbed(
-      :user,
+      :admin,
       password: "testtest",
       password_confirmation: "testtest"
     )
@@ -20,4 +20,5 @@ describe Administration::UserForm do
   it { expect(subject.validate(password: nil)).to be false }
   it { expect(subject.validate(password_confirmation: nil)).to be false }
   it { expect(subject.validate(password_confirmation: "diferent")).to be false }
+  it { expect(subject.validate(project_ids: [])).to be true }
 end

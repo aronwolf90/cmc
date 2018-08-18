@@ -5,6 +5,7 @@ module Administration
     class UpdateOperation < AdministrationOperation
       @form = OrganizationForm
       @model_step = ModelStep
+      @policy = OrganizationPolicy
       include MvcStandardUpdateOperationConcern
     end
   end

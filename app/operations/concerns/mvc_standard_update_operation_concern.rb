@@ -6,12 +6,14 @@ module MvcStandardUpdateOperationConcern
   included do |base|
     form = @form
     model_step = @model_step
+    policy = @policy
     base.const_set("Present", Class.new(Trailblazer::Operation) do
       if model_step
         success model_step
       else
         step self::Model(form.model_options.first, :find)
       end
+      step self::Policy::Pundit(policy, :update?) if policy
       step self::Contract::Build(constant: form)
     end)
 

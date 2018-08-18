@@ -10,8 +10,10 @@ module Administration
     property :firstname
     property :lastname
     property :email
+    property :type
     property :password
     property :password_confirmation
+    property :project_ids
 
     validation with: { form: true } do
       configure do
@@ -25,8 +27,10 @@ module Administration
       required(:firstname).filled
       required(:lastname).filled
       required(:email).filled
+      required(:type).filled
       required(:password).filled
       required(:password_confirmation).filled(:same_password?)
+      required(:project_ids)
     end
   end
 end

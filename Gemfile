@@ -18,11 +18,12 @@ gem "devise_invitable"
 gem "active_model_serializers"
 gem "carrierwave"
 gem "config"
-gem "migration_data"
 gem "dry-transaction"
 gem "hash_mapper"
 gem "kaminari", "~> 1.0.0"
 gem "knock"
+gem "migration_data"
+gem "pundit"
 gem "scenic"
 gem "seed-fu"
 gem "uglifier"
@@ -51,13 +52,14 @@ gem "bootstrap", "~> 4"
 gem "jquery-rails"
 gem "turbolinks"
 gem "rails-assets-datetimepicker"
+gem "select2-rails"
 
 # Template
 gem "font-awesome-rails"
 gem "simple_form"
 gem "slim-rails"
 
-# preloads
+# preloaders
 gem "bootsnap", require: false
 gem "spring"
 gem "spring-commands-rspec"

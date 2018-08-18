@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe RecordsUserProjectQuery do
   subject { described_class.call(user: user, project: project) }
 
-  let(:user) { create(:user) }
+  let(:user) { create(:admin) }
   let(:project) { create(:project) }
 
   context "record belongs to project and user" do

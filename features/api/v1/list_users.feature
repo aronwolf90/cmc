@@ -11,7 +11,7 @@ Scenario: Get
     {
       "data": [{
         "id": "1",
-        "type": "users",
+        "type": "admins",
         "attributes": { "firstname": null },
         "relationships": {
           "issues": { "data": [] },

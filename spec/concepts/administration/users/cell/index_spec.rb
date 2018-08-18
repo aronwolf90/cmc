@@ -9,6 +9,9 @@ RSpec.describe Administration::Users::Cell::Index, type: :cell do
 
   let(:model) { [user1] }
   let(:user1) { build_stubbed(:user) }
+  let(:current_user) { build_stubbed(:admin)  }
+
+  before { sign_in current_user  }
 
   it { is_expected.to have_text "New user" }
   it { is_expected.to have_text user1 }

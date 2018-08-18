@@ -12,5 +12,9 @@ FactoryBot.define do
         Rails.root.join("spec", "fixures", "image.png")
       )
     end
+
+    factory :admin, class: Admin
+    factory :employee, class: Employee
+    factory :customer, class: Customer
   end
 end

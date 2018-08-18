@@ -7,7 +7,7 @@ RSpec.describe Records::UpdateMutation do
     described_class.call(record, attributes: attributes, current_user: current_user)
   end
 
-  let(:current_user) { create(:user) }
+  let(:current_user) { create(:admin) }
   let(:record) { create(:record, user: current_user) }
 
   context "new record is active" do

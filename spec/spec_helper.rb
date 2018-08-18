@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "pundit/rspec"
+
 if ENV["COVERAGE"]
   require "simplecov"
 

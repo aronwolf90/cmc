@@ -19,7 +19,7 @@ Scenario: Get
           "start-time": "2018-06-11T16:58:00.049+02:00"
         },
         "relationships": {
-          "user": { "data": { "id": "1", "type": "users"  } },
+          "user": { "data": { "id": "1", "type": "admins"  } },
           "issue": { "data": { "id": "1", "type": "issues"  } }
         }
       }]

@@ -7,6 +7,7 @@ module MvcStandardCreateOperationConcern
     form = @form
     model_step = @model_step
     default_value_step = @default_value_step
+    policy = @policy
 
     base.const_set("Present", Class.new(Trailblazer::Operation) do
       if model_step
@@ -18,6 +19,7 @@ module MvcStandardCreateOperationConcern
       if default_value_step.present?
         success default_value_step
       end
+      step self::Policy::Pundit(policy, :update?) if policy
       success self::Contract::Build(constant: form)
     end)
 

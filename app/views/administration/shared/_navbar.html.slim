@@ -3,16 +3,21 @@ nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
     = image_tag 'logo.png', id: 'logo', height: 21, width: 40
 
   ul.navbar-nav.mr-auto.ml-4
-    li.nav-item class=('active' if request.url.include?('projects'))
-      = link_to 'Projects', administration_projects_path, class: 'nav-link small'
-    li.nav-item class=('active' if request.url.include?('wiki'))
-      = link_to 'Wiki', administration_wiki_root_path, class: 'nav-link small'
-    li.nav-item class=('active' if request.url.include?('archive'))
-      = link_to 'Archive', administration_archive_root_path, class: 'nav-link small'
-    li.nav-item class=('active' if request.url.include?('users'))
-      = link_to 'Users', administration_users_path, class: 'nav-link small'
-    li.nav-item class=("active" if request.url.include?("users"))
-      = link_to 'Admin', %i[edit administration organization], class: 'nav-link small'
+    - if policy(Project).index?
+      li.nav-item class=('active' if request.url.include?('projects'))
+        = link_to 'Projects', administration_projects_path, class: 'nav-link small'
+    - if policy(WikiPage).index? && policy(WikiCategory).index?
+      li.nav-item class=('active' if request.url.include?('wiki'))
+        = link_to 'Wiki', administration_wiki_root_path, class: 'nav-link small'
+    - if policy(Document).index? && policy(Folder).index?
+      li.nav-item class=('active' if request.url.include?('archive'))
+        = link_to 'Archive', administration_archive_root_path, class: 'nav-link small'
+    - if policy(User).index?
+      li.nav-item class=('active' if request.url.include?('users'))
+        = link_to 'Users', administration_users_path, class: 'nav-link small'
+    - if policy(Organization).index?
+      li.nav-item class=("active" if request.url.include?("users"))
+        = link_to 'Admin', %i[edit administration organization], class: 'nav-link small'
 
   ul.navbar-nav
      a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -20,7 +25,7 @@ nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
      .dropdown-menu.dropdown-menu-right
        a class="dropdown-item"
          = current_user
-       = link_to [:edit, :administration, :settings, current_user], class: 'dropdown-item'
+       = link_to edit_administration_settings_user_path(current_user), class: 'dropdown-item'
          = 'Settings'
        div class="dropdown-divider">
        = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item'

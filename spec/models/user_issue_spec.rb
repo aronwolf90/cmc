@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe UserIssue, type: :model do
   context "issue user and record are present" do
     let(:issue) { create(:issue) }
-    let(:user) { create(:user) }
+    let(:user) { create(:admin) }
     let!(:record) { create(:record, user: user, issue: issue) }
 
     describe "#amount_time" do

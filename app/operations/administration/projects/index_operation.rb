@@ -5,8 +5,9 @@ module Administration
     class IndexOperation < AdministrationOperation
       step :model
 
-      def model(options, *)
-        options["model"] = ::Project.all
+      def model(options, current_user:, **)
+        options["model"] =
+          ProjectPolicy::Scope.(current_user, Project)
       end
     end
   end

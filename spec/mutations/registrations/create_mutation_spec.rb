@@ -7,11 +7,11 @@ RSpec.describe Registrations::CreateMutation do
     described_class.call(
       attributes: attributes,
       current_user: current_user,
-      model: { organization: Organization.new, user: User.new }
+      model: { organization: Organization.new, user: Admin.new }
     )
   end
 
-  let(:current_user) { create(:user) }
+  let(:current_user) { create(:admin) }
   let(:attributes) do
     {
       organization: {

@@ -11,6 +11,7 @@ RSpec.describe Administration::Users::Cell::Form, type: :cell do
 
   it { is_expected.to have_selector "#data_firstname" }
   it { is_expected.to have_selector "#data_lastname" }
+  it { is_expected.to have_selector "#data_type" }
   it { is_expected.to have_selector "#data_password" }
   it { is_expected.to have_selector "#data_password_confirmation" }
   it { is_expected.to have_selector "input[type='submit']" }

@@ -13,5 +13,11 @@ export default {
       }
     }
     return context.dispatch('update', { entry, payload, endpoint })
+  },
+  initUsers (context) {
+    return context.dispatch('initEntry', {
+      endpoint,
+      resource: 'users'
+    })
   }
 }

@@ -6,4 +6,6 @@ RSpec.describe Project, type: :model do
   it { is_expected.to have_many :board_lists }
   it { is_expected.to have_many :issues }
   it { is_expected.to have_many :records }
+  it { is_expected.to have_many :user_projects }
+  it { is_expected.to have_many :users }
 end

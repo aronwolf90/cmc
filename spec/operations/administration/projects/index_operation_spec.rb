@@ -3,10 +3,12 @@
 require "rails_helper"
 
 RSpec.describe Administration::Projects::IndexOperation do
-  subject { described_class.() }
+  subject { described_class.(current_user: current_user) }
+
+  let(:current_user) { build_stubbed(:admin) }
 
   before do
-    allow(Project).to receive(:all).and_return([])
+    allow(ProjectPolicy::Scope).to receive(:call).and_return([])
   end
 
   it "model is set" do

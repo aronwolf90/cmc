@@ -13,12 +13,12 @@ Scenario: Get
         "id": "context",
         "type": "contexts",
         "relationships": {
-          "current-user": { "data": { "id": "1", "type": "users" } }
+          "current-user": { "data": { "id": "1", "type": "admins" } }
         }
       },
       "included": [{
         "id": "1",
-        "type": "users",
+        "type": "admins",
         "attributes": { "firstname": null },
         "relationships": {
           "selected-project": { "data": null },

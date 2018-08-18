@@ -6,13 +6,15 @@ module Administration
     private
 
       def new_btn
-        link_to "New user", %i[new administration user],
+        return unless policy(User).create?
+        link_to "New user", new_administration_user_path,
           class: "btn btn-success btn-block"
       end
 
       def edit_btn(user)
-        link_to fa_icon(:edit), [:edit, :administration, :settings, user],
-        class: "btn btn-sm btn-secondary"
+        return unless policy(user).update?
+        link_to fa_icon(:edit), edit_administration_settings_user_path(user),
+          class: "btn btn-sm btn-secondary"
       end
     end
   end

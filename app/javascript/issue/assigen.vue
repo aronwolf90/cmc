@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     options () {
-      return (this.$store.getters.collection('users') || []).map((user) => {
+      return (this.$store.getters.metaCollection('users') || []).map((user) => {
         return {
           value: user.id,
           text: user.attributes.firstname
@@ -31,8 +31,8 @@ export default {
       })
     },
     issue () {
-      return this.$store.getters.entry({
-        type: 'issues',
+      return this.$store.getters.metaEntry({
+        type: 'users',
         id: this.issueId
       })
     },

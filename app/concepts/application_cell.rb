@@ -9,4 +9,9 @@ class ApplicationCell < Trailblazer::Cell
   include Kaminari::Cells
   include SimpleForm::ActionViewExtensions::FormHelper
   include ApplicationHelper
+  include Pundit
+
+  def current_user
+    controller.current_user
+  end
 end

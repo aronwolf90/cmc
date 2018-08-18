@@ -12,6 +12,7 @@ Scenario: Create user
   And I enter "firstname" into input named "data_firstname"
   And I enter "lastname" into input named "data_lastname"
   And I enter "test@email.com" into input named "data_email"
+  And select "Admin" from select box "data_type"
   And I enter "password" into input named "data_password"
   And I enter "password" into input named "data_password_confirmation"
   And I click on submit

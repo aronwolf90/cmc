@@ -9,7 +9,7 @@ RSpec.describe RecordDay, type: :model do
   describe "with records" do
     subject { RecordDay.find_by(day: record.start_time) }
 
-    let(:user) { create(:user) }
+    let(:user) { create(:admin) }
     let(:record) { create(:record, user: user) }
 
     before { create(:record, user: user, start_time: 2.day.from_now) }

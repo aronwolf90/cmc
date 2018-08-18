@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Given /^an user exists with an id of 1$/ do
-  User.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
+  Admin.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
 end
 
 Given /^an project with an id of 1 exists$/ do
@@ -13,11 +13,11 @@ Given /^a folder with an id of 1 exists$/ do
 end
 
 Given /^I am an user with an id of 1$/ do
-  User.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
+  Admin.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
 end
 
 Given /^I am an user with an email "test@localhost.de" and a password "testtest" and and id of "1"$/ do
-  User.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
+  Admin.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
 end
 
 Given /^an issue exists with an id of 1$/ do

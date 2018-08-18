@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 def find_or_create_current_user
-  User.create_with(
+  Admin.create_with(
     password: "testtest",
     password_confirmation: "testtest",
     firstname: "aron",
@@ -10,7 +10,7 @@ def find_or_create_current_user
 end
 
 Given(/^I am registered$/) do
-  User.create!(email: "aronwolf90@gmail.com", password: "testtest", password_confirmation: "testtest")
+  Admin.create!(email: "aronwolf90@gmail.com", password: "testtest", password_confirmation: "testtest")
 end
 
 Given(/^I am not registered$/) do; end
