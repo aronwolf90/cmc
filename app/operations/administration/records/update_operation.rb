@@ -5,6 +5,7 @@ module Administration
     class UpdateOperation < AdministrationOperation
       @form = RecordForm
       @mutation = ::Records::UpdateMutation
+      @policy = RecordPolicy
       include MvcStandardUpdateOperationConcern
     end
   end

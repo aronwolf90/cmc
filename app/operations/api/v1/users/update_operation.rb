@@ -5,6 +5,7 @@ module Api::V1
     class UpdateOperation < ApiOperation
       @form = UpdateForm
       @deserializer = UserDeserializer
+      @policy = UserPolicy
       include StandardUpdateOperationConcern
     end
   end

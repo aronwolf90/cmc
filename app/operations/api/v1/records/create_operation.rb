@@ -3,9 +3,10 @@
 module Api::V1
   module Records
     class CreateOperation < ApiOperation
-      step ValidateStep.new(form: CreateForm)
-      success DeserializeStep.new(deserializer: RecordDeserializer)
-      success CreateMutationStep.new(mutation: ::Records::CreateMutation)
+      @form = CreateForm
+      @deserializer = RecordDeserializer
+      @mutation = ::Records::CreateMutation
+      include StandardCreateOperationConcern
     end
   end
 end

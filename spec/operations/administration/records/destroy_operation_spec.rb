@@ -6,7 +6,7 @@ RSpec.describe Administration::Records::DestroyOperation do
   subject { described_class.(params: {}, current_user: current_user) }
 
   let(:record) { build_stubbed(:record) }
-  let(:current_user) { build_stubbed(:user)  }
+  let(:current_user) { build_stubbed(:admin)  }
 
   before do
     allow(Record).to receive(:find).and_return(record)

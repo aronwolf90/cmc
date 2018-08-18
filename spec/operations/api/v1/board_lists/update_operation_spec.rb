@@ -3,8 +3,15 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::BoardLists::UpdateOperation do
-  subject { described_class.(params: params, model: board_list) }
+  subject do
+    described_class.(
+      params: params,
+      model: board_list,
+      current_user: user
+    )
+  end
 
+  let(:user) { build_stubbed(:admin)  }
   let(:board_list) { build_stubbed(:board_list) }
   let(:params) do
     {

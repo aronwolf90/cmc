@@ -3,11 +3,11 @@
 require "rails_helper"
 
 RSpec.describe Administration::Users::IndexOperation do
-  subject { described_class.() }
+  subject { described_class.(current_user: user) }
 
   let(:user) { build_stubbed(:user) }
 
-  before { expect(User).to receive(:all).and_return([])  }
+  before { expect(UserPolicy::Scope).to receive(:call).and_return([]) }
 
   it "model is set" do
     expect(subject["model"]).to eq([])

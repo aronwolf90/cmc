@@ -13,7 +13,7 @@ RSpec.describe Administration::Records::CreateOperation do
     allow(Records::CreateMutation).to receive(:call)
   end
 
-  let(:current_user) { build_stubbed(:user)  }
+  let(:current_user) { build_stubbed(:admin)  }
 
   context "valid params" do
     let(:params) do

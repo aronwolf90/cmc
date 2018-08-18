@@ -3,8 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::Comments::CreateOperation do
-  subject { described_class.(params: params) }
+  subject { described_class.(params: params, current_user: user) }
 
+  let(:user) { build_stubbed(:admin)  }
   let(:params) do
     {
       data: {

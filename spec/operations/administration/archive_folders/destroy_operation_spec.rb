@@ -3,9 +3,10 @@
 require "rails_helper"
 
 RSpec.describe Administration::ArchiveFolders::DestroyOperation do
-  subject { described_class.(params: {}) }
+  subject { described_class.(params: {}, current_user: user) }
 
   let(:folder) { build_stubbed(:folder) }
+  let(:user) { build_stubbed(:admin) }
 
   before do
     allow(Folder).to receive(:find).and_return(folder)

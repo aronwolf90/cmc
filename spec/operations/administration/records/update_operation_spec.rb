@@ -16,7 +16,7 @@ RSpec.describe Administration::Records::UpdateOperation do
     allow(Record).to receive(:find).and_return(record)
   end
 
-  let(:current_user) { build_stubbed(:user)  }
+  let(:current_user) { build_stubbed(:admin)  }
 
   context "valid params" do
     let(:params) do

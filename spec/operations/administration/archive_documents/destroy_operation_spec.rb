@@ -3,9 +3,10 @@
 require "rails_helper"
 
 RSpec.describe Administration::ArchiveDocuments::DestroyOperation do
-  subject { described_class.(params: {}) }
+  subject { described_class.(params: {}, current_user: user) }
 
   let(:document) { build_stubbed(:document) }
+  let(:user) { build_stubbed(:admin) }
 
   before do
     allow(Document).to receive(:find).and_return(document)
