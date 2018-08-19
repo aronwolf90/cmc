@@ -5,8 +5,9 @@ require "rails_helper"
 RSpec.describe Administration::Issues::Cell::Form, type: :cell do
   controller Administration::IssuesController
 
-  subject { cell(described_class, form).() }
+  subject { cell(described_class, form, current_user: user).() }
 
+  let(:user) { build_stubbed(:admin) }
   let(:board_list) { build_stubbed(:board_list)  }
   let(:form) do
     Administration::IssueForm.new(Issue.new(board_list: board_list))

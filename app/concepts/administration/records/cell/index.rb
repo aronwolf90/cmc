@@ -6,11 +6,13 @@ module Administration
     private
 
       def add_link
+        return unless policy(Record).new?
         link_to "New record", new_administration_record_path,
           class: "btn btn-success"
       end
 
       def edit_btn(record)
+        return unless policy(record).edit?
         link_to fa_icon(:edit), [:edit, :administration, record],
           class: "btn btn-sm btn-secondary"
       end

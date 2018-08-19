@@ -9,10 +9,12 @@ RSpec.describe Administration::Records::Cell::Index, type: :cell do
     cell(
       described_class,
       model,
-      this_month_spended_time: this_month_spended_time
+      this_month_spended_time: this_month_spended_time,
+      current_user: user
     ).().text
   end
 
+  let(:user) { build_stubbed(:admin) }
   let(:model) { Kaminari.paginate_array([record_day]).page(1) }
   let(:record_day) do
     build_stubbed(:record_day, day: Date.current).tap do |record_day|

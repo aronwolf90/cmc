@@ -12,6 +12,6 @@ class ApplicationCell < Trailblazer::Cell
   include Pundit
 
   def current_user
-    controller.current_user
+    options[:current_user]
   end
 end

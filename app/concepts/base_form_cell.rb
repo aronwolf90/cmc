@@ -18,11 +18,13 @@ private
     form.submit class: "btn btn-success"
   end
 
-  def destroy_btn(path, options = {})
+  def destroy_btn(path_array, options = {})
+    return unless policy(path_array.last).destroy?
+
     options[:class] = options[:class].to_s + " btn btn-danger"
     options[:method] ||= :delete
 
-    link_to "Destroy", path, options
+    link_to "Destroy", path_array, options
   end
 
   def cancell_btn(path)

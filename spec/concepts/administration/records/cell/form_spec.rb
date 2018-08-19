@@ -5,8 +5,9 @@ require "rails_helper"
 RSpec.describe Administration::Records::Cell::Form, type: :cell do
   controller Administration::RecordsController
 
-  subject { cell(described_class, form).() }
+  subject { cell(described_class, form, current_user: user).() }
 
+  let(:user) { build_stubbed(:admin) }
   let(:form) { Administration::RecordForm.new(Record.new) }
 
   it { is_expected.to have_selector "#data_start_time" }

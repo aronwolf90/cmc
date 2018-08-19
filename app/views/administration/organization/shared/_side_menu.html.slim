@@ -2,3 +2,4 @@
   ul.nav.navbar-nav
     li class=("active" if current_page?(controller: :organizations, action: :edit))
       = link_to "Edit", %i[edit administration organization]
+  = render "administration/shared/shared_issue_section"

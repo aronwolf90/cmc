@@ -1,11 +1,12 @@
-.row
-  .col-md-8
-  .col-md-4
-    br.d-md-none
-    = new_btn
+- if policy(User).new?
+  .row
+    .col-md-8
+    .col-md-4
+      br.d-md-none
+      = new_btn
 
-br
-br
+  br
+  br
 
 ul.list-group.list-lines
   - model.each do |user|

@@ -2,3 +2,4 @@
   ul.nav.navbar-nav
     li class=('active' if current_page?(controller: :contents, action: :show))
       = link_to 'Content', administration_archive_root_path
+  = render "administration/shared/shared_issue_section"

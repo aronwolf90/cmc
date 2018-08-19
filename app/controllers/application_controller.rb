@@ -24,4 +24,9 @@ protected
   def after_sign_in_path_for(resource)
     administration_root_path
   end
+
+  def cell(name, model = nil, options = {}, constant = ::Cell::ViewModel, &block)
+    options[:current_user] = current_user
+    super
+  end
 end

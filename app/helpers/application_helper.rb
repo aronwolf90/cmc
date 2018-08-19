@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "uri"
+
 module ApplicationHelper
   def flash_class(level)
     case level.to_sym

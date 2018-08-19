@@ -2,3 +2,4 @@
   ul.nav.navbar-nav
     li class=('active' if current_page?(controller: :departments))
       = link_to 'All', administration_projects_path
+  = render "administration/shared/shared_issue_section"

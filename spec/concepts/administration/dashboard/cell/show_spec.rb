@@ -5,8 +5,9 @@ require "rails_helper"
 RSpec.describe Administration::Dashboard::Cell::Show, type: :cell do
   controller Administration::DashboardsController
 
-  subject { cell(described_class, model).() }
+  subject { cell(described_class, model, current_user: user).() }
 
+  let(:user) { build_stubbed(:admin) }
   let(:model) { { projects: { project => 3600 } } }
   let(:project) { build_stubbed(:project) }
 

@@ -16,7 +16,7 @@ nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
       li.nav-item class=('active' if request.url.include?('users'))
         = link_to 'Users', administration_users_path, class: 'nav-link small'
     - if policy(Organization).index?
-      li.nav-item class=("active" if request.url.include?("users"))
+      li.nav-item class=("active" if request.url.include?("/organization"))
         = link_to 'Admin', %i[edit administration organization], class: 'nav-link small'
 
   ul.navbar-nav

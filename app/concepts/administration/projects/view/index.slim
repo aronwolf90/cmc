@@ -1,9 +1,13 @@
 .row
-  .col-md-8
-    project-search-select
-  .col-md-4
-    br.d-md-none
-    = new_btn
+  - if policy(Project).new?
+    .col-md-8
+      project-search-select
+    .col-md-4
+      br.d-md-none
+      = new_btn
+  - else
+    .col-sm-12
+      project-search-select
 
 br
 br

@@ -5,7 +5,9 @@ require "rails_helper"
 RSpec.describe Administration::WikiContent::Cell::Show, type: :cell do
   controller Administration::RecordsController
 
-  subject { cell(described_class).() }
+  subject { cell(described_class, nil, current_user: user).() }
+
+  let(:user) { build_stubbed(:admin) }
 
   it { is_expected.to have_link("add category") }
   it { is_expected.to have_link("add page") }

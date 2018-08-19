@@ -2,10 +2,12 @@
   ul.nav.navbar-nav
     li class=('active' if current_page?(controller: :dashboards, action: :show))
       = link_to 'Dashboard', administration_root_path
-  ul.nav.navbar-nav
-    li class=('active' if request.url.include?('records'))
-      = link_to 'Records', administration_records_path
-    li class=('active' if request.url.include?('board'))
-      = link_to 'Issues', administration_board_path
-  ul.nav.navbar-nav.shared-section
-    shared-issue-section
+  - if policy(Record).new?
+    ul.nav.navbar-nav
+      li class=('active' if request.url.include?('records'))
+        = link_to 'Records', administration_records_path
+  - if policy(BoardList).index?
+    ul.nav.navbar-nav
+      li class=('active' if request.url.include?('board'))
+        = link_to 'Issues', administration_board_path
+  = render "administration/shared/shared_issue_section"
