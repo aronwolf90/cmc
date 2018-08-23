@@ -3,16 +3,16 @@
 require "reform/form/coercion"
 
 class RegistrationForm < Reform::Form
-  include Composition
   feature Coercion
+  model Registration
 
-  property :name, on: :organization
-  property :time_zone, on: :organization
+  property :name
+  property :time_zone
 
-  property :firstname, on: :user
-  property :lastname, on: :user
-  property :email, on: :user
-  property :password, on: :user
+  property :firstname
+  property :lastname
+  property :email
+  property :password
   property :confirmation_password, virtual: true
 
   validation :default, with: { form: true } do
@@ -36,9 +36,5 @@ class RegistrationForm < Reform::Form
     required(:email)
     required(:password).filled(:password_length?)
     required(:confirmation_password).filled(:same_password?)
-  end
-
-  def persisted?
-    false
   end
 end

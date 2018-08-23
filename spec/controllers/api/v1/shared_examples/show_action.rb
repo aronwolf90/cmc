@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard show action" do
+RSpec.shared_examples "standard api show action" do
   describe "GET show" do
     subject { get :show, params: { id: model.id } }
 

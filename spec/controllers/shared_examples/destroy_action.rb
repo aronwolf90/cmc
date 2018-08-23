@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standart destroy action" do |namespace, redirect|
+RSpec.shared_examples "standard destroy action" do |namespace, redirect|
   describe "DELETE destroy" do
     let(:user) { build_stubbed(:user) }
 

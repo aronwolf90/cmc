@@ -5,15 +5,5 @@ require_relative "../../shared_examples/standard_create_operation"
 
 RSpec.describe Administration::Projects::CreateOperation do
   it_should_behave_like "standard create operation",
-    Administration::ProjectForm,
-    {
-      data: {
-        name: "name"
-      }
-    },
-    {
-      data: {
-        name: nil
-      }
-    }
+    form_class: Administration::ProjectForm
 end

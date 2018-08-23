@@ -8,12 +8,12 @@ RSpec.describe Administration::BoardListsController, type: :controller do
   let(:form) { Administration::BoardListForm }
   let(:params) { {} }
 
-  include_examples "standart new action", Administration::BoardLists
-  include_examples "standart create action", Administration::BoardLists,
+  include_examples "standard new action", Administration::BoardLists
+  include_examples "standard create action", Administration::BoardLists,
     %i[administration board]
-  include_examples "standart edit action", Administration::BoardLists
-  include_examples "standart update action", Administration::BoardLists,
+  include_examples "standard edit action", Administration::BoardLists
+  include_examples "standard update action", Administration::BoardLists,
     %i[administration board]
-  include_examples "standart destroy action", Administration::BoardLists,
+  include_examples "standard destroy action", Administration::BoardLists,
     %i[administration board]
 end

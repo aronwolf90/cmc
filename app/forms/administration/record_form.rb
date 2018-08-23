@@ -21,7 +21,6 @@ module Administration
       optional(:id).maybe
       required(:start_time).filled
       optional(:end_time).maybe
-      required(:user_id).filled(exists?: ::User)
       required(:issue_id).filled(exists?: ::Issue)
 
       validate start_before_end: %i[start_time end_time] do |start_time, end_time|

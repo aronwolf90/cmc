@@ -8,10 +8,7 @@ RSpec.describe Registrations::Cell::Form, type: :cell do
   subject { cell(described_class, form).() }
 
   let(:form) do
-    RegistrationForm.new(
-      organization: Organization.new,
-      user: User.new
-    )
+    RegistrationForm.new(Registration.new)
   end
 
   it { is_expected.to have_selector("#data_name") }

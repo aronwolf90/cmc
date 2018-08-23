@@ -9,8 +9,8 @@ RSpec.describe Administration::Wiki::PagesController, type: :controller do
   let(:form) { Administration::WikiPageForm }
   let(:params) { {} }
 
-  include_examples "standart show action", Administration::WikiPages
-  include_examples "standart new action", Administration::WikiPages
-  include_examples "standart create action",
+  include_examples "standard show action", Administration::WikiPages
+  include_examples "standard new action", Administration::WikiPages
+  include_examples "standard create action",
     Administration::WikiPages, %i[administration wiki content]
 end

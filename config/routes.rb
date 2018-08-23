@@ -78,6 +78,4 @@ Rails.application.routes.draw do
       resources :user_issues, only: :index
     end
   end
-
-  root to: "health#index"
 end

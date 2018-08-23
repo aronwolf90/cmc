@@ -9,7 +9,7 @@ module Api::V1
     end
 
     def update
-      super(operation: Users::UpdateOperation, model: user)
+      super(operation: Users::UpdateOperation)
     end
 
   private

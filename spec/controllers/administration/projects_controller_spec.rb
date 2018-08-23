@@ -8,12 +8,12 @@ RSpec.describe Administration::ProjectsController, type: :controller do
   let(:form) { Administration::ProjectForm }
   let(:params) { {} }
 
-  include_examples "standart index action", Administration::Projects
-  include_examples "standart new action", Administration::Projects
-  include_examples "standart edit action", Administration::Projects
-  include_examples "standart create action", Administration::Projects
-  include_examples "standart update action", Administration::Projects,
+  include_examples "standard index action", Administration::Projects
+  include_examples "standard new action", Administration::Projects
+  include_examples "standard edit action", Administration::Projects
+  include_examples "standard create action", Administration::Projects
+  include_examples "standard update action", Administration::Projects,
     %i[administration projects]
-  include_examples "standart destroy action", Administration::Projects,
+  include_examples "standard destroy action", Administration::Projects,
     %i[administration projects]
 end

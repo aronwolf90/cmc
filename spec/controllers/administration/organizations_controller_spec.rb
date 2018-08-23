@@ -8,7 +8,7 @@ RSpec.describe Administration::OrganizationsController, type: :controller do
   let(:form) { Administration::OrganizationForm }
   let(:params) { {} }
 
-  include_examples "standart edit action", Administration::Organizations
-  include_examples "standart update action", Administration::Organizations,
+  include_examples "standard edit action", Administration::Organizations
+  include_examples "standard update action", Administration::Organizations,
     %i[edit administration organization]
 end

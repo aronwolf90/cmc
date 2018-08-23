@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standart new action" do |namespace|
+RSpec.shared_examples "standard new action" do |namespace|
   describe "GET new" do
     let(:user) { build_stubbed(:user) }
 

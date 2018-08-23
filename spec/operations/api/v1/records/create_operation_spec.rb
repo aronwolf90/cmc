@@ -3,7 +3,12 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::Records::CreateOperation do
-  subject { described_class.(params: params, current_user: current_user) }
+  subject do
+    described_class.(
+      params: params,
+      current_user: current_user
+    )
+  end
 
   let(:current_user) { build_stubbed(:user) }
   let(:params) do
@@ -37,13 +42,10 @@ RSpec.describe Api::V1::Records::CreateOperation do
     allow(Api::V1::Records::CreateForm).to receive(:call).with(params).and_return(form_result)
     allow(Api::V1::RecordDeserializer).to receive(:call).with(params[:data]).and_return(deserialized_params)
     allow(Records::CreateMutation).to receive(:call)
-      .with(attributes: deserialized_params, current_user: current_user)
-      .and_return(build_stubbed(:record, deserialized_params))
   end
 
   it "call CreateMutation" do
     expect(Records::CreateMutation).to receive(:call)
-      .with(attributes: deserialized_params, current_user: current_user)
     subject
   end
 

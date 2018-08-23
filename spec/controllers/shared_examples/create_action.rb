@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standart create action" do |namespace, redirect|
+RSpec.shared_examples "standard create action" do |namespace, redirect|
   describe "POST create" do
     let(:user) { build_stubbed(:user) }
 

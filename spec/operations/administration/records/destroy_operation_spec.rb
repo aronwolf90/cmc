@@ -1,19 +1,10 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require_relative "../../shared_examples/standard_destroy_operation"
 
 RSpec.describe Administration::Records::DestroyOperation do
-  subject { described_class.(params: {}, current_user: current_user) }
+  let(:model) { Record.new }
 
-  let(:record) { build_stubbed(:record) }
-  let(:current_user) { build_stubbed(:admin)  }
-
-  before do
-    allow(Record).to receive(:find).and_return(record)
-  end
-
-  it "call destroy" do
-    expect(record).to receive(:destroy!)
-    subject
-  end
+  it_should_behave_like "standard destroy operation"
 end

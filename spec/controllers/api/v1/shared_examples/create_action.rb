@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard create action" do |operation|
+RSpec.shared_examples "standard api create action" do |operation|
   describe "PUT udate" do
     subject { post :create }
 

@@ -3,9 +3,11 @@
 module Api::V1
   module WikiPages
     class UpdateOperation < ApiOperation
-      step ValidateStep.new(form: UpdateForm)
-      success DeserializeStep.new(deserializer: WikiPageDeserializer)
-      success UpdateStep.new
+      @form = UpdateForm
+      @deserializer = WikiPageDeserializer
+      @policy = WikiPagePolicy
+      @model = WikiPage
+      include StandardUpdateOperationConcern
     end
   end
 end

@@ -14,7 +14,7 @@ module Api
       end
 
       def update
-        super(operation: Issues::UpdateOperation, model: issue)
+        super(operation: Issues::UpdateOperation)
       end
 
       def destroy

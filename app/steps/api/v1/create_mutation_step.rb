@@ -2,10 +2,11 @@
 
 module Api::V1
   class CreateMutationStep < ApiStep
-    pattr_initialize %i[mutation!]
-
-    def call(options, deserialized_params:, current_user:, **args)
-      options[:model] = mutation.call(attributes: deserialized_params, current_user: current_user)
+    def self.call(options, deserialized_params:, model:, current_user:, **)
+      mutation(model, :create).call(
+        user: current_user,
+        **deserialized_params
+      )
     end
   end
 end

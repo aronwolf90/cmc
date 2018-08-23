@@ -8,5 +8,5 @@ RSpec.describe Administration::DashboardsController, type: :controller do
   let(:form) { Administration::RecordForm }
   let(:params) { {} }
 
-  include_examples "standart show action", Administration::Dashboard
+  include_examples "standard show action", Administration::Dashboard
 end

@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "standard create operation" do
-  |form_class, valid_params, invalid_params|
+  |
+    form_class:,
+    valid_params: { data: {} },
+    invalid_params: { data: {} },
+    mutation: StandardCreateMutation
+  |
 
   subject do
     described_class.(params: params, current_user: current_user)
@@ -12,7 +17,7 @@ RSpec.shared_examples "standard create operation" do
   before do
     allow(form_class)
       .to receive(:new).and_return(form)
-    allow(form).to receive(:save).and_return(true)
+    allow(mutation).to receive(:call)
   end
 
   context "valid params" do
@@ -20,30 +25,33 @@ RSpec.shared_examples "standard create operation" do
     let(:form) { double() }
 
     before do
-      allow(form).to receive(:call).and_return(double(success?: true))
+      result = double(success?: true)
+      allow(form).to receive(:call).and_return(result)
+      allow(result).to receive(:save).and_yield(params[:data])
     end
 
     it { is_expected.to be_success }
 
     it do
       subject
-      expect(form).to have_received(:save)
+      expect(mutation).to have_received(:call)
     end
   end
 
   context "invalid params" do
     let(:params) { invalid_params }
     let(:form) { double()  }
+    let(:result) { double(success?: false) }
 
     before do
-      allow(form).to receive(:call).and_return(double(success?: false))
+      allow(form).to receive(:call).and_return(result)
     end
 
     it { is_expected.to be_failure }
 
-    it do
+    specify do
       subject
-      expect(form).not_to have_received(:save)
+      expect(mutation).not_to have_received(:call)
     end
   end
 end

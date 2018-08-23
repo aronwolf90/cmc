@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standart index action" do |namespace|
+RSpec.shared_examples "standard index action" do |namespace|
   describe "GET index" do
     let(:form) { Administration::RecordForm }
     let(:user) { build_stubbed(:user) }

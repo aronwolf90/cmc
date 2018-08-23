@@ -1,19 +1,10 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require_relative "../../shared_examples/standard_destroy_operation"
 
 RSpec.describe Administration::WikiCategories::DestroyOperation do
-  subject { described_class.(params: {}, current_user: user) }
+  let(:model) { WikiCategory.new }
 
-  let(:wiki_category) { build_stubbed(:wiki_category) }
-  let(:user) { build_stubbed(:admin)  }
-
-  before do
-    allow(WikiCategory).to receive(:find).and_return(wiki_category)
-  end
-
-  it "call destroy" do
-    expect(wiki_category).to receive(:destroy!)
-    subject
-  end
+  it_should_behave_like "standard destroy operation"
 end

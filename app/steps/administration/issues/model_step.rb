@@ -2,9 +2,10 @@
 
 module Administration
   module Issues
-    class SetDefaultValueStep < ApplicationStep
+    class ModelStep < ApplicationStep
       def self.call(options, params:, **)
-        options[:model].board_list_id = params[:board_list_id]
+        options[:model] =
+          Issue.new(board_list_id: params[:board_list_id])
       end
     end
   end

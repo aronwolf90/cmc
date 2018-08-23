@@ -4,22 +4,22 @@ require "rails_helper"
 
 describe RegistrationForm do
   subject do
-    described_class.new(organization: organization, user: user)
+    described_class.new(Registration.new)
   end
-
-  let(:organization) { build(:organization) }
-  let(:user) { build(:user) }
 
   let(:valid_params) do
     {
       name: "test",
+      time_zone: "Berlin",
       firstname: "Bob",
-      lastame: "Marley",
+      lastname: "Marley",
       email: "test@email.com",
       password: "password",
       confirmation_password: "password"
     }
   end
 
-  it { expect(subject.validate(valid_params)).to be true }
+  specify do
+    expect(subject.validate(valid_params)).to be true
+  end
 end

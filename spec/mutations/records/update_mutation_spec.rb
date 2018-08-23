@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe Records::UpdateMutation do
   subject do
-    described_class.call(record, attributes: attributes, current_user: current_user)
+    described_class.call(user: current_user, model: record, **attributes)
   end
 
   let(:current_user) { create(:admin) }
@@ -13,7 +13,7 @@ RSpec.describe Records::UpdateMutation do
   context "new record is active" do
     let(:attributes) do
       {
-        "end_time" => nil
+        end_time: nil
       }
     end
 
@@ -47,14 +47,14 @@ RSpec.describe Records::UpdateMutation do
     let!(:other_record) { create(:record, user: current_user, end_time: nil) }
     let(:attributes) do
       {
-        "start_time" => Time.parse("2018-05-17 20:27:45"),
-        "end_time" => Time.parse("2018-06-17 20:27:45")
+        start_time: Time.parse("2018-05-17 20:27:45"),
+        end_time: Time.parse("2018-06-17 20:27:45")
       }
     end
 
     it "create new record" do
       expect { subject }.to change { current_user.records.count }.by(1)
-      expect(Record.last.attributes).to include attributes
+      expect(Record.last.attributes.symbolize_keys).to include attributes
     end
 
     it "not deactivate old record" do

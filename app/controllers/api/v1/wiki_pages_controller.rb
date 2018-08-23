@@ -10,7 +10,7 @@ module Api
       end
 
       def update
-        super(operation: WikiPages::UpdateOperation, model: wiki_page)
+        super(operation: WikiPages::UpdateOperation)
       end
 
     private

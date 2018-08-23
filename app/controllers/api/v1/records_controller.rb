@@ -9,13 +9,7 @@ module Api::V1
     end
 
     def update
-      super(operation: Records::UpdateOperation, model: record)
-    end
-
-  private
-
-    def record
-      @record ||= Record.find(params[:id])
+      super(operation: Records::UpdateOperation)
     end
   end
 end

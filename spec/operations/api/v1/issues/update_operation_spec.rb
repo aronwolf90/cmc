@@ -3,8 +3,11 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::Issues::UpdateOperation do
-  subject { described_class.(params: params, model: issue) }
+  subject do
+    described_class.(params: params, current_user: user)
+  end
 
+  let(:user) { build_stubbed(:admin) }
   let(:issue) { build_stubbed(:issue) }
   let(:params) do
     {
@@ -30,6 +33,7 @@ RSpec.describe Api::V1::Issues::UpdateOperation do
   end
 
   before do
+    allow(Issue).to receive(:find).and_return(issue)
     allow(Api::V1::Issues::UpdateForm).to receive(:call).with(params).and_return(form_result)
     allow(Api::V1::IssueDeserializer).to receive(:call).with(params[:data]).and_return(deserialized_params)
     allow(issue).to receive(:update!)

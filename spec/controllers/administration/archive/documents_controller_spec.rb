@@ -9,17 +9,17 @@ RSpec.describe Administration::Archive::DocumentsController, type: :controller d
   let(:form) { Administration::ArchiveDocumentForm }
   let(:params) { {} }
 
-  include_examples "standart new action",
+  include_examples "standard new action",
     Administration::ArchiveDocuments
-  include_examples "standart create action",
+  include_examples "standard create action",
     Administration::ArchiveDocuments,
     %i[administration archive content]
-  include_examples "standart edit action",
+  include_examples "standard edit action",
     Administration::ArchiveDocuments
-  include_examples "standart update action",
+  include_examples "standard update action",
     Administration::ArchiveDocuments,
     %i[administration archive content]
-  include_examples "standart destroy action",
+  include_examples "standard destroy action",
     Administration::ArchiveDocuments,
     %i[administration archive content]
 

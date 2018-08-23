@@ -8,7 +8,7 @@ RSpec.describe Administration::Settings::UsersController, type: :controller do
   let(:form) { Administration::UserForm }
   let(:params) { {} }
 
-  include_examples "standart edit action", Administration::SettingsUsers
-  include_examples "standart update action", Administration::SettingsUsers,
+  include_examples "standard edit action", Administration::SettingsUsers
+  include_examples "standard update action", Administration::SettingsUsers,
     "/administration/settings/users/1/edit"
 end

@@ -4,7 +4,6 @@ module Administration
   module ArchiveFolders
     class CreateOperation < AdministrationOperation
       @form = ArchiveFolderForm
-      @policy = FolderPolicy
       include MvcStandardCreateOperationConcern
     end
   end

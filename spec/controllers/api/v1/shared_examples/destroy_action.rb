@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard destroy action" do
+RSpec.shared_examples "standard api destroy action" do
   describe "DELETE destroy" do
     subject { delete :destroy, params: { id: model.id } }
 

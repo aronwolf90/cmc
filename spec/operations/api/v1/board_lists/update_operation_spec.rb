@@ -6,7 +6,6 @@ RSpec.describe Api::V1::BoardLists::UpdateOperation do
   subject do
     described_class.(
       params: params,
-      model: board_list,
       current_user: user
     )
   end
@@ -35,6 +34,7 @@ RSpec.describe Api::V1::BoardLists::UpdateOperation do
   end
 
   before do
+    allow(BoardList).to receive(:find).and_return(board_list)
     allow(Api::V1::BoardLists::UpdateForm).to receive(:call).with(params).and_return(form_result)
     allow(Api::V1::BoardListDeserializer).to receive(:call).with(params[:data]).and_return(deserialized_params)
     allow(board_list).to receive(:update!)

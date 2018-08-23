@@ -14,7 +14,7 @@ module Api
       end
 
       def update
-        super(operation: BoardLists::UpdateOperation, model: board_list)
+        super(operation: BoardLists::UpdateOperation)
       end
 
       def destroy

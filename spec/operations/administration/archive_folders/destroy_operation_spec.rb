@@ -1,19 +1,10 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require_relative "../../shared_examples/standard_destroy_operation"
 
 RSpec.describe Administration::ArchiveFolders::DestroyOperation do
-  subject { described_class.(params: {}, current_user: user) }
+  let(:model) { build_stubbed(:folder) }
 
-  let(:folder) { build_stubbed(:folder) }
-  let(:user) { build_stubbed(:admin) }
-
-  before do
-    allow(Folder).to receive(:find).and_return(folder)
-  end
-
-  it "call destroy" do
-    expect(folder).to receive(:destroy!)
-    subject
-  end
+  it_should_behave_like "standard destroy operation"
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard update action" do |operation|
+RSpec.shared_examples "standard api update action" do |operation|
   describe "PUT udate" do
     subject { put :update, params: { id: model.id } }
 
@@ -23,7 +23,7 @@ RSpec.shared_examples "standard update action" do |operation|
 
     it "pass collection to render" do
       expect(operation).to receive(:call)
-        .with(current_user: user, model: model, params: params)
+        .with(current_user: user, params: params)
         .and_return(result)
       subject
     end

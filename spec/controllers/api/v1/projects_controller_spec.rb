@@ -6,5 +6,5 @@ require_relative "./shared_examples/standart_actions"
 RSpec.describe Api::V1::ProjectsController, type: :controller do
   let(:model) { build_stubbed(:project) }
 
-  include_examples "standard index action"
+  include_examples "standard api index action"
 end

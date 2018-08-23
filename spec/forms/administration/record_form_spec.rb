@@ -17,7 +17,6 @@ describe Administration::RecordForm do
   end
 
   it { expect(subject.validate({})).to be true }
-  it { expect(subject.validate(user_id: nil)).to be false }
   it { expect(subject.validate(issue_id: nil)).to be false }
   it { expect(subject.validate(start_time: nil)).to be false }
   it { expect(subject.validate(end_time: nil)).to be true }

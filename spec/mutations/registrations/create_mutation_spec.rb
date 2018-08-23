@@ -5,26 +5,22 @@ require "rails_helper"
 RSpec.describe Registrations::CreateMutation do
   subject do
     described_class.call(
-      attributes: attributes,
-      current_user: current_user,
-      model: { organization: Organization.new, user: Admin.new }
+      user: current_user,
+      model: Registration.new,
+      **attributes,
     )
   end
 
   let(:current_user) { create(:admin) }
   let(:attributes) do
     {
-      organization: {
-        name: "test",
-        time_zone: "Berlin"
-      },
-      user: {
-        firstname: "Bob",
-        lastname: "Marley",
-        email: "bob@email.com",
-        password: "password",
-        confirmation_password: "password"
-      }
+      name: "test",
+      time_zone: "Berlin",
+      firstname: "Bob",
+      lastname: "Marley",
+      email: "bob@email.com",
+      password: "password",
+      confirmation_password: "password"
     }
   end
 

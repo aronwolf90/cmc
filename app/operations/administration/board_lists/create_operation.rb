@@ -4,7 +4,6 @@ module Administration
   module BoardLists
     class CreateOperation < AdministrationOperation
       @form = BoardListForm
-      @policy = BoardListPolicy
       include MvcStandardCreateOperationConcern
     end
   end

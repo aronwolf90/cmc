@@ -28,8 +28,8 @@ module Api
         end
       end
 
-      def update(operation:, model:)
-        result = run operation, model: model
+      def update(operation:)
+        result = run operation
 
         if result.success?
           head :no_content

@@ -3,10 +3,12 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::Records::UpdateOperation do
-  subject { described_class.(params: params, model: record, current_user: current_user) }
+  subject do
+    described_class.(params: params, current_user: current_user)
+  end
 
   let(:record) { build_stubbed(:record) }
-  let(:current_user) { build_stubbed(:user) }
+  let(:current_user) { build_stubbed(:admin) }
   let(:params) do
     {
       data: {
@@ -36,10 +38,10 @@ RSpec.describe Api::V1::Records::UpdateOperation do
 
   before do
     Timecop.freeze
+    allow(Record).to receive(:find).and_return(record)
     allow(Api::V1::Records::UpdateForm).to receive(:call).with(params).and_return(form_result)
     allow(Api::V1::RecordDeserializer).to receive(:call).with(params[:data]).and_return(deserialized_params)
     allow(Records::UpdateMutation).to receive(:call)
-      .with(record, attributes: deserialized_params, current_user: current_user).and_return(build_stubbed(:record, deserialized_params))
   end
 
   after do
@@ -48,7 +50,6 @@ RSpec.describe Api::V1::Records::UpdateOperation do
 
   it "call UpdateMutation" do
     expect(Records::UpdateMutation).to receive(:call)
-      .with(record, attributes: deserialized_params, current_user: current_user)
     subject
   end
 

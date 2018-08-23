@@ -2,13 +2,6 @@
 
 module Registrations
   class CreateMutation < ApplicationMutation
-    attr_reader :attributes, :model
-
-    def initialize(attributes:, model:, **)
-      @attributes = attributes
-      @model = model
-    end
-
     def call
       ActiveRecord::Base.transaction do
         create_organization
@@ -22,15 +15,23 @@ module Registrations
   private
 
     def create_organization
-      model[:organization].update!(attributes[:organization])
+      Organization.create!(
+        name: attributes[:name],
+        time_zone: attributes[:time_zone]
+      )
     end
 
     def create_user
-      model[:user].update!(attributes[:user].except(:confirmation_password))
+      Admin.create!(
+        firstname: attributes[:firstname],
+        lastname: attributes[:lastname],
+        email: attributes[:email],
+        password: attributes[:password]
+      )
     end
 
     def organization_name
-      @organization_name ||= attributes[:organization][:name]
+      @organization_name ||= attributes[:name]
     end
   end
 end

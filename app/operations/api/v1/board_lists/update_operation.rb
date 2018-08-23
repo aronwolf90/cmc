@@ -6,6 +6,7 @@ module Api::V1
       @form = UpdateForm
       @deserializer = BoardListDeserializer
       @policy = BoardListPolicy
+      @model = BoardList
       include StandardUpdateOperationConcern
     end
   end

@@ -6,8 +6,8 @@ require_relative "./shared_examples/standart_actions"
 RSpec.describe Api::V1::RecordsController, type: :controller do
   let(:model) { build_stubbed(:record) }
 
-  include_examples "standard create action",
+  include_examples "standard api create action",
     Api::V1::Records::CreateOperation
-  include_examples "standard update action",
+  include_examples "standard api update action",
     Api::V1::Records::UpdateOperation
 end

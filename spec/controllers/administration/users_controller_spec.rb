@@ -8,8 +8,8 @@ RSpec.describe Administration::UsersController, type: :controller do
   let(:form) { Administration::UserForm }
   let(:params) { {} }
 
-  include_examples "standart index action", Administration::Users
-  include_examples "standart new action", Administration::Users
-  include_examples "standart create action", Administration::Users,
+  include_examples "standard index action", Administration::Users
+  include_examples "standard new action", Administration::Users
+  include_examples "standard create action", Administration::Users,
     %i[administration users]
 end

@@ -5,7 +5,7 @@ module Api::V1
     class CreateOperation < ApiOperation
       @form = CreateForm
       @deserializer = RecordDeserializer
-      @mutation = ::Records::CreateMutation
+      @model = Record
       include StandardCreateOperationConcern
     end
   end

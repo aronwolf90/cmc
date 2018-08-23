@@ -20,24 +20,20 @@ RSpec.describe Api::V1::Comments::CreateOperation do
   let(:form_result) { OpenStruct.new(errors: []) }
   let(:deserialized_params) do
     {
-      attributes: {
-        content: "comment"
-      },
-      relationships: {
-        issue: { data: { id: 1, type: "issues" } },
-        user: { data: { id: 1, type: "users" } }
-      }
+      content: "comment",
+      issue_id: 1,
+      user_id: 1
     }
   end
 
   before do
     allow(Api::V1::Comments::CreateForm).to receive(:call).with(params).and_return(form_result)
     allow(Api::V1::CommentDeserializer).to receive(:call).with(params[:data]).and_return(deserialized_params)
-    allow(Comment).to receive(:create!)
+    allow(StandardCreateMutation).to receive(:call)
   end
 
-  it "call create!" do
-    expect(Comment).to receive(:create!).with(deserialized_params)
+  it "call mutation" do
+    expect(StandardCreateMutation).to receive(:call)
     subject
   end
 

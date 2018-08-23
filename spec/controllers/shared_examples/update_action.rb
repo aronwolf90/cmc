@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standart update action" do |namespace, redirect|
+RSpec.shared_examples "standard update action" do |namespace, redirect|
   describe "PUT update" do
     let(:user) { build_stubbed(:user) }
 

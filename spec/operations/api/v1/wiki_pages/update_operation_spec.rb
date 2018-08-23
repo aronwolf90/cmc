@@ -3,9 +3,10 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::WikiPages::UpdateOperation do
-  subject { described_class.(params: params, model: model) }
+  subject { described_class.(params: params, current_user: user) }
 
   let(:model) { build_stubbed(:wiki_page)  }
+  let(:user) { Admin.new }
   let(:params) do
     {
       data: {
@@ -28,6 +29,7 @@ RSpec.describe Api::V1::WikiPages::UpdateOperation do
 
   before do
     Timecop.freeze
+    allow(WikiPage).to receive(:find).and_return(model)
     allow(Api::V1::WikiPages::UpdateForm)
       .to receive(:call).with(params).and_return(form_result)
     allow(Api::V1::WikiPageDeserializer)

@@ -5,10 +5,11 @@ module Api::V1
     extend ActiveSupport::Concern
 
     included do
+      success self::Model(@model, :find)
       step ValidateStep.new(form: @form)
       success DeserializeStep.new(deserializer: @deserializer)
       step self::Policy::Pundit(@policy, :create?) if @policy
-      success UpdateStep.new
+      success UpdateMutationStep
     end
   end
 end

@@ -9,12 +9,12 @@ RSpec.describe Administration::Wiki::CategoriesController, type: :controller do
   let(:form) { Administration::WikiPageForm }
   let(:params) { {} }
 
-  include_examples "standart new action", Administration::WikiCategories
-  include_examples "standart create action",
+  include_examples "standard new action", Administration::WikiCategories
+  include_examples "standard create action",
     Administration::WikiCategories, %i[administration wiki content]
-  include_examples "standart edit action", Administration::WikiCategories
-  include_examples "standart update action", Administration::WikiCategories,
+  include_examples "standard edit action", Administration::WikiCategories
+  include_examples "standard update action", Administration::WikiCategories,
     %i[administration wiki content]
-  include_examples "standart destroy action", Administration::WikiCategories,
+  include_examples "standard destroy action", Administration::WikiCategories,
     %i[administration wiki content]
 end

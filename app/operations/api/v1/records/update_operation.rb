@@ -3,9 +3,11 @@
 module Api::V1
   module Records
     class UpdateOperation < ApiOperation
-      step ValidateStep.new(form: UpdateForm)
-      success DeserializeStep.new(deserializer: RecordDeserializer)
-      success UpdateMutationStep.new(mutation: ::Records::UpdateMutation)
+      @form = UpdateForm
+      @deserializer = RecordDeserializer
+      @policy = RecordPolicy
+      @model = Record
+      include StandardUpdateOperationConcern
     end
   end
 end

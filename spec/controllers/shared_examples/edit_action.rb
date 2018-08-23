@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standart edit action" do |namespace|
+RSpec.shared_examples "standard edit action" do |namespace|
   describe "GET edit" do
     let(:user) { build_stubbed(:user) }
 

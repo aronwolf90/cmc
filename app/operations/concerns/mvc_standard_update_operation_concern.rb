@@ -5,24 +5,18 @@ module MvcStandardUpdateOperationConcern
 
   included do |base|
     form = @form
-    model_step = @model_step
-    policy = @policy
+    model_step = @model_step || self::Model(form.model_options.first, :find)
+    policy = @policy || "#{form.model_options.first}Policy".constantize
+    mutation = @mutation || StandardUpdateMutation
+
     base.const_set("Present", Class.new(Trailblazer::Operation) do
-      if model_step
-        success model_step
-      else
-        step self::Model(form.model_options.first, :find)
-      end
+      success model_step
       step self::Policy::Pundit(policy, :update?) if policy
       step self::Contract::Build(constant: form)
     end)
 
     step base::Nested(base::Present)
     step base::Contract::Validate(key: :data)
-    if @mutation.present?
-      success MvcUpdateMutationStep.new(mutation: @mutation)
-    else
-      success base::Contract::Persist()
-    end
+    success MvcUpdateMutationStep
   end
 end
