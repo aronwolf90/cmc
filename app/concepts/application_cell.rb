@@ -14,4 +14,9 @@ class ApplicationCell < Trailblazer::Cell
   def current_user
     options[:current_user]
   end
+
+  def add_btn(model_class:, name:, path:)
+    return unless policy(model_class).new?
+    standard_btn "add #{name}", path
+  end
 end

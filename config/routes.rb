@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
     namespace :settings do
       resources :users, only: %i[edit update]
+      resources :user_configurations, only: %i[edit update]
     end
 
     resources :users, only: %i[index new create]

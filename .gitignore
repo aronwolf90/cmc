@@ -34,6 +34,7 @@ coverage/
 /bundle
 public/uploads
 public/uploads/tmp
+uploads/
 
 public/assets/
 
