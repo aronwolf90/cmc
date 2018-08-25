@@ -20,5 +20,7 @@ module CMC
     config.active_record.belongs_to_required_by_default = false
 
     config.time_zone = "Berlin"
+
+    config.middleware.insert_before Warden::Manager, Apartment::Elevators::Subdomain
   end
 end

@@ -2,8 +2,8 @@
 
 class WikiCategory < ApplicationRecord
   belongs_to :wiki_category
-  has_many :wiki_categories
-  has_many :wiki_pages
+  has_many :wiki_categories, -> { order(:title) }
+  has_many :wiki_pages, -> { order(:title) }
 
   def root?
     wiki_category.nil?
