@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      wiki_page:
+        one: page
+        other: pages

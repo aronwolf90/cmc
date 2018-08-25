@@ -4,19 +4,20 @@ module Api
   module V1
     class WikiPagesController < ApiController
       include StandartActions
+      namespace WikiPages
 
       def show
-        super(wiki_page)
+        super
       end
 
       def update
-        super(operation: WikiPages::UpdateOperation)
+        super
       end
 
     private
 
-      def wiki_page
-        WikiPage.find(params[:id])
+      def model
+        @model ||= WikiPage.find(params[:id])
       end
     end
   end

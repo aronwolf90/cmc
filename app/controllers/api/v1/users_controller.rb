@@ -3,19 +3,20 @@
 module Api::V1
   class UsersController < ApiController
     include StandartActions
+    namespace Users
 
     def index
       super(User)
     end
 
     def update
-      super(operation: Users::UpdateOperation)
+      super
     end
 
   private
 
-    def user
-      @user ||= User.find(params[:id])
+    def model
+      @model ||= User.find(params[:id])
     end
   end
 end

@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      document:
+        one: document
+        other: documents

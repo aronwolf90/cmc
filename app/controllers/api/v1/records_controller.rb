@@ -3,13 +3,14 @@
 module Api::V1
   class RecordsController < ApiController
     include StandartActions
+    namespace Records
 
     def create
-      super(operation: Records::CreateOperation)
+      super
     end
 
     def update
-      super(operation: Records::UpdateOperation)
+      super
     end
   end
 end

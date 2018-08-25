@@ -14,12 +14,12 @@ module Api
         )
       end
 
-      def show(model)
+      def show
         render_json_api json: model
       end
 
-      def create(operation:)
-        result = run operation
+      def create
+        result = run namespace::CreateOperation
 
         if result.success?
           render json: result[:model], status: :created
@@ -28,8 +28,8 @@ module Api
         end
       end
 
-      def update(operation:)
-        result = run operation
+      def update
+        result = run namespace::UpdateOperation
 
         if result.success?
           head :no_content
@@ -38,7 +38,7 @@ module Api
         end
       end
 
-      def destroy(model:)
+      def destroy
         model.destroy!
 
         head :ok

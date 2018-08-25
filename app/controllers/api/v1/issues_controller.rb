@@ -4,27 +4,28 @@ module Api
   module V1
     class IssuesController < ApiController
       include StandartActions
+      namespace Issues
 
       def index
         super(Issue)
       end
 
       def show
-        super(issue)
+        super
       end
 
       def update
-        super(operation: Issues::UpdateOperation)
+        super
       end
 
       def destroy
-        super(model: issue)
+        super
       end
 
     private
 
-      def issue
-        @issue ||= Issue.find(params[:id])
+      def model
+        @model ||= Issue.find(params[:id])
       end
     end
   end

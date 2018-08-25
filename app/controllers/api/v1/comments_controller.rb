@@ -4,9 +4,10 @@ module Api
   module V1
     class CommentsController < ApiController
       include StandartActions
+      namespace Comments
 
       def create
-        super(operation: Comments::CreateOperation)
+        super
       end
     end
   end

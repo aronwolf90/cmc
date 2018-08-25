@@ -4,27 +4,28 @@ module Api
   module V1
     class BoardListsController < ApiController
       include StandartActions
+      namespace BoardLists
 
       def index
         super(BoardList)
       end
 
       def show
-        super(board_list)
+        super
       end
 
       def update
-        super(operation: BoardLists::UpdateOperation)
+        super
       end
 
       def destroy
-        super(model: board_list)
+        super
       end
 
     private
 
-      def board_list
-        @board_list ||= BoardList.find(params[:id])
+      def model
+        @model ||= BoardList.find(params[:id])
       end
     end
   end

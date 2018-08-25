@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      folder:
+        one: folder
+        other: folders

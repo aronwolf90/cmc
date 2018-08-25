@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      wiki_category:
+        one: category
+        other: categories
