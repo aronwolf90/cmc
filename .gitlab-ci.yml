@@ -165,12 +165,12 @@ deploy:
         helm install chart --name cmc-production
           --set image.tag=$CI_COMMIT_SHA
           --set remote=true
-          --set url=cost-manager.tk;
+          --set url=cost-manager.com;
       else
         helm upgrade cmc-production chart
           --set image.tag=$CI_COMMIT_SHA
           --set remote=true
-          --set url=cost-manager.tk
+          --set url=cost-manager.com
           --force;
       fi
   only:
