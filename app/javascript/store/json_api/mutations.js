@@ -20,7 +20,7 @@ export default {
     new UpdateService({ entry, payload }).perform()
   },
   remove (state, entry) {
-    new RemoveService({state, entry}).perform()
+    new RemoveService({ state, entry }).perform()
   },
   removeFromAll (state, { child, parentType, parentRelationshipName }) {
     new RemoveFromAllService({ state, child, parentType, parentRelationshipName }).perform()

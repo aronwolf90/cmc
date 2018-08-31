@@ -8,4 +8,5 @@ RSpec.describe Project, type: :model do
   it { is_expected.to have_many :records }
   it { is_expected.to have_many :user_projects }
   it { is_expected.to have_many :users }
+  it { is_expected.to have_many :project_record_days }
 end

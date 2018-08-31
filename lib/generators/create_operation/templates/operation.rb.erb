@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+module <%= class_name.pluralize.split("::")[0..-2].join("::") %>
+  module <%= class_name.pluralize.split("::").last.pluralize %>
+    class CreateOperation < <%= class_name.pluralize.split("::")[-2] %>Operation
+      @form = <%= class_name.split("::").last %>Form
+      include MvcStandardCreateOperationConcern
+    end
+  end
+end

@@ -8,7 +8,7 @@ import AssociatedEntryService from './services/getters/associated_entry_service'
 
 export default {
   entry (state) {
-    return ({type, id}) => Utils.get(state, { type, id })
+    return ({ type, id }) => Utils.get(state, { type, id })
   },
   collection (state) {
     return (type) => Utils.getCollection(state, type)
@@ -23,10 +23,10 @@ export default {
     return (name) => new MetaCollectionService({ state, name }).perform()
   },
   associatedEntries (state) {
-    return ({entry, name}) => new AssociatedEntriesService({state, entry, name}).perform()
+    return ({ entry, name }) => new AssociatedEntriesService({ state, entry, name }).perform()
   },
   associatedEntry (state) {
-    return ({entry, name}) => new AssociatedEntryService({state, entry, name}).perform()
+    return ({ entry, name }) => new AssociatedEntryService({ state, entry, name }).perform()
   },
   wasUrlCalled (state) {
     return (url) => {

@@ -1,0 +1,9 @@
+Description:
+    Generate the udpate operation
+
+Example:
+    rails generate update_operation user
+
+    This will create:
+        app/operations/users/update.rb
+        app/oeprations/users/update_spec.rb

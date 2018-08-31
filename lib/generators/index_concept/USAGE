@@ -1,0 +1,9 @@
+Description:
+    Generate the index concept
+
+Example:
+    rails generate index_concept user
+
+    This will create:
+        app/concepts/users/cell/index.rb
+        app/concepts/users/view/index.slim

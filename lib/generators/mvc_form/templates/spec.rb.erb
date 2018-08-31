@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+require "rails_helper"
+
+describe <%= class_name %>Form do
+  subject { described_class.new(model) }
+
+  let(:model) { build_stubbed(:<%= class_name.split("::").last.underscore %>) }
+
+  it { expect(subject.validate({})).to be true }
+end

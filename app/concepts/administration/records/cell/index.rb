@@ -4,17 +4,21 @@ module Administration
   module Records::Cell
     class Index < ApplicationCell
     private
-
-      def add_link
-        return unless policy(Record).new?
-        link_to "New record", new_administration_record_path,
-          class: "btn btn-success"
+      def format_day(day)
+        l(day, format: "%A %d.%m.%Y")
       end
 
-      def edit_btn(record)
-        return unless policy(record).edit?
-        link_to fa_icon(:edit), [:edit, :administration, record],
-          class: "btn btn-sm btn-secondary"
+      def format_time(time)
+        l(time, format: "%I:%M %P")
+      end
+
+      def add_btn
+        super(Record)
+      end
+
+      def csv_btn
+        standard_btn fa_icon(:"file-excel-o"),
+          administration_records_path(format: :csv)
       end
 
       def spended_time(record_day)

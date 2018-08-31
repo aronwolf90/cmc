@@ -3,9 +3,10 @@
 module Administration
   module Records
     class IndexOperation < Trailblazer::Operation
-      step ModelStep
+      step IndexModelStep
+      success ThisMonthSpentTimeStep
+      success RecordsStep
       step Policy::Pundit(RecordPolicy, :index?)
-      step ThisMonthSpentTimeStep
     end
   end
 end

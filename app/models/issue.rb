@@ -4,6 +4,8 @@ class Issue < ApplicationRecord
   belongs_to :user
   belongs_to :board_list
 
+  has_one :project, through: :board_list
+
   has_many :comments
   has_many :issues
   has_many :records

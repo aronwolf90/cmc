@@ -6,11 +6,11 @@ module Administration
     private
 
       def add_category_btn
-        add_btn(model_class: WikiCategory)
+        add_btn(WikiCategory)
       end
 
       def add_page_btn
-        add_btn(model_class: WikiPage)
+        add_btn(WikiPage)
       end
     end
   end

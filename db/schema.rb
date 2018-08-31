@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180817170637) do
+ActiveRecord::Schema.define(version: 20180828211000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,6 +178,15 @@ ActiveRecord::Schema.define(version: 20180817170637) do
        JOIN records ON ((records.user_id = users.id)))
        JOIN issues ON ((issues.id = records.issue_id)))
     GROUP BY users.id, issues.id;
+  SQL
+
+  create_view "project_record_days",  sql_definition: <<-SQL
+      SELECT (records.start_time)::date AS day,
+      board_lists.project_id
+     FROM ((records
+       JOIN issues ON ((issues.id = records.issue_id)))
+       JOIN board_lists ON ((board_lists.id = issues.board_list_id)))
+    GROUP BY ((records.start_time)::date), board_lists.project_id;
   SQL
 
 end

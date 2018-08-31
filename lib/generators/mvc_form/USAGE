@@ -1,0 +1,9 @@
+Description:
+    Generate the mvc form
+
+Example:
+    rails generate create_operation user
+
+    This will create:
+        app/forms/user_form.rb
+        app/forms/user_form_spec.rb

@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :projects, except: :show do
       scope module: :projects do
         resource :dashboard, only: :show
+        resources :records, only: :index
       end
     end
 

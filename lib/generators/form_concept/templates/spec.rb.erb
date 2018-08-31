@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+describe <%= class_name %>::Cell::Form, type: :cell do
+  subject { described_class.(form, current_user: user) }
+
+  controller <%= class_name.pluralize %>Controller
+
+  let(:user) { Admin.new }
+  let(:form) { <% class_name %>Form.new(<%= class_name.split("::").last %>.new) }
+
+  # it { is_expected.to have_selector "#data_name" }
+end

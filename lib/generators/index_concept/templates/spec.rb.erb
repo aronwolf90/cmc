@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+describe <%= class_name %>::Cell::Index, type: :cell do
+  subject { described_class.(model, current_user: user) }
+
+  controller <%= class_name.pluralize %>Controller
+
+  let(:user) { Admin.new }
+  let(:model) { [] }
+end

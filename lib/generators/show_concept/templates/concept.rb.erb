@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+module <%= class_name.pluralize.split("::")[0..-2].join("::") %>
+  module <%= class_name.pluralize.split("::").last.pluralize %>::Cell
+    class Show < ApplicationCell
+    end
+  end
+end

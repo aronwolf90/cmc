@@ -15,7 +15,7 @@ RSpec.shared_examples "standard index action" do |namespace|
       subject
     end
 
-    subject { get :index }
+    subject { get :index, params: params }
 
     let(:model) { [] }
     let(:operation_result) { OpenStruct.new("model" => model) }

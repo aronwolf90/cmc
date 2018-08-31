@@ -22,6 +22,7 @@ gem "dry-transaction"
 gem "hash_mapper"
 gem "kaminari", "~> 1.0.0"
 gem "knock"
+gem "lp_csv_exportable"
 gem "migration_data"
 gem "pundit"
 gem "scenic"
@@ -85,6 +86,7 @@ group :development, :test do
 
   # static code analyzers
   gem "active_record_doctor"
+  gem "brakeman"
   gem "rails_best_practices", require: false
   gem "rubycritic", require: false
   gem "traceroute"

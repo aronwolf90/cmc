@@ -7,11 +7,20 @@ module Administration
 
     def index
       run Records::IndexOperation
-      render cell(
-        Records::Cell::Index,
-        result["model"],
-        this_month_spended_time: result["this_month_spended_time"]
-      )
+
+      respond_to do |format|
+        format.html do
+          render cell(
+            Records::Cell::Index,
+            result["model"],
+            this_month_spended_time: result["this_month_spended_time"]
+          )
+        end
+
+        format.csv do
+          send_data RecordsCsvExporter.call(result[:records])
+        end
+      end
     end
 
     def new

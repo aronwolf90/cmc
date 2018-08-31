@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+module <%= class_name.pluralize.split("::")[0..-2].join("::") %>
+  module <%= class_name.pluralize.split("::").last.pluralize %>
+    class IndexOperation < <%= class_name.pluralize.split("::")[-2] %>Operation
+      step IndexModelStep
+      step Policy::Pundit(<%= class_name.split("::").last %>Policy, :index?)
+    end
+  end
+end

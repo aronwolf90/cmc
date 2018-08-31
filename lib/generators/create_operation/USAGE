@@ -1,0 +1,9 @@
+Description:
+    Generate the create operation
+
+Example:
+    rails generate create_operation user
+
+    This will create:
+        app/operations/users/create.rb
+        app/oeprations/users/create_spec.rb

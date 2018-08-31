@@ -12,7 +12,7 @@ RSpec.describe Administration::Records::IndexOperation do
       options["this_month_spended_time"] = 0
     end
 
-    allow(Administration::Records::ModelStep).to receive(:call) do |options|
+    allow(Administration::Records::IndexModelStep).to receive(:call) do |options|
       options["model"] = []
     end
   end

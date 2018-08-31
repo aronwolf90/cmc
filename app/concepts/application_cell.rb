@@ -15,8 +15,15 @@ class ApplicationCell < Trailblazer::Cell
     options[:current_user]
   end
 
-  def add_btn(model_class:, path: [:new, :administration, model_class.name.underscore])
+  def add_btn(model_class, path: nil)
+    path ||= [:new, :administration, model_class.name.underscore]
     return unless policy(model_class).new?
     standard_btn "add #{model_class.model_name.human}", path
+  end
+
+  def edit_btn(model, path: nil)
+    path ||= [:edit, :administration, model]
+    return unless policy(model).edit?
+    standard_btn fa_icon(:edit), [:edit, :administration, model]
   end
 end

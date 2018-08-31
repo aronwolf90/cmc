@@ -2,4 +2,7 @@
   ul.nav.navbar-nav
     li class=('active' if current_page?(controller: :dashboards, action: :show))
       = link_to 'Dashboard', [:administration, @project, :dashboard]
+    - if policy(Record).index?
+      li class=('active' if current_page?(controller: :records))
+        = link_to 'Records', [:administration, @project, :records]
   = render "administration/shared/shared_issue_section"

@@ -4,6 +4,8 @@ class Record < ApplicationRecord
   belongs_to :user
   belongs_to :issue
 
+  has_one :project, through: :issue
+
   scope :active, -> { where(end_time: nil) }
   scope :ordered, -> { order(start_time: :desc) }
 

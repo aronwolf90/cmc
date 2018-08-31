@@ -2,8 +2,14 @@
 
 require "rails_helper"
 
-RSpec.describe Administration::Records::ModelStep do
-  subject { described_class.call(options, params: {}, current_user: current_user) }
+RSpec.describe Administration::Records::IndexModelStep do
+  subject do
+    described_class.call(
+      options,
+      params: {},
+      current_user: current_user
+    )
+  end
 
   let(:current_user) { create(:admin) }
   let(:options) { {} }

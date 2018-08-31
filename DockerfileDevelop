@@ -6,9 +6,6 @@ ARG UID=1000
 ARG GID=1000
 ARG UNAME=user
 
-RUN echo "test"
-RUN echo $UID
-
 WORKDIR  /app
 
 ENV PATH /app/bin:/root/.yarn/bin:$PATH
@@ -40,6 +37,8 @@ RUN apk add vim tmux
 
 RUN chown -R $UID /usr/local/bundle
 RUN chown -R $UID /usr/local/bundle
+
+RUN deluser node
 
 RUN groupadd -g $GID $UNAME
 RUN useradd -m -u $UID -g $GID -s /bin/bash $UNAME -d /user

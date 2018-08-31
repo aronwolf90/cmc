@@ -1,0 +1,9 @@
+Description:
+    Generate the show concept
+
+Example:
+    rails generate show_concept user
+
+    This will create:
+        app/concepts/users/cell/show.rb
+        app/concepts/users/view/show.slim

@@ -1,0 +1,9 @@
+Description:
+    Generate the index operation
+
+Example:
+    rails generate index_operation user
+
+    This will create:
+        app/operations/users/index.rb
+        app/oeprations/users/index_spec.rb

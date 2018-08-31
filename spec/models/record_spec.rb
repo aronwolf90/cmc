@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe Record, type: :model do
   it { is_expected.to belong_to(:user) }
   it { is_expected.to belong_to(:issue) }
+  it { is_expected.to have_one(:project) }
 
   describe "scope .ordered" do
     let!(:old_record) { create(:record, start_time: 3.hours.ago, end_time: 1.hour.ago) }

@@ -1,7 +1,7 @@
 function handleVueDestructionOn (turbolinksEvent, vue) {
   function restoreTurbolinksRoute (o) {
     if (!window.history.state.turbolinks) {
-      Turbolinks.visit(window.location.pathname + window.location.hash, {action: 'replace'}) /* eslint-disable-line no-undef */
+      Turbolinks.visit(window.location.pathname + window.location.hash, { action: 'replace' }) /* eslint-disable-line no-undef */
     }
   }
   window.addEventListener('popstate', restoreTurbolinksRoute)

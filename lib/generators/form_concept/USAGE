@@ -1,0 +1,9 @@
+Description:
+    Generate the create concept
+
+Example:
+    rails generate create_concept user
+
+    This will create:
+        app/concepts/users/cell/create.rb
+        app/concepts/users/view/create.slim

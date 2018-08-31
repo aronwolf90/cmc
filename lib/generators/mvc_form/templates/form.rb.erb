@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+module <%= class_name.pluralize.split("::")[0..-2].join("::") %>
+  class <%= class_name.split("::").last %>Form < Reform::Form
+    model <%= class_name.split("::").last %>
+
+    # property :name
+
+    validation do
+      configure do
+        predicates(ReformPredicates)
+      end
+
+      # require(:name).filled
+    end
+  end
+end
