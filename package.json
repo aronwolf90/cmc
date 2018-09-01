@@ -12,6 +12,7 @@
     "d3": "^5.5.0",
     "d3-3": "^0.0.0",
     "d3-3d": "^0.0.9",
+    "eslint-plugin-vue": "^4.7.1",
     "jsdom": "^11.5.1",
     "jsdom-global": "^3.0.2",
     "json-api-normalizer": "^0.4.10",
@@ -42,8 +43,14 @@
     "babel-plugin-istanbul": "^4.1.5",
     "bdd-lazy-var": "^2.1.2",
     "chai": "^4.1.2",
+    "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standart": "^0.2.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0",
     "mocha": "^5.0.0",
     "mocha-webpack": "^1.0.1",
     "regenerator-runtime": "^0.11.1",
@@ -57,7 +64,8 @@
   "scripts": {
     "test": "./scripts/test_js.sh",
     "test:watch": "./scripts/test_js.sh spec/javascript --watch",
-    "report": "cross-env NODE_ENV=test nyc report"
+    "report": "cross-env NODE_ENV=test nyc report",
+    "eslint": "eslint app/javascript spec"
   },
   "nyc": {
     "exclude": [

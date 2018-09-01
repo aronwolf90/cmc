@@ -12,16 +12,15 @@ describe Administration::ProjectRecords::IndexModelStep do
     )
   end
 
-  let(:current_user) { create(:admin) }
+  let(:current_user) { build_stubbed(:admin) }
   let(:project) { build_stubbed(:project) }
   let(:options) { {} }
 
   before do
-    create(:record, user: current_user)
     subject
   end
 
   it "set on options the correct spended Time" do
-    expect(options["model"].as_json).to eq([RecordDay.first.as_json])
+    expect(options["model"].as_json).to eq([])
   end
 end

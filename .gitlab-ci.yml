@@ -26,18 +26,11 @@ gitlint:
 
 eslint:
   stage: lint
-  image: node:9.9.0-alpine
+  image: registry.gitlab.com/cmc_system/cmc/cmc:test
   script:
-    - npm install -g
-      eslint eslint-config-standard
-      eslint-plugin-import
-      eslint-plugin-node
-      eslint-plugin-standard
-      eslint-config-standart
-      eslint-plugin-promise
-      eslint-plugin-vue
-    - eslint app/javascript
-    - eslint spec/javascript
+    - ln -s /root/node_modules node_modules
+    - yarn install
+    - yarn eslint
 
 rubocop:
   stage: lint
@@ -135,7 +128,6 @@ build_test:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - make build_and_push_test_image
   only:
-    - master
     - schedules
 
 deploy:

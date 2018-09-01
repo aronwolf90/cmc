@@ -26,7 +26,7 @@ describe('ProjectSearchSelect', () => {
       }
     },
     entry () {
-      return ({id}) => {
+      return ({ id }) => {
         if (id === 1) {
           return $project1
         } else if (id === 2) {

@@ -38,7 +38,6 @@ build:
 
 build_and_push_test_image:
 	@$(eval IMAGE:="registry.gitlab.com/cmc_system/cmc/cmc:test")
-	@echo "rest"
 	@docker build -f DockerfileGitlab -t $(IMAGE) .
 	@docker push ${IMAGE}
 

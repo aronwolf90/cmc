@@ -5,7 +5,7 @@ import PQueue from 'p-queue'
 
 Vue.use(VueResource)
 
-const queue = new PQueue({concurrency: 1})
+const queue = new PQueue({ concurrency: 1 })
 
 const required = (params) => {
   for (const [paramsName, paramValue] of Object.entries(params)) {
@@ -175,7 +175,7 @@ export default {
       method: 'put',
       payload: { relationships: {
         [childRelationshipName]: { data: data }
-      }}
+      } }
     }).then(response => {
       context.commit('removeFromAll', {
         child: child,

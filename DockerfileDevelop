@@ -25,14 +25,6 @@ RUN /app/alphine_shared_install.sh
 
 RUN echo 'export PATH="/app/bin:$PATH"' >> /etc/profile
 
-RUN yarn global add eslint eslint-config-standard \
-  eslint-plugin-import \
-  eslint-plugin-node \
-  eslint-plugin-standard \
-  eslint-config-standart \
-  eslint-plugin-promise \
-  eslint-plugin-vue
-
 RUN apk add vim tmux
 
 RUN chown -R $UID /usr/local/bundle

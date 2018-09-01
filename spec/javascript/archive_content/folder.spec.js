@@ -15,13 +15,13 @@ describe('Folder', () => {
 
   def('getters', () => ({
     entry () {
-      return ({id}) => {
+      return ({ id }) => {
         if (id === 1) return $folder
         return $childFolder
       }
     },
     associatedEntries () {
-      return ({entry, name}) => {
+      return ({ entry, name }) => {
         if (entry !== $folder) return []
         if (name === 'folders') return $childFolders
         return $documents

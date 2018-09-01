@@ -15,13 +15,13 @@ describe('Category', () => {
 
   def('getters', () => ({
     entry () {
-      return ({id}) => {
+      return ({ id }) => {
         if (id === 1) return $category
         return $childCategory
       }
     },
     associatedEntries () {
-      return ({entry, name}) => {
+      return ({ entry, name }) => {
         if (entry !== $category) return []
         if (name === 'wiki-categories') return $childCategories
         return $pages

@@ -26,7 +26,7 @@ describe('SearchSelect', () => {
       }
     },
     entry () {
-      return ({id}) => {
+      return ({ id }) => {
         if (id === 1) {
           return $issue1
         } else if (id === 2) {
