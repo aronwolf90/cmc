@@ -2,6 +2,6 @@
 
 class Organization < ApplicationRecord
   def self.current
-    Organization.find_by!(name: Apartment::Tenant.current)
+    Organization.find_by(name: Apartment::Tenant.current)
   end
 end

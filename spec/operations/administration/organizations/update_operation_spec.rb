@@ -7,7 +7,7 @@ RSpec.describe Administration::Organizations::UpdateOperation do
   let(:model) { Organization.new }
 
   before do
-    allow(model.class).to receive(:find_by!).and_return(model)
+    allow(model.class).to receive(:current).and_return(model)
   end
 
   it_should_behave_like "standard update operation",
