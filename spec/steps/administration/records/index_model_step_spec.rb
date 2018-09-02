@@ -16,6 +16,7 @@ RSpec.describe Administration::Records::IndexModelStep do
 
   before do
     create(:record, user: current_user)
+    create(:organization, name: "public")
     subject
   end
 

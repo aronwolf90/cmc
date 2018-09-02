@@ -6,6 +6,10 @@ RSpec.describe RecordDay, type: :model do
   it { is_expected.to belong_to(:user) }
   it { is_expected.to have_many(:records) }
 
+  before do
+    create(:organization, name: "public")
+  end
+
   describe "with records" do
     subject { RecordDay.find_by(day: record.start_time) }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180828211000) do
+ActiveRecord::Schema.define(version: 20180902142751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180828211000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "time_zone", null: false
+    t.integer "time_zone_seconds"
     t.index ["name"], name: "index_organizations_on_name", unique: true
   end
 
@@ -162,13 +163,6 @@ ActiveRecord::Schema.define(version: 20180828211000) do
   add_foreign_key "records", "users"
   add_foreign_key "users", "projects", column: "selected_project_id"
 
-  create_view "record_days",  sql_definition: <<-SQL
-      SELECT (records.start_time)::date AS day,
-      records.user_id
-     FROM records
-    GROUP BY ((records.start_time)::date), records.user_id;
-  SQL
-
   create_view "user_issues",  sql_definition: <<-SQL
       SELECT users.id AS user_id,
       issues.id AS issue_id,
@@ -180,13 +174,22 @@ ActiveRecord::Schema.define(version: 20180828211000) do
     GROUP BY users.id, issues.id;
   SQL
 
+  create_view "record_days",  sql_definition: <<-SQL
+      SELECT ((records.start_time + ((organizations.time_zone_seconds)::double precision * 'PT1S'::interval)))::date AS day,
+      records.user_id
+     FROM (records
+       JOIN organizations ON (((organizations.name)::name = "current_schema"())))
+    GROUP BY (((records.start_time + ((organizations.time_zone_seconds)::double precision * 'PT1S'::interval)))::date), records.user_id;
+  SQL
+
   create_view "project_record_days",  sql_definition: <<-SQL
-      SELECT (records.start_time)::date AS day,
+      SELECT ((records.start_time + ((organizations.time_zone_seconds)::double precision * 'PT1S'::interval)))::date AS day,
       board_lists.project_id
-     FROM ((records
+     FROM (((records
        JOIN issues ON ((issues.id = records.issue_id)))
        JOIN board_lists ON ((board_lists.id = issues.board_list_id)))
-    GROUP BY ((records.start_time)::date), board_lists.project_id;
+       JOIN organizations ON (((organizations.name)::name = "current_schema"())))
+    GROUP BY (((records.start_time + ((organizations.time_zone_seconds)::double precision * 'PT1S'::interval)))::date), board_lists.project_id;
   SQL
 
 end

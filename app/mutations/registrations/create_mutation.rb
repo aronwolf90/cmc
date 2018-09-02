@@ -17,7 +17,8 @@ module Registrations
     def create_organization
       Organization.create!(
         name: attributes[:name],
-        time_zone: attributes[:time_zone]
+        time_zone: attributes[:time_zone],
+        time_zone_seconds: time_zone_seconds
       )
     end
 
@@ -28,6 +29,11 @@ module Registrations
         email: attributes[:email],
         password: attributes[:password]
       )
+    end
+
+    def time_zone_seconds
+      @time_zone_seconds ||=
+        Time.now.in_time_zone(attributes[:time_zone]).utc_offset
     end
 
     def organization_name
