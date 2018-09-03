@@ -9,6 +9,7 @@ class Registration
     :firstname,
     :lastname,
     :email,
-    :password
+    :password,
+    :organization
   )
 end

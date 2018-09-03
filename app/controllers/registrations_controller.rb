@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
 
   def create
     super do |model|
-      helpers.organization_sign_in_url(model[:organization])
+      helpers.organization_sign_in_url(model.organization)
     end
   end
 end

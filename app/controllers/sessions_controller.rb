@@ -12,6 +12,7 @@ class SessionsController < Devise::SessionsController
 private
 
   def organization
-    @organization ||= Organization.find_by(name: params[:organization])
+    @organization ||=
+      Organization.find_by(name: params[:organization].underscore.tr("_", "-"))
   end
 end

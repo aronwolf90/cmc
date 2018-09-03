@@ -31,6 +31,7 @@ class RegistrationForm < Reform::Form
     end
 
     required(:name).filled(:uniq_organization_name?)
+    required(:time_zone).filled
     required(:firstname).filled
     required(:lastname).filled
     required(:email)

@@ -4,7 +4,7 @@ module Registrations
   class CreateMutation < ApplicationMutation
     def call
       ActiveRecord::Base.transaction do
-        create_organization
+        model.organization = create_organization
         Apartment::Tenant.create(organization_name)
         Apartment::Tenant.switch(organization_name) do
           create_user
@@ -16,7 +16,7 @@ module Registrations
 
     def create_organization
       Organization.create!(
-        name: attributes[:name],
+        name: organization_name,
         time_zone: attributes[:time_zone],
         time_zone_seconds: time_zone_seconds
       )
@@ -37,7 +37,7 @@ module Registrations
     end
 
     def organization_name
-      @organization_name ||= attributes[:name]
+      @organization_name ||= attributes[:name].underscore.tr("_", "-")
     end
   end
 end
