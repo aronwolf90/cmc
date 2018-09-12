@@ -2,14 +2,10 @@
 
 module Administration
   module Records
-    class IndexModelStep < ApplicationStep
+    class IndexModelStep < BaseIndexStep
       def self.call(options, params:, current_user:, **)
         options["model"] =
-          current_user
-            .record_days
-            .ordered
-            .page(params[:page] || 1)
-            .per(5)
+          page(current_user.record_days, page: params[:page], per: 5)
       end
     end
   end

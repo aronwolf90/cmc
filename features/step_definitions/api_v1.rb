@@ -57,3 +57,12 @@ Given /^a wiki page exists with an id of 1$/ do
     wiki_category: wiki_category, content: "content"
   )
 end
+
+Given(/An record for user "([^\"]*)" and issue "([^\"]*)"/) do |user_id, issue_id|
+  Record.create!(
+    user_id: user_id,
+    issue_id: issue_id,
+    start_time: DateTime.parse("2018-06-11T16:59:00.049+02:00") - 1.minute,
+    end_time: DateTime.parse("2018-06-11T16:59:00.049+02:00")
+  )
+end

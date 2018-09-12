@@ -1,9 +1,10 @@
 Feature: Users
 
 Scenario: List user
-  Given I am signed in
+  Given The app contain seed data
+  And I am signed in
   When I click on link "Users"
-  Then the element "#side-body" contain the text "aron"
+  Then the element "#side-body" contain the text "Aron"
 
 Scenario: Create user
   Given I am signed in
@@ -21,7 +22,8 @@ Scenario: Create user
 
 @javascript
 Scenario: Edit user
-  Given I am signed in
+  Given The app contain seed data
+  And I am signed in
   When I click on ".navbar-nav img"
   And I click on link "Users"
   And I click on ".fa-edit"
@@ -29,4 +31,4 @@ Scenario: Edit user
   And I click on submit
   Then the page contain the text "User has been updated"
   And I reload the page
-  Then the input "data_firstname" has the value "new firstname"
+  And the input "data_firstname" has the value "new firstname"

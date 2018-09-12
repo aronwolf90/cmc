@@ -2,7 +2,8 @@ Feature: Edit my profile
 
 @javascript
 Scenario: Change firstname
-  Given I am signed in
+  Given The app contain seed data
+  And I am signed in
   When I click on ".navbar-nav img"
   And I click on link "Settings"
   And I enter "new user name" into input named "data_firstname"

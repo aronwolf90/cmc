@@ -8,7 +8,7 @@ module Api::V1
       success self::Model(@model, :find)
       step ValidateStep.new(form: @form)
       success DeserializeStep.new(deserializer: @deserializer)
-      step self::Policy::Pundit(@policy, :create?) if @policy
+      step self::Policy::Pundit(@policy, :update?) if @policy
       success UpdateMutationStep
     end
   end

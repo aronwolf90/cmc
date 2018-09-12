@@ -178,7 +178,7 @@ ActiveRecord::Schema.define(version: 20180902142751) do
       SELECT ((records.start_time + ((organizations.time_zone_seconds)::double precision * 'PT1S'::interval)))::date AS day,
       records.user_id
      FROM (records
-       JOIN organizations ON (((organizations.name)::name = "current_schema"())))
+       JOIN public.organizations ON (((organizations.name)::name = "current_schema"())))
     GROUP BY (((records.start_time + ((organizations.time_zone_seconds)::double precision * 'PT1S'::interval)))::date), records.user_id;
   SQL
 
@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 20180902142751) do
      FROM (((records
        JOIN issues ON ((issues.id = records.issue_id)))
        JOIN board_lists ON ((board_lists.id = issues.board_list_id)))
-       JOIN organizations ON (((organizations.name)::name = "current_schema"())))
+       JOIN public.organizations ON (((organizations.name)::name = "current_schema"())))
     GROUP BY (((records.start_time + ((organizations.time_zone_seconds)::double precision * 'PT1S'::interval)))::date), board_lists.project_id;
   SQL
 

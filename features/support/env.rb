@@ -38,11 +38,6 @@ ActionController::Base.allow_rescue = false
 Before do |scenario|
   DatabaseCleaner.clean_with(:truncation, reset_ids: true)
   Timecop.travel("11.06.2018 17:00:00")
-  Organization.create!(
-    name: "public",
-    time_zone: "Berlin",
-    time_zone_seconds: 7200
-  )
 end
 
 After do

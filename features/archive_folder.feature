@@ -11,8 +11,8 @@ Scenario: Create folder
 
 @javascript
 Scenario: Edit folder
-  Given I am signed in
-  And a folder exists with name "folder"
+  Given The app contain seed data
+  And I am signed in
   When I click on link "Archive"
   And I click on ".folder .fa-edit"
   And I enter "new folder name" into input named "data[name]"

@@ -1,16 +1,20 @@
 # frozen_string_literal: true
 
+Given(/^The app contain seed data$/) do
+  suppress_output do
+    load Rails.root.join("db", "seeds.rb")
+  end
+end
+
 def find_or_create_current_user
-  Admin.create_with(
-    password: "testtest",
-    password_confirmation: "testtest",
-    firstname: "aron",
-    lastname: "wolf"
-  ).find_or_create_by!(email: "aronwolf90@gmail.com")
+  Admin.find_or_create_by!(email: "admin@lvh.me") do |user|
+    user.password = "testtest"
+    user.password_confirmation = "testtest"
+  end
 end
 
 Given(/^I am registered$/) do
-  Admin.create!(email: "aronwolf90@gmail.com", password: "testtest", password_confirmation: "testtest")
+  Admin.create!(email: "admin@lvh.me", password: "testtest", password_confirmation: "testtest")
 end
 
 Given(/^I am not registered$/) do; end
@@ -18,118 +22,9 @@ Given(/^I am not registered$/) do; end
 Given(/^I am signed in$/) do
   find_or_create_current_user
   visit "/users/sign_in"
-  fill_in "user_email", with: "aronwolf90@gmail.com"
+  fill_in "user_email", with: "admin@lvh.me"
   fill_in "user_password", with: "testtest"
   find('input[name="commit"]').click
-end
-
-Given(/I have an old record/) do
-  board_list = BoardList.create!(name: "Backlog")
-
-  issue = Issue.create!(
-    title: "issues title",
-    description: "issues content",
-    board_list: board_list
-  )
-
-  Record.create(
-    start_time: 2.hour.ago,
-    end_time: 1.hour.ago,
-    issue: issue,
-    user: find_or_create_current_user
-  )
-end
-
-Given(/An record for user "([^\"]*)" and issue "([^\"]*)"/) do |user_id, issue_id|
-  Record.create!(
-    user_id: user_id,
-    issue_id: issue_id,
-    start_time: DateTime.parse("2018-06-11T16:59:00.049+02:00") - 1.minute,
-    end_time: DateTime.parse("2018-06-11T16:59:00.049+02:00")
-  )
-end
-
-Given(/^an issue exists$/) do
-  board_list = BoardList.create!(name: "Backlog")
-  Issue.create!(title: "issues title", description: "issues content", board_list: board_list)
-end
-
-Given(/^an issue with id of "([^\"]*)" exists$/) do |id|
-  board_list = BoardList.create!(name: "Backlog")
-  Issue.create!(
-    id: id,
-    title: "issues title",
-    description: "issues content",
-    board_list: board_list
-  )
-end
-
-Given(/^I have spent time one a project$/) do
-  project = Project.create!(name: "project")
-  board_list = BoardList.create!(name: "Backlog", project: project)
-  issue = Issue.create!(title: "issues title", description: "issues content", board_list: board_list)
-  Record.create(
-    start_time: 2.hour.ago,
-    end_time: 1.hour.ago,
-    issue: issue,
-    user: find_or_create_current_user
-  )
-end
-
-Given(/^an issue with title "([^\"]*)" exists$/) do |title|
-  board_list = BoardList.create!(name: "Backlog")
-  Issue.create!(title: title, description: "issues content", board_list: board_list)
-end
-
-Given(/^an issue with title "([^\"]*)" and content "([^\"]*)" exists$/) do |title, content|
-  board_list = BoardList.create!(name: "Backlog")
-  Issue.create!(title: title, description: content, board_list: board_list)
-end
-
-Given(/^an acive issue exists$/) do
-  board_list = BoardList.create!(name: "Backlog")
-  issue = Issue.create!(
-    title: "issues title", description: "issues content",
-    board_list: board_list
-  )
-  issue.records.create(start_time: Time.zone.now, user: find_or_create_current_user)
-end
-
-Given(/^a board list named "([^\"]*)"$/) do |name|
-  BoardList.create!(name: name)
-end
-
-Given(/^a document exists with name "([^\"]*)" exists$/) do |name|
-  Document.create(
-    name: name,
-    folder: Folder.create!(name: "fodler"),
-    file: File.open("/etc/hostname")
-  )
-end
-
-Given(/^a project exists$/) do
-  Project.create!(name: "project name")
-end
-
-Given(/^a wiki category exists$/) do
-  WikiCategory.create!(title: "wiki category title")
-end
-
-Given(/^an wiki page with title "([^\"]*)" and content "([^\"]*)" exists/) do |title, content|
-  wiki_category = WikiCategory.create!(title: "wiki category title")
-  WikiPage.create!(
-    title: title,
-    content: content,
-    wiki_category: wiki_category
-  )
-end
-
-Given(/^an wiki page with title "([^\"]*)" exists$/) do |title|
-  WikiCategory.create!(title: title)
-end
-
-Given(/^a folder exists with name "([^\"]*)"$/) do |name|
-  Folder.create!(name: name)
 end
 
 When(/^I navigate to "([^\"]*)"$/) do |link|
@@ -140,6 +35,11 @@ When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
   fill_in name, with: text
   sleep 0.1
   find("body").click
+end
+
+When(/^an acive issue exists$/) do
+  sleep 0.1
+  find(".fa-play", match: :prefer_exact).click
 end
 
 When(/^I replace the text "([^\"]*)" from the markdown editor "([^\"]*)"$/) do |text, element|
@@ -158,12 +58,12 @@ end
 
 When(/^I click on "([^\"]*)"$/) do |element|
   sleep 0.1
-  find(element).click
+  find(element, match: :prefer_exact).click
 end
 
 When(/^I click on link "([^\"]*)"$/) do |text|
   sleep 0.1
-  find("a", text: text).click
+  find("a", text: text, match: :prefer_exact).click
 end
 
 When(/^select "([^\"]*)" from select box "([^\"]*)"$/) do |text, name|

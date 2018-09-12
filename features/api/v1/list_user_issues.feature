@@ -1,7 +1,7 @@
 Feature: API: list users
 
 Scenario: Get
-  Given an issue with id of "1" exists
+  Given an issue exists with an id of 1
   And I am an user with an id of 1
   And An record for user "1" and issue "1"
   And I set headers:

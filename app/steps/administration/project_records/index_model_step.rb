@@ -2,14 +2,10 @@
 
 module Administration
   module ProjectRecords
-    class IndexModelStep < ApplicationStep
+    class IndexModelStep < BaseIndexStep
       def self.call(options, params:, project:, **)
         options["model"] =
-          project
-            .project_record_days
-            .ordered
-            .page(params[:page] || 1)
-            .per(5)
+          page(project.project_record_days, page: params[:page], per: 5)
       end
     end
   end

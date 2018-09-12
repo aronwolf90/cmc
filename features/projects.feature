@@ -11,8 +11,8 @@ Scenario: Create project
 
 @javascript
 Scenario: Update project
-  Given a project exists
-  When I am signed in
+  Given The app contain seed data
+  And I am signed in
   When I click on link "Projects"
   And I click on ".fa-edit"
   And I enter "project title new" into input named "data_name"

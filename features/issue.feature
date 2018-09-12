@@ -2,9 +2,9 @@ Feature: Issue
 
 @javascript
 Scenario: Create Issue
-  Given an issue with title "issue title 1" and content "issues content" exists
+  Given The app contain seed data
   And I am signed in
-  And I click on link "Issues"
+  When I click on link "Issues"
   And I click on ".issues-board-body .fa-plus"
   And I enter "issue name" into input named "data_title"
   And I enter "description" into input named "data_description"
@@ -14,17 +14,17 @@ Scenario: Create Issue
 
 @javascript
 Scenario: Show issue
-  Given an issue with title "issue title 1" and content "issues content" exists
+  Given The app contain seed data 
   And I am signed in
-  When I click on link "issue title 1"
-  Then the element "#side-body" contain the text "issue title 1"
-  And the element "#side-body" contain the text "issues content"
+  When I click on link "Test issue 1"
+  Then the element "#side-body" contain the text "Test issue 1"
+  And the element "#side-body" contain the text "description"
 
 @javascript
 Scenario: Edit issue
-  Given an issue with title "issue title 1" and content "issues content" exists
+  Given The app contain seed data 
   And I am signed in
-  When I click on link "issue title 1"
+  When I click on link "Test issue 1"
   And I click on ".fa-edit"
   And I replace the text "test" from the markdown editor "form .markdown-editor"
   And I click on submit
@@ -44,9 +44,9 @@ Scenario: Edit issue
 
 @javascript
 Scenario: Change complexity
-  Given an issue with title "issue title 1" and content "issues content" exists
+  Given The app contain seed data
   And I am signed in
-  When I click on link "issue title 1"
+  When I click on link "Test issue 1"
   And I click on "#complexity .text"
   And I click on "#complexity .item:nth-child(2)"
   Then the element "#complexity .text" contain the text "0.5"
