@@ -9,3 +9,11 @@ class Module
     true
   end
 end
+
+class String
+  def try_constanize
+    constantize
+  rescue NameError
+    nil
+  end
+end

@@ -17,7 +17,7 @@ class User < ApplicationRecord
   belongs_to :selected_project, class_name: "Project"
 
   has_many :issues
-  has_many :records
+  has_many :records, -> { ordered }
   has_many :record_days, -> { ordered }
   has_one :current_record, -> { active.order(created_at: :desc) },
     class_name: "Record"

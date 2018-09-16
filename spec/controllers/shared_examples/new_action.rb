@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard new action" do |namespace|
+RSpec.shared_examples "standard new action" do
+  |namespace, params: {}, cell: namespace::Cell::Form|
+
   describe "GET new" do
     let(:user) { build_stubbed(:user) }
 
@@ -18,7 +20,6 @@ RSpec.shared_examples "standard new action" do |namespace|
 
     let(:operation_result) { OpenStruct.new("model" => model) }
     let(:operation) { namespace::CreateOperation::Present }
-    let(:cell) { namespace::Cell::Form }
 
     it "call operation" do
       expect(operation).to have_received(:call)

@@ -1,6 +1,0 @@
-= simple_form_for model, url: administration_settings_user_configuration_path(model), as: :data do |f|
-
-  = f.input :type, collection: User.descendants
-  = f.input :project_ids, required: false, collection: Project.all, multiple: true, label: "Projecs"
-
-  = actions(form: f)

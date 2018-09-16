@@ -5,12 +5,6 @@ module Api::V1
     include StandartActions
     namespace Records
 
-    def create
-      super
-    end
-
-    def update
-      super
-    end
+    public :create, :update
   end
 end

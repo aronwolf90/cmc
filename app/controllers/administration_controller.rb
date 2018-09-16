@@ -5,21 +5,16 @@ class AdministrationController < ApplicationController
   layout "administration"
 
   before_action :authenticate_user!
-  before_action :set_side_menu_path
   around_action :set_time_zone
 
-  def self.side_menu(menu)
-    define_method :side_menu do
-      menu
-    end
-    private :side_menu
+  def self.side_menu(side_menu, **args)
+    before_action(
+      -> { @side_menu_path = "#{side_menu}/shared/side_menu" },
+      **args
+    )
   end
 
 private
-
-  def set_side_menu_path
-    @side_menu_path ||= "#{side_menu}/shared/side_menu"
-  end
 
   def set_time_zone
     old_time_zone = Time.zone

@@ -5,16 +5,10 @@ module Administration
     class FoldersController < ArchiveBaseController
       namespace ArchiveFolders
 
-      def new
-        super
-      end
+      public :new, :edit
 
       def create
         super { %i[administration archive content] }
-      end
-
-      def edit
-        super
       end
 
       def update

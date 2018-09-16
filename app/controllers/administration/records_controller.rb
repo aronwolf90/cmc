@@ -2,37 +2,14 @@
 
 module Administration
   class RecordsController < AdministrationController
+    include RecordsControllerConcern
     side_menu :administration
-    namespace Records
+    namespace Administration::Records
 
-    def index
-      run Records::IndexOperation
-
-      respond_to do |format|
-        format.html do
-          render cell(
-            Records::Cell::Index,
-            result["model"],
-            this_month_spended_time: result["this_month_spended_time"]
-          )
-        end
-
-        format.csv do
-          send_data RecordsCsvExporter.call(result[:records])
-        end
-      end
-    end
-
-    def new
-      super
-    end
+    public :index, :new, :edit
 
     def create
       super { [:administration, :records] }
-    end
-
-    def edit
-      super
     end
 
     def update

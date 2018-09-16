@@ -13,7 +13,7 @@ module Administration
 
       def edit_btn(user)
         return unless policy(user).edit?
-        link_to fa_icon(:edit), edit_administration_settings_user_path(user),
+        link_to fa_icon(:edit), edit_administration_user_path(user),
           class: "btn btn-sm btn-secondary"
       end
     end

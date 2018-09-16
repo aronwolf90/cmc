@@ -5,8 +5,6 @@ module Administration
     side_menu :administration
     namespace Dashboard
 
-    def show
-      super
-    end
+    public :show
   end
 end

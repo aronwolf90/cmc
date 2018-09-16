@@ -3,23 +3,44 @@
 module MvcNoModifyStandardActionsConcern
 protected
 
-  def index
+  def index(cell_options: [])
     result = run namespace::IndexOperation
-    render cell(namespace::Cell::Index, result["model"])
+    render_info_cell(namespace::Cell::Index, result, cell_options)
   end
 
   def new
     result = run namespace::CreateOperation::Present
-    render cell(namespace::Cell::Form, result["contract.default"])
+    render cell(
+      action_or_form("Create"),
+      result["contract.default"]
+    )
   end
 
-  def show
+  def show(cell_options: [])
     result = run namespace::ShowOperation
-    render cell(namespace::Cell::Show, result["model"] || result[:model])
+    render_info_cell(namespace::Cell::Show, result, cell_options)
   end
 
   def edit
     result = run namespace::UpdateOperation::Present
-    render cell(namespace::Cell::Form, result["contract.default"])
+    render cell(
+      action_or_form("Update"),
+      result["contract.default"]
+    )
+  end
+
+  def render_info_cell(cell_class, result, cell_options)
+    render cell(cell_class, result["model"] || result[:model], slice(result, cell_options))
+  end
+
+  def slice(result, options)
+    options.map do |option|
+      [option, result[option]]
+    end.to_h
+  end
+
+  def action_or_form(action)
+    "#{namespace}::Cell::#{action}".try_constantize ||
+      "#{namespace}::Cell::Form".constantize
   end
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard show action" do |namespace|
+RSpec.shared_examples "standard show action" do
+  |namespace, params: {}|
+
   describe "GET show" do
     let(:user) { build_stubbed(:user) }
 

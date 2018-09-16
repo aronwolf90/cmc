@@ -5,9 +5,7 @@ module Administration
     side_menu "administration/organization"
     namespace Organizations
 
-    def edit
-      super
-    end
+    public :edit
 
     def update
       super { %i[edit administration organization] }

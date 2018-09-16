@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: "sessions" }
 
   resources :registrations, only: %i[new create]
+  resource :terms, only: :show
 
   namespace :administration do
     root to: "dashboards#show"
@@ -19,12 +20,12 @@ Rails.application.routes.draw do
 
     resource :organization, only: %i[edit update]
 
-    namespace :settings do
-      resources :users, only: %i[edit update]
-      resources :user_configurations, only: %i[edit update]
+    resources :users, except: :show do
+      scope module: :users do
+        resource :configuration, only: %i[edit update]
+        resources :records, only: :index
+      end
     end
-
-    resources :users, only: %i[index new create]
 
     resources :projects, except: :show do
       scope module: :projects do

@@ -6,20 +6,10 @@ module Api
       include StandartActions
       namespace Issues
 
+      public :show, :update, :destroy
+
       def index
         super(Issue)
-      end
-
-      def show
-        super
-      end
-
-      def update
-        super
-      end
-
-      def destroy
-        super
       end
 
     private

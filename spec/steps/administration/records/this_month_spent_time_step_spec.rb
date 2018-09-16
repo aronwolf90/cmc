@@ -20,6 +20,6 @@ RSpec.describe Administration::Records::ThisMonthSpentTimeStep do
   end
 
   it "set on options the correct spended Time" do
-    expect(options["this_month_spended_time"]).to eq(7200.seconds)
+    expect(options[:this_month_spended_time]).to eq(7200.seconds)
   end
 end

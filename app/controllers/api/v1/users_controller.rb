@@ -5,12 +5,10 @@ module Api::V1
     include StandartActions
     namespace Users
 
+    public :update
+
     def index
       super(User)
-    end
-
-    def update
-      super
     end
 
   private

@@ -5,16 +5,10 @@ module Administration
     class CategoriesController < WikiController
       namespace WikiCategories
 
-      def new
-        super
-      end
+      public :new, :edit
 
       def create
         super { %i[administration wiki content] }
-      end
-
-      def edit
-        super
       end
 
       def update

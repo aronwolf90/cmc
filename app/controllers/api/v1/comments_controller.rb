@@ -6,9 +6,7 @@ module Api
       include StandartActions
       namespace Comments
 
-      def create
-        super
-      end
+      public :create
     end
   end
 end

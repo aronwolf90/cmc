@@ -5,13 +5,7 @@ module Administration
     side_menu :administration
     namespace Issues
 
-    def show
-      super
-    end
-
-    def new
-      super
-    end
+    public :show, :new
 
     def create
       super { administration_board_path }

@@ -14,6 +14,7 @@ class RegistrationForm < Reform::Form
   property :email
   property :password
   property :confirmation_password, virtual: true
+  property :terms_service, virtual: true
 
   validation :default, with: { form: true } do
     configure do
@@ -37,5 +38,6 @@ class RegistrationForm < Reform::Form
     required(:email)
     required(:password).filled(:password_length?)
     required(:confirmation_password).filled(:same_password?)
+    required(:terms_service).filled
   end
 end

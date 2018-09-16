@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard create action" do |namespace, redirect|
+RSpec.shared_examples "standard create action" do
+  |namespace, redirect, params: nil, cell: namespace::Cell::Form|
+
   describe "POST create" do
     let(:user) { build_stubbed(:user) }
 
@@ -14,10 +16,9 @@ RSpec.shared_examples "standard create action" do |namespace, redirect|
       subject
     end
 
-    subject { post :create, params: params }
+    subject { post :create, params: params || { id: model.id } }
 
     let(:operation) { namespace::CreateOperation }
-    let(:cell) { namespace::Cell::Form }
 
     context "valid" do
       let(:operation_result) do

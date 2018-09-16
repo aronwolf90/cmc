@@ -9,5 +9,5 @@ RSpec.describe Administration::Projects::RecordsController, type: :controller do
 
   before { allow(Project).to receive(:find).and_return(project) }
 
-  include_examples "standard index action", Administration::ProjectRecords
+  include_examples "standard index action", Administration::Projects::Records
 end

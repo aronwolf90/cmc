@@ -5,16 +5,10 @@ module Administration
     side_menu :administration
     namespace BoardLists
 
-    def new
-      super
-    end
+    public :new, :edit
 
     def create
       super { %i[administration board] }
-    end
-
-    def edit
-      super
     end
 
     def update

@@ -25,7 +25,7 @@ nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
      .dropdown-menu.dropdown-menu-right
        a class="dropdown-item"
          = current_user
-       = link_to edit_administration_settings_user_path(current_user), class: 'dropdown-item'
+       = link_to edit_administration_user_path(current_user), class: 'dropdown-item'
          = 'Settings'
        div class="dropdown-divider">
        = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item'

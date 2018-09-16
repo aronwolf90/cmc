@@ -15,6 +15,8 @@ RSpec.shared_examples "standard api create action" do |operation|
 
     before do
       allow(result).to receive(:[]).with(:model).and_return(nil)
+      allow(result).to receive(:[]).with("model").and_return(nil)
+      allow(result).to receive(:[]).with(:parent).and_return(nil)
       allow(result).to receive(:[]).with("contract.default").and_return(nil)
       sign_in user
     end

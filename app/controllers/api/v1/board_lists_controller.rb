@@ -6,20 +6,10 @@ module Api
       include StandartActions
       namespace BoardLists
 
+      public :show, :update, :destroy
+
       def index
         super(BoardList)
-      end
-
-      def show
-        super
-      end
-
-      def update
-        super
-      end
-
-      def destroy
-        super
       end
 
     private

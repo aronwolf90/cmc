@@ -17,6 +17,8 @@ RSpec.shared_examples "standard api update action" do |operation|
     before do
       allow(model.class).to receive(:find).and_return(model)
       allow(result).to receive(:[]).with(:model).and_return(model)
+      allow(result).to receive(:[]).with("model").and_return(nil)
+      allow(result).to receive(:[]).with(:parent).and_return(nil)
       allow(result).to receive(:[]).with("contract.default").and_return(nil)
       sign_in user
     end

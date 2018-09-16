@@ -15,7 +15,8 @@ describe RegistrationForm do
       lastname: "Marley",
       email: "test@email.com",
       password: "password",
-      confirmation_password: "password"
+      confirmation_password: "password",
+      terms_service: true
     }
   end
 

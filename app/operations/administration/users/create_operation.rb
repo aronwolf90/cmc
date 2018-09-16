@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-module Administration
-  module Users
-    class CreateOperation < AdministrationOperation
-      @form = UserForm
-      include MvcStandardCreateOperationConcern
-    end
+module Administration::Users
+  class CreateOperation < BaseOperation
+    @form = CreateForm
+    include MvcStandardCreateOperationConcern
   end
 end

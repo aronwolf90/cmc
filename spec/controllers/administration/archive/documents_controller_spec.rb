@@ -7,7 +7,6 @@ RSpec.describe Administration::Archive::DocumentsController, type: :controller d
 
   let(:model) { build_stubbed(:document, id: 1) }
   let(:form) { Administration::ArchiveDocumentForm }
-  let(:params) { {} }
 
   include_examples "standard new action",
     Administration::ArchiveDocuments

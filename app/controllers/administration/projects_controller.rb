@@ -5,20 +5,10 @@ module Administration
     side_menu "administration/projects"
     namespace Projects
 
-    def index
-      super
-    end
-
-    def new
-      super
-    end
+    public :index, :new, :edit
 
     def create
       super { %i[administration projects] }
-    end
-
-    def edit
-      super
     end
 
     def update

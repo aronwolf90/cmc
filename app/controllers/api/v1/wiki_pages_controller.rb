@@ -6,13 +6,7 @@ module Api
       include StandartActions
       namespace WikiPages
 
-      def show
-        super
-      end
-
-      def update
-        super
-      end
+      public :show, :update
 
     private
 
