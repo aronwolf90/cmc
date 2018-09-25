@@ -1,20 +1,33 @@
 # frozen_string_literal: true
 
 class JsonApiQuery < ApplicationQuery
-  attr_reader :relation, :sort_options, :include_options, :filter_params
+  attr_reader(
+    :relation,
+    :sort_options,
+    :include_options,
+    :filter_params,
+    :query
+  )
 
-  def initialize(relation, sort: [], include: [], filter: {}, **_args)
+  def initialize(relation, sort: [], include: [], filter: {}, query: nil, **)
     @relation = relation
     @sort_options = sort
     @include_options = include
     @filter_params = filter
+    @query = query
   end
 
   def call
-    relation
+    collection = relation
       .where(filter_options)
       .order(sort_options)
       .includes(include_options)
+
+    if query.present?
+      collection.search(query)
+    else
+      collection
+    end
   end
 
 private

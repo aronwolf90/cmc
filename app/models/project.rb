@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Project < ApplicationRecord
+  include PgSearch
+
   has_many :board_lists
   has_many :issues, through: :board_lists
   has_many :records, through: :issues
@@ -9,4 +11,6 @@ class Project < ApplicationRecord
   has_many :project_record_days, -> { ordered }
 
   alias_attribute :to_s, :name
+
+  pg_search_scope :search, against: %i[name id]
 end

@@ -13,6 +13,6 @@ private
 
   def organization
     @organization ||=
-      Organization.find_by(name: params[:organization].underscore.tr("_", "-"))
+      Organization.find_by(name: params[:organization].to_domain)
   end
 end

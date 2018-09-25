@@ -30,7 +30,7 @@ module Registrations
     end
 
     def organization_name
-      @organization_name ||= attributes[:name].underscore.tr("_", "-")
+      @organization_name ||= attributes[:name].to_domain
     end
   end
 end

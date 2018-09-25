@@ -16,4 +16,16 @@ class String
   rescue NameError
     nil
   end
+
+  def to_domain
+    domain = underscore.
+      tr("_", "-").
+      tr(" ", "-").
+      gsub(/[^0-9a-z\-]/i, "")
+
+    domain = "a#{domain}" if domain.first == "-"
+    domain = "#{domain}e" if domain.last  == "-"
+
+    domain
+  end
 end

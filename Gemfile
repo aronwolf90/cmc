@@ -24,6 +24,7 @@ gem "kaminari", "~> 1.0.0"
 gem "knock"
 gem "lp_csv_exportable"
 gem "migration_data"
+gem "pg_search"
 gem "pundit"
 gem "scenic"
 gem "seed-fu"
@@ -80,6 +81,7 @@ end
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "bullet"
   gem "rails-controller-testing"
   gem "factory_bot_rails"
   gem "rspec-rails"
