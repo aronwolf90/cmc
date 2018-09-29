@@ -1,6 +1,6 @@
 container=docker ps | grep -m 1 cmc_app | cut -d ' ' -f1
-uid=id -u
-gid=id -g
+uid=if [ "$$(uname -s)" = "Darwin" ]; then echo "1000"; else id -u; fi
+gid=if [ "$$(uname -s)" = "Darwin" ]; then echo "1000"; else id -g; fi
 
 docker_compose=uid=$$($(uid)) gid=$$($(gid)) docker-compose
 docker_exec_app=docker exec -it $$($(container))

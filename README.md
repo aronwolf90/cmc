@@ -17,15 +17,17 @@ I wrote this because I was unsatisfied with existing solutions.
 On linux and mac:
 - Install make (sudo apt-get install make or brew install make)
 - Execute: make install_develop
+- Execute: make setup
 - Execute: xmake server (or execute xmake rails s)
 - browse to: http://lvh.me:3000
 
 On windows:
 - Install docker and docker compose
 - Enable virtualizaton
+- docker-compose run --rm app setup
 - docker-compose up
 
-NOTE: you can execute every command prefixing t with xmake. E.g
+NOTE: you can execute every command prefixing t with xmake. E.g.
 - xmake ls
 - xmake rspec
 - ...
@@ -34,6 +36,8 @@ NOTE: You can also use it without docker, but because we rarelly test
 it without it, there can be some configuration errors. If this is the case,
 pleas feal free to submit a MR or an issue.
 
+NOTE: Take a look on the [contributing.md](CONTRIBUTING.md)
+
 # Setup for production
 Using make (ubuntu only):
 - make install_production
@@ -41,12 +45,12 @@ Using make (ubuntu only):
 Or do the following (recomended):
 - Install kuberntics
 - Install helm (kubernetics packet manager)
-- Execute: helm install chart --name cmc-production 
-             --set image.tag=latest 
-             --set remote=true 
+- Execute: helm install chart --name cmc-production
+             --set image.tag=latest
+             --set remote=true
 
 NOTE: the `make install_production` install a kubernetics
-server and enable to deploy pods on the same host 
+server and enable to deploy pods on the same host
 (` kubectl taint nodes mymasternode dedicated-`). This allow
 to use a single server insted multiple.
 
