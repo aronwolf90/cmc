@@ -10,10 +10,15 @@ module Api
       before_action :authenticate!
 
     private
+      attr_reader :model_class
 
       def render_errors(errors)
         render json: OpenStruct.new(errors: OpenStruct.new(messages: errors)), status: :bad_request,
                serializer: ActiveModel::Serializer::ErrorSerializer
+      end
+
+      def self.model_class(model_class, **args)
+        before_action -> { @model_class = model_class }, **args
       end
     end
   end

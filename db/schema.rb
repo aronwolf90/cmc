@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180902142751) do
+ActiveRecord::Schema.define(version: 20180925204755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20180902142751) do
     t.string "title", null: false
     t.text "description"
     t.bigint "user_id"
-    t.decimal "complexity", precision: 2, scale: 1
+    t.decimal "complexity", precision: 4, scale: 1
     t.integer "board_list_id", null: false
     t.integer "ordinal_number"
     t.index ["board_list_id"], name: "index_issues_on_board_list_id"
@@ -178,7 +178,7 @@ ActiveRecord::Schema.define(version: 20180902142751) do
       SELECT ((records.start_time + ((organizations.time_zone_seconds)::double precision * 'PT1S'::interval)))::date AS day,
       records.user_id
      FROM (records
-       JOIN public.organizations ON (((organizations.name)::name = "current_schema"())))
+       JOIN organizations ON (((organizations.name)::name = "current_schema"())))
     GROUP BY (((records.start_time + ((organizations.time_zone_seconds)::double precision * 'PT1S'::interval)))::date), records.user_id;
   SQL
 
@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 20180902142751) do
      FROM (((records
        JOIN issues ON ((issues.id = records.issue_id)))
        JOIN board_lists ON ((board_lists.id = issues.board_list_id)))
-       JOIN public.organizations ON (((organizations.name)::name = "current_schema"())))
+       JOIN organizations ON (((organizations.name)::name = "current_schema"())))
     GROUP BY (((records.start_time + ((organizations.time_zone_seconds)::double precision * 'PT1S'::interval)))::date), board_lists.project_id;
   SQL
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard update action" do |namespace, redirect, params: nil|
+RSpec.shared_examples "standard update action" do
+  |namespace, redirect, params: nil, cell: namespace::Cell::Form|
+
   describe "PUT update" do
     let(:user) { build_stubbed(:user) }
 
@@ -17,7 +19,6 @@ RSpec.shared_examples "standard update action" do |namespace, redirect, params: 
     subject { put :update, params: params || { id: model.id } }
 
     let(:operation) { namespace::UpdateOperation }
-    let(:cell) { namespace::Cell::Form }
 
     context "valid" do
       let(:operation_result) do

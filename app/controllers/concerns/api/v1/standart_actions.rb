@@ -7,7 +7,7 @@ module Api
 
     protected
 
-      def index(model_class)
+      def index
         render_json_api json: JsonApiQuery.(
           model_class.all,
           params.to_unsafe_h.deep_symbolize_keys
@@ -52,6 +52,10 @@ module Api
 
       def render_json_api(json:)
         render json: json, include: params[:include]
+      end
+
+      def model
+        @model ||= model_class.find(params[:id])
       end
     end
   end

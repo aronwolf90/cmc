@@ -20,3 +20,23 @@ RSpec.shared_examples "standard api show action" do
     end
   end
 end
+
+
+RSpec.shared_examples "simple api show action" do |params: {}|
+
+  describe "GET show" do
+    subject { get :show, params: params }
+
+    before do
+      sign_in respond_to?(:user) ? user : build_stubbed(:user)
+    end
+
+    it "pass collection to render" do
+      expect(controller)
+        .to receive(:render).with(json: model, include: nil) do
+        controller.head :ok
+      end
+      subject
+    end
+  end
+end

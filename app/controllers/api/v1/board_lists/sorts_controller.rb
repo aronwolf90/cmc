@@ -4,15 +4,10 @@ module Api
   module V1
     module BoardLists
       class SortsController < ApiController
-        def update
-          result = run Api::V1::BoardLists::SortOperation
+        include StandartActions
+        namespace BoardLists::Sort
 
-          if result.success?
-            render json: result[:model], status: :no_content
-          else
-            render_errors(result[:errors])
-          end
-        end
+        public :update
       end
     end
   end

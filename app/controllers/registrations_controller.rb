@@ -5,9 +5,7 @@ class RegistrationsController < ApplicationController
   layout "devise"
   namespace Registrations
 
-  def new
-    super
-  end
+  public :new
 
   def create
     super do |model|

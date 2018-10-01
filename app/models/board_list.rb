@@ -7,5 +7,7 @@ class BoardList < ApplicationRecord
 
   belongs_to :project
 
+  scope :ordered, -> { order(:ordinal_number, :id) }
+
   accepts_nested_attributes_for :issues
 end

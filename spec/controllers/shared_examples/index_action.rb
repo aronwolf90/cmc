@@ -31,3 +31,38 @@ RSpec.shared_examples "standard index action" do |namespace|
     end
   end
 end
+
+RSpec.shared_examples "standard csv index action" do |namespace|
+  describe "GET index" do
+    subject { get :index, params: params.merge(format: :csv) }
+
+    let(:user) { build_stubbed(:user) }
+    let(:model) { [] }
+    let(:result) { OpenStruct.new("model" => model) }
+    let(:operation) { namespace::IndexCsvOperation }
+
+    before do
+      sign_in(build_stubbed(:user))
+      allow(result).to receive(:[]).with(:model).and_return(model)
+      allow(result).to receive(:[]).with("model").and_return(nil)
+      allow(result).to receive(:[]).with(:parent).and_return(nil)
+      allow(result).to receive(:[]).with("contract.default").and_return(nil)
+      allow(controller).to receive(:send_data)
+      allow(operation).to receive(:call).and_return(result)
+      allow("#{namespace}CsvExporter".constantize).to receive(:call)
+      subject
+    end
+
+    it "call operation" do
+      expect(operation).to have_received(:call)
+    end
+
+    it "call send" do
+      expect(controller).to have_received(:send_data)
+    end
+
+    it "call exporter" do
+      expect("#{namespace}CsvExporter".constantize).to have_received(:call)
+    end
+  end
+end

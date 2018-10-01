@@ -2,14 +2,16 @@
 
 module Api::V1
   class CurrentRecordsController < ApiController
-    def show
-      render json: user.current_record
-    end
+    include StandartActions
+    namespace Records
+    model_class Record
+
+    public :show
 
   private
 
-    def user
-      @user ||= User.find(params[:user_id])
+    def model
+      @model ||= current_user.current_record
     end
   end
 end

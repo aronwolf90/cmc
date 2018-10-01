@@ -3,9 +3,8 @@
 module Api::V1
   class ProjectsController < ApiController
     include StandartActions
+    model_class Project
 
-    def index
-      super(Project)
-    end
+    public :index
   end
 end

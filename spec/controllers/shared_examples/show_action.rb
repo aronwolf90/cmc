@@ -27,7 +27,28 @@ RSpec.shared_examples "standard show action" do
     end
 
     it "call cell" do
-      expect(operation).to have_received(:call)
+      expect(cell).to have_received(:call)
+    end
+  end
+end
+
+RSpec.shared_examples "basic show action" do |cell, params: {}|
+  describe "GET show" do
+    let(:user) { build_stubbed(:user) }
+
+    before do
+      cell_instance = Cell::ViewModel.new
+
+      allow(cell).to receive(:call).and_return(cell_instance)
+      allow(cell_instance).to receive(:call).and_return("")
+      sign_in(build_stubbed(:user))
+      subject
+    end
+
+    subject { get :show, params: params }
+
+    it "call cell" do
+      expect(cell).to have_received(:call)
     end
   end
 end

@@ -4,17 +4,8 @@ module Api::V1
   class UsersController < ApiController
     include StandartActions
     namespace Users
+    model_class User
 
-    public :update
-
-    def index
-      super(User)
-    end
-
-  private
-
-    def model
-      @model ||= User.find(params[:id])
-    end
+    public :index, :update
   end
 end

@@ -5,14 +5,9 @@ module Api
     class WikiPagesController < ApiController
       include StandartActions
       namespace WikiPages
+      model_class WikiPage
 
       public :show, :update
-
-    private
-
-      def model
-        @model ||= WikiPage.find(params[:id])
-      end
     end
   end
 end

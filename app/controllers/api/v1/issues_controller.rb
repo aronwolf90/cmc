@@ -5,18 +5,9 @@ module Api
     class IssuesController < ApiController
       include StandartActions
       namespace Issues
+      model_class Issue
 
-      public :show, :update, :destroy
-
-      def index
-        super(Issue)
-      end
-
-    private
-
-      def model
-        @model ||= Issue.find(params[:id])
-      end
+      public :index, :show, :update, :destroy
     end
   end
 end

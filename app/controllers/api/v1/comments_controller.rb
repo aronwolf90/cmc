@@ -5,6 +5,7 @@ module Api
     class CommentsController < ApiController
       include StandartActions
       namespace Comments
+      model_class Comment
 
       public :create
     end

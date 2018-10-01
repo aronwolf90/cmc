@@ -4,4 +4,5 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
   scope :all_except, ->(id) { where.not(id: id) }
+  scope :ordered, -> { order(:id) }
 end

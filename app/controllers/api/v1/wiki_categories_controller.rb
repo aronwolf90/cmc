@@ -3,9 +3,8 @@
 module Api::V1
   class WikiCategoriesController < ApiController
     include StandartActions
+    model_class WikiCategory
 
-    def index
-      super(WikiCategory)
-    end
+    public :index
   end
 end

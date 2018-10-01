@@ -31,3 +31,32 @@ RSpec.shared_examples "standard api update action" do |operation|
     end
   end
 end
+
+
+RSpec.shared_examples "simple api update action" do |operation, params:|
+  describe "PUT udate" do
+    subject { put :update, params: params }
+
+    let(:user) { build_stubbed(:user) }
+    let(:result) { double(success?: true)  }
+
+    before do
+      allow(result).to receive(:[])
+        .with(:parent).and_return(nil)
+      allow(result).to receive(:[])
+        .with(:model).and_return(nil)
+      allow(result).to receive(:[])
+        .with("model").and_return(nil)
+      allow(result).to receive(:[])
+        .with("contract.default").and_return(nil)
+      sign_in user
+    end
+
+    it "pass collection to render" do
+      expect(operation).to receive(:call)
+        .with(current_user: user, params: params)
+        .and_return(result)
+      subject
+    end
+  end
+end

@@ -5,18 +5,9 @@ module Api
     class BoardListsController < ApiController
       include StandartActions
       namespace BoardLists
+      model_class BoardList
 
-      public :show, :update, :destroy
-
-      def index
-        super(BoardList)
-      end
-
-    private
-
-      def model
-        @model ||= BoardList.find(params[:id])
-      end
+      public :index, :show, :update, :destroy
     end
   end
 end

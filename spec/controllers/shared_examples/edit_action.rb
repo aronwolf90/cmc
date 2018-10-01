@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "standard edit action" do
-  |namespace, params: nil|
+  |namespace, params: nil, cell: namespace::Cell::Form|
 
   describe "GET edit" do
     let(:user) { build_stubbed(:user) }
@@ -22,7 +22,6 @@ RSpec.shared_examples "standard edit action" do
       OpenStruct.new("model" => model, "contract.default": form.new(model))
     end
     let(:operation) { namespace::UpdateOperation::Present }
-    let(:cell) { namespace::Cell::Form }
 
     it "call operation" do
       expect(operation).to have_received(:call)

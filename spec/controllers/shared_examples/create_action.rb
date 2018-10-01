@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "standard create action" do
-  |namespace, redirect, params: nil, cell: namespace::Cell::Form|
+  |namespace, redirect, params: {}, cell: namespace::Cell::Form|
 
   describe "POST create" do
     let(:user) { build_stubbed(:user) }
@@ -16,7 +16,7 @@ RSpec.shared_examples "standard create action" do
       subject
     end
 
-    subject { post :create, params: params || { id: model.id } }
+    subject { post :create, params: params }
 
     let(:operation) { namespace::CreateOperation }
 
@@ -25,7 +25,7 @@ RSpec.shared_examples "standard create action" do
         OpenStruct.new("model" => model, success?: true, "contract.default": form.new(model))
       end
 
-      it "call edit operation" do
+      it "call create operation" do
         expect(operation).to have_received(:call)
       end
 

@@ -16,4 +16,11 @@ RSpec.describe Administration::UsersController, type: :controller do
     Administration::Users,
     %i[administration users],
     cell: Administration::Users::Cell::Create
+  include_examples "standard edit action", Administration::Users,
+    cell: Administration::Users::Cell::Update
+  include_examples "standard update action", Administration::Users,
+    [:edit, :administration, :user, id: 1],
+    cell: Administration::Users::Cell::Update
+  include_examples "standard destroy action", Administration::Users,
+    %i[administration users]
 end

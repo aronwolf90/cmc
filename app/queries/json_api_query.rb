@@ -21,6 +21,7 @@ class JsonApiQuery < ApplicationQuery
     collection = relation
       .where(filter_options)
       .order(sort_options)
+      .ordered
       .includes(include_options)
 
     if query.present?

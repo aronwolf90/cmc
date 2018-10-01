@@ -17,6 +17,6 @@ RSpec.describe BoardLists::SortStep  do
     expect(board_list1).to  receive(:update!).with(ordinal_number: 1)
     expect(board_list2).to  receive(:update!).with(ordinal_number: 0)
 
-    subject.call(nil, params: params)
+    described_class.call(nil, params: params)
   end
 end

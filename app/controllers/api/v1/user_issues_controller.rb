@@ -3,9 +3,8 @@
 module Api::V1
   class UserIssuesController < ApiController
     include StandartActions
+    model_class UserIssue
 
-    def index
-      super(UserIssue)
-    end
+    public :index
   end
 end
