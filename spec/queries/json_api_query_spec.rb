@@ -23,4 +23,20 @@ RSpec.describe JsonApiQuery   do
       board_lists[1].issues.size
     end.to make_database_queries(count: 2)
   end
+
+  context "query present in the params" do
+    let(:params) { { query: board_list1.id } }
+
+    it "return mached entry" do
+      expect(subject.size).to eq(1)
+    end
+  end
+
+  context "filter is present in the params" do
+    let(:params) { { filter: { id: board_list2.id } } }
+
+    it "return mached entry" do
+      expect(subject.first).to eq(board_list2)
+    end
+  end
 end

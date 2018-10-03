@@ -7,8 +7,8 @@ RSpec.describe Administration::BoardLists::Cell::Form, type: :cell do
 
   subject { cell(described_class, form, current_user: user).() }
 
-  let(:user) { build_stubbed(:admin) }
-  let(:project) { build_stubbed(:project) }
+  let(:user) { Admin.new }
+  let(:project) { Project.new }
   let(:form) do
     Administration::BoardListForm.new(BoardList.new)
   end

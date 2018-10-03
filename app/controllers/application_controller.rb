@@ -3,7 +3,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
-  before_action :allow_iframe
 
 protected
   attr_reader :namespace
@@ -34,10 +33,5 @@ protected
   def cell(name, model = nil, options = {}, constant = ::Cell::ViewModel, &block)
     options[:current_user] = current_user
     super
-  end
-
-  def allow_iframe
-    return if (url = ENV["ALLOW_IFRAME_URL"]).nil?
-    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM #{url}"
   end
 end

@@ -4,7 +4,7 @@ RSpec.shared_examples "standard show action" do
   |namespace, params: {}|
 
   describe "GET show" do
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
 
     before do
       cell_instance = Cell::ViewModel.new
@@ -34,7 +34,7 @@ end
 
 RSpec.shared_examples "basic show action" do |cell, params: {}|
   describe "GET show" do
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
 
     before do
       cell_instance = Cell::ViewModel.new

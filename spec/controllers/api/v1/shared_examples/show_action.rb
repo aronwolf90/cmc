@@ -4,7 +4,7 @@ RSpec.shared_examples "standard api show action" do
   describe "GET show" do
     subject { get :show, params: { id: model.id } }
 
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
 
     before do
       allow(model.class).to receive(:find).and_return(model)

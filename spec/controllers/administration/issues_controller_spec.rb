@@ -4,7 +4,7 @@ require "rails_helper"
 require_relative "../shared_examples/standart_actions"
 
 RSpec.describe Administration::IssuesController, type: :controller do
-  let(:model) { build_stubbed(:issue) }
+  let(:model) { Issue.new(id: 1) }
   let(:form) { Administration::IssueForm }
 
   include_examples "standard show action",

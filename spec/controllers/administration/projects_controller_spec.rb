@@ -4,7 +4,7 @@ require "rails_helper"
 require_relative "../shared_examples/standart_actions"
 
 RSpec.describe Administration::ProjectsController, type: :controller do
-  let(:model) { build_stubbed(:project) }
+  let(:model) { Project.new(id: 1) }
   let(:form) { Administration::ProjectForm }
   let(:params) { {} }
 

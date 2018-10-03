@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Issue < ApplicationRecord
-  include PgSearch
-
   belongs_to :user
   belongs_to :board_list
 

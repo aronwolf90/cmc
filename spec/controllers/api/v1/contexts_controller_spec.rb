@@ -4,7 +4,7 @@ require "rails_helper"
 require_relative "./shared_examples/standart_actions"
 
 RSpec.describe Api::V1::ContextsController, type: :controller do
-  let(:user) { build_stubbed(:user) }
+  let(:user) { User.new(id: 1) }
 
   before { sign_in user }
 

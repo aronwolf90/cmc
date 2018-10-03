@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Administration::Records::IndexOperation do
   subject { described_class.(params: {}, current_user: user) }
 
-  let(:user) { build_stubbed(:user) }
+  let(:user) { User.new }
 
   before do
     allow(Administration::Records::ThisMonthSpentTimeStep).to receive(:call) do |options|

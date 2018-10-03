@@ -7,7 +7,7 @@ RSpec.describe Administration::Users::Cell::Create, type: :cell do
 
   subject { cell(described_class, form, current_user: user).() }
 
-  let(:user) { build_stubbed(:admin) }
+  let(:user) { Admin.new }
   let(:form) { Administration::Users::CreateForm.new(User.new) }
 
   it { is_expected.to have_selector "#data_firstname" }

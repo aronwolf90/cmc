@@ -8,7 +8,7 @@ class ApplicationMutation
   end
 
   def initialize(model:, user: nil, **attributes)
-    @attributes = attributes
+    @attributes = attributes.except(:current_user)
     @user = user
     @model = model
   end

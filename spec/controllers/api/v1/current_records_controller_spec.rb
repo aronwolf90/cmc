@@ -4,8 +4,8 @@ require "rails_helper"
 require_relative "./shared_examples/standart_actions"
 
 RSpec.describe Api::V1::CurrentRecordsController, type: :controller do
-  let(:model) { build_stubbed(:record) }
-  let(:user) { build_stubbed(:user) }
+  let(:model) { Record.new(id: 1) }
+  let(:user) { User.new(id: 1) }
 
   before do
     allow(user).to receive(:current_record).and_return(model)

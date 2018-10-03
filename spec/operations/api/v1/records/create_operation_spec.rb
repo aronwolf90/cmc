@@ -10,7 +10,7 @@ RSpec.describe Api::V1::Records::CreateOperation do
     )
   end
 
-  let(:current_user) { build_stubbed(:user) }
+  let(:current_user) { Admin.new }
   let(:params) do
     {
       data: {

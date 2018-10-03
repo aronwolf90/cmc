@@ -30,9 +30,4 @@ protected
   def model_name(result)
     result["contract.default"].class.model_name.human
   end
-
-  def action_or_form(action)
-    "#{namespace}::Cell::#{action}".try_constanize ||
-      "#{namespace}::Cell::Form".constantize
-  end
 end

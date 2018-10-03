@@ -4,7 +4,7 @@ RSpec.shared_examples "standard api destroy action" do
   describe "DELETE destroy" do
     subject { delete :destroy, params: { id: model.id } }
 
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
 
     before do
       allow(model.class).to receive(:find).and_return(model)

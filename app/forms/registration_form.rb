@@ -16,7 +16,7 @@ class RegistrationForm < Reform::Form
   property :confirmation_password, virtual: true
   property :terms_service, virtual: true
 
-  validation :default, with: { form: true } do
+  validation with: { form: true } do
     configure do
       def same_password?(value)
         value == form.password

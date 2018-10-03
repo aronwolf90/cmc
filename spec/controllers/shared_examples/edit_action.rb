@@ -4,7 +4,7 @@ RSpec.shared_examples "standard edit action" do
   |namespace, params: nil, cell: namespace::Cell::Form|
 
   describe "GET edit" do
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
 
     before do
       cell_instance = Cell::ViewModel.new
@@ -28,7 +28,7 @@ RSpec.shared_examples "standard edit action" do
     end
 
     it "call cell" do
-      expect(operation).to have_received(:call)
+      expect(cell).to have_received(:call)
     end
   end
 end

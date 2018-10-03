@@ -4,7 +4,7 @@ require "rails_helper"
 require_relative "../shared_examples/standart_actions"
 
 RSpec.describe Administration::DashboardsController, type: :controller do
-  let(:model) { build_stubbed(:record) }
+  let(:model) { Record.new(id: 1) }
   let(:form) { Administration::RecordForm }
   let(:params) { {} }
 

@@ -10,7 +10,7 @@ module Administration
     property :id
     property :start_time, type: Types::Form::DateTime
     property :end_time, type: Types::Form::DateTime
-    property :user_id
+    property :current_user, virtual: true
     property :issue_id
 
     validation do
@@ -19,6 +19,7 @@ module Administration
       end
 
       optional(:id).maybe
+      required(:current_user).filled
       required(:start_time).filled
       optional(:end_time).maybe
       required(:issue_id).filled(exists?: ::Issue)
@@ -27,11 +28,11 @@ module Administration
         end_time.nil? || start_time < end_time
       end
 
-      validate no_overlapping_records: %i[id user_id start_time end_time] \
-        do |id, user_id, start_time, end_time|
+      validate no_overlapping_records: %i[id current_user start_time end_time] do
+        |id, current_user, start_time, end_time|
 
         RecordsIntervalQuery.call(
-          ::User.find(user_id).records.all_except(id),
+          current_user.records.all_except(id),
           start_time: start_time,
           end_time: end_time || Time.zone.now
         ).empty?

@@ -10,8 +10,8 @@ RSpec.describe Api::V1::BoardLists::UpdateOperation do
     )
   end
 
-  let(:user) { build_stubbed(:admin)  }
-  let(:board_list) { build_stubbed(:board_list) }
+  let(:user) { Admin.new }
+  let(:board_list) { BoardList.new }
   let(:params) do
     {
       data: {

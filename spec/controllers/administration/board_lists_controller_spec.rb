@@ -4,7 +4,7 @@ require "rails_helper"
 require_relative "../shared_examples/standart_actions"
 
 RSpec.describe Administration::BoardListsController, type: :controller do
-  let(:model) { build_stubbed(:board_list) }
+  let(:model) { BoardList.new(id: 1) }
   let(:form) { Administration::BoardListForm }
   let(:params) { {} }
 

@@ -5,7 +5,7 @@ require_relative "../../shared_examples/standart_actions"
 
 RSpec.describe Administration::Projects::RecordsController, type: :controller do
   let(:params) { { project_id: 1 } }
-  let(:project) { build_stubbed(:project) }
+  let(:project) { Project.new(id: 1) }
 
   before { allow(Project).to receive(:find).and_return(project) }
 

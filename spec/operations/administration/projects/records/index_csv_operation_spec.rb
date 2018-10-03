@@ -10,9 +10,9 @@ RSpec.describe Administration::Projects::Records::IndexCsvOperation do
     )
   end
 
-  let(:user) { build_stubbed(:user) }
-  let(:project) { build_stubbed(:project) }
-  let(:record) { build_stubbed(:record) }
+  let(:user) { User.new }
+  let(:project) { Project.new }
+  let(:record) { Record.new }
 
   before do
     allow(Project).to receive(:find).and_return(project)

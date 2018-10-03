@@ -3,7 +3,7 @@
 RSpec.shared_examples "standard index action" do |namespace|
   describe "GET index" do
     let(:form) { Administration::RecordForm }
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
 
     before do
       cell_instance = Cell::ViewModel.new
@@ -36,7 +36,7 @@ RSpec.shared_examples "standard csv index action" do |namespace|
   describe "GET index" do
     subject { get :index, params: params.merge(format: :csv) }
 
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
     let(:model) { [] }
     let(:result) { OpenStruct.new("model" => model) }
     let(:operation) { namespace::IndexCsvOperation }

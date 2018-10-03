@@ -5,7 +5,7 @@ require_relative "../../shared_examples/standart_actions"
 
 RSpec.describe Administration::Wiki::PagesController, type: :controller do
 
-  let(:model) { build_stubbed(:wiki_page) }
+  let(:model) { WikiPage.new(id: 1) }
   let(:form) { Administration::WikiPageForm }
   let(:params) { {} }
 

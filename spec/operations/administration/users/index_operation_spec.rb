@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Administration::Users::IndexOperation do
   subject { described_class.(current_user: user) }
 
-  let(:user) { build_stubbed(:user) }
+  let(:user) { User.new }
 
   before { expect(UserPolicy::Scope).to receive(:call).and_return([]) }
 

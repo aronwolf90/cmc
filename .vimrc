@@ -31,6 +31,7 @@ let NERDTreeShowHidden=1
 let g:ctrlp_root_markers = ['Gemfile.lock']
 let g:ctrlp_custom_ignore = '\v[\/]\.(git)$'
 set wildignore+=*/tmp/*,*/node_modules/*,*/.tmp/*,*/coverage/*,*/uploads/*
+let g:ale_linters = {'ruby': ['reek', 'rubocop', 'ruby'] }
 
 :syntax enable
 

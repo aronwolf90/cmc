@@ -4,7 +4,7 @@ require "rails_helper"
 require_relative "../../shared_examples/standart_actions"
 
 RSpec.describe Administration::Archive::FoldersController, type: :controller do
-  let(:model) { build_stubbed(:folder) }
+  let(:model) { Folder.new(id: 1) }
   let(:form) { Administration::ArchiveFolderForm }
   let(:params) { {} }
 

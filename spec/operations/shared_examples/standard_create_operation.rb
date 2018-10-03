@@ -12,7 +12,7 @@ RSpec.shared_examples "standard create operation" do
     described_class.(params: params, current_user: current_user)
   end
 
-  let(:current_user) { build_stubbed(:admin) }
+  let(:current_user) { Admin.new }
 
   before do
     allow(form_class)

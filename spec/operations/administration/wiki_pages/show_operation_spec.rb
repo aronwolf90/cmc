@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Administration::WikiPages::ShowOperation do
   subject { described_class.(params: {}) }
 
-  let(:wiki_page) { build_stubbed(:wiki_page) }
+  let(:wiki_page) { WikiPage.new }
 
   before { allow(WikiPage).to receive(:find).and_return(wiki_page)  }
 

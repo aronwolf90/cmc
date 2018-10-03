@@ -2,7 +2,7 @@
 
 RSpec.shared_examples "standard destroy action" do |namespace, redirect|
   describe "DELETE destroy" do
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
 
     before do
       allow(operation).to receive(:call).and_return(operation_result)

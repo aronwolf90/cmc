@@ -4,7 +4,7 @@ require "rails_helper"
 require_relative "./shared_examples/standart_actions"
 
 RSpec.describe Api::V1::BoardListsController, type: :controller do
-  let(:model) { build_stubbed(:board_list)  }
+  let(:model) { BoardList.new(id: 1) }
 
   include_examples "standard api index action"
   include_examples "standard api show action"

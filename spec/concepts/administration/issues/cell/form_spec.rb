@@ -7,8 +7,8 @@ RSpec.describe Administration::Issues::Cell::Form, type: :cell do
 
   subject { cell(described_class, form, current_user: user).() }
 
-  let(:user) { build_stubbed(:admin) }
-  let(:board_list) { build_stubbed(:board_list)  }
+  let(:user) { Admin.new }
+  let(:board_list) { BoardList.new(id: 1) }
   let(:form) do
     Administration::IssueForm.new(Issue.new(board_list: board_list))
   end

@@ -7,7 +7,7 @@ RSpec.describe Administration::ArchiveContent::Cell::Show, type: :cell do
 
   subject { cell(described_class, nil, current_user: user).() }
 
-  let(:user) { build_stubbed(:admin)  }
+  let(:user) { Admin.new }
 
   it { is_expected.to have_link("add folder") }
   it { is_expected.to have_link("add document") }

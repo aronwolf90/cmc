@@ -6,6 +6,7 @@ FactoryBot.define do
     firstname "firstname"
     lastname "lastname"
     password "testtest"
+    invitation_created_at Time.zone.now
 
     avatar do
       Rack::Test::UploadedFile.new(

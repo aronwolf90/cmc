@@ -7,8 +7,8 @@ RSpec.describe Api::V1::Issues::UpdateOperation do
     described_class.(params: params, current_user: user)
   end
 
-  let(:user) { build_stubbed(:admin) }
-  let(:issue) { build_stubbed(:issue) }
+  let(:user) { Admin.new }
+  let(:issue) { Issue.new }
   let(:params) do
     {
       data: {

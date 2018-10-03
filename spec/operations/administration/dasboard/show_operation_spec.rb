@@ -5,8 +5,8 @@ require "rails_helper"
 RSpec.describe Administration::Dashboard::ShowOperation do
   subject { described_class.(params: {}, current_user: user) }
 
-  let(:user) { build_stubbed(:user) }
-  let(:project) { build_stubbed(:project) }
+  let(:user) { User.new }
+  let(:project) { Project.new }
 
   before do
     allow(Administration::Dashboard::ProjectsStep).to receive(:call) do |options|

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Administration::Projects::IndexOperation do
   subject { described_class.(current_user: current_user) }
 
-  let(:current_user) { build_stubbed(:admin) }
+  let(:current_user) { Admin.new }
 
   before do
     allow(ProjectPolicy::Scope).to receive(:call).and_return([])

@@ -4,7 +4,7 @@ RSpec.shared_examples "standard api index action" do |namespace|
   describe "GET index" do
     subject { get :index }
 
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
 
     before do
       allow(JsonApiQuery).to receive(:call).and_return([model])

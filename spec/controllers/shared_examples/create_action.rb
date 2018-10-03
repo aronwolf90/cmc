@@ -4,7 +4,7 @@ RSpec.shared_examples "standard create action" do
   |namespace, redirect, params: {}, cell: namespace::Cell::Form|
 
   describe "POST create" do
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
 
     before do
       cell_instance = Cell::ViewModel.new

@@ -7,7 +7,7 @@ RSpec.describe Administration::WikiCategories::Cell::Form, type: :cell do
 
   subject { cell(described_class, form, current_user: user).() }
 
-  let(:user) { build_stubbed(:admin) }
+  let(:user) { Admin.new }
   let(:form) do
     Administration::WikiCategoryForm.new(WikiCategory.new)
   end

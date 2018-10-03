@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Api::V1::WikiPages::UpdateOperation do
   subject { described_class.(params: params, current_user: user) }
 
-  let(:model) { build_stubbed(:wiki_page)  }
+  let(:model) { WikiPage.new }
   let(:user) { Admin.new }
   let(:params) do
     {

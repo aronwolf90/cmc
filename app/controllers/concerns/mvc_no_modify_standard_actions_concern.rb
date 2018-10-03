@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+
 module MvcNoModifyStandardActionsConcern
 protected
 
@@ -37,10 +38,5 @@ protected
     options.map do |option|
       [option, result[option]]
     end.to_h
-  end
-
-  def action_or_form(action)
-    "#{namespace}::Cell::#{action}".try_constantize ||
-      "#{namespace}::Cell::Form".constantize
   end
 end

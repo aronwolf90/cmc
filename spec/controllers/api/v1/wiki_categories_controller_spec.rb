@@ -4,7 +4,7 @@ require "rails_helper"
 require_relative "./shared_examples/standart_actions"
 
 RSpec.describe Api::V1::WikiCategoriesController, type: :controller do
-  let(:model) { build_stubbed(:wiki_category) }
+  let(:model) { WikiCategory.new(id: 1) }
 
   include_examples "standard api index action"
 end

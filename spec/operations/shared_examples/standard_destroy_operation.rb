@@ -5,7 +5,7 @@ RSpec.shared_examples "standard destroy operation" do
     described_class.(params: { id: model.id }, current_user: user)
   end
 
-  let(:user) { build_stubbed(:admin) }
+  let(:user) { Admin.new }
 
   before do
     allow(model.class).to receive(:find).and_return(model)

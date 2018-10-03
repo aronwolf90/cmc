@@ -5,7 +5,7 @@ require "pundit/rspec"
 if ENV["COVERAGE"]
   require "simplecov"
 
-  SimpleCov.minimum_coverage 98.31
+  SimpleCov.minimum_coverage 100
 
   SimpleCov.start "rails" do
     add_group "Cells", "app/concepts"
@@ -110,6 +110,7 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
   config.filter_gems_from_backtrace(
     "spring",
     "bootsnap",

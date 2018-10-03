@@ -7,8 +7,8 @@ RSpec.describe Api::V1::Records::UpdateOperation do
     described_class.(params: params, current_user: current_user)
   end
 
-  let(:record) { build_stubbed(:record) }
-  let(:current_user) { build_stubbed(:admin) }
+  let(:record) { Record.new }
+  let(:current_user) { Admin.new }
   let(:params) do
     {
       data: {

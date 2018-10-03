@@ -5,8 +5,8 @@ require_relative "../../shared_examples/standart_actions"
 
 RSpec.describe Administration::Wiki::CategoriesController, type: :controller do
 
-  let(:model) { build_stubbed(:wiki_page) }
-  let(:form) { Administration::WikiPageForm }
+  let(:model) { WikiCategory.new(id: 1) }
+  let(:form) { Administration::WikiCategoryForm }
   let(:params) { {} }
 
   include_examples "standard new action", Administration::WikiCategories

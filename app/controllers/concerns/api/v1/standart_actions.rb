@@ -44,12 +44,6 @@ module Api
         head :ok
       end
 
-      def filter(filter_hash = params[:filter]&.to_unsafe_h)
-        (filter_hash || {}).map do |key, value|
-          [key, value != "null" ? value : nil]
-        end.to_h
-      end
-
       def render_json_api(json:)
         render json: json, include: params[:include]
       end

@@ -5,7 +5,7 @@ require_relative "../../shared_examples/standart_actions"
 
 RSpec.describe Administration::Archive::DocumentsController, type: :controller do
 
-  let(:model) { build_stubbed(:document, id: 1) }
+  let(:model) { Document.new(id: 1) }
   let(:form) { Administration::ArchiveDocumentForm }
 
   include_examples "standard new action",

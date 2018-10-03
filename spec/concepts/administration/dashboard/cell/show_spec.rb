@@ -7,9 +7,9 @@ RSpec.describe Administration::Dashboard::Cell::Show, type: :cell do
 
   subject { cell(described_class, model, current_user: user).() }
 
-  let(:user) { build_stubbed(:admin) }
+  let(:user) { Admin.new }
   let(:model) { { projects: { project => 3600 } } }
-  let(:project) { build_stubbed(:project) }
+  let(:project) { Project.new }
 
   before { Timecop.freeze("01.01.2018") }
   after { Timecop.return }

@@ -4,7 +4,7 @@ RSpec.shared_examples "standard update action" do
   |namespace, redirect, params: nil, cell: namespace::Cell::Form|
 
   describe "PUT update" do
-    let(:user) { build_stubbed(:user) }
+    let(:user) { Admin.new }
 
     before do
       cell_instance = Cell::ViewModel.new
