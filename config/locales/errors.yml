@@ -7,3 +7,6 @@ en:
     same_password?: password is not equal
     uniq_organization_name?: already exist
     password_length?: to short
+    exists?: Does not exist
+    before_end?: Muss be before end
+    no_overlapping?: Can not overlap with an other

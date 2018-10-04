@@ -76,7 +76,7 @@ Rails.application.routes.draw do
       resources :records, only: %i[create update]
       resources :projects, only: :index
       resources :wiki_categories, only: :index
-      resources :wiki_pages, only: %i[show update]
+      resources :wiki_pages, only: %i[show update destroy]
       resources :folders, only: :index
       resources :user_issues, only: :index
     end

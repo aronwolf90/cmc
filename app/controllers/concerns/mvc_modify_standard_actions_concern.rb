@@ -28,6 +28,6 @@ protected
   end
 
   def model_name(result)
-    result["contract.default"].class.model_name.human
+    (result[:model] || result["model"]).class.model_name.human
   end
 end

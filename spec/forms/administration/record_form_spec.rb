@@ -21,6 +21,38 @@ describe Administration::RecordForm do
   it { expect(subject.validate(current_user: user)).to be true }
   it { expect(subject.validate(current_user: user, issue_id: nil)).to be false }
   it { expect(subject.validate(current_user: user, start_time: nil)).to be false }
-  it { expect(subject.validate(current_user: user, end_time: nil)).to be true }
-  it { expect(subject.validate(current_user: user, start_time: 1.day.from_now, end_time: 1.day.ago)).to eq false }
+  it { expect(subject.validate(current_user: user, end_time: "")).to be false }
+  it { expect(subject.validate(current_user: user, issue_id: "")).to be false }
+
+  context "end before start" do
+    let(:data) do
+      {
+        current_user: user,
+        start_time: 1.day.from_now,
+        end_time: 1.day.ago
+      }
+    end
+
+    it { expect(subject.validate(data)).to eq false }
+    specify do
+      subject.validate(data)
+      expect { subject.errors }.not_to raise_error
+    end
+  end
+
+  context "overlapping record" do
+    before do
+      allow(RecordsIntervalQuery)
+        .to receive(:call).and_return([Issue.new])
+    end
+
+    specify do
+      expect(subject.validate(current_user: user, id: nil)).to be false
+    end
+
+    specify do
+      subject.validate(current_user: user, id: nil)
+      expect { subject.errors }.not_to raise_error
+    end
+  end
 end

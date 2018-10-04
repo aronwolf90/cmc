@@ -9,4 +9,5 @@ RSpec.describe Api::V1::WikiPagesController, type: :controller do
   include_examples "standard api show action"
   include_examples "standard api update action",
     Api::V1::WikiPages::UpdateOperation
+  include_examples "standard api destroy action"
 end

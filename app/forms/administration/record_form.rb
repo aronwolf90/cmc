@@ -13,30 +13,30 @@ module Administration
     property :current_user, virtual: true
     property :issue_id
 
-    validation do
+    validation with: { form: true } do
       configure do
         predicates(ReformPredicates)
+
+        def before_end?(start_time)
+          form.end_time.blank? || start_time < form.end_time
+        end
+
+        def no_overlapping?(start_time)
+          return true if form.end_time.blank?
+
+          RecordsIntervalQuery.call(
+            form.current_user.records.all_except(form.id),
+            start_time: start_time,
+            end_time: form.end_time
+          ).empty?
+        end
       end
 
       optional(:id).maybe
       required(:current_user).filled
-      required(:start_time).filled
-      optional(:end_time).maybe
+      required(:start_time).filled(:before_end?, :no_overlapping?)
+      optional(:end_time).filled
       required(:issue_id).filled(exists?: ::Issue)
-
-      validate start_before_end: %i[start_time end_time] do |start_time, end_time|
-        end_time.nil? || start_time < end_time
-      end
-
-      validate no_overlapping_records: %i[id current_user start_time end_time] do
-        |id, current_user, start_time, end_time|
-
-        RecordsIntervalQuery.call(
-          current_user.records.all_except(id),
-          start_time: start_time,
-          end_time: end_time || Time.zone.now
-        ).empty?
-      end
     end
   end
 end

@@ -29,6 +29,6 @@ Scenario: Edit user
   And I click on ".fa-edit"
   And I enter "new firstname" into input named "data_firstname"
   And I click on submit
-  Then the page contain the text "User has been updated"
+  Then the page contain the text "user has been updated"
   And I reload the page
   And the input "data_firstname" has the value "new firstname"
