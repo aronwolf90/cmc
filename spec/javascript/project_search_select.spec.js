@@ -15,65 +15,38 @@ describe('ProjectSearchSelect', () => {
   subject(() => mount(ProjectSearchSelect, { store: $store, localVue }))
 
   def('getters', () => ({
-    relevantProjects () {
-      return (value) => {
-        if (value === 'project1') {
-          return [$project1]
-        } else if (value === 'project2') {
-          return [$project2]
-        }
-        return []
-      }
+    metaCollection () {
+      return () => [$project]
     },
     entry () {
       return ({ id }) => {
-        if (id === 1) {
-          return $project1
-        } else if (id === 2) {
-          return $project2
-        }
+        return $project
       }
     }
   }))
-  def('actions', () => ({ initBoardsLists () {} }))
+  def('actions', () => ({
+    initProjects () {},
+    request () {}
+  }))
   def('store', () => (new Vuex.Store({
     state: {},
     getters: $getters,
     actions: $actions
   })))
-  def('project1', () => ({
+  def('project', () => ({
     id: 1,
     type: 'projects',
     attributes: { name: 'project1' }
   }))
-  def('project2', () => ({
-    id: 2,
-    type: 'projects',
-    attributes: { name: 'project2' }
-  }))
-  describe('when write into input project1', () => {
-    it('show project1', (done) => {
-      let input = $subject.find('input')
-      input.element.value = 'project1'
-      input.trigger('input')
-      input.trigger('focus')
-      $subject.vm.$nextTick(() => {
-        expect($subject.html()).to.include('project1')
-        done()
-      })
-    })
-  })
 
-  describe('when write into input project2', () => {
-    it('show project2', (done) => {
-      let input = $subject.find('input')
-      input.element.value = 'project2'
-      input.trigger('input')
-      input.trigger('focus')
-      $subject.vm.$nextTick(() => {
-        expect($subject.html()).to.include('project2')
-        done()
-      })
+  it('show project', (done) => {
+    let input = $subject.find('input')
+    input.element.value = 'project1'
+    input.trigger('input')
+    input.trigger('focus')
+    $subject.vm.$nextTick(() => {
+      expect($subject.html()).to.include('project1')
+      done()
     })
   })
 })

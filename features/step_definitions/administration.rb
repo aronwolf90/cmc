@@ -57,12 +57,12 @@ When(/^I click on submit$/) do
 end
 
 When(/^I click on "([^\"]*)"$/) do |element|
-  sleep 0.1
+  sleep 0.2
   find(element, match: :prefer_exact).click
 end
 
 When(/^I click on link "([^\"]*)"$/) do |text|
-  sleep 0.1
+  sleep 0.2
   find("a", text: text, match: :prefer_exact).click
 end
 
@@ -91,12 +91,14 @@ end
 
 Then(/^the element "([^\"]*)" contain the text "([^\"]*)"$/) do |element, text|
   within element do
+    sleep 0.1
     expect(page).to have_content text
   end
 end
 
 Then(/^the element "([^\"]*)" does not contain the text "([^\"]*)"$/) do |element, text|
   within element do
+    sleep 0.1
     expect(page).not_to have_content text
   end
 end

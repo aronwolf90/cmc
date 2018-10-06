@@ -15,16 +15,6 @@ describe('SearchSelect', () => {
   subject(() => mount(SearchSelect, { store: $store, localVue }))
 
   def('getters', () => ({
-    relevantIssues () {
-      return (value) => {
-        if (value === 'issue1') {
-          return [$issue1]
-        } else if (value === 'issue2') {
-          return [$issue2]
-        }
-        return []
-      }
-    },
     entry () {
       return ({ id }) => {
         if (id === 1) {
@@ -33,9 +23,12 @@ describe('SearchSelect', () => {
           return $issue2
         }
       }
-    }
+    },
+    metaCollection () { return () => [$issue1, $issue2] }
   }))
-  def('actions', () => ({ initBoardsLists () {} }))
+  def('actions', () => ({
+    initBoardsLists () {}
+  }))
   def('store', () => (new Vuex.Store({
     state: {},
     getters: $getters,

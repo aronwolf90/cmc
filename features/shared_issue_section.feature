@@ -22,7 +22,7 @@ Scenario: Filter issues
   And I am signed in
   Then the element "#shared-issue-section" contain the text "Test issue 1"
   Then the element "#shared-issue-section" contain the text "Test issue 2"
-  When I enter "Test issue 2" into "#shared-issue-section input"
+  When I enter "2" into "#shared-issue-section input"
   Then the element "#shared-issue-section" does not contain the text "Test issue 1"
   And the element "#shared-issue-section" contain the text "Test issue 2"
 

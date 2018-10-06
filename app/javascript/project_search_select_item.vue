@@ -19,7 +19,7 @@ export default {
       return Utils.attribute(this.project, 'name')
     },
     link () {
-      return `/administration/projects/${this.project.id}`
+      return `/administration/projects/${this.project.id}/dashboard`
     }
   }
 }

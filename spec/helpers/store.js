@@ -1,3 +1,7 @@
+var sinon = require('sinon')
+var sinonStubPromise = require('sinon-stub-promise')
+sinonStubPromise(sinon)
+
 export const helperState = {
   enabledGetters: {
   }
@@ -18,20 +22,22 @@ export const helperGetters = {
     if (!state.enabledGetters.currentIssue) return undefined
     return state.getterData.currentIssue
   },
-  relevantIssues (state) {
-    if (!state.enabledGetters.relevantIssues) return () => undefined
-    return state.getterData.relevantIssues
+  metaCollection (state) {
+    console.log(state.enabledGetters)
+    if (!state.enabledGetters.metaCollection) return () => undefined
+    return state.getterData.metaCollection
   }
 }
 
 export const helperActions = {
   initIssues (context) {
-    context.commit('enable', 'relevantIssues')
+    context.commit('enable', 'metaCollection')
   },
   initIssue (context) {
     context.commit('enable', 'entry')
   },
   initCurrentIssue (context) {
     context.commit('enable', 'currentIssue')
-  }
+  },
+  request () { return () => sinon.stub().returnsPromise() }
 }

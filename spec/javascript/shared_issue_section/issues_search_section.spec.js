@@ -25,7 +25,7 @@ describe('IssuesSearchSection', () => {
       ...helperState,
       getterData: {
         currentIssue: $currentIssue,
-        relevantIssues: () => [$issue1, $issue2]
+        metaCollection: () => [$issue1, $issue2]
       }
     },
     mutations: helperMutations,

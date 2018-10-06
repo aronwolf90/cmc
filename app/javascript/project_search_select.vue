@@ -1,13 +1,12 @@
 <template lang='pug'>
-  .search
+  .project-search
     b-form-input(
       type='text', 
       v-model='searchText', 
       placeholder='Search',
-      @blur.native="focused = false",
       @focus.native="focused = true"
     )
-    .items(v-if="projects.length && focused")
+    .items(v-if="focused")
       project-search-select-item(
         v-for="project in projects", 
         :project-id="project.id",
@@ -20,7 +19,11 @@ import ProjectSearchSelectItem from './project_search_select_item'
  
 export default {
   data () {
-    return { searchText: '', focused: false }
+    return { 
+      searchText: '', 
+      focused: false,
+      requestProjects: null
+    }
   },
   components: {
     ProjectSearchSelectItem
@@ -28,17 +31,41 @@ export default {
   created () {
     this.$store.dispatch('initProjects')
   },
+  mounted () {
+    window.onclick = () => {
+      this.focused = false
+    }
+    this.$el.onclick = (event) => {
+      event.stopPropagation()
+    }
+  },
   computed: {
     projects () {
-      if (this.searchText === '') return [] 
-      return this.$store.getters.relevantProjects(this.searchText) || []
+      return this.relevantProjects || []
+    },
+    relevantProjects () {
+      return this.requestProjects || this.$store.getters.metaCollection('projects')
+    },
+  },
+  methods: {
+    request () {
+      this.$store.dispatch('request', { 
+        url: `/api/v1/projects?query=${this.searchText}`,
+      }).then(response => {
+        this.requestProjects = response.data 
+      })
+    }
+  },
+  watch: {
+    searchText () {
+      this.request()
     }
   }
 }
 </script>
 
 <style lang='sass' scoped>
-.search
+.project-search
   position: relative
   .items
     position: absolute

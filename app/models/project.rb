@@ -12,5 +12,9 @@ class Project < ApplicationRecord
 
   alias_attribute :to_s, :name
 
-  pg_search_scope :search, against: %i[name id]
+  pg_search_scope(
+    :search,
+    against: %i[name],
+    using: { tsearch: { prefix: true } }
+  )
 end

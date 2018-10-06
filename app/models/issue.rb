@@ -12,5 +12,9 @@ class Issue < ApplicationRecord
 
   alias_attribute :to_s, :title
 
-  pg_search_scope :search, against: %i[title description id]
+  pg_search_scope(
+    :search,
+    against: %i[title description],
+    using: { tsearch: { prefix: true } }
+  )
 end

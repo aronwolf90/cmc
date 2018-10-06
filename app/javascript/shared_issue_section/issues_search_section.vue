@@ -2,7 +2,7 @@
   .issues-search-section
     .relevant-issues.container-fluid
       issue(v-for='issue in issues', :key='issue.id', :issue-id='issue.id')
-    input.search-section(type='text', placeholder='\uf002', v-model='search_text')
+    input.search-section(type='text', placeholder='\uf002', v-model='searchText')
 
 </template>
 
@@ -11,8 +11,13 @@ import Issue from 'shared_issue_section/issue'
 import * as Utils from '../store/json_api/utils'
 
 export default {
-  data: () => ({ search_text: '', time: '00:00:00' }),
+  data: () => ({ 
+    searchText: '', 
+    time: '00:00:00',
+    requestIssues: null
+  }),
   created () {
+    this.request()
     this.$store.dispatch('initIssues')
     this.$store.dispatch('initCurrentIssue')
   },
@@ -24,12 +29,26 @@ export default {
       return this.$store.getters.currentIssue
     },
     relevantIssues () {
-      return this.$store.getters.relevantIssues(this.search_text) || []
+      return this.requestIssues || this.$store.getters.metaCollection('issues') || []
     },
     issues () {
       return this.relevantIssues.filter(entry => {
         return !Utils.sameRef(this.currentIssue, entry)
       })
+    }
+  },
+  methods: {
+    request () {
+      this.$store.dispatch('request', { 
+        url: `/api/v1/issues?query=${this.searchText}`,
+      }).then(response => {
+        this.requestIssues = response.data 
+      })
+    }
+  },
+  watch: {
+    searchText () {
+      this.request()
     }
   }
 }

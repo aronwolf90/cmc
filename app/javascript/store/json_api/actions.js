@@ -72,7 +72,7 @@ export default {
       return response.data
     })
   },
-  request (context, { url, method, payload }) {
+  request (context, { url, method, payload, quene }) {
     required({ url })
 
     let promise = null

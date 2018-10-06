@@ -5,7 +5,6 @@
       v-model='searchText', 
       placeholder='Search', 
       size='sm',
-      @blur.native="focused = false",
       @focus.native="focused = true"
     )
     .items(v-if="issues.length && focused")
@@ -21,15 +20,43 @@ import SearchSelectItem from './search_select_item'
  
 export default {
   data () {
-    return { searchText: '', focused: false }
+    return { 
+      searchText: '', 
+      focused: false ,
+      requestIssues: null
+    }
+  },
+  mounted () {
+    window.onclick = () => {
+      this.focused = false
+    }
+    this.$el.onclick = (event) => {
+      event.stopPropagation()
+    }
   },
   components: {
     SearchSelectItem
   },
   computed: {
     issues () {
-      if (this.searchText === '') return [] 
-      return this.$store.getters.relevantIssues(this.searchText) || []
+      return this.relevantIssues || []
+    },
+    relevantIssues () {
+      return this.requestIssues || this.$store.getters.metaCollection('issues') 
+    }
+  },
+  methods: {
+    request () {
+      this.$store.dispatch('request', { 
+        url: `/api/v1/issues?query=${this.searchText}`,
+      }).then(response => {
+        this.requestIssues = response.data 
+      })
+    }
+  },
+  watch: {
+    searchText () {
+      this.request()
     }
   }
 }

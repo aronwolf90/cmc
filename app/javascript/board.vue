@@ -31,6 +31,7 @@ export default {
   },
   created () {
     this.$store.dispatch('initBoardsLists')
+    this.$store.dispatch('initIssues')
   },
   computed: {
     boardLists: {
