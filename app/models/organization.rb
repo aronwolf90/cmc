@@ -6,4 +6,6 @@ class Organization < ApplicationRecord
       find_by(name: Apartment::Tenant.current)
     end
   end
+
+  alias_attribute :to_s, :name
 end

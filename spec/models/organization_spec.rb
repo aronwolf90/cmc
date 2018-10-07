@@ -12,4 +12,12 @@ RSpec.describe Organization, type: :model do
       end.to raise_error(ActiveRecord::RecordNotUnique)
     end
   end
+
+  describe "#to_s" do
+    subject { Organization.new(name: "test").to_s }
+
+    it "returns the name" do
+      is_expected.to eq "test"
+    end
+  end
 end
