@@ -11,14 +11,22 @@ describe Api::V1::WikiPageDeserializer do
       type: "users",
       attributes: {
         title: "new title",
-        content: "new content"
+        content: "new content",
+      },
+      relationships: {
+        "wiki-category": {
+          data: {
+            id: 1, type: "wiki-categories"
+          }
+        }
       }
     }
   end
   let(:result) do
     {
       title: "new title",
-      content: "new content"
+      content: "new content",
+      wiki_category_id: 1
     }
   end
 

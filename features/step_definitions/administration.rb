@@ -28,31 +28,34 @@ Given(/^I am signed in$/) do
 end
 
 When(/^I navigate to "([^\"]*)"$/) do |link|
+  sleep 0.2
   visit link
 end
 
 When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
   fill_in name, with: text
-  sleep 0.1
+  sleep 0.2
   find("body").click
 end
 
 When(/^an acive issue exists$/) do
-  sleep 0.1
+  sleep 0.2
   find(".fa-play", match: :prefer_exact).click
 end
 
 When(/^I replace the text "([^\"]*)" from the markdown editor "([^\"]*)"$/) do |text, element|
+  sleep 0.2
   js_comand = "$('#{element}')[0].editor.setValue('#{text}')"
   page.driver.browser.execute_script(js_comand)
 end
 
 When(/^I enter "([^\"]*)" into "([^\"]*)"$/) do |text, element|
+  sleep 0.2
   find(element).set(text)
 end
 
 When(/^I click on submit$/) do
-  sleep 0.1
+  sleep 0.2
   find('input[name="commit"], button[type="submit"]').click
 end
 
@@ -71,12 +74,12 @@ When(/^select "([^\"]*)" from select box "([^\"]*)"$/) do |text, name|
 end
 
 When(/^I reload the page$/) do
-  sleep 0.1 # wait for for unfinished requests
+  sleep 0.2 # wait for for unfinished requests
   page.driver.browser.navigate.refresh
 end
 
 Then(/^the page contain the text "([^\"]*)"$/) do |text|
-  sleep 0.1
+  sleep 0.2
   expect(page).to have_content text
 end
 

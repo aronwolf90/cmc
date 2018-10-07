@@ -2,6 +2,8 @@
   #issue(v-if='wikiPage')
     .container-fluid
       router-view(:wiki-page-id='wikiPage.id')
+    .right-aside
+      category(:wiki-page-id="wikiPageId")
 </template>
 
 <script>
@@ -9,6 +11,7 @@ import Router from 'vue-router'
 
 import Show from 'wiki_page/show'
 import Edit from 'wiki_page/edit'
+import Category from 'wiki_page/category'
 
 const router = new Router({
   routes: [
@@ -31,6 +34,7 @@ export default {
   components: {
     Show,
     Edit,
+    Category
   },
   created () {
     this.$store.dispatch('initWikiPage', this.wikiPageId)
@@ -52,5 +56,11 @@ export default {
   .container-fluid
     padding-top: 15px
     overflow-y: auto
+  .right-aside
+    background-color: #f8f8f8
+    border-left: 2px solid #e7e7e7
+    width: 200px
+    height: calc(100vh - 40px)
+</style>
 
 </style>
