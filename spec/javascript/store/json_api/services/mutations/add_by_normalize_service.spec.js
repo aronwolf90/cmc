@@ -122,6 +122,12 @@ describe('AddByNormalizeService', () => {
             type: 'post-blocks',
             id: '2620'
           }]
+        },
+        '/post-blocks/2620': {
+          data: {
+            type: 'post-blocks',
+            id: '2620'
+          }
         }
       },
       'post-blocks': {

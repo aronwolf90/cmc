@@ -26,7 +26,7 @@ Scenario: Edit user
   And I am signed in
   When I click on ".navbar-nav img"
   And I click on link "Users"
-  And I click on ".fa-edit"
+  And I click on link "user2 simson"
   And I enter "new firstname" into input named "data_firstname"
   And I click on submit
   Then the page contain the text "user has been updated"

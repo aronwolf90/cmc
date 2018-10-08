@@ -28,6 +28,9 @@ export default class {
       let data = null
       if (Array.isArray(this.payload.data)) {
         data = Utils.entryArrayToRef(metaData[resource].data)
+        for (let entry of data) {
+          Vue.set(this.state.meta, `${resource}/${entry.id}`, { data: entry })
+        }
       } else {
         data = Utils.entryToRef(metaData[resource].data[0])
       }

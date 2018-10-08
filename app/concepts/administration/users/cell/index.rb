@@ -11,10 +11,14 @@ module Administration
           class: "btn btn-success btn-block"
       end
 
-      def edit_btn(user)
-        return unless policy(user).edit?
-        link_to fa_icon(:edit), edit_administration_user_path(user),
-          class: "btn btn-sm btn-secondary"
+      def link(user)
+        if policy(user).edit?
+          link_to user,
+            edit_administration_user_path(user),
+            class: "text-dark"
+        else
+          content_tag(:div, class: "text-muted") { user }
+        end
       end
     end
   end

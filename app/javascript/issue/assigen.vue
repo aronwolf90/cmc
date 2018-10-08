@@ -31,8 +31,8 @@ export default {
       })
     },
     issue () {
-      return this.$store.getters.metaEntry({
-        type: 'users',
+      return this.$store.getters.entry({
+        type: 'issues',
         id: this.issueId
       })
     },
@@ -54,12 +54,10 @@ export default {
   },
   methods: {
     onSelect (item) {
+      console.log(this.$store.getters.metaEntry(`users/${item.value}`))
       this.$store.dispatch('changeIssueToUserReference', {
         issue: this.issue,
-        user: this.$store.getters.entry({
-          type: 'users',
-          id: item.value
-        })
+        user: this.$store.getters.metaEntry(`users/${item.value}`)
       })
     }
   },

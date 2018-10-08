@@ -13,5 +13,11 @@ RSpec.describe Administration::Users::Cell::Index, type: :cell do
 
   it { is_expected.to have_text "New user" }
   it { is_expected.to have_text user1 }
-  it { is_expected.to have_selector ".fa-edit" }
+  it { is_expected.to have_selector "[href='/administration/users/#{user1.id}/edit']" }
+
+  context "user is an customer" do
+    let(:user) { build_stubbed(:customer) }
+
+    it { is_expected.not_to have_selector "[href='/administration/users/#{user1.id}/edit']" }
+  end
 end

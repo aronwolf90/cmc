@@ -10,6 +10,4 @@
 
 ul.list-group.list-lines
   - model.each do |user|
-    li.list-group-item
-      = user
-      .pull-right = edit_btn(user)
+    li.list-group-item = link(user)

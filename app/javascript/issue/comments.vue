@@ -51,12 +51,14 @@ export default {
   },
   methods: {
     comment () {
-      this.$refs.markdownEditor.clear()
+      if (!this.newCommentData.attributes.content) return
       this.$store.dispatch('createComment', {
         issue: this.issue,
         user: this.currentUser,
         attributes: this.newCommentData.attributes
       })
+      this.$refs.markdownEditor.clear()
+      this.newCommentData.attributes.content = ""
     }
   }
 }
