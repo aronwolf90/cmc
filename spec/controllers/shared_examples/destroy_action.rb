@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard destroy action" do |namespace, redirect|
+RSpec.shared_examples "standard destroy action" do |namespace, redirect, params: {}|
   describe "DELETE destroy" do
     let(:user) { Admin.new }
 
@@ -10,7 +10,7 @@ RSpec.shared_examples "standard destroy action" do |namespace, redirect|
       subject
     end
 
-    subject { delete :destroy, params: { id: model } }
+    subject { delete :destroy, params: params.merge(id: model.id) }
 
     let(:operation) { namespace::DestroyOperation }
     let(:operation_result) do

@@ -17,9 +17,5 @@ module Administration
         edit_administration_user_path(model)
       end
     end
-
-    def destroy
-      super %i[administration users]
-    end
   end
 end

@@ -15,4 +15,8 @@ RSpec.describe Administration::Users::ConfigurationsController, type: :controlle
     Administration::Users::Configurations,
     "/administration/users/1/configuration/edit",
     params: { user_id: 1 }
+  include_examples "standard destroy action",
+    Administration::Users::Configurations,
+    "/administration/users",
+    params: { user_id: 1 }
 end

@@ -20,9 +20,9 @@ Rails.application.routes.draw do
 
     resource :organization, only: %i[edit update]
 
-    resources :users, except: :show do
+    resources :users, except: %i[show destroy] do
       scope module: :users do
-        resource :configuration, only: %i[edit update]
+        resource :configuration, only: %i[edit update destroy]
         resources :records, only: :index
       end
     end

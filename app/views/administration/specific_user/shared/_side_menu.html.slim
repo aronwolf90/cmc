@@ -10,7 +10,7 @@
   ul.nav.navbar-nav
     - if UserConfigurationPolicy.new(current_user, @root_model).edit?
       li class=('active' if request.url.include?('configuration'))
-        = link_to 'Coniguration', edit_administration_user_configuration_path(@root_model)
+        = link_to 'Configuration', edit_administration_user_configuration_path(@root_model)
   ul.nav.navbar-nav
     - if policy(Record).index?
       li class=('active' if request.url.include?('records'))

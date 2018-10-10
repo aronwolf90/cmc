@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+module <%= class_name.pluralize.split("::")[0..-2].join("::") %>
+  module <%= class_name.pluralize.split("::").last.pluralize %>
+    class DestroyOperation < <%= class_name.pluralize.split("::")[-2] %>Operation
+      step Model(<%= class_name.split("::").last %>, :find)
+      step Policy::Pundit(<%= class_name.split("::").last %>Policy, :destroy?)
+      step DestroyStep
+    end
+  end
+end

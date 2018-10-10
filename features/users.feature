@@ -32,3 +32,14 @@ Scenario: Edit user
   Then the page contain the text "user has been updated"
   And I reload the page
   And the input "data_firstname" has the value "new firstname"
+
+@javascript
+Scenario: Edit user
+  Given The app contain seed data
+  And I am signed in
+  When I click on link "Users"
+  And I click on link "user3 Herrera"
+  And I click on link "Configuration"
+  And I click on link "Destroy"
+  Then the page contain the text "user has been destroyed"
+  And the page does not contain the text "user3 Herrera"

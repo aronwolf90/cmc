@@ -11,5 +11,9 @@ module Administration::Users
         [:edit, :administration, model, :configuration]
       end
     end
+
+    def destroy
+      super(%i[administration users])
+    end
   end
 end

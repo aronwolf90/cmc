@@ -1,0 +1,9 @@
+Description:
+    Generate the destroy operation
+
+Example:
+    rails generate destroy_operation users
+
+    This will create:
+        app/operations/users/destroy_operation.rb
+        app/operations/users/destroy_operation_spec.rb

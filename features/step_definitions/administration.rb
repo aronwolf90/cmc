@@ -39,7 +39,7 @@ When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
 end
 
 When(/^an acive issue exists$/) do
-  sleep 0.2
+  sleep 0.4
   find(".fa-play", match: :prefer_exact).click
 end
 
@@ -60,12 +60,12 @@ When(/^I click on submit$/) do
 end
 
 When(/^I click on "([^\"]*)"$/) do |element|
-  sleep 0.2
+  sleep 0.4
   find(element, match: :prefer_exact).click
 end
 
 When(/^I click on link "([^\"]*)"$/) do |text|
-  sleep 0.2
+  sleep 0.4
   find("a", text: text, match: :prefer_exact).click
 end
 
