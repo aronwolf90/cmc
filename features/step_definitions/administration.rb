@@ -60,12 +60,12 @@ When(/^I click on submit$/) do
 end
 
 When(/^I click on "([^\"]*)"$/) do |element|
-  sleep 0.4
+  sleep 0.8
   find(element, match: :prefer_exact).click
 end
 
 When(/^I click on link "([^\"]*)"$/) do |text|
-  sleep 0.4
+  sleep 0.8
   find("a", text: text, match: :prefer_exact).click
 end
 
@@ -88,35 +88,35 @@ Then (/^I enter enter a file into input named "([^\"]*)"$/) do |element|
 end
 
 Then(/^the page does not contain the text "([^\"]*)"$/) do |text|
-  sleep(0.1)
+  sleep 0.2
   expect(page).not_to have_content text
 end
 
 Then(/^the element "([^\"]*)" contain the text "([^\"]*)"$/) do |element, text|
   within element do
-    sleep 0.1
+    sleep 0.2
     expect(page).to have_content text
   end
 end
 
 Then(/^the element "([^\"]*)" does not contain the text "([^\"]*)"$/) do |element, text|
   within element do
-    sleep 0.1
+    sleep 0.2
     expect(page).not_to have_content text
   end
 end
 
 Then(/^the page contain the element "([^\"]*)"$/) do |text|
-  sleep(0.1)
+  sleep 0.2
   expect(page).to have_css text
 end
 
 Then(/^I am on page "([^\"]*)"$/) do |link|
-  sleep(0.1)
+  sleep 0.2
   expect(page).to have_current_path(link)
 end
 
 Then(/^the input "([^\"]*)" has the value "([^\"]*)"$/) do |input_name, value|
-  sleep(0.1)
+  sleep 0.2
   expect(find_field(input_name).value).to eq value
 end

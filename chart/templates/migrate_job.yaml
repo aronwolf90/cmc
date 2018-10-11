@@ -21,6 +21,6 @@ spec:
           imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
-              value: 'postgres://root:password@cmc-database/database'
+              value: 'postgres://root:{{ .Values.db_password }}@cmc-database/database'
             - name: SECRET_KEY_BASE
               value: {{ .Values.secret_key_base }}

@@ -157,11 +157,15 @@ deploy:
         helm install chart --name cmc-production
           --set image.tag=$CI_COMMIT_SHA
           --set remote=true
+          --set cluster-issuer=letsencrypt-production
+          --set db-password=$DB_PASSWORD
           --set url=cost-manager.com;
       else
         helm upgrade cmc-production chart
           --set image.tag=$CI_COMMIT_SHA
           --set remote=true
+          --set cluster_issuer=letsencrypt-production
+          --set db_password=$DB_PASSWORD
           --set url=cost-manager.com
           --force;
       fi
