@@ -15,10 +15,6 @@ spec:
           backend:
             serviceName: cmc-service
             servicePort: 80
-        - path: /
-          backend:
-            serviceName: cmc-database
-            servicePort: 5432
   - host: "*.{{ .Values.url }}"
     http:
       paths:

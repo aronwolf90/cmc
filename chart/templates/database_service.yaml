@@ -5,6 +5,8 @@ metadata:
   labels:
     name: cmc-database
 spec:
+  externalIPs:
+    - {{ .Values.external_ip }}
   ports:
     - port: 5432
   selector:

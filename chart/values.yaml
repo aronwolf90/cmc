@@ -6,3 +6,4 @@ enviroment: production
 remote: false
 cluster_issuer:
 db_password:
+external_ip:
