@@ -21,22 +21,16 @@ spec:
               value: root
             - name: POSTGRES_PASSWORD
               value: {{ .Values.db_password }}
-            {{ if .Values.remote }}
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
-            {{ end }}
           ports:
             - containerPort: 5432
               name: cmc-database
-          {{ if .Values.remote }}
           volumeMounts:
             - name: cmc-database-volume
               mountPath: /var/lib/postgresql/data
-          {{ end }}
 
-      {{ if .Values.remote }}
       volumes:
         - name: cmc-database-volume
-          hostPath:
-            path: "/databases/cmc"
-      {{ end }}
+          persistentVolumeClaim:
+            claimName: cmc-db-pvc
