@@ -39,10 +39,10 @@ export default {
   },
   methods: {
     request () {
-      this.$store.dispatch('request', { 
+      this.$store.dispatch('add', { 
         url: `/api/v1/issues?query=${this.searchText}`,
       }).then(response => {
-        this.requestIssues = response.data 
+        this.requestIssues = response
       })
     }
   },

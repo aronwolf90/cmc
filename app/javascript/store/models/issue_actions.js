@@ -2,12 +2,15 @@ const endpoint = '/api/v1'
 
 export default {
   initIssue (context, issueId) {
-    return context.dispatch('initEntry', { endpoint, resource: `issues/${issueId}` })
+    return context.dispatch('initEntry', {
+      endpoint,
+      resource: `issues/${issueId}?include[]=comments`
+    })
   },
   initIssues (context) {
     return context.dispatch('initEntry', {
       endpoint,
-      resource: 'issues?include[]=comments'
+      resource: 'issues'
     })
   },
   initCurrentIssue () {

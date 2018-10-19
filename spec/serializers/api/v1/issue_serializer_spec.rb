@@ -13,8 +13,7 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
       attributes: {
         title: "title",
         description: "description",
-        complexity: nil,
-        "my-spended-time": 60
+        complexity: nil
       },
       relationships: {
         user: { data: nil },

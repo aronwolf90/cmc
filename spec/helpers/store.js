@@ -39,5 +39,6 @@ export const helperActions = {
   initCurrentIssue (context) {
     context.commit('enable', 'currentIssue')
   },
-  request () { return () => sinon.stub().returnsPromise() }
+  request () { return () => sinon.stub().returnsPromise() },
+  add () { return () => sinon.stub().returnsPromise() }
 }

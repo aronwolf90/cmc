@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class DocumentSerializer < ActiveModel::Serializer
+    class DocumentSerializer < ApplicationSerializer
       include Rails.application.routes.url_helpers
 
       attributes :name

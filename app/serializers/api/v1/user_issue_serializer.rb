@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class UserIssueSerializer < ActiveModel::Serializer
+    class UserIssueSerializer < ApplicationSerializer
       attributes :spent_time, :start_time, :id
 
       belongs_to :user, serializer: UserSerializer

@@ -2,14 +2,13 @@
 
 module Api
   module V1
-    class IssueSerializer < ActiveModel::Serializer
+    class IssueSerializer < ApplicationSerializer
       include Rails.application.routes.url_helpers
 
       attributes(
         :title,
         :description,
         :complexity,
-        :my_spended_time
       )
 
       belongs_to :user, serializer: UserSerializer
@@ -18,11 +17,8 @@ module Api
 
       link(:self) { api_v1_issue_path(object) }
 
-      def my_spended_time
-        UserIssueSpendedTimeCalculator.(
-          user: scope,
-          issue: object
-        ).to_i
+      def self.eager_load_options
+        %i[user board_list comments]
       end
     end
   end

@@ -16,8 +16,7 @@ Scenario: Get /api/v1/issues
         "attributes": { 
           "title": "title",
           "description": null,
-          "complexity": null,
-          "my-spended-time": 0
+          "complexity": null
         },
         "relationships": {
           "user": { "data": null },

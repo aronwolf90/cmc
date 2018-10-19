@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class ProjectSerializer < ActiveModel::Serializer
+    class ProjectSerializer < ApplicationSerializer
       include Rails.application.routes.url_helpers
 
       attributes :name

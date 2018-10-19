@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class BoardListSerializer < ActiveModel::Serializer
+    class BoardListSerializer < ApplicationSerializer
       include Rails.application.routes.url_helpers
 
       attributes :name
@@ -12,6 +12,10 @@ module Api
       belongs_to :project, serializer: ProjectSerializer
 
       link(:self) { api_v1_board_list_path(object) }
+
+      def self.eager_load_options
+        %i[issues project]
+      end
     end
   end
 end

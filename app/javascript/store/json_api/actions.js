@@ -62,7 +62,6 @@ export default {
       relatedEntriesReference.links.url)
   },
   add (context, { endpoint, resource, url }) {
-    required({ endpoint, resource })
     url = calculeUrl({ endpoint, resource, url })
 
     return context.dispatch('request', { url }).then(response => {

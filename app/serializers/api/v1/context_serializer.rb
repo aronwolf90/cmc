@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class ContextSerializer < ActiveModel::Serializer
+    class ContextSerializer < ApplicationSerializer
       belongs_to :current_user, serializer: UserSerializer
     end
   end

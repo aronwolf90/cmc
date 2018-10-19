@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class TreeSerializer < ActiveModel::Serializer
+    class TreeSerializer < ApplicationSerializer
       def root
         object.root?
       end

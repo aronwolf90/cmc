@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class CommentSerializer < ActiveModel::Serializer
+    class CommentSerializer < ApplicationSerializer
       attributes :content
 
       belongs_to :issue, serializer: IssueSerializer

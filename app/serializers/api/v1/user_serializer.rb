@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class UserSerializer < ActiveModel::Serializer
+    class UserSerializer < ApplicationSerializer
       include Rails.application.routes.url_helpers
 
       attributes :firstname
@@ -13,6 +13,10 @@ module Api
       has_one :current_record, serializer: RecordSerializer
 
       link(:self) { api_v1_user_path(object) }
+
+      def self.eager_load_options
+        %i[issues current_record selected_project]
+      end
     end
   end
 end

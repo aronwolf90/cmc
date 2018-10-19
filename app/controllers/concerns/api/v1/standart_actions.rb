@@ -9,7 +9,7 @@ module Api
 
       def index
         render_json_api json: JsonApiQuery.(
-          model_class.all,
+          model_class.all.includes(serializer.eager_load_options),
           params.to_unsafe_h.deep_symbolize_keys
         )
       end

@@ -20,6 +20,10 @@ module Api
       def self.model_class(model_class, **args)
         before_action -> { @model_class = model_class }, **args
       end
+
+      def serializer
+        "Api::V1::#{model_class}Serializer".constantize
+      end
     end
   end
 end
