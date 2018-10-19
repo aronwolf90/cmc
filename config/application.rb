@@ -3,7 +3,7 @@
 require_relative "boot"
 
 require "rails/all"
-require "apartment/elevators/subdomain"
+require_relative "../lib/apartment_middleware"
 
 # Require the gems listed in Gemfile, including any gems
 # you"ve limited to :test, :development, or :production.
@@ -21,6 +21,6 @@ module CMC
 
     config.time_zone = "Berlin"
 
-    config.middleware.insert_before Warden::Manager, Apartment::Elevators::Subdomain
+    config.middleware.insert_before Warden::Manager, ApartmentMiddleware
   end
 end
