@@ -17,7 +17,9 @@ RSpec.describe SessionsController do
           .to receive(:organization_sign_in_url)
           .and_return("test.lvh.me")
         allow(Organization)
-          .to receive(:find_by).and_return(Organization.new)
+          .to receive(:find_by).with(name: "test").and_return(Organization.new)
+        allow(Organization)
+          .to receive(:find_by).with(name: "no-exist").and_return(nil)
         allow(Settings)
           .to receive(:multi_tenant).and_return(true)
       end
@@ -25,6 +27,11 @@ RSpec.describe SessionsController do
       specify do
         post :create, params: { organization: "test" }
         is_expected.to redirect_to "test.lvh.me"
+      end
+
+      specify do
+        post :create, params: { organization: "no-exist" }
+        is_expected.to redirect_to new_user_session_path
       end
     end
 

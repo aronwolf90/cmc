@@ -20,4 +20,13 @@ describe ApplicationHelper do
       it { expect(helper.flash_class(:alert)).to eq "alert alert-warn" }
     end
   end
+
+  describe "organization_sign_in_url" do
+    let(:organization) { Organization.new(name: "main") }
+
+    it "return root sign in url" do
+      expect(helper.organization_sign_in_url(organization))
+        .to eq "http://main.test.host/users/sign_in"
+    end
+  end
 end
