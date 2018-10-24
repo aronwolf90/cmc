@@ -194,7 +194,7 @@ export default {
   {
     events () {
       return (this.$store.getters.collection('events') || []).map(event => {
-        let date = new Date(Utils.attribute(event, 'start-time'))
+        let date = Utils.attribute(event, 'start-time')
 
         return {
           data: {
@@ -203,9 +203,9 @@ export default {
             id: event.id
           },
           schedule: {
-            year: date.getYear(),
-            month: [date.getMonth()],
-            dayOfMonth: [date.getUTCDate()]     
+            year: parseInt(date.substring(0, 4)),
+            month: [parseInt(date.substring(5, 7)) - 1],
+            dayOfMonth: [parseInt(date.substring(8, 10))]
           }
         }
       })
