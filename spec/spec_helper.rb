@@ -117,6 +117,7 @@ RSpec.configure do |config|
     "turbolinks",
     "cells",
     "tilt",
-    "simple_form"
+    "simple_form",
+    "active_support"
   )
 end

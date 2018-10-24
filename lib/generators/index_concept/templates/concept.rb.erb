@@ -3,6 +3,10 @@
 module <%= class_name.pluralize.split("::")[0..-2].join("::") %>
   module <%= class_name.pluralize.split("::").last.pluralize %>::Cell
     class Index < ApplicationCell
+      <% name =  class_name.underscore.split("/").last.singularize %>
+      def link(<% name %>)
+        link_to <% name %>, administration_calender_path(<% name %>)
+      end
     end
   end
 end

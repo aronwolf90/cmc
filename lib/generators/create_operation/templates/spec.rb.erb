@@ -3,7 +3,7 @@
 require "rails_helper"
 require_relative "../../shared_examples/standard_create_operation"
 
-describe <%= class_name %>CreateOperation do
+describe <%= class_name %>::CreateOperation do
   it_should_behave_like "standard create operation",
     form_class: <%= class_name %>Form
 end

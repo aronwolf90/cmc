@@ -12,6 +12,7 @@ import wikiCategoryActions from 'store/models/wiki_category_actions'
 import wikiPageActions from 'store/models/wiki_page_actions'
 import folderActions from 'store/models/folder_actions'
 import userIssueActions from 'store/models/user_issue_actions'
+import eventActions from 'store/models/event_actions'
 
 export default {
   strict: true,
@@ -72,6 +73,7 @@ export default {
     ...wikiPageActions,
     ...folderActions,
     ...userIssueActions,
+    ...eventActions,
 
     initCurrentUser (context) {
       return context.dispatch('initContext').then(contextEntry => {

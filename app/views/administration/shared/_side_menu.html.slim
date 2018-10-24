@@ -6,6 +6,10 @@
     ul.nav.navbar-nav
       li class=('active' if request.url.include?('records'))
         = link_to 'Records', administration_records_path
+  - if policy(Event).index?
+    ul.nav.navbar-nav
+      li class=('active' if request.url.include?('calenders'))
+        = link_to 'Calenders', administration_calender_path
   - if policy(BoardList).index?
     ul.nav.navbar-nav
       li class=('active' if request.url.include?('board'))

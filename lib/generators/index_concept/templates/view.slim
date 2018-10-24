@@ -1,0 +1,4 @@
+<% name =  class_name.underscore.split("/").last.singularize %>
+ul.list-group
+- model.each |<%= name %>|
+  li.list-group-item = link(<%= name %>)

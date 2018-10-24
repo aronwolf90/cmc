@@ -28,4 +28,14 @@ class String
 
     domain
   end
+
+  def to_range
+    if include?("...")
+      Range.new(*split("..."))
+    elsif include?("..")
+      Range.new(*split(".."))
+    else
+      nil
+    end
+  end
 end

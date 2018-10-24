@@ -6,7 +6,7 @@ describe <%= class_name %>::Cell::Form, type: :cell do
   controller <%= class_name.pluralize %>Controller
 
   let(:user) { Admin.new }
-  let(:form) { <% class_name %>Form.new(<%= class_name.split("::").last %>.new) }
+  let(:form) { <% class_name %>Form.new(<%= class_name.split("::").last.singularize %>.new) }
 
   # it { is_expected.to have_selector "#data_name" }
 end

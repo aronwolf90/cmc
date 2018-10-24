@@ -58,6 +58,13 @@ Given /^a wiki page exists with an id of 1$/ do
   )
 end
 
+Given /^an event exists with an id of 1$/ do
+  Event.create!(
+    title: "Test",
+    all_day: true
+  )
+end
+
 Given(/An record for user "([^\"]*)" and issue "([^\"]*)"/) do |user_id, issue_id|
   Record.create!(
     user_id: user_id,

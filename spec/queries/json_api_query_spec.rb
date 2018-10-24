@@ -39,4 +39,22 @@ RSpec.describe JsonApiQuery   do
       expect(subject.first).to eq(board_list2)
     end
   end
+
+  context "filter with null is present in the params" do
+    let(:params) { { filter: { project_id: "null" } } }
+
+    it "return mached entry" do
+      expect(subject.all.sort).to eq(relation.sort)
+    end
+  end
+
+  context "filter is a range" do
+    let(:params) { { filter: { ordinal_number: "1..2" } } }
+
+    before { create(:board_list, ordinal_number: 3) }
+
+    it "return entries for the range" do
+      expect(subject.order(:ordinal_number)).to eq([board_list2, board_list1])
+    end
+  end
 end

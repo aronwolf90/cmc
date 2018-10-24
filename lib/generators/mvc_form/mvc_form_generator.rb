@@ -15,7 +15,7 @@ class MvcFormGenerator < Rails::Generators::NamedBase
   def create_spec
     template(
       "spec.rb.erb",
-      File.join("spec", "operations", class_path, "#{file_name}_form_spec.rb")
+      File.join("spec", "forms", class_path, "#{file_name}_form_spec.rb")
     )
   end
 end

@@ -35,7 +35,14 @@ private
 
   def filter_options
     filter_params.map do |key, value|
-      [key, value != "null" ? value : nil]
+      case
+      when value == "null"
+        [key, nil]
+      when value.to_s.to_range != nil
+        [key, value.to_range]
+      else
+        [key, value]
+      end
     end.to_h
   end
 end

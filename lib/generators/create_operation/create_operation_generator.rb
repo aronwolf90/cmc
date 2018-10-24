@@ -7,14 +7,14 @@ class CreateOperationGenerator < Rails::Generators::NamedBase
 
   def create_operation
     file = File.join("app", "operations", class_path,
-      file_name.pluralize, "create.rb")
+      file_name.pluralize, "create_operation.rb")
 
     template("operation.rb.erb", file)
   end
 
   def create_spec
     file = File.join("spec", "operations", class_path,
-      file_name.pluralize, "create_spec.rb")
+      file_name.pluralize, "create_operation_spec.rb")
 
     template("spec.rb.erb", file)
   end

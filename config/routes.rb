@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :board_lists, only: %i[new create edit update destroy] do
       resources :issues, only: %i[show new create]
     end
+    resource :calender, only: :show
 
     resource :organization, only: %i[edit update]
 
@@ -79,6 +80,7 @@ Rails.application.routes.draw do
       resources :wiki_pages, only: %i[show update destroy]
       resources :folders, only: :index
       resources :user_issues, only: :index
+      resources :events, only: %i[index create update]
     end
   end
 end
