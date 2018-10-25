@@ -9,7 +9,7 @@
       .modal-dialog.modal-dialog-centered(role='document')
         .modal-content
           .modal-header
-            h5#exampleModalLabel.modal-title Modal title
+            h5#exampleModalLabel.modal-title Create event
             button.close(type='button', data-dismiss='modal', aria-label='Close')
               span(aria-hidden='true') ×
           .modal-body

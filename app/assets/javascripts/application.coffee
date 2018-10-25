@@ -13,6 +13,7 @@ document.addEventListener 'turbolinks:load', =>
     $('.datetimepicker').datetimepicker()
     $('[data-toggle="tooltip"]').tooltip()
     $('select[multiple]').select2({ theme: "bootstrap" })
+    $('body, [data-dismiss="modal"]').click => 
+      $('.modal').modal('hide')
     $('.modal-content').click (event) => event.stopPropagation()
-    $('body').click => $('.modal').modal('hide')
   ), 100

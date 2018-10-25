@@ -9,7 +9,7 @@
       .modal-dialog.modal-dialog-centered(role='document')
         .modal-content
           .modal-header
-            h5#exampleModalLabel.modal-title Modal title
+            h5#exampleModalLabel.modal-title Edit event
             button.close(type='button', data-dismiss='modal', aria-label='Close')
               span(aria-hidden='true') ×
           .modal-body
@@ -54,6 +54,10 @@ export default {
         type: 'events',
         id: this.eventId
       })
+    },
+    startTime () {
+      let date = Utils.attribute(this.event, 'start-time')
+      return date.substring(0, 10)
     }
   },
   watch: {
@@ -63,7 +67,7 @@ export default {
       this.attributes.title = 
         Utils.attribute(this.event, 'title')
       this.attributes['start-time'] = 
-        Utils.attribute(this.event, 'start-time')
+       this.startTime
     }
   }
 }
