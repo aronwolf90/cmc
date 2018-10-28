@@ -21,6 +21,10 @@
               | Date
               input.form-control(v-model="attributes['start-time']")
           .modal-footer
+            button.btn.btn-danger(
+              @click='destroy',
+              data-dismiss='modal'
+            ) Delete
             button.btn.btn-success(
               @click='update',
               data-dismiss='modal'
@@ -46,6 +50,9 @@ export default {
        entry: this.event,
        attributes: this.attributes
      })
+    },
+    destroy () {
+      this.$store.dispatch('destroyEvent', this.event)
     }
   },
   computed: {

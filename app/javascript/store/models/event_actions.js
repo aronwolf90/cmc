@@ -20,5 +20,8 @@ export default {
       attributes
     }
     return context.dispatch('update', { entry, payload, endpoint })
+  },
+  destroyEvent (context, entry) {
+    return context.dispatch('destroy', { entry })
   }
 }

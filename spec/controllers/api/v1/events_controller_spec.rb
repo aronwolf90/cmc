@@ -11,5 +11,5 @@ RSpec.describe Api::V1::EventsController, type: :controller do
     Api::V1::Events::CreateOperation
   include_examples "standard api update action",
     Api::V1::Events::UpdateOperation
-  # include_examples "standard api destroy action"
+  include_examples "standard api destroy action"
 end

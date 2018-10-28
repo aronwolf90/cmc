@@ -7,7 +7,7 @@ module Api
       namespace Events
       model_class Event
 
-      public :index, :create, :update
+      public :index, :create, :update, :destroy
     end
   end
 end
