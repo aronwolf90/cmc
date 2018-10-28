@@ -19,6 +19,9 @@ describe Organizations::UpdateMutation do
     }
   end
 
+  before { Timecop.freeze("1.8.2018") }
+  after { Timecop.return }
+
 
   it "change time zone to London" do
     expect { subject }.to change(organization, :time_zone)
