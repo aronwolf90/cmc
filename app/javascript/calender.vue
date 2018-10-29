@@ -205,7 +205,7 @@ export default {
           },
           schedule: {
             year: parseInt(startTime.substring(0, 4)),
-            month: [parseInt(endTime.substring(5, 7)) - 1],
+            month: [parseInt(startTime.substring(5, 7)) - 1],
             dayOfMonth: [parseInt(startTime.substring(8, 10))],
             times: allDay ? null : [startTime.substring(11, 19)],
             duration: allDay ? null : (new Date(endTime) - new Date(startTime))/3600000
