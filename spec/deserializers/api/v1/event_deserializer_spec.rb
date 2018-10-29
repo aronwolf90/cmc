@@ -9,18 +9,18 @@ describe Api::V1::EventDeserializer do
     {
       attributes: {
         "title": "Title",
-        "start-time": "1-1-2019",
-        "all-day": true,
-        duration: 1
+        "start-time": "1-1-2019 00:00:00",
+        "end-time": "1-1-2019 01:00:00",
+        "all-day": true
       }
     }
   end
   let(:result) do
     {
       title: "Title",
-      start_time: "1-1-2019",
-      all_day: true,
-      duration: 1
+      start_time: "1-1-2019 00:00:00",
+      end_time: "1-1-2019 01:00:00",
+      all_day: true
     }
   end
 

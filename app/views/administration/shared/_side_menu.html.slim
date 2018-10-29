@@ -9,7 +9,7 @@
   - if policy(Event).index?
     ul.nav.navbar-nav
       li class=('active' if request.url.include?('calender'))
-        = link_to 'Calenders', administration_calender_path
+        = link_to 'Calender', administration_calender_path
   - if policy(BoardList).index?
     ul.nav.navbar-nav
       li class=('active' if request.url.include?('board'))

@@ -13,13 +13,24 @@
             button.close(type='button', data-dismiss='modal', aria-label='Close')
               span(aria-hidden='true') ×
           .modal-body
-            label
-              | Title
-              input.form-control(v-model='attributes.title')
-            | &nbsp; 
-            label
-              | Date
-              input.form-control(v-model="attributes['start-time']")
+            .row
+              .col-12.label
+                | Title
+                input.form-control(v-model='form.title')
+            .row
+              .col-6.label
+                | Date
+                input.form-control(v-model='form.date')
+              .col-6.label
+                | Time
+                .input-group
+                  .input-group-prepend
+                    .input-group-text
+                      input(v-model='form.nonAllDay', type='checkbox')
+                  template(v-if='form.nonAllDay')
+                    input.form-control(v-model='form.startTime')
+                    input.form-control(v-model='form.endTime')
+                  input.form-control(v-else, disabled=true)
           .modal-footer
             button.btn.btn-danger(
               @click='destroy',
@@ -38,9 +49,12 @@ export default {
   props: ['eventId'],
   data () {
    return {
-     attributes: {
+     form: {
        title: null,
-       'start-time': null
+       date: null,
+       startTime: null,
+       endTime: null,
+       nonAllDay: null
      }
    }
   },
@@ -48,7 +62,12 @@ export default {
    update () {
      this.$store.dispatch('updateEvent', {
        entry: this.event,
-       attributes: this.attributes
+       attributes: {
+         title: this.form.title,
+         'start-time': `${this.form.date} ${this.form.startTime}`,
+         'end-time': `${this.form.date} ${this.form.endTime}`,
+         'all-day': !this.form.nonAllDay
+       }
      })
     },
     destroy () {
@@ -62,19 +81,31 @@ export default {
         id: this.eventId
       })
     },
-    startTime () {
+    date () {
       let date = Utils.attribute(this.event, 'start-time')
       return date.substring(0, 10)
+    },
+    startTime () {
+      let date = Utils.attribute(this.event, 'start-time')
+      return date.substring(11, 19)
+    },
+    endTime () {
+      let date = Utils.attribute(this.event, 'end-time')
+      if (!date) return ''
+      return date.substring(11, 19)
     }
   },
   watch: {
     event () {
       if (this.loadedId == this.eventId) return
       this.loadedId = this.eventId
-      this.attributes.title = 
+      this.form.title = 
         Utils.attribute(this.event, 'title')
-      this.attributes['start-time'] = 
-       this.startTime
+      this.form.nonAllDay =
+        !Utils.attribute(this.event, 'all-day')
+      this.form.date = this.date
+      this.form.startTime = this.startTime
+      this.form.endTime = this.endTime || this.startTime
     }
   }
 }

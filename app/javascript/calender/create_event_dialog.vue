@@ -1,5 +1,5 @@
 <template lang='pug'>
-    #event-dialog.modal.fade(
+    #create-event-dialog.modal.fade(
       tabindex='-1',
       role='dialog',
       data-backdrop="false",
@@ -13,37 +13,58 @@
             button.close(type='button', data-dismiss='modal', aria-label='Close')
               span(aria-hidden='true') ×
           .modal-body
-            label
-              | Title
-              input.form-control(v-model='attributes.title')
-            | &nbsp; 
-            label
-              | Date
-              input.form-control(v-model="attributes['start-time']")
+            .row
+              .col-12.label
+                | Title
+                input.form-control(v-model='form.title')
+            .row
+              .col-6.label
+                | Date
+                input.form-control(v-model='form.date')
+              .col-6.label
+                | Time
+                .input-group
+                  .input-group-prepend
+                    .input-group-text
+                      input(v-model='form.nonAllDay', type='checkbox')
+                  template(v-if='form.nonAllDay')
+                    input.form-control(v-model='form.startTime')
+                    input.form-control(v-model='form.endTime')
+                  input.form-control(v-else, disabled=true)
           .modal-footer
             button.btn.btn-success(
               @click='create',
               data-dismiss='modal'
-            ) Save changes
+            ) Save
 </template>
 
 <script>
+import * as Utils from 'store/json_api/utils'
  
 export default {
+  props: ['eventId'],
   data () {
    return {
-     attributes: {
-       title: '',
-       'start-time': ''
+     form: {
+       title: null,
+       date: null,
+       startTime: null,
+       endTime: null,
+       nonAllDay: null
      }
    }
   },
   methods: {
    create () {
      this.$store.dispatch('createEvent', {
-       attributes: this.attributes
+       attributes: {
+         title: this.form.title,
+         'start-time': `${this.form.date} ${this.form.startTime}`,
+         'end-time': `${this.form.date} ${this.form.endTime}`,
+         'all-day': !this.form.nonAllDay
+       }
      })
-   }
+    }
   }
 }
 </script>

@@ -26,7 +26,7 @@ Scenario: Post an valid event using json in POST body
         "attributes": { 
           "title": "Title",
           "start-time": "2019-01-01T00:00:00.000+01:00",
-          "duration": null,
+          "end-time": null,
           "all-day": true 
         },
         "links": { "self": "/api/v1/events/1" }

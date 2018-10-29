@@ -6,7 +6,7 @@ module Api
       attributes(
         :title,
         :start_time,
-        :duration,
+        :end_time,
         :all_day
       )
 

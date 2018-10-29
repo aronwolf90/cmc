@@ -6,13 +6,12 @@
     .col-sm-3
       .btn-group
         slot(name='today', v-bind='{setToday, todayDate, calendar}')
-          a.btn.btn-outline-secondary(@click='setToday', href="#") Today
+          a.btn.btn-outline-secondary(@click='setToday') Today
         slot(name='view', v-bind='{currentType, types}')
           a.btn.btn-outline-secondary.dropdown-toggle(
             data-toggle='dropdown',
             aria-haspopup='true',
-            aria-expanded='false',
-            href="#"
+            aria-expanded='false'
           )
             | {{ currentType.label }}
           .dropdown-menu
@@ -33,7 +32,7 @@
         a.btn.btn-outline-secondary(
           href='#',
           data-toggle="modal",
-          data-target="#event-dialog"
+          data-target="#create-event-dialog"
         ) Add event
 
 
@@ -194,7 +193,9 @@ export default {
   {
     events () {
       return (this.$store.getters.collection('events') || []).map(event => {
-        let date = Utils.attribute(event, 'start-time')
+        let startTime = Utils.attribute(event, 'start-time')
+        let endTime = Utils.attribute(event, 'end-time')
+        let allDay = Utils.attribute(event, 'all-day') 
 
         return {
           data: {
@@ -203,9 +204,11 @@ export default {
             id: event.id
           },
           schedule: {
-            year: parseInt(date.substring(0, 4)),
-            month: [parseInt(date.substring(5, 7)) - 1],
-            dayOfMonth: [parseInt(date.substring(8, 10))]
+            year: parseInt(startTime.substring(0, 4)),
+            month: [parseInt(endTime.substring(5, 7)) - 1],
+            dayOfMonth: [parseInt(startTime.substring(8, 10))],
+            times: allDay ? null : [startTime.substring(11, 19)],
+            duration: allDay ? null : (new Date(endTime) - new Date(startTime))/3600000
           }
         }
       })
