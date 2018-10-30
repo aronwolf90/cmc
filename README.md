@@ -78,3 +78,6 @@ atom:
 
 vim:
 . Execute: xmake dev-tmux
+
+# Links
+homepage: https://about.cost-manager.com
