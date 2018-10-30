@@ -6,5 +6,6 @@ module Api::V1
     attribute :start_time
     attribute :end_time
     attribute :all_day
+    attribute :description
   end
 end

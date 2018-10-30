@@ -7,7 +7,8 @@ module Api
         :title,
         :start_time,
         :end_time,
-        :all_day
+        :all_day,
+        :description
       )
 
       link(:self) { api_v1_event_path(object) }

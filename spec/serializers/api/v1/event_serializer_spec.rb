@@ -13,7 +13,8 @@ RSpec.describe Api::V1::EventSerializer, type: :serializer do
         title: event.title,
         "start-time": event.start_time,
         "end-time": event.end_time,
-        "all-day": event.all_day
+        "all-day": event.all_day,
+        "description": event.description
       },
       links: { self: "/api/v1/events/#{event.id}" }
     } }

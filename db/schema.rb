@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181029193456) do
+ActiveRecord::Schema.define(version: 20181030184844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20181029193456) do
     t.datetime "updated_at", null: false
     t.datetime "start_time"
     t.datetime "end_time"
+    t.text "description"
   end
 
   create_table "folders", force: :cascade do |t|

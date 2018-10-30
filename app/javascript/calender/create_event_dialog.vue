@@ -31,6 +31,10 @@
                     input.form-control(v-model='form.startTime')
                     input.form-control(v-model='form.endTime')
                   input.form-control(v-else, disabled=true)
+            .row
+              .col-12.label
+                | Description
+                textarea.form-control(v-model='form.description')
           .modal-footer
             button.btn.btn-success(
               @click='create',
@@ -50,7 +54,8 @@ export default {
        date: null,
        startTime: null,
        endTime: null,
-       nonAllDay: null
+       nonAllDay: null,
+       description: null
      }
    }
   },
@@ -61,7 +66,8 @@ export default {
          title: this.form.title,
          'start-time': `${this.form.date} ${this.form.startTime}`,
          'end-time': `${this.form.date} ${this.form.endTime}`,
-         'all-day': !this.form.nonAllDay
+         'all-day': !this.form.nonAllDay,
+         'description': this.form.description
        }
      })
     }

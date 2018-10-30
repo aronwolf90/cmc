@@ -11,7 +11,8 @@ describe Api::V1::EventDeserializer do
         "title": "Title",
         "start-time": "1-1-2019 00:00:00",
         "end-time": "1-1-2019 01:00:00",
-        "all-day": true
+        "all-day": true,
+        "description": "description"
       }
     }
   end
@@ -20,7 +21,8 @@ describe Api::V1::EventDeserializer do
       title: "Title",
       start_time: "1-1-2019 00:00:00",
       end_time: "1-1-2019 01:00:00",
-      all_day: true
+      all_day: true,
+      description: "description"
     }
   end
 

@@ -12,7 +12,8 @@ Scenario: Post an valid event using json in POST body
         "attributes": {
           "title": "Title",
           "all-day": "comment", 
-          "start-time": "1.1.2019"
+          "start-time": "1.1.2019",
+          "description": "description"
         }
       }
     }
@@ -27,7 +28,8 @@ Scenario: Post an valid event using json in POST body
           "title": "Title",
           "start-time": "2019-01-01T00:00:00.000+01:00",
           "end-time": null,
-          "all-day": true 
+          "all-day": true,
+          "description": "description"
         },
         "links": { "self": "/api/v1/events/1" }
       }

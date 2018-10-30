@@ -17,7 +17,8 @@ Scenario: Get /api/v1/events
           "title": "Test",
           "start-time": null,
           "end-time": null,
-          "all-day": true
+          "all-day": true,
+          "description": null
         },
         "links": { "self": "/api/v1/events/1" }
       }]
