@@ -34,8 +34,41 @@ spec:
           volumeMounts:
             - name: cmc-files-volume
               mountPath: /app/uploads
+            - mountPath: /assets
+              name: assets
+          lifecycle:
+            postStart:
+              exec:
+                command: 
+                  - sh 
+                  - -c 
+                  - "cp -r /app/public/* /assets"
+
+
+        - image: nginx:1.14-alpine
+          name: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /assets
+              name: assets
+              readOnly: true
+            - mountPath: /etc/nginx/nginx.conf
+              name: nginx-conf
+              subPath: nginx.conf
+              readOnly: true
+
 
       volumes:
         - name: cmc-files-volume
           persistentVolumeClaim:
             claimName: cmc-web-pvc
+        - name: nginx-conf
+          configMap:
+            name: cmc-nginx-conf
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+        - name: assets
+          emptyDir: {}
+
