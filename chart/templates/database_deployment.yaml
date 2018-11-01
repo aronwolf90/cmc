@@ -12,7 +12,7 @@ spec:
         name: cmc-database
     spec:
       containers:
-        - image: postgres:latest
+        - image: postgres:10-alpine
           name: cmc-database
           env:
             - name: POSTGRES_DB
