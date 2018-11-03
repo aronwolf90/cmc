@@ -1,4 +1,4 @@
-import * as Utils from '../json_api/utils'
+import { Utils } from 'vuex-jsonapi-client'
 
 const endpoint = '/api/v1'
 

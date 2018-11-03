@@ -10,7 +10,7 @@
 <script>
 import * as d3 from 'd3'
 import { _3d } from 'd3-3d'
-import * as Utils from './store/json_api/utils'
+import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   data () { 

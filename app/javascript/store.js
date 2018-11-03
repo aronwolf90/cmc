@@ -1,6 +1,4 @@
-import JsonApi from 'store/json_api'
-
-import JsonApiGetters from 'store/json_api/getters'
+import JsonApi from 'vuex-jsonapi-client'
 
 import recordActions from 'store/models/record_actions'
 import issueActions from 'store/models/issue_actions'
@@ -21,18 +19,18 @@ export default {
   },
   getters: {
     currentUser (store) {
-      let entry = JsonApiGetters.entry(store.json_api)({
+      let entry = JsonApi.getters.entry(store.json_api)({
         type: 'contexts',
         id: 'context'
       })
 
-      return JsonApiGetters.associatedEntry(store.json_api)({
+      return JsonApi.getters.associatedEntry(store.json_api)({
         entry,
         name: 'current-user'
       })
     },
     currentRecord (store, getters) {
-      return JsonApiGetters.associatedEntry(store.json_api)({
+      return JsonApi.getters.associatedEntry(store.json_api)({
         entry: getters.currentUser,
         name: 'current-record'
       })

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import * as Utils from '../store/json_api/utils'
+import { Utils } from 'vuex-jsonapi-client'
 import MarkdownViewer from '../markdown_viewer'
 
 export default {

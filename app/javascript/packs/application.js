@@ -26,12 +26,19 @@ Vue.component('calender', Calender)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')
+store.commit('vue', Vue)
 
 if (document.querySelector('meta[name="csrf-token"]')) {
-  Vue.http.headers.common['X-CSRF-Token'] =
-    document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  store.commit('headerValue', {
+    key: 'X-CSRF-Token',
+    value: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  })
 }
-Vue.http.headers.common['Content-Type'] = 'application/vnd.api+json'
+
+store.commit('headerValue', {
+  key: 'Content-Type',
+  value: 'application/vnd.api+js'
+})
 
 document.addEventListener('turbolinks:before-visit', () => {
   store.commit('clearCalledUrls')

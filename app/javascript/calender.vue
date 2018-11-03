@@ -88,7 +88,7 @@ import {
   Op
 } from 'dayspan';
 import 'dayspan-vuetify/dist/lib/dayspan-vuetify.min.css'
-import * as Utils from 'store/json_api/utils'
+import { Utils } from 'vuex-jsonapi-client'
 import CreateEventDialog from 'calender/create_event_dialog'
 import UpdateEventDialog from 'calender/update_event_dialog'
 

@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import * as Utils from 'store/json_api/utils'
+import { Utils } from 'vuex-jsonapi-client'
  
 export default {
   props: ['eventId'],

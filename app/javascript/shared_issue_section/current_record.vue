@@ -10,7 +10,7 @@
 
 <script>
 import IssueRecordSection from 'components/issues_record_section'
-import * as Utils from '../store/json_api/utils'
+import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   data: () => ({ search_text: '', time: '00:00:00' }),
