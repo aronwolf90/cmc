@@ -1,5 +1,7 @@
 .side-menu
   ul.nav.navbar-nav
-    li class=("active" if current_page?(controller: :organizations, action: :edit))
-      = link_to "Edit", %i[edit administration organization]
+    li = link_to %i[edit administration organization]
+      = fa_icon(:gears, class: "fa-lg")
+      | &nbsp &nbsp
+      | Admin
   = render "administration/shared/shared_issue_section"

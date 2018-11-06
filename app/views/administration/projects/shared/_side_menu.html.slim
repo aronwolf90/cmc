@@ -1,5 +1,7 @@
 .side-menu
   ul.nav.navbar-nav
-    li class=('active' if current_page?(controller: :projects))
-      = link_to 'All', administration_projects_path
+    li = link_to administration_projects_path
+      = fa_icon(:tasks, class: "fa-lg")
+      | &nbsp &nbsp
+      | Projects
   = render "administration/shared/shared_issue_section"
