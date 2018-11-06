@@ -61,7 +61,11 @@ end
 
 When(/^I click on "([^\"]*)"$/) do |element|
   sleep 0.8
-  find(element, match: :prefer_exact).click
+  if Capybara.current_driver == :selenium
+    find(element, match: :prefer_exact).click
+  else
+    find("a:has(#{element})", match: :prefer_exact).click
+  end
 end
 
 When(/^I click on link "([^\"]*)"$/) do |text|

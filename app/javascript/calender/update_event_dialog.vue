@@ -20,16 +20,16 @@
             .row
               .col-6.label
                 | Date
-                input.form-control(v-model='form.date')
+                input.datepicker.form-control(v-model='form.date')
               .col-6.label
                 | Time
                 .input-group
                   .input-group-prepend
                     .input-group-text
-                      input(v-model='form.nonAllDay', type='checkbox')
+                      input(v-model='form.nonAllDay', type='checkbox', @change="jqueryFuncs()")
                   template(v-if='form.nonAllDay')
-                    input.form-control(v-model='form.startTime')
-                    input.form-control(v-model='form.endTime')
+                    input.timepicker.form-control(v-model='form.startTime')
+                    input.timepicker.form-control(v-model='form.endTime')
                   input.form-control(v-else, disabled=true)
             .row
               .col-12.label
@@ -78,6 +78,9 @@ export default {
     },
     destroy () {
       this.$store.dispatch('destroyEvent', this.event)
+    },
+    jqueryFuncs () {
+      setTimeout(() => jqueryFuncs(), 100)
     }
   },
   computed: {
@@ -93,12 +96,12 @@ export default {
     },
     startTime () {
       let date = Utils.attribute(this.event, 'start-time')
-      return date.substring(11, 19)
+      return date.substring(11, 6)
     },
     endTime () {
       let date = Utils.attribute(this.event, 'end-time')
       if (!date) return ''
-      return date.substring(11, 19)
+      return date.substring(11, 16)
     }
   },
   watch: {
@@ -111,9 +114,11 @@ export default {
         !Utils.attribute(this.event, 'all-day')
       this.form.description =
         Utils.attribute(this.event, 'description')
-      this.form.date = this.date
+      this.$set(this.form, "date", this.date)
       this.form.startTime = this.startTime
       this.form.endTime = this.endTime || this.startTime
+
+      this.jqueryFuncs()
     }
   }
 }

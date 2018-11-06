@@ -20,16 +20,16 @@
             .row
               .col-6.label
                 | Date
-                input.form-control(v-model='form.date')
+                input.datepicker.form-control(v-model='form.date')
               .col-6.label
                 | Time
                 .input-group
                   .input-group-prepend
                     .input-group-text
-                      input(v-model='form.nonAllDay', type='checkbox')
+                      input(v-model='form.nonAllDay', type='checkbox', @change="jqueryFuncs()")
                   template(v-if='form.nonAllDay')
-                    input.form-control(v-model='form.startTime')
-                    input.form-control(v-model='form.endTime')
+                    input.timepicker.form-control(v-model='form.startTime')
+                    input.timepicker.form-control(v-model='form.endTime')
                   input.form-control(v-else, disabled=true)
             .row
               .col-12.label
@@ -60,18 +60,21 @@ export default {
    }
   },
   methods: {
-   create () {
-     this.$store.dispatch('createEvent', {
-       attributes: {
-         title: this.form.title,
-         'start-time': `${this.form.date} ${this.form.startTime}`,
-         'end-time': `${this.form.date} ${this.form.endTime}`,
-         'all-day': !this.form.nonAllDay,
-         'description': this.form.description
-       }
-     })
+    create () {
+      this.$store.dispatch('createEvent', {
+        attributes: {
+          title: this.form.title,
+          'start-time': `${this.form.date} ${this.form.startTime}`,
+          'end-time': `${this.form.date} ${this.form.endTime}`,
+          'all-day': !this.form.nonAllDay,
+          'description': this.form.description
+        }
+      })
+    },
+    jqueryFuncs () {
+      setTimeout(() => jqueryFuncs(), 100)
     }
-  }
+  },
 }
 </script>
 

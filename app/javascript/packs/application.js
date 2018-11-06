@@ -29,16 +29,9 @@ store.commit('setEndpoint', '/api/v1/')
 store.commit('vue', Vue)
 
 if (document.querySelector('meta[name="csrf-token"]')) {
-  store.commit('headerValue', {
-    key: 'X-CSRF-Token',
-    value: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-  })
+  store.getters.axios.defaults.headers.common['X-CSRF-Token'] =
+    document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 }
-
-store.commit('headerValue', {
-  key: 'Content-Type',
-  value: 'application/vnd.api+js'
-})
 
 document.addEventListener('turbolinks:before-visit', () => {
   store.commit('clearCalledUrls')

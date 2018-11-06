@@ -26,7 +26,6 @@ gem "lp_csv_exportable"
 gem "migration_data"
 gem "pg_search"
 gem "pundit"
-gem "scenic"
 gem "seed-fu"
 gem "uglifier"
 gem "webpacker"
@@ -51,9 +50,10 @@ gem "sass-rails"
 
 # Frontent libraries
 gem "bootstrap", "~> 4"
+gem "bootstrap3-datetimepicker-rails"
 gem "jquery-rails"
+gem "momentjs-rails"
 gem "turbolinks"
-gem "rails-assets-datetimepicker"
 gem "select2-rails"
 
 # Template

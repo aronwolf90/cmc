@@ -17,12 +17,11 @@ Scenario: Record new
   And I click on submit
   Then the element "#side-body" contain the text "Test issue 1"
 
-@javascript
 Scenario: Record edit
   Given The app contain seed data
   And I am signed in
   When I click on link "Records"
   And I click on ".fa-edit"
-  And I enter "2020.01.01 01:41:43" into input named "data[end_time]"
+  And I enter "2200.01.01 01:41:43" into input named "data[end_time]"
   And I click on submit
   Then the page contain the text "2018"

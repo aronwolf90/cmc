@@ -22,5 +22,7 @@ module CMC
     config.time_zone = "Berlin"
 
     config.middleware.insert_before Warden::Manager, ApartmentMiddleware
+
+    config.active_record.schema_format = :sql
   end
 end
