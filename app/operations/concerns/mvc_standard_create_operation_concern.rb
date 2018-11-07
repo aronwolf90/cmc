@@ -15,7 +15,7 @@ module MvcStandardCreateOperationConcern
     end)
 
     success base::Nested(base::Present)
-    step MvcInjectStep.new(:current_user)
+    success MvcInjectStep.new(:current_user)
     step base::Contract::Validate(key: :data)
     success MvcCreateMutationStep
   end

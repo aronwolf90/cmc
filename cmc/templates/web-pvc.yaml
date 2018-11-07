@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: cmc-web-pvc
+spec:
+  {{- if .Values.webPersistence.storageClassName }}
+  storageClassName: "{{ .Values.webPersistence.storageClassName }}"
+  {{- end }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi

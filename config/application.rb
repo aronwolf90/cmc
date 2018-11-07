@@ -24,5 +24,7 @@ module CMC
     config.middleware.insert_before Warden::Manager, ApartmentMiddleware
 
     config.active_record.schema_format = :sql
+
+    config.active_record.dump_schemas = "test-organization"
   end
 end

@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationMutation
-  attr_private :model, :attributes, :user
+  attr_reader :model
+  attr_private :attributes, :user
 
   def self.call(*args)
-    new(*args).call
+    new(*args).tap(&:call).model
   end
 
   def initialize(model:, user: nil, **attributes)

@@ -1,0 +1,33 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cmc-ingress
+  annotations:
+    {{- range $key, $value := .Values.ingress.annotations }}
+      {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.url }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: cmc-service
+              servicePort: 80
+    {{- if .Values.multiTenant }}
+    - host: "*.{{ .Values.ingress.url }}"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: cmc-service
+              servicePort: 80
+    {{- end }}
+
+  {{- if .Values.ingress.tls }}
+  tls:
+{{ toYaml .Values.ingress.tls | indent 4 }}
+  {{- end -}}
+{{- end -}}

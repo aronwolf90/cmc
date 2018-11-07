@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: cmc-db-pvc
+spec:
+  {{- if .Values.databasePersistence.storageClassName }}
+  storageClassName: "{{ .Values.databasePersistence.storageClassName }}"
+  {{- end }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi

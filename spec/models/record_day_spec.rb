@@ -7,8 +7,11 @@ RSpec.describe RecordDay, type: :model do
   it { is_expected.to have_many(:records) }
 
   before do
+    Timecop.freeze("1.8.2018")
     create(:organization, name: "public")
   end
+
+  after { Timecop.return }
 
   describe "with records" do
     subject { RecordDay.find_by(day: record.start_time) }
