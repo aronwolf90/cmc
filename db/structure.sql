@@ -8,17 +8,9 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+-- Name: test-organization; Type: SCHEMA; Schema: -; Owner: -
 --
 
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 SET default_tablespace = '';
@@ -26,10 +18,10 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
+-- Name: ar_internal_metadata; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.ar_internal_metadata (
+CREATE TABLE ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
     created_at timestamp without time zone NOT NULL,
@@ -38,10 +30,10 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
--- Name: board_lists; Type: TABLE; Schema: public; Owner: -
+-- Name: board_lists; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.board_lists (
+CREATE TABLE board_lists (
     id bigint NOT NULL,
     name character varying,
     created_at timestamp without time zone NOT NULL,
@@ -52,10 +44,10 @@ CREATE TABLE public.board_lists (
 
 
 --
--- Name: board_lists_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: board_lists_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.board_lists_id_seq
+CREATE SEQUENCE board_lists_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -64,17 +56,17 @@ CREATE SEQUENCE public.board_lists_id_seq
 
 
 --
--- Name: board_lists_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: board_lists_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.board_lists_id_seq OWNED BY public.board_lists.id;
+ALTER SEQUENCE board_lists_id_seq OWNED BY board_lists.id;
 
 
 --
--- Name: comments; Type: TABLE; Schema: public; Owner: -
+-- Name: comments; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.comments (
+CREATE TABLE comments (
     id bigint NOT NULL,
     issue_id bigint,
     content text,
@@ -85,10 +77,10 @@ CREATE TABLE public.comments (
 
 
 --
--- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.comments_id_seq
+CREATE SEQUENCE comments_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -97,17 +89,17 @@ CREATE SEQUENCE public.comments_id_seq
 
 
 --
--- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
+ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
--- Name: documents; Type: TABLE; Schema: public; Owner: -
+-- Name: documents; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.documents (
+CREATE TABLE documents (
     id bigint NOT NULL,
     name character varying NOT NULL,
     file character varying NOT NULL,
@@ -118,10 +110,10 @@ CREATE TABLE public.documents (
 
 
 --
--- Name: documents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: documents_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.documents_id_seq
+CREATE SEQUENCE documents_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -130,17 +122,17 @@ CREATE SEQUENCE public.documents_id_seq
 
 
 --
--- Name: documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: documents_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.documents_id_seq OWNED BY public.documents.id;
+ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
 
 
 --
--- Name: events; Type: TABLE; Schema: public; Owner: -
+-- Name: events; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.events (
+CREATE TABLE events (
     id bigint NOT NULL,
     title character varying NOT NULL,
     all_day boolean DEFAULT false NOT NULL,
@@ -153,10 +145,10 @@ CREATE TABLE public.events (
 
 
 --
--- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: events_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.events_id_seq
+CREATE SEQUENCE events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -165,17 +157,17 @@ CREATE SEQUENCE public.events_id_seq
 
 
 --
--- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.events_id_seq OWNED BY public.events.id;
+ALTER SEQUENCE events_id_seq OWNED BY events.id;
 
 
 --
--- Name: folders; Type: TABLE; Schema: public; Owner: -
+-- Name: folders; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.folders (
+CREATE TABLE folders (
     id bigint NOT NULL,
     name character varying NOT NULL,
     folder_id bigint,
@@ -185,10 +177,10 @@ CREATE TABLE public.folders (
 
 
 --
--- Name: folders_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: folders_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.folders_id_seq
+CREATE SEQUENCE folders_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -197,17 +189,17 @@ CREATE SEQUENCE public.folders_id_seq
 
 
 --
--- Name: folders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: folders_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.folders_id_seq OWNED BY public.folders.id;
+ALTER SEQUENCE folders_id_seq OWNED BY folders.id;
 
 
 --
--- Name: issues; Type: TABLE; Schema: public; Owner: -
+-- Name: issues; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.issues (
+CREATE TABLE issues (
     id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -221,10 +213,10 @@ CREATE TABLE public.issues (
 
 
 --
--- Name: issues_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: issues_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.issues_id_seq
+CREATE SEQUENCE issues_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -233,17 +225,17 @@ CREATE SEQUENCE public.issues_id_seq
 
 
 --
--- Name: issues_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: issues_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.issues_id_seq OWNED BY public.issues.id;
+ALTER SEQUENCE issues_id_seq OWNED BY issues.id;
 
 
 --
--- Name: organizations; Type: TABLE; Schema: public; Owner: -
+-- Name: organizations; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.organizations (
+CREATE TABLE organizations (
     id bigint NOT NULL,
     name character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -254,10 +246,10 @@ CREATE TABLE public.organizations (
 
 
 --
--- Name: organizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: organizations_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.organizations_id_seq
+CREATE SEQUENCE organizations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -266,17 +258,17 @@ CREATE SEQUENCE public.organizations_id_seq
 
 
 --
--- Name: organizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: organizations_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.organizations_id_seq OWNED BY public.organizations.id;
+ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
 
 
 --
--- Name: records; Type: TABLE; Schema: public; Owner: -
+-- Name: records; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.records (
+CREATE TABLE records (
     id bigint NOT NULL,
     start_time timestamp without time zone,
     end_time timestamp without time zone,
@@ -288,24 +280,24 @@ CREATE TABLE public.records (
 
 
 --
--- Name: project_record_days; Type: VIEW; Schema: public; Owner: -
+-- Name: project_record_days; Type: VIEW; Schema: test-organization; Owner: -
 --
 
-CREATE VIEW public.project_record_days AS
+CREATE VIEW project_record_days AS
  SELECT ((records.start_time + ((organizations.time_zone_seconds)::double precision * '00:00:01'::interval)))::date AS day,
     board_lists.project_id
-   FROM (((public.records
-     JOIN public.issues ON ((issues.id = records.issue_id)))
-     JOIN public.board_lists ON ((board_lists.id = issues.board_list_id)))
+   FROM (((records
+     JOIN issues ON ((issues.id = records.issue_id)))
+     JOIN board_lists ON ((board_lists.id = issues.board_list_id)))
      JOIN public.organizations ON (((organizations.name)::name = "current_schema"())))
   GROUP BY (((records.start_time + ((organizations.time_zone_seconds)::double precision * '00:00:01'::interval)))::date), board_lists.project_id;
 
 
 --
--- Name: projects; Type: TABLE; Schema: public; Owner: -
+-- Name: projects; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.projects (
+CREATE TABLE projects (
     id bigint NOT NULL,
     name character varying,
     created_at timestamp without time zone NOT NULL,
@@ -314,10 +306,10 @@ CREATE TABLE public.projects (
 
 
 --
--- Name: projects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: projects_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.projects_id_seq
+CREATE SEQUENCE projects_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -326,29 +318,29 @@ CREATE SEQUENCE public.projects_id_seq
 
 
 --
--- Name: projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: projects_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.projects_id_seq OWNED BY public.projects.id;
+ALTER SEQUENCE projects_id_seq OWNED BY projects.id;
 
 
 --
--- Name: record_days; Type: VIEW; Schema: public; Owner: -
+-- Name: record_days; Type: VIEW; Schema: test-organization; Owner: -
 --
 
-CREATE VIEW public.record_days AS
+CREATE VIEW record_days AS
  SELECT ((records.start_time + ((organizations.time_zone_seconds)::double precision * '00:00:01'::interval)))::date AS day,
     records.user_id
-   FROM (public.records
+   FROM (records
      JOIN public.organizations ON (((organizations.name)::name = "current_schema"())))
   GROUP BY (((records.start_time + ((organizations.time_zone_seconds)::double precision * '00:00:01'::interval)))::date), records.user_id;
 
 
 --
--- Name: records_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: records_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.records_id_seq
+CREATE SEQUENCE records_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -357,26 +349,26 @@ CREATE SEQUENCE public.records_id_seq
 
 
 --
--- Name: records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: records_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.records_id_seq OWNED BY public.records.id;
+ALTER SEQUENCE records_id_seq OWNED BY records.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
+-- Name: schema_migrations; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.schema_migrations (
+CREATE TABLE schema_migrations (
     version character varying NOT NULL
 );
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
+-- Name: users; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.users (
+CREATE TABLE users (
     id bigint NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
     encrypted_password character varying DEFAULT ''::character varying NOT NULL,
@@ -409,25 +401,25 @@ CREATE TABLE public.users (
 
 
 --
--- Name: user_issues; Type: VIEW; Schema: public; Owner: -
+-- Name: user_issues; Type: VIEW; Schema: test-organization; Owner: -
 --
 
-CREATE VIEW public.user_issues AS
+CREATE VIEW user_issues AS
  SELECT users.id AS user_id,
     issues.id AS issue_id,
     sum((records.end_time - records.start_time)) AS spent_time,
     min(records.start_time) AS start_time
-   FROM ((public.users
-     JOIN public.records ON ((records.user_id = users.id)))
-     JOIN public.issues ON ((issues.id = records.issue_id)))
+   FROM ((users
+     JOIN records ON ((records.user_id = users.id)))
+     JOIN issues ON ((issues.id = records.issue_id)))
   GROUP BY users.id, issues.id;
 
 
 --
--- Name: user_projects; Type: TABLE; Schema: public; Owner: -
+-- Name: user_projects; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.user_projects (
+CREATE TABLE user_projects (
     id bigint NOT NULL,
     user_id bigint NOT NULL,
     project_id bigint NOT NULL,
@@ -437,10 +429,10 @@ CREATE TABLE public.user_projects (
 
 
 --
--- Name: user_projects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: user_projects_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.user_projects_id_seq
+CREATE SEQUENCE user_projects_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -449,17 +441,17 @@ CREATE SEQUENCE public.user_projects_id_seq
 
 
 --
--- Name: user_projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: user_projects_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.user_projects_id_seq OWNED BY public.user_projects.id;
+ALTER SEQUENCE user_projects_id_seq OWNED BY user_projects.id;
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: users_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.users_id_seq
+CREATE SEQUENCE users_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -468,17 +460,17 @@ CREATE SEQUENCE public.users_id_seq
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: wiki_categories; Type: TABLE; Schema: public; Owner: -
+-- Name: wiki_categories; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.wiki_categories (
+CREATE TABLE wiki_categories (
     id bigint NOT NULL,
     title character varying,
     wiki_category_id bigint,
@@ -488,10 +480,10 @@ CREATE TABLE public.wiki_categories (
 
 
 --
--- Name: wiki_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: wiki_categories_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.wiki_categories_id_seq
+CREATE SEQUENCE wiki_categories_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -500,17 +492,17 @@ CREATE SEQUENCE public.wiki_categories_id_seq
 
 
 --
--- Name: wiki_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: wiki_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.wiki_categories_id_seq OWNED BY public.wiki_categories.id;
+ALTER SEQUENCE wiki_categories_id_seq OWNED BY wiki_categories.id;
 
 
 --
--- Name: wiki_pages; Type: TABLE; Schema: public; Owner: -
+-- Name: wiki_pages; Type: TABLE; Schema: test-organization; Owner: -
 --
 
-CREATE TABLE public.wiki_pages (
+CREATE TABLE wiki_pages (
     id bigint NOT NULL,
     title character varying,
     created_at timestamp without time zone NOT NULL,
@@ -521,10 +513,10 @@ CREATE TABLE public.wiki_pages (
 
 
 --
--- Name: wiki_pages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: wiki_pages_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
 --
 
-CREATE SEQUENCE public.wiki_pages_id_seq
+CREATE SEQUENCE wiki_pages_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -533,439 +525,439 @@ CREATE SEQUENCE public.wiki_pages_id_seq
 
 
 --
--- Name: wiki_pages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: wiki_pages_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
 --
 
-ALTER SEQUENCE public.wiki_pages_id_seq OWNED BY public.wiki_pages.id;
-
-
---
--- Name: board_lists id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.board_lists ALTER COLUMN id SET DEFAULT nextval('public.board_lists_id_seq'::regclass);
+ALTER SEQUENCE wiki_pages_id_seq OWNED BY wiki_pages.id;
 
 
 --
--- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: board_lists id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.comments ALTER COLUMN id SET DEFAULT nextval('public.comments_id_seq'::regclass);
-
-
---
--- Name: documents id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.documents ALTER COLUMN id SET DEFAULT nextval('public.documents_id_seq'::regclass);
+ALTER TABLE ONLY board_lists ALTER COLUMN id SET DEFAULT nextval('board_lists_id_seq'::regclass);
 
 
 --
--- Name: events id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: comments id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.events ALTER COLUMN id SET DEFAULT nextval('public.events_id_seq'::regclass);
-
-
---
--- Name: folders id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.folders ALTER COLUMN id SET DEFAULT nextval('public.folders_id_seq'::regclass);
+ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
 
 
 --
--- Name: issues id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: documents id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.issues ALTER COLUMN id SET DEFAULT nextval('public.issues_id_seq'::regclass);
-
-
---
--- Name: organizations id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.organizations ALTER COLUMN id SET DEFAULT nextval('public.organizations_id_seq'::regclass);
+ALTER TABLE ONLY documents ALTER COLUMN id SET DEFAULT nextval('documents_id_seq'::regclass);
 
 
 --
--- Name: projects id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: events id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.projects ALTER COLUMN id SET DEFAULT nextval('public.projects_id_seq'::regclass);
-
-
---
--- Name: records id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.records ALTER COLUMN id SET DEFAULT nextval('public.records_id_seq'::regclass);
+ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
 
 
 --
--- Name: user_projects id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: folders id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.user_projects ALTER COLUMN id SET DEFAULT nextval('public.user_projects_id_seq'::regclass);
-
-
---
--- Name: users id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+ALTER TABLE ONLY folders ALTER COLUMN id SET DEFAULT nextval('folders_id_seq'::regclass);
 
 
 --
--- Name: wiki_categories id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: issues id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.wiki_categories ALTER COLUMN id SET DEFAULT nextval('public.wiki_categories_id_seq'::regclass);
-
-
---
--- Name: wiki_pages id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.wiki_pages ALTER COLUMN id SET DEFAULT nextval('public.wiki_pages_id_seq'::regclass);
+ALTER TABLE ONLY issues ALTER COLUMN id SET DEFAULT nextval('issues_id_seq'::regclass);
 
 
 --
--- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: organizations id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.ar_internal_metadata
+ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organizations_id_seq'::regclass);
+
+
+--
+-- Name: projects id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq'::regclass);
+
+
+--
+-- Name: records id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY records ALTER COLUMN id SET DEFAULT nextval('records_id_seq'::regclass);
+
+
+--
+-- Name: user_projects id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY user_projects ALTER COLUMN id SET DEFAULT nextval('user_projects_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: wiki_categories id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY wiki_categories ALTER COLUMN id SET DEFAULT nextval('wiki_categories_id_seq'::regclass);
+
+
+--
+-- Name: wiki_pages id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY wiki_pages ALTER COLUMN id SET DEFAULT nextval('wiki_pages_id_seq'::regclass);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
 
 
 --
--- Name: board_lists board_lists_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: board_lists board_lists_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.board_lists
+ALTER TABLE ONLY board_lists
     ADD CONSTRAINT board_lists_pkey PRIMARY KEY (id);
 
 
 --
--- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: comments comments_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.comments
+ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
 
 
 --
--- Name: documents documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: documents documents_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.documents
+ALTER TABLE ONLY documents
     ADD CONSTRAINT documents_pkey PRIMARY KEY (id);
 
 
 --
--- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.events
+ALTER TABLE ONLY events
     ADD CONSTRAINT events_pkey PRIMARY KEY (id);
 
 
 --
--- Name: folders folders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: folders folders_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.folders
+ALTER TABLE ONLY folders
     ADD CONSTRAINT folders_pkey PRIMARY KEY (id);
 
 
 --
--- Name: issues issues_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: issues issues_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.issues
+ALTER TABLE ONLY issues
     ADD CONSTRAINT issues_pkey PRIMARY KEY (id);
 
 
 --
--- Name: organizations organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: organizations organizations_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.organizations
+ALTER TABLE ONLY organizations
     ADD CONSTRAINT organizations_pkey PRIMARY KEY (id);
 
 
 --
--- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: projects projects_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.projects
+ALTER TABLE ONLY projects
     ADD CONSTRAINT projects_pkey PRIMARY KEY (id);
 
 
 --
--- Name: records records_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: records records_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.records
+ALTER TABLE ONLY records
     ADD CONSTRAINT records_pkey PRIMARY KEY (id);
 
 
 --
--- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.schema_migrations
+ALTER TABLE ONLY schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
 --
--- Name: user_projects user_projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: user_projects user_projects_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.user_projects
+ALTER TABLE ONLY user_projects
     ADD CONSTRAINT user_projects_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.users
+ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
 --
--- Name: wiki_categories wiki_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: wiki_categories wiki_categories_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.wiki_categories
+ALTER TABLE ONLY wiki_categories
     ADD CONSTRAINT wiki_categories_pkey PRIMARY KEY (id);
 
 
 --
--- Name: wiki_pages wiki_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: wiki_pages wiki_pages_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.wiki_pages
+ALTER TABLE ONLY wiki_pages
     ADD CONSTRAINT wiki_pages_pkey PRIMARY KEY (id);
 
 
 --
--- Name: index_board_lists_on_project_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_board_lists_on_project_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE INDEX index_board_lists_on_project_id ON public.board_lists USING btree (project_id);
-
-
---
--- Name: index_comments_on_issue_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_comments_on_issue_id ON public.comments USING btree (issue_id);
+CREATE INDEX index_board_lists_on_project_id ON board_lists USING btree (project_id);
 
 
 --
--- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_comments_on_issue_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE INDEX index_comments_on_user_id ON public.comments USING btree (user_id);
-
-
---
--- Name: index_documents_on_folder_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_documents_on_folder_id ON public.documents USING btree (folder_id);
+CREATE INDEX index_comments_on_issue_id ON comments USING btree (issue_id);
 
 
 --
--- Name: index_folders_on_folder_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_comments_on_user_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE INDEX index_folders_on_folder_id ON public.folders USING btree (folder_id);
-
-
---
--- Name: index_issues_on_board_list_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_issues_on_board_list_id ON public.issues USING btree (board_list_id);
+CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 
 
 --
--- Name: index_issues_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_documents_on_folder_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE INDEX index_issues_on_user_id ON public.issues USING btree (user_id);
-
-
---
--- Name: index_organizations_on_name; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_organizations_on_name ON public.organizations USING btree (name);
+CREATE INDEX index_documents_on_folder_id ON documents USING btree (folder_id);
 
 
 --
--- Name: index_records_on_issue_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_folders_on_folder_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE INDEX index_records_on_issue_id ON public.records USING btree (issue_id);
-
-
---
--- Name: index_records_on_user_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_records_on_user_id ON public.records USING btree (user_id);
+CREATE INDEX index_folders_on_folder_id ON folders USING btree (folder_id);
 
 
 --
--- Name: index_user_projects_on_project_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_issues_on_board_list_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE INDEX index_user_projects_on_project_id ON public.user_projects USING btree (project_id);
-
-
---
--- Name: index_user_projects_on_user_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_user_projects_on_user_id ON public.user_projects USING btree (user_id);
+CREATE INDEX index_issues_on_board_list_id ON issues USING btree (board_list_id);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
+-- Name: index_issues_on_user_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
-
-
---
--- Name: index_users_on_invitation_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_users_on_invitation_token ON public.users USING btree (invitation_token);
+CREATE INDEX index_issues_on_user_id ON issues USING btree (user_id);
 
 
 --
--- Name: index_users_on_invitations_count; Type: INDEX; Schema: public; Owner: -
+-- Name: index_organizations_on_name; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE INDEX index_users_on_invitations_count ON public.users USING btree (invitations_count);
-
-
---
--- Name: index_users_on_invited_by_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_users_on_invited_by_id ON public.users USING btree (invited_by_id);
+CREATE UNIQUE INDEX index_organizations_on_name ON organizations USING btree (name);
 
 
 --
--- Name: index_users_on_invited_by_type_and_invited_by_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_records_on_issue_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE INDEX index_users_on_invited_by_type_and_invited_by_id ON public.users USING btree (invited_by_type, invited_by_id);
-
-
---
--- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+CREATE INDEX index_records_on_issue_id ON records USING btree (issue_id);
 
 
 --
--- Name: index_users_on_selected_project_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_records_on_user_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE INDEX index_users_on_selected_project_id ON public.users USING btree (selected_project_id);
-
-
---
--- Name: index_wiki_categories_on_wiki_category_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_wiki_categories_on_wiki_category_id ON public.wiki_categories USING btree (wiki_category_id);
+CREATE INDEX index_records_on_user_id ON records USING btree (user_id);
 
 
 --
--- Name: index_wiki_pages_on_wiki_category_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_user_projects_on_project_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-CREATE INDEX index_wiki_pages_on_wiki_category_id ON public.wiki_pages USING btree (wiki_category_id);
-
-
---
--- Name: unique_active_record_per_user; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_active_record_per_user ON public.records USING btree (user_id) WHERE (end_time IS NULL);
+CREATE INDEX index_user_projects_on_project_id ON user_projects USING btree (project_id);
 
 
 --
--- Name: comments fk_rails_03de2dc08c; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: index_user_projects_on_user_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.comments
-    ADD CONSTRAINT fk_rails_03de2dc08c FOREIGN KEY (user_id) REFERENCES public.users(id);
-
-
---
--- Name: issues fk_rails_14989b278a; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.issues
-    ADD CONSTRAINT fk_rails_14989b278a FOREIGN KEY (board_list_id) REFERENCES public.board_lists(id);
+CREATE INDEX index_user_projects_on_user_id ON user_projects USING btree (user_id);
 
 
 --
--- Name: documents fk_rails_404da7ca3d; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: index_users_on_email; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.documents
-    ADD CONSTRAINT fk_rails_404da7ca3d FOREIGN KEY (folder_id) REFERENCES public.folders(id);
-
-
---
--- Name: records fk_rails_6f771fa596; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.records
-    ADD CONSTRAINT fk_rails_6f771fa596 FOREIGN KEY (issue_id) REFERENCES public.issues(id) ON DELETE SET NULL;
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: records fk_rails_9ba3ba9afc; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: index_users_on_invitation_token; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.records
-    ADD CONSTRAINT fk_rails_9ba3ba9afc FOREIGN KEY (user_id) REFERENCES public.users(id);
-
-
---
--- Name: board_lists fk_rails_c76f6a3cd9; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.board_lists
-    ADD CONSTRAINT fk_rails_c76f6a3cd9 FOREIGN KEY (project_id) REFERENCES public.projects(id);
+CREATE UNIQUE INDEX index_users_on_invitation_token ON users USING btree (invitation_token);
 
 
 --
--- Name: users fk_rails_cbf756aaae; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: index_users_on_invitations_count; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT fk_rails_cbf756aaae FOREIGN KEY (selected_project_id) REFERENCES public.projects(id);
+CREATE INDEX index_users_on_invitations_count ON users USING btree (invitations_count);
 
 
 --
--- Name: folders fk_rails_f5f7a22451; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: index_users_on_invited_by_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
-ALTER TABLE ONLY public.folders
-    ADD CONSTRAINT fk_rails_f5f7a22451 FOREIGN KEY (folder_id) REFERENCES public.folders(id);
+CREATE INDEX index_users_on_invited_by_id ON users USING btree (invited_by_id);
+
+
+--
+-- Name: index_users_on_invited_by_type_and_invited_by_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_users_on_invited_by_type_and_invited_by_id ON users USING btree (invited_by_type, invited_by_id);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+
+
+--
+-- Name: index_users_on_selected_project_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_users_on_selected_project_id ON users USING btree (selected_project_id);
+
+
+--
+-- Name: index_wiki_categories_on_wiki_category_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_wiki_categories_on_wiki_category_id ON wiki_categories USING btree (wiki_category_id);
+
+
+--
+-- Name: index_wiki_pages_on_wiki_category_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_wiki_pages_on_wiki_category_id ON wiki_pages USING btree (wiki_category_id);
+
+
+--
+-- Name: unique_active_record_per_user; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE UNIQUE INDEX unique_active_record_per_user ON records USING btree (user_id) WHERE (end_time IS NULL);
+
+
+--
+-- Name: comments fk_rails_03de2dc08c; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_03de2dc08c FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: issues fk_rails_14989b278a; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY issues
+    ADD CONSTRAINT fk_rails_14989b278a FOREIGN KEY (board_list_id) REFERENCES board_lists(id);
+
+
+--
+-- Name: documents fk_rails_404da7ca3d; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY documents
+    ADD CONSTRAINT fk_rails_404da7ca3d FOREIGN KEY (folder_id) REFERENCES folders(id);
+
+
+--
+-- Name: records fk_rails_6f771fa596; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY records
+    ADD CONSTRAINT fk_rails_6f771fa596 FOREIGN KEY (issue_id) REFERENCES issues(id) ON DELETE SET NULL;
+
+
+--
+-- Name: records fk_rails_9ba3ba9afc; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY records
+    ADD CONSTRAINT fk_rails_9ba3ba9afc FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: board_lists fk_rails_c76f6a3cd9; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY board_lists
+    ADD CONSTRAINT fk_rails_c76f6a3cd9 FOREIGN KEY (project_id) REFERENCES projects(id);
+
+
+--
+-- Name: users fk_rails_cbf756aaae; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT fk_rails_cbf756aaae FOREIGN KEY (selected_project_id) REFERENCES projects(id);
+
+
+--
+-- Name: folders fk_rails_f5f7a22451; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY folders
+    ADD CONSTRAINT fk_rails_f5f7a22451 FOREIGN KEY (folder_id) REFERENCES folders(id);
 
 
 --

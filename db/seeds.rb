@@ -1,4 +1,4 @@
-if Apartment::Tenant.current == "public"
+if Apartment::Tenant.current == "public" && Organization.none?
   {
     true => %w[test-organization],
     false => %w[public]

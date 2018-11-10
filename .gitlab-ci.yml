@@ -132,41 +132,36 @@ build_test:
 
 deploy:
   stage: deploy
-  image: lwolf/helm-kubectl-docker:latest
+  image: dtzar/helm-kubectl
   environment:
     name: production
-    url: http://159.65.252.140:30928
+    url: http://cost-manager.com
   script:
-    - 'which ssh-agent || ( apk update  && apk add openssh-client  )'
-    - eval $(ssh-agent -s)
-    - apk add bash
-    - bash -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - mkdir ~/.kube
     - echo $KUBE_CONFIG | base64 -d > ~/.kube/config
-    - kubectl config use-context kubernetes-admin@kubernetes
     - helm init --upgrade
     - export LOGS_COMAND="\$(kubectl get pods -l name=cmc-migrate-task | sed -n 2p | awk '{print \$1}')"
     - sleep 2 &&
       until kubectl logs $(eval echo $LOGS_COMAND) && kubectl logs -f $(eval echo $LOGS_COMAND); do
         sleep 0.2;
       done &
-    - echo $CHART_VALUES > values.yaml
-    - helm upgrade cmc-production cmc --install --force
+    - helm upgrade cmc-production cmc --install --wait
         --set image.tag=$CI_COMMIT_SHA
         --set multiTenant=true
         --set databasePassword=$DB_PASSWORD
+        --set databaseService.externalIp=95.216.162.196
         --set ingress.enabled=true
         --set ingress.url="cost-manager.com"
         --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=letsencrypt-production 
+        --set ingress.annotations."certmanager\.k8s\.io/acme-challenge-type"=dns01
+        --set ingress.annotations."certmanager\.k8s\.io/acme-dns01-provider"=clouddns
         --set ingress.annotations."kubernetes\.io/ingress\.class"=nginx 
         --set ingress.annotations."kubernetes\.io/tls-acme"="true"
         --set ingress.tls[0].secretName=cost-manager-tls
         --set ingress.tls[0].hosts[0]="*.cost-manager.com"
         --set ingress.tls[0].hosts[1]="cost-manager.com"
-        --set databasePersistence.storageClassName=cmc-db
-        --set webPersistence.storageClassName=cmc-web
+        --set databasePersistence.storageClassName=openebs-standalone
+        --set webPersistence.storageClassName=openebs-standalone
 
   only:
     - master

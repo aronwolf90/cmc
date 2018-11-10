@@ -1,0 +1,5 @@
+A admin user has been created with the following login data:
+- Email: admin@lvh.me
+- Password: testtest
+
+Pleas create a new admin user and consider to delete this one.

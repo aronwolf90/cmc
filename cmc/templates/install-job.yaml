@@ -1,23 +1,23 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: cmc-migrate-task
+  name: cmc-install-task
   annotations:
-    "helm.sh/hook": post-upgrade
+    "helm.sh/hook": post-install
     "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
 spec:
   template:
     metadata:
-      name: cmc-migrate-task
+      name: cmc-install-task
       labels:
-        name: cmc-migrate-task
+        name: cmc-install-task
     spec:
       restartPolicy: Never
       containers:
-        - name: cmc-migrate-task
+        - name: cmc-install-task
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh","-c"]
-          args: ["rake db:migrate && echo 'migrated successfully'"]
+          args: ["rake db:schema:load; rake db:seed"]
           imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
