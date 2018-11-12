@@ -83,14 +83,13 @@ cucumber:
     - selenium
   services:
     - postgres:latest
-    - name: selenium/standalone-chrome-debug:latest
-      alias: selenium
+    - selenium/standalone-chrome-debug:latest
   variables:
     POSTGRES_PASSWORD: password
     POSTGRES_DB: root
     POSTGRES_USER: root
-    DATABASE_URL: postgres://root:password@postgres/root
-    SELENIUM_HOST: selenium
+    DATABASE_URL: postgres://root:password@localhost/root
+    SELENIUM_HOST: localhost
     SELENIUM_PORT: 4444
     TEST_PORT: 3001
     RAILS_ENV: test
