@@ -84,6 +84,7 @@ group :development, :test do
   gem "bullet"
   gem "rails-controller-testing"
   gem "factory_bot_rails"
+  gem "foreman", "0.27.0"
   gem "rspec-rails"
 
   # static code analyzers

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+container="docker ps | grep -m 1 $(cat .dc-exec) | cut -d ' ' -f1"
+if [ "$(uname -s)" = "Darwin" ]; then 
+  uid="1000"
+else 
+  uid=$(id -u)
+fi
+
+if [ "$(uname -s)" = "Darwin" ]; then 
+  gid="1000"
+else 
+  gid=$(id -g)
+fi
+
+docker_compose="uid=$(echo $uid) gid=$(echo $gid) docker-compose"
+
+if [ -z "$(eval $container)" ]; then \
+  docker-compose -f docker-compose.yml -f docker-compose.dc-exec.yml up -d; \
+fi
+
+if [ "$1" == "--no-interactive" ]; then
+  docker exec $(eval $container) ${@:2}
+elif [ "$1" == "down" ]; then
+  docker-compose $@
+else
+  docker exec -it $(eval $container) $@
+fi
+

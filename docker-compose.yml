@@ -11,19 +11,12 @@ services:
     ports: 
       - 6432:5432
 
-  webpack:
-    image: cmc
-    command: webpack-dev-server
-    environment:
-      - WEBPACKER_DEV_SERVER_HOST=webpack
-    ports:
-      - "3035:3035"
-    volumes:
-      - .:/app
-      - bundle:/usr/local/bundle
-
   app:
     image: cmc
+    networks:
+      default:
+        aliases:
+          - test-organization.app.local
     build:
       dockerfile: DockerfileDevelop
       context: .
@@ -35,7 +28,6 @@ services:
       - DB_PASSWORD=password
       - DB_HOST=db
       - BUNDLE_BIN=false
-      - WEBPACKER_DEV_SERVER_HOST=webpack
       - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
       - SELENIUM_HOST=selenium
       - SELENIUM_PORT=4444
@@ -44,6 +36,7 @@ services:
     command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
     ports:
       - "3000:3000"
+      - "3035:3035"
     volumes:
       - .:/app
       - bundle:/usr/local/bundle

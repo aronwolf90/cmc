@@ -22,6 +22,7 @@ RUN rsync -a /tmp/local/ /usr/local
 COPY alphine_minimum_shared_install.sh ./
 COPY alphine_shared_install.sh ./
 RUN /app/alphine_shared_install.sh
+RUN gem install foreman
 
 RUN echo 'export PATH="/app/bin:$PATH"' >> /etc/profile
 

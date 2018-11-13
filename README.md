@@ -15,69 +15,56 @@ I wrote this because I was unsatisfied with existing solutions.
 
 # Setup for development
 On linux and mac:
-- Install make (sudo apt-get install make or brew install make)
-- Execute: make install_develop
-- Execute: make setup
-- Execute: xmake server (or execute xmake rails s)
+- Install docker and docker-compose and then:
+- Execute: ./dc-exec setup
+- Execute: ./db-exec foreman start
 - browse to: http://lvh.me:3000
 
 On windows:
 - Install docker and docker compose
-- Enable virtualizaton
+- Enable virtualization
 - docker-compose run --rm app setup
 - docker-compose up
 
-NOTE: you can execute every command prefixing t with xmake. E.g.
-- xmake ls
-- xmake rspec
+NOTE: ./dc-exec can be used to execute every comand inside the conatainer E.g.
+- ./dc-exec ls
+- ./dc-exec rspec
 - ...
 
-NOTE: You can also use it without docker, but because we rarelly test
-it without it, there can be some configuration errors. If this is the case,
-pleas feal free to submit a MR or an issue.
+NOTE: We recomend to move ./dc-exec to the bin folder, so that you can
+use dc-exec instead ./dc-exec
+- Execute: cp ./dc-exec /usr/local/bin
 
 NOTE: Take a look on the [contributing.md](CONTRIBUTING.md)
 
 # Setup for production
-Using make (ubuntu only):
-- make install_production
-
-Or do the following (recomended):
-- Install kuberntics
-- Install helm (kubernetics packet manager)
-- Execute: helm install chart --name cmc-production
-             --set image.tag=latest
-             --set remote=true
-
-NOTE: the `make install_production` install a kubernetics
-server and enable to deploy pods on the same host
-(` kubectl taint nodes mymasternode dedicated-`). This allow
-to use a single server insted multiple.
-
-NOTE: You can also use the tradicional way to install it. There
-should no be problems. But we strong recomend to use the above method
-because is is hard tested on our servers.
+Right now we only support the kubernetics packet manager named helm.
+- Create a Kubernetics cluster
+- Install helm on it
+- Execute: git clone git@gitlab.com:cmc_system/cmc.git
+- Execute: cd cmc
+- Execute: helm install cmc/ --name cmc-production
 
 # Setup up linters (e.g for atom)
 eslint:
-- Execute: xmake eslint app/javascipt spec
+- Execute: ./dc-exec eslint app/javascipt spec
 
 gitlinter:
 - Install pip (eg. sudo apt-get install pip)
-- pip install gitlint
-- git log -1 --pretty=%B | gitlint
+- Execute: pip install gitlint
+- Execute: git log -1 --pretty=%B | gitlint
 
 atom:
 - eslinter
-  * apm install linter-eslint
-  * select global npm option
-  * set command: xmake eslint (to execute it inside docker)
+  * Execute: apm install linter-eslint
+  * Select global npm option
+  * Set command: ./dc-exec --no-interactive eslint
 - rubocop:
   * apm install linter-rubocop
-  * set command: xmake rubocop (to execute it inside docker)
+  * set command: ./dc-exec --no-interactive rubocop
 
 vim:
-. Execute: xmake dev-tmux
+. Execute: ./dc-exec dev-tmux
 
 # Links
 homepage: https://about.cost-manager.com
