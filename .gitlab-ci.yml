@@ -149,6 +149,7 @@ deploy:
         --set multiTenant=true
         --set databasePassword=$DB_PASSWORD
         --set databaseService.externalIp=95.216.162.196
+        --set installJobDelay=20
         --set ingress.enabled=true
         --set ingress.url="cost-manager.com"
         --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=letsencrypt-production 
@@ -159,8 +160,8 @@ deploy:
         --set ingress.tls[0].secretName=cost-manager-tls
         --set ingress.tls[0].hosts[0]="*.cost-manager.com"
         --set ingress.tls[0].hosts[1]="cost-manager.com"
-        --set databasePersistence.storageClassName=openebs-standalone
-        --set webPersistence.storageClassName=openebs-standalone
+        --set databasePersistence.storageClassName=openebs-standard
+        --set webPersistence.storageClassName=openebs-standard
 
   only:
     - master

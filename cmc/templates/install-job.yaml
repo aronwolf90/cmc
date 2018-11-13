@@ -17,7 +17,7 @@ spec:
         - name: cmc-install-task
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh","-c"]
-          args: ["rake db:schema:load; rake db:seed"]
+          args: ["sleep {{ .Values.installJobDelay }}; rake db:schema:load; rake db:seed"]
           imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL

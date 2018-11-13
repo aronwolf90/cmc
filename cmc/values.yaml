@@ -7,6 +7,7 @@ webDeployment:
   sentryDsn: 
   enviroment: production
 databasePassword: repl_password
+installJobDelay: 5
 databasePersistence:
   storageClassName: 
 webPersistence:
