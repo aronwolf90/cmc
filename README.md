@@ -45,6 +45,9 @@ Right now we only support the kubernetics packet manager named helm.
 - Execute: cd cmc
 - Execute: helm install cmc/ --name cmc-production
 
+NOTE: The configuration options for
+the helm package can be found [here](cmc/README.md)
+
 # Setup up linters (e.g for atom)
 eslint:
 - Execute: ./dc-exec eslint app/javascipt spec
@@ -54,7 +57,7 @@ gitlinter:
 - Execute: pip install gitlint
 - Execute: git log -1 --pretty=%B | gitlint
 
-atom:
+atom (using docker-compose):
 - eslinter
   * Execute: apm install linter-eslint
   * Select global npm option
@@ -64,7 +67,8 @@ atom:
   * set command: ./dc-exec --no-interactive rubocop
 
 vim:
-. Execute: ./dc-exec dev-tmux
+Just install the w0rp/ale plugin.
+
 
 # Links
 homepage: https://about.cost-manager.com
