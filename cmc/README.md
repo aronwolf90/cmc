@@ -100,3 +100,8 @@ See the [Configuration](#configuration) section to configure the PVC.
 ## Ingress
 
 This chart provides support for Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.enabled` to true and choose an `ingress.url` for the URL. Then, you should be able to access the installation using that address.
+
+## Multi tenant on localhost
+
+- Execute: `helm install cmc --set multiTenant=true`
+- Use the following domain: `<ip>.xip.io`. Use `kubectl get services` to get the ip.

@@ -22,8 +22,8 @@ services:
       dockerfile: DockerfileDevelop
       context: .
       args:
-        - UID=${uid}
-        - GID=${gid}
+        - uid=${uid}
+        - gid=${gid}
         - USER_NAME=${USER}
     environment:
       - DB_PASSWORD=password

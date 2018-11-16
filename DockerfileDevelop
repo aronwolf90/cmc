@@ -22,13 +22,11 @@ RUN rsync -a /tmp/local/ /usr/local
 COPY alphine_minimum_shared_install.sh ./
 COPY alphine_shared_install.sh ./
 RUN /app/alphine_shared_install.sh
-RUN gem install foreman
 
 RUN echo 'export PATH="/app/bin:$PATH"' >> /etc/profile
 
 RUN apk add vim tmux
 
-RUN chown -R $UID /usr/local/bundle
 RUN chown -R $UID /usr/local/bundle
 
 RUN deluser node

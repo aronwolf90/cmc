@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ "$1" == "shutdown" ]; then
+  if [ "$(docker ps -q)" != "" ]; then
+    docker kill $(docker ps -q)
+  fi
+  exit 0
+fi
+
 container="docker ps | grep -m 1 $(cat .dc-exec) | cut -d ' ' -f1"
 if [ "$(uname -s)" = "Darwin" ]; then 
   uid="1000"
@@ -15,15 +22,15 @@ fi
 
 docker_compose="uid=$(echo $uid) gid=$(echo $gid) docker-compose"
 
-if [ -z "$(eval $container)" ]; then \
-  docker-compose -f docker-compose.yml -f docker-compose.dc-exec.yml up -d; \
+if [ -z "$(eval $container)" ] && [ "$1" != "build" ] && [ "$1" != "down" ]; then
+  eval $docker_compose -f docker-compose.yml -f docker-compose.dc-exec.yml up -d; \
+elif [ "$1" == "build" -o "$1" == "down" ]; then
+  eval "$docker_compose $@"
+  exit 0
 fi
 
 if [ "$1" == "--no-interactive" ]; then
   docker exec $(eval $container) ${@:2}
-elif [ "$1" == "down" ]; then
-  docker-compose $@
 else
   docker exec -it $(eval $container) $@
 fi
-
