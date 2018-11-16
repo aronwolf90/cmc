@@ -17,6 +17,7 @@ services:
       default:
         aliases:
           - test-organization.app.local
+          - app.local
     build:
       dockerfile: DockerfileDevelop
       context: .
@@ -31,7 +32,8 @@ services:
       - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
       - SELENIUM_HOST=selenium
       - SELENIUM_PORT=4444
-      - TEST_APP_HOST=app
+      - TEST_APP_HOST=app.local
+      - TEST_HOST=app.local
       - TEST_PORT=3001
     command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
     ports:

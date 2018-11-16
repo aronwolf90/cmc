@@ -8,6 +8,7 @@
 
 require "cucumber/api_steps"
 require "cucumber/rails"
+require "cucumber/rspec/doubles"
 require "selenium-webdriver"
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -37,6 +38,7 @@ ActionController::Base.allow_rescue = false
 
 Before do |scenario|
   DatabaseCleaner.clean_with(:truncation, reset_ids: true)
+  ActiveRecord::Base.connection.execute('DROP SCHEMA IF EXISTS "test-organization" CASCADE')
   Timecop.travel("11.06.2018 17:00:00")
 end
 
@@ -66,7 +68,7 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Capybara.server_host = "0.0.0.0"
 Capybara.server_port = ENV["TEST_PORT"]
-Capybara.app_host = "http://#{Socket.ip_address_list.detect { |intf| intf.ipv4_private? }.ip_address}:#{ENV['TEST_PORT']}"
+Capybara.app_host = "http://#{ENV['TEST_HOST']}:#{ENV['TEST_PORT']}"
 Capybara.javascript_driver = :selenium
 
 Capybara.register_driver :selenium do |app|

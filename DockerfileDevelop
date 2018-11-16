@@ -36,8 +36,3 @@ RUN deluser node
 RUN groupadd -g $GID $UNAME
 RUN useradd -m -u $UID -g $GID -s /bin/bash $UNAME -d /user
 USER $UID:$GID
-
-RUN git clone https://github.com/VundleVim/Vundle.vim.git /user/.vim/bundle/Vundle.vim
-COPY .tmux.conf /user/.tmux.conf
-COPY .vimrc /user/.vimrc
-RUN vim +PluginInstall +qall

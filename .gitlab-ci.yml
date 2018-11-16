@@ -93,6 +93,7 @@ cucumber:
     SELENIUM_PORT: 4444
     TEST_PORT: 3001
     RAILS_ENV: test
+    TEST_HOST: lvh.me
     DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: 'true'
   script:
     - bundle install

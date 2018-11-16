@@ -6,6 +6,10 @@ Given(/^The app contain seed data$/) do
   end
 end
 
+Given(/^Multi tenant is enabled$/) do
+  allow(Settings).to receive(:multi_tenant).and_return(true)
+end
+
 def find_or_create_current_user
   Admin.find_or_create_by!(email: "admin@lvh.me") do |user|
     user.password = "testtest"
@@ -34,6 +38,16 @@ end
 
 When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
   fill_in name, with: text
+  sleep 0.2
+  find("body").click
+end
+
+When(/^wait$/) do
+  debugger
+end
+
+When(/^I check the input named "([^\"]*)"$/) do |name|
+  find(:css, "input[name='#{name}']").set(true)
   sleep 0.2
   find("body").click
 end
