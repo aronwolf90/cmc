@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Administration::Dashboard::ShowOperation do
   subject { described_class.(params: {}, current_user: user) }
 
-  let(:user) { User.new }
+  let(:user) { User.new(worked_issues: [], issues: []) }
   let(:project) { Project.new }
 
   before do

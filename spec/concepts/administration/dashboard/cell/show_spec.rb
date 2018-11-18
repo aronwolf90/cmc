@@ -7,8 +7,18 @@ RSpec.describe Administration::Dashboard::Cell::Show, type: :cell do
 
   subject { cell(described_class, model, current_user: user).() }
 
-  let(:user) { Admin.new }
-  let(:model) { { projects: { project => 3600 } } }
+  let(:user) { Admin.new(worked_issues: [worked_issue]) }
+  let(:worked_issue) { Issue.new(title: "worked issue") }
+  let(:assigned_issue) { Issue.new(title: "assigned issue") }
+  let(:event) { build_stubbed(:event) }
+  let(:model) {
+    {
+      projects: { project => 3600 },
+      worked_issues: [worked_issue],
+      assigned_issues: [assigned_issue],
+      events: [event]
+    }
+  }
   let(:project) { Project.new }
 
   before { Timecop.freeze("01.01.2018") }
@@ -22,7 +32,15 @@ RSpec.describe Administration::Dashboard::Cell::Show, type: :cell do
     is_expected.to have_text "01:00:00"
   end
 
-  it "personal_dashboard_graph is present" do
-    is_expected.to have_selector "personal_dashboard_graph"
+  it "worked issue is present" do
+    is_expected.to have_text worked_issue.to_s
+  end
+
+  it "assigned issue is present" do
+    is_expected.to have_text assigned_issue.to_s
+  end
+
+  it "event is present" do
+    is_expected.to have_text event.to_s
   end
 end

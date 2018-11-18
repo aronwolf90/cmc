@@ -965,6 +965,7 @@ ALTER TABLE ONLY folders
 --
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20181030184844');
+('20181030184844'),
+('20181118160714');
 
 

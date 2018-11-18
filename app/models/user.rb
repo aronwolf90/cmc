@@ -24,6 +24,8 @@ class User < ApplicationRecord
   has_many :users
   has_many :user_projects
   has_many :projects, through: :user_projects
+  has_many :worked_issues, through: :records, class_name: "Issue",
+    source: :issue
 
   # Knock requires :authenticate
   alias_method :authenticate, :valid_password?

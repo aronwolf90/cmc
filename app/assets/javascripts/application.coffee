@@ -12,13 +12,13 @@
 @jqueryFuncs = () =>
     $('.datetimepicker').datetimepicker(
       sideBySide: true,
-      format: 'YYYY-MM-DD HH:mm',
-    )
+      format: 'YYYY-MM-DD HH:mm'
+    ) 
     $('.datepicker').datetimepicker(
-      format: 'YYYY-MM-DD',
-    )
+      format: 'YYYY-MM-DD'
+    ) 
     $('.timepicker').datetimepicker(
-      format: 'HH:mm',
+      format: 'HH:mm'
     )
     $('[data-toggle="tooltip"]').tooltip()
     $('select[multiple]').select2({ theme: "bootstrap" })

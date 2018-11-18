@@ -52,8 +52,8 @@ export default {
      form: {
        title: null,
        date: null,
-       startTime: null,
-       endTime: null,
+       startTime: '',
+       endTime: '',
        nonAllDay: null,
        description: null
      }
@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     create () {
+      console.log(this.form)
       this.$store.dispatch('createEvent', {
         attributes: {
           title: this.form.title,

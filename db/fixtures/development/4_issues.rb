@@ -4,6 +4,7 @@ Issue.seed do |s|
   s.id            = 1
   s.board_list_id = 1
   s.complexity    = 2
+  s.user_id       = 1
   s.title         = "Test issue 1"
   s.description   = "description for the test issue"
 end
@@ -12,6 +13,7 @@ Issue.seed do |s|
   s.id            = 2
   s.board_list_id = 1
   s.complexity    = 2
+  s.user_id       = 1
   s.title         = "Test issue 2"
   s.description   = "description for the test issue"
 end

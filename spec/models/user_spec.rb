@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:record_days) }
   it { is_expected.to have_many(:user_projects) }
   it { is_expected.to have_many(:projects) }
-  it { is_expected.to have_many(:projects) }
+  it { is_expected.to have_many(:worked_issues) }
   it do
     expect(subject.avatar.url)
       .to include("/assets/avatar_placeholder")

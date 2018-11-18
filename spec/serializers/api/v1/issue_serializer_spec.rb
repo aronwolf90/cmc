@@ -29,10 +29,6 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
     } }
   end
 
-  before do
-    allow(UserIssueSpendedTimeCalculator).to receive(:call).and_return(60.seconds)
-  end
-
   it "serialize record in the correct way" do
     expect(serialize(issue, scope: user)).to eq expected_result
   end

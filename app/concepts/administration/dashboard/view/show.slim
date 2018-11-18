@@ -1,12 +1,74 @@
-.table-resposive
-  table.table
-    thead
-      th scope="col" Project
-      th scope="col" Spended time
-    tbody
-      - model[:projects].each do |project, spended_time|
-        tr
-          td = project.name
-          td = seconds_to_time(spended_time)
+.row
+  .col-lg-6
+    .card
+      .card-header Projects
+      .card-body
+        .table-resposive
+          table.table
+            thead
+              th scope="col" Project
+              th scope="col" Total time
+              th scope="col" Last month time
+              th scope="col" This month time
+            tbody
+              - model[:projects].each do |project, spended_time|
+                tr
+                  td = project.name
+                  td = seconds_to_time(spended_time)
+                  td
+                  td
 
-personal_dashboard_graph
+  .col-lg-6
+    br.d-lg-none
+    .card
+      .card-header Last worked Issues
+      .card-body
+        .table-responsive
+          table.table
+            thead
+              th Issue
+              th Project
+              th Time
+            tbody
+              - model[:worked_issues].each do |issue|
+                tr
+                  td = issue
+                  td = issue.project
+                  td = spendet_time(issue)
+br
+.row
+  .col-lg-6
+    .card
+      .card-header Assigned issues
+      .card-body
+        .table-responsive
+          table.table
+            thead
+              th Issue
+              th Project
+              th Time
+            tbody
+              - model[:assigned_issues].each do |issue|
+                tr
+                  td = issue
+                  td = issue.project
+                  td = spendet_time(issue)
+  .col-lg-6
+    br.d-lg-none
+    .card
+      .card-header Calender events
+      .card-body
+        .table-responsive
+          table.table
+            thead
+              th Event
+              th Day
+              th start
+              th end
+            tbody
+              - model[:events].each do |event|
+                tr
+                  td = event
+                  td = event.start_time.to_date
+                  td = event.start_time unless event.all_day
+                  td = event.end_time unless event.all_day
