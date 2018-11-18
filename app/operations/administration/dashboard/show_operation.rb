@@ -4,24 +4,15 @@ module Administration
   module Dashboard
     class ShowOperation < ApplicationOperation
       success ProjectsStep
-      success :worked_issues
-      success :assigned_issues
+      success WorkedIssuesStep
+      success AssignedIssuesStep
       success :events
 
     private
 
-      def worked_issues(options, current_user:, **)
-        options["model"][:worked_issues] =
-          current_user.worked_issues.includes(:records, :project)
-      end
-
-      def assigned_issues(options, current_user:, **)
-        options["model"][:assigned_issues] =
-          current_user.issues.includes(:records, :project)
-      end
-
-      def events(options, current_user:, **)
-        options["model"][:events] = Event.all.ordered
+      def events(options, params:, **)
+        options["model"][:events] =
+          Event.all.ordered.page(params[:event_page] || 1).per(5)
       end
     end
   end

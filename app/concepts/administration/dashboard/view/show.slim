@@ -35,6 +35,10 @@
                   td = issue
                   td = issue.project
                   td = spendet_time(issue)
+      .card-footer
+        .pull-right
+          = paginate(model[:worked_issues],
+            param_name: :worked_issue_page)
 br
 .row
   .col-lg-6
@@ -53,6 +57,11 @@ br
                   td = issue
                   td = issue.project
                   td = spendet_time(issue)
+      .card-footer
+        .pull-right
+          = paginate(model[:assigned_issues],
+            param_name: :assigned_issue_page)
+
   .col-lg-6
     br.d-lg-none
     .card
@@ -72,3 +81,5 @@ br
                   td = event.start_time.to_date
                   td = event.start_time unless event.all_day
                   td = event.end_time unless event.all_day
+      .card-footer
+        .pull-right = paginate model[:events], param_name: :event_page

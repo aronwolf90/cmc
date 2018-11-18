@@ -4,7 +4,9 @@ module Administration
   module Dashboard::Cell
     class Show < ApplicationCell
       def spendet_time(issue)
-        SpendedTimeIssueUserCalculator.(issue, current_user)
+        seconds_to_time(
+          SpendedTimeIssueUserCalculator.(issue, current_user)
+        )
       end
     end
   end

@@ -14,9 +14,9 @@ RSpec.describe Administration::Dashboard::Cell::Show, type: :cell do
   let(:model) {
     {
       projects: { project => 3600 },
-      worked_issues: [worked_issue],
-      assigned_issues: [assigned_issue],
-      events: [event]
+      worked_issues: Kaminari.paginate_array([worked_issue]).page(1).per(10),
+      assigned_issues: Kaminari.paginate_array([assigned_issue]).page(1).per(10),
+      events: Kaminari.paginate_array([event]).page(1).per(10)
     }
   }
   let(:project) { Project.new }

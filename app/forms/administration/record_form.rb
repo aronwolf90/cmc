@@ -22,12 +22,13 @@ module Administration
         end
 
         def no_overlapping?(start_time)
-          return true if form.end_time.blank?
+          end_time = form.end_time
+          return true if end_time.blank?
 
           RecordsIntervalQuery.call(
             form.current_user.records.all_except(form.id),
             start_time: start_time,
-            end_time: form.end_time
+            end_time: end_time
           ).empty?
         end
       end
