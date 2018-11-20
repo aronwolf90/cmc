@@ -20,7 +20,7 @@
             .row
               .col-6.label
                 | Date
-                input.datepicker.form-control(v-model='form.date')
+                datepicker(v-model='form.date')
               .col-6.label
                 | Time
                 .input-group
@@ -28,8 +28,8 @@
                     .input-group-text
                       input(v-model='form.nonAllDay', type='checkbox', @change="jqueryFuncs()")
                   template(v-if='form.nonAllDay')
-                    input.timepicker.form-control(v-model='form.startTime')
-                    input.timepicker.form-control(v-model='form.endTime')
+                    timepicker(v-model='form.startTime')
+                    timepicker(v-model='form.endTime')
                   input.form-control(v-else, disabled=true)
             .row
               .col-12.label

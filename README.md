@@ -17,7 +17,7 @@ I wrote this because I was unsatisfied with existing solutions.
 On linux and mac:
 - Install docker and docker-compose and then:
 - Execute: ./dc-exec setup
-- Execute: ./db-exec foreman start
+- Execute: ./db-exec rails s -b 0.0.0.0
 - browse to: http://lvh.me:3000
 
 On windows:

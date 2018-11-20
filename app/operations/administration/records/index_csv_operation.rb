@@ -7,7 +7,7 @@ module Administration
       step Policy::Pundit(RecordPolicy, :index?)
 
       def model(options, current_user:, **)
-        options[:model] = current_user.records
+        options[:model] = current_user.records.includes(:issue)
       end
     end
   end

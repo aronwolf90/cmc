@@ -11,6 +11,17 @@ services:
     ports: 
       - 6432:5432
 
+  webpack:
+    image: cmc
+    command: webpack-dev-server
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=webpack
+    ports:
+      - "3035:3035"
+    volumes:
+      - .:/app
+      - bundle:/usr/local/bundle
+
   app:
     image: cmc
     networks:
@@ -35,10 +46,10 @@ services:
       - TEST_APP_HOST=app.local
       - TEST_HOST=app.local
       - TEST_PORT=3001
+      - WEBPACKER_DEV_SERVER_HOST=webpack
     command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
     ports:
       - "3000:3000"
-      - "3035:3035"
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
