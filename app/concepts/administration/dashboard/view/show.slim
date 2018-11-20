@@ -32,7 +32,7 @@
             tbody
               - model[:worked_issues].each do |issue|
                 tr
-                  td = issue
+                  td = link_to issue, administration_issue_path(issue), class: "text-dark"
                   td = issue.project
                   td = spendet_time(issue)
       .card-footer
@@ -54,7 +54,7 @@ br
             tbody
               - model[:assigned_issues].each do |issue|
                 tr
-                  td = issue
+                  td = link_to issue, administration_issue_path(issue), class: "text-dark"
                   td = issue.project
                   td = spendet_time(issue)
       .card-footer

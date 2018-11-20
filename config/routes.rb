@@ -15,8 +15,9 @@ Rails.application.routes.draw do
     resources :records, except: :show
     resource :board, only: :show
     resources :board_lists, only: %i[new create edit update destroy] do
-      resources :issues, only: %i[show new create]
+      resources :issues, only: %i[new create]
     end
+    resources :issues, only: :show
     resource :calender, only: :show
 
     resource :organization, only: %i[edit update]

@@ -50,7 +50,7 @@ detect_code_problems:
     expire_in: 30 days
   script:
     - bundle install
-    - rubycritic app/ lib/ -s 98.00
+    - rubycritic app/ lib/ -s 97.00
     - rails_best_practices -e "db/migrate"
     - FAIL_ON_ERROR=1 DATABASE_URL=postgres://root:password@postgres/root rake traceroute
 

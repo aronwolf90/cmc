@@ -41,15 +41,6 @@ export default {
         name: 'issue'
       })
     },
-    relevantIssues (state, getters) {
-      return (searchText) => {
-        if (!getters.collection('issues')) return
-        let relevantIssues = getters.collection('issues').slice()
-        return relevantIssues.filter(relevantIssue => {
-          return relevantIssue.attributes.title.includes(searchText)
-        })
-      }
-    },
     relevantProjects (state, getters) {
       return (searchText) => {
         if (!getters.collection('projects')) return

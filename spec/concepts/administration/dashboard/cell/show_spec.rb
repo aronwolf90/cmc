@@ -8,8 +8,8 @@ RSpec.describe Administration::Dashboard::Cell::Show, type: :cell do
   subject { cell(described_class, model, current_user: user).() }
 
   let(:user) { Admin.new(worked_issues: [worked_issue]) }
-  let(:worked_issue) { Issue.new(title: "worked issue") }
-  let(:assigned_issue) { Issue.new(title: "assigned issue") }
+  let(:worked_issue) { Issue.new(id: 1, title: "worked issue") }
+  let(:assigned_issue) { Issue.new(id: 2, title: "assigned issue") }
   let(:event) { build_stubbed(:event) }
   let(:model) {
     {

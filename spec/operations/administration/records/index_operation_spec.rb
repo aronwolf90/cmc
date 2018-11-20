@@ -12,9 +12,9 @@ RSpec.describe Administration::Records::IndexOperation do
       options["this_month_spended_time"] = 0
     end
 
-    allow(Administration::Records::IndexModelStep).to receive(:call) do |options|
-      options["model"] = []
-    end
+    allow(Paginator).to receive(:call).and_return([])
+    allow(Administration::Records::Preloader)
+      .to receive(:call).and_return([])
   end
 
   it "model option is equal to record_days" do

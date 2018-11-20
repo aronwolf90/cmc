@@ -26,7 +26,7 @@ export default {
       return Utils.relationship(this.issue, 'board-list').id
     },
     showPath () {
-      return `/administration/board_lists/${this.boardListId}/issues/${this.issueId}`
+      return `/administration/issues/${this.issueId}`
     }
   },
   methods: {

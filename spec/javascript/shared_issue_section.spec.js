@@ -16,8 +16,7 @@ describe('SharedIssueSection', () => {
 
   def('getters', () => ({
     associatedEntry () { return () => $currentIssue },
-    currentRecord () { return $currentRecord },
-    relevantIssues () { return () => [$currentIssue] }
+    currentRecord () { return $currentRecord }
   }))
   def('actions', () => ({ initBoardsLists () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
