@@ -22,8 +22,4 @@ RSpec.describe Administration::Dashboard::ProjectsStep do
   it "add projects to spent time hash to options" do
     expect(options["model"][:projects]).to include(project => 3600.seconds)
   end
-
-  it "add general project to spent time hash to options" do
-    expect(options["model"][:projects]).to include(OpenStruct.new(name: "General project") => 0.seconds)
-  end
 end

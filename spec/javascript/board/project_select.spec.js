@@ -45,10 +45,6 @@ describe('ProjectSelect', () => {
   describe('when the meta collection named projects is present ', () => {
     def('projects', () => ([$project]))
 
-    it('general board option is present', () => {
-      expect($subject.html()).to.include('General board')
-    })
-
     it('project board option is present', () => {
       expect($subject.html()).to.include('project name')
     })
@@ -81,14 +77,6 @@ describe('ProjectSelect', () => {
           { entry: $user, selectedProject: $project }
         )
       })
-    })
-  })
-
-  describe('when the meta collection named projects is empty ', () => {
-    def('projects', () => [])
-
-    it('general board option is present', () => {
-      expect($subject.html()).to.include('General board')
     })
   })
 

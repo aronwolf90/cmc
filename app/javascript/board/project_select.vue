@@ -13,11 +13,9 @@ export default {
   },
   computed: {
     options () {
-      return [{ value: null, text: 'General board' }].concat(
-        (this.projects || []).map(project => {
-          return { value: project.id, text: project.attributes.name }
-        })
-      )
+      return (this.projects || []).map(project => {
+        return { value: project.id, text: project.attributes.name }
+      })
     },
     projects () {
       return this.$store.getters.metaCollection('projects')
