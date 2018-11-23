@@ -14,7 +14,7 @@ module ApplicationHelper
 
   def seconds_to_time(seconds)
     [seconds / 3600, seconds / 60 % 60, seconds % 60].map do |time|
-      time.to_s.rjust(2, "0")
+      time.to_i.to_s.rjust(2, "0")
     end.join(":")
   end
 

@@ -7,19 +7,32 @@ RSpec.describe Administration::Dashboard::ProjectsStep do
 
   let(:current_user) { build_stubbed(:user) }
   let(:options) { {} }
-  let(:record) { build_stubbed(:record) }
-  let(:project) { build_stubbed(:project) }
+  let(:record) { Record.new }
+  let(:project) { Project.new }
 
   before do
-    allow(RecordsUserProjectQuery).to receive(:call).and_return([record])
-    allow(SpendedTimeCalculator).to receive(:call).with([record]).and_return(3600.seconds)
-    allow(SpendedTimeCalculator).to receive(:call).with([]).and_return(0.seconds)
-    allow(RecordsWithoutProjectQuery).to receive(:call).and_return([])
-    allow(Project).to receive(:find_each).and_yield(project)
+    Timecop.freeze
+    allow(RecordsUserProjectQuery)
+      .to receive(:call).with(user: current_user, project: project)
+      .and_return([record])
+    allow(RecordsMonthUserProjectQuery)
+      .to receive(:call).with(user: current_user, project: project)
+      .and_return([record])
+    allow(RecordsMonthUserProjectQuery).to \
+      receive(:call).with(user: current_user, project: project, month: 1.month.ago)
+      .and_return([])
+    allow(SqlSpendedTimeCalculator)
+      .to receive(:call).with([record]).and_return(3600.seconds)
+    allow(SqlSpendedTimeCalculator)
+      .to receive(:call).with([]).and_return(0.seconds)
+    allow(Project).to receive(:all).and_return([project])
     subject
   end
 
+  after { Timecop.return }
+
   it "add projects to spent time hash to options" do
-    expect(options["model"][:projects]).to include(project => 3600.seconds)
+    expect(options["model"][:projects])
+      .to include([project, 3600.seconds, 3600.seconds, 0])
   end
 end

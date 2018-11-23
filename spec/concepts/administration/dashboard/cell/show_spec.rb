@@ -13,13 +13,13 @@ RSpec.describe Administration::Dashboard::Cell::Show, type: :cell do
   let(:event) { build_stubbed(:event) }
   let(:model) {
     {
-      projects: { project => 3600 },
+      projects: [ [project, 3600, 3600, 3600] ],
       worked_issues: Kaminari.paginate_array([worked_issue]).page(1).per(10),
       assigned_issues: Kaminari.paginate_array([assigned_issue]).page(1).per(10),
       events: Kaminari.paginate_array([event]).page(1).per(10)
     }
   }
-  let(:project) { Project.new }
+  let(:project) { Project.new(id: 1) }
 
   before { Timecop.freeze("01.01.2018") }
   after { Timecop.return }

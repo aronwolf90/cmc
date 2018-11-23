@@ -8,15 +8,15 @@
             thead
               th scope="col" Project
               th scope="col" Total time
-              th scope="col" Last month time
               th scope="col" This month time
+              th scope="col" Last month time
             tbody
-              - model[:projects].each do |project, spended_time|
+              - model[:projects].each do |project, total_spent_time,  month_spent_time, last_month_spent_time|
                 tr
-                  td = project.name
-                  td = seconds_to_time(spended_time)
-                  td
-                  td
+                  td = link_to project, administration_project_dashboard_path(project), class: "text-dark"
+                  td = seconds_to_time(total_spent_time)
+                  td = seconds_to_time(month_spent_time)
+                  td = seconds_to_time(last_month_spent_time)
 
   .col-lg-6
     br.d-lg-none
