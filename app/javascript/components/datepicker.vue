@@ -1,11 +1,12 @@
 <template lang='pug'>
-  date-picker(v-on='$listeners', :config="options")
+  date-picker(v-on='$listeners', :value='value', :config='options')
 </template>
 
 <script>
   import datePicker from 'vue-bootstrap-datetimepicker';
    
   export default {    
+    props: ['value'],
     data () {
       return {
         options: {
