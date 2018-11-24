@@ -9,6 +9,7 @@ class Issue < ApplicationRecord
   has_many :comments
   has_many :issues
   has_many :records
+  has_many :user_issues
 
   alias_attribute :to_s, :title
 

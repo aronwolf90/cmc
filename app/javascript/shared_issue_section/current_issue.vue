@@ -25,7 +25,7 @@ export default {
     },
     showPath () {
       if (!this.currentIssue) return
-      return `/administration/board_lists/${this.boardListId}/issues/${this.currentIssue.id}`
+      return `/administration/issues/${this.currentIssue.id}`
     }
   },
   methods: {

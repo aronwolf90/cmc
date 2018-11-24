@@ -43,7 +43,7 @@ describe('Issue', () => {
     })
 
     it('include show link', () => {
-      expect($subject.html()).to.include('href="/administration/board_lists/1/issues/1"')
+      expect($subject.html()).to.include('href="/administration/issues/1"')
     })
 
     it('pass issueId to issue-record-section', () => {

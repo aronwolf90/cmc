@@ -22,7 +22,7 @@ export default {
       return this.$store.getters.entry({type: 'issues', id: this.issueId})
     },
     showPath () {
-      return `/administration/board_lists/${this.boardListId}/issues/${this.issueId}`
+      return `/administration/issues/${this.issueId}`
     }
   },
   methods: {

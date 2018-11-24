@@ -49,7 +49,15 @@ module Api
       end
 
       def model
-        @model ||= model_class.find(params[:id])
+        @model ||= model_class.find(id)
+      end
+
+      def id
+        if params[:id].include? ","
+          params[:id].split(",")
+        else
+          params[:id]
+        end
       end
     end
   end

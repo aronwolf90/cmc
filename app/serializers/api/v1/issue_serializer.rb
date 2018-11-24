@@ -3,8 +3,6 @@
 module Api
   module V1
     class IssueSerializer < ApplicationSerializer
-      include Rails.application.routes.url_helpers
-
       attributes(
         :title,
         :description,

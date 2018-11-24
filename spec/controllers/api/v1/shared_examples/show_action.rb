@@ -2,7 +2,7 @@
 
 RSpec.shared_examples "standard api show action" do
   describe "GET show" do
-    subject { get :show, params: { id: model.id } }
+    subject { get :show, params: { id: model.id.to_s } }
 
     let(:user) { Admin.new }
 

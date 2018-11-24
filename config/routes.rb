@@ -80,7 +80,7 @@ Rails.application.routes.draw do
       resources :wiki_categories, only: :index
       resources :wiki_pages, only: %i[show update destroy]
       resources :folders, only: :index
-      resources :user_issues, only: :index
+      resources :user_issues, only: %i[index show]
       resources :events, only: %i[index create update destroy]
     end
   end

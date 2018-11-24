@@ -6,6 +6,7 @@
       comments(:issue-id='issueId')
       br
     .right-aside
+      spent-time(:issue-id='issueId')
       assigen(:issue-id='issueId')
       complexity(:issue-id='issueId')
 
@@ -17,6 +18,7 @@ import Router from 'vue-router'
 import Show from 'issue/show'
 import Edit from 'issue/edit'
 
+import SpentTime from 'issue/spent_time'
 import Assigen from 'issue/assigen'
 import Complexity from 'issue/complexity'
 import Comments from 'issue/comments'
@@ -42,6 +44,7 @@ export default {
   components: {
     Show,
     Edit,
+    SpentTime,
     'assigen': Assigen,
     'comments': Comments,
     'complexity': Complexity

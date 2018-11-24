@@ -47,7 +47,7 @@ describe('CurrentIssue', () => {
     it('call visit on click link', () => {
       $subject.find('a').trigger('click')
       expect($Turbolinks.visit).to.have
-        .been.calledWith('/administration/board_lists/1/issues/1')
+        .been.calledWith('/administration/issues/1')
     })
   })
   describe('without currentIssue', () => {

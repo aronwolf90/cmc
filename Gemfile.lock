@@ -120,6 +120,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    composite_primary_keys (10.0.5)
+      activerecord (~> 5.1.0, >= 5.1.6)
     concurrent-ruby (1.0.5)
     config (1.7.0)
       activesupport (>= 3.0)
@@ -608,6 +610,7 @@ DEPENDENCIES
   cells-rails
   cells-slim
   coffee-rails
+  composite_primary_keys
   config
   cucumber-api-steps
   cucumber-rails

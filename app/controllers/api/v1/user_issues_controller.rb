@@ -5,6 +5,14 @@ module Api::V1
     include StandartActions
     model_class UserIssue
 
-    public :index
+    public :index, :show
+
+  private
+
+    def model
+      @model ||=
+        model_class
+        .find_or_initialize_by(user_id: id[0], issue_id: id[1])
+    end
   end
 end
