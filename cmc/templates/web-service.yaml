@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: cmc-service
+  name: {{ .Release.Name }}-service
 spec:
   selector:
-    app: cmc-web
+    app: {{ .Release.Name }}-web
   type: NodePort
   ports:
   - name: http

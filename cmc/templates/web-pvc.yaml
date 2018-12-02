@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cmc-web-pvc
+  name: {{ .Release.Name }}-web-pvc
 spec:
   {{- if .Values.webPersistence.storageClassName }}
   storageClassName: "{{ .Values.webPersistence.storageClassName }}"

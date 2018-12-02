@@ -1,9 +1,10 @@
+{{- if .Values.databaseService.externalIp }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: cmc-database
+  name: {{ .Release.Name }}-db-ext
   labels:
-    name: cmc-database
+    name: {{ .Release.Name }}-db-ext
 spec:
   {{- if .Values.databaseService.externalIp }}
   externalIPs:
@@ -12,4 +13,7 @@ spec:
   ports:
     - port: 5432
   selector:
-    name: cmc-database
+    app: postgresql
+    release: {{ .Release.Name }}
+    role: master
+{{- end }}

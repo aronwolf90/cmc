@@ -1,27 +1,27 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: cmc-install-task
+  name: {{ .Release.Name }}-install-task
   annotations:
     "helm.sh/hook": post-install
     "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
 spec:
   template:
     metadata:
-      name: cmc-install-task
+      name: {{ .Release.Name }}-install-task
       labels:
-        name: cmc-install-task
+        name: {{ .Release.Name }}-install-task
     spec:
       restartPolicy: Never
       containers:
-        - name: cmc-install-task
+        - name: install
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh","-c"]
           args: ["sleep {{ .Values.installJobDelay }}; rake db:schema:load; rake db:seed"]
           imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
-              value: 'postgres://root:{{ .Values.databasePassword }}@cmc-database/database'
+              value: 'postgres://{{ .Values.postgresql.postgresqlUser }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
             - name: SECRET_KEY_BASE
               value: '{{ .Values.webDeployment.secretKeyBase }}'
             - name: RAILS_ENV

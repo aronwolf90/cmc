@@ -148,7 +148,7 @@ deploy:
     - helm upgrade cmc-production cmc --install --wait
         --set image.tag=$CI_COMMIT_SHA
         --set multiTenant=true
-        --set databasePassword=$DB_PASSWORD
+        --set postgresql.postgresqlPassword=$DB_PASSWORD
         --set databaseService.externalIp=95.216.162.196
         --set installJobDelay=20
         --set ingress.enabled=true
@@ -163,7 +163,7 @@ deploy:
         --set ingress.tls[0].hosts[1]="cost-manager.com"
         --set databasePersistence.storageClassName=openebs-standard
         --set webPersistence.storageClassName=openebs-standard
-
+        --set postgresql.persistence.storageClass=openebs-standard
   only:
     - master
   except:

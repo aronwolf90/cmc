@@ -2,7 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: cmc-ingress
+  name: {{ .Release.Name }}-ingress
   annotations:
     {{- range $key, $value := .Values.ingress.annotations }}
       {{ $key }}: {{ $value | quote }}
@@ -14,7 +14,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: cmc-service
+              serviceName: {{ .Release.Name }}-service
               servicePort: 80
     {{- if .Values.multiTenant }}
     - host: "*.{{ .Values.ingress.url }}"
@@ -22,7 +22,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: cmc-service
+              serviceName: {{ .Release.Name }}-service
               servicePort: 80
     {{- end }}
 

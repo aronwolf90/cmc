@@ -6,7 +6,10 @@ webDeployment:
   secretKeyBase: 5d1ee3590cdac32f527d1c4c835578859ecbd50ac1b03ff6d4689c19d732b5c9050ceb66d8b625cacadb1c1228095a7fd855933ce1881075a577e7cb8aea3432
   sentryDsn: 
   enviroment: production
-databasePassword: repl_password
+postgresql:
+  postgresqlUsername: root
+  postgresqlDatabase: database
+  postgresqlPassword: repl_password
 installJobDelay: 5
 databasePersistence:
   storageClassName: 

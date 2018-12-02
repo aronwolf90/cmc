@@ -1,27 +1,27 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: cmc-migrate-task
+  name: {{ .Release.Name }}-migrate-task
   annotations:
     "helm.sh/hook": post-upgrade
     "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
 spec:
   template:
     metadata:
-      name: cmc-migrate-task
+      name: {{ .Release.Name }}-migrate-task
       labels:
-        name: cmc-migrate-task
+        name: {{ .Release.Name }}-migrate-task
     spec:
       restartPolicy: Never
       containers:
-        - name: cmc-migrate-task
+        - name: migrate
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh","-c"]
           args: ["rake db:migrate && echo 'migrated successfully'"]
           imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
-              value: 'postgres://root:{{ .Values.databasePassword }}@cmc-database/database'
+              value: 'postgres://{{ .Values.postgresql.postgresqlUser }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
             - name: SECRET_KEY_BASE
               value: '{{ .Values.webDeployment.secretKeyBase }}'
             - name: RAILS_ENV

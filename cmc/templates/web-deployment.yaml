@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: cmc-web
+  name: {{ .Release.Name }}-web
 spec:
   replicas: 1
   strategy:
@@ -12,17 +12,17 @@ spec:
   template:
     metadata:
       labels:
-        app: cmc-web
+        app: {{ .Release.Name }}-web
     spec:
       containers:
-        - name: cmc-web
+        - name: web
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: "Always"
           ports:
             - containerPort: 3000
           env:
             - name: DATABASE_URL
-              value: 'postgres://root:{{ .Values.databasePassword }}@cmc-database/database'
+              value: 'postgres://{{ .Values.postgresql.postgresqlUser }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
             - name: SECRET_KEY_BASE
               value: '{{ .Values.webDeployment.secretKeyBase }}'
             - name: RAILS_ENV
@@ -32,7 +32,7 @@ spec:
             - name: SENTRY_DSN
               value: '{{ .Values.webDeployment.sentryDsn }}'
           volumeMounts:
-            - name: cmc-files-volume
+            - name: files
               mountPath: /app/uploads
             - mountPath: /assets
               name: assets
@@ -58,15 +58,14 @@ spec:
               readOnly: true
 
       volumes:
-        - name: cmc-files-volume
+        - name: files
           persistentVolumeClaim:
-            claimName: cmc-web-pvc
+            claimName: {{ .Release.Name }}-web-pvc
         - name: nginx-conf
           configMap:
-            name: cmc-nginx-conf
+            name: {{ .Release.Name }}-nginx-conf
             items:
               - key: nginx.conf
                 path: nginx.conf
         - name: assets
           emptyDir: {}
-
