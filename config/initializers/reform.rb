@@ -1,3 +1,7 @@
 # frozen_string_literal: true
 
-Rails.application.config.reform.validations = :dry
+require "reform/form/active_model/validations"
+
+Reform::Form.class_eval do
+  include Reform::Form::ActiveModel::Validations
+end

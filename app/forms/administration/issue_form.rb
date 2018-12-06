@@ -3,21 +3,15 @@
 require "reform/form/coercion"
 
 module Administration
-  class IssueForm < Reform::Form
+  class IssueForm < ApplicationForm
     model ::Issue
 
     property :title
     property :description
     property :board_list_id
 
-    validation do
-      configure do
-        predicates(ReformPredicates)
-      end
-
-      required(:title).filled
-      required(:description).filled
-      required(:board_list_id).filled
-    end
+    validates :title, presence: true
+    validates :description, presence: true
+    validates :board_list_id, presence: true
   end
 end

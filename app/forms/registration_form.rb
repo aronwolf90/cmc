@@ -2,8 +2,7 @@
 
 require "reform/form/coercion"
 
-class RegistrationForm < Reform::Form
-  feature Coercion
+class RegistrationForm < ApplicationForm
   model Registration
 
   property :name
@@ -16,28 +15,34 @@ class RegistrationForm < Reform::Form
   property :confirmation_password, virtual: true
   property :terms_service, virtual: true
 
-  validation with: { form: true } do
-    configure do
-      def same_password?(value)
-        value == form.password
-      end
+  validates :name, presence: true
+  validates :time_zone, presence: true
+  validates :firstname, presence: true
+  validates :lastname, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :confirmation_password, presence: true
+  validates :terms_service, presence: true
 
-      def password_length?(value)
-        value.to_s.size >= 6
-      end
+  validate :same_password
+  validate :password_length
+  validate :uniq_organization_name
 
-      def uniq_organization_name?(value)
-        !Organization.exists?(name: value)
-      end
-    end
+  def same_password
+    return if confirmation_password == password
 
-    required(:name).filled(:uniq_organization_name?)
-    required(:time_zone).filled
-    required(:firstname).filled
-    required(:lastname).filled
-    required(:email)
-    required(:password).filled(:password_length?)
-    required(:confirmation_password).filled(:same_password?)
-    required(:terms_service).filled
+    errors.add(:password, "Password is diferent")
+  end
+
+  def password_length
+    return if password.to_s.size >= 6
+
+    errors.add(:password, "Password is too short")
+  end
+
+  def uniq_organization_name
+    return unless Organization.exists?(name: name)
+
+    errors.add(:password, "Organization is not uniq")
   end
 end

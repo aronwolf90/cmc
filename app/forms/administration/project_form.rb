@@ -3,18 +3,11 @@
 require "reform/form/coercion"
 
 module Administration
-  class ProjectForm < Reform::Form
-    feature Coercion
+  class ProjectForm < ApplicationForm
     model ::Project
 
     property :name
 
-    validation do
-      configure do
-        predicates(ReformPredicates)
-      end
-
-      required(:name).filled
-    end
+    validates :name, presence: true
   end
 end

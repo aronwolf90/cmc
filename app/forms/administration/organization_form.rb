@@ -3,14 +3,11 @@
 require "reform/form/coercion"
 
 module Administration
-  class OrganizationForm < Reform::Form
-    feature Coercion
+  class OrganizationForm < ApplicationForm
     model Organization
 
     property :time_zone
 
-    validation  do
-      required(:time_zone).filled
-    end
+    validates :time_zone, presence: true
   end
 end

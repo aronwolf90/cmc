@@ -15,7 +15,7 @@ describe Administration::RecordForm do
     allow(User).to receive(:exists?).with(user.id).and_return(true)
     allow(User).to receive(:find).with(user.id).and_return(user)
     allow(Issue).to receive(:exists?).with(issue.id).and_return(true)
-    allow(RecordsIntervalQuery).to receive(:call).and_return([])
+    allow(OtherUserRecordsIntervalQuery).to receive(:call).and_return([])
   end
 
   it { expect(subject.validate(current_user: user)).to be true }
@@ -42,16 +42,16 @@ describe Administration::RecordForm do
 
   context "overlapping record" do
     before do
-      allow(RecordsIntervalQuery)
+      allow(OtherUserRecordsIntervalQuery)
         .to receive(:call).and_return([Issue.new])
     end
 
     specify do
-      expect(subject.validate(current_user: user, id: nil)).to be false
+      expect(subject.validate(current_user: user)).to be false
     end
 
     specify do
-      subject.validate(current_user: user, id: nil)
+      subject.validate(current_user: user)
       expect { subject.errors }.not_to raise_error
     end
   end

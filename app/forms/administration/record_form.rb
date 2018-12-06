@@ -3,8 +3,7 @@
 require "reform/form/coercion"
 
 module Administration
-  class RecordForm < Reform::Form
-    feature Coercion
+  class RecordForm < ApplicationForm
     model ::Record
 
     property :id
@@ -13,31 +12,39 @@ module Administration
     property :current_user, virtual: true
     property :issue_id
 
-    validation with: { form: true } do
-      configure do
-        predicates(ReformPredicates)
 
-        def before_end?(start_time)
-          form.end_time.blank? || start_time < form.end_time
-        end
+    validates :current_user, presence: true
+    validates :start_time, presence: true
+    validates :end_time, presence: true
+    validates :issue_id, presence: true
 
-        def no_overlapping?(start_time)
-          end_time = form.end_time
-          return true if end_time.blank?
+    validate :start_time_before_end
+    validate :no_overlapping
 
-          RecordsIntervalQuery.call(
-            form.current_user.records.all_except(form.id),
-            start_time: start_time,
-            end_time: end_time
-          ).empty?
-        end
-      end
+  private
 
-      optional(:id).maybe
-      required(:current_user).filled
-      required(:start_time).filled(:before_end?, :no_overlapping?)
-      optional(:end_time).filled
-      required(:issue_id).filled(exists?: ::Issue)
+    def start_time_before_end
+      return if start_time.blank?
+      return if end_time.blank?
+      return if start_time < end_time
+
+      errors.add(:start_time, "End time before start time")
+    end
+
+    def no_overlapping
+      return if end_time.blank?
+      return if other_records.empty?
+
+      errors.add(:start_time, "Overlapping with other record")
+    end
+
+    def other_records
+      OtherUserRecordsIntervalQuery.(
+        user: current_user,
+        start_time: start_time,
+        end_time: end_time,
+        record_id: id
+      )
     end
   end
 end

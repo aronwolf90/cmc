@@ -3,18 +3,12 @@
 require "reform/form/coercion"
 
 module Administration
-  class BoardListForm < Reform::Form
+  class BoardListForm < ApplicationForm
     model BoardList
 
     property :name
     property :project_id
 
-    validation do
-      configure do
-        predicates(ReformPredicates)
-      end
-
-      required(:name).filled
-    end
+    validates :name, presence: true
   end
 end

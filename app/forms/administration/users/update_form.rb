@@ -4,7 +4,7 @@ require "reform/form/coercion"
 
 module Administration
   module Users
-    class UpdateForm < Reform::Form
+    class UpdateForm < ApplicationForm
       feature Coercion
       model User
 
@@ -15,15 +15,9 @@ module Administration
       property :avatar_cache
       property :telephone_number
 
-      validation do
-        configure do
-          predicates(ReformPredicates)
-        end
-
-        required(:firstname).filled
-        required(:lastname).filled
-        required(:email).filled
-      end
+      validates :firstname, presence: true
+      validates :lastname, presence: true
+      validates :email, presence: true
     end
   end
 end

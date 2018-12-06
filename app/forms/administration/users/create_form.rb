@@ -4,7 +4,7 @@ require "reform/form/coercion"
 
 module Administration
   module Users
-    class CreateForm < Reform::Form
+    class CreateForm < ApplicationForm
       feature Coercion
       model User
 
@@ -16,22 +16,19 @@ module Administration
       property :password_confirmation
       property :project_ids
 
-      validation with: { form: true } do
-        configure do
-          predicates(ReformPredicates)
+      validates :firstname, presence: true
+      validates :lastname, presence: true
+      validates :email, presence: true
+      validates :type, presence: true
+      validates :password, presence: true
+      validates :password_confirmation, presence: true
 
-          def same_password?(value)
-            value == form.password
-          end
-        end
+      validate :same_password
 
-        required(:firstname).filled
-        required(:lastname).filled
-        required(:email).filled
-        required(:type).filled
-        required(:password).filled
-        required(:password_confirmation).filled(:same_password?)
-        required(:project_ids)
+      def same_password
+        return if password_confirmation == password
+
+        errors.add(:password_confirmation, "Diferent password")
       end
     end
   end

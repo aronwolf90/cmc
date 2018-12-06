@@ -3,8 +3,7 @@
 require "reform/form/coercion"
 
 module Administration
-  class ArchiveDocumentForm < Reform::Form
-    feature Coercion
+  class ArchiveDocumentForm < ApplicationForm
     model Document
 
     property :name
@@ -12,19 +11,14 @@ module Administration
     property :file
     property :file_cache
 
-    validation with: { form: true } do
-      configure do
-        predicates(ReformPredicates)
+    validates :name, presence: true
+    validates :folder_id, presence: true
+    validate :file_present
 
-        def file_present?(file)
-          file.respond_to?(:original_filename) ||
-            form.model.file.file.respond_to?(:original_filename)
-        end
-      end
-
-      required(:name).filled
-      required(:folder_id).filled
-      required(:file).filled(:file_present?)
+    def file_present
+      return if file.respond_to?(:original_filename)
+      return if model.file.file.respond_to?(:original_filename)
+      errors.add(:file, :blank)
     end
   end
 end

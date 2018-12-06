@@ -3,19 +3,12 @@
 require "reform/form/coercion"
 
 module Administration
-  class WikiCategoryForm < Reform::Form
-    feature Coercion
+  class WikiCategoryForm < ApplicationForm
     model WikiCategory
 
     property :title
     property :wiki_category_id
 
-    validation do
-      configure do
-        predicates(ReformPredicates)
-      end
-
-      required(:title).filled
-    end
+    validates :title, presence: true
   end
 end
