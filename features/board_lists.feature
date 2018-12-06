@@ -2,6 +2,7 @@ Feature: Board lists
 
 @javascript
 Scenario: create board list
+  Given The app contain seed data
   Given I am signed in
   And I click on link "Issues"
   And I click on ".fa-plus"

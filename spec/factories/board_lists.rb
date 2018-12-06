@@ -3,5 +3,7 @@
 FactoryBot.define do
   factory :board_list do
     name "name"
+
+    association :project
   end
 end

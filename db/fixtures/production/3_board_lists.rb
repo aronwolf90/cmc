@@ -2,13 +2,13 @@
 
 BoardList.seed do |s|
   s.id         = 1
-  s.name       = "Backlog"
+  s.name       = "Open"
   s.project_id = 1
 end
 
 BoardList.seed do |s|
   s.id         = 2
-  s.name       = "In development"
+  s.name       = "Doing"
   s.project_id = 1
 end
 

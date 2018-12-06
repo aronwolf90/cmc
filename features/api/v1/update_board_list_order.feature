@@ -24,7 +24,7 @@ Scenario: valid data
         "attributes": { "name": "name" },
         "relationships": {
           "issues": {"data": []},
-          "project": {"data": null}
+          "project": {"data": { "id": "2", "type": "projects" } }
         },
         "links": {"self": "/api/v1/board_lists/2"}
       }, {
@@ -33,7 +33,7 @@ Scenario: valid data
         "attributes": { "name": "name" },
         "relationships": {
           "issues": {"data": []},
-          "project": {"data": null}
+          "project": {"data": { "id": "1", "type": "projects" } }
         },
         "links": {"self": "/api/v1/board_lists/1"}
       }]

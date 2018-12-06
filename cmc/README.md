@@ -59,7 +59,7 @@ The following table lists the configurable parameters of the CMC chart and their
 | `ingress.url`                          | domain of the app                           |                                                            |
 | `ingress.annotations`                  | ingress annotations                         | `{}`                                                       |
 | `ingress.tls`                          | ingress ssl configuration                   | `{}`                                                       |
-| `databasePassword`                     | database password                           |                                                            |
+| `postgresql.postgresqlPassword`        | database password                           |                                                            |
 | `databaseService.externalIp`           | externalIp for the database                 |                                                            |
 | `databasePersistence.storageClassName` | database storageClassName                   |                                                            |
 | `webPersistence.storageClassName`      | web storageClassName                        |                                                            |

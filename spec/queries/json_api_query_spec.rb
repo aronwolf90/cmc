@@ -7,8 +7,9 @@ RSpec.describe JsonApiQuery   do
 
   let(:relation) { BoardList.all }
   let(:params) { { include: ["issues"], sort: ["ordinal_number"], o: 1 } }
-  let!(:board_list1) { create(:board_list, ordinal_number: 2)  }
-  let!(:board_list2) { create(:board_list, ordinal_number: 1) }
+  let!(:board_list1) { create(:board_list, ordinal_number: 2, project: project) }
+  let!(:board_list2) { create(:board_list, ordinal_number: 1, project: project) }
+  let!(:project) { create(:project) }
   let!(:issue_board_list1) { create(:issue, board_list: board_list1) }
   let!(:issue_board_list2) { create(:issue, board_list: board_list2) }
 
@@ -41,7 +42,8 @@ RSpec.describe JsonApiQuery   do
   end
 
   context "filter with null is present in the params" do
-    let(:params) { { filter: { project_id: "null" } } }
+    let(:params) { { filter: { user_id: "null" } } }
+    let(:relation) { Issue.all }
 
     it "return mached entry" do
       expect(subject.all.sort).to eq(relation.sort)

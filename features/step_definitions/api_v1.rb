@@ -21,12 +21,14 @@ Given /^I am an user with an email "test@localhost.de" and a password "testtest"
 end
 
 Given /^an issue exists with an id of 1$/ do
-  board_list = BoardList.create!(name: "Test", id: 10)
+  project = Project.create!(name: "Test project")
+  board_list = BoardList.create!(name: "Test", id: 10, project_id: project.id)
   Issue.create!(id: 1, title: "title", board_list: board_list)
 end
 
 Given /^an issue exists with an id of 2$/ do
-  board_list = BoardList.create!(name: "Test", id: 11)
+  project = Project.create!(name: "Test project")
+  board_list = BoardList.create!(name: "Test", id: 11, project: project)
   Issue.create!(id: 2, title: "title", board_list: board_list)
 end
 
@@ -43,11 +45,13 @@ Given /^I with an id of 1 have an current record$/ do
 end
 
 Given /^a board list exists with an id of 1$/ do
-  BoardList.create!(id: 1, name: "name")
+  project = Project.create!(name: "Test project")
+  BoardList.create!(id: 1, name: "name", project: project)
 end
 
 Given /^a board list exists with an id of 2$/ do
-  BoardList.create!(id: 2, name: "name")
+  project = Project.create!(name: "Test project")
+  BoardList.create!(id: 2, name: "name", project: project)
 end
 
 Given /^a wiki page exists with an id of 1$/ do

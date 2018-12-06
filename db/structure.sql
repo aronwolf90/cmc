@@ -39,7 +39,7 @@ CREATE TABLE board_lists (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     ordinal_number integer,
-    project_id bigint
+    project_id bigint NOT NULL
 );
 
 
@@ -968,6 +968,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181030184844'),
 ('20181118160714'),
 ('20181122194236'),
-('20181122195042');
+('20181122195042'),
+('20181206180705');
 
 

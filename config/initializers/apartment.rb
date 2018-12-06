@@ -109,7 +109,7 @@ Apartment.configure do |config|
   # the new tenant
   #
   # config.pg_excluded_names = ["uuid_generate_v4"]
-  config.seed_after_create = false
+  config.seed_after_create = true
 end
 
 # Setup a custom Tenant switching middleware. The Proc should return the name of the Tenant that

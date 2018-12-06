@@ -37,7 +37,7 @@ Scenario: Put an valid board lists using json in PUT body
             { "id": "2", "type": "issues" },
             { "id": "1", "type": "issues" }
           ] },
-          "project": { "data": null }
+          "project": { "data": { "id": "1", "type": "projects" } }
         },
         "links": { "self": "/api/v1/board_lists/1" }
       }

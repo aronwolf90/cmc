@@ -18,7 +18,7 @@ Scenario: Get
         },
         "relationships": {
           "issues": { "data": [] },
-          "project": { "data": null }
+          "project": { "data": { "id": "1", "type": "projects" } }
         },
         "links": { "self": "/api/v1/board_lists/1" }
       }
