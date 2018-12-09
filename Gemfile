@@ -15,6 +15,7 @@ gem "devise"
 gem "devise_invitable"
 
 # Lovlevel
+gem "acts_as_paranoid"
 gem "active_model_serializers"
 gem "carrierwave"
 gem "config"

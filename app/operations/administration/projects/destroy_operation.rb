@@ -5,7 +5,7 @@ module Administration
     class DestroyOperation < AdministrationOperation
       step Model(Project, :find)
       step Policy::Pundit(ProjectPolicy, :destroy?)
-      step DestroyStep
+      step MvcDestroyMutationStep
     end
   end
 end

@@ -39,7 +39,8 @@ CREATE TABLE board_lists (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     ordinal_number integer,
-    project_id bigint NOT NULL
+    project_id bigint NOT NULL,
+    deleted_at timestamp without time zone
 );
 
 
@@ -208,7 +209,8 @@ CREATE TABLE issues (
     user_id bigint,
     complexity numeric(4,1),
     board_list_id integer NOT NULL,
-    ordinal_number integer
+    ordinal_number integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -301,7 +303,8 @@ CREATE TABLE projects (
     id bigint NOT NULL,
     name character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    deleted_at timestamp without time zone
 );
 
 
@@ -743,6 +746,13 @@ ALTER TABLE ONLY wiki_pages
 
 
 --
+-- Name: index_board_lists_on_deleted_at; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_board_lists_on_deleted_at ON board_lists USING btree (deleted_at);
+
+
+--
 -- Name: index_board_lists_on_project_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
@@ -785,6 +795,13 @@ CREATE INDEX index_issues_on_board_list_id ON issues USING btree (board_list_id)
 
 
 --
+-- Name: index_issues_on_deleted_at; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_issues_on_deleted_at ON issues USING btree (deleted_at);
+
+
+--
 -- Name: index_issues_on_user_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
@@ -796,6 +813,13 @@ CREATE INDEX index_issues_on_user_id ON issues USING btree (user_id);
 --
 
 CREATE UNIQUE INDEX index_organizations_on_name ON organizations USING btree (name);
+
+
+--
+-- Name: index_projects_on_deleted_at; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_projects_on_deleted_at ON projects USING btree (deleted_at);
 
 
 --
@@ -969,6 +993,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181118160714'),
 ('20181122194236'),
 ('20181122195042'),
-('20181206180705');
+('20181206180705'),
+('20181208224113'),
+('20181208224623'),
+('20181208224833');
 
 

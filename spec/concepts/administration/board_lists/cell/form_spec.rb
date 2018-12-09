@@ -22,15 +22,18 @@ RSpec.describe Administration::BoardLists::Cell::Form, type: :cell do
   it { is_expected.to have_selector("input[type='submit']") }
 
   context "persisted board list" do
+    let(:board_list) { build_stubbed(:board_list, project: project)  }
     let(:form) do
-      Administration::BoardListForm.new(build_stubbed(:board_list))
+      Administration::BoardListForm.new(board_list)
     end
-    let(:issue) { build_stubbed(:issue) }
 
     it { is_expected.to have_text("Destroy") }
 
     context "with issues" do
-      before { allow(form.model).to receive(:issues).and_return([issue])  }
+      let(:issue) { build_stubbed(:issue, board_list: board_list) }
+      before do
+        allow(form.model).to receive(:issues).and_return([issue])
+      end
 
       it { is_expected.to have_css(".disabled") }
     end

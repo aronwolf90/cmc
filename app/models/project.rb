@@ -2,8 +2,9 @@
 
 class Project < ApplicationRecord
   include PgSearch
+  acts_as_paranoid
 
-  has_many :board_lists
+  has_many :board_lists, dependent: :destroy
   has_many :issues, through: :board_lists
   has_many :records, through: :issues
   has_many :user_projects
