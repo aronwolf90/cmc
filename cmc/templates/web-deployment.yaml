@@ -31,6 +31,8 @@ spec:
               value: '{{ .Values.multiTenant }}'
             - name: SENTRY_DSN
               value: '{{ .Values.webDeployment.sentryDsn }}'
+            - name: ADMIN_PASSWORD
+              value: '{{ .Values.admin_password }}'
           volumeMounts:
             - name: files
               mountPath: /app/uploads

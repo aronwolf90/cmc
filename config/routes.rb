@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   resources :registrations, only: %i[new create]
   resource :terms, only: :show
 
+  namespace :admin_area do
+    root to: "organizations#index"
+
+    resources :organizations, only: :index
+  end
+
   namespace :administration do
     root to: "dashboards#show"
 

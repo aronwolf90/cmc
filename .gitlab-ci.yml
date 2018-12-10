@@ -164,6 +164,7 @@ deploy:
         --set databasePersistence.storageClassName=openebs-standard
         --set webPersistence.storageClassName=openebs-standard
         --set postgresql.persistence.storageClass=openebs-standard
+        --set admin_password=$ADMIN_PASSWORD
   only:
     - master
   except:

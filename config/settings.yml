@@ -1,1 +1,2 @@
 multi_tenant: <%= ENV["MULTI_TENANT"] || true%>
+admin_password: <%= ENV["ADMIN_PASSWORD"] %>

@@ -1,4 +1,5 @@
 multiTenant: false
+admin_password: repl_passowrd
 image:
   repository: registry.gitlab.com/cmc_system/cmc
   tag: latest
