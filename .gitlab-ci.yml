@@ -24,6 +24,14 @@ gitlint:
     - pip install gitlint
     - git log -1 --pretty=%B | gitlint
 
+helm_lint:
+  stage: lint
+  image: dtzar/helm-kubectl
+  only:
+    - master
+  script:
+    - helm lint -f values.yaml cmc/
+
 eslint:
   stage: lint
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
@@ -146,24 +154,9 @@ deploy:
         sleep 0.2;
       done &
     - helm upgrade cmc-production cmc --install --wait
+        - f values.yaml
         --set image.tag=$CI_COMMIT_SHA
-        --set multiTenant=true
         --set postgresql.postgresqlPassword=$DB_PASSWORD
-        --set databaseService.externalIp=95.216.162.196
-        --set installJobDelay=20
-        --set ingress.enabled=true
-        --set ingress.url="cost-manager.com"
-        --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=letsencrypt-production 
-        --set ingress.annotations."certmanager\.k8s\.io/acme-challenge-type"=dns01
-        --set ingress.annotations."certmanager\.k8s\.io/acme-dns01-provider"=clouddns
-        --set ingress.annotations."kubernetes\.io/ingress\.class"=nginx 
-        --set ingress.annotations."kubernetes\.io/tls-acme"="true"
-        --set ingress.tls[0].secretName=cost-manager-tls
-        --set ingress.tls[0].hosts[0]="*.cost-manager.com"
-        --set ingress.tls[0].hosts[1]="cost-manager.com"
-        --set databasePersistence.storageClassName=openebs-standard
-        --set webPersistence.storageClassName=openebs-standard
-        --set postgresql.persistence.storageClass=openebs-standard
         --set admin_password=$ADMIN_PASSWORD
   only:
     - master

@@ -1,0 +1,26 @@
+multiTenant: true
+databaseService:
+  externalIp: 95.216.162.196
+installJobDelay: 20
+ingress:
+  enabled: true
+  url: cost-manager.com
+  annotations:
+    certmanager.k8s.io/cluster-issuer: letsencrypt-production
+    certmanager.k8s.io/acme-challenge-type: dns01
+    certmanager.k8s.io/acme-dns01-provider: clouddns
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: true
+  tls:
+    - secretName: cost-manager-tls
+      hosts:
+        - "*.cost-manager.com"
+        - "cost-manager.com"
+databasePersistence:
+  storageClassName: openebs-standard
+webPersistence:
+  storageClassName: openebs-standard
+postgresql:
+  persistence:
+    storageClass: openebs-standard
+
