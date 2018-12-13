@@ -12,8 +12,6 @@ variables:
   POSTGRES_USER: root
   DATABASE_URL: postgres://root:password@postgres/root
 
-services:
-  - postgres:latest
 
 gitlint:
   stage: lint
@@ -44,7 +42,6 @@ rubocop:
   stage: lint
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
   script:
-    - apk update
     - ln -s /root/node_modules node_modules
     - bundle install
     - rubocop
@@ -52,6 +49,8 @@ rubocop:
 detect_code_problems:
   stage: lint
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
+  services:
+    - postgres:latest
   artifacts:
     paths:
       - tmp/rubycritic
@@ -65,6 +64,8 @@ detect_code_problems:
 rspec:
   stage: test
   image: registry.gitlab.com/cmc_system/cmc/cmc:test
+  services:
+    - postgres:latest
   variables:
     COVERAGE: "true"
   artifacts:
