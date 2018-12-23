@@ -1,18 +1,14 @@
-.side-menu
-  ul.nav.navbar-nav
-    li = link_to edit_administration_user_path(@root_model) do
-      = fa_icon 'user', class: 'fa-lg'
-      | &nbsp &nbsp
-      = 'User Settings'
-  ul.nav.navbar-nav
-    li class=('active' if /users\/\d*\/edit$/.match(request.url))
-      = link_to 'Edit', edit_administration_user_path(@root_model)
-  ul.nav.navbar-nav
-    - if UserConfigurationPolicy.new(current_user, @root_model).edit?
-      li class=('active' if request.url.include?('configuration'))
-        = link_to 'Configuration', edit_administration_user_configuration_path(@root_model)
-  ul.nav.navbar-nav
-    - if policy(Record).index?
-      li class=('active' if request.url.include?('records'))
-        = link_to 'Records', administration_user_records_path(@root_model)
+= asside policy(@root_model).show? do
+  = top_asside_item("User Settings",
+      icon: :user,
+      path: edit_administration_user_path(@root_model))
+  = asside_item("Edit",
+      path: edit_administration_user_path(@root_model),
+      policy: policy(@root_model).edit?)
+  = asside_item("Configuration",
+      path: edit_administration_user_configuration_path(@root_model),
+      policy: UserConfigurationPolicy.new(current_user, @root_model).edit?)
+  = asside_item("Records",
+      path: administration_user_records_path(@root_model),
+      policy: policy(Record).index?)
   = render "administration/shared/shared_issue_section"

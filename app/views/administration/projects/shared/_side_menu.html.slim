@@ -1,7 +1,5 @@
-.side-menu
-  ul.nav.navbar-nav
-    li = link_to administration_projects_path
-      = fa_icon(:tasks, class: "fa-lg")
-      | &nbsp &nbsp
-      | Projects
+= asside policy(Project).index? do
+  = top_asside_item("Projects",
+      path: administration_projects_path,
+      icon: :tasks)
   = render "administration/shared/shared_issue_section"

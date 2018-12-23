@@ -1,7 +1,5 @@
-.side-menu
-  ul.nav.navbar-nav
-    li = link_to administration_users_path
-      = fa_icon(:users, class: "fa-lg")
-      | &nbsp &nbsp
-      | Users
+= asside policy(User).index? do
+  = top_asside_item("Users",
+          icon: :users,
+          path: administration_users_path)
   = render "administration/shared/shared_issue_section"

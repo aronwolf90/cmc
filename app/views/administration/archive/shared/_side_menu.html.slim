@@ -1,7 +1,5 @@
-.side-menu
-  ul.nav.navbar-nav
-    li = link_to administration_archive_root_path
-      = fa_icon("folder-open", class: "fa-lg")
-      | &nbsp &nbsp
-      | Archive
+= asside true do
+  = top_asside_item("Archive",
+      path: administration_archive_root_path,
+      icon: :"folder-open")
   = render "administration/shared/shared_issue_section"

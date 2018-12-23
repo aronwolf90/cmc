@@ -1,7 +1,5 @@
-.side-menu
-  ul.nav.navbar-nav
-    li = link_to %i[edit administration organization]
-      = fa_icon(:gears, class: "fa-lg")
-      | &nbsp &nbsp
-      | Admin
+= asside policy(Organization).show? do
+  = top_asside_item("Admin",
+      path:  %i[edit administration organization],
+      icon: :gears)
   = render "administration/shared/shared_issue_section"

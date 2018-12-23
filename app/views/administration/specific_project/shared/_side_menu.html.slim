@@ -1,12 +1,11 @@
-.side-menu
-  ul.nav.navbar-nav
-    li = link_to [:administration, @project, :dashboard]
-      = fa_icon(:building, class: "fa-lg")
-      | &nbsp &nbsp
-      | Project
-    li class=('active' if current_page?(controller: :dashboards, action: :show))
-      = link_to 'Dashboard', [:administration, @project, :dashboard]
-    - if policy(Record).index?
-      li class=('active' if current_page?(controller: :records))
-        = link_to 'Records', [:administration, @project, :records]
+= asside policy(@project).show? do
+  = top_asside_item("Projects",
+      path: administration_project_dashboard_path(@project),
+      icon: :building)
+  = asside_item("Dashboard",
+      path: administration_project_dashboard_path(@project),
+      policy: true)
+  = asside_item("Records",
+      path: administration_project_records_path(@project),
+      policy: policy(Record).index?)
   = render "administration/shared/shared_issue_section"

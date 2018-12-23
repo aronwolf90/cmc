@@ -1,7 +1,5 @@
-.side-menu
-  ul.nav.navbar-nav
-    li = link_to administration_wiki_root_path
-      = fa_icon(:book, class: "fa-lg")
-      | &nbsp &nbsp
-      | Wiki
+= asside true do
+  = top_asside_item("Wiki",
+      icon: :book,
+      path: administration_wiki_root_path)
   = render "administration/shared/shared_issue_section"
