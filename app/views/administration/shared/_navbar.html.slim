@@ -1,32 +1,33 @@
-nav.navbar.navbar-expand-sm.navbar-dark.fixed-top
-  = link_to administration_root_path
-    = image_tag 'logo.png', id: 'logo', height: 21, width: 40
+= menu do
+  = menu_logo "logo.png", administration_root_path
 
-  ul.navbar-nav.mr-auto.ml-4
-    - if policy(Project).index?
-      li.nav-item class=('active' if request.url.include?('projects'))
-        = link_to 'Projects', administration_projects_path, class: 'nav-link small'
-    - if policy(WikiPage).index? && policy(WikiCategory).index?
-      li.nav-item class=('active' if request.url.include?('wiki'))
-        = link_to 'Wiki', administration_wiki_root_path, class: 'nav-link small'
-    - if policy(Document).index? && policy(Folder).index?
-      li.nav-item class=('active' if request.url.include?('archive'))
-        = link_to 'Archive', administration_archive_root_path, class: 'nav-link small'
-    - if policy(User).index?
-      li.nav-item class=('active' if request.url.include?('users'))
-        = link_to 'Users', administration_users_path, class: 'nav-link small'
-    - if policy(Organization).index?
-      li.nav-item class=("active" if request.url.include?("/organization"))
-        = link_to 'Admin', %i[edit administration organization], class: 'nav-link small'
+  = left_menu do
+    = menu_item("Projects",
+        path: administration_projects_path,
+        policy: policy(Project).index?,
+        includes: "projects")
+    = menu_item("Wiki",
+        path: administration_wiki_root_path,
+        policy: policy(WikiPage).index?,
+        includes: "wiki")
+    = menu_item("Archive",
+        path: administration_archive_root_path,
+        policy: policy(Document).index? && policy(Folder).index?,
+        includes: "archive")
+    = menu_item("Users",
+        path: administration_users_path,
+        policy: policy(User).index?,
+        includes: "users")
+    = menu_item("Admin",
+        path: %i[edit administration organization],
+        policy: policy(Organization).index?,
+        includes: "organization")
 
-  ul.navbar-nav
-     a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-       = image_tag current_user.avatar_url.to_s, class: 'rounded-circle', size: 24
-     .dropdown-menu.dropdown-menu-right
-       a class="dropdown-item"
-         = current_user
-       = link_to edit_administration_user_path(current_user), class: 'dropdown-item'
-         = 'Settings'
-       div class="dropdown-divider">
-       = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item'
-         =  'Sign out'
+  = right_menu do
+    = user_menu_dropdown_text
+      = image_tag current_user.avatar_url, class: 'rounded-circle', size: 24
+    = user_menu_dropdown_body do
+      = dropdown_link current_user, ""
+      = dropdown_link 'Settings', edit_administration_user_path(current_user)
+      .dropdown-divider
+      = dropdown_link 'Sign out', destroy_user_session_path, method: :delete
