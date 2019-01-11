@@ -36,11 +36,11 @@ RSpec.describe Api::V1::Issues::UpdateOperation do
     allow(Issue).to receive(:find).and_return(issue)
     allow(Api::V1::Issues::UpdateForm).to receive(:call).with(params).and_return(form_result)
     allow(Api::V1::IssueDeserializer).to receive(:call).with(params[:data]).and_return(deserialized_params)
-    allow(issue).to receive(:update!)
+    allow(Issues::UpdateMutation).to receive(:call)
   end
 
   it "call update!" do
-    expect(issue).to receive(:update!).with(deserialized_params)
+    expect(Issues::UpdateMutation).to receive(:call)
     subject
   end
 
@@ -55,7 +55,7 @@ RSpec.describe Api::V1::Issues::UpdateOperation do
     end
 
     it "not call update!" do
-      expect(issue).not_to receive(:update!).with(deserialized_params)
+      expect(Issues::UpdateMutation).not_to receive(:call)
     end
 
     it { is_expected.not_to be_success }
