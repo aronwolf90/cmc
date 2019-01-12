@@ -16,11 +16,12 @@ export default {
   initCurrentIssue () {
 
   },
-  updateIssue (context, { entry, attributes }) {
+  updateIssue (context, { entry, attributes, boardList }) {
     let payload = {
       id: entry.id,
       type: entry.type,
-      attributes
+      attributes,
+      relationships: { 'board-list': { data: boardList } }
     }
     return context.dispatch('update', { entry, payload, endpoint })
   },

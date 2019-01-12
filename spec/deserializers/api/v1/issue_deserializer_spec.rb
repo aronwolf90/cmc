@@ -10,10 +10,12 @@ describe Api::V1::IssueDeserializer do
       attributes: {
         title: "title",
         description: "description",
-        complexity: "0.5"
+        complexity: "0.5",
+        "ordinal-number": 1
       },
       relationships: {
-        user: { data: { id: 1, type: "users" } }
+        user: { data: { id: 1, type: "users" } },
+        'board-list': { data: { id: 1, type: "board-lists" } }
       }
     }
   end
@@ -22,7 +24,9 @@ describe Api::V1::IssueDeserializer do
       title: "title",
       description: "description",
       complexity: "0.5",
-      user_id: 1
+      user_id: 1,
+      board_list_id: 1,
+      ordinal_number: 1
     }
   end
 

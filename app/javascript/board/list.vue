@@ -24,6 +24,17 @@ export default {
     'issue': issue
   },
   props: { 'list-id': { required: true } },
+  data () {
+   return { local: { issues: [] } }
+  },
+  created () {
+    this.$store.dispatch('initRelatedCollection', {
+      entry: this.boardList,
+      name: 'issues' 
+    }).then(issues => {
+      this.local.issues = issues
+    })
+  },
   computed: {
     boardList () {
       return this.$store.getters.entry({ type: 'board-lists', id: this.listId })
@@ -39,12 +50,20 @@ export default {
     },
     issues: {
       get () {
-        return this.$store.getters.associatedEntries({ entry: this.boardList, name: 'issues' })
+        return this.local.issues
       },
       set (issues) {
-        this.$store.dispatch('updateBoardListIssues', {
-          boardList: this.boardList, issues: issues
-        })
+        for (let i = 0, j = 0; i < issues.length && j < this.local.issues.length; i++,j++ ) {
+          if (issues[i] == this.local.issues[j]) continue
+          this.$store.dispatch('updateIssue', {
+            entry: issues[i],
+            attributes: { 'ordinal-number': i },
+            boardList: this.boardList
+          })
+          if (issues[i+1] == this.local.issues[j]) i++
+          if (issues[i] == this.local.issues[j+1]) j++
+        }
+        this.local.issues = issues
       }
     }
   },
