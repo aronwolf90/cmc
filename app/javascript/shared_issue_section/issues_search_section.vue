@@ -42,7 +42,7 @@ export default {
       this.$store.dispatch('add', { 
         url: `/api/v1/issues?query=${this.searchText}`,
       }).then(response => {
-        this.requestIssues = response
+        this.requestIssues = response.data
       })
     }
   },

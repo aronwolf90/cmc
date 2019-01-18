@@ -72,6 +72,7 @@ Rails.application.routes.draw do
           collection do
             resource :sort, only: :update
           end
+          resources :issues, only: :index
         end
       end
 

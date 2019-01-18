@@ -10,6 +10,13 @@ Scenario: Get /api/v1/issues
   Then the JSON response should be:
     """
     {
+      "links": {
+        "self": "/api/v1/issues?page%5Bnumber%5D=1&page%5Bsize%5D=15",
+        "first": "/api/v1/issues?page%5Bnumber%5D=1&page%5Bsize%5D=15",
+        "prev": null, 
+        "next": null, 
+        "last": "/api/v1/issues?page%5Bnumber%5D=1&page%5Bsize%5D=15"
+      },
       "data": [{
         "id": "1",
         "type": "issues",
@@ -28,7 +35,7 @@ Scenario: Get /api/v1/issues
           },
           "comments": { "data": [] }
         },
-        "links": { "self": "/api/v1/issues/1" }
+        "links": {"self": "/api/v1/issues/1"}
       }]
     }
     """

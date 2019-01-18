@@ -13,7 +13,7 @@ RSpec.shared_examples "standard api show action" do
 
     it "pass collection to render" do
       expect(controller)
-        .to receive(:render).with(json: model, include: nil) do
+        .to receive(:render).with(hash_including(json: model)) do
         controller.head :ok
       end
       subject
@@ -33,7 +33,7 @@ RSpec.shared_examples "simple api show action" do |params: {}|
 
     it "pass collection to render" do
       expect(controller)
-        .to receive(:render).with(json: model, include: nil) do
+        .to receive(:render).with(hash_including(json: model)) do
         controller.head :ok
       end
       subject

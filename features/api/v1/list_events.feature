@@ -21,7 +21,8 @@ Scenario: Get /api/v1/events
           "description": null
         },
         "links": { "self": "/api/v1/events/1" }
-      }]
+      }],
+      "links": { "self": "/api/v1/events" }
     }
     """
   And the response status should be "200"

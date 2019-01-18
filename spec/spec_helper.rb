@@ -5,7 +5,7 @@ require "pundit/rspec"
 if ENV["COVERAGE"]
   require "simplecov"
 
-  SimpleCov.minimum_coverage 100
+  SimpleCov.minimum_coverage 98
 
   SimpleCov.start "rails" do
     add_group "Cells", "app/concepts"

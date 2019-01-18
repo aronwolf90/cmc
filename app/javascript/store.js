@@ -65,9 +65,9 @@ export default {
     ...eventActions,
 
     initCurrentUser (context) {
-      return context.dispatch('initContext').then(contextEntry => {
+      return context.dispatch('initContext').then(currentContext => {
         return context.dispatch('initRelatedEntry', {
-          entry: contextEntry,
+          entry: currentContext,
           name: 'current-user'
         })
       })

@@ -14,8 +14,8 @@ export default {
     })
   },
   initBoardsLists (context) {
-    return context.dispatch('initCurrentUser').then(currentUser => {
-      let project = currentUser.relationships['selected-project'].data
+    return context.dispatch('initCurrentUser').then(boardList => {
+      let project = boardList.relationships['selected-project'].data
       let projectId = project ? project.id : null
       return context.dispatch('initEntry', {
         endpoint,
@@ -24,8 +24,8 @@ export default {
     })
   },
   loadBoardLists (context) {
-    context.dispatch('initCurrentUser').then(currentUser => {
-      let project = currentUser.relationships['selected-project'].data
+    context.dispatch('initCurrentUser').then(response => {
+      let project = response.data.relationships['selected-project'].data
       let projectId = project ? project.id : null
       return context.dispatch('add', {
         endpoint,

@@ -17,10 +17,15 @@ Scenario: Get
           "name": "name"
         },
         "relationships": {
-          "issues": { "data": [] },
+          "issues": { 
+            "data": [],
+            "links": { "self": "/api/v1/board_lists/1/issues" }
+          },
           "project": { "data": { "id": "1", "type": "projects" } }
         },
-        "links": { "self": "/api/v1/board_lists/1" }
+        "links": { 
+          "self": "/api/v1/board_lists/1"
+        }
       }
     }
     """

@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::BoardListSerializer, type: :serializer do
-  let(:issue) { build_stubbed(:issue) }
-  let(:project) { build_stubbed(:project) }
-  let(:board_list) { build_stubbed(:board_list, issues: [issue], project: project) }
+  let(:issue) { create(:issue, id: 1) }
+  let(:project) { create(:project) }
+  let(:board_list) { create(:board_list, issues: [issue], project: project, id: 1) }
 
   let(:expected_result) do
     {
@@ -16,10 +16,15 @@ RSpec.describe Api::V1::BoardListSerializer, type: :serializer do
           name: "name"
         },
         relationships: {
-          issues: { data: [{ id: issue.id.to_s, type: "issues" }] },
+          issues: {
+            data: [{ id: "1", type: "issues" }],
+            links: {
+              self: "/api/v1/board_lists/1/issues"
+            }
+          },
           project: { data: { id: project.id.to_s, type: "projects" } },
         },
-        links: { self: "/api/v1/board_lists/#{board_list.id}" }
+        links: { self: "/api/v1/board_lists/1" }
       }
     }
   end

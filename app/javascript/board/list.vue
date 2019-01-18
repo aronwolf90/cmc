@@ -10,6 +10,8 @@
       .clearfix
     draggable.body(v-model="issues", :options="{group:'issues'}")
       issue(v-for='issue in issues', :key='issue.id', :issue-id="issue.id", :board-list-id="boardList.id")
+    .more(v-if='showMore') 
+      .text(v-on:click.self='loadMore') Load more
 
 </template>
 
@@ -24,15 +26,10 @@ export default {
     'issue': issue
   },
   props: { 'list-id': { required: true } },
-  data () {
-   return { local: { issues: [] } }
-  },
   created () {
     this.$store.dispatch('initRelatedCollection', {
       entry: this.boardList,
       name: 'issues' 
-    }).then(issues => {
-      this.local.issues = issues
     })
   },
   computed: {
@@ -48,22 +45,40 @@ export default {
     editLink () {
       return `/administration/board_lists/${this.boardList.id}/edit`
     },
+    showMore () {
+      if (!this.boardList) return false
+      if (!this.boardList.relationships['issues'].links) return false
+      return !!this.boardList.relationships['issues'].links.next
+    },
     issues: {
       get () {
-        return this.local.issues
+        return this.$store.getters.associatedEntries({ entry: this.boardList, name: 'issues' })
       },
       set (issues) {
-        for (let i = 0, j = 0; i < issues.length && j < this.local.issues.length; i++,j++ ) {
-          if (issues[i] == this.local.issues[j]) continue
+        for (let i = 0, j = 0; i < issues.length && j < this.issues.length; i++,j++ ) {
+          if (issues[i] == this.issues[j]) continue
           this.$store.dispatch('updateIssue', {
             entry: issues[i],
             attributes: { 'ordinal-number': i },
             boardList: this.boardList
           })
-          if (issues[i+1] == this.local.issues[j]) i++
-          if (issues[i] == this.local.issues[j+1]) j++
+          if (issues[i+1] == this.issues[j]) i++
+          if (issues[i] == this.issues[j+1]) j++
         }
-        this.local.issues = issues
+        this.$store.commit('changeManyToOneReference', {
+          children: issues,
+          parent: this.boardList,
+          childRelationshipName: 'board-list',
+          parentRelationshipName: 'issues',
+          parentTypes: ['board-lists']
+        })
+        this.$store.commit('relataionshipLinks', {
+          entry: this.boardList,
+          association: 'issues',
+          links: {
+            next: `/api/v1/board_lists/${this.listId}/issues?more_id=${this.issues[this.issues.length - 1]}`
+          }
+        })
       }
     }
   },
@@ -74,6 +89,12 @@ export default {
     visitAdd (event) {
       Turbolinks.visit(this.addLink) /* eslint-disable-line no-undef */
       event.preventDefault()
+    },
+    loadMore () {
+      this.$store.dispatch('loadAssociationNextPageAccumulative', { 
+        entry: this.boardList, 
+        association: 'issues'
+      })
     }
   }
 }
@@ -96,4 +117,11 @@ export default {
           .text
             overflow: hidden
             text-overflow: ellipsis
+    .more
+      text-align: center
+      .text
+        display: inline-block
+        &:hover
+          text-decoration: underline
+          cursor: pointer
 </style>

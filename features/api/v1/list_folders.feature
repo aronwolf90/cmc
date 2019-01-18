@@ -22,7 +22,8 @@ Scenario: Get
           "folders": { "data": [] },
           "documents": { "data": [] }
         }
-      }]
+      }],
+      "links": { "self": "/api/v1/folders" }
     }
     """
   And the response status should be "200"

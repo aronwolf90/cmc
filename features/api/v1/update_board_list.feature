@@ -33,10 +33,13 @@ Scenario: Put an valid board lists using json in PUT body
         "type": "board-lists",
         "attributes": { "name": "name" },
         "relationships": {
-          "issues": { "data": [
-            { "id": "2", "type": "issues" },
-            { "id": "1", "type": "issues" }
-          ] },
+          "issues": {
+            "data": [
+              { "id": "2", "type": "issues" },
+              { "id": "1", "type": "issues" }
+            ],
+            "links": { "self": "/api/v1/board_lists/1/issues" }
+          },
           "project": { "data": { "id": "1", "type": "projects" } }
         },
         "links": { "self": "/api/v1/board_lists/1" }

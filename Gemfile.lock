@@ -340,6 +340,7 @@ GEM
       shellany (~> 0.0)
     numeric (0.2.0)
     orm_adapter (0.5.0)
+    pager_api (0.2.3)
     parallel (1.12.1)
     parser (2.5.1.2)
       ast (~> 2.4.0)
@@ -635,6 +636,7 @@ DEPENDENCIES
   migration_data
   momentjs-rails
   numeric
+  pager_api
   pg
   pg_search
   puma (~> 3.7)

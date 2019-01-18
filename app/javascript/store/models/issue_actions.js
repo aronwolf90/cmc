@@ -20,8 +20,11 @@ export default {
     let payload = {
       id: entry.id,
       type: entry.type,
-      attributes,
-      relationships: { 'board-list': { data: boardList } }
+      attributes
+    }
+
+    if (boardList) {
+      payload['relationships'] = { 'board-list': { data: boardList } }
     }
     return context.dispatch('update', { entry, payload, endpoint })
   },

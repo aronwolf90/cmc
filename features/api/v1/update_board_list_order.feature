@@ -23,7 +23,7 @@ Scenario: valid data
         "type": "board-lists",
         "attributes": { "name": "name" },
         "relationships": {
-          "issues": {"data": []},
+          "issues": {"data": [], "links": { "self": "/api/v1/board_lists/2/issues" } },
           "project": {"data": { "id": "2", "type": "projects" } }
         },
         "links": {"self": "/api/v1/board_lists/2"}
@@ -32,11 +32,12 @@ Scenario: valid data
         "type": "board-lists",
         "attributes": { "name": "name" },
         "relationships": {
-          "issues": {"data": []},
+          "issues": {"data": [], "links": { "self": "/api/v1/board_lists/1/issues" } },
           "project": {"data": { "id": "1", "type": "projects" } }
         },
         "links": {"self": "/api/v1/board_lists/1"}
-      }]
+      }],
+      "links": { "self": "/api/v1/board_lists" }
     }
     """
 

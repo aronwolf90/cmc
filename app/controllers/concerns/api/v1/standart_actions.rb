@@ -8,14 +8,11 @@ module Api
     protected
 
       def index
-        render_json_api json: JsonApiQuery.(
-          model_class.all.includes(serializer.eager_load_options),
-          params.to_unsafe_h.deep_symbolize_keys
-        )
+        render_json_api json: query
       end
 
       def show
-        render_json_api json: model
+        render_json_api json: model, links: false
       end
 
       def create
@@ -44,8 +41,19 @@ module Api
         head :ok
       end
 
-      def render_json_api(json:)
-        render json: json, include: params[:include]
+      def render_json_api(json:, links: true)
+        render(
+          json: json,
+          include: params[:include],
+          links: ({ self: request.path_info } if links)
+        )
+      end
+
+      def query
+        JsonApiQuery.(
+          model_class.all.includes(serializer.eager_load_options),
+          params.to_unsafe_h.deep_symbolize_keys
+        )
       end
 
       def model

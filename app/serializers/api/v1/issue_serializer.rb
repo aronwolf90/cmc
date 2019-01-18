@@ -6,7 +6,7 @@ module Api
       attributes(
         :title,
         :description,
-        :complexity,
+        :complexity
       )
 
       belongs_to :user, serializer: UserSerializer

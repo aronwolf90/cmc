@@ -25,7 +25,7 @@ Scenario: Get
           "issues": { "data": [] },
           "current-record": { "data": null }
         },
-        "links": { "self": "/api/v1/users/1"}
+        "links": { "self": "/api/v1/users/1" }
       }]
     }
     """

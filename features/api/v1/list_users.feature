@@ -19,7 +19,8 @@ Scenario: Get
           "selected-project": { "data": null }
         },
         "links": { "self": "/api/v1/users/1" }
-      }]
+      }],
+      "links": { "self": "/api/v1/users" }
     }
     """
   And the response status should be "200"

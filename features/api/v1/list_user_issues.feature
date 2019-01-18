@@ -22,7 +22,8 @@ Scenario: Get
           "user": { "data": { "id": "1", "type": "admins"  } },
           "issue": { "data": { "id": "1", "type": "issues"  } }
         }
-      }]
+      }],
+      "links": { "self": "/api/v1/user_issues" }
     }
     """
   And the response status should be "200"

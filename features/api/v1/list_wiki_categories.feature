@@ -22,7 +22,8 @@ Scenario: Get
           "wiki-categories": { "data": [] },
           "wiki-pages": { "data": [] }
         }
-      }]
+      }],
+      "links": { "self": "/api/v1/wiki_categories" }
     }
     """
   And the response status should be "200"
