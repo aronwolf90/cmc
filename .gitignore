@@ -13,6 +13,7 @@
 
 # Ignore editor files
 *.swp
+*.swo
 
 # Ignore all logfiles and tempfiles.
 /log/*

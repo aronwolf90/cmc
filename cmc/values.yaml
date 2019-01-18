@@ -15,7 +15,10 @@ installJobDelay: 5
 databasePersistence:
   storageClassName: 
 webPersistence:
-  storageClassName:
+  enabled: false
+  accessMode: ReadWriteOnce 
+  size: 8Gi
+  # storageClassName:
 databaseService:
   externalIp:
 ingress:

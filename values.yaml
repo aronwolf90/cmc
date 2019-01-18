@@ -19,7 +19,9 @@ ingress:
 databasePersistence:
   storageClassName: openebs-standard
 webPersistence:
-  storageClassName: openebs-standard
+  enabled: true
+  accessMode: ReadWriteMany
+  size: 4Gi
 postgresql:
   persistence:
     storageClass: openebs-standard
