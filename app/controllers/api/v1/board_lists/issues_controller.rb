@@ -6,10 +6,8 @@ module Api
       class IssuesController < ApiController
         def index
           render(
-            json: collection,
-            links: {
-              next: (api_v1_board_list_issues_path(board_list, more_id: collection.last&.id) if collection.count > 15)
-            },
+            json: collection.limit(15),
+            links: { next: next_more_path },
             each_serializer: Api::V1::IssueSerializer
           )
         end
@@ -17,24 +15,23 @@ module Api
       private
 
         def collection
-          @collection ||=
-            if params[:more_id].nil?
-              board_list
-                .issues
-                .limit(15)
-            else
-              if more_id_issue.ordinal_number.present?
-                board_list
-                  .issues
-                  .where("ordinal_number > ? ", more_id_issue.ordinal_number)
-                  .limit(15)
-              else
-                board_list
-                  .issues
-                  .where("created_at < ? ", more_id_issue.created_at)
-                  .limit(15)
-              end
-            end
+          MoreCollectionQuery.(
+            board_list.issues,
+            more_id: params[:more_id],
+          )
+        end
+
+        def next_more_path
+          return if next_more_id.nil?
+          api_v1_board_list_issues_path(
+            board_list,
+            more_id: next_more_id
+          )
+        end
+
+        def next_more_id
+          return if collection.count <= 15
+          collection.limit(15).last&.id
         end
 
         def board_list
