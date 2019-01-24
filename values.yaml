@@ -27,4 +27,4 @@ postgresql:
     storageClass: openebs-standard
   master: 
     nodeSelector:
-      kubernetes.io/hostname: cmc-production-node-3
+      kubernetes.io/hostname: cmc-production-node
