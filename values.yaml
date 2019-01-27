@@ -1,7 +1,7 @@
 multiTenant: true
 databaseService:
   externalIp: 95.216.162.196
-installJobDelay: 20
+installJobDelay: 60
 ingress:
   enabled: true
   url: cost-manager.com
