@@ -25,6 +25,3 @@ webPersistence:
 postgresql:
   persistence:
     storageClass: openebs-standard
-  master: 
-    nodeSelector:
-      kubernetes.io/hostname: cmc-production-node

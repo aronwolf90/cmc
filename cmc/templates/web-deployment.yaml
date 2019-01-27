@@ -2,12 +2,15 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-web
+  labels:
+    name: {{ .Release.Name }}-web
+    openebs.io/target-affinity: {{ .Release.Name }}-web
 spec:
   replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 2
       maxUnavailable: 1
   template:
     metadata:
