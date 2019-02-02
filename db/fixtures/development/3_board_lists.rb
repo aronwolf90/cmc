@@ -17,3 +17,9 @@ BoardList.seed do |s|
   s.name       = "Closed"
   s.project_id = 1
 end
+
+BoardList.seed do |s|
+  s.id         = 4
+  s.name       = "Test project 2 open"
+  s.project_id = 2
+end

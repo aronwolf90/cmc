@@ -1,6 +1,6 @@
 <template lang='pug'>
   #complexity(v-if='projects && currentUser')
-    b-form-select(v-model='selected', :options='options', size="sm")
+    b-form-select(v-model='selected', :options='options', size="sm", id="project-select")
 </template>
 
 <script>
