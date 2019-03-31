@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :project do
-    name "project title"
+    sequence(:name) { |n| "project title #{n}" }
   end
 end

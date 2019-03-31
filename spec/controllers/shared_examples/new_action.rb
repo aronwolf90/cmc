@@ -19,7 +19,7 @@ RSpec.shared_examples "standard new action" do
     subject { get :new, params: params }
 
     let(:operation_result) { OpenStruct.new("model" => model) }
-    let(:operation) { namespace::CreateOperation::Present }
+    let(:operation) { namespace::NewOperation }
 
     it "call operation" do
       expect(operation).to have_received(:call)

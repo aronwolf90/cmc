@@ -27,5 +27,7 @@ module CMC
     config.active_record.schema_format = :sql
 
     config.active_record.dump_schemas = "test-organization"
+
+    config.action_controller.include_all_helpers = false
   end
 end

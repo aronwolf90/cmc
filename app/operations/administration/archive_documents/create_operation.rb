@@ -3,7 +3,6 @@
 module Administration
   module ArchiveDocuments
     class CreateOperation < AdministrationOperation
-      @form = ArchiveDocumentForm
       include MvcStandardCreateOperationConcern
     end
   end

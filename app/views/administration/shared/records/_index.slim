@@ -1,0 +1,26 @@
+.row.align-items-center
+  .col-sm-6.font-weight-bold
+    | #{seconds_to_time(@this_month_spended_time)} hours has been spended this month
+  .col-sm-6
+    .pull-right.btn-group
+      = new_record_btn
+      = csv_records_btn
+br
+.autopagerize_page_element
+  .table-responsive
+    table.table
+      tbody
+        - @model.each do |record_day|
+          tr
+            td colspan=3
+              .font-weight-bold = l(record_day.day, format: :day)
+            td
+              .pull-right = seconds_to_time(record_day.spent_time)
+          - record_day.records.each do |record|
+            tr
+              td = record.description
+              td = l(record.start_time, format: :spent)
+              td = l(record.end_time, format: :spent)
+              td
+                .btn-group.pull-right = edit_record_btn(record)
+  = paginate @model

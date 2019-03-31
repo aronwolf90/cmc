@@ -1,6 +1,7 @@
 version: '2.2'
 services:
   app:
+    command: bash -c "spring start; sleep 10000000"
     volumes:
       - ~/.vimrc:/user/.vimrc
       - ~/.vim:/user/.vim

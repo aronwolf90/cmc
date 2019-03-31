@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
+  helper ApplicationHelper
 
 protected
   attr_reader :namespace

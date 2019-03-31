@@ -3,6 +3,7 @@
 class AdministrationController < MenuController
   include MvcStandardActionsConcern
   layout "administration"
+  helper AdministrationHelper
 
   before_action :authenticate_user!
   around_action :set_time_zone

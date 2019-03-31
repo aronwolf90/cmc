@@ -7,4 +7,8 @@ class RecordDay < ApplicationRecord
   end), through: :user
 
   scope :ordered, -> { order(day: :desc) }
+
+  def spent_time
+    records.sum(&:spended_time)
+  end
 end

@@ -3,7 +3,6 @@
 module Administration
   module WikiCategories
     class CreateOperation < AdministrationOperation
-      @form = WikiCategoryForm
       include MvcStandardCreateOperationConcern
     end
   end

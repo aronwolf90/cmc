@@ -4,13 +4,16 @@
 module MvcNoModifyStandardActionsConcern
 protected
 
-  def index(cell_options: [])
+  def index(view_options: [])
     result = run namespace::IndexOperation
-    render_info_cell(namespace::Cell::Index, result, cell_options)
+    view_options.each do |option|
+      instance_variable_set("@#{option}", result[option.to_sym] || result[option.to_s])
+    end
+    @model = result[:model] || result["model"]
   end
 
   def new
-    result = run namespace::CreateOperation::Present
+    result = run namespace::NewOperation
     render cell(
       action_or_form("Create"),
       result["contract.default"]

@@ -3,3 +3,7 @@ en:
   time:
     formats:
       long: "%d/%m/%y %I:%M:%S"
+      spent: "%I:%M %P"
+  date:
+    formats:
+      day: "%A %d.%m.%Y"

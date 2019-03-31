@@ -3,7 +3,6 @@
 module Administration
   module Records
     class CreateOperation < AdministrationOperation
-      @form = RecordForm
       include MvcStandardCreateOperationConcern
     end
   end

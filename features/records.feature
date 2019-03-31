@@ -10,7 +10,7 @@ Scenario: Record new
   Given The app contain seed data
   And I am signed in
   When I click on link "Records"
-  And I click on link "add record"
+  And I click on link "New record"
   And select "Test issue 1" from select box "data[issue_id]"
   And I enter "12:00:00 01:01:2017" into input named "data[start_time]"
   And I enter "12:01:00 01:01:2017" into input named "data[end_time]"

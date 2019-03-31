@@ -7,7 +7,7 @@ module Administration
     def index
       respond_to do |format|
         format.html do
-          super(cell_options: %i[parent this_month_spended_time])
+          super(view_options: %i[parent this_month_spended_time])
         end
 
         format.csv { csv_index }

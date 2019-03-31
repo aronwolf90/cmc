@@ -59,6 +59,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include ControllerSpecHelper, type: :controller
   config.include ControllerSpecHelper, type: :cell
+  config.include ControllerSpecHelper, type: :view
   config.include SerializerSpecHelper, type: :serializer
   config.include Shoulda::Matchers::ActiveModel, type: :model
   config.include Shoulda::Matchers::ActiveRecord, type: :model

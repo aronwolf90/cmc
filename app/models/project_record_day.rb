@@ -7,4 +7,8 @@ class ProjectRecordDay < ApplicationRecord
   end), through: :project
 
   scope :ordered, -> { order(day: :desc) }
+
+  def spent_time
+    records.sum(&:spended_time)
+  end
 end
