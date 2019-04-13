@@ -13,20 +13,26 @@ variables:
   POSTGRES_DB: root
   POSTGRES_USER: root
   DATABASE_URL: postgres://root:password@postgres/root
+  GIT_STRATEGY: none
 
 build:
   stage: build
   image: docker:latest
+  variables:
+    GIT_STRATEGY: clone
   services:
     - docker:dind
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker build -t $CONTAINER_RELEASE_IMAGE .
+    - docker pull $CI_REGISTRY_IMAGE
+    - docker build --cache-from $CI_REGISTRY_IMAGE -t $CONTAINER_RELEASE_IMAGE .
     - docker push $CONTAINER_RELEASE_IMAGE
 
 helm_lint:
   stage: lint
   image: dtzar/helm-kubectl
+  variables:
+    GIT_STRATEGY: clone
   only:
     - master
   script:
@@ -35,27 +41,29 @@ helm_lint:
 eslint:
   stage: lint
   script:
-    - yarn install
+    - cd /app
     - yarn eslint
 
 rubocop:
   stage: lint
   script:
+    - cd /app
     - rubocop
 
 detect_code_problems:
   stage: lint
-  image: registry.gitlab.com/cmc_system/cmc/cmc:test
   services:
     - postgres:latest
   artifacts:
     paths:
-      - tmp/rubycritic
+      - rubycritic
     expire_in: 30 days
   script:
+    - cd /app
     - rubycritic app/ lib/ -s 97.00
     - rails_best_practices -e "db/migrate"
     - FAIL_ON_ERROR=1 DATABASE_URL=postgres://root:password@postgres/root rake traceroute
+    - mv /app/tmp/rubycritic /builds/
 
 rspec:
   stage: test
@@ -65,14 +73,17 @@ rspec:
     COVERAGE: "true"
   artifacts:
     paths:
-      - coverage/
+      - /app/coverage/
     expire_in: 30 days
   script:
+    - cd /app
     - rspec
+    - mv /app/coverage/ /builds/
 
 mocha:
   stage: test
   script:
+    - cd /app
     - yarn test
 
 cucumber:
@@ -94,11 +105,14 @@ cucumber:
     TEST_HOST: lvh.me
     DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: 'true'
   script:
+    - cd /app
     - cucumber
 
 deploy:
   stage: deploy
   image: dtzar/helm-kubectl
+  variables:
+    GIT_STRATEGY: clone
   environment:
     name: production
     url: http://cost-manager.com
@@ -126,6 +140,7 @@ tag_latest:
     - docker:dind
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker pull $CONTAINER_RELEASE_IMAGE
     - docker tag $CI_REGISTRY_IMAGE:latest $CONTAINER_RELEASE_IMAGE
     - docker push $CI_REGISTRY_IMAGE:latest
 
@@ -137,7 +152,7 @@ pages:
     - detect_code_problems
   script:
     - mv coverage/ public/
-    - mv tmp/rubycritic public/
+    - mv rubycritic public/
   artifacts:
     paths:
       - public

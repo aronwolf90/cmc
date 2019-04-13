@@ -3,6 +3,8 @@
 module Administration
   module Users
     module ConfigurationsHelper
+      include AdministrationHelper
+
       def cancel_btn;end
 
       def destroy_btn(user)

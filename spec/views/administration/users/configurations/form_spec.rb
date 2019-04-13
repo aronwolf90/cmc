@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "administration/users/configurations/form" do
-  helper AdministrationHelper
+  helper Administration::Users::ConfigurationsHelper
 
   subject { rendered }
 
@@ -13,6 +13,7 @@ RSpec.describe "administration/users/configurations/form" do
   before do
     sign_in(Admin.new)
     assign :model, form
+    assign :parent, build_stubbed(:admin)
     render
   end
 

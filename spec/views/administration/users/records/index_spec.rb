@@ -38,6 +38,7 @@ RSpec.describe "administration/users/records/index" do
     Timecop.freeze("01.01.2018")
     sign_in(Admin.new)
     assign(:model, model)
+    assign(:parent, build_stubbed(:admin))
     assign(:this_month_spended_time, 3600 * 3.seconds)
     render
   end
