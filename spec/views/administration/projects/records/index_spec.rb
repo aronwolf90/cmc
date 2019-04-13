@@ -5,9 +5,7 @@ require "rails_helper"
 RSpec.describe "administration/projects/records/index" do
   helper AdministrationHelper
 
-  subject do
-    rendered
-  end
+  subject { rendered }
 
   let(:user) { build_stubbed(:admin) }
   let(:model) { Kaminari.paginate_array([record_day]).page(1) }

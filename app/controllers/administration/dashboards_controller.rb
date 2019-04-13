@@ -3,7 +3,7 @@
 module Administration
   class DashboardsController < AdministrationController
     side_menu :administration
-    namespace Dashboard
+    namespace Administration::Dashboard
 
     public :show
   end

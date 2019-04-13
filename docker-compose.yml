@@ -12,8 +12,8 @@ services:
       - 6432:5432
 
   webpack:
-    image: cmc
-    command: webpack-dev-server
+    image: registry.gitlab.com/cmc_system/cmc:latest
+    command: bash -c "bin/install.sh; bin/webpack-dev-server"
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack
     ports:
@@ -23,19 +23,13 @@ services:
       - bundle:/usr/local/bundle
 
   app:
-    image: cmc
+    image: registry.gitlab.com/cmc_system/cmc:latest
     networks:
       default:
         aliases:
           - test-organization.app.local
           - app.local
-    build:
-      dockerfile: DockerfileDevelop
-      context: .
-      args:
-        - uid=${uid}
-        - gid=${gid}
-        - USER_NAME=${USER}
+    build: .
     environment:
       - DB_PASSWORD=password
       - DB_HOST=db
@@ -47,14 +41,12 @@ services:
       - TEST_HOST=app.local
       - TEST_PORT=3001
       - WEBPACKER_DEV_SERVER_HOST=webpack
-    command:  /bin/sh -c "rm -r tmp/pids; rails s -b '0.0.0.0'"
+    command:  /bin/sh -c "bin/install.sh; rm -r tmp/pids; rails s -b '0.0.0.0'"
     ports:
       - "3000:3000"
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
-      - ~/.ssh:/user/.ssh
-      - ~/.gitconfig:/user/.gitconfig
     depends_on:
       - db
       - selenium

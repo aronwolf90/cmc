@@ -5,9 +5,7 @@ module Administration
     class ContentsController < WikiController
       side_menu "administration/wiki"
 
-      def show
-        render cell(WikiContent::Cell::Show)
-      end
+      def show; end
     end
   end
 end

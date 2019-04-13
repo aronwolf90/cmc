@@ -2,12 +2,12 @@
 
 module MvcModifyStandardActionsConcern
 protected
-  def create(&block)
-    result = saved(namespace::CreateOperation, "Create", :created, block)
+  def create(render: :form, &block)
+    result = saved(namespace::CreateOperation, "Create", :created, render, block)
   end
 
-  def update(&block)
-    result = saved(namespace::UpdateOperation, "Update", :updated, block)
+  def update(render: :form, &block)
+    saved(namespace::UpdateOperation, "Update", :updated, render, block)
   end
 
   def destroy(path)
@@ -15,16 +15,14 @@ protected
     redirect_to path, notice: "#{model_name(result)} has been destroyed"
   end
 
-  def saved(operation, action, type, block)
+  def saved(operation, action, type, render, block)
     run operation do |result|
       flash[:notice] = "#{model_name(result)} has been #{type}"
       return redirect_to block.call(result[:model])
     end
 
-    render cell(
-      action_or_form(action),
-      result["contract.default"]
-    )
+    @model = result["contract.default"]
+    render(render)
   end
 
   def model_name(result)

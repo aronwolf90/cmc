@@ -3,7 +3,7 @@
 module Administration
   class ProjectsController < AdministrationController
     side_menu "administration/projects"
-    namespace Projects
+    namespace Administration::Projects
 
     public :index, :new, :edit
 

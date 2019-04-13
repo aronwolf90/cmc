@@ -16,15 +16,11 @@ RSpec.describe Administration::UsersController, type: :controller do
 
   include_examples "standard index action", Administration::Users
   include_examples "standard new action",
-    Administration::Users,
-    cell: Administration::Users::Cell::Create
+    Administration::Users
   include_examples "standard create action",
     Administration::Users,
-    %i[administration users],
-    cell: Administration::Users::Cell::Create
-  include_examples "standard edit action", Administration::Users,
-    cell: Administration::Users::Cell::Update
+    %i[administration users]
+  include_examples "standard edit action", Administration::Users
   include_examples "standard update action", Administration::Users,
-    [:edit, :administration, :user, id: 1],
-    cell: Administration::Users::Cell::Update
+    [:edit, :administration, :user, id: 1]
 end

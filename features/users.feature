@@ -34,7 +34,7 @@ Scenario: Edit user
   And the input "data_firstname" has the value "new firstname"
 
 @javascript
-Scenario: Edit user
+Scenario: Destroy user
   Given The app contain seed data
   And I am signed in
   When I click on link "Users"

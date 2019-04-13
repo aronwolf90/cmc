@@ -1,0 +1,6 @@
+.row
+  = f.submit class: "btn btn-success"
+  .btn-group.pull-right
+    - if f.object.persisted?
+      = destroy_btn(f.object)
+    = cancel_btn

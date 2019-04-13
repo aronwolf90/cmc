@@ -4,8 +4,12 @@ require "rails_helper"
 require_relative "../../shared_examples/standard_create_operation"
 
 RSpec.describe Administration::Issues::CreateOperation do
-  let(:model) { BoardList.new }
+  before do
+    allow(BoardList).to receive(:find).and_return BoardList.new
+  end
 
   it_should_behave_like "standard create operation",
-    form_class: Administration::IssueForm
+    form_class: Administration::IssueForm,
+    valid_params: { board_list_id: 1, data: {} },
+    invalid_params: { board_list_id: 1, data: {} }
 end

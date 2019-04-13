@@ -5,7 +5,7 @@ Scenario: Create document
   Given The app contain seed data
   And I am signed in
   When I click on link "Archive"
-  And I click on link "add document"
+  And I click on link "New document"
   And I enter "document name" into input named "data[name]"
   And I enter enter a file into input named "data[file]"
   And select "folder 1" from select box "data[folder_id]"

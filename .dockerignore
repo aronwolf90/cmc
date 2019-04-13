@@ -1,9 +1,9 @@
 node_modules/
-public/assets/
 public/packs/
+public/assets/
 coverage/
+uploads/
 log/
 .git/
 tmp/
-spec/
-chart/
+.nyc_output

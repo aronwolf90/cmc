@@ -1,27 +1,28 @@
+image: $CONTAINER_RELEASE_IMAGE
+
 stages:
+  - build
   - lint
   - test
-  - build
   - deploy
+  - tag_latest
 
 variables:
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-  CONTAINER_RELEASE_IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
-  CONTAINER_RELEASE_IMAGE_TEST: $CI_REGISTRY_IMAGE:test
   POSTGRES_PASSWORD: password
   POSTGRES_DB: root
   POSTGRES_USER: root
   DATABASE_URL: postgres://root:password@postgres/root
 
-
-gitlint:
-  stage: lint
-  image: python:3.7.0a4-alpine3.7
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - apk update
-    - apk add git
-    - pip install gitlint
-    - git log -1 --pretty=%B | gitlint
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CONTAINER_RELEASE_IMAGE .
+    - docker push $CONTAINER_RELEASE_IMAGE
 
 helm_lint:
   stage: lint
@@ -33,18 +34,13 @@ helm_lint:
 
 eslint:
   stage: lint
-  image: registry.gitlab.com/cmc_system/cmc/cmc:test
   script:
-    - ln -s /root/node_modules node_modules
     - yarn install
     - yarn eslint
 
 rubocop:
   stage: lint
-  image: registry.gitlab.com/cmc_system/cmc/cmc:test
   script:
-    - ln -s /root/node_modules node_modules
-    - bundle install
     - rubocop
 
 detect_code_problems:
@@ -57,14 +53,12 @@ detect_code_problems:
       - tmp/rubycritic
     expire_in: 30 days
   script:
-    - bundle install
     - rubycritic app/ lib/ -s 97.00
     - rails_best_practices -e "db/migrate"
     - FAIL_ON_ERROR=1 DATABASE_URL=postgres://root:password@postgres/root rake traceroute
 
 rspec:
   stage: test
-  image: registry.gitlab.com/cmc_system/cmc/cmc:test
   services:
     - postgres:latest
   variables:
@@ -74,21 +68,15 @@ rspec:
       - coverage/
     expire_in: 30 days
   script:
-    - bundle install
-    - ln -s /root/node_modules node_modules
     - rspec
 
 mocha:
   stage: test
-  image: registry.gitlab.com/cmc_system/cmc/cmc:test
   script:
-    - ln -s /root/node_modules node_modules
-    - yarn install
     - yarn test
 
 cucumber:
   stage: test
-  image: registry.gitlab.com/cmc_system/cmc/cmc:test
   tags:
     - selenium
   services:
@@ -106,38 +94,7 @@ cucumber:
     TEST_HOST: lvh.me
     DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: 'true'
   script:
-    - bundle install
-    - ln -s /root/node_modules node_modules
-    - yarn install
     - cucumber
-
-build:
-  stage: build
-  image: docker:latest
-  services:
-    - docker:dind
-  script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker build -t $CONTAINER_RELEASE_IMAGE .
-    - docker tag $CONTAINER_RELEASE_IMAGE $CONTAINER_RELEASE_IMAGE_LATEST
-    - docker push $CONTAINER_RELEASE_IMAGE
-    - docker push $CONTAINER_RELEASE_IMAGE_LATEST
-  only:
-    - master
-  except:
-    - schedules
-
-build_test:
-  stage: build
-  image: docker:latest
-  services:
-    - docker:dind
-  script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker build -f DockerfileGitlab -t $CONTAINER_RELEASE_IMAGE_TEST .
-    - docker push $CONTAINER_RELEASE_IMAGE_TEST
-  only:
-    - schedules
 
 deploy:
   stage: deploy
@@ -161,8 +118,16 @@ deploy:
         --set admin_password=$ADMIN_PASSWORD
   only:
     - master
-  except:
-    - schedules
+
+tag_latest:
+  stage: tag_latest
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker tag $CI_REGISTRY_IMAGE:latest $CONTAINER_RELEASE_IMAGE
+    - docker push $CI_REGISTRY_IMAGE:latest
 
 pages:
   stage: deploy
