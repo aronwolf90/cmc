@@ -3,7 +3,7 @@
 module Administration
   class OrganizationsController < AdministrationController
     side_menu "administration/organization"
-    namespace Organizations
+    namespace Administration::Organizations
 
     public :edit
 

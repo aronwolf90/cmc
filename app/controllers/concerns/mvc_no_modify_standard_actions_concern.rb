@@ -1,45 +1,38 @@
 # frozen_string_literal: true
 
-
 module MvcNoModifyStandardActionsConcern
 protected
 
   def index(view_options: [])
     result = run namespace::IndexOperation
-    view_options.each do |option|
-      instance_variable_set("@#{option}", result[option.to_sym] || result[option.to_s])
-    end
+    set_view_options(view_options)
     @model = result[:model] || result["model"]
   end
 
-  def new
+  def new(render: :form)
     result = run namespace::NewOperation
-    render cell(
-      action_or_form("Create"),
-      result["contract.default"]
-    )
+    @model = result["contract.default"]
+    render(render)
   end
 
-  def show(cell_options: [])
+  def show(view_options: [])
     result = run namespace::ShowOperation
-    render_info_cell(namespace::Cell::Show, result, cell_options)
+    set_view_options(view_options)
+    @model ||= result[:model] || result["model"]
   end
 
-  def edit
+  def edit(render: :form)
     result = run namespace::UpdateOperation::Present
-    render cell(
-      action_or_form("Update"),
-      result["contract.default"]
-    )
+    @model = result["contract.default"]
+    render(render)
   end
 
-  def render_info_cell(cell_class, result, cell_options)
-    render cell(cell_class, result["model"] || result[:model], slice(result, cell_options))
-  end
-
-  def slice(result, options)
-    options.map do |option|
-      [option, result[option]]
-    end.to_h
+  def set_view_options(view_options)
+    view_options.each do |option|
+      instance_variable_set(
+        "@#{option}",
+        result[option.to_sym] || result[option.to_s]
+      )
+    end
   end
 end

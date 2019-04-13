@@ -3,7 +3,7 @@
 module Administration
   class BoardListsController < AdministrationController
     side_menu :administration
-    namespace BoardLists
+    namespace Administration::BoardLists
 
     public :new, :edit
 

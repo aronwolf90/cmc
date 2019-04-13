@@ -3,9 +3,7 @@
 module Administration
   module Projects
     class DashboardsController < BaseProjectsController
-      def show
-        render cell(Projects::Cell::Show)
-      end
+      def show;end
     end
   end
 end

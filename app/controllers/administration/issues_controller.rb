@@ -3,7 +3,7 @@
 module Administration
   class IssuesController < AdministrationController
     side_menu :administration
-    namespace Issues
+    namespace Administration::Issues
 
     public :show, :new
 

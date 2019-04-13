@@ -3,9 +3,7 @@
 module Administration
   module Archive
     class ContentsController < ArchiveBaseController
-      def show
-        render cell(ArchiveContent::Cell::Show)
-      end
+      def show;end
     end
   end
 end

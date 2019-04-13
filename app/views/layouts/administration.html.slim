@@ -7,11 +7,12 @@ html
     <link rel="stylesheet" href="https://nhnent.github.io/tui.editor/api/latest/lib/codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="https://nhnent.github.io/tui.editor/api/latest/lib/highlightjs/styles/github.css">
 
-    = stylesheet_link_tag 'administration', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
     = javascript_pack_tag 'application'
     = stylesheet_pack_tag 'application'
+
+    = stylesheet_link_tag 'administration', media: 'all', 'data-turbolinks-track': 'reload'
   body
     #app
       = render 'administration/shared/navbar'

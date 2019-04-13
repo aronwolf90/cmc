@@ -1,6 +1,6 @@
 .row.align-items-center
   .col-sm-6.font-weight-bold
-    | #{seconds_to_time(@this_month_spended_time)} hours has been spended this month
+    | #{seconds_to_time(this_month_spended_time)} hours has been spended this month
   .col-sm-6
     .pull-right.btn-group
       = new_record_btn
@@ -10,7 +10,7 @@ br
   .table-responsive
     table.table
       tbody
-        - @model.each do |record_day|
+        - model.each do |record_day|
           tr
             td colspan=3
               .font-weight-bold = l(record_day.day, format: :day)
@@ -23,4 +23,4 @@ br
               td = l(record.end_time, format: :spent)
               td
                 .btn-group.pull-right = edit_record_btn(record)
-  = paginate @model
+  = paginate model

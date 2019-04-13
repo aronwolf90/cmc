@@ -8,12 +8,10 @@ module Administration
       def new_record_btn; end
 
       def csv_records_btn
-        csv_btn([@parent, Record])
+        csv_btn([@parent.becomes(User), Record])
       end
 
-      def edit_record_btn(record)
-        edit_btn([@parent, record])
-      end
+      def edit_record_btn(record); end
     end
   end
 end

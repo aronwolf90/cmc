@@ -1,6 +1,0 @@
-#/bin/bash
-if [ $# -eq 0 -o  "$1" == "install" -o "$1" == "install_develop" ]; then
-  make $1
-else
-  eval "$(make $1 | sed '$!d') ${@:2}"
-fi

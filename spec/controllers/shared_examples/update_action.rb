@@ -1,18 +1,15 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "standard update action" do
-  |namespace, redirect, params: nil, cell: namespace::Cell::Form|
+  |namespace, redirect, params: nil|
 
   describe "PUT update" do
     let(:user) { Admin.new }
 
     before do
-      cell_instance = Cell::ViewModel.new
-
-      allow(operation).to receive(:call).and_return(operation_result)
-      allow(cell).to receive(:call).and_return(cell_instance)
-      allow(cell_instance).to receive(:call).and_return("")
       sign_in(user)
+      allow(operation).to receive(:call)
+        .and_return(operation_result)
       subject
     end
 
@@ -29,10 +26,6 @@ RSpec.shared_examples "standard update action" do
         )
       end
 
-      it "call operation" do
-        expect(operation).to have_received(:call)
-      end
-
       it "redirect" do
         expect(response).to redirect_to(redirect)
       end
@@ -45,14 +38,6 @@ RSpec.shared_examples "standard update action" do
           success?: false,
           "contract.default": form.new(model)
         )
-      end
-
-      it "call operation" do
-        expect(operation).to have_received(:call)
-      end
-
-      it "call cell" do
-        expect(cell).to have_received(:call)
       end
     end
   end

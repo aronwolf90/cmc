@@ -5,8 +5,8 @@ require "uri"
 module AdministrationHelper
   include ApplicationHelper
 
-  def new_btn(clazz)
-    super(*transformation(clazz, action: :new))
+  def new_btn(clazz, options = {})
+    super(*transformation(clazz, action: :new), options)
   end
 
   def edit_btn(object)
@@ -17,8 +17,16 @@ module AdministrationHelper
     super(*transformation(clazz))
   end
 
+  def destroy_btn(object, options = {})
+    super(*transformation(object), options)
+  end
+
   def link(object)
     super(*transformation(object))
+  end
+
+  def edit_link(object)
+    super(*transformation(object, action: :edit))
   end
 
   def edit_link(object)

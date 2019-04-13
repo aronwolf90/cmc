@@ -3,7 +3,7 @@
 module Administration
   module Wiki
     class PagesController < WikiController
-      namespace WikiPages
+      namespace Administration::WikiPages
 
       def show
         super

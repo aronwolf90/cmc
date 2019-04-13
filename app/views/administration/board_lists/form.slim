@@ -1,0 +1,7 @@
+= simple_form_for [:administration, @model.model], as: :data do |f|
+  .row
+    .col-lg-12
+      = f.input :name, required: false
+      = f.input :project_id, collection: BoardList.all
+
+  = render "administration/shared/form_actions", f: f

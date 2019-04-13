@@ -1,0 +1,10 @@
+= simple_form_for [:administration, @parent, @model], as: :data do |f|
+  .row
+    .col-lg-12
+      = f.input :title, required: false
+      = f.input :description, as: :text, required: false
+
+  .row
+    .col-lg-12
+      = f.submit class: 'btn btn-success'
+      = link_to 'Cancel', cancel_btn, class: 'btn btn-secondary pull-right'

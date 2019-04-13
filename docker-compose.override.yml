@@ -1,8 +1,10 @@
 version: '2.2'
 services:
   app:
-    command: bash -c "spring start; sleep 10000000"
+    command: bash -c "spring server; sleep 10000000"
     volumes:
-      - ~/.vimrc:/user/.vimrc
-      - ~/.vim:/user/.vim
-      - ~/.tmux.conf:/user/.tmux.conf
+      - ~/.vimrc:/root/.vimrc
+      - ~/.vim:/root/.vim
+      - ~/.tmux.conf:/root/.tmux.conf
+      - ~/.ssh:/root/.ssh
+      - /usr/local/bin/dev-tmux:/usr/bin/dev-tmux

@@ -4,16 +4,24 @@ module Administration
   class UsersController < AdministrationController
     side_menu "administration/users", only: %i[index new create]
     side_menu "administration/specific_user", only: %i[edit update]
-    namespace Users
+    namespace Administration::Users
 
-    public :index, :new, :edit
+    public :index
+
+    def new
+      super(render: :create)
+    end
+
+    def edit
+      super(render: :update)
+    end
 
     def create
-      super { %i[administration users] }
+      super(render: :create) { %i[administration users] }
     end
 
     def update
-      super do |model|
+      super(render: :update) do |model|
         edit_administration_user_path(model)
       end
     end

@@ -1,35 +1,33 @@
-FROM registry.gitlab.com/cmc_system/cmc/cmc:test
+FROM ruby:2.6.2-alpine3.9
 
 WORKDIR  /app
 
-ENV RAILS_ENV production
+RUN apk add --update \
+  tzdata postgresql-client \
+  libressl-dev gnupg libstdc++ \
+  less git g++ make \
+  bash openssh-client \
+  nodejs yarn vim tmux \
+  postgresql-dev
 
-RUN ln -s /root/node_modules node_modules
-COPY yarn.lock ./
-RUN yarn install
+RUN echo "export PATH=/app/bin:$PATH" >> ~/.profile
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --without test development
+RUN bundle install
 
-RUN mkdir -p /app/public/assets
-RUN cp -r /assets /app/public/assets
+COPY yarn.lock package.json ./
+RUN yarn install
 
-COPY . /app
+COPY --from=registry.gitlab.com/cmc_system/cmc:latest /app/tmp/cache/assets/ /app/tmp/cache/assets/
+COPY --from=registry.gitlab.com/cmc_system/cmc:latest /app/tmp/cache/webpacker/ /app/tmp/cache/webpacker/
+COPY --from=registry.gitlab.com/cmc_system/cmc:latest /app/public/assets /app/public/assets
+COPY --from=registry.gitlab.com/cmc_system/cmc:latest /app/public/packs /app/public/packs
 
-# secret key  and database url is not really used hear, it is only added to avoid the crash on compile
-RUN SECRET_KEY_BASE='9479a648d2fb' DATABASE_URL=postgres://root:password@db%5Ftest/root rake assets:precompile
+COPY . ./
 
-FROM ruby:2.5.1-alpine3.7
-
-WORKDIR  /app
-
-ENV BUNDLE_BIN /app/bin
-ENV RAILS_ENV production
-
-COPY . /app
-COPY --from=0 /app/public/ /app/public/
-COPY --from=0 /usr/local/ /usr/local/
-
-RUN /app/alphine_minimum_shared_install.sh
+RUN SECRET_KEY_BASE='9479a648d2fb' \
+  DATABASE_URL=postgres://root:password@db%5Ftest/root \
+  RAILS_ENV=production \
+  bundle exec rake assets:precompile
 
 CMD bundle exec puma -C config/puma.rb

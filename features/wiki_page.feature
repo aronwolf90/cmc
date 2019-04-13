@@ -5,7 +5,7 @@ Scenario: Create wiki page
   Given The app contain seed data
   And I am signed in
   When I click on link "Wiki"
-  And I click on link "add page"
+  And I click on link "New wikipage"
   And I enter "page title" into input named "data[title]"
   And select "category 1" from select box "data[wiki_category_id]"
   And I click on submit

@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "standard new action" do
-  |namespace, params: {}, cell: namespace::Cell::Form|
+  |namespace, params: {}|
 
   describe "GET new" do
     let(:user) { ADmin.new }
 
     before do
-      cell_instance = Cell::ViewModel.new
-
       allow(operation).to receive(:call).and_return(operation_result)
-      allow(cell).to receive(:call).and_return(cell_instance)
-      allow(cell_instance).to receive(:call).and_return("")
       sign_in(build_stubbed(:user))
       subject
     end
@@ -23,10 +19,6 @@ RSpec.shared_examples "standard new action" do
 
     it "call operation" do
       expect(operation).to have_received(:call)
-    end
-
-    it "call cell" do
-      expect(cell).to have_received(:call)
     end
   end
 end

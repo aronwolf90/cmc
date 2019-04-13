@@ -7,6 +7,5 @@ RSpec.describe Administration::Projects::DashboardsController, type: :controller
   before { allow(Project).to receive(:find)  }
 
   include_examples "basic show action",
-    Administration::Projects::Cell::Show,
     params: { project_id: 1 }
 end

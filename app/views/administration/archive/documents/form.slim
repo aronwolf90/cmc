@@ -1,0 +1,9 @@
+= simple_form_for [:administration, :archive, @model], as: :data do |f|
+  .row
+    .col-lg-12
+      = f.input :name
+      = f.input :folder_id, collection: Folder.all
+      = f.input :file, as: :file
+      = f.input :file_cache, as: :hidden
+
+  = render "administration/shared/form_actions", f: f
