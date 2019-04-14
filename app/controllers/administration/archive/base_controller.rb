@@ -2,7 +2,7 @@
 
 module Administration
   module Archive
-    class ArchiveBaseController < AdministrationController
+    class BaseController < AdministrationController
       side_menu "administration/archive"
     end
   end

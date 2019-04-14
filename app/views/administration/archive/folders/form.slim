@@ -1,8 +1,5 @@
 = simple_form_for [:administration, :archive, @model], as: :data do |f|
-  .row
-    .col-lg-12
-      = f.input :name
-      = f.input :folder_id, collection: Folder.all,
-                required: false
+  = f.input :name
+  = f.input :folder_id, collection: Folder.all, required: false
 
   = render "administration/shared/form_actions", f: f

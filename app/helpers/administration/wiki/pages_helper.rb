@@ -3,11 +3,7 @@
 module Administration
   module Wiki
     module PagesHelper
-      include AdministrationHelper
-
-      def cancel_btn
-        super(%i[administration wiki content])
-      end
+      include BaseHelper
     end
   end
 end

@@ -17,7 +17,7 @@ module Administration
     end
 
     def create
-      super(render: :create) { %i[administration users] }
+      super(render: :create)
     end
 
     def update

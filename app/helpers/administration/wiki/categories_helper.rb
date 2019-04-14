@@ -3,11 +3,7 @@
 module Administration
   module Wiki
     module CategoriesHelper
-      include AdministrationHelper
-
-      def cancel_btn
-        super(%i[administration wiki content])
-      end
+      include BaseHelper
     end
   end
 end

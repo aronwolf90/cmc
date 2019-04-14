@@ -31,11 +31,15 @@ module ApplicationHelper
       return unless policy(object).destroy?
 
       link_to "Destroy", path, method: :delete,
-        class: "btn btn-destroy #{options[:class]}"
+        class: "btn btn-danger #{options[:class]}"
     end
 
-    def cancel_btn(path = { action: :index })
-      link_to "Cancel", path, class: "btn btn-secondary"
+    def cancel_btn(path = { action: :index }, options = {})
+      link_to "Cancel", path, class: "btn btn-secondary #{options[:class]}"
+    end
+
+    def submit_btn(form)
+      form.submit class: "btn btn-success"
     end
   end
 end

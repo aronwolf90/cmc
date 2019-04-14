@@ -2,7 +2,7 @@
 
 module Administration
   module Projects
-    class RecordsController < BaseProjectsController
+    class RecordsController < BaseController
       include RecordsControllerConcern
       namespace Administration::Projects::Records
     end

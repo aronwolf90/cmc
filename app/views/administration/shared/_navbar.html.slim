@@ -7,11 +7,11 @@
         policy: policy(Project).index?,
         includes: "projects")
     = menu_item("Wiki",
-        path: administration_wiki_root_path,
+        path: administration_wiki_path,
         policy: policy(WikiPage).index?,
         includes: "wiki")
     = menu_item("Archive",
-        path: administration_archive_root_path,
+        path: administration_archive_path,
         policy: policy(Document).index? && policy(Folder).index?,
         includes: "archive")
     = menu_item("Users",

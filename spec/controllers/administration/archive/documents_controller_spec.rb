@@ -12,15 +12,15 @@ RSpec.describe Administration::Archive::DocumentsController, type: :controller d
     Administration::ArchiveDocuments
   include_examples "standard create action",
     Administration::ArchiveDocuments,
-    %i[administration archive content]
+    %i[administration archive]
   include_examples "standard edit action",
     Administration::ArchiveDocuments
   include_examples "standard update action",
     Administration::ArchiveDocuments,
-    %i[administration archive content]
+    %i[administration archive]
   include_examples "standard destroy action",
     Administration::ArchiveDocuments,
-    %i[administration archive content]
+    %i[administration archive]
 
   describe "#show" do
     let(:document) { build_stubbed(:document)  }

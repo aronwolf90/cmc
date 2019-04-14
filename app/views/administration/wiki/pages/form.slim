@@ -1,7 +1,5 @@
 = simple_form_for [:administration, @model], as: :data do |f|
-  .row
-    .col-lg-12
-      = f.input :title
-      = f.input :wiki_category_id, collection: WikiCategory.all
+  = f.input :title
+  = f.input :wiki_category_id, collection: WikiCategory.all
 
   = render "administration/shared/form_actions", f: f

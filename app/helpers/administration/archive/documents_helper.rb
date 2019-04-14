@@ -3,15 +3,7 @@
 module Administration
   module Archive
     module DocumentsHelper
-      include AdministrationHelper
-
-      def cancel_btn
-        super([:administration, :archive, :root])
-      end
-
-      def destroy_btn(document)
-        super([:archive, document])
-      end
+      include BaseHelper
     end
   end
 end

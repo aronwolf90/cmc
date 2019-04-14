@@ -13,5 +13,5 @@
   - if policy(BoardList).index?
     ul.nav.navbar-nav
       li class=('active' if request.url.include?('board'))
-        = link_to 'Issues', administration_board_path
+        = link_to 'Issues', administration_board_lists_path
   = render "administration/shared/shared_issue_section"

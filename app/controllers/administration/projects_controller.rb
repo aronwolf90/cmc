@@ -5,18 +5,6 @@ module Administration
     side_menu "administration/projects"
     namespace Administration::Projects
 
-    public :index, :new, :edit
-
-    def create
-      super { %i[administration projects] }
-    end
-
-    def update
-      super { %i[administration projects] }
-    end
-
-    def destroy
-      super %i[administration projects]
-    end
+    public :index, :new, :edit, :create, :update, :destroy
   end
 end

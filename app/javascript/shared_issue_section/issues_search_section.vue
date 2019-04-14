@@ -61,6 +61,7 @@ export default {
     padding-left: 0 !important
     min-height: 220px
     max-height: 220px
+    max-width: 170px
     overflow: auto
     .issue
       margin-left: 0

@@ -1,7 +1,4 @@
 = simple_form_for [:administration, @model], as: :data do |f|
-  .row
-    .col-lg-12
-      = f.input :time_zone, as: :time_zone
-  .row
-    .col-12
-      = f.submit class: 'btn btn-success'
+  = f.input :time_zone, as: :time_zone
+
+  = submit_btn(f)

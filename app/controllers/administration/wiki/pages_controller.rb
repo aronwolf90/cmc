@@ -2,20 +2,13 @@
 
 module Administration
   module Wiki
-    class PagesController < WikiController
+    class PagesController < BaseController
       namespace Administration::WikiPages
 
-      def show
-        super
-      end
-
-
-      def new
-        super
-      end
+      public :show, :new
 
       def create
-        super { [:administration, :wiki, :content] }
+        super { [:administration, :wiki] }
       end
     end
   end

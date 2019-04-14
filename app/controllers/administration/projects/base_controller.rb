@@ -2,7 +2,7 @@
 
 module Administration
   module Projects
-    class BaseProjectsController < AdministrationController
+    class BaseController < AdministrationController
       before_action :set_project
       side_menu "administration/specific_project"
 

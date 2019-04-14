@@ -4,7 +4,7 @@ Feature: schared issue section
 Scenario: Start record time
   Given The app contain seed data
   And I am signed in
-  When I navigate to "/administration/board"
+  When I click on link "Issues"
   And I click on "#shared-issue-section .fa-play"
   Then the page contain the element "#shared-issue-section .fa-stop"
 

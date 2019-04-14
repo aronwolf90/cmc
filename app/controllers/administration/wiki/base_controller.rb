@@ -2,10 +2,8 @@
 
 module Administration
   module Wiki
-    class ContentsController < WikiController
+    class BaseController < AdministrationController
       side_menu "administration/wiki"
-
-      def show; end
     end
   end
 end

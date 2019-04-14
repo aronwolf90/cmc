@@ -7,9 +7,7 @@ module Administration::Users
     public :edit
 
     def update
-      super do |model|
-        [:edit, :administration, model, :configuration]
-      end
+      super { {  action: :edit } }
     end
 
     def destroy

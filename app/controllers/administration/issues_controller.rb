@@ -8,7 +8,7 @@ module Administration
     public :show, :new
 
     def create
-      super { administration_board_path }
+      super { %i[administration board_lists] }
     end
   end
 end

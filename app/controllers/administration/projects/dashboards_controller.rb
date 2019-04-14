@@ -2,8 +2,8 @@
 
 module Administration
   module Projects
-    class DashboardsController < BaseProjectsController
-      def show;end
+    class DashboardsController < BaseController
+      def show; end
     end
   end
 end

@@ -2,8 +2,10 @@
 
 module Administration
   module Archive
-    class DocumentsController < ArchiveBaseController
-      namespace ArchiveDocuments
+    class DocumentsController < BaseController
+      namespace Administration::ArchiveDocuments
+
+      public :new, :edit
 
       def show
         document = Document.find(params[:id])
@@ -14,24 +16,16 @@ module Administration
         )
       end
 
-      def new
-        super
-      end
-
       def create
-        super { %i[administration archive content] }
-      end
-
-      def edit
-        super
+        super { %i[administration archive] }
       end
 
       def update
-        super { %i[administration archive content] }
+        super { %i[administration archive] }
       end
 
       def destroy
-        super %i[administration archive content]
+        super %i[administration archive]
       end
     end
   end

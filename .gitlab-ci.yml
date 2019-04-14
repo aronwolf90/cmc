@@ -63,7 +63,7 @@ detect_code_problems:
     - rubycritic app/ lib/ -s 97.00
     - rails_best_practices -e "db/migrate"
     - FAIL_ON_ERROR=1 DATABASE_URL=postgres://root:password@postgres/root rake traceroute
-    - mv /app/tmp/rubycritic /builds/
+    - mv /app/tmp/rubycritic $CI_PROJECT_DIR 
 
 rspec:
   stage: test
@@ -73,12 +73,12 @@ rspec:
     COVERAGE: "true"
   artifacts:
     paths:
-      - /app/coverage/
+      - coverage/
     expire_in: 30 days
   script:
     - cd /app
     - rspec
-    - mv /app/coverage/ /builds/
+    - mv /app/coverage/ $CI_PROJECT_DIR
 
 mocha:
   stage: test
@@ -141,7 +141,7 @@ tag_latest:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker pull $CONTAINER_RELEASE_IMAGE
-    - docker tag $CI_REGISTRY_IMAGE:latest $CONTAINER_RELEASE_IMAGE
+    - docker tag $CONTAINER_RELEASE_IMAGE $CI_REGISTRY_IMAGE:latest  
     - docker push $CI_REGISTRY_IMAGE:latest
 
 pages:

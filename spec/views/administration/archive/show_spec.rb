@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "administration/archive/contents/show" do
+RSpec.describe "administration/archive/show" do
   helper AdministrationHelper
 
   subject { rendered }

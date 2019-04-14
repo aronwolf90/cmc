@@ -19,8 +19,7 @@ Rails.application.routes.draw do
 
     resource :dashboard, only: :show
     resources :records, except: :show
-    resource :board, only: :show
-    resources :board_lists, only: %i[new create edit update destroy] do
+    resources :board_lists, only: %i[index new create edit update destroy] do
       resources :issues, only: %i[new create]
     end
     resources :issues, only: :show
@@ -42,23 +41,21 @@ Rails.application.routes.draw do
       end
     end
 
-    namespace :wiki do
-      root to: "contents#show"
-
-      resources :categories, except: %i[index show]
-      resource :content, only: :show
-      resources :pages, only: %i[show new create]
+    resource :wiki, only: :show, controller: :wiki do
+      scope module: :wiki do
+        resources :categories, except: %i[index show]
+        resources :pages, only: %i[show new create]
+      end
     end
 
-    namespace :archive do
-      root to: "contents#show"
+    resource :archive, only: :show, controller: :archive do
+      scope module: :archive do
+        resources :folders, except: %i[index show]
+        resources :documents, except: :index
+      end
 
-      resource :content, only: :show
-      resources :folders, except: %i[index show]
-      resources :documents, except: :index
+      get "*path" => redirect("/administration")
     end
-
-    get "*path" => redirect("/administration")
   end
 
   namespace :api do

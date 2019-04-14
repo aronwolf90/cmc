@@ -2,21 +2,21 @@
 
 module Administration
   module Archive
-    class FoldersController < ArchiveBaseController
-      namespace ArchiveFolders
+    class FoldersController < BaseController
+      namespace Administration::ArchiveFolders
 
       public :new, :edit
 
       def create
-        super { %i[administration archive content] }
+        super { %i[administration archive] }
       end
 
       def update
-        super { %i[administration archive content] }
+        super { %i[administration archive] }
       end
 
       def destroy
-        super %i[administration archive content]
+        super %i[administration archive]
       end
     end
   end

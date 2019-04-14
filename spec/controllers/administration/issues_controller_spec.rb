@@ -15,6 +15,6 @@ RSpec.describe Administration::IssuesController, type: :controller do
     params: { board_list_id: 1, id: 1 }
   include_examples "standard create action",
     Administration::Issues,
-    %i[administration board],
+    %i[administration board_lists],
     params: { board_list_id: 1 }
 end

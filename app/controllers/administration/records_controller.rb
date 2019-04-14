@@ -6,18 +6,6 @@ module Administration
     side_menu :administration
     namespace Administration::Records
 
-    public :index, :new, :edit
-
-    def create
-      super { [:administration, :records] }
-    end
-
-    def update
-      super { [:administration, :records] }
-    end
-
-    def destroy
-      super(%i[administration records])
-    end
+    public :index, :new, :edit, :create, :update, :destroy
   end
 end

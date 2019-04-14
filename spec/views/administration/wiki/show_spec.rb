@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "administration/wiki/contents/show" do
+RSpec.describe "administration/wiki/show" do
   helper AdministrationHelper
 
   subject { rendered }

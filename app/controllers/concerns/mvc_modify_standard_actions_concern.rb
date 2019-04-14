@@ -10,12 +10,13 @@ protected
     saved(namespace::UpdateOperation, "Update", :updated, render, block)
   end
 
-  def destroy(path)
+  def destroy(path = { action: :index })
     result = run namespace::DestroyOperation
     redirect_to path, notice: "#{model_name(result)} has been destroyed"
   end
 
   def saved(operation, action, type, render, block)
+    block ||= lambda { |_| { action: :index } }
     run operation do |result|
       flash[:notice] = "#{model_name(result)} has been #{type}"
       return redirect_to block.call(result[:model])

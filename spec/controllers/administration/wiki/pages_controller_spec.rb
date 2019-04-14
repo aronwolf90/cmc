@@ -12,5 +12,5 @@ RSpec.describe Administration::Wiki::PagesController, type: :controller do
   include_examples "standard show action", Administration::WikiPages
   include_examples "standard new action", Administration::WikiPages
   include_examples "standard create action",
-    Administration::WikiPages, %i[administration wiki content]
+    Administration::WikiPages, %i[administration wiki]
 end

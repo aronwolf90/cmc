@@ -5,7 +5,7 @@ module Administration
     include AdministrationHelper
 
     def cancel_btn
-      super([:administration, :board])
+      super([:administration, :board_lists])
     end
   end
 end

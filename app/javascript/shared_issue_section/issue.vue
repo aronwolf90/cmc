@@ -45,7 +45,6 @@ export default {
   padding-left: 2px
   border-bottom: 1px solid #e7e7e7
   color: grey
-  max-width: 170px
   &:hover
     background-color: #e7e7e7
     text-decoration: none
