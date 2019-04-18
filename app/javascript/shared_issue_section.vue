@@ -24,4 +24,5 @@ export default {
 #shared-issue-section
   border-top: 1px solid #e7e7e7
   position: relative
+  width: 100%
 </style>

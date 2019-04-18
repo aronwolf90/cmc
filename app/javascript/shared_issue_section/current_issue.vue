@@ -42,12 +42,13 @@ export default {
   padding: 10px
   text-align: center
   border-bottom: 1px solid #e7e7e7
-  max-width: 170px
+  text-overflow: ellipsis
   a
     color: grey
-    display: table-caption
-    text-overflow: ellipsis
+    white-space: nowrap
     overflow: hidden
-    width: 153px
+    text-overflow: ellipsis
+    display: block
+    max-width: 100%
 
 </style>
