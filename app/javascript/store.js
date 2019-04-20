@@ -76,7 +76,7 @@ export default {
       return context.dispatch('initCurrentUser').then(currentUser => {
         return context.dispatch('initRelatedEntry', {
           entry: currentUser,
-          name: 'current-record?include=issue'
+          name: 'current-record'
         })
       })
     }
