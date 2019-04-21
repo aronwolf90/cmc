@@ -24,4 +24,6 @@ webPersistence:
   size: 4Gi
 postgresql:
   persistence:
-    storageClass: openebs-standard
+    storageClass: local-path
+  master:
+    nodeSelector: storage

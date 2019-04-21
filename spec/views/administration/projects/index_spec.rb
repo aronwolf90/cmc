@@ -24,10 +24,9 @@ RSpec.describe "administration/projects/index.slim" do
 
   it "render the edit btn" do
     expect(view).to have_received :edit_btn
-    subject
   end
 
-  it "render the project"  do
+  it "render the project name"  do
     expect(subject).to have_content project.to_s
   end
 end
