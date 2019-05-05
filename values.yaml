@@ -16,8 +16,6 @@ ingress:
       hosts:
         - "*.cost-manager.com"
         - "cost-manager.com"
-databasePersistence:
-  storageClassName: openebs-standard
 webPersistence:
   enabled: true
   accessMode: ReadWriteMany

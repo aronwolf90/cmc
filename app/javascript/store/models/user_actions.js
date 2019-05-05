@@ -19,5 +19,8 @@ export default {
       endpoint,
       resource: 'users'
     })
+  },
+  users (context) {
+    return this.dispatch('initUsers')
   }
 }

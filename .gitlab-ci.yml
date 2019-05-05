@@ -61,7 +61,6 @@ detect_code_problems:
   script:
     - cd /app
     - rubycritic app/ lib/ -s 97.00
-    - rails_best_practices -e "db/migrate"
     - FAIL_ON_ERROR=1 DATABASE_URL=postgres://root:password@postgres/root rake traceroute
     - mv /app/tmp/rubycritic $CI_PROJECT_DIR 
 

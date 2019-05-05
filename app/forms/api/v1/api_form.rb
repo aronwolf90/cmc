@@ -12,7 +12,8 @@ module Api
           predicates(ApiPredicates)
         end
 
-        required(:data).filled(:record_exists?).schema do
+        required(:data).filled(:record_exists?)
+        required(:data).schema do
           required(:id).filled
           required(:type).filled
         end

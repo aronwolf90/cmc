@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: trule
 
 class Context < ActiveModelSerializers::Model
   include ActiveModel::Model

@@ -77,3 +77,15 @@ Given(/An record for user "([^\"]*)" and issue "([^\"]*)"/) do |user_id, issue_i
     end_time: DateTime.parse("2018-06-11T16:59:00.049+02:00")
   )
 end
+
+Given(/an attendance event exists with an id of 1/) do
+  FactoryBot.create(
+    :attendance_event,
+    id: 1,
+    from_day: "15.01.2019",
+    to_day: "16.01.2019",
+    from_time: Time.zone.parse("9:00"),
+    to_time: Time.zone.parse("18:00"),
+    user: User.first
+  )
+end

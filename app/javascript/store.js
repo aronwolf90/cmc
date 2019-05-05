@@ -11,6 +11,8 @@ import wikiPageActions from 'store/models/wiki_page_actions'
 import folderActions from 'store/models/folder_actions'
 import userIssueActions from 'store/models/user_issue_actions'
 import eventActions from 'store/models/event_actions'
+import attendaceDaysActions from 'store/models/attendance_days_actions'
+import attendaceEventActions from 'store/models/attendance_event_actions'
 
 export default {
   strict: true,
@@ -49,6 +51,20 @@ export default {
           return relevantProject.attributes.name.includes(searchText)
         })
       }
+    },
+    attendanceEventForDay (state, getters) {
+      return ({ day, userId }) => {
+        return (getters.collection('attendance-events') || []).find(event => {
+          return (
+            (
+              Date.parse(event.attributes['from-day']) <= Date.parse(day) &&
+              Date.parse(event.attributes['to-day']) >= Date.parse(day)
+            ) ||
+              Date.parse(event.attributes['from-day']) === Date.parse(day)
+          ) &&
+            userId === event.relationships.user.data.id
+        })
+      }
     }
   },
   actions: {
@@ -63,6 +79,8 @@ export default {
     ...folderActions,
     ...userIssueActions,
     ...eventActions,
+    ...attendaceDaysActions,
+    ...attendaceEventActions,
 
     initCurrentUser (context) {
       return context.dispatch('initContext').then(currentContext => {

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :issues, only: %i[new create]
     end
     resources :issues, only: :show
+    resources :attendances, only: :index
     resource :calender, only: :show
 
     resource :organization, only: %i[edit update]
@@ -86,6 +87,8 @@ Rails.application.routes.draw do
       resources :folders, only: :index
       resources :user_issues, only: %i[index show]
       resources :events, only: %i[index create update destroy]
+      resources :attendance_days, only: :index
+      resources :attendance_events, only: %i[index create update destroy]
     end
   end
 end

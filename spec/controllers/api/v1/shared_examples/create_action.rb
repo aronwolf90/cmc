@@ -38,6 +38,9 @@ RSpec.shared_examples "standard api create action" do |operation|
       let(:result) { double(success?: false)  }
 
       specify do
+        expect(operation).to receive(:call)
+          .with(current_user: user, params: params)
+          .and_return(result)
         expect(controller).to receive(:render_errors).and_call_original
         subject
       end

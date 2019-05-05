@@ -13,6 +13,7 @@ import ProjectSearchSelect from '../project_search_select'
 import Calender from '../calender'
 import Timepicker from '../components/timepicker'
 import Datepicker from '../components/datepicker'
+import Attendances from '../attendances'
 
 require('../config')
 
@@ -27,6 +28,7 @@ Vue.component('project-search-select', ProjectSearchSelect)
 Vue.component('calender', Calender)
 Vue.component('timepicker', Timepicker)
 Vue.component('datepicker', Datepicker)
+Vue.component('attendances', Attendances)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')

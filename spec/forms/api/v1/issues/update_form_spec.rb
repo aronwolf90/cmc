@@ -36,7 +36,7 @@ describe Api::V1::Issues::UpdateForm do
     it "it has an error: id must be filled" do
       expect(subject.errors).to eq(
         data: { relationships: {
-          user: { data: ["Does not exists"] }
+          user: { data: { id: ["must be filled"] } }
         } })
     end
   end

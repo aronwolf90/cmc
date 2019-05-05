@@ -5,6 +5,8 @@
     path: administration_records_path, policy: policy(Record).new?)
   = asside_item("Calender",
     path: administration_calender_path, policy: policy(Event).index?)
+  = asside_item("Attendances",
+    path: administration_attendances_path, policy: policy(Event).index?)
   = asside_item('Issues',
     path: administration_board_lists_path, policy: policy(BoardList).index?)
   = render "administration/shared/shared_issue_section"

@@ -30,6 +30,42 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
+-- Name: attendance_events; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE attendance_events (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    from_day date NOT NULL,
+    to_day date,
+    from_time time without time zone,
+    to_time time without time zone,
+    description character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: attendance_events_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE attendance_events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: attendance_events_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE attendance_events_id_seq OWNED BY attendance_events.id;
+
+
+--
 -- Name: board_lists; Type: TABLE; Schema: test-organization; Owner: -
 --
 
@@ -535,6 +571,13 @@ ALTER SEQUENCE wiki_pages_id_seq OWNED BY wiki_pages.id;
 
 
 --
+-- Name: attendance_events id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY attendance_events ALTER COLUMN id SET DEFAULT nextval('attendance_events_id_seq'::regclass);
+
+
+--
 -- Name: board_lists id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
@@ -631,6 +674,14 @@ ALTER TABLE ONLY wiki_pages ALTER COLUMN id SET DEFAULT nextval('wiki_pages_id_s
 
 ALTER TABLE ONLY ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: attendance_events attendance_events_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY attendance_events
+    ADD CONSTRAINT attendance_events_pkey PRIMARY KEY (id);
 
 
 --
@@ -743,6 +794,13 @@ ALTER TABLE ONLY wiki_categories
 
 ALTER TABLE ONLY wiki_pages
     ADD CONSTRAINT wiki_pages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_attendance_events_on_user_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_attendance_events_on_user_id ON attendance_events USING btree (user_id);
 
 
 --
@@ -977,6 +1035,14 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: attendance_events fk_rails_d39232abec; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY attendance_events
+    ADD CONSTRAINT fk_rails_d39232abec FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
 -- Name: folders fk_rails_f5f7a22451; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
 --
 
@@ -996,6 +1062,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181206180705'),
 ('20181208224113'),
 ('20181208224623'),
-('20181208224833');
+('20181208224833'),
+('20190503200308');
 
 
