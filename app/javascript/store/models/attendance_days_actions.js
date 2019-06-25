@@ -1,10 +1,11 @@
 const endpoint = '/api/v1'
+const resource = 'attendance_days'
 
 export default {
-  attendanceDays (context) {
-    return context.dispatch('initEntry', {
+  attendanceDays (context, startDate) {
+    return context.dispatch('get', {
       endpoint,
-      resource: 'attendance_days'
+      resource: `${resource}?page[number]=${startDate}`
     })
   }
 }

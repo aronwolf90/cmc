@@ -14,10 +14,10 @@ export default {
     })
   },
   initBoardsLists (context) {
-    return context.dispatch('initCurrentUser').then(boardList => {
-      let project = boardList.relationships['selected-project'].data
+    return context.dispatch('initCurrentUser').then(currentUser => {
+      let project = currentUser.relationships['selected-project'].data
       let projectId = project ? project.id : null
-      return context.dispatch('initEntry', {
+      return context.dispatch('get', {
         endpoint,
         resource: `board_lists?filter[project_id]=${projectId}&include[]=issues`
       })

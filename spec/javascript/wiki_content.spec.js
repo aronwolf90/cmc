@@ -12,7 +12,7 @@ localVue.use(Vuex)
 
 describe('WikiContent', () => {
   subject(() => shallow(WikiContent, { store: $store, localVue }))
-  def('getters', () => ({ metaCollection () { return () => [$category] } }))
+  def('getters', () => ({ rootWikiCategories () { return [$category] } }))
 
   def('actions', () => ({ initWikiCategories () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))

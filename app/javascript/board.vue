@@ -36,7 +36,7 @@ export default {
   computed: {
     boardLists: {
       get () {
-        return this.$store.getters.metaCollection('board_lists') || []
+        return this.$store.getters.boardLists
       },
       set (boardLists) {
         this.$store.dispatch('sortBoardLists', boardLists)

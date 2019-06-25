@@ -19,7 +19,7 @@ localVue.use(FormInput)
 describe('Board', () => {
   subject(() => shallow(Board, { store: $store, localVue, stubs: { draggable } }))
 
-  def('getters', () => ({ metaCollection () { return () => $boardLists } }))
+  def('getters', () => ({ boardLists () { return $boardLists } }))
   def('actions', () => ({ initBoardsLists () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
   def('Turbolinks', () => ({ visit: sinon.spy() }))

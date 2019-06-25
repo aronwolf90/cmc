@@ -1,7 +1,7 @@
 <template lang='pug'>
   #wiki-content
     category(
-      v-for='category in categories', 
+      v-for='category in rootCategories', 
       :category-id='category.id',
       :key='category.id'
     )
@@ -20,12 +20,8 @@ export default {
     this.$store.dispatch('initWikiCategories')
   },
   computed: {
-    categories() {
-      let rootCategories = this.$store.getters
-        .metaCollection('wiki_categories') || []
-      return rootCategories.filter(category => {
-          return Utils.attribute(category, 'root')
-        })
+    rootCategories() {
+      return this.$store.getters.rootWikiCategories
     }
   }
 }

@@ -1,7 +1,7 @@
 <template lang='pug'>
   #archive-content
     folder(
-      v-for='folder in folders', 
+      v-for='folder in rootFolders', 
       :folder-id='folder.id',
       :key='folder.id'
     )
@@ -20,12 +20,8 @@ export default {
     this.$store.dispatch('initFolders')
   },
   computed: {
-    folders() {
-      let rootFolders = this.$store.getters
-        .metaCollection('folders') || []
-      return rootFolders.filter(folder => {
-          return Utils.attribute(folder, 'root')
-        })
+    rootFolders() {
+      return this.$store.getters.rootFolders
     }
   }
 }

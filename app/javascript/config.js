@@ -11,7 +11,6 @@ import {
   Tooltip
 } from 'bootstrap-vue/es/components'
 import TurbolinksAdapter from './vue_turbolinks'
-import VueResource from 'vue-resource'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Router from 'vue-router'
@@ -27,7 +26,6 @@ Vue.use(Vuetify)
 Vue.use(Router)
 Vue.use(AsyncComputed)
 Vue.use(TurbolinksAdapter)
-Vue.use(VueResource)
 Vue.use(Button)
 Vue.use(FormInput)
 Vue.use(Dropdown)

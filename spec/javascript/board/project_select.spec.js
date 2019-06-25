@@ -18,7 +18,7 @@ describe('ProjectSelect', () => {
   def('store', () => (new Vuex.Store({
     state: {},
     getters: {
-      metaCollection () { return () => $projects },
+      projects () { return $projects },
       currentUser () { return $user },
       entry () { return () => $project }
     },

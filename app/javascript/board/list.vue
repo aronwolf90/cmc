@@ -27,7 +27,7 @@ export default {
   },
   props: { 'list-id': { required: true } },
   created () {
-    this.$store.dispatch('initRelatedCollection', {
+    this.$store.dispatch('loadRelationship', {
       entry: this.boardList,
       name: 'issues' 
     })

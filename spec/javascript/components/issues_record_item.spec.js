@@ -45,16 +45,13 @@ describe('IssuesRecordSection', () => {
         actions
       })
     })
-    beforeEach(() => (this.clock = sinon.useFakeTimers(new Date('Wed Feb 21 2018 12:30:10 GMT+0000 (UTC)'))))
-    afterEach(() => (this.clock = this.clock.restore()))
 
-    it('create record', () => {
+    it('create record', (done) => {
       const wrapper = shallow(IssuesRecordSection, { store, localVue })
       wrapper.find('.fa-play').trigger('click')
-      expect(createRecordSpy).to.have.been.calledWith({
-        attributes: { 'start-time': 'Wed Feb 21 2018 12:30:10 GMT+0000 (Coordinated Universal Time)' },
-        user,
-        issue
+      wrapper.vm.$nextTick(() => {
+        expect(createRecordSpy).to.have.been.called
+        done()
       })
     })
   })

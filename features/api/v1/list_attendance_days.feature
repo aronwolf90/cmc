@@ -126,8 +126,13 @@ Scenario: Get
       "links": {
         "first": null,
         "last": null,
-        "prev": "2019-01-01",
-        "next": "2019-01-29"
+        "prev": "/api/v1/attendance_days?from_date=2019-01-01",
+        "next": "/api/v1/attendance_days?from_date=2019-01-29",
+        "meta": {
+          "prev": "2019-01-01",
+          "current": "2019-01-15",
+          "next": "2019-01-29"
+        }
       }
     }
     """

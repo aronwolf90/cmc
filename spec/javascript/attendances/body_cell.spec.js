@@ -13,7 +13,8 @@ describe('BodyCell', () => {
   subject(() => shallow(BodyCell, { store: $store, localVue }))
 
   def('getters', () => ({
-    entry () { return () => { return $attendanceDay } }
+    entry () { return () => { return $attendanceDay } },
+    attendanceEventForDay () { return () => { null } }
   }))
   def('store', () => (new Vuex.Store({
     state: {},
@@ -30,7 +31,7 @@ describe('BodyCell', () => {
   }))
 
   it('render day kind class', () => {
-    expect($subject.html()).to.include('class="holiday-day"')
+    expect($subject.html()).to.include('class="holiday-day')
   })
 
   it('render table cell', () => {

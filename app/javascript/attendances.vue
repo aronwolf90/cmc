@@ -1,5 +1,10 @@
 <template lang='pug'>
   .attendances
+    .text-center
+      a.fa.fa-step-backward.fa-fw(:href='`?start-date=${prev}`')
+      | {{ current }}
+      a.fa.fa-step-forward.fa-fw(:href='`?start-date=${next}`')
+    br
     .table-responsive
       table.table.table-bordered 
         thead
@@ -8,6 +13,7 @@
             v-for='attendanceDay in attendanceDays',
             :key='attendanceDay.id',
             :attendance-day-id='attendanceDay.id'
+            :attendance-day-type='attendanceDay.type'
           )
         tbody
           tr(v-for='user in users')
@@ -46,35 +52,47 @@ export default {
     return {
       currentAttendanceDay: null,
       currentUser: null,
-      form: {
-        email: ''
-      }
+      prev: null,
+      current: null,
+      next: null,
     }
   },
   created () {
-    this.$store.dispatch('attendanceEvents')
+    this.$store.dispatch('users') 
   },
   computed: {
     startDate () {
-      return window.location.search['start-date']
+      var urlParams = new URLSearchParams(location.search);
+      return urlParams.get('start-date')
     },
     currentAttendanceDayType () {
       return this.currentAttendanceDay && this.currentAttendanceDay.type
+    },
+    users () {
+      return this.$store.getters.users
     }
   },
   asyncComputed: {
-    users: {
-      get () {
-        return this.$store.dispatch('users') 
-      },
-      default: []
-    },
     attendanceDays: {
       get () {
         return this.$store.dispatch(
           'attendanceDays',
           this.startDate
-        )
+        ).then(response => {
+          this.prev = response.links.meta.prev
+          this.current = response.links.meta.current
+          this.next = response.links.meta.next
+          return response.data
+        })
+      },
+      default: []
+    },
+    attendanceEvents: {
+      get () {
+        return this.$store.dispatch(
+          'attendanceEvents',
+          this.startDate
+        ).then(response => response.data)
       },
       default: []
     }
@@ -85,9 +103,10 @@ export default {
       this.currentUser = user
       if (this.$refs.modal) this.$refs.modal.show()
     },
-    onSubmit () {
-    },
-    onReset () {
+  },
+  watch: {
+    startDate () {
+      this.$store.dispatch('attendanceEvents')
     }
   }
 }

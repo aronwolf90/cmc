@@ -21,9 +21,9 @@ export default {
           issue: { data: issue }
         }
       }
-    }).then(record => {
+    }).then(response => {
       context.commit('setAssociation', {
-        parent: record,
+        parent: response.data.data,
         child: user,
         relationshipName: 'current-record'
       })

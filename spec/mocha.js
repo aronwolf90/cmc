@@ -9,3 +9,4 @@ Chai.use(SinonChai)
 
 // make expect available globally
 global.expect = Chai.expect
+window.Date = Date

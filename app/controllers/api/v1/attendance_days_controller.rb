@@ -12,8 +12,13 @@ module Api
         render json: attendance_days, links: {
           first: nil,
           last: nil,
-          prev: from_date - 14.days,
-          next: from_date + 14.days
+          prev: api_v1_attendance_days_path(from_date: from_date - 14.days),
+          next: api_v1_attendance_days_path(from_date: from_date + 14.days),
+          meta: {
+            prev: from_date - 14.days,
+            current: from_date,
+            next: from_date + 14.days
+          }
         }
       end
 

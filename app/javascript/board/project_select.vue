@@ -18,7 +18,7 @@ export default {
       })
     },
     projects () {
-      return this.$store.getters.metaCollection('projects')
+      return this.$store.getters.projects
     },
     currentUser () {
       return this.$store.getters.currentUser

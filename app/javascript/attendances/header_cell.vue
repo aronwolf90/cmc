@@ -1,5 +1,5 @@
 <template lang='pug'>
-  td.text-nowrap(:class='attendanceDay.attributes.kind') {{ day }}
+  td.text-nowrap(:class='kind') {{ day }}
 </template>
 
 <script>
@@ -7,7 +7,15 @@ import { Utils } from 'vuex-jsonapi-client'
 import dateFormat from 'dateformat'
 
 export default {
-  props: ['attendance-day-id'],
+  props: {
+    attendanceDayId: {
+      required: true
+    },
+    attendanceDayType: {
+      required: true,
+      type: String
+    }
+  },
   computed: {
     attendanceDay () {
       return this.$store.getters.entry({ 
@@ -16,8 +24,12 @@ export default {
       })
     },
     day () {
+      if (!this.attendanceDay) return
       let day = this.attendanceDay.attributes.day
       return dateFormat(day, 'ddd d')
+    },
+    kind () {
+      return Utils.attribute(this.attendanceDay, 'kind')
     }
   }
 }

@@ -75,12 +75,16 @@ Capybara.register_driver :selenium do |app|
   client = Selenium::WebDriver::Remote::Http::Default.new
   client.timeout = 200
 
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    chromeOptions: { "w3c" => false }
+  )
+
   Capybara::Selenium::Driver.new(
     app,
     browser: :remote,
     url: "http://#{ENV['SELENIUM_HOST']}:#{ENV['SELENIUM_PORT']}/wd/hub",
     http_client: client,
-    desired_capabilities: :chrome
+    desired_capabilities: capabilities
   )
 end
 

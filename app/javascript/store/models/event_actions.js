@@ -2,7 +2,7 @@ const endpoint = '/api/v1'
 
 export default {
   initEvents (context) {
-    return context.dispatch('initEntry', { endpoint, resource: 'events' })
+    return context.dispatch('get', { endpoint, resource: 'events' })
   },
   createEvent (context, { attributes }) {
     let payload = { attributes }

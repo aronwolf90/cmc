@@ -16,18 +16,18 @@ export default {
       resource: `comments`,
       endpoint,
       payload
-    }).then(comment => {
+    }).then(response => {
       context.commit('addToMultiple', {
         parent: issue,
-        child: comment,
+        child: response.data,
         relationshipName: 'comments'
       })
       context.commit('addToMultiple', {
         parent: user,
-        child: comment,
+        child: response.data,
         relationshipName: 'comments'
       })
-      return comment
+      return response.data
     })
   }
 }

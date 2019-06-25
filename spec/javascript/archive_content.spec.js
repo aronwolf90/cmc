@@ -12,7 +12,7 @@ localVue.use(Vuex)
 
 describe('ArchiveContent', () => {
   subject(() => shallow(ArchiveContent, { store: $store, localVue }))
-  def('getters', () => ({ metaCollection () { return () => [$folder] } }))
+  def('getters', () => ({ rootFolders () { return [$folder] } }))
 
   def('actions', () => ({ initFolders () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))

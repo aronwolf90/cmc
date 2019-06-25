@@ -2,12 +2,12 @@
   .issues_record_section
     .clock(
       v-if='record',
-      v-on:click.stop.prevent='clickStop'
+      @click.stop.prevent='clickStop'
     )
       .fa.fa-stop
     .play_btn(
       v-else,
-      v-on:click.stop.prevent='clickPlay'
+      @click.stop.prevent='clickPlay'
     )
       .fa.fa-play
 </template>
@@ -47,6 +47,7 @@ export default {
   },
   methods: {
     clickPlay () {
+      console.log("---------------------------------------")
       this.$store.dispatch('createRecord', {
         attributes: { 'start-time': (new Date()).toString() },
         user: this.currentUser,

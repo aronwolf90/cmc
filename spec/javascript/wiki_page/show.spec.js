@@ -42,7 +42,7 @@ describe('Show', () => {
     })
 
     it('edit btn point to /edit route', () => {
-      $subject.find(Button).trigger('click')
+      $subject.find('.fa-edit').trigger('click')
       expect($subject.vm.$router.currentRoute.path).to.eq('/edit')
     })
 

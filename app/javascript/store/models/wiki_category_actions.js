@@ -2,13 +2,12 @@ const endpoint = '/api/v1'
 
 export default {
   initWikiCategories (context) {
-    return context.dispatch('initEntry', {
+    return context.dispatch('get', {
       endpoint,
       resource: 'wiki_categories?include[]=wiki_pages'
     })
   },
   changeWikiPageToCategoryReference (context, { page, category }) {
-    console.log(page)
     context.dispatch('changeOneToManyReference', {
       child: page,
       parent: category,

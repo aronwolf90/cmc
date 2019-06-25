@@ -40,31 +40,27 @@ export default {
   ],
   data () {
     return {
-      attendanceEventId: null,
-      attendanceEventType: null,
       form: {
         fromDay: this.day,
         description: null
       }
     }
   },
-  mounted () {
-    this.$store.dispatch('attendanceEventForDay', {
-      day: this.day,
-      userId: this.userId
-    }).then(attendanceEvent => {
-      this.attendanceEventId = attendanceEvent.id
-      this.attendanceEventType = attendanceEvent.type
-      this.form.fromDay = attendanceEvent.attributes['from-day']
-      this.form.description = attendanceEvent.attributes['description']
-    })
-  },
   computed: {
     attendanceEvent () {
-      return this.$store.getters.entry({
-        type: this.attendanceEventType,
-        id: this.attendanceEventId
+      return this.$store.getters.attendanceEventForDay({
+        day: this.day,
+        userId: this.userId
       })
+    }
+  },
+  mounted () {
+    if (this.attendanceEvent) {
+      this.form.fromDay = this.attendanceEvent.attributes['from-day']
+      this.form.description = this.attendanceEvent.attributes['description']
+    } else {
+      this.form.fromDay = this.day
+      this.form.description = null
     }
   },
   methods: {

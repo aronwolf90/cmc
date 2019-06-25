@@ -4,11 +4,16 @@ import recordActions from 'store/models/record_actions'
 import issueActions from 'store/models/issue_actions'
 import commentActions from 'store/models/comment_actions'
 import boardListActions from 'store/models/board_list_actions'
+import boardListGetters from 'store/models/board_list_getters'
 import projectActions from 'store/models/project_actions'
+import projectGetters from 'store/models/project_getters'
 import userActions from 'store/models/user_actions'
+import userGetters from 'store/models/user_getters'
 import wikiCategoryActions from 'store/models/wiki_category_actions'
+import wikiCategoryGetters from 'store/models/wiki_category_getters'
 import wikiPageActions from 'store/models/wiki_page_actions'
 import folderActions from 'store/models/folder_actions'
+import folderGetters from 'store/models/folder_getters'
 import userIssueActions from 'store/models/user_issue_actions'
 import eventActions from 'store/models/event_actions'
 import attendaceDaysActions from 'store/models/attendance_days_actions'
@@ -20,6 +25,11 @@ export default {
     json_api: JsonApi
   },
   getters: {
+    ...userGetters,
+    ...folderGetters,
+    ...wikiCategoryGetters,
+    ...boardListGetters,
+    ...projectGetters,
     currentUser (store) {
       let entry = JsonApi.getters.entry(store.json_api)({
         type: 'contexts',
@@ -83,16 +93,16 @@ export default {
     ...attendaceEventActions,
 
     initCurrentUser (context) {
-      return context.dispatch('initContext').then(currentContext => {
-        return context.dispatch('initRelatedEntry', {
-          entry: currentContext,
+      return context.dispatch('initContext').then(response => {
+        return context.dispatch('loadRelationship', {
+          entry: response.data,
           name: 'current-user'
         })
       })
     },
     initCurrentRecord (context) {
       return context.dispatch('initCurrentUser').then(currentUser => {
-        return context.dispatch('initRelatedEntry', {
+        return context.dispatch('loadRelationship', {
           entry: currentUser,
           name: 'current-record'
         })

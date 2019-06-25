@@ -9,7 +9,7 @@ localVue.use(Vuex)
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
 
-describe('UserCell', () => {
+describe('HeaderCell', () => {
   subject(() => shallow(HeaderCell, { store: $store, localVue }))
 
   def('getters', () => ({

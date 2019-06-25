@@ -18,12 +18,17 @@ describe('Attendances', () => {
   subject(() => shallow(Attendances, { store: $store, localVue }))
 
   def('actions', () => ({
-    users () { return Promise.resolve([$user]) },
-    attendanceDays () { return Promise.resolve([$attendanceDay]) }
+    attendanceDays () { return Promise.resolve({ data: [$attendanceDay], links: { meta: { prev: '01-01-2019', next: '29-01-2019' } } }) },
+    attendanceEvents () { return Promise.resolve([]) },
+    users () { return Promise.resolve([$user]) }
+  }))
+  def('getters', () => ({
+    users () { return [$user] }
   }))
   def('store', () => (new Vuex.Store({
     state: {},
-    actions: $actions
+    actions: $actions,
+    getters: $getters
   })))
 
   def('user', () => ({
@@ -52,16 +57,20 @@ describe('Attendances', () => {
   it('render HeaderCell', done => {
     $subject.vm.$nextTick(() => {
       $subject.vm.$nextTick(() => {
-        expect($subject.find(HeaderCell).exists()).to.be.true
-        done()
+        $subject.vm.$nextTick(() => {
+          expect($subject.find(HeaderCell).exists()).to.be.true
+          done()
+        })
       })
     })
   })
   it('render BodyCell', done => {
     $subject.vm.$nextTick(() => {
       $subject.vm.$nextTick(() => {
-        expect($subject.find(BodyCell).exists()).to.be.true
-        done()
+        $subject.vm.$nextTick(() => {
+          expect($subject.find(BodyCell).exists()).to.be.true
+          done()
+        })
       })
     })
   })
