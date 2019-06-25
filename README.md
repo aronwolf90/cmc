@@ -4,11 +4,12 @@
 * rubycritic: https://cmc_system.gitlab.io/cmc/rubycritic/code_index.html
 
 # About
-CMC is a feature-rich time tracker. Its features include
+Cost Manager Controller is a feature-rich time tracker. Its features include
 * easy session tracking
-* scrum project management
+* project management
 * extended project information including prioritizing
 * wiki
+* document uploads
 
 I wrote this because I was unsatisfied with existing solutions.
 

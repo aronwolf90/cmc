@@ -3,9 +3,11 @@ const resource = 'attendance_events'
 
 export default {
   attendanceEvents (context, startDate) {
+    const path = startDate ? `${resource}?page[number]=${startDate}` : resource
+
     return context.dispatch('get', {
       endpoint,
-      resource: `${resource}?page[number]=${startDate}`
+      resource: path
     })
   },
   createAttendanceEvent (context, payload) {
