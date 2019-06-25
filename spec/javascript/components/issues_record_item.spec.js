@@ -7,7 +7,7 @@ const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
-/* eslint-disable no-undef */
+/* eslint-disable no-undef, no-unused-expressions */
 
 describe('IssuesRecordSection', () => {
   let actions = {}
