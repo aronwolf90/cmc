@@ -1,11 +1,19 @@
 .side-menu
-  padding-top: 38px
+  padding-top: 51px
   min-width: $side-menu-width
   max-width: $side-menu-width
   height: 100vh
   background-color: #f8f8f8
   border-right: 2px solid #e7e7e7
   position: relative
+  z-index: 999
+
+  @media only screen and (max-width: 600px)
+    display: none
+    &.expanded
+      display: block
+      min-width: $side-menu-width
+      max-width: $side-menu-width
 
   .navbar
     border: none
@@ -38,6 +46,8 @@
     bottom: 0
     width: 100%
 
+  .expand
+
 .wraper
   display: flex
   align-items: stretch
@@ -46,8 +56,11 @@
   padding-top: 22px
   position: fixed
   margin-left: $side-menu-width
-  margin-top: 38px
+  margin-top: 51px
   height: calc(100vh - 38px)
   max-height: calc(100vh - 38px)
   max-width: calc(100% - #{$side-menu-width})
   overflow-y: auto
+  @media only screen and (max-width: 600px)
+    margin-left: 0
+    max-width: 100%

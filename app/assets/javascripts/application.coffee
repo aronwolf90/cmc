@@ -26,6 +26,11 @@
       $('.modal').modal('hide')
     $('.modal-content').click (event) => event.stopPropagation()
 
+    document.getElementById("side-toggle-btn").addEventListener "click", () =>
+      sideMenu = document.getElementsByClassName("side-menu")
+      sideMenu[0].classList.toggle("expanded");
+      document.querySelector("#side-toggle-btn > .fa").classList.toggle("fa-angle-right");
+      document.querySelector("#side-toggle-btn > .fa").classList.toggle("fa-angle-left");
 
   jQuery.extend(true, jQuery.fn.datetimepicker.defaults, {
     icons: {

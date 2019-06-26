@@ -1,33 +1,39 @@
 = menu do
+  button#side-toggle-btn
+    = fa_icon("angle-right", class: "fa-2x")
   = menu_logo "logo.png", administration_root_path
 
-  = left_menu do
-    = menu_item("Projects",
-        path: administration_projects_path,
-        policy: policy(Project).index?,
-        includes: "projects")
-    = menu_item("Wiki",
-        path: administration_wiki_path,
-        policy: policy(WikiPage).index?,
-        includes: "wiki")
-    = menu_item("Archive",
-        path: administration_archive_path,
-        policy: policy(Document).index? && policy(Folder).index?,
-        includes: "archive")
-    = menu_item("Users",
-        path: administration_users_path,
-        policy: policy(User).index?,
-        includes: "users")
-    = menu_item("Admin",
-        path: %i[edit administration organization],
-        policy: policy(Organization).index?,
-        includes: "organization")
+  button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+    span.navbar-toggler-icon
+  
+  .collapse.navbar-collapse#navbarSupportedContent
+    = left_menu do
+      = menu_item("Projects",
+          path: administration_projects_path,
+          policy: policy(Project).index?,
+          includes: "projects")
+      = menu_item("Wiki",
+          path: administration_wiki_path,
+          policy: policy(WikiPage).index?,
+          includes: "wiki")
+      = menu_item("Archive",
+          path: administration_archive_path,
+          policy: policy(Document).index? && policy(Folder).index?,
+          includes: "archive")
+      = menu_item("Users",
+          path: administration_users_path,
+          policy: policy(User).index?,
+          includes: "users")
+      = menu_item("Admin",
+          path: %i[edit administration organization],
+          policy: policy(Organization).index?,
+          includes: "organization")
 
-  = right_menu do
-    = user_menu_dropdown_text
-      = image_tag current_user.avatar_url, class: 'rounded-circle', size: 24
-    = user_menu_dropdown_body do
-      = dropdown_link current_user, ""
-      = dropdown_link 'Settings', edit_administration_user_path(current_user)
-      .dropdown-divider
-      = dropdown_link 'Sign out', destroy_user_session_path, method: :delete
+    = right_menu do
+      = user_menu_dropdown_text
+        = image_tag current_user.avatar_url, class: 'rounded-circle', size: 24
+      = user_menu_dropdown_body do
+        = dropdown_link current_user, ""
+        = dropdown_link 'Settings', edit_administration_user_path(current_user)
+        .dropdown-divider
+        = dropdown_link 'Sign out', destroy_user_session_path, method: :delete
