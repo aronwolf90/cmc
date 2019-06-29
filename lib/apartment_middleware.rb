@@ -10,8 +10,7 @@ class ApartmentMiddleware < Apartment::Elevators::Generic
   end
 
   def parse_tenant_name(request)
-    return unless request.host.include?(".")
-    return if request.host == "example.org"
+    return if request.host.count(".") < 2
     tenant_name_candidate = request.host.split(".").first
     return if tenant_name_candidate =~ /^[0-9]+$/
     tenant_name_candidate
