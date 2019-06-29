@@ -2,10 +2,18 @@
 
 require "apartment/elevators/subdomain"
 
-class ApartmentMiddleware < ::Apartment::Elevators::Subdomain
+class ApartmentMiddleware < Apartment::Elevators::Generic
   def call(*env)
     super
   rescue ::Apartment::TenantNotFound
-    [301, { "Location" => "http://cost-manager.com" }, ["redirect"]]
+    [301, { "Location" => "http://#{ENV["DOMAIN"] || ENV["TEST_HOST"]}" }, ["redirect"]]
+  end
+
+  def parse_tenant_name(request)
+    return unless request.host.include?(".")
+    return if request.host == "example.org"
+    tenant_name_candidate = request.host.split(".").first
+    return if tenant_name_candidate =~ /^[0-9]+$/
+    tenant_name_candidate
   end
 end

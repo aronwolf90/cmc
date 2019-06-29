@@ -142,6 +142,8 @@ tag_latest:
     - docker pull $CONTAINER_RELEASE_IMAGE
     - docker tag $CONTAINER_RELEASE_IMAGE $CI_REGISTRY_IMAGE:latest  
     - docker push $CI_REGISTRY_IMAGE:latest
+  only:
+    - master
 
 pages:
   stage: deploy

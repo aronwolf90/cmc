@@ -36,6 +36,7 @@ coverage/
 public/uploads
 public/uploads/tmp
 uploads/
+vendor/
 
 public/assets/
 

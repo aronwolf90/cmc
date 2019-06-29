@@ -1,2 +1,4 @@
 multi_tenant: <%= ENV["MULTI_TENANT"] || true%>
 admin_password: <%= ENV["ADMIN_PASSWORD"] %>
+test_host: <%= ENV["TEST_HOST"] || (ENV["DOCKER"] && "#{`bin/get_ip.sh`.tr("\n","")}.xip.io") || "localhost" %> 
+test_port: <%= ENV["TEST_PORT"] || "3001" %>

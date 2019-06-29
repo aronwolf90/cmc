@@ -24,22 +24,17 @@ services:
 
   app:
     image: registry.gitlab.com/cmc_system/cmc:latest
-    networks:
-      default:
-        aliases:
-          - test-organization.app.local
-          - app.local
     build: .
+    stdin_open: true
+    tty: true
     environment:
       - DB_PASSWORD=password
       - DB_HOST=db
       - BUNDLE_BIN=false
       - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
+      - TEST_PORT=3001
       - SELENIUM_HOST=selenium
       - SELENIUM_PORT=4444
-      - TEST_APP_HOST=app.local
-      - TEST_HOST=app.local
-      - TEST_PORT=3001
       - WEBPACKER_DEV_SERVER_HOST=webpack
     command:  /bin/sh -c "bin/install.sh; rm -r tmp/pids; rails s -b '0.0.0.0'"
     ports:
@@ -62,4 +57,3 @@ volumes:
   bundle:
     driver: local
   db_volume:
-    driver: local

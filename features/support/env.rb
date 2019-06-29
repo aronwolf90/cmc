@@ -67,13 +67,14 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Capybara.server_host = "0.0.0.0"
-Capybara.server_port = ENV["TEST_PORT"]
-Capybara.app_host = "http://#{ENV['TEST_HOST']}:#{ENV['TEST_PORT']}"
+Capybara.server_port = Settings.test_port
+Capybara.app_host = "http://#{Settings.test_host}:#{Settings.test_port}"
 Capybara.javascript_driver = :selenium
+Capybara.default_max_wait_time = 9
 
 Capybara.register_driver :selenium do |app|
   client = Selenium::WebDriver::Remote::Http::Default.new
-  client.timeout = 200
+  client.timeout = 100
 
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
     chromeOptions: { "w3c" => false }
