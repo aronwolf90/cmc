@@ -5,36 +5,20 @@
 
 # About
 Cost Manager Controller is a feature-rich time tracker. Its features include
-* easy session tracking
+* easy time tracking
 * project management
-* extended project information including prioritizing
 * wiki
-* document uploads
+* document uploads (archive)
+* user managment (e.g assigen rolles)
 
 I wrote this because I was unsatisfied with existing solutions.
 
 
 # Setup for development
-On linux and mac:
-- Install docker and docker-compose and then:
-- Execute: ./dc-exec setup
-- Execute: ./db-exec rails s -b 0.0.0.0
-- browse to: http://lvh.me:3000
-
-On windows:
-- Install docker and docker compose
-- Enable virtualization
-- docker-compose run --rm app setup
+- Install docker and docker-compose
+- Execute:  git clone git@gitlab.com:cmc_system/cmc.git
 - docker-compose up
-
-NOTE: ./dc-exec can be used to execute every comand inside the conatainer E.g.
-- ./dc-exec ls
-- ./dc-exec rspec
-- ...
-
-NOTE: We recomend to move ./dc-exec to the bin folder, so that you can
-use dc-exec instead ./dc-exec
-- Execute: cp ./dc-exec /usr/local/bin
+- open http://test-organization.lvh.me:3000 
 
 NOTE: Take a look on the [contributing.md](CONTRIBUTING.md)
 
@@ -49,27 +33,9 @@ Right now we only support the kubernetics packet manager named helm.
 NOTE: The configuration options for
 the helm package can be found [here](cmc/README.md)
 
-# Setup up linters (e.g for atom)
-eslint:
-- Execute: ./dc-exec eslint app/javascipt spec
-
-gitlinter:
-- Install pip (eg. sudo apt-get install pip)
-- Execute: pip install gitlint
-- Execute: git log -1 --pretty=%B | gitlint
-
-atom (using docker-compose):
-- eslinter
-  * Execute: apm install linter-eslint
-  * Select global npm option
-  * Set command: ./dc-exec --no-interactive eslint
-- rubocop:
-  * apm install linter-rubocop
-  * set command: ./dc-exec --no-interactive rubocop
-
-vim:
-Just install the w0rp/ale plugin.
-
+# Linters
+ESLint (Javascipt): docker-compose run yarn eslint
+RuboCop (Ruby): docker-compose run rubocop
 
 # Links
 homepage: https://about.cost-manager.com
