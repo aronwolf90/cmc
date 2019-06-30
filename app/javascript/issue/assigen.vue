@@ -23,9 +23,9 @@ export default {
   },
   computed: {
     options () {
-      return (this.$store.getters.metaCollection('users') || []).map((user) => {
+      return this.$store.getters.users.map(user => {
         return {
-          value: user.id,
+          value: { id: user.id, type: user.type },
           text: user.attributes.firstname
         }
       })
@@ -46,7 +46,7 @@ export default {
       get () {
         if (!this.user) return
         return {
-          value: this.user.id,
+          value: { id: this.user.id, type: this.user.type },
           text: this.user.attributes.firstname
         }
       }
@@ -54,10 +54,12 @@ export default {
   },
   methods: {
     onSelect (item) {
-      console.log(this.$store.getters.metaEntry(`users/${item.value}`))
       this.$store.dispatch('changeIssueToUserReference', {
         issue: this.issue,
-        user: this.$store.getters.metaEntry(`users/${item.value}`)
+        user: this.$store.getters.entry({
+          id: item.value.id,
+          type: item.value.type
+        })
       })
     }
   },

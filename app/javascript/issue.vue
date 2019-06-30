@@ -5,8 +5,7 @@
       hr.divider
       comments(:issue-id='issueId')
       br
-    .right-aside
-      spent-time(:issue-id='issueId')
+    right-aside
       assigen(:issue-id='issueId')
       complexity(:issue-id='issueId')
 
@@ -17,6 +16,8 @@ import Router from 'vue-router'
 
 import Show from 'issue/show'
 import Edit from 'issue/edit'
+
+import RightAside from 'components/right_aside'
 
 import SpentTime from 'issue/spent_time'
 import Assigen from 'issue/assigen'
@@ -47,7 +48,8 @@ export default {
     SpentTime,
     'assigen': Assigen,
     'comments': Comments,
-    'complexity': Complexity
+    'complexity': Complexity,
+    RightAside
   },
   created () {
     this.$store.dispatch('initIssue', this.issueId)
@@ -70,11 +72,5 @@ export default {
     padding-top: 15px
     overflow-y: auto
     height: calc(100vh - 40px)
-  .right-aside
-    background-color: #f8f8f8
-    border-left: 2px solid #e7e7e7
-    width: 200px
-    height: calc(100vh - 40px)
-
 </style>
 

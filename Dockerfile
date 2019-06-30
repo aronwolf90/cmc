@@ -4,6 +4,8 @@ ENV DOCKER true
 
 WORKDIR  /app
 
+RUN echo "export PATH=/app/bin:$PATH" >> ~/.profile
+
 RUN apk add --update \
   tzdata postgresql-client \
   libressl-dev gnupg libstdc++ \
@@ -30,6 +32,5 @@ RUN SECRET_KEY_BASE='9479a648d2fb' \
   DATABASE_URL=postgres://root:password@db%5Ftest/root \
   RAILS_ENV=production \
   bundle exec rake assets:precompile
-
 
 CMD bundle exec puma -C config/puma.rb
