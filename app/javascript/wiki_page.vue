@@ -2,7 +2,7 @@
   #issue(v-if='wikiPage')
     .container-fluid
       router-view(:wiki-page-id='wikiPage.id')
-    .right-aside
+    right-aside
       category(:wiki-page-id="wikiPageId")
 </template>
 
@@ -12,6 +12,7 @@ import Router from 'vue-router'
 import Show from 'wiki_page/show'
 import Edit from 'wiki_page/edit'
 import Category from 'wiki_page/category'
+import RightAside from 'components/right_aside'
 
 const router = new Router({
   routes: [
@@ -34,7 +35,8 @@ export default {
   components: {
     Show,
     Edit,
-    Category
+    Category,
+    RightAside
   },
   created () {
     this.$store.dispatch('initWikiPage', this.wikiPageId)

@@ -3,7 +3,7 @@ import Issue from '../../app/javascript/issue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import Comments from '../../app/javascript/issue/comments'
-import Assigen from 'issue/assigen'
+import RightAside from 'components/right_aside'
 
 const localVue = createLocalVue()
 
@@ -29,7 +29,7 @@ describe('Issue', () => {
     expect($subject.find(Comments).props().issueId).to.be.eq(1)
   })
 
-  it('has assigen', () => {
-    expect($subject.find(Assigen).props().issueId).to.be.eq(1)
+  it('has right asigen', () => {
+    expect($subject.contains(RightAside)).to.be.true
   })
 })
