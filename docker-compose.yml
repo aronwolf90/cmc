@@ -12,7 +12,7 @@ services:
       - 6432:5432
 
   webpack:
-    image: registry.gitlab.com/cmc_system/cmc:latest
+    image: registry.gitlab.com/cmc_system/cmc:$TAG
     command: bash -c "bin/install.sh; bin/webpack-dev-server"
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack
@@ -23,7 +23,7 @@ services:
       - bundle:/usr/local/bundle
 
   app:
-    image: registry.gitlab.com/cmc_system/cmc:latest
+    image: registry.gitlab.com/cmc_system/cmc:$TAG
     build: .
     stdin_open: true
     tty: true
@@ -47,7 +47,7 @@ services:
       - selenium
 
   selenium:
-    image: selenium/standalone-chrome-debug:latest
+    image: selenium/standalone-chrome-debug:$TAG
     ports:
       - "4444:4444"
       - "5900:5900"

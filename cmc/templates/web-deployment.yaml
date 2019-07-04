@@ -36,8 +36,10 @@ spec:
             - name: ADMIN_PASSWORD
               value: '{{ .Values.admin_password }}'
           volumeMounts:
+            {{- if .Values.webPersistence.enabled }}
             - name: files
               mountPath: /app/uploads
+            {{- end }}
             - mountPath: /assets
               name: assets
           lifecycle:
@@ -62,9 +64,11 @@ spec:
               readOnly: true
 
       volumes:
+        {{- if .Values.webPersistence.enabled }}
         - name: files
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-web-pvc
+        {{- end }}
         - name: nginx-conf
           configMap:
             name: {{ .Release.Name }}-nginx-conf

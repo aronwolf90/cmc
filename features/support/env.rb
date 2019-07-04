@@ -77,7 +77,7 @@ Capybara.register_driver :selenium do |app|
   client.timeout = 100
 
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: { "w3c" => false }
+    chromeOptions: { "w3c" => false, args: ["disable-dev-shm-usage"] }
   )
 
   Capybara::Selenium::Driver.new(
