@@ -1,6 +1,4 @@
 multiTenant: true
-databaseService:
-  externalIp: 95.216.162.196
 installJobDelay: 60
 ingress:
   enabled: true
@@ -16,3 +14,8 @@ ingress:
       hosts:
         - "*.cost-manager.com"
         - "cost-manager.com"
+webAws:
+  enabled: true
+  region: fra1
+  endpoint: fra1.digitaloceanspaces.com
+  directory: webcloudpower/cmc-production

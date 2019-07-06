@@ -35,6 +35,18 @@ spec:
               value: '{{ .Values.webDeployment.sentryDsn }}'
             - name: ADMIN_PASSWORD
               value: '{{ .Values.admin_password }}'
+            - name: AWS_ENABLED
+              value: '{{ .Values.webAws.enabled }}'
+            - name: AWS_KEY
+              value: '{{ .Values.webAws.key }}'
+            - name: AWS_SECRET
+              value: '{{ .Values.webAws.secret }}'
+            - name: AWS_REGION
+              value: '{{ .Values.webAws.region }}'
+            - name: AWS_ENDPOINT
+              value: '{{ .Values.webAws.endpoint }}'
+            - name: AWS_DIRECTORY
+              value: '{{ .Values.webAws.directory }}'
           volumeMounts:
             {{- if .Values.webPersistence.enabled }}
             - name: files
@@ -45,9 +57,9 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: 
-                  - sh 
-                  - -c 
+                command:
+                  - sh
+                  - -c
                   - "cp -r /app/public/* /assets"
 
         - image: nginx:1.14-alpine
