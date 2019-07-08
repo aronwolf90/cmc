@@ -106,7 +106,7 @@ cucumber:
 
 deploy:
   stage: deploy
-  image: dtzar/helm-kubectl
+  image: aronwolf/helm-doctl
   allow_failure: true
   variables:
     GIT_STRATEGY: clone
@@ -114,14 +114,8 @@ deploy:
     name: production
     url: http://cost-manager.com
   script:
-    - mkdir ~/.kube
-    - echo $KUBE_CONFIG | base64 -d > ~/.kube/config
+    - doctl kubernetes cluster kubeconfig save webcloudpower
     - helm init --upgrade
-    - export LOGS_COMAND="\$(kubectl get pods -l name=cmc-migrate-task | sed -n 2p | awk '{print \$1}')"
-    - sleep 2 &&
-      until kubectl logs $(eval echo $LOGS_COMAND) && kubectl logs -f $(eval echo $LOGS_COMAND); do
-        sleep 0.2;
-      done &
     - helm upgrade cmc-production cmc --install --wait
         -f values.yaml
         --set image.tag=$CI_COMMIT_SHA
