@@ -3,13 +3,13 @@
     .card
       .card-header Projects
       .card-body
-        .table-resposive
+        .table-responsive
           table.table
             thead
-              th scope="col" Project
-              th scope="col" Total time
-              th scope="col" This month time
-              th scope="col" Last month time
+              th Project
+              th Total time
+              th This month time
+              th Last month time
             tbody
               - @model[:projects].each do |project, total_spent_time,  month_spent_time, last_month_spent_time|
                 tr

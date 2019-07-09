@@ -1,7 +1,7 @@
 .side-menu
   min-width: $side-menu-width
   max-width: $side-menu-width
-  margin-top: 54px
+  margin-top: $navbar-height
   height: calc(100vh - 54px)
   background-color: #f8f8f8
   border-right: 2px solid #e7e7e7
@@ -11,6 +11,7 @@
     display: none
     position: fixed
     left: 0
+    margin-top: $navbar-height-mobile
     &.expanded
       display: block
       min-width: $side-menu-width
