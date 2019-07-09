@@ -34,7 +34,7 @@ export default {
     width: 200px
     height: calc(100vh - 44px)
     .arrow
-      position: absolute
+      position: fixed
       bottom: 25px
       right: 9px
     @media only screen and (max-width: 600px)

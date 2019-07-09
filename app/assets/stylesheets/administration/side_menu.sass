@@ -1,15 +1,16 @@
 .side-menu
-  padding-top: 51px
   min-width: $side-menu-width
   max-width: $side-menu-width
-  height: 100vh
+  margin-top: 54px
+  height: calc(100vh - 54px)
   background-color: #f8f8f8
   border-right: 2px solid #e7e7e7
-  position: relative
   z-index: 999
 
   @media only screen and (max-width: 600px)
     display: none
+    position: fixed
+    left: 0
     &.expanded
       display: block
       min-width: $side-menu-width
@@ -42,9 +43,11 @@
       border-left: 5px solid $main-color
 
   .shared-section
-    position: absolute
+    position: fixed
     bottom: 0
-    width: 100%
+    left: 0
+    width: 170px
+    background-color: #f8f8f8
 
   .expand
 
