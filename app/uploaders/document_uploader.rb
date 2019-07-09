@@ -8,7 +8,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    if ["AWS_ENABLED"]
+    if ENV["AWS_ENABLED"]
       "#{Organization.current}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     else
       "#{Rails.root}/uploads/#{Organization.current}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"

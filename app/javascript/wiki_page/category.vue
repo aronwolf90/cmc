@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     wikiCategories () {
-      return this.$store.getters.metaCollection('wiki_categories') || []
+      return this.$store.getters.wikiCategories
     },
     options () {
       return this.wikiCategories.map((category) => {

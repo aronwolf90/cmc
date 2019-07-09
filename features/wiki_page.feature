@@ -32,3 +32,16 @@ Scenario: Edit wiki page
   Then the element "#side-body" contain the text "wiki page test new"
   When I reload the page
   Then the element "#side-body" contain the text "wiki page test new"
+
+@javascript
+Scenario: Change category
+  Given The app contain seed data 
+  And I am signed in
+  When I click on link "Wiki"
+  And I click on link "wiki page title"
+  Then the element "#category .text" does not contain the text "subcategory 1"
+  And I click on "#category .text"
+  And I click on "#category .item:nth-child(2)"
+  Then the element "#category .text" contain the text "subcategory 1"
+  And I reload the page
+  Then the element "#category .text" contain the text "subcategory 1"
