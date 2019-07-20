@@ -18,14 +18,15 @@ class HashMapper::Map
     end
   end
 
-  def get_value_from_input(output, input, path, meth)
+  def get_value_from_input(_output, input, path, _meth)
     value = path.inject(input) do |h, e|
-      if h.is_a?(Hash)
-        v = [h[e.to_sym], h[e.to_s]].compact.first
+      v = if h.is_a?(Hash)
+        [h[e.to_sym], h[e.to_s]].compact.first
       else
-        v = h[e]
+        h[e]
       end
       return :hash_mapper_no_value if hash_mapper_no_value?(e, v, h)
+
       v
     end
     delegated_mapper ? delegate_to_nested_mapper(value, e) : value

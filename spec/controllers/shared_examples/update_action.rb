@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard update action" do
-  |namespace, redirect, params: nil|
-
+RSpec.shared_examples "standard update action" do |namespace, redirect, params: nil|
   describe "PUT update" do
     let(:user) { Admin.new }
 

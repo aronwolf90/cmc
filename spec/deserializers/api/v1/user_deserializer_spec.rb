@@ -22,7 +22,7 @@ describe Api::V1::UserDeserializer do
     end
     let(:result) do
       {
-        selected_project_id: "1",
+        selected_project_id: "1"
       }
     end
 
@@ -41,7 +41,7 @@ describe Api::V1::UserDeserializer do
     end
     let(:result) do
       {
-        selected_project_id: nil,
+        selected_project_id: nil
       }
     end
 

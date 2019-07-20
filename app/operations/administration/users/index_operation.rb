@@ -7,7 +7,7 @@ module Administration::Users
 
     def model(options, current_user:, **)
       options["model"] =
-        UserPolicy::Scope.(current_user, User)
+        UserPolicy::Scope.call(current_user, User)
     end
   end
 end

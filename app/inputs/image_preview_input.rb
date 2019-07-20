@@ -6,11 +6,10 @@ class ImagePreviewInput < SimpleForm::Inputs::FileInput
     out += template.image_tag(url, class: "img-thumbnail") if url
     out += @builder.input(attribute_name, as: "hidden")
     out += @builder.input("#{attribute_name}_cache", as: "hidden")
-    (out += super).html_safe
+    (out + super).html_safe
   end
 
 private
-
   def url
     @url ||=
       if @builder.object.send(attribute_name).respond_to?(:url)

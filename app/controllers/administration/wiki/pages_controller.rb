@@ -8,7 +8,7 @@ module Administration
       public :show, :new
 
       def create
-        super { [:administration, :wiki] }
+        super { %i[administration wiki] }
       end
     end
   end

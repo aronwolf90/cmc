@@ -12,7 +12,6 @@ module Administration
     property :current_user, virtual: true
     property :issue_id
 
-
     validates :current_user, presence: true
     validates :start_time, presence: true
     validates :end_time, presence: true
@@ -21,30 +20,29 @@ module Administration
     validate :start_time_before_end
     validate :no_overlapping
 
-  private
+    private
+      def start_time_before_end
+        return if start_time.blank?
+        return if end_time.blank?
+        return if start_time < end_time
 
-    def start_time_before_end
-      return if start_time.blank?
-      return if end_time.blank?
-      return if start_time < end_time
+        errors.add(:start_time, "End time before start time")
+      end
 
-      errors.add(:start_time, "End time before start time")
-    end
+      def no_overlapping
+        return if end_time.blank?
+        return if other_records.empty?
 
-    def no_overlapping
-      return if end_time.blank?
-      return if other_records.empty?
+        errors.add(:start_time, "Overlapping with other record")
+      end
 
-      errors.add(:start_time, "Overlapping with other record")
-    end
-
-    def other_records
-      OtherUserRecordsIntervalQuery.(
-        user: current_user,
-        start_time: start_time,
-        end_time: end_time,
-        record_id: id
-      )
-    end
+      def other_records
+        OtherUserRecordsIntervalQuery.call(
+          user: current_user,
+          start_time: start_time,
+          end_time: end_time,
+          record_id: id
+        )
+      end
   end
 end

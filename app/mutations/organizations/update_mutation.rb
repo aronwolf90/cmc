@@ -6,7 +6,8 @@ module Organizations
       model.update!(
         attributes.merge(
           time_zone_seconds: time_zone_seconds
-      ))
+        )
+      )
     end
 
     def time_zone_seconds

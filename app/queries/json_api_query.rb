@@ -19,10 +19,10 @@ class JsonApiQuery < ApplicationQuery
 
   def call
     collection = relation
-      .where(filter_options)
-      .order(sort_options)
-      .ordered
-      .includes(include_options)
+                 .where(filter_options)
+                 .order(sort_options)
+                 .ordered
+                 .includes(include_options)
 
     if query.present?
       collection.search(query)
@@ -31,18 +31,16 @@ class JsonApiQuery < ApplicationQuery
     end
   end
 
-private
-
-  def filter_options
-    filter_params.map do |key, value|
-      case
-      when value == "null"
-        [key, nil]
-      when value.to_s.to_range != nil
-        [key, value.to_range]
-      else
-        [key, value]
-      end
-    end.to_h
-  end
+  private
+    def filter_options
+      filter_params.map do |key, value|
+        if value == "null"
+          [key, nil]
+        elsif !value.to_s.to_range.nil?
+          [key, value.to_range]
+        else
+          [key, value]
+        end
+      end.to_h
+    end
 end

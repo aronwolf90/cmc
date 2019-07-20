@@ -19,7 +19,7 @@ RSpec.describe RecordDay, type: :model do
     let(:user) { create(:admin) }
     let(:record) { create(:record, user: user) }
 
-    before { create(:record, user: user, start_time: 2.day.from_now) }
+    before { create(:record, user: user, start_time: 2.days.from_now) }
 
     it "return asscoaitated records" do
       expect(subject.records).to eq([record])

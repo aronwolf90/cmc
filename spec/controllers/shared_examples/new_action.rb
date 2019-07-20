@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard new action" do
-  |namespace, params: {}|
-
+RSpec.shared_examples "standard new action" do |namespace, params: {}|
   describe "GET new" do
     let(:user) { ADmin.new }
 

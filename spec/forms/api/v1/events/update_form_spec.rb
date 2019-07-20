@@ -9,7 +9,7 @@ describe Api::V1::Events::UpdateForm do
     {
       data: {
         attributes: {
-          "title": "Title",
+          "title": "Title"
         }
       }
     }

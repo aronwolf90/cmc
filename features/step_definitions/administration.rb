@@ -21,7 +21,7 @@ Given(/^I am registered$/) do
   Admin.create!(email: "admin@lvh.me", password: "testtest", password_confirmation: "testtest")
 end
 
-Given(/^I am not registered$/) do; end
+Given(/^I am not registered$/) { ; }
 
 Given(/^I am signed in$/) do
   find_or_create_current_user

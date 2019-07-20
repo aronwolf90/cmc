@@ -18,6 +18,7 @@ module Administration
     def file_present
       return if file.respond_to?(:original_filename)
       return if model.file.file.respond_to?(:original_filename)
+
       errors.add(:file, :blank)
     end
   end

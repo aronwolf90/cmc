@@ -8,5 +8,5 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   include_examples "standard api index action"
   include_examples "standard api update action",
-    Api::V1::Users::UpdateOperation
+                   Api::V1::Users::UpdateOperation
 end

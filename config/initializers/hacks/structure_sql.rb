@@ -14,7 +14,7 @@ module ActiveRecord
 
         args = ["-s", "-x", "-O", "-f", filename]
         args.concat(Array(extra_flags)) if extra_flags
-        unless search_path.blank?
+        if search_path.present?
           args += search_path.split(",").map do |part|
             "--schema=#{part.strip}"
           end

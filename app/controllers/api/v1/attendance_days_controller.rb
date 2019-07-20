@@ -22,11 +22,10 @@ module Api
         }
       end
 
-    private
-
-      def from_date
-        @from_date ||= (params.dig(:page, :number) || Date.current).to_date
-      end
+      private
+        def from_date
+          @from_date ||= (params.dig(:page, :number) || Date.current).to_date
+        end
     end
   end
 end

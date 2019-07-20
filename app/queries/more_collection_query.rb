@@ -21,23 +21,22 @@ class MoreCollectionQuery < ApplicationQuery
     end
   end
 
-private
-
-  def collection_by_more_id
-    if sort_attribute.present?
-      collection
-        .where("#{sort_key} > ? ", sort_attribute)
-    else
-      collection
-        .where("created_at < ? ", more_id_entry.created_at)
+  private
+    def collection_by_more_id
+      if sort_attribute.present?
+        collection
+          .where("#{sort_key} > ? ", sort_attribute)
+      else
+        collection
+          .where("created_at < ? ", more_id_entry.created_at)
+      end
     end
-  end
 
-  def sort_attribute
-    more_id_entry.public_send(sort_key)
-  end
+    def sort_attribute
+      more_id_entry.public_send(sort_key)
+    end
 
-  def more_id_entry
-    collection.find(more_id)
-  end
+    def more_id_entry
+      collection.find(more_id)
+    end
 end

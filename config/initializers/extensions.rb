@@ -6,6 +6,7 @@ class Module
     return false unless self < Object
     return false if self == ApplicationRecord
     return false if self == ActiveRecord::Base
+
     true
   end
 end
@@ -18,10 +19,10 @@ class String
   end
 
   def to_domain
-    domain = underscore.
-      tr("_", "-").
-      tr(" ", "-").
-      gsub(/[^0-9a-z\-]/i, "")
+    domain = underscore
+             .tr("_", "-")
+             .tr(" ", "-")
+             .gsub(/[^0-9a-z\-]/i, "")
 
     domain = "a#{domain}" if domain.first == "-"
     domain = "#{domain}e" if domain.last  == "-"
@@ -34,8 +35,6 @@ class String
       Range.new(*split("..."))
     elsif include?("..")
       Range.new(*split(".."))
-    else
-      nil
     end
   end
 end

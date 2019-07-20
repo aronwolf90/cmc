@@ -8,7 +8,7 @@ module Api::V1
       @form = form
     end
 
-    def call(options, params:, **args)
+    def call(options, params:, **_args)
       options[:errors] = form.call(params).errors
       options[:errors].none?
     end

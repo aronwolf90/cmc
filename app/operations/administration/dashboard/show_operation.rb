@@ -8,12 +8,11 @@ module Administration
       success AssignedIssuesStep
       success :events
 
-    private
-
-      def events(options, params:, **)
-        options["model"][:events] =
-          Event.all.ordered.page(params[:event_page] || 1).per(5)
-      end
+      private
+        def events(options, params:, **)
+          options["model"][:events] =
+            Event.all.ordered.page(params[:event_page] || 1).per(5)
+        end
     end
   end
 end

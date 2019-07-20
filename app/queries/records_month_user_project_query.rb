@@ -11,6 +11,6 @@ class RecordsMonthUserProjectQuery < ApplicationQuery
 
   def call
     records = project.records.where(user: user)
-    RecordsForMonthQuery.(records, month: month)
+    RecordsForMonthQuery.call(records, month: month)
   end
 end

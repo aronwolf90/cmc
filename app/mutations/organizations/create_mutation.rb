@@ -9,15 +9,14 @@ module Organizations
       end
     end
 
-  private
+    private
+      def time_zone_seconds
+        @time_zone_seconds ||=
+          Time.now.in_time_zone(attributes[:time_zone]).utc_offset
+      end
 
-    def time_zone_seconds
-      @time_zone_seconds ||=
-        Time.now.in_time_zone(attributes[:time_zone]).utc_offset
-    end
-
-    def name
-      attributes[:name]
-    end
+      def name
+        attributes[:name]
+      end
   end
 end

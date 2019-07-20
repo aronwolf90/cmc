@@ -42,7 +42,6 @@ Issue.seed do |s|
   s.description   = "description for the test issue"
 end
 
-
 Issue.seed do |s|
   s.id            = 6
   s.board_list_id = 2

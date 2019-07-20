@@ -7,17 +7,16 @@ class RecordsIntervalQuery < ApplicationQuery
     start_in_interval.or(end_in_interval)
   end
 
-private
+  private
+    def start_in_interval
+      relation.where(start_time: interval)
+    end
 
-  def start_in_interval
-    relation.where(start_time: interval)
-  end
+    def end_in_interval
+      relation.where(end_time: interval)
+    end
 
-  def end_in_interval
-    relation.where(end_time: interval)
-  end
-
-  def interval
-    start_time..end_time
-  end
+    def interval
+      start_time..end_time
+    end
 end

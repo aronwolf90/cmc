@@ -9,6 +9,6 @@ RSpec.describe Api::V1::IssuesController, type: :controller do
   include_examples "standard api index action"
   include_examples "standard api show action"
   include_examples "standard api update action",
-    Api::V1::Issues::UpdateOperation
+                   Api::V1::Issues::UpdateOperation
   include_examples "standard api destroy action"
 end

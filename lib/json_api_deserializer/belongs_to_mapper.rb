@@ -11,13 +11,12 @@ class BelongsToMapper < BaseMapper
     end
   end
 
-private
+  private
+    def from_name
+      "relationships/#{name.to_s.tr('_', '-')}/data"
+    end
 
-  def from_name
-    "relationships/#{name.to_s.tr("_", "-")}/data"
-  end
-
-  def to_name
-    "#{name.to_s.singularize}_id"
-  end
+    def to_name
+      "#{name.to_s.singularize}_id"
+    end
 end

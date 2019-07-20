@@ -1,4 +1,4 @@
-Feature: API: create an comment
+Feature: API: create a comment
 
 Scenario: Put an valid event using json in POST body
   Given I am an user with an id of 1

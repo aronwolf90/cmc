@@ -11,13 +11,12 @@ module Records
       end
     end
 
-  protected
-
-    def deactivate_active_records
-      user
-        .records
-        .active
-        .update_all(end_time: Time.zone.now)
-    end
+    protected
+      def deactivate_active_records
+        user
+          .records
+          .active
+          .update_all(end_time: Time.zone.now)
+      end
   end
 end

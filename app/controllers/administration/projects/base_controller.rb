@@ -6,11 +6,10 @@ module Administration
       before_action :set_project
       side_menu "administration/specific_project"
 
-    private
-
-      def set_project
-        @project = ::Project.find(params[:project_id])
-      end
+      private
+        def set_project
+          @project = ::Project.find(params[:project_id])
+        end
     end
   end
 end

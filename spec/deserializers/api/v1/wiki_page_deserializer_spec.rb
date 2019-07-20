@@ -11,7 +11,7 @@ describe Api::V1::WikiPageDeserializer do
       type: "users",
       attributes: {
         title: "new title",
-        content: "new content",
+        content: "new content"
       },
       relationships: {
         "wiki-category": {

@@ -11,23 +11,22 @@ class HasManyBaseMapper < BaseMapper
     end
   end
 
-protected
-
-  def map_entries(entries)
-    entries.to_a.map.with_index do |entry, index|
-      process(entry, index)
+  protected
+    def map_entries(entries)
+      entries.to_a.map.with_index do |entry, index|
+        process(entry, index)
+      end
     end
-  end
 
-  def process(_entry, _index)
-    raise NotImplementedError
-  end
+    def process(_entry, _index)
+      raise NotImplementedError
+    end
 
-  def from_name
-    "relationships/#{name.to_s.tr("_", "-")}/data"
-  end
+    def from_name
+      "relationships/#{name.to_s.tr('_', '-')}/data"
+    end
 
-  def to_name
-    raise NotImplementedError
-  end
+    def to_name
+      raise NotImplementedError
+    end
 end

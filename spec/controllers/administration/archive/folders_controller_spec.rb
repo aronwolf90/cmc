@@ -9,16 +9,16 @@ RSpec.describe Administration::Archive::FoldersController, type: :controller do
   let(:params) { {} }
 
   include_examples "standard new action",
-    Administration::ArchiveFolders
+                   Administration::ArchiveFolders
   include_examples "standard create action",
-    Administration::ArchiveFolders,
-    %i[administration archive]
+                   Administration::ArchiveFolders,
+                   %i[administration archive]
   include_examples "standard edit action",
-    Administration::ArchiveFolders
+                   Administration::ArchiveFolders
   include_examples "standard update action",
-    Administration::ArchiveFolders,
-    %i[administration archive]
+                   Administration::ArchiveFolders,
+                   %i[administration archive]
   include_examples "standard destroy action",
-    Administration::ArchiveFolders,
-    %i[administration archive]
+                   Administration::ArchiveFolders,
+                   %i[administration archive]
 end

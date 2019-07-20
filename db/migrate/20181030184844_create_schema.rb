@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSchema < ActiveRecord::Migration[5.1]
   def up
     drop_table :schema_migrations

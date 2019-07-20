@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard edit action" do
-  |namespace, params: nil|
-
+RSpec.shared_examples "standard edit action" do |namespace, params: nil|
   describe "GET edit" do
     let(:user) { Admin.new }
 

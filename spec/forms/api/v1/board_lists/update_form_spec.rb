@@ -29,13 +29,14 @@ describe Api::V1::BoardLists::UpdateForm do
   end
 
   context "without issue id" do
-    before { params[:data][:relationships][:"issues"][:data][0][:id] = nil }
+    before { params[:data][:relationships][:issues][:data][0][:id] = nil }
 
     it "it has an error: id must be filled" do
       expect(subject.errors).to eq(
         data: { relationships: {
           "issues": { data: { 0 => { id: ["must be filled"] } } }
-        } })
+        } }
+      )
     end
   end
 end

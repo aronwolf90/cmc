@@ -5,7 +5,6 @@ Project.seed do |s|
   s.name      = "Test project"
 end
 
-
 Project.seed do |s|
   s.id        = 2
   s.name      = "Test project 2"

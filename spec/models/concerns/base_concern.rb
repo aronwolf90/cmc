@@ -3,6 +3,5 @@
 class BaseConcern
   include ActiveSupport::Concern
 
-  def application_descendants
-  end
+  def application_descendants; end
 end

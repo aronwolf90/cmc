@@ -12,5 +12,5 @@ RSpec.describe Api::V1::CurrentRecordsController, type: :controller do
   end
 
   include_examples "simple api show action",
-    params: { user_id: 1 }
+                   params: { user_id: 1 }
 end

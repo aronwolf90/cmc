@@ -35,11 +35,10 @@ module ApplicationHelper
     ].join(".")
   end
 
-
   def dropdown_link(*args, **options, &block)
     options[:class] ||= ""
     options[:class] += " dropdown-item"
-    link_to *args, options, &block
+    link_to(*args, options, &block)
   end
 
   def link(object, url)

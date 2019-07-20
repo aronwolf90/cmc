@@ -29,7 +29,7 @@ describe RegistrationForm do
   end
 
   context "diferent passwords" do
-    let(:invalid_params) { valid_params.merge(confirmation_password: "123")  }
+    let(:invalid_params) { valid_params.merge(confirmation_password: "123") }
 
     specify do
       expect(subject.validate(invalid_params)).to be false
@@ -37,7 +37,7 @@ describe RegistrationForm do
   end
 
   context "organization already exists" do
-    before { allow(Organization).to receive(:exists?).and_return true  }
+    before { allow(Organization).to receive(:exists?).and_return true }
 
     specify do
       expect(subject.validate(valid_params)).to be false

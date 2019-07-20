@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Knock.setup do |config|
-
   ## Expiration claim
   ## ----------------
   ##
@@ -9,7 +8,6 @@ Knock.setup do |config|
   ## last forever.
   ##
   config.token_lifetime = nil if Rails.env.test? :test
-
 
   ## Audience claim
   ## --------------

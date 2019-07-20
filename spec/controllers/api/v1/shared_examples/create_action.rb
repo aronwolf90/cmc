@@ -5,12 +5,12 @@ RSpec.shared_examples "standard api create action" do |operation|
     subject { post :create }
 
     let(:user) { User.new }
-    let(:params) {
+    let(:params) do
       {
         "controller" => "api/v1/#{model.class.name.underscore.pluralize}",
         "action" => "create"
       }
-    }
+    end
 
     before do
       allow(result).to receive(:[]).with(:model).and_return(nil)
@@ -24,7 +24,7 @@ RSpec.shared_examples "standard api create action" do |operation|
     end
 
     context "valid request" do
-      let(:result) { double(success?: true)  }
+      let(:result) { double(success?: true) }
 
       it "pass collection to render" do
         expect(operation).to receive(:call)
@@ -35,7 +35,7 @@ RSpec.shared_examples "standard api create action" do |operation|
     end
 
     context "invalid request" do
-      let(:result) { double(success?: false)  }
+      let(:result) { double(success?: false) }
 
       specify do
         expect(operation).to receive(:call)

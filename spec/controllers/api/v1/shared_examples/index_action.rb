@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard api index action" do |namespace|
+RSpec.shared_examples "standard api index action" do |_namespace|
   describe "GET index" do
     subject { get :index }
 

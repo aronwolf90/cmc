@@ -21,9 +21,7 @@ RSpec.shared_examples "standard api show action" do
   end
 end
 
-
 RSpec.shared_examples "simple api show action" do |params: {}|
-
   describe "GET show" do
     subject { get :show, params: params }
 

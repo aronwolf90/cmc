@@ -8,7 +8,7 @@ module Administration
 
       def model(options, current_user:, **)
         options["model"] =
-          ProjectPolicy::Scope.(current_user, Project)
+          ProjectPolicy::Scope.call(current_user, Project)
       end
     end
   end

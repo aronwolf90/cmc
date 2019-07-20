@@ -37,7 +37,8 @@ describe Api::V1::Issues::UpdateForm do
       expect(subject.errors).to eq(
         data: { relationships: {
           user: { data: { id: ["must be filled"] } }
-        } })
+        } }
+      )
     end
   end
 end

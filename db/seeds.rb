@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 if Apartment::Tenant.current == "public" && Organization.none?
   {
     true => %w[test-organization],
     false => %w[public]
   }[Settings.multi_tenant].each do |name|
     next if Organization.exists?(name: name)
-    mutation(Organization, :create).(name: name, time_zone: "Berlin")
+
+    mutation(Organization, :create).call(name: name, time_zone: "Berlin")
   end
 end
 

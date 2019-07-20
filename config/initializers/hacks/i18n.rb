@@ -6,6 +6,6 @@ module I18n
       super if text
     end
 
-    alias_method :l, :localize
+    alias l localize
   end
 end

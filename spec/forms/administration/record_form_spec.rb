@@ -8,7 +8,7 @@ describe Administration::RecordForm do
   end
 
   let(:record) { build_stubbed(:record, user: user) }
-  let(:user) { build_stubbed(:user, current_record: nil)  }
+  let(:user) { build_stubbed(:user, current_record: nil) }
   let(:issue) { record.issue }
 
   before do

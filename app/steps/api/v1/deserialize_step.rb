@@ -8,7 +8,7 @@ module Api::V1
       @deserializer = deserializer
     end
 
-    def call(options, params:, **args)
+    def call(options, params:, **_args)
       options[:deserialized_params] = deserializer.call(params[:data])
     end
   end

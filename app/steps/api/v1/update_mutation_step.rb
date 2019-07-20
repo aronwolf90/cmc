@@ -2,7 +2,7 @@
 
 module Api::V1
   class UpdateMutationStep < ApiStep
-    def self.call(options, deserialized_params:, model:, current_user:, **args)
+    def self.call(_options, deserialized_params:, model:, current_user:, **_args)
       mutation(model, :update).call(
         user: current_user,
         **deserialized_params

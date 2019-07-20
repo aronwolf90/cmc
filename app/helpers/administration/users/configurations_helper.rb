@@ -5,7 +5,7 @@ module Administration
     module ConfigurationsHelper
       include AdministrationHelper
 
-      def cancel_btn;end
+      def cancel_btn; end
 
       def destroy_btn(user)
         return unless policy(user).destroy?
@@ -13,7 +13,7 @@ module Administration
         path = administration_user_configuration_path(user)
 
         link_to "Destroy", path, method: :delete,
-          class: "btn btn-destroy"
+                                 class: "btn btn-destroy"
       end
     end
   end

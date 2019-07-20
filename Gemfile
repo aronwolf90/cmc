@@ -15,11 +15,11 @@ gem "devise"
 gem "devise_invitable"
 
 # Lovlevel
-gem "acts_as_paranoid"
 gem "active_model_serializers"
+gem "acts_as_paranoid"
 gem "carrierwave"
-gem "config"
 gem "composite_primary_keys"
+gem "config"
 gem "dry-transaction"
 gem "fog-aws"
 gem "hash_mapper"
@@ -60,8 +60,8 @@ gem "bootstrap", "~> 4"
 gem "bootstrap3-datetimepicker-rails"
 gem "jquery-rails"
 gem "momentjs-rails"
-gem "turbolinks"
 gem "select2-rails"
+gem "turbolinks"
 
 # Template
 gem "font-awesome-rails"
@@ -87,11 +87,11 @@ group :development do
 end
 
 group :development, :test do
-  gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "bullet"
-  gem "rails-controller-testing"
+  gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
   gem "foreman", "0.27.0"
+  gem "rails-controller-testing"
   gem "rspec-rails"
 
   # static code analyzers
@@ -108,9 +108,9 @@ group :test do
   gem "cucumber-rails", require: false
   gem "database_cleaner", require: false
   gem "db-query-matchers"
-  gem "selenium-webdriver", require: false
-  gem "simplecov", require: false
   gem "rspec-cells"
+  gem "selenium-webdriver", require: false
   gem "shoulda-matchers"
+  gem "simplecov", require: false
   gem "timecop"
 end

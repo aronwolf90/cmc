@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard create action" do
-  |namespace, redirect, params: {}|
-
+RSpec.shared_examples "standard create action" do |namespace, redirect, params: {}|
   describe "POST create" do
     let(:user) { Admin.new }
 

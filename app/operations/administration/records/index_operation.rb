@@ -14,11 +14,11 @@ module Administration
       end
 
       def paginate(options, model:, params:, **)
-        options["model"] = Paginator.(model, params[:page])
+        options["model"] = Paginator.call(model, params[:page])
       end
 
       def preload(options, model:, current_user:, **)
-        options["model"] = Preloader.(current_user, model)
+        options["model"] = Preloader.call(current_user, model)
       end
     end
   end

@@ -13,7 +13,7 @@ RSpec.describe Administration::ProjectsController, type: :controller do
   include_examples "standard edit action", Administration::Projects
   include_examples "standard create action", Administration::Projects
   include_examples "standard update action", Administration::Projects,
-    %i[administration projects]
+                   %i[administration projects]
   include_examples "standard destroy action", Administration::Projects,
-    %i[administration projects]
+                   %i[administration projects]
 end

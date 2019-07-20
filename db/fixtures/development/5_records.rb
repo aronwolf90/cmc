@@ -4,8 +4,8 @@ Record.seed do |s|
   s.id          = 1
   s.user_id     = 1
   s.issue_id    = 5
-  s.start_time  = 1.weeks.ago - 1.hour
-  s.end_time    = 1.weeks.ago
+  s.start_time  = 1.week.ago - 1.hour
+  s.end_time    = 1.week.ago
 end
 
 Record.seed do |s|
@@ -37,7 +37,7 @@ Record.seed do |s|
   s.user_id     = 2
   s.issue_id    = 6
   s.start_time  = 16.weeks.ago - 7.hours
-  s.end_time    = 16.week.ago
+  s.end_time    = 16.weeks.ago
 end
 
 Record.seed do |s|

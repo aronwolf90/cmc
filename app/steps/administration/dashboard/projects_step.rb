@@ -7,13 +7,13 @@ module Administration::Dashboard
 
       options["model"][:projects] =
         Project.all.map do |project|
-        [
-          project,
-          total_spent_time(current_user, project),
-          month_spent_time(current_user, project),
-          last_month_spent_time(current_user, project)
-        ]
-      end
+          [
+            project,
+            total_spent_time(current_user, project),
+            month_spent_time(current_user, project),
+            last_month_spent_time(current_user, project)
+          ]
+        end
     end
 
     def self.init(options)
@@ -27,26 +27,26 @@ module Administration::Dashboard
         project: project
       )
 
-      SqlSpendedTimeCalculator.(records)
+      SqlSpendedTimeCalculator.call(records)
     end
 
     def self.month_spent_time(current_user, project)
-      records = RecordsMonthUserProjectQuery.(
+      records = RecordsMonthUserProjectQuery.call(
         user: current_user,
         project: project
       )
 
-      SqlSpendedTimeCalculator.(records)
+      SqlSpendedTimeCalculator.call(records)
     end
 
     def self.last_month_spent_time(current_user, project)
-      records = RecordsMonthUserProjectQuery.(
+      records = RecordsMonthUserProjectQuery.call(
         user: current_user,
         project: project,
         month: 1.month.ago
       )
 
-      SqlSpendedTimeCalculator.(records)
+      SqlSpendedTimeCalculator.call(records)
     end
   end
 end

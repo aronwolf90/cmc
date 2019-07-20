@@ -6,7 +6,7 @@ module Administration
       include AdministrationHelper
 
       def cancel_btn
-        super([:administration, :archive])
+        super(%i[administration archive])
       end
 
       def destroy_btn(document)

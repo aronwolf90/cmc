@@ -36,7 +36,7 @@ ActionController::Base.allow_rescue = false
 # Remove/comment out the lines below if your app doesn"t have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 
-Before do |scenario|
+Before do |_scenario|
   ActiveRecord::Base.connection.execute('DROP SCHEMA IF EXISTS "test-organization" CASCADE')
   DatabaseCleaner.clean_with(:truncation, reset_ids: true)
   Timecop.travel("11.06.2018 17:00:00")

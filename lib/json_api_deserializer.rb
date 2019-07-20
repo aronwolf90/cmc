@@ -14,19 +14,19 @@ class JsonApiDeserializer
     end
 
     def has_many(name, sort_attribute: nil)
-      HasManyMapper.(self, name: name)
+      HasManyMapper.call(self, name: name)
     end
 
     def has_many_sort(name, attribute: nil)
-      HasManySortMapper.(self, name: name, attribute: attribute)
+      HasManySortMapper.call(self, name: name, attribute: attribute)
     end
 
     def attribute(name)
-      AttributeMapper.(self, name: name)
+      AttributeMapper.call(self, name: name)
     end
 
     def belongs_to(name)
-      BelongsToMapper.(self, name: name)
+      BelongsToMapper.call(self, name: name)
     end
   end
 end

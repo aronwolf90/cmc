@@ -9,7 +9,6 @@ class ApplicationRecord < ActiveRecord::Base
   scope :ordered, -> { order(:id) }
   pg_search_scope :search, against: %i[id]
 
-
   # :nocov:
   def self.seed(&block)
     # HACK

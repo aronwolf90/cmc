@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAttendanceEvents < ActiveRecord::Migration[5.1]
   def change
     create_table :attendance_events do |t|

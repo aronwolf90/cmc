@@ -10,9 +10,8 @@ class AttributeMapper < BaseMapper
     map from(name_from), to(name.to_s)
   end
 
-private
-
-  def name_from
-    "attributes/#{name.to_s.tr("_", "-")}"
-  end
+  private
+    def name_from
+      "attributes/#{name.to_s.tr('_', '-')}"
+    end
 end

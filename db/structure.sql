@@ -4,6 +4,7 @@ SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
@@ -130,6 +131,47 @@ CREATE SEQUENCE comments_id_seq
 --
 
 ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
+-- Name: contacts; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE contacts (
+    id bigint NOT NULL,
+    name character varying,
+    avatar character varying,
+    lastname character varying,
+    email character varying,
+    description character varying,
+    address_city character varying,
+    address_zip character varying,
+    address_street character varying,
+    address_number character varying,
+    address_country character varying,
+    kind integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: contacts_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE contacts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: contacts_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE contacts_id_seq OWNED BY contacts.id;
 
 
 --
@@ -592,6 +634,13 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 
 
 --
+-- Name: contacts id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY contacts ALTER COLUMN id SET DEFAULT nextval('contacts_id_seq'::regclass);
+
+
+--
 -- Name: documents id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
@@ -698,6 +747,14 @@ ALTER TABLE ONLY board_lists
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: contacts contacts_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY contacts
+    ADD CONSTRAINT contacts_pkey PRIMARY KEY (id);
 
 
 --
@@ -1063,6 +1120,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181208224113'),
 ('20181208224623'),
 ('20181208224833'),
-('20190503200308');
+('20190503200308'),
+('20190712213034');
 
 

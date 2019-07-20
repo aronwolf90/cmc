@@ -36,7 +36,7 @@ RSpec.describe SessionsController do
     end
 
     context "login" do
-      let!(:user) { create(:admin)  }
+      let!(:user) { create(:admin) }
 
       specify do
         post(

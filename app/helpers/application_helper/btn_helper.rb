@@ -17,21 +17,21 @@ module ApplicationHelper
       return unless policy(object).edit?
 
       link_to fa_icon(:edit), path,
-        class: "btn btn-sm btn-secondary"
+              class: "btn btn-sm btn-secondary"
     end
 
     def csv_btn(object, path)
       return unless policy(object).index?
 
       link_to fa_icon(:"file-excel-o"), path,
-        class: "btn btn-sm btn-success"
+              class: "btn btn-sm btn-success"
     end
 
     def destroy_btn(object, path, options = {})
       return unless policy(object).destroy?
 
       link_to "Destroy", path, method: :delete,
-        class: "btn btn-danger #{options[:class]}"
+                               class: "btn btn-danger #{options[:class]}"
     end
 
     def cancel_btn(path = { action: :index }, options = {})

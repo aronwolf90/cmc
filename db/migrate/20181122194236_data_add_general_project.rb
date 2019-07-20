@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DataAddGeneralProject < ActiveRecord::Migration[5.1]
   def data
     Project.create!(name: "General project").tap do |project|

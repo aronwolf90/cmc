@@ -8,7 +8,7 @@ describe Administration::WikiPageForm do
   let(:wiki_page) do
     build_stubbed(:wiki_page, wiki_category: parent_category)
   end
-  let(:parent_category) { build_stubbed(:wiki_category)  }
+  let(:parent_category) { build_stubbed(:wiki_category) }
 
   it { expect(subject.validate({})).to be true }
   it { expect(subject.validate(title: nil)).to be false }

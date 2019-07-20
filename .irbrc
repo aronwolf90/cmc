@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-IRB.conf[:IRB_RC] = Proc.new do
+IRB.conf[:IRB_RC] = proc do
   tenants = Apartment.tenant_names.sort
 
   if tenants.size == 1

@@ -54,9 +54,9 @@ RSpec.describe Api::V1::AttendanceEventsController do
     end
 
     include_examples "standard api create action",
-      Api::V1::AttendanceEvents::CreateOperation
+                     Api::V1::AttendanceEvents::CreateOperation
     include_examples "standard api update action",
-      Api::V1::AttendanceEvents::UpdateOperation
+                     Api::V1::AttendanceEvents::UpdateOperation
     include_examples "standard api destroy action"
   end
 end

@@ -18,29 +18,28 @@ module Issues
       end
     end
 
-  private
-
-    def issues_without_ordinal_number
-      model.board_list.issues.select do |issue|
-        issue.ordinal_number.nil?
+    private
+      def issues_without_ordinal_number
+        model.board_list.issues.select do |issue|
+          issue.ordinal_number.nil?
+        end
       end
-    end
 
-    def max_ordinal_number
-      @max_ordinal_number ||= model.board_list.issues.max_by do |issue|
-        issue.ordinal_number || 0
-      end.ordinal_number
-    end
-
-    def issues_after_model
-      model.board_list.issues.select do |issue|
-        issue.ordinal_number >= ordinal_number &&
-          model.id != issue.id
+      def max_ordinal_number
+        @max_ordinal_number ||= model.board_list.issues.max_by do |issue|
+          issue.ordinal_number || 0
+        end.ordinal_number
       end
-    end
 
-    def ordinal_number
-      attributes[:ordinal_number]
-    end
+      def issues_after_model
+        model.board_list.issues.select do |issue|
+          issue.ordinal_number >= ordinal_number &&
+            model.id != issue.id
+        end
+      end
+
+      def ordinal_number
+        attributes[:ordinal_number]
+      end
   end
 end

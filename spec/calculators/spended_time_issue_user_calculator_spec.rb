@@ -6,7 +6,7 @@ RSpec.describe SpendedTimeIssueUserCalculator do
   subject { described_class.call(issue, user) }
 
   let(:user) { User.new(id: 1) }
-  let(:issue) { Issue.new(records:  [record]) }
+  let(:issue) { Issue.new(records: [record]) }
   let(:record) do
     build_stubbed(:record, user_id: user.id)
   end

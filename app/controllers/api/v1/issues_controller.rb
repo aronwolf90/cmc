@@ -9,11 +9,10 @@ module Api
 
       public :index, :show, :update, :destroy
 
-    private
-
-      def query
-        super.page(params[:page]).per(15)
-      end
+      private
+        def query
+          super.page(params[:page]).per(15)
+        end
     end
   end
 end

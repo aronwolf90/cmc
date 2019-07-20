@@ -10,5 +10,5 @@ RSpec.describe Administration::OrganizationsController, type: :controller do
 
   include_examples "standard edit action", Administration::Organizations
   include_examples "standard update action", Administration::Organizations,
-    %i[edit administration organization]
+                   %i[edit administration organization]
 end

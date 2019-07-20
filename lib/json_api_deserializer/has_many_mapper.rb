@@ -5,13 +5,12 @@ require_relative "has_many_base_mapper"
 class HasManyMapper < HasManyBaseMapper
   pattr_initialize :serializer, %i[name!]
 
-private
+  private
+    def process(entry, _index)
+      entry.dig(:id)
+    end
 
-  def process(entry, _index)
-    entry.dig(:id)
-  end
-
-  def to_name
-    "#{name.to_s.singularize}_ids"
-  end
+    def to_name
+      "#{name.to_s.singularize}_ids"
+    end
 end

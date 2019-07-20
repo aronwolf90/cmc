@@ -7,7 +7,7 @@ module Administration::Users
     public :edit
 
     def update
-      super { {  action: :edit } }
+      super { { action: :edit } }
     end
 
     def destroy

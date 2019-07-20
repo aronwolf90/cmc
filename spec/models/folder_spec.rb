@@ -9,7 +9,7 @@ RSpec.describe Folder, type: :model do
 
   describe "#root?" do
     context "has no parent folder" do
-      subject { build_stubbed(:folder, folder: nil)  }
+      subject { build_stubbed(:folder, folder: nil) }
 
       it { is_expected.to be_root }
     end

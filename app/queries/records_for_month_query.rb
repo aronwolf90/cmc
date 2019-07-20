@@ -12,9 +12,8 @@ class RecordsForMonthQuery < ApplicationQuery
     relation.where(start_time: interval)
   end
 
-private
-
-  def interval
-    month.at_beginning_of_month..month.at_end_of_month
-  end
+  private
+    def interval
+      month.at_beginning_of_month..month.at_end_of_month
+    end
 end

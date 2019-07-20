@@ -20,15 +20,15 @@ class User < ApplicationRecord
   has_many :records, -> { ordered }
   has_many :record_days, -> { ordered }
   has_one :current_record, -> { active.order(created_at: :desc) },
-    class_name: "Record"
+          class_name: "Record"
   has_many :users
   has_many :user_projects
   has_many :projects, through: :user_projects
   has_many :worked_issues, through: :records, class_name: "Issue",
-    source: :issue
+                           source: :issue
 
   # Knock requires :authenticate
-  alias_method :authenticate, :valid_password?
+  alias authenticate valid_password?
 
   def name
     [firstname, lastname].join(" ")

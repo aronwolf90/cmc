@@ -11,26 +11,25 @@ module Registrations
       end
     end
 
-  private
+    private
+      def create_organization
+        mutation(Organization, :create).call(
+          name: organization_name,
+          time_zone: attributes[:time_zone]
+        )
+      end
 
-    def create_organization
-      mutation(Organization, :create).(
-        name: organization_name,
-        time_zone: attributes[:time_zone],
-      )
-    end
+      def create_user
+        Admin.create!(
+          firstname: attributes[:firstname],
+          lastname: attributes[:lastname],
+          email: attributes[:email],
+          password: attributes[:password]
+        )
+      end
 
-    def create_user
-      Admin.create!(
-        firstname: attributes[:firstname],
-        lastname: attributes[:lastname],
-        email: attributes[:email],
-        password: attributes[:password]
-      )
-    end
-
-    def organization_name
-      @organization_name ||= attributes[:name].to_domain
-    end
+      def organization_name
+        @organization_name ||= attributes[:name].to_domain
+      end
   end
 end

@@ -8,10 +8,9 @@ module Api::V1
 
     public :show
 
-  private
-
-    def model
-      @model ||= current_user.current_record
-    end
+    private
+      def model
+        @model ||= current_user.current_record
+      end
   end
 end

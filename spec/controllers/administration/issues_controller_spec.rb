@@ -8,13 +8,13 @@ RSpec.describe Administration::IssuesController, type: :controller do
   let(:form) { Administration::IssueForm }
 
   include_examples "standard show action",
-    Administration::Issues,
-    params: { board_list_id: 1, id: 1 }
+                   Administration::Issues,
+                   params: { board_list_id: 1, id: 1 }
   include_examples "standard new action",
-    Administration::Issues,
-    params: { board_list_id: 1, id: 1 }
+                   Administration::Issues,
+                   params: { board_list_id: 1, id: 1 }
   include_examples "standard create action",
-    Administration::Issues,
-    %i[administration board_lists],
-    params: { board_list_id: 1 }
+                   Administration::Issues,
+                   %i[administration board_lists],
+                   params: { board_list_id: 1 }
 end

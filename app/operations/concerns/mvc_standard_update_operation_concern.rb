@@ -7,7 +7,7 @@ module MvcStandardUpdateOperationConcern
     form = @form
     model_step = @model_step || self::Model(form.model_options.first, :find)
     policy = @policy || "#{form.model_options.first}Policy".constantize
-    mutation = @mutation || StandardUpdateMutation
+    @mutation || StandardUpdateMutation
 
     base.const_set("Present", Class.new(Trailblazer::Operation) do
       success model_step

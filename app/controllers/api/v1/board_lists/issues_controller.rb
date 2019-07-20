@@ -14,36 +14,36 @@ module Api
           )
         end
 
-      private
+        private
+          def collection
+            MoreCollectionQuery.call(
+              board_list.issues,
+              more_id: params[:more_id]
+            )
+          end
 
-        def collection
-          MoreCollectionQuery.(
-            board_list.issues,
-            more_id: params[:more_id]
-          )
-        end
+          def next_more_path
+            return if collection.count <= per_page
 
-        def next_more_path
-          return if collection.count <= per_page
-          api_v1_board_list_issues_path(
-            board_list,
-            more_id: next_more_id
-          )
-        end
+            api_v1_board_list_issues_path(
+              board_list,
+              more_id: next_more_id
+            )
+          end
 
-        def next_more_id
-          collection.limit(per_page).last.id
-        end
+          def next_more_id
+            collection.limit(per_page).last.id
+          end
 
-        def board_list
-          @board_list ||= BoardList
-            .includes(:issues)
-            .find(params[:board_list_id])
-        end
+          def board_list
+            @board_list ||= BoardList
+                            .includes(:issues)
+                            .find(params[:board_list_id])
+          end
 
-        def more_id_issue
-          @more_id_issue ||= Issue.find(params[:more_id])
-        end
+          def more_id_issue
+            @more_id_issue ||= Issue.find(params[:more_id])
+          end
       end
     end
   end

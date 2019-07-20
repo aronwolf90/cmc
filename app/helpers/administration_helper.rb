@@ -33,15 +33,14 @@ module AdministrationHelper
     super(*transformation(object, action: :edit))
   end
 
-private
+  private
+    def transformation(object, action: nil)
+      path = %i[administration] + Array(object)
+      [path.last, create_url(action, path)]
+    end
 
-  def transformation(object, action: nil)
-    path = %i[administration] + Array(object)
-    [path.last, create_url(action, path)]
-  end
-
-  def create_url(action, path)
-    method = (Array(action) + ["polymorphic_path"]).join("_")
-    send(method, path)
-  end
+    def create_url(action, path)
+      method = (Array(action) + ["polymorphic_path"]).join("_")
+      send(method, path)
+    end
 end

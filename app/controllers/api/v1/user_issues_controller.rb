@@ -7,12 +7,11 @@ module Api::V1
 
     public :index, :show
 
-  private
-
-    def model
-      @model ||=
-        model_class
-        .find_or_initialize_by(user_id: id[0], issue_id: id[1])
-    end
+    private
+      def model
+        @model ||=
+          model_class
+          .find_or_initialize_by(user_id: id[0], issue_id: id[1])
+      end
   end
 end

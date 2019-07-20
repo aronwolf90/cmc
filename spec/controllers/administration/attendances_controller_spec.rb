@@ -8,6 +8,6 @@ RSpec.describe Administration::AttendancesController, type: :controller do
 
   it "GET index" do
     sign_in Admin.new
-    expect(get :index).to render_template :index
+    expect(get(:index)).to render_template :index
   end
 end

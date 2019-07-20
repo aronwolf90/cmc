@@ -11,5 +11,5 @@ RSpec.describe RegistrationsController do
 
   include_examples "standard new action", Registrations
   include_examples "standard create action", Registrations,
-    "http://test.test.host/users/sign_in"
+                   "http://test.test.host/users/sign_in"
 end

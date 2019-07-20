@@ -7,7 +7,7 @@ RSpec.describe Api::V1::RecordsController, type: :controller do
   let(:model) { Record.new(id: 1) }
 
   include_examples "standard api create action",
-    Api::V1::Records::CreateOperation
+                   Api::V1::Records::CreateOperation
   include_examples "standard api update action",
-    Api::V1::Records::UpdateOperation
+                   Api::V1::Records::UpdateOperation
 end
