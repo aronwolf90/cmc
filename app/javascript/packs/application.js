@@ -14,6 +14,10 @@ import Calender from '../calender'
 import Timepicker from '../components/timepicker'
 import Datepicker from '../components/datepicker'
 import Attendances from '../attendances'
+import ContactsIndex from '../contacts/index'
+import Contact from '../contacts/show'
+import ContactNew from '../contacts/new'
+import ContactEdit from '../contacts/edit'
 
 require('../config')
 
@@ -29,6 +33,10 @@ Vue.component('calender', Calender)
 Vue.component('timepicker', Timepicker)
 Vue.component('datepicker', Datepicker)
 Vue.component('attendances', Attendances)
+Vue.component('contacts-index', ContactsIndex)
+Vue.component('contact', Contact)
+Vue.component('contact-new', ContactNew)
+Vue.component('contact-edit', ContactEdit)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')

@@ -31,6 +31,12 @@ Scenario: Post an valid event using json in POST body
           "all-day": true,
           "description": "description"
         },
+        "meta": {
+          "permissions": {
+            "update": true, 
+            "destroy": true
+          }
+        },
         "links": { "self": "/api/v1/events/1" }
       }
     }

@@ -21,6 +21,12 @@ Scenario: Get
           "wiki-category": { "data": null },
           "wiki-categories": { "data": [] },
           "wiki-pages": { "data": [] }
+        },
+        "meta": {
+          "permissions": {
+            "update": true,
+            "destroy": true
+          }
         }
       }],
       "links": { "self": "/api/v1/wiki_categories" }

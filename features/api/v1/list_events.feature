@@ -20,7 +20,15 @@ Scenario: Get /api/v1/events
           "all-day": true,
           "description": null
         },
-        "links": { "self": "/api/v1/events/1" }
+        "links": {
+          "self": "/api/v1/events/1"
+        },
+        "meta": {
+          "permissions": {
+            "update": true,
+            "destroy": true
+          }
+        }
       }],
       "links": { "self": "/api/v1/events" }
     }

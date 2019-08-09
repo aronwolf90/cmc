@@ -21,6 +21,12 @@ Scenario: Get
           "folder": { "data": null },
           "folders": { "data": [] },
           "documents": { "data": [] }
+        },
+        "meta": {
+          "permissions": {
+            "update": true,
+            "destroy": true
+          }
         }
       }],
       "links": { "self": "/api/v1/folders" }

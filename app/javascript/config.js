@@ -8,7 +8,8 @@ import {
   FormGroup,
   Form,
   FormSelect,
-  Tooltip
+  Tooltip,
+  FormFilePlugin
 } from 'bootstrap-vue/es/components'
 import TurbolinksAdapter from './vue_turbolinks'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -40,3 +41,4 @@ Vue.use(DaySpanVuetify, {
     getDefaultEventColor: () => '#1976d2'
   }
 })
+Vue.use(FormFilePlugin)

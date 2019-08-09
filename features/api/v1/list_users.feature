@@ -18,7 +18,15 @@ Scenario: Get
           "current-record": { "data": null },
           "selected-project": { "data": null }
         },
-        "links": { "self": "/api/v1/users/1" }
+        "links": {
+          "self": "/api/v1/users/1"
+        },
+        "meta": {
+          "permissions": {
+            "update": true,
+            "destroy": true
+          }
+        }
       }],
       "links": { "self": "/api/v1/users" }
     }

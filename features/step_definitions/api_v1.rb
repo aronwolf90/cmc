@@ -91,5 +91,48 @@ Given(/an attendance event exists with an id of 1/) do
 end
 
 Given(/a contact exists with an id of 1/) do
-  FactoryBot.create(:contact, id: 1)
+  contact_avatar = ContactAvatar.create!(
+    id: 1,
+    file: File.open(Rails.root.join("features", "support", "attachments", "avatar.jpg"))
+  )
+  FactoryBot.create(
+    :contact,
+    id: 1,
+    contact_avatar: contact_avatar,
+    name: "Frantz",
+    description: "Test description",
+    telephone: "01727873609",
+    mobile: "01702876609",
+    fax: "01727876620",
+    address_city: "Augsburg",
+    address_zip: "86153",
+    address_country: "germany",
+    address_street: "Street",
+    address_number: "8"
+  )
+end
+
+Given(/^(?:|I )send a multipart (POST|PUT) request (?:for|to) "([^"]*)" with:/) do |verb, path, body|
+  body = body.hashes
+  request_opts = {}
+
+  request_opts[:method] = verb.downcase.to_sym
+  request_opts[:params] = body.inject({}) do |hash, row|
+    if row["Filename"].present?
+      hash[row["Name"]] = Rack::Test::UploadedFile.new(Rails.root.join("features/support/attachments/", row["Filename"]), row["Type"])
+    else
+      hash[row["Name"]] = row["Content"].strip
+    end
+    hash
+  end
+
+
+  request path, request_opts
+end
+
+Given(/^a contact avatar exists with an id of 1/) do
+  ContactAvatar.create!(
+    id: 1,
+    file: File.open(Rails.root.join("features", "support", "attachments", "avatar.jpg"))
+  )
 end

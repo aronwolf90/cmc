@@ -134,22 +134,54 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
+-- Name: contact_avatars; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE contact_avatars (
+    id bigint NOT NULL,
+    file character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: contact_avatars_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE contact_avatars_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: contact_avatars_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE contact_avatars_id_seq OWNED BY contact_avatars.id;
+
+
+--
 -- Name: contacts; Type: TABLE; Schema: test-organization; Owner: -
 --
 
 CREATE TABLE contacts (
     id bigint NOT NULL,
     name character varying,
-    avatar character varying,
-    lastname character varying,
     email character varying,
     description character varying,
+    telephone character varying,
+    mobile character varying,
+    fax character varying,
     address_city character varying,
     address_zip character varying,
     address_street character varying,
     address_number character varying,
     address_country character varying,
-    kind integer,
+    contact_avatar_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -634,6 +666,13 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 
 
 --
+-- Name: contact_avatars id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY contact_avatars ALTER COLUMN id SET DEFAULT nextval('contact_avatars_id_seq'::regclass);
+
+
+--
 -- Name: contacts id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
@@ -747,6 +786,14 @@ ALTER TABLE ONLY board_lists
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: contact_avatars contact_avatars_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY contact_avatars
+    ADD CONSTRAINT contact_avatars_pkey PRIMARY KEY (id);
 
 
 --
@@ -886,6 +933,13 @@ CREATE INDEX index_comments_on_issue_id ON comments USING btree (issue_id);
 --
 
 CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
+
+
+--
+-- Name: index_contacts_on_contact_avatar_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_contacts_on_contact_avatar_id ON contacts USING btree (contact_avatar_id);
 
 
 --
@@ -1121,6 +1175,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181208224623'),
 ('20181208224833'),
 ('20190503200308'),
+('20190607213618'),
 ('20190712213034');
 
 

@@ -28,7 +28,15 @@ Scenario: Get the current record from an user
             "data": null
           }
         },
-        "links": { "self": "/api/v1/records/1" }
+        "links": {
+          "self": "/api/v1/records/1"
+        },
+        "meta": {
+          "permissions": {
+            "update": true,
+            "destroy": true
+          }
+        }
       }
     }
     """

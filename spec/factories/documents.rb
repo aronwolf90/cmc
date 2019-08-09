@@ -5,7 +5,7 @@ FactoryBot.define do
     name "document.txt"
     file do
       Rack::Test::UploadedFile.new(
-        Rails.root.join("spec", "fixures", "document.txt")
+        Rails.root.join("spec", "fixtures", "document.txt")
       )
     end
     association :folder

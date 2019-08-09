@@ -25,6 +25,12 @@ Scenario: Get
         },
         "links": { 
           "self": "/api/v1/board_lists/1"
+        },
+        "meta": {
+          "permissions": {
+            "update": true, 
+            "destroy": true
+          }
         }
       }
     }

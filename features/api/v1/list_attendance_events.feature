@@ -31,6 +31,12 @@ Scenario: Get
           },
           "links": {
             "self": "/api/v1/attendance_events/1"
+          },
+          "meta": {
+            "permissions": {
+              "update": true, 
+              "destroy": true
+            }
           }
         }
       ],

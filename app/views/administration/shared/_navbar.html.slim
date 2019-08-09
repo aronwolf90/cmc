@@ -24,6 +24,10 @@
           path: administration_users_path,
           policy: policy(User).index?,
           includes: "users")
+      = menu_item("Contacts",
+          path: administration_contacts_path,
+          policy: policy(Contact).index?,
+          includes: "contacts")
       = menu_item("Admin",
           path: %i[edit administration organization],
           policy: policy(Organization).index?,

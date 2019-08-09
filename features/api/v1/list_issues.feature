@@ -35,7 +35,15 @@ Scenario: Get /api/v1/issues
           },
           "comments": { "data": [] }
         },
-        "links": {"self": "/api/v1/issues/1"}
+        "links": {
+          "self": "/api/v1/issues/1"
+        },
+        "meta": {
+          "permissions": {
+            "update": true,
+            "destroy": true
+          }
+        }
       }]
     }
     """

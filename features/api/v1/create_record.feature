@@ -29,7 +29,15 @@ Scenario: Post an valid record using json in POST body
           "user": {"data": {"id": "1", "type": "admins"}},
           "issue": {"data": {"id": "1", "type": "issues"}}
         },
-        "links": {"self": "/api/v1/records/1"}
+        "links": {
+          "self": "/api/v1/records/1"
+        },
+        "meta": {
+          "permissions": {
+            "update": true, 
+            "destroy": true
+          }
+        }
       }
     }
     """

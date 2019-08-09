@@ -36,7 +36,15 @@ Scenario: Put an valid record using json in PUT body
             "data": {"id": "1", "type": "wiki-categories"}
           }
         },
-        "links": { "self": "/api/v1/wiki_pages/1" }
+        "links": {
+          "self": "/api/v1/wiki_pages/1"
+        },
+        "meta": {
+          "permissions": {
+            "update": true, 
+            "destroy": true
+          }
+        }
       }
     }
     """

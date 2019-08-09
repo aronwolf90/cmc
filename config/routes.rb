@@ -57,6 +57,8 @@ Rails.application.routes.draw do
 
       get "*path" => redirect("/administration")
     end
+
+    resources :contacts, only: %i[index show new edit]
   end
 
   namespace :api do
@@ -89,6 +91,8 @@ Rails.application.routes.draw do
       resources :events, only: %i[index create update destroy]
       resources :attendance_days, only: :index
       resources :attendance_events, only: %i[index create update destroy]
+      resources :contacts, only: %i[index show create update destroy]
+      resources :contact_avatars, only: %i[index show create update destroy]
     end
   end
 end

@@ -48,6 +48,12 @@ Scenario: Post an valid event using json in POST body
             }
           }
         },
+        "meta": {
+          "permissions": {
+            "update": true, 
+            "destroy": true
+          }
+        },
         "links": {
           "self": "/api/v1/attendance_events/1"
         }

@@ -10,7 +10,7 @@ FactoryBot.define do
 
     avatar do
       Rack::Test::UploadedFile.new(
-        Rails.root.join("spec", "fixures", "image.png")
+        Rails.root.join("spec", "fixtures", "image.png")
       )
     end
 

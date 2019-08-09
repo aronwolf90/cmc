@@ -9,6 +9,7 @@ module Api
       include Hack::KnockDevise::Authenticable
       include ActionController::Serialization
       before_action :authenticate!
+      serialization_scope :view_context
 
       private
         attr_reader :model_class, :per_page

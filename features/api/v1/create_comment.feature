@@ -28,6 +28,12 @@ Scenario: Post an valid comment using json in POST body
         "relationships": {
           "issue": { "data": { "id": "1", "type": "issues" } },
           "user": { "data": { "id": "1", "type": "admins" } }
+        },
+        "meta": {
+          "permissions": {
+            "update": true, 
+            "destroy": true
+          }
         }
       }
     }
