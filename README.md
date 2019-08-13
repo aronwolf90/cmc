@@ -17,7 +17,8 @@ I wrote this because I was unsatisfied with existing solutions.
 # Setup for development
 - Install docker and docker-compose
 - Execute:  git clone git@gitlab.com:cmc_system/cmc.git
-- docker-compose up
+- Execute: docker-compose run app bin/setup
+- Execute: docker-compose up
 - open http://test-organization.lvh.me:3000 
 
 NOTE: Take a look on the [contributing.md](CONTRIBUTING.md)
@@ -34,8 +35,8 @@ NOTE: The configuration options for
 the helm package can be found [here](cmc/README.md)
 
 # Linters
-ESLint (Javascipt): docker-compose run yarn eslint
-RuboCop (Ruby): docker-compose run rubocop
+* ESLint (Javascipt): docker-compose run yarn eslint
+* RuboCop (Ruby): docker-compose run rubocop
 
 # Links
 homepage: https://about.cost-manager.com
