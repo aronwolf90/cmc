@@ -3,5 +3,9 @@
 class Contact < ApplicationRecord
   belongs_to :contact_avatar
 
-  pg_search_scope :search, against: %i[id name]
+  pg_search_scope(
+    :search,
+    against: %i[id name],
+    using: { tsearch: { prefix: true } }
+  )
 end

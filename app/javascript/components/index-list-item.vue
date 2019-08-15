@@ -1,7 +1,12 @@
 <template lang='pug'>
   li.list-group-item
-    a.text-dark(:href="`${basePath}/${entryId}`")
+    a.text-dark(:href="`${resource}/${entryId}`")
       | {{ text || '---' }}
+    a.btn.btn-secondary.btn-sm.pull-right(
+      v-if="editBtn",
+      :href="`/administration/${resource}/${entryId}/edit`"
+    )
+      .fa.fa-edit
 </template>
 
 <script>
@@ -12,7 +17,8 @@ export default {
     'entry-type',
     'entry-id',
     'text',
-    'base-path'
+    'resource',
+    'editBtn'
   ],
   components: {
     BtnEdit

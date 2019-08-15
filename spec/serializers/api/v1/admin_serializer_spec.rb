@@ -22,7 +22,8 @@ RSpec.describe Api::V1::AdminSerializer, type: :serializer do
         id: user.id.to_s,
         type: "admins",
         attributes: {
-          firstname: "firstname"
+          firstname: "firstname",
+          lastname: "lastname"
         },
         relationships: {
           "selected-project": {

@@ -13,7 +13,7 @@
             tbody
               - @model[:projects].each do |project, total_spent_time,  month_spent_time, last_month_spent_time|
                 tr
-                  td = link_to project, administration_project_dashboard_path(project), class: "text-dark"
+                  td = link_to project, administration_project_path(project), class: "text-dark"
                   td = seconds_to_time(total_spent_time)
                   td = seconds_to_time(month_spent_time)
                   td = seconds_to_time(last_month_spent_time)

@@ -1,13 +1,10 @@
 <template lang='pug'>
   .contacts-index
-    .d-flex.flex-row
-      .w-100.mr-2
-        index-search-section(
-          search-endpoint='/api/v1/contacts',
-          attribute='name'
-        )
-      a.btn.btn-success(href='/administration/contacts/new')
-        | New contact
+    index-top-section(
+      resource="contacts",
+      new-text="New contact",
+      :item-text-function="itemTextFunction"
+    )
     
     br
     br
@@ -15,7 +12,7 @@
     ul.list-group.list-lines
       index-list-item(
         v-for="contact in contacts",
-        base-path="/administration/contacts",
+        resource="/administration/contacts",
         :entry-type="contact.type",
         :entry-id="contact.id",
         :text="contact.attributes.name"
@@ -23,12 +20,12 @@
 </template>
 
 <script>
-import IndexSearchSection from '../components/index-search-section'
+import IndexTopSection from '../components/index-top-section'
 import IndexListItem from '../components/index-list-item'
 
 export default {
   components: {
-    IndexSearchSection,
+    IndexTopSection,
     IndexListItem
   },
   asyncComputed: {
@@ -44,6 +41,11 @@ export default {
     apiLinks () {
       if (!this.result) return
       return this.result.links
+    }
+  },
+  methods: {
+    itemTextFunction(contact) {
+      return contact.attributes.name
     }
   }
 }

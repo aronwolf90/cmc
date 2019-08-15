@@ -36,8 +36,8 @@ RSpec.describe Api::V1::ContactSerializer, type: :serializer do
           "address-street": "Street",
           "address-number": "8"
         },
-        relationships: { 
-          "contact-avatar": { 
+        relationships: {
+          "contact-avatar": {
             data: nil
           }
         },

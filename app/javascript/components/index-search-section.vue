@@ -4,25 +4,22 @@
       type='text', 
       v-model='searchText', 
       placeholder='Search',
-      @focus.native="focused = true"
+      @focus.native="focused = true",
+      autocomplete="off"
     )
     .items(v-if="focused")
-      index-search-section-item(
-        v-for="item in items", 
-        :item-type="item.type",
-        :item-id="item.id",
-        :attribute="attribute",
-        :base-path="basePath",
-        :key="item.id"
+      slot(
+        v-for="entry in items", 
+        v-bind:entry="entry",
       )
 </template>
 
 <script>
-import IndexSearchSectionItem from './index-search-section-item'
+import IndexSearchSection from './index-search-section'
 
 export default {
   components: {
-    IndexSearchSectionItem
+    IndexSearchSection
   },
   data () {
     return { 
@@ -31,9 +28,10 @@ export default {
     }
   },
   props: [
-    "searchEndpoint",
+    "resource",
     "basePath",
-    "attribute"
+    "attribute",
+    "itemTextFunction"
   ],
   computed: {
     items () {
@@ -43,10 +41,10 @@ export default {
   asyncComputed: {
     result: {
       get () {
-        return this.$store.dispatch(
-          'searchContacts',
-          this.searchText
-        )
+        return this.$store.dispatch('get', {
+          endpoint: '/api/v1',
+          resource: `${this.resource}?query=${this.searchText}`
+        })
       },
       watch: ['searchText']
     }

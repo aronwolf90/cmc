@@ -4,7 +4,8 @@
       type='text', 
       v-model='searchText', 
       placeholder='Search',
-      @focus.native="focused = true"
+      @focus.native="focused = true",
+      autocomplete="off"
     )
     .items(v-if="focused")
       slot(

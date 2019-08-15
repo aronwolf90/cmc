@@ -15,6 +15,7 @@ class User < ApplicationRecord
   )
 
   belongs_to :selected_project, class_name: "Project"
+  belongs_to :contact
 
   has_many :issues
   has_many :records, -> { ordered }
@@ -26,6 +27,12 @@ class User < ApplicationRecord
   has_many :projects, through: :user_projects
   has_many :worked_issues, through: :records, class_name: "Issue",
                            source: :issue
+
+  pg_search_scope(
+    :search,
+    against: %i[firstname lastname],
+    using: { tsearch: { prefix: true } }
+  )
 
   # Knock requires :authenticate
   alias authenticate valid_password?

@@ -14,6 +14,8 @@ import Calender from '../calender'
 import Timepicker from '../components/timepicker'
 import Datepicker from '../components/datepicker'
 import Attendances from '../attendances'
+import ProjectIndex from '../projects/index'
+import UserIndex from '../users/index'
 import ContactsIndex from '../contacts/index'
 import Contact from '../contacts/show'
 import ContactNew from '../contacts/new'
@@ -33,6 +35,8 @@ Vue.component('calender', Calender)
 Vue.component('timepicker', Timepicker)
 Vue.component('datepicker', Datepicker)
 Vue.component('attendances', Attendances)
+Vue.component('project-index', ProjectIndex)
+Vue.component('user-index', UserIndex)
 Vue.component('contacts-index', ContactsIndex)
 Vue.component('contact', Contact)
 Vue.component('contact-new', ContactNew)

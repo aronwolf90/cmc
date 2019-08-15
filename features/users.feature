@@ -1,11 +1,13 @@
 Feature: Users
 
+@javascript
 Scenario: List user
   Given The app contain seed data
   And I am signed in
   When I click on link "Users"
   Then the element "#side-body" contain the text "Aron"
 
+@javascript
 Scenario: Create user
   Given I am signed in
   When I click on link "Users"

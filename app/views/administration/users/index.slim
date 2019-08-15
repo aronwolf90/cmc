@@ -1,14 +1,1 @@
-- if policy(User).new?
-  .row
-    .col-md-8
-    .col-md-4
-      br.d-md-none
-      = new_btn(User)
-
-  br
-  br
-
-ul.list-group.list-lines
-  - @model.each do |user|
-    li.list-group-item
-      = edit_link(user.becomes(User))
+user-index

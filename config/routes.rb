@@ -28,16 +28,15 @@ Rails.application.routes.draw do
 
     resource :organization, only: %i[edit update]
 
-    resources :users, except: %i[show destroy] do
+    resources :users, except: %i[edit destroy] do
       scope module: :users do
         resource :configuration, only: %i[edit update destroy]
         resources :records, only: :index
       end
     end
 
-    resources :projects, except: :show do
+    resources :projects do
       scope module: :projects do
-        resource :dashboard, only: :show
         resources :records, only: :index
       end
     end
@@ -92,7 +91,7 @@ Rails.application.routes.draw do
       resources :attendance_days, only: :index
       resources :attendance_events, only: %i[index create update destroy]
       resources :contacts, only: %i[index show create update destroy]
-      resources :contact_avatars, only: %i[index show create update destroy]
+      resources :contact_avatars, only: :create
     end
   end
 end

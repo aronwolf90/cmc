@@ -1,9 +1,9 @@
 = asside policy(@project).show? do
   = top_asside_item("Projects",
-      path: administration_project_dashboard_path(@project),
+      path: administration_project_path(@project),
       icon: :building)
   = asside_item("Dashboard",
-      path: administration_project_dashboard_path(@project),
+      path: administration_project_path(@project),
       policy: true)
   = asside_item("Records",
       path: administration_project_records_path(@project),

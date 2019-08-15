@@ -19,7 +19,10 @@ Scenario: Get
       "included": [{
         "id": "1",
         "type": "admins",
-        "attributes": { "firstname": null },
+        "attributes": {
+          "firstname": null,
+          "lastname": null
+        },
         "relationships": {
           "selected-project": { "data": null },
           "issues": { "data": [] },

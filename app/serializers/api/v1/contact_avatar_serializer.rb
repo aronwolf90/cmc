@@ -8,8 +8,6 @@ module Api
       def file
         object.file.as_json
       end
-
-      link(:self) { api_v1_contact_avatar_path(object) }
     end
   end
 end

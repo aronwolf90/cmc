@@ -22,7 +22,8 @@ RSpec.describe Api::V1::CustomerSerializer, type: :serializer do
         id: user.id.to_s,
         type: "customers",
         attributes: {
-          firstname: "firstname"
+          firstname: "firstname",
+          lastname: "lastname"
         },
         relationships: {
           "selected-project": {

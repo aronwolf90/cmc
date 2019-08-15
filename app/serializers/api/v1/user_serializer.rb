@@ -5,7 +5,8 @@ module Api
     class UserSerializer < ApplicationSerializer
       include Rails.application.routes.url_helpers
 
-      attributes :firstname
+      attribute :firstname
+      attribute :lastname
 
       belongs_to :selected_project, serializer: ProjectSerializer
 

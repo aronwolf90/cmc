@@ -12,7 +12,10 @@ Scenario: Get
       "data": [{
         "id": "1",
         "type": "admins",
-        "attributes": { "firstname": null },
+        "attributes": {
+          "firstname": null,
+          "lastname": null
+        },
         "relationships": {
           "issues": { "data": [] },
           "current-record": { "data": null },

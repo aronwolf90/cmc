@@ -20,9 +20,6 @@ Scenario: Create an contact
             "url": "/uploads/contact_avatar/file/1/avatar.jpg"
           }
         }, 
-        "links": {
-          "self": "/api/v1/contact_avatars/1"
-        },
         "meta": {
           "permissions": {
             "update": true, 

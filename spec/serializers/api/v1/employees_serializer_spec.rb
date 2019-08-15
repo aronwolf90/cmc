@@ -22,7 +22,8 @@ RSpec.describe Api::V1::EmployeeSerializer, type: :serializer do
         id: user.id.to_s,
         type: "employees",
         attributes: {
-          firstname: "firstname"
+          firstname: "firstname",
+          lastname: "lastname"
         },
         relationships: {
           "selected-project": {

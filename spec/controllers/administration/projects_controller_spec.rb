@@ -8,7 +8,11 @@ RSpec.describe Administration::ProjectsController, type: :controller do
   let(:form) { Administration::ProjectForm }
   let(:params) { {} }
 
+  before { allow(Project).to receive(:find) }
+
   include_examples "standard index action", Administration::Projects
+  include_examples "basic show action",
+                   params: { id: 1 }
   include_examples "standard new action", Administration::Projects
   include_examples "standard edit action", Administration::Projects
   include_examples "standard create action", Administration::Projects

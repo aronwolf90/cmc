@@ -1,9 +1,9 @@
 = asside policy(@root_model).show? do
   = top_asside_item("User Settings",
       icon: :user,
-      path: edit_administration_user_path(@root_model))
+      path: administration_user_path(@root_model))
   = asside_item("Edit",
-      path: edit_administration_user_path(@root_model),
+      path: administration_user_path(@root_model),
       policy: policy(@root_model).edit?)
   = asside_item("Configuration",
       path: edit_administration_user_configuration_path(@root_model),
