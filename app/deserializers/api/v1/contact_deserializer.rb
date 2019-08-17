@@ -12,6 +12,6 @@ module Api::V1
     attribute :address_country
     attribute :address_street
     attribute :address_number
-    belongs_to :contact_avatar
+    attribute :contact_avatar_id
   end
 end

@@ -165,8 +165,10 @@ export default {
     this.form.country = this.country
   },
   methods: {
-    onSubmit () {
-      this.$emit('onSubmit', {
+    onSubmit (event) {
+      event.preventDefault()
+      
+      let payload = {
         attributes: {
           name: this.form.name,
           description: this.form.description,
@@ -178,16 +180,12 @@ export default {
           'address-zip': this.form.zip,
           'address-city': this.form.city,
           'address-country': this.form.country,
-        },
-        relationships: {
-          'contact-avatar': {
-            data: {
-              type: 'contact-avatars',
-              id: this.contactAvatar.id
-            }
-          }
         }
-      })
+      }
+      if (this.contactAvatar) {
+        payload.attributes['contact-avatar-id'] = this.contactAvatar.id
+      }
+      this.$emit('onSubmit', payload)
     },
     setDescription (value) {
       this.form.description = value

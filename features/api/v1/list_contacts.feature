@@ -23,15 +23,8 @@ Scenario: Get /api/v1/contacts
           "address-zip": "86153",
           "address-country": "germany",
           "address-street": "Street",
-          "address-number": "8"
-        },
-        "relationships": {
-          "contact-avatar": {
-            "data": {
-              "id": "1",
-              "type": "contact-avatars"
-            }
-          }
+          "address-number": "8",
+          "avatar-url": "/api/v1/contact_avatars/1"
         },
         "links": {
           "self": "/api/v1/contacts/1"

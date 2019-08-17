@@ -21,15 +21,8 @@ Scenario: Create an contact of kind "person"
           "address-number": "8",
           "telephone": "01727873609",
           "mobile": "01702876609",
-          "fax": "01727876620"
-        },
-        "relationships": {
-          "contact-avatar": {
-            "data": {
-              "id": 1,
-              "type": "contact-avatars"
-            }
-          }
+          "fax": "01727876620",
+          "contact-avatar-id": "1"
         }
       }
     }
@@ -50,15 +43,8 @@ Scenario: Create an contact of kind "person"
           "address-zip": "86153",
           "address-country": "germany",
           "address-street": "Street",
-          "address-number": "8"
-        },
-        "relationships": {
-          "contact-avatar": {
-            "data": {
-              "id": "1",
-              "type": "contact-avatars"
-            }
-          }
+          "address-number": "8",
+          "avatar-url": "/api/v1/contact_avatars/1"
         },
         "meta": {
           "permissions": {

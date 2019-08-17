@@ -18,14 +18,7 @@ describe Api::V1::ContactDeserializer do
         "address-country": "germany",
         "address-street": "Street",
         "address-number": "8",
-      },
-      relationships: {
-        'contact-avatar': {
-          data: {
-            id: 1,
-            type: "contact-avatars"
-          }
-        }
+        "contact-avatar-id": "1"
       }
     }
   end
@@ -41,7 +34,7 @@ describe Api::V1::ContactDeserializer do
       address_country: "germany",
       address_street: "Street",
       address_number: "8",
-      contact_avatar_id: 1
+      contact_avatar_id: "1"
     }
   end
 

@@ -8,4 +8,48 @@ RSpec.describe Api::V1::ContactAvatarsController, type: :controller do
 
   include_examples "standard api create action",
                    Api::V1::ContactAvatars::CreateOperation
+
+  describe "#show" do
+    let(:contact_avatar_path) do
+      Rails.root.join("spec", "fixtures", "avatar.png")
+    end
+    let(:contact_avatar) { build_stubbed(:contact_avatar, file: File.open(contact_avatar_path)) }
+    let(:user) { build_stubbed(:user) }
+
+    before do
+      sign_in(user)
+      allow(ContactAvatar)
+        .to receive(:find_by).and_return(contact_avatar)
+    end
+
+    context "when the contact avatar exists" do
+      specify do
+        params = [
+          /app\/public\/uploads\/tmp\/.+\/avatar.png/,
+          disposition: :inline
+        ]
+
+        expect(controller).to receive(:send_file).with(*params) do
+          controller.head :ok
+        end
+        get :show, params: { id: contact_avatar.id }
+      end
+    end
+
+    context "when the contact avatar exists" do
+      let(:contact_avatar) { nil }
+
+      specify do
+        params = [
+          Rails.root.join("public", "avatar_placeholder.png"),
+          disposition: :inline
+        ]
+
+        expect(controller).to receive(:send_file).with(*params) do
+          controller.head :ok
+        end
+        get :show, params: { id: "placeholder" }
+      end
+    end
+  end
 end

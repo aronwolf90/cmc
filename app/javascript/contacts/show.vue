@@ -18,7 +18,7 @@
           h4 {{ name }}
           .description {{ description }}
         .left.order-0
-          img.img-thumbnail.w-100(:src="avatarUrl")
+          img.avatar.img-thumbnail.w-100(:src="avatarUrl")
           br
           br
           div Tel: {{ telephone }}
@@ -68,12 +68,7 @@ export default {
       return Utils.attribute(this.contact, 'fax')
     },
     avatarUrl () {
-      if (!this.contact) return
-      let contactAvatar = this.$store.getters.relationship({
-        entry: this.contact,
-        name: 'contact-avatar'
-      })
-      return (Utils.attribute(contactAvatar, 'file') || {}).url
+      return Utils.attribute(this.contact, 'avatar-url')
     },
     street () {
       return Utils.attribute(this.contact, 'address-street')
@@ -104,3 +99,8 @@ export default {
   }
 }
 </script>
+
+<style lang='sass' scoped>
+.avatar
+  max-width: 400px
+</style>

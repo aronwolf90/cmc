@@ -16,9 +16,18 @@ RSpec.describe Api::V1::ContactSerializer, type: :serializer do
       address_country: "germany",
       address_street: "Street",
       address_number: "8",
+      contact_avatar: contact_avatar
+    )
+  end
+  let(:contact_avatar) do
+    build_stubbed(:contact_avatar,
+      file: File.open(Rails.root.join("spec", "fixtures", "avatar.png"))
     )
   end
 
+  let(:expected_avatar_url) do
+    "/api/v1/contact_avatars/#{contact_avatar.id}"
+  end
   let(:expected_result) do
     {
       data: {
@@ -34,12 +43,8 @@ RSpec.describe Api::V1::ContactSerializer, type: :serializer do
           "address-zip": "86153",
           "address-country": "germany",
           "address-street": "Street",
-          "address-number": "8"
-        },
-        relationships: {
-          "contact-avatar": {
-            data: nil
-          }
+          "address-number": "8",
+          "avatar-url": expected_avatar_url
         },
         links: { self: "/api/v1/contacts/#{contact.id}" }
       }
@@ -48,5 +53,16 @@ RSpec.describe Api::V1::ContactSerializer, type: :serializer do
 
   it "serialize record in the correct way" do
     expect(serialize(contact)).to eql expected_result
+  end
+
+  context "when contact_avatar is nil" do
+    let(:contact_avatar) { nil }
+    let(:expected_avatar_url) do
+      "/api/v1/contact_avatars/placeholder"
+    end
+
+    it "return a placeholder avatar" do
+      expect(serialize(contact)).to eql expected_result
+    end
   end
 end

@@ -13,10 +13,14 @@ module Api
         :address_zip,
         :address_country,
         :address_street,
-        :address_number
+        :address_number,
+        :avatar_url
       )
 
-      belongs_to :contact_avatar, serializer: ContactAvatarSerializer
+      def avatar_url
+        id = object.contact_avatar&.id || "placeholder"
+        api_v1_contact_avatar_path(id: id)
+      end
 
       link(:self) { api_v1_contact_path(object) }
 
