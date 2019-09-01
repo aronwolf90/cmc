@@ -39,11 +39,16 @@ ActionController::Base.allow_rescue = false
 Before do |_scenario|
   ActiveRecord::Base.connection.execute('DROP SCHEMA IF EXISTS "test-organization" CASCADE')
   DatabaseCleaner.clean_with(:truncation, reset_ids: true)
-  Timecop.travel("11.06.2018 17:00:00")
 end
 
 After do
   Timecop.return
+  Fog::Storage.new(AvatarUploader.fog_credentials)
+    .directories
+    .get("cmc")
+    .files
+    .all(prefix: "test")
+    .each(&:destroy)
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.

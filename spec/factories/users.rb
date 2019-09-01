@@ -7,13 +7,6 @@ FactoryBot.define do
     lastname "lastname"
     password "testtest"
     invitation_created_at Time.zone.now
-
-    avatar do
-      Rack::Test::UploadedFile.new(
-        Rails.root.join("spec", "fixtures", "image.png")
-      )
-    end
-
     factory :admin, class: Admin
     factory :employee, class: Employee
     factory :customer, class: Customer

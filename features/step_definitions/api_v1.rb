@@ -136,3 +136,16 @@ Given(/^a contact avatar exists with an id of 1/) do
     file: File.open(Rails.root.join("features", "support", "attachments", "avatar.jpg"))
   )
 end
+
+Given(/^a (document|document_file) exists with an id of 1/) do |*_args|
+  document_file = DocumentFile.create!(
+    id: 1,
+    file: File.open(Rails.root.join("features", "support", "attachments", "avatar.jpg"))
+  )
+  FactoryBot.create(:document, document_file: document_file, name: "test")
+end
+
+Then(/^has the following headers:/) do |headers|
+  expect(last_response.headers.slice(*headers.rows_hash.keys).values)
+    .to eq(headers.rows_hash.values)
+end

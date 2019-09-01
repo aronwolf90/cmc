@@ -24,12 +24,7 @@ RSpec.describe Api::V1::ContactAvatarsController, type: :controller do
 
     context "when the contact avatar exists" do
       specify do
-        params = [
-          /app\/public\/uploads\/tmp\/.+\/avatar.png/,
-          disposition: :inline
-        ]
-
-        expect(controller).to receive(:send_file).with(*params) do
+        expect(controller).to receive(:send_file) do
           controller.head :ok
         end
         get :show, params: { id: contact_avatar.id }
@@ -40,12 +35,7 @@ RSpec.describe Api::V1::ContactAvatarsController, type: :controller do
       let(:contact_avatar) { nil }
 
       specify do
-        params = [
-          Rails.root.join("public", "avatar_placeholder.png"),
-          disposition: :inline
-        ]
-
-        expect(controller).to receive(:send_file).with(*params) do
+        expect(controller).to receive(:send_file) do
           controller.head :ok
         end
         get :show, params: { id: "placeholder" }

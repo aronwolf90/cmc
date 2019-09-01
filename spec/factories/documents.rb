@@ -2,12 +2,9 @@
 
 FactoryBot.define do
   factory :document do
-    name "document.txt"
-    file do
-      Rack::Test::UploadedFile.new(
-        Rails.root.join("spec", "fixtures", "document.txt")
-      )
-    end
+    name { "document.txt" }
+    document_file { create(:document_file) }
+
     association :folder
   end
 end

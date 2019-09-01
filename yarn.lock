@@ -10148,10 +10148,10 @@ vuetify@^1.1.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.3.1.tgz#bbfc5014af2cd6c82c8fb6b9c84551367b6cc5d4"
 
-vuex-jsonapi-client@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/vuex-jsonapi-client/-/vuex-jsonapi-client-2.2.2.tgz#ad56eb2aef70861a48a9274d0a6b01dab7391857"
-  integrity sha512-lXkAG+dv8Ni1gX0eR3CIaOXeW3dNZBLEtoCl6FGkuHpNU5Juop0sQDeUQfqfnxIfegdML7DfrTThHgOlaDy4KA==
+vuex-jsonapi-client@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/vuex-jsonapi-client/-/vuex-jsonapi-client-2.3.2.tgz#db65c62831bfa4983c8276fbd89e7f9eee183664"
+  integrity sha512-lc2I7tQKVbJAlU1AxPWeTueq4bWn8xY1l5gls2dwI1oQdcnHGvHJ43Y0qYZriGyN0HqClAmDUDy1DssLGdnnxQ==
   dependencies:
     "@babel/core" "^7.1.2"
     "@babel/plugin-transform-for-of" "^7.0.0"

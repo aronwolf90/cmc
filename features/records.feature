@@ -24,4 +24,4 @@ Scenario: Record edit
   And I click on ".fa-edit"
   And I enter "2200.01.01 01:41:43" into input named "data[end_time]"
   And I click on submit
-  Then the page contain the text "2018"
+  Then the page contain the current year

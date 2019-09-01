@@ -5,16 +5,18 @@ module Administration
     class DocumentsController < BaseController
       namespace Administration::ArchiveDocuments
 
-      public :new, :edit
-
       def show
         document = Document.find(params[:id])
-        send_file(
-          document.file.path,
+        send_data(
+          document.document_file.file.read,
           filename: document.download_name,
           disposition: :inline
         )
       end
+
+      def new; end
+
+      def edit; end
 
       def create
         super { %i[administration archive] }

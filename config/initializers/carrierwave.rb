@@ -8,10 +8,10 @@ CarrierWave.configure do |config|
       aws_access_key_id: ENV["AWS_KEY"],
       aws_secret_access_key: ENV["AWS_SECRET"],
       region: ENV["AWS_REGION"],
-      endpoint: "https://#{ENV['AWS_ENDPOINT']}",
+      endpoint: ENV['AWS_ENDPOINT'],
       path_style: true
-    }
-    config.fog_directory = ENV["AWS_DIRECTORY"]
+    }.compact
+    config.fog_directory = ENV["AWS_DIRECTORY"] || "cmc/#{Rails.env}"
     config.storage = :fog
   else
     config.storage = :file

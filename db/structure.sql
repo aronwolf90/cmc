@@ -207,16 +207,47 @@ ALTER SEQUENCE contacts_id_seq OWNED BY contacts.id;
 
 
 --
+-- Name: document_files; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE document_files (
+    id bigint NOT NULL,
+    file character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: document_files_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE document_files_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: document_files_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE document_files_id_seq OWNED BY document_files.id;
+
+
+--
 -- Name: documents; Type: TABLE; Schema: test-organization; Owner: -
 --
 
 CREATE TABLE documents (
     id bigint NOT NULL,
     name character varying NOT NULL,
-    file character varying NOT NULL,
     folder_id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    document_file_id bigint
 );
 
 
@@ -680,6 +711,13 @@ ALTER TABLE ONLY contacts ALTER COLUMN id SET DEFAULT nextval('contacts_id_seq':
 
 
 --
+-- Name: document_files id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY document_files ALTER COLUMN id SET DEFAULT nextval('document_files_id_seq'::regclass);
+
+
+--
 -- Name: documents id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
@@ -802,6 +840,14 @@ ALTER TABLE ONLY contact_avatars
 
 ALTER TABLE ONLY contacts
     ADD CONSTRAINT contacts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: document_files document_files_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY document_files
+    ADD CONSTRAINT document_files_pkey PRIMARY KEY (id);
 
 
 --
@@ -940,6 +986,13 @@ CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 --
 
 CREATE INDEX index_contacts_on_contact_avatar_id ON contacts USING btree (contact_avatar_id);
+
+
+--
+-- Name: index_documents_on_document_file_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_documents_on_document_file_id ON documents USING btree (document_file_id);
 
 
 --
@@ -1176,6 +1229,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181208224833'),
 ('20190503200308'),
 ('20190607213618'),
-('20190712213034');
+('20190712213034'),
+('20190819204007'),
+('20190819204611');
 
 

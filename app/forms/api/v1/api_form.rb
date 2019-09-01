@@ -14,8 +14,8 @@ module Api
 
         required(:data).filled(:record_exists?)
         required(:data).schema do
-          required(:id).filled
-          required(:type).filled
+          required(:id).filled(:present?)
+          required(:type).filled(:present?)
         end
       end
 

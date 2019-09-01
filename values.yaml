@@ -17,5 +17,5 @@ ingress:
 webAws:
   enabled: true
   region: fra1
-  endpoint: fra1.digitaloceanspaces.com
+  endpoint: https://fra1.digitaloceanspaces.com
   directory: webcloudpower/cmc-production

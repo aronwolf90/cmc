@@ -10,16 +10,17 @@ module Api
       public :create
 
       def show
-        send_file(
-          path,
+        send_data(
+          model.file.read,
+          filename: File.basename(model.file.path),
           disposition: :inline
         )
-      end
-
-    private
-      def path
-        model_class.find_by(id: params[:id])&.file&.path ||
-          Rails.root.join("public", "avatar_placeholder.png")
+      rescue ActiveRecord::RecordNotFound
+        file = File.open(Rails.root.join("public", "avatar_placeholder.png"))
+        send_file(
+          file,
+          disposition: :inline
+        )
       end
     end
   end

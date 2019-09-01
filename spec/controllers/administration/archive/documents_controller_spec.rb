@@ -7,20 +7,6 @@ RSpec.describe Administration::Archive::DocumentsController, type: :controller d
   let(:model) { Document.new(id: 1) }
   let(:form) { Administration::ArchiveDocumentForm }
 
-  include_examples "standard new action",
-                   Administration::ArchiveDocuments
-  include_examples "standard create action",
-                   Administration::ArchiveDocuments,
-                   %i[administration archive]
-  include_examples "standard edit action",
-                   Administration::ArchiveDocuments
-  include_examples "standard update action",
-                   Administration::ArchiveDocuments,
-                   %i[administration archive]
-  include_examples "standard destroy action",
-                   Administration::ArchiveDocuments,
-                   %i[administration archive]
-
   describe "#show" do
     let(:document) { build_stubbed(:document) }
     let(:user) { build_stubbed(:user) }
@@ -31,7 +17,7 @@ RSpec.describe Administration::Archive::DocumentsController, type: :controller d
     end
 
     specify do
-      expect(controller).to receive(:send_file) do
+      expect(controller).to receive(:send_data) do
         controller.head :ok
       end
       get :show, params: { id: document.id }

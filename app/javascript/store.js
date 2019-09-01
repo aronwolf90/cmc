@@ -19,6 +19,7 @@ import eventActions from 'store/models/event_actions'
 import attendaceDaysActions from 'store/models/attendance_days_actions'
 import attendaceEventActions from 'store/models/attendance_event_actions'
 import contactActions from 'store/models/contact_actions'
+import documentActions from 'store/models/document_actions'
 
 export default {
   strict: true,
@@ -93,6 +94,7 @@ export default {
     ...attendaceDaysActions,
     ...attendaceEventActions,
     ...contactActions,
+    ...documentActions,
 
     initCurrentUser (context) {
       return context.dispatch('initContext').then(response => {

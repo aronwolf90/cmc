@@ -15,11 +15,6 @@ Scenario: Create an contact
       "data": {
         "id": "1",
         "type": "contact-avatars",
-        "attributes": {
-          "file": {
-            "url": "/uploads/contact_avatar/file/1/avatar.jpg"
-          }
-        }, 
         "meta": {
           "permissions": {
             "update": true, 

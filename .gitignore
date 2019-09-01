@@ -14,6 +14,9 @@
 # Ignore editor files
 *.swp
 *.swo
+*.swl
+*.swm
+*.swn
 
 # Ignore all logfiles and tempfiles.
 /log/*

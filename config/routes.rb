@@ -92,6 +92,8 @@ Rails.application.routes.draw do
       resources :attendance_events, only: %i[index create update destroy]
       resources :contacts, only: %i[index show create update destroy]
       resources :contact_avatars, only: %i[show create]
+      resources :document_files, only: %i[show create]
+      resources :documents, only: %i[index show create update destroy]
     end
   end
 end

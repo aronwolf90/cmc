@@ -1,9 +1,0 @@
-version: '2.2'
-services:
-  app:
-    volumes:
-      - ~/.vimrc:/root/.vimrc
-      - ~/.vim:/root/.vim
-      - ~/.tmux.conf:/root/.tmux.conf
-      - ~/.ssh:/root/.ssh
-      - /usr/local/bin/dev-tmux:/usr/bin/dev-tmux

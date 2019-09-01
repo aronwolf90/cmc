@@ -20,6 +20,8 @@ import ContactsIndex from '../contacts/index'
 import Contact from '../contacts/show'
 import ContactNew from '../contacts/new'
 import ContactEdit from '../contacts/edit'
+import DocumentNew from '../documents/new'
+import DocumentEdit from '../documents/edit'
 
 require('../config')
 
@@ -41,6 +43,8 @@ Vue.component('contacts-index', ContactsIndex)
 Vue.component('contact', Contact)
 Vue.component('contact-new', ContactNew)
 Vue.component('contact-edit', ContactEdit)
+Vue.component('document-new', DocumentNew)
+Vue.component('document-edit', DocumentEdit)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')

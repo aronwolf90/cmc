@@ -8,6 +8,8 @@ module Api
       attributes :name
 
       belongs_to :folder, serializer: FolderSerializer
+
+      link(:self) { api_v1_document_path(object) }
     end
   end
 end

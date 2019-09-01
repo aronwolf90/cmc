@@ -15,8 +15,8 @@ module Api
         attr_reader :model_class, :per_page
 
         def render_errors(errors)
-          render json: OpenStruct.new(errors: OpenStruct.new(messages: errors)), status: :bad_request,
-                 serializer: ActiveModel::Serializer::ErrorSerializer
+          render json: Api::ErrorSerializer.(errors),
+                 status: :bad_request
         end
 
         def self.model_class(model_class, **args)

@@ -96,13 +96,18 @@ When(/^I reload the page$/) do
   page.driver.browser.navigate.refresh
 end
 
+When(/^Travel to 11.06.2018 17:00:00$/) do
+  Timecop.travel("11.06.2018 17:00:00")
+end
+
 Then(/^the page contain the text "([^\"]*)"$/) do |text|
   sleep 0.2
   expect(page).to have_content text
 end
 
 Then (/^I enter enter a file into input named "([^\"]*)"$/) do |element|
-  page.attach_file(element, "/etc/hostname")
+  input = find(:xpath, "//label[contains(text(), '#{element}')]")[:for]
+  page.attach_file(input, "/etc/hostname", visible: false)
 end
 
 Then(/^the page does not contain the text "([^\"]*)"$/) do |text|
@@ -137,4 +142,9 @@ end
 Then(/^the input "([^\"]*)" has the value "([^\"]*)"$/) do |input_name, value|
   sleep 0.2
   expect(find_field(input_name).value).to eq value
+end
+
+Then(/the page contain the current year/) do
+  sleep 0.2
+  expect(page).to have_content Date.current.year
 end

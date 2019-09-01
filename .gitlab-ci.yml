@@ -33,7 +33,7 @@ helm_lint:
   variables:
     GIT_STRATEGY: clone
   script:
-    - helm lint -f values.yaml cmc/
+    - helm lint -f values.yaml chart/
 
 traceroute:
   stage: test
@@ -109,7 +109,7 @@ deploy:
     - doctl kubernetes cluster kubeconfig save webcloudpower
     - helm init --upgrade
     - kubectl delete jobs -n cmc-production --all
-    - helm upgrade cmc-production cmc --install --wait
+    - helm upgrade cmc-production chart --install --wait
         -f values.yaml
         --set image.tag=$CI_COMMIT_SHA
         --set image.repository=$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG

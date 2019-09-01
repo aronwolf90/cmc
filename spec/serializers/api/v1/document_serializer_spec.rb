@@ -20,7 +20,8 @@ RSpec.describe Api::V1::DocumentSerializer, type: :serializer do
               type: "folders"
             }
           }
-        }
+        },
+        links: { self: "/api/v1/documents/#{document.id}" }
       }
     }
   end

@@ -11,6 +11,18 @@ services:
     ports: 
       - 6432:5432
 
+  storage:
+    image: minio/minio
+    entrypoint: sh
+    command: -c 'mkdir -p /data/cmc; /usr/bin/minio server /data'
+    environment:
+      - MINIO_ACCESS_KEY=access_key
+      - MINIO_SECRET_KEY=secret_key
+    ports:
+      - "9000:9000"
+    volumes:
+      - storage_volume:/data
+
   webpack:
     image: registry.gitlab.com/cmc_system/cmc:$TAG
     command: bash -c "bin/install.sh; bin/webpack-dev-server"
@@ -36,6 +48,10 @@ services:
       - SELENIUM_HOST=selenium
       - SELENIUM_PORT=4444
       - WEBPACKER_DEV_SERVER_HOST=webpack
+      - AWS_ENABLED=true
+      - AWS_KEY=access_key
+      - AWS_SECRET=secret_key
+      - AWS_ENDPOINT=http://storage:9000
     command:  /bin/sh -c "bin/install.sh; rm -r tmp/pids; rails s -b '0.0.0.0'"
     ports:
       - "3000:3000"
@@ -45,6 +61,7 @@ services:
     depends_on:
       - db
       - selenium
+      - storage
 
   selenium:
     image: selenium/standalone-chrome-debug:$TAG
@@ -55,5 +72,5 @@ services:
 
 volumes:
   bundle:
-    driver: local
   db_volume:
+  storage_volume:

@@ -11,4 +11,8 @@ module ApiPredicates
   predicate(:numeric_format?) do |value|
     value.numeric?
   end
+
+  predicate(:present?) do |value|
+    value.present?
+  end
 end
