@@ -75,7 +75,7 @@ Capybara.server_host = "0.0.0.0"
 Capybara.server_port = Settings.test_port
 Capybara.app_host = "http://#{Settings.test_host}:#{Settings.test_port}"
 Capybara.javascript_driver = :selenium
-Capybara.default_max_wait_time = 9
+Capybara.default_max_wait_time = 15
 
 Capybara.register_driver :selenium do |app|
   client = Selenium::WebDriver::Remote::Http::Default.new

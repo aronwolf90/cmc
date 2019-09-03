@@ -64,3 +64,9 @@ RSpec.configure do |config|
   config.include Shoulda::Matchers::ActiveModel, type: :model
   config.include Shoulda::Matchers::ActiveRecord, type: :model
 end
+
+Fog.mock!
+Fog::Storage
+  .new(AvatarUploader.fog_credentials)
+  .directories
+  .create(key: "cmc/test")
