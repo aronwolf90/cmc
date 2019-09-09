@@ -149,3 +149,11 @@ Then(/^has the following headers:/) do |headers|
   expect(last_response.headers.slice(*headers.rows_hash.keys).values)
     .to eq(headers.rows_hash.values)
 end
+
+Then(/^a document_file with an id of 1 and chunck0.txt/) do
+  FactoryBot.create(
+    :document_file,
+    id: 1,
+    file: File.open(Rails.root.join("features", "support", "attachments", "avatar.jpg"))
+  )
+end

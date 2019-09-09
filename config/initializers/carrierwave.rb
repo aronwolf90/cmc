@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-CarrierWave.configure do |config|
-  if ENV["AWS_ENABLED"].present?
+if ENV["AWS_KEY"].present?
+  CarrierWave.configure do |config|
     config.fog_provider = "fog/aws"
     config.fog_credentials = {
       provider: "AWS",
@@ -13,7 +13,5 @@ CarrierWave.configure do |config|
     }.compact
     config.fog_directory = ENV["AWS_DIRECTORY"] || "cmc/#{Rails.env}"
     config.storage = :fog
-  else
-    config.storage = :file
   end
 end

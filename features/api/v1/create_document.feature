@@ -32,7 +32,8 @@ Scenario: Create a document
         "id": "2",
         "type": "documents",
         "attributes": { 
-          "name": "Test"
+          "name": "Test",
+          "url": "/api/v1/document_files/1"
         },
         "relationships": {
           "folder": {

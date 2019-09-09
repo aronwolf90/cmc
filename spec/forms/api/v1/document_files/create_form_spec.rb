@@ -8,12 +8,19 @@ describe Api::V1::DocumentFiles::CreateForm do
   let(:params) do
     {
       data: {
-        file: Rack::Test::UploadedFile.new(File.open(Rails.root.join("spec", "fixtures", "avatar.png")))
+        file: Rack::Test::UploadedFile.new(File.open(Rails.root.join("spec", "fixtures", "avatar.png"))),
+        not_finished: true
       }
     }
   end
 
   context "with valid params" do
+    it { is_expected.to be_success }
+  end
+
+  context "when not_finished is present" do
+    before { params[:data].delete(:not_finished) }
+
     it { is_expected.to be_success }
   end
 end

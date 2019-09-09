@@ -15,21 +15,11 @@
         v-for="error in findErrors('attributes/name')"
       )
         | {{ error.detail }}
-    b-form-group(
-      label="File:",
-      label-for="input-file"
+    input-file(
+      endpoint="/api/v1/document_files",
+      :errors="findErrors('data/attributes/document-file-id')",
+      @input="setDocumentFile"
     )
-      b-form-file(
-        id="input-file",
-        placeholder="Choose a file...",
-        @input="changeFile",
-        drop-placeholder="Drop file here...",
-        :state="errorStatus('data/attributes/document-file-id')",
-      )
-      b-form-invalid-feedback(
-        v-for="error in findErrors('data/attributes/document-file-id')"
-      )
-        | {{ error.detail }}
     b-form-group(
       id="folder-label",
       label="Folder:",
@@ -52,8 +42,12 @@
 </template>
 
 <script>
+import InputFile from '../components/inputs/file'
 
 export default {
+  components: {
+    InputFile
+  },
   props: [
     'name',
     'folder-type',
@@ -110,17 +104,8 @@ export default {
         return self.findIndex(value => value.detail == error.detail) === index;
       })
     },
-    changeFile (file) {
-      let formData = new FormData();
-      let headers = { 'Content-Type': 'multipart/form-data' }
-      formData.append('data[file]', file)
-      let that = this
-
-      this.$store.getters.axios
-        .post('/api/v1/document_files', formData, { headers })
-        .then(response => {
-          that.documentFile = response.data.data
-        })
+    setDocumentFile (documentFile) {
+      this.documentFile = documentFile
     },
   },
   computed: {

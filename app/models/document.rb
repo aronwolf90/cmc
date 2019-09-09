@@ -6,6 +6,6 @@ class Document < ApplicationRecord
 
   def download_name
     name.parameterize.underscore +
-      File.extname(document_file.file.path).downcase
+      File.extname(document_file.file).downcase
   end
 end

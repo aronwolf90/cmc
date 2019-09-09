@@ -26,7 +26,8 @@ RSpec.describe Document, type: :model do
 
   describe "#download_name" do
     subject do
-      create(:document, name: "document name")
+      document_file = create(:document_file, file: "test.txt")
+      create(:document, name: "document name", document_file: document_file)
     end
 
     it { expect(subject.download_name).to eq("document_name.txt") }

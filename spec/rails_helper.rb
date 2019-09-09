@@ -67,6 +67,6 @@ end
 
 Fog.mock!
 Fog::Storage
-  .new(AvatarUploader.fog_credentials)
-  .directories
-  .create(key: "cmc/test")
+ .new(AvatarUploader.fog_credentials)
+ .directories
+ .create(key: "cmc/test")

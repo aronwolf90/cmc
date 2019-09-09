@@ -214,7 +214,9 @@ CREATE TABLE document_files (
     id bigint NOT NULL,
     file character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    s3_id character varying,
+    s3_parts character varying[] DEFAULT '{}'::character varying[] NOT NULL
 );
 
 
@@ -247,7 +249,7 @@ CREATE TABLE documents (
     folder_id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    document_file_id bigint
+    document_file_id bigint NOT NULL
 );
 
 
@@ -1231,6 +1233,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190607213618'),
 ('20190712213034'),
 ('20190819204007'),
-('20190819204611');
+('20190819204611'),
+('20190907123907'),
+('20190910193632'),
+('20190910193903');
 
 

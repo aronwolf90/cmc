@@ -8,12 +8,14 @@ describe Api::V1::DocumentFileDeserializer do
   let(:file) { Rack::Test::UploadedFile.new(File.open(Rails.root.join("spec", "fixtures", "avatar.png"))) }
   let(:params) do
     {
-      file: file
+      file: file,
+      not_finished: true
     }
   end
   let(:result) do
     {
       file: file,
+      not_finished: true
     }
   end
 

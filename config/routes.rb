@@ -51,7 +51,7 @@ Rails.application.routes.draw do
     resource :archive, only: :show, controller: :archive do
       scope module: :archive do
         resources :folders, except: %i[index show]
-        resources :documents, except: :index
+        resources :documents, only: %i[new edit]
       end
 
       get "*path" => redirect("/administration")
@@ -92,7 +92,7 @@ Rails.application.routes.draw do
       resources :attendance_events, only: %i[index create update destroy]
       resources :contacts, only: %i[index show create update destroy]
       resources :contact_avatars, only: %i[show create]
-      resources :document_files, only: %i[show create]
+      resources :document_files, only: %i[show create update]
       resources :documents, only: %i[index show create update destroy]
     end
   end

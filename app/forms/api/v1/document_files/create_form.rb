@@ -6,6 +6,7 @@ module Api::V1
       @form = Dry::Validation.Schema do
         required(:data).schema do
           required(:file).filled
+          optional(:not_finished).filled
         end
       end
     end

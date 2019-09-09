@@ -7,14 +7,10 @@ module Api
       model_class DocumentFile
       namespace DocumentFiles
 
-      public :create
+      public :create, :update
 
       def show
-        send_data(
-          model.file.read,
-          filename: model.document.download_name,
-          disposition: :inline
-        )
+        redirect_to ChunckUploader.new(model).s3_file.url(1.day.from_now.to_i, query: { "response-content-disposition" => "inline" })
       end
     end
   end

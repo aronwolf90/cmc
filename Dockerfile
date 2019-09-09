@@ -15,9 +15,11 @@ RUN apk add --update \
   postgresql-dev \
   grep
 
+COPY --from=registry.gitlab.com/cmc_system/cmc:latest /usr/local/bundle /usr/local/bundle
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --jobs $(nproc)
 
+COPY --from=registry.gitlab.com/cmc_system/cmc:latest /app/node_modules /app/node_modules
 COPY yarn.lock package.json ./
 RUN yarn install
 

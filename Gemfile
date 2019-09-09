@@ -7,6 +7,7 @@ gem "rails", "~> 5.1.3"
 
 # Fundamental
 gem "apartment"
+gem "aws-sdk-s3"
 gem "pg"
 gem "puma", "~> 3.7"
 

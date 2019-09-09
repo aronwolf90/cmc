@@ -23,10 +23,10 @@ export default {
       return Utils.attribute(this.document, 'name')
     },
     link () {
-      return `/administration/archive/documents/${this.document.id}`
+      return Utils.attribute(this.document, 'url')
     },
     editLink () {
-      return this.link + '/edit'
+      return `/administration/archive/documents/${this.document.id}/edit`
     }
   }
 }
