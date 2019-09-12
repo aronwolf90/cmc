@@ -140,8 +140,10 @@ end
 Given(/^a (document|document_file) exists with an id of 1/) do |*_args|
   document_file = DocumentFile.create!(
     id: 1,
-    file: File.open(Rails.root.join("features", "support", "attachments", "avatar.jpg"))
+    file: "avatar.jpg"
   )
+  file = Rails.root.join("features", "support", "attachments", "avatar.jpg")
+  ChunckUploader.new(document_file).upload(file)
   FactoryBot.create(:document, document_file: document_file, name: "test")
 end
 

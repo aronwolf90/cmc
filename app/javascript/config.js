@@ -9,7 +9,8 @@ import {
   Form,
   FormSelect,
   Tooltip,
-  FormFilePlugin
+  FormFilePlugin,
+  ProgressPlugin
 } from 'bootstrap-vue/es/components'
 import TurbolinksAdapter from './vue_turbolinks'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -42,3 +43,4 @@ Vue.use(DaySpanVuetify, {
   }
 })
 Vue.use(FormFilePlugin)
+Vue.use(ProgressPlugin)

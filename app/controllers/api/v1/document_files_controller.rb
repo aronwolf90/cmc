@@ -10,7 +10,7 @@ module Api
       public :create, :update
 
       def show
-        redirect_to ChunckUploader.new(model).s3_file.url(1.day.from_now.to_i, query: { "response-content-disposition" => "inline" })
+        redirect_to ChunckUploader.url(model)
       end
     end
   end

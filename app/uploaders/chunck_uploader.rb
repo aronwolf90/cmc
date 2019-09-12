@@ -28,12 +28,31 @@ class ChunckUploader < BaseUploader
     )
   end
 
+  def upload(file)
+    s3_bucket.files.create(
+      key: "#{store_dir}/#{model.file}",
+      body: File.open(file),
+      public: false
+    )
+  end
+
+  def url
+    s3_file.url(
+      1.day.from_now.to_i,
+      query: { "response-content-disposition" => "inline" }
+    )
+  end
+
   def s3_file
     s3_bucket.files.get(file_path)
   end
 
   def s3_bucket
     fog_storage.directories.new(key: self.fog_directory)
+  end
+
+  def self.url(model)
+    new(model).url
   end
 
   private
