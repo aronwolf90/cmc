@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :calender do
-    title "Test calender"
+    title { "Test calender" }
   end
 end

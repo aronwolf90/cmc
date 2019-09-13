@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :contact_avatar do
-    file "MyString"
+    file { "MyString" }
   end
 end

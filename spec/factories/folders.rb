@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :folder do
-    name "folder name"
+    name { "folder name" }
   end
 end

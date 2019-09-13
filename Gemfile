@@ -7,7 +7,6 @@ gem "rails", "~> 5.1.3"
 
 # Fundamental
 gem "apartment"
-gem "aws-sdk-s3"
 gem "pg"
 gem "puma", "~> 3.7"
 
@@ -21,7 +20,6 @@ gem "acts_as_paranoid"
 gem "carrierwave"
 gem "composite_primary_keys"
 gem "config"
-gem "dry-transaction"
 gem "fog-aws"
 gem "hash_mapper"
 gem "holidays"
@@ -43,9 +41,6 @@ gem "attr_extras"
 gem "numeric"
 
 # Trailblazer
-gem "cells-rails"
-gem "cells-slim"
-gem "kaminari-cells"
 gem "reform", "~> 2.2"
 gem "reform-rails"
 gem "trailblazer"
@@ -53,7 +48,6 @@ gem "trailblazer-cells"
 gem "trailblazer-rails", "~> 2.1"
 
 # Preprocessors
-gem "coffee-rails"
 gem "sass-rails"
 
 # Frontent libraries
@@ -68,12 +62,6 @@ gem "turbolinks"
 gem "font-awesome-rails"
 gem "simple_form"
 gem "slim-rails"
-
-# preloaders
-gem "bootsnap", require: false
-gem "spring"
-gem "spring-commands-rspec"
-gem "spring-watcher-listen"
 
 group :production do
   gem "sentry-raven"
@@ -91,16 +79,17 @@ group :development, :test do
   gem "bullet"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
-  gem "foreman", "0.27.0"
   gem "rails-controller-testing"
   gem "rspec-rails"
 
   # static code analyzers
-  gem "active_record_doctor"
-  gem "brakeman"
-  gem "rails_best_practices", require: false
-  gem "rubycritic", require: false
   gem "traceroute"
+
+  # preloaders
+  gem "bootsnap", require: false
+  gem "spring"
+  gem "spring-commands-rspec"
+  gem "spring-watcher-listen"
 end
 
 group :test do
@@ -109,7 +98,6 @@ group :test do
   gem "cucumber-rails", require: false
   gem "database_cleaner", require: false
   gem "db-query-matchers"
-  gem "rspec-cells"
   gem "selenium-webdriver", require: false
   gem "shoulda-matchers"
   gem "simplecov", require: false

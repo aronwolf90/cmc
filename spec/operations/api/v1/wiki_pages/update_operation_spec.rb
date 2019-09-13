@@ -1,67 +1,11 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require_relative "../shared_examples/standard_operations"
 
 RSpec.describe Api::V1::WikiPages::UpdateOperation do
-  subject { described_class.(params: params, current_user: user) }
-
-  let(:model) { WikiPage.new }
-  let(:user) { Admin.new }
-  let(:params) do
-    {
-      data: {
-        id: 1,
-        type: "wiki-pages",
-        attributes: {
-          title: "new title",
-          content: "new content",
-        }
-      }
-    }
-  end
-  let(:form_result) { OpenStruct.new(errors: []) }
-  let(:deserialized_params) do
-    {
-      title: "new title",
-      content: "new content",
-    }
-  end
-
-  before do
-    Timecop.freeze
-    allow(WikiPage).to receive(:find).and_return(model)
-    allow(Api::V1::WikiPages::UpdateForm)
-      .to receive(:call).with(params).and_return(form_result)
-    allow(Api::V1::WikiPageDeserializer)
-      .to receive(:call).with(params[:data]).and_return(deserialized_params)
-    allow(model).to receive(:update!)
-  end
-
-  after do
-    Timecop.return
-  end
-
-  it "call update!" do
-    expect(model).to receive(:update!)
-      .with(title: "new title", content: "new content")
-    subject
-  end
-
-  it { is_expected.to be_success }
-
-  context "invalid params" do
-    before do
-      params[:data][:attributes][:content] = ""
-      form_result.errors = {
-        data: { attributes: { content: ["must be filled"] } }
-      }
-    end
-
-    it "not call update!" do
-      expect(model).not_to receive(:update!)
-      subject
-    end
-
-    it { is_expected.not_to be_success }
-  end
+  include_examples "standard api update operation",
+                   form: Api::V1::WikiPages::UpdateForm,
+                   model: WikiPage.new,
+                   deserializer: Api::V1::WikiPageDeserializer
 end

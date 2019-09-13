@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :board_list do
-    name "name"
+    name { "name" }
 
     association :project
   end
