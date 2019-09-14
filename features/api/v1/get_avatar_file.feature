@@ -1,8 +1,7 @@
 Feature: API: get contact_avatars/<id>
 
 Scenario: Get
-  Given an issue exists with an id of 1
-  And I am an user with an id of 1
+  Given I am an user with an id of 1
   And a contact avatar exists with an id of 1
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |

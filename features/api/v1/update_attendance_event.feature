@@ -2,7 +2,9 @@ Feature: API: update an attendance event
 
 Scenario: Post an valid event using json in POST body
   Given I am an user with an id of 1
-  And an attendance event exists with an id of 1
+  And the following attendance event exist:
+   | id | user_id |
+   | 1  | 1       |
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

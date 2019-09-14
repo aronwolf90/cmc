@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :wiki_category do
-    sequence(:title) { |n| "wiki categorie title #{n}" }
+    title { "wiki category title" }
   end
 end

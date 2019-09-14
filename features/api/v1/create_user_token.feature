@@ -1,7 +1,9 @@
 Feature: API: create user token
 
 Scenario: Post valid authentication data
-  Given I am an user with an email "test@localhost.de" and a password "testtest" and and id of "1"
+  Given the following employee exist:
+   | id  | email             | password |
+   | 1   | test@localhost.de | testtest |
   And I set headers:
    | Content-Type | application/json |
   When I send a POST request to "/api/v1/user_tokens" with the following:

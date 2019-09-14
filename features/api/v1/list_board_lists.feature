@@ -2,7 +2,10 @@ Feature: API: list board lists
 
 Scenario: Get
   Given I am an user with an id of 1
-  And a board list exists with an id of 1
+  And a project exists with an id of "1"
+  And the following board list exist:
+   | id | project_id |
+   | 1  | 1          |
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

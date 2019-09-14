@@ -2,7 +2,7 @@ Feature: API: update an user
 
 Scenario: Put an valid record using json in PUT body
   Given I am an user with an id of 1
-  And an project with an id of 1 exists
+  And an project exists with an id of "1"
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -22,7 +22,7 @@ Scenario: Put an valid record using json in PUT body
 
 Scenario: Put an invalid record using json in PUT body
   Given I am an user with an id of 1
-  And an project with an id of 1 exists
+  And an project exists with an id of "1"
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

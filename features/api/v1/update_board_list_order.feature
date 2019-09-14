@@ -1,9 +1,12 @@
 Feature: API: update board list order
 
 Scenario: valid data
-  Given a board list exists with an id of 1
-  And a board list exists with an id of 2
-  And I am an user with an id of 1
+  Given I am an user with an id of 1
+  And an project exists with an id of "1"
+  And the following board lists exist:
+    | id | project_id |
+    | 1  | 1          |
+    | 2  | 1          | 
   And I set headers:
     | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
     | Content-Type | application/vnd.api+json |
@@ -24,7 +27,7 @@ Scenario: valid data
         "attributes": { "name": "name" },
         "relationships": {
           "issues": {"data": [], "links": { "self": "/api/v1/board_lists/2/issues" } },
-          "project": {"data": { "id": "2", "type": "projects" } }
+          "project": {"data": { "id": "1", "type": "projects" } }
         },
         "links": {
           "self": "/api/v1/board_lists/2"
@@ -58,9 +61,12 @@ Scenario: valid data
     """
 
 Scenario: inalid data
-  Given a board list exists with an id of 1
-  And a board list exists with an id of 2
-  And I am an user with an id of 1
+  Given I am an user with an id of 1
+  And an project exists with an id of "1"
+  And the following board lists exist:
+    | id | project_id |
+    | 1  | 1          |
+    | 2  | 1          | 
   And I set headers:
     | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
     | Content-Type | application/vnd.api+json |

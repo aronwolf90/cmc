@@ -1,8 +1,14 @@
 Feature: API: list issues
 
 Scenario: Get /api/v1/issues
-  Given an issue exists with an id of 1
-  And I am an user with an id of 1
+  Given I am an user with an id of 1
+  And a project exists with an id of "1"
+  And the following board list exist:
+   | id | project_id |
+   | 1  | 1          |
+  And the following issue exist:
+   | id | board_list_id |
+   | 1  | 1             |
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -22,14 +28,14 @@ Scenario: Get /api/v1/issues
         "type": "issues",
         "attributes": { 
           "title": "title",
-          "description": null,
+          "description": "description",
           "complexity": null
         },
         "relationships": {
           "user": { "data": null },
           "board-list": { 
             "data": { 
-              "id": "10",
+              "id": "1",
               "type": "board-lists"
             } 
           },

@@ -6,7 +6,6 @@ Scenario: Create an contact of kind "person"
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
-  And an issue exists with an id of 1
   When I send a POST request to "/api/v1/contacts" with the following:
     """
     {
@@ -60,7 +59,6 @@ Scenario: Create an contact of kind "person"
 
   Scenario: Post an invalid record using json in POST body
     Given I am an user with an id of 1
-    And an issue exists with an id of 1
     And I set headers:
      | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
      | Content-Type | application/vnd.api+json |

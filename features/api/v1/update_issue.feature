@@ -1,8 +1,14 @@
 Feature: API: update an issue
 
 Scenario: Put an valid issue using json in PUT body
-  Given an issue exists with an id of 1
-  And I am an user with an id of 1
+  Given I am an user with an id of 1
+  And a project exists with an id of "1"
+  And the following board list exist:
+   | id | project_id |
+   | 1  | 1          |
+  And the following issue exist:
+   | id | board_list_id |
+   | 1  | 1             |
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -19,8 +25,14 @@ Scenario: Put an valid issue using json in PUT body
   Then the response status should be "204"
 
 Scenario: Put an invalid issue using json in PUT body
-  Given an issue exists with an id of 1
-  And I am an user with an id of 1
+  Given I am an user with an id of 1
+  And a project exists with an id of "1"
+  And the following board list exist:
+   | id | project_id |
+   | 1  | 1          |
+  And the following issue exist:
+   | id | board_list_id |
+   | 1  | 1             |
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

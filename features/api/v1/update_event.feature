@@ -2,7 +2,7 @@ Feature: API: create a comment
 
 Scenario: Put an valid event using json in POST body
   Given I am an user with an id of 1
-  And an event exists with an id of 1
+  And an event exists with an id of "1"
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -24,7 +24,7 @@ Scenario: Put an valid event using json in POST body
 
   Scenario: Put an invalid event using json in POST body
     Given I am an user with an id of 1
-    And an event exists with an id of 1
+    And an event exists with an id of "1"
     And I set headers:
      | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
      | Content-Type | application/vnd.api+json |

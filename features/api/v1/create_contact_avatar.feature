@@ -5,7 +5,6 @@ Scenario: Create an contact
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type  | multipart/form-data        |
-  And an issue exists with an id of 1
   When I send a multipart POST request to "/api/v1/contact_avatars" with:
        | Name                | Content    | Filename      | Type       |
        | data[file] |        | avatar.jpg | image/jpeg    |

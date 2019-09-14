@@ -2,7 +2,9 @@ Feature: API: list attendance events
 
 Scenario: Get
   Given I am an user with an id of 1
-  And an attendance event exists with an id of 1
+  And the following attendance event exist:
+   | id | user_id | from_day     | to_day       | from_time | to_time |
+   | 1  | 1       | "2019-01-15" | "2019-01-16" | "09:00"   |"18:00"  |
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

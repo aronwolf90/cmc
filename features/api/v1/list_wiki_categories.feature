@@ -2,7 +2,7 @@ Feature: API: list users
 
 Scenario: Get
   Given I am an user with an id of 1
-  And a wiki category with an id of 1 exists
+  And a wiki category exists with an id of "1"
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

@@ -1,8 +1,11 @@
 Feature: API: update an user
 
 Scenario: Put an valid record using json in PUT body
-  Given a wiki page exists with an id of 1
-  And I am an user with an id of 1
+  Given I am an user with an id of 1
+  And a wiki category exists with an id of "1"
+  And the following wiki page exist:
+   | id | wiki_category_id |
+   | 1  | 1                |
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -50,8 +53,11 @@ Scenario: Put an valid record using json in PUT body
     """
 
 Scenario: Put an invalid record using json in PUT body
-  Given a wiki page exists with an id of 1
-  And I am an user with an id of 1
+  Given I am an user with an id of 1
+  And a wiki category exists with an id of "1"
+  And the following wiki page exist:
+   | id | wiki_category_id |
+   | 1  | 1                |
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
