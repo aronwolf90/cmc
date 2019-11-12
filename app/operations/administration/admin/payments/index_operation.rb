@@ -6,7 +6,10 @@ module Administration
       class IndexOperation < AdministrationOperation
         step :create_subscription
 
+      private
         def create_subscription(options, params:, **args)
+          return if params[:stripe_session_id].nil?
+
           Subscription.create(
             stripe_session_id: params[:stripe_session_id],
             organization_id: Organization.current.id,
