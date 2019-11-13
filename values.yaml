@@ -18,3 +18,6 @@ webAws:
   region: fra1
   endpoint: https://fra1.digitaloceanspaces.com
   directory: webcloudpower/cmc-production
+
+payment:
+  host: https://payment.cost-manager.com
