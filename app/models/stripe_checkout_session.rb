@@ -18,6 +18,7 @@ class StripeCheckoutSession < ActiveModelSerializers::Model
     }
 
     response = RestClient.post(url, data, Settings.payment.headers.to_h)
+    Rails.logger.info "Stripe checkout post response: #{response.body}"
     self.id = JSON.parse(response.body)["data"]["id"]
   end
 

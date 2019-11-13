@@ -159,7 +159,7 @@ describe ApplicationHelper do
 
       it "return url with name as subdomain" do
         expect(helper.organization_url(build_stubbed(:organization, name: "test")))
-          .to eq "test.lvh.me"
+          .to eq "http://test.lvh.me"
       end
     end
 
@@ -168,7 +168,7 @@ describe ApplicationHelper do
 
       it "return url with name as subdomain" do
         expect(helper.organization_url(build_stubbed(:organization, name: "test")))
-          .to eq "lvh.me"
+          .to eq "http://lvh.me"
       end
     end
   end

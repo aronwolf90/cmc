@@ -37,9 +37,9 @@ module ApplicationHelper
 
   def organization_url(organization)
     if Settings.multi_tenant
-      [organization.name, Settings.host].join(".")
+      ["http://#{organization.name}", Settings.host].join(".")
     else
-      Settings.host
+      "http://#{Settings.host}"
     end
   end
 
