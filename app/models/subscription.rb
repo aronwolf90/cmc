@@ -9,10 +9,28 @@ class Subscription < ApplicationApi
     :quantity
   )
 
+private
   def create
-    url = "#{Settings.payment.host}/api/v1/subscriptions"
+    response = RestClient.post(url, data, Settings.payment.headers.to_h)
+    JSON.parse(response.body)["data"].tap do |attributes|
+      self.id = attributes["id"]
+      self.quantity = attributes["quantity"]
+    end
+  end
 
-    data = {
+  def update
+    response = RestClient.patch(url, data, Settings.payment.headers.to_h)
+    JSON.parse(response.body)["data"].tap do |attributes|
+      self.quantity = attributes["quantity"]
+    end
+  end
+
+  def url
+    [Settings.payment.host, "api/v1/subscriptions", id].compact.join("/")
+  end
+
+  def data
+    {
       data: {
         attributes: {
           stripe_session_id: stripe_session_id,
@@ -22,12 +40,5 @@ class Subscription < ApplicationApi
         }
       }
     }
-
-    response = RestClient.post(url, data, Settings.payment.headers.to_h)
-    self.id = JSON.parse(response.body)["data"]["id"]
-  end
-
-  def update!(_attributes)
-    create if id.nil?
   end
 end

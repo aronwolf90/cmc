@@ -6,7 +6,13 @@ module Administration
       side_menu "administration/organization"
       namespace Administration::Admin::Payments
 
-      public :index
+      def index
+        run Administration::Admin::Payments::IndexOperation
+
+        if @model.present?
+          flash[:success] = "You have successfully added you payment information"
+        end
+      end
     end
   end
 end

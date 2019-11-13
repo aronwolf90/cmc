@@ -10,9 +10,12 @@ module Administration
         def create_subscription(options, params:, **args)
           return if params[:stripe_session_id].nil?
 
-          Subscription.create(
+          organization = Organization.current
+
+          options[:model] = Subscription.create_or_update(
+            id: organization.subscription_id,
             stripe_session_id: params[:stripe_session_id],
-            organization_id: Organization.current.id,
+            organization_id: organization.id,
             email: ::Admin.first.email,
             quantity: User.count
           )

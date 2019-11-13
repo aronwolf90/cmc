@@ -386,7 +386,8 @@ CREATE TABLE organizations (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     time_zone character varying NOT NULL,
-    time_zone_seconds integer
+    time_zone_seconds integer,
+    subscription_id integer
 );
 
 
@@ -1236,6 +1237,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190819204611'),
 ('20190907123907'),
 ('20190910193632'),
-('20190910193903');
+('20190910193903'),
+('20191112235930');
 
 
