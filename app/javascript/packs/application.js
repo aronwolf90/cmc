@@ -22,7 +22,7 @@ import ContactNew from '../contacts/new'
 import ContactEdit from '../contacts/edit'
 import DocumentNew from '../documents/new'
 import DocumentEdit from '../documents/edit'
-import AdminPayment from '../admin/payment'
+import AdminPayment from '../admin/payments'
 
 require('../config')
 

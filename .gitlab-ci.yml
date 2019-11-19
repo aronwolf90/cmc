@@ -74,7 +74,7 @@ rubocop:
   stage: test
   script:
     - cd /app
-    - yarn eslint
+    - rubocop
 
 mocha:
   stage: test

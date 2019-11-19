@@ -11,8 +11,8 @@ class StripeCheckoutSession < ActiveModelSerializers::Model
     data = {
       data: {
         attributes: {
-          cancel_url: "#{organization_url}/admin/payment",
-          success_url:  "#{organization_url}/admin/payment?session_id={CHECKOUT_SESSION_ID}"
+          cancel_url: "#{organization_url}/administration/admin/payments",
+          success_url:  "#{organization_url}/administration/admin/payments?stripe_session_id={CHECKOUT_SESSION_ID}"
         }
       }
     }

@@ -1,8 +1,8 @@
 multiTenant: true
 installJobDelay: 60
+url: cost-manager.com
 ingress:
   enabled: true
-  url: cost-manager.com
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
     kubernetes.io/ingress.class: nginx

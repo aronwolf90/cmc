@@ -9,6 +9,7 @@ class Subscription < ApplicationApi
     :quantity
   )
 
+
 private
   def create
     response = RestClient.post(url, data, Settings.payment.headers.to_h)

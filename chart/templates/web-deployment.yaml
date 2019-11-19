@@ -49,6 +49,8 @@ spec:
               value: '{{ .Values.webAws.directory }}'
             - name: PAYMENT_HOST
               value: '{{ .Values.payment.host }}'
+            - name: HOST
+              value: '{{ .Values.url }}'
           volumeMounts:
             {{- if .Values.webPersistence.enabled }}
             - name: files

@@ -9,8 +9,8 @@ RSpec.describe StripeCheckoutSession, type: :model do
       {
         data: {
           attributes: {
-            cancel_url: "http://lvh.me/admin/payment",
-            success_url:  "http://lvh.me/admin/payment?session_id={CHECKOUT_SESSION_ID}"
+            cancel_url: "http://lvh.me/administration/admin/payments",
+            success_url:  "http://lvh.me/administration/admin/payments?stripe_session_id={CHECKOUT_SESSION_ID}"
           }
         }
       },

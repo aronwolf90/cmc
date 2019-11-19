@@ -100,6 +100,7 @@ Rails.application.routes.draw do
       resources :document_files, only: %i[show create update]
       resources :documents, only: %i[index show create update destroy]
       resources :stripe_checkout_sessions, only: :create
+      resources :invoices, only: :index
     end
   end
 end

@@ -1,0 +1,354 @@
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "in_1FbueoLeD4GoxaIE6rVfYns7",
+      "object": "invoice",
+      "account_country": "DE",
+      "account_name": "about.cost-manager",
+      "amount_due": 58668,
+      "amount_paid": 58668,
+      "amount_remaining": 0,
+      "application_fee_amount": null,
+      "attempt_count": 1,
+      "attempted": true,
+      "auto_advance": false,
+      "billing": "charge_automatically",
+      "billing_reason": "subscription_cycle",
+      "charge": "ch_1FbvcpLeD4GoxaIEZWphJqFC",
+      "collection_method": "charge_automatically",
+      "created": 1573070350,
+      "currency": "eur",
+      "custom_fields": null,
+      "customer": "cus_FvqHIeUAq8T0Wc",
+      "customer_address": null,
+      "customer_email": "jenny.rosen@example.com",
+      "customer_name": null,
+      "customer_phone": null,
+      "customer_shipping": null,
+      "customer_tax_exempt": "none",
+      "customer_tax_ids": [
+      ],
+      "default_payment_method": null,
+      "default_source": null,
+      "default_tax_rates": [
+      ],
+      "description": null,
+      "discount": null,
+      "due_date": null,
+      "ending_balance": 0,
+      "footer": null,
+      "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_9KtFtihugeF8KkYEfFEJltHcg7",
+      "invoice_pdf": "https://pay.stripe.com/invoice/invst_9KtFtihugeF8KkYEfFEJltHcg7/pdf",
+      "lines": {
+        "object": "list",
+        "data": [
+          {
+            "id": "ii_1FRQGgLeD4GoxaIEDgvCsiAC",
+            "object": "line_item",
+            "amount": 37337,
+            "currency": "eur",
+            "description": "Remaining time on 4 × My product after 08 Oct 2019",
+            "discountable": false,
+            "invoice_item": "ii_1FRQGgLeD4GoxaIEDgvCsiAC",
+            "livemode": false,
+            "metadata": {
+            },
+            "period": {
+              "end": 1573070344,
+              "start": 1570570254
+            },
+            "plan": {
+              "id": "plan_Fr9b1qI2jX1UkO",
+              "object": "plan",
+              "active": true,
+              "aggregate_usage": null,
+              "amount": 10000,
+              "amount_decimal": "10000",
+              "billing_scheme": "per_unit",
+              "created": 1569144255,
+              "currency": "eur",
+              "interval": "month",
+              "interval_count": 1,
+              "livemode": false,
+              "metadata": {
+              },
+              "nickname": "SaaS Platform USD",
+              "product": "prod_Fr9YJzKxHAdARJ",
+              "tiers": null,
+              "tiers_mode": null,
+              "transform_usage": null,
+              "trial_period_days": null,
+              "usage_type": "licensed"
+            },
+            "proration": true,
+            "quantity": 4,
+            "subscription": "sub_FwZ0oDDH6KjJOZ",
+            "subscription_item": "si_FwZ0BTeBukXRJg",
+            "tax_amounts": [
+            ],
+            "tax_rates": [
+            ],
+            "type": "invoiceitem"
+          },
+          {
+            "id": "ii_1FRQFCLeD4GoxaIEIYNu7pWG",
+            "object": "line_item",
+            "amount": -18669,
+            "currency": "eur",
+            "description": "Unused time on 2 × My product after 08 Oct 2019",
+            "discountable": false,
+            "invoice_item": "ii_1FRQFCLeD4GoxaIEIYNu7pWG",
+            "livemode": false,
+            "metadata": {
+            },
+            "period": {
+              "end": 1573070344,
+              "start": 1570570162
+            },
+            "plan": {
+              "id": "plan_Fr9b1qI2jX1UkO",
+              "object": "plan",
+              "active": true,
+              "aggregate_usage": null,
+              "amount": 10000,
+              "amount_decimal": "10000",
+              "billing_scheme": "per_unit",
+              "created": 1569144255,
+              "currency": "eur",
+              "interval": "month",
+              "interval_count": 1,
+              "livemode": false,
+              "metadata": {
+              },
+              "nickname": "SaaS Platform USD",
+              "product": "prod_Fr9YJzKxHAdARJ",
+              "tiers": null,
+              "tiers_mode": null,
+              "transform_usage": null,
+              "trial_period_days": null,
+              "usage_type": "licensed"
+            },
+            "proration": true,
+            "quantity": 2,
+            "subscription": "sub_FwZ0oDDH6KjJOZ",
+            "subscription_item": "si_FwZ0BTeBukXRJg",
+            "tax_amounts": [
+            ],
+            "tax_rates": [
+            ],
+            "type": "invoiceitem"
+          },
+          {
+            "id": "sli_9bf085addc1df0",
+            "object": "line_item",
+            "amount": 40000,
+            "currency": "eur",
+            "description": "4 × My product (at €100.00 / month)",
+            "discountable": true,
+            "livemode": false,
+            "metadata": {
+            },
+            "period": {
+              "end": 1575662344,
+              "start": 1573070344
+            },
+            "plan": {
+              "id": "plan_Fr9b1qI2jX1UkO",
+              "object": "plan",
+              "active": true,
+              "aggregate_usage": null,
+              "amount": 10000,
+              "amount_decimal": "10000",
+              "billing_scheme": "per_unit",
+              "created": 1569144255,
+              "currency": "eur",
+              "interval": "month",
+              "interval_count": 1,
+              "livemode": false,
+              "metadata": {
+              },
+              "nickname": "SaaS Platform USD",
+              "product": "prod_Fr9YJzKxHAdARJ",
+              "tiers": null,
+              "tiers_mode": null,
+              "transform_usage": null,
+              "trial_period_days": null,
+              "usage_type": "licensed"
+            },
+            "proration": false,
+            "quantity": 4,
+            "subscription": "sub_FwZ0oDDH6KjJOZ",
+            "subscription_item": "si_FwZ0BTeBukXRJg",
+            "tax_amounts": [
+            ],
+            "tax_rates": [
+            ],
+            "type": "subscription"
+          }
+        ],
+        "has_more": false,
+        "total_count": 3,
+        "url": "/v1/invoices/in_1FbueoLeD4GoxaIE6rVfYns7/lines"
+      },
+      "livemode": false,
+      "metadata": {
+      },
+      "next_payment_attempt": null,
+      "number": "DE5653B8-0002",
+      "paid": true,
+      "payment_intent": "pi_1FbvcpLeD4GoxaIE7VAsRNFe",
+      "period_end": 1573070344,
+      "period_start": 1570391944,
+      "post_payment_credit_notes_amount": 0,
+      "pre_payment_credit_notes_amount": 0,
+      "receipt_number": null,
+      "starting_balance": 0,
+      "statement_descriptor": null,
+      "status": "paid",
+      "status_transitions": {
+        "finalized_at": 1573074071,
+        "marked_uncollectible_at": null,
+        "paid_at": 1573074072,
+        "voided_at": null
+      },
+      "subscription": "sub_FwZ0oDDH6KjJOZ",
+      "subtotal": 58668,
+      "tax": null,
+      "tax_percent": null,
+      "total": 58668,
+      "total_tax_amounts": [
+      ],
+      "webhooks_delivered_at": 1573070351
+    },
+    {
+      "id": "in_1FQfsiLeD4GoxaIEtKwWfNRT",
+      "object": "invoice",
+      "account_country": "DE",
+      "account_name": "about.cost-manager",
+      "amount_due": 20000,
+      "amount_paid": 20000,
+      "amount_remaining": 0,
+      "application_fee_amount": null,
+      "attempt_count": 1,
+      "attempted": true,
+      "auto_advance": false,
+      "billing": "charge_automatically",
+      "billing_reason": "subscription_create",
+      "charge": "ch_1FQfsiLeD4GoxaIEaRCwBIo1",
+      "collection_method": "charge_automatically",
+      "created": 1570391944,
+      "currency": "eur",
+      "custom_fields": null,
+      "customer": "cus_FvqHIeUAq8T0Wc",
+      "customer_address": null,
+      "customer_email": "jenny.rosen@example.com",
+      "customer_name": null,
+      "customer_phone": null,
+      "customer_shipping": null,
+      "customer_tax_exempt": "none",
+      "customer_tax_ids": [
+      ],
+      "default_payment_method": null,
+      "default_source": null,
+      "default_tax_rates": [
+      ],
+      "description": null,
+      "discount": null,
+      "due_date": null,
+      "ending_balance": 0,
+      "footer": null,
+      "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_7sNZM2hdIJubqnCNFhmJ4F5WeF",
+      "invoice_pdf": "https://pay.stripe.com/invoice/invst_7sNZM2hdIJubqnCNFhmJ4F5WeF/pdf",
+      "lines": {
+        "object": "list",
+        "data": [
+          {
+            "id": "sli_86ef707c8a939b",
+            "object": "line_item",
+            "amount": 20000,
+            "currency": "eur",
+            "description": "2 × My product (at €100.00 / month)",
+            "discountable": true,
+            "livemode": false,
+            "metadata": {
+            },
+            "period": {
+              "end": 1573070344,
+              "start": 1570391944
+            },
+            "plan": {
+              "id": "plan_Fr9b1qI2jX1UkO",
+              "object": "plan",
+              "active": true,
+              "aggregate_usage": null,
+              "amount": 10000,
+              "amount_decimal": "10000",
+              "billing_scheme": "per_unit",
+              "created": 1569144255,
+              "currency": "eur",
+              "interval": "month",
+              "interval_count": 1,
+              "livemode": false,
+              "metadata": {
+              },
+              "nickname": "SaaS Platform USD",
+              "product": "prod_Fr9YJzKxHAdARJ",
+              "tiers": null,
+              "tiers_mode": null,
+              "transform_usage": null,
+              "trial_period_days": null,
+              "usage_type": "licensed"
+            },
+            "proration": false,
+            "quantity": 2,
+            "subscription": "sub_FwZ0oDDH6KjJOZ",
+            "subscription_item": "si_FwZ0BTeBukXRJg",
+            "tax_amounts": [
+            ],
+            "tax_rates": [
+            ],
+            "type": "subscription"
+          }
+        ],
+        "has_more": false,
+        "total_count": 1,
+        "url": "/v1/invoices/in_1FQfsiLeD4GoxaIEtKwWfNRT/lines"
+      },
+      "livemode": false,
+      "metadata": {
+      },
+      "next_payment_attempt": null,
+      "number": "DE5653B8-0001",
+      "paid": true,
+      "payment_intent": "pi_1FQfsiLeD4GoxaIEl7ikKP9A",
+      "period_end": 1570391944,
+      "period_start": 1570391944,
+      "post_payment_credit_notes_amount": 0,
+      "pre_payment_credit_notes_amount": 0,
+      "receipt_number": null,
+      "starting_balance": 0,
+      "statement_descriptor": null,
+      "status": "paid",
+      "status_transitions": {
+        "finalized_at": 1570391944,
+        "marked_uncollectible_at": null,
+        "paid_at": 1570391946,
+        "voided_at": null
+      },
+      "subscription": "sub_FwZ0oDDH6KjJOZ",
+      "subtotal": 20000,
+      "tax": null,
+      "tax_percent": null,
+      "total": 20000,
+      "total_tax_amounts": [
+      ],
+      "webhooks_delivered_at": 1570391947
+    }
+  ],
+  "has_more": false,
+  "url": "/v1/invoices"
+}

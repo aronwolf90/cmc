@@ -7,7 +7,7 @@ if Apartment::Tenant.current == "public" && Organization.none?
   }[Settings.multi_tenant].each do |name|
     next if Organization.exists?(name: name)
 
-    mutation(Organization, :create).call(name: name, time_zone: "Berlin")
+    mutation(Organization, :create).call(name: name, time_zone: "Berlin", subscription_id: 1)
   end
 end
 

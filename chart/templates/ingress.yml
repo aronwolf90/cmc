@@ -9,7 +9,7 @@ metadata:
     {{- end }}
 spec:
   rules:
-    - host: {{ .Values.ingress.url }}
+    - host: {{ .Values.url }}
       http:
         paths:
           - path: /
@@ -17,7 +17,7 @@ spec:
               serviceName: {{ .Release.Name }}-service
               servicePort: 80
     {{- if .Values.multiTenant }}
-    - host: "*.{{ .Values.ingress.url }}"
+    - host: "*.{{ .Values.url }}"
       http:
         paths:
           - path: /
