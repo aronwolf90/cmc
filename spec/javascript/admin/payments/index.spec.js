@@ -15,6 +15,17 @@ describe('AdminPaymentsIndex', () => {
     { store: $store, localVue, propsData: {} }))
 
   def('actions', () => ({
+    subscription () {
+      return Promise.resolve({
+        data: {
+          id: 'subscription',
+          type: 'subscriptions',
+          attributes: {
+            'iban-last4': '2424'
+          }
+        }
+      })
+    },
     invoices () {
       return Promise.resolve({
         data: [{
@@ -23,13 +34,25 @@ describe('AdminPaymentsIndex', () => {
           attributes: {
             'amount-paid': 8,
             'amount-due': 8,
-            'amount-remaining': 0
+            'amount-remaining': 0,
+            pdf: 'https://pay.stripe.com/invoice/invst_9KtFtihugeF8KkYEfFEJltHcg7/pdf'
           }
         }]
       })
     }
   }))
   def('store', () => (new Vuex.Store({ state: {}, actions: $actions })))
+
+  it('render iban-last4', (done) => {
+    $subject.vm.$nextTick(() => {
+      $subject.vm.$nextTick(() => {
+        $subject.vm.$nextTick(() => {
+          expect($subject.html()).to.include('**** **** **** 2424')
+          done()
+        })
+      })
+    })
+  })
 
   it('render payment btn', () => {
     expect($subject.html()).to.include('Add payment informations')
@@ -46,6 +69,15 @@ describe('AdminPaymentsIndex', () => {
     $subject.vm.$nextTick(() => {
       $subject.vm.$nextTick(() => {
         expect($subject.html()).to.include(8)
+        done()
+      })
+    })
+  })
+
+  it('render invoice pdf link', (done) => {
+    $subject.vm.$nextTick(() => {
+      $subject.vm.$nextTick(() => {
+        expect($subject.html()).to.include('https://pay.stripe.com/invoice/invst_9KtFtihugeF8KkYEfFEJltHcg7/pdf')
         done()
       })
     })

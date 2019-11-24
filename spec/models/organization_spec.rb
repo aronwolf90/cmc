@@ -21,6 +21,40 @@ RSpec.describe Organization, type: :model do
     end
   end
 
+  it "#subscription" do
+    expect(RestClient).to receive(:get).with(
+      "http://payment:4000/api/v1/organizations/1/subscription",
+      "Authorization": "Basic YWRtaW46dGVzdHRlc3Q=",
+      "Content-Type": "application/json"
+    ).and_return(
+      instance_double(
+        RestClient::Response,
+        body: {
+          data: {
+            id: 1,
+            type: "subscriptions",
+            attributes: {
+              "stripeSessionId": "cs_test_xpK6Pq8jMXbcxlV41ESuACxwqEosAGNM52zTSiqsp7PO1TnuJ23vCUPM",
+              "organizationId": 1,
+              "quantity": 1,
+              "ibanLast4": "4242",
+              "email": "test@example.com"
+            }
+          }
+        }.to_json
+      )
+    )
+    expect(described_class.new(id: 1).subscription)
+      .to eq(Subscription.new(
+               id: 1,
+               stripe_session_id: "cs_test_xpK6Pq8jMXbcxlV41ESuACxwqEosAGNM52zTSiqsp7PO1TnuJ23vCUPM",
+               organization_id: 1,
+               quantity: 1,
+               iban_last4: "4242",
+               email: "test@example.com"
+      ))
+  end
+
   describe "#invoices" do
     it "return invoices if subscription_id!=nil" do
       expect(RestClient).to receive(:get).with(
@@ -38,7 +72,8 @@ RSpec.describe Organization, type: :model do
                 createdAt: "2019-11-06T19:59:10Z",
                 amountDue: 2,
                 amountPaid: 2,
-                amountRemaining: 0
+                amountRemaining: 0,
+                pdf: "https://pay.stripe.com/invoice/invst_9KtFtihugeF8KkYEfFEJltHcg7/pdf"
               }
             }]
           }.to_json
@@ -50,7 +85,8 @@ RSpec.describe Organization, type: :model do
           created_at: "2019-11-06T19:59:10Z",
           amount_due: 2,
           amount_paid: 2,
-          amount_remaining: 0
+          amount_remaining: 0,
+          pdf: "https://pay.stripe.com/invoice/invst_9KtFtihugeF8KkYEfFEJltHcg7/pdf"
         )])
     end
     it "return invoices if subscription_id==nil" do

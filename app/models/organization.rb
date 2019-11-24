@@ -6,12 +6,39 @@ class Organization < ApplicationRecord
       find_by(name: Apartment::Tenant.current)
     end
 
+    def subscription
+      current.subscription
+    end
+
     def invoices
       current.invoices
     end
   end
 
   alias_attribute :to_s, :name
+
+  def subscription
+    @subscription ||=
+      begin
+        url = [
+          Settings.payment.host,
+          "api/v1/organizations",
+          id,
+          "subscription"
+        ].compact.join("/")
+
+        body = RestClient.get(url, Settings.payment.headers.to_h).body
+        data = JSON.parse(body)["data"]
+        Subscription.new(
+          id: data["id"],
+          quantity: data["attributes"]["quantity"],
+          iban_last4: data["attributes"]["ibanLast4"],
+          email: data["attributes"]["email"],
+          stripe_session_id: data["attributes"]["stripeSessionId"],
+          organization_id: data["attributes"]["organizationId"]
+        )
+      end
+  end
 
   def invoices
     @invoices ||=
@@ -31,7 +58,8 @@ class Organization < ApplicationRecord
             created_at: invoice["attributes"]["createdAt"],
             amount_due: invoice["attributes"]["amountDue"],
             amount_paid: invoice["attributes"]["amountPaid"],
-            amount_remaining: invoice["attributes"]["amountRemaining"]
+            amount_remaining: invoice["attributes"]["amountRemaining"],
+            pdf: invoice["attributes"]["pdf"],
           )
         end
       end

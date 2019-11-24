@@ -101,6 +101,7 @@ Rails.application.routes.draw do
       resources :documents, only: %i[index show create update destroy]
       resources :stripe_checkout_sessions, only: :create
       resources :invoices, only: :index
+      resource :subscription, only: :show
     end
   end
 end

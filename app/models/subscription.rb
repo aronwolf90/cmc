@@ -6,7 +6,8 @@ class Subscription < ApplicationApi
     :stripe_session_id,
     :organization_id,
     :email,
-    :quantity
+    :quantity,
+    :iban_last4
   )
 
 

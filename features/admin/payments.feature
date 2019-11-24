@@ -6,7 +6,8 @@ Scenario: Call payment callback from stripe
   Given I am signed in
   When I click on link "Admin"
   When I click on link "Payment"
-  Then the page contain the text "Add payment informations"
+  Then the page contain the text "**** **** **** 4242"
+  And the page contain the text "Add payment informations"
 
 @javascript
 Scenario: Call payment callback from stripe

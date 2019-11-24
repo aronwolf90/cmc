@@ -7,7 +7,8 @@ module Api
         :created_at,
         :amount_remaining,
         :amount_paid,
-        :amount_due
+        :amount_due,
+        :pdf
       )
     end
   end

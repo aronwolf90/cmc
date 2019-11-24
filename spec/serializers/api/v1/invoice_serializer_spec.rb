@@ -9,7 +9,8 @@ RSpec.describe Api::V1::InvoiceSerializer, type: :serializer do
       created_at: "2019-11-06T19:59:10Z",
       amount_due: 58668,
       amount_paid: 58668,
-      amount_remaining: 0
+      amount_remaining: 0,
+      pdf: "https://pay.stripe.com/invoice/invst_9KtFtihugeF8KkYEfFEJltHcg7/pdf"
     )
   end
 
@@ -22,7 +23,8 @@ RSpec.describe Api::V1::InvoiceSerializer, type: :serializer do
           "created-at": "2019-11-06T19:59:10Z",
           "amount-due": 58668,
           "amount-remaining": 0,
-          "amount-paid": 58668
+          "amount-paid": 58668,
+          pdf: "https://pay.stripe.com/invoice/invst_9KtFtihugeF8KkYEfFEJltHcg7/pdf"
         }
       }
     }

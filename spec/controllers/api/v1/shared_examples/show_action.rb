@@ -7,7 +7,8 @@ RSpec.shared_examples "standard api show action" do
     let(:user) { Admin.new }
 
     before do
-      allow(model.class).to receive(:find).and_return(model)
+      model.class.respond_to?(:find) &&
+        allow(model.class).to(receive(:find).and_return(model))
       sign_in user
     end
 

@@ -6,6 +6,7 @@ class Invoice < ApplicationApi
     :created_at,
     :amount_due,
     :amount_paid,
-    :amount_remaining
+    :amount_remaining,
+    :pdf
   )
 end

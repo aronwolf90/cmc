@@ -22,6 +22,7 @@ import contactActions from 'store/models/contact_actions'
 import documentActions from 'store/models/document_actions'
 import stripeCheckoutSessionActions from 'store/models/stripe_checkout_session_actions'
 import invoiceActions from 'store/models/invoice_actions'
+import subscriptionActions from 'store/models/subscription_actions'
 
 export default {
   strict: true,
@@ -99,6 +100,7 @@ export default {
     ...documentActions,
     ...stripeCheckoutSessionActions,
     ...invoiceActions,
+    ...subscriptionActions,
 
     initCurrentUser (context) {
       return context.dispatch('initContext').then(response => {
