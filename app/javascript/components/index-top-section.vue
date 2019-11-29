@@ -1,13 +1,10 @@
 <template lang='pug'>
   .d-flex.flex-row
     .w-100.mr-2
-      index-search-section(:resource="resource")
-        template(v-slot:default="slotProps")
-          slot(v-bind:entry="slotProps.entry")
-            index-search-section-item(
-              :text="itemTextFunction(slotProps.entry)",
-              :link="`/administration/${resource}/${slotProps.entry.id}`"
-            )
+      index-search-section(
+        :resource="resource",
+        :itemTextFunction="itemTextFunction"
+      )
     a.btn.btn-success(:href="`/administration/${resource}/new`")
       | {{ newText }}
 </template>

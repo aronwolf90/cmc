@@ -12,6 +12,7 @@ RSpec.describe Api::V1::ContextsController, type: :controller do
     subject { get :show }
 
     specify do
+      allow(User).to receive(:count).and_return 1
       expect(controller).to receive(:render).and_call_original do |hash|
         expect(hash[:json]).to be_a Context
       end

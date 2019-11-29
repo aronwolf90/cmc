@@ -24,6 +24,7 @@
 import IndexTopSection from '../components/index-top-section'
 import IndexListItem from '../components/index-list-item'
 import IndexSearchSectionItem from '../components/index-list-item' 
+import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   components: {
@@ -44,7 +45,7 @@ export default {
   },
   methods: {
     itemTextFunction(project) {
-      return project.name
+      return Utils.attribute(project, 'name')
     }
   }
 }

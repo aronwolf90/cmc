@@ -1,7 +1,7 @@
 const endpoint = '/api/v1'
 
 export default {
-  initContext (context) {
+  getContext (context) {
     return context.dispatch('get', { endpoint, resource: 'context' })
   },
   updateUser (context, { entry, selectedProject }) {

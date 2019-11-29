@@ -12,6 +12,10 @@ Scenario: Get
       "data": {
         "id": "context",
         "type": "contexts",
+        "attributes": {
+          "premium": true, 
+          "user-count": 1
+        },
         "relationships": {
           "current-user": { "data": { "id": "1", "type": "admins" } }
         }

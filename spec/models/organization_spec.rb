@@ -94,4 +94,34 @@ RSpec.describe Organization, type: :model do
         .to eq([])
     end
   end
+
+  describe "#premium?" do
+    it "return true when subscription_id is present" do
+      expect(described_class.new(subscription_id: 1).premium?).to eq true
+    end
+
+    it "return true when subscription_id is present" do
+      expect(described_class.new(subscription_id: nil).premium?).to eq false
+    end
+  end
+
+  describe ".premium?" do
+    it "return true when .current is nil" do
+      allow(Settings).to receive(:multi_tenant).and_return false
+      allow(described_class).to receive(:current).and_return(nil)
+      expect(described_class.premium?).to eq true
+    end
+
+    it "return true when #premium? return true" do
+      allow(Settings).to receive(:multi_tenant).and_return true
+      allow(described_class).to receive(:current).and_return(instance_double(described_class, premium?: true))
+      expect(described_class.premium?).to eq true
+    end
+
+    it "return false when #premium? is false" do
+      allow(Settings).to receive(:multi_tenant).and_return true
+      allow(described_class).to receive(:current).and_return(instance_double(described_class, premium?: false))
+      expect(described_class.premium?).to eq false
+    end
+  end
 end

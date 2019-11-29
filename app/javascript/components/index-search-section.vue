@@ -8,18 +8,21 @@
       autocomplete="off"
     )
     .items(v-if="focused")
-      slot(
+      index-search-section-item(
         v-for="entry in items", 
-        v-bind:entry="entry",
+        :text="itemTextFunction(entry)",
+        :link="`/administration/${resource}/${entry.id}`"
       )
 </template>
 
 <script>
 import IndexSearchSection from './index-search-section'
+import IndexSearchSectionItem from './index-search-section-item'
 
 export default {
   components: {
-    IndexSearchSection
+    IndexSearchSection,
+    IndexSearchSectionItem
   },
   data () {
     return { 

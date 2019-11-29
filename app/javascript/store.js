@@ -103,7 +103,7 @@ export default {
     ...subscriptionActions,
 
     initCurrentUser (context) {
-      return context.dispatch('initContext').then(response => {
+      return context.dispatch('getContext').then(response => {
         return context.dispatch('loadRelationship', {
           entry: response.data,
           name: 'current-user'

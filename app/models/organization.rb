@@ -13,6 +13,10 @@ class Organization < ApplicationRecord
     def invoices
       current.invoices
     end
+
+    def premium?
+      !Settings.multi_tenant || current.premium?
+    end
   end
 
   alias_attribute :to_s, :name
@@ -63,5 +67,9 @@ class Organization < ApplicationRecord
           )
         end
       end
+  end
+
+  def premium?
+    subscription_id.present?
   end
 end

@@ -45,6 +45,10 @@ export default {
     invoices () {
       if (!this.invoicesResult) return []
       return this.invoicesResult.data
+    },
+    context () {
+      if (!this.contextResult) return
+      return this.contextResult.data
     }
   },
   methods: {

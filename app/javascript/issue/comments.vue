@@ -33,7 +33,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('initContext', this.issueId)
+    this.$store.dispatch('getContext', this.issueId)
   },
   computed: {
     comments () {

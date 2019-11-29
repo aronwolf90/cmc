@@ -31,6 +31,28 @@ Given(/^I am signed in$/) do
   find('input[name="commit"]').click
 end
 
+Given(/^Organization is not premium$/) do
+  Organization.update_all(subscription_id: nil)
+end
+
+Given(/^I am signed in \(multitenant\)$/) do
+  find_or_create_current_user
+  visit "/users/sign_in"
+  fill_in "organization", with: "test-organization"
+  find('input[type="submit"]').click
+  fill_in "user_email", with: "admin@lvh.me"
+  fill_in "user_password", with: "testtest"
+  find('input[name="commit"]').click
+end
+
+Given(/^set "([^\"]*)" as current organization$/) do |tenant|
+  Apartment::Tenant.switch!(tenant)
+end
+
+Given(/^5 additional users exist$/) do
+  FactoryBot.create_list(:admin, 5)
+end
+
 When(/^I navigate to "([^\"]*)"$/) do |link|
   sleep 0.2
   visit link
@@ -85,6 +107,11 @@ end
 When(/^I click on link "([^\"]*)"$/) do |text|
   sleep 0.8
   find("a", text: text, match: :prefer_exact).click
+end
+
+When(/^I click on button "([^\"]*)"$/) do |text|
+  sleep 0.8
+  find("button", text: text, match: :prefer_exact).click
 end
 
 When(/^select "([^\"]*)" from select box "([^\"]*)"$/) do |text, name|
