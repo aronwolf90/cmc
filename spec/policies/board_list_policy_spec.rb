@@ -35,29 +35,29 @@ describe BoardListPolicy do
 
   permissions :edit?, :update? do
     it "grant access to the admins" do
-      is_expected.to permit(Admin.new, BoardList)
+      is_expected.to permit(Admin.new, BoardList.new)
     end
 
     it "grant access to the employees" do
-      is_expected.to permit(Employee.new, BoardList)
+      is_expected.to permit(Employee.new, BoardList.new)
     end
 
     it "denies access to the customers" do
-      is_expected.not_to permit(Customer.new, BoardList)
+      is_expected.not_to permit(Customer.new, BoardList.new)
     end
   end
 
   permissions :destroy? do
     it "grant access to the admins" do
-      is_expected.to permit(Admin.new, BoardList)
+      is_expected.to permit(Admin.new, BoardList.new)
     end
 
     it "denies access to the employees" do
-      is_expected.not_to permit(Employee.new, BoardList)
+      is_expected.not_to permit(Employee.new, BoardList.new)
     end
 
     it "denies access to the customers" do
-      is_expected.not_to permit(Customer.new, BoardList)
+      is_expected.not_to permit(Customer.new, BoardList.new)
     end
   end
 end

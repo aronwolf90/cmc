@@ -5,7 +5,7 @@ describe AdminPolicy do
 
   permissions :edit?, :update? do
     it "grant access to the admins" do
-      is_expected.to permit(Admin.new, Project)
+      is_expected.to permit(Admin.new, User.new)
     end
 
     it "grant access to the employees" do

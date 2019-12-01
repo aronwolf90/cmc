@@ -17,7 +17,10 @@
                 class="float-left",
                 @click="show=false"
               ) Close
-              a.btn.btn-success.float-right(href="/administration/users/new") Continue
+              a.btn.btn-success.float-right(
+                v-if="showContinueBtn",
+                href="/administration/users/new"
+              ) Continue
       template(v-else="")
         a.btn.btn-success(href="/administration/users/new") New user
 
@@ -69,9 +72,14 @@ export default {
     userCount () {
       return Utils.attribute(this.context, 'user-count')
     },
+    premium () {
+      return Utils.attribute(this.context, 'premium')
+    },
     showModal () {
-      return !Utils.attribute(this.context, 'premium') &&
-        this.userCount > 5
+      return !this.premium && this.userCount > 5
+    },
+    showContinueBtn () {
+      return this.userCount < 10
     }
   },
   methods: {

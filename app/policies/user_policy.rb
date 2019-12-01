@@ -6,10 +6,16 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    user.is_a?(Admin)
+    user.is_a?(Admin) &&
+      (premium? || User.count < 10)
   end
 
   def update?
     user.is_a?(Admin) || user == record
+  end
+
+private
+  def premium?
+    @premium ||= Organization.premium?
   end
 end
