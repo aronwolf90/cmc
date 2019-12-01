@@ -1,2 +1,4 @@
 multi_tenant: false
 admin_password: testtest
+payment:
+  enabled: true

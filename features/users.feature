@@ -45,7 +45,7 @@ Scenario: Create user on no premium when 6 users exist
 @javascript
 Scenario: Edit user
   Given The app contain seed data
-  And I am signed in (multitenant)
+  And I am signed in
   When I click on ".navbar-nav img"
   And I click on link "Users"
   And I click on link "user2 simson"

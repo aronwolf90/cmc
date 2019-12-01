@@ -70,6 +70,6 @@ class Organization < ApplicationRecord
   end
 
   def premium?
-    subscription_id.present?
+    subscription_id.present? || !Settings.payment.enabled
   end
 end

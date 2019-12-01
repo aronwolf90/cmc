@@ -49,6 +49,7 @@ After do
     .files
     .all(prefix: "test")
     .each(&:destroy)
+  Apartment::Tenant.switch!("public")
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.

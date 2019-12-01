@@ -5,7 +5,8 @@
   = asside_item("General",
       path: edit_administration_organization_path,
       policy: true)
-  = asside_item("Payment",
-      path: administration_admin_payments_path,
-      policy: true)
+  - if Settings.payment.enabled
+    = asside_item("Payment",
+        path: administration_admin_payments_path,
+        policy: true)
   = render "administration/shared/shared_issue_section"
