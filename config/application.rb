@@ -29,5 +29,9 @@ module CMC
     config.active_record.dump_schemas = "test-organization"
 
     config.action_controller.include_all_helpers = false
+
+    config.action_mailer.default_url_options = {
+      host: lambda { ApplicationHelper.organization_url }
+    }
   end
 end

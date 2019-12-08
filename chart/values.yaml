@@ -38,3 +38,8 @@ ingress:
   #   - secretName: chart-example-tls
   #     hosts:
   #     - chart-example.local
+mailer:
+  smtp_domain: 
+  domain: 
+  user_name:
+  password:

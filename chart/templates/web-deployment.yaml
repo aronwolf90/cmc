@@ -51,6 +51,15 @@ spec:
               value: '{{ .Values.payment.host }}'
             - name: HOST
               value: '{{ .Values.url }}'
+            - name: MAILER_SMTP_DOMAIN 
+              value: '{{ .Values.mailer.smtp_domain }}'
+            - name: MAILER_DOMAIN 
+              value: '{{ .Values.mailer.domain }}'
+            - name: MAILER_USER_NAME
+              value: '{{ .Values.mailer.user_name }}'
+            - name: MAILER_PASSWORD
+              value: '{{ .Values.mailer.password }}' 
+              
           volumeMounts:
             {{- if .Values.webPersistence.enabled }}
             - name: files

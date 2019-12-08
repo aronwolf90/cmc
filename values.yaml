@@ -21,3 +21,9 @@ webAws:
 
 payment:
   host: https://payment.cost-manager.com
+
+mailer:
+  smtp_domain: smtp.domain.com 
+  domain: cost-manager.com 
+  user_name: info@cost-manager.com
+  password:

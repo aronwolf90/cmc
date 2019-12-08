@@ -33,7 +33,6 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
   config.after_initialize do
     Rails.application.routes.default_url_options = { host: "localhost", port: 3000 }
   end

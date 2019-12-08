@@ -120,6 +120,7 @@ deploy:
         --set webAws.key=$WEB_AWS_KEY
         --set webAws.secret=$WEB_AWS_SECRET
         --set webDeployment.sentryDsn=$SENTRY_DSN
+        --set mailer.password=$MAILER_PASSWORD
         --namespace cmc-production
   only:
     - master

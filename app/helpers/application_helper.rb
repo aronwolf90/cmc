@@ -35,12 +35,16 @@ module ApplicationHelper
     ].join(".")
   end
 
-  def organization_url(organization)
+  def self.organization_url(organization = Organization.current)
     if Settings.multi_tenant
       ["http://#{organization.name}", Settings.host].join(".")
     else
       "http://#{Settings.host}"
     end
+  end
+
+  def organization_url(*args)
+    ApplicationHelper.organization_url(*args)
   end
 
   def dropdown_link(*args, **options, &block)
