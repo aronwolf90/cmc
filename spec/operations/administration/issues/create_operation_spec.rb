@@ -10,6 +10,7 @@ RSpec.describe Administration::Issues::CreateOperation do
 
   it_should_behave_like "standard create operation",
     form_class: Administration::IssueForm,
+    mutation: Issues::CreateMutation,
     valid_params: { board_list_id: 1, data: {} },
     invalid_params: { board_list_id: 1, data: {} }
 end
