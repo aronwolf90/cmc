@@ -33,7 +33,7 @@ RSpec.describe Api::V1::AttendanceEventSerializer, type: :serializer do
           user: {
             data: {
               id: "1",
-              type: "admins"
+              type: "users"
             }
           }
         },

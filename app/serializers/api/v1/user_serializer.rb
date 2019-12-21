@@ -4,9 +4,11 @@ module Api
   module V1
     class UserSerializer < ApplicationSerializer
       include Rails.application.routes.url_helpers
+      type "users"
 
       attribute :firstname
       attribute :lastname
+      attribute :email
 
       belongs_to :selected_project, serializer: ProjectSerializer
 

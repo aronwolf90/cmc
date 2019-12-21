@@ -27,7 +27,7 @@ Scenario: Get
             "user": {
               "data": {
                 "id": "1",
-                "type": "admins"
+                "type": "users"
               }
             }
           },

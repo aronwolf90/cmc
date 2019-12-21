@@ -14,7 +14,8 @@ RSpec.describe Api::V1::UserSerializer, type: :serializer do
       issues: [issue],
       current_record: record,
       lastname: "Hernandez",
-      firstname: "Tom"
+      firstname: "Tom",
+      email: "test@lvh.me"
     )
   end
 
@@ -25,7 +26,8 @@ RSpec.describe Api::V1::UserSerializer, type: :serializer do
         type: "users",
         attributes: {
           lastname: "Hernandez",
-          firstname: "Tom"
+          firstname: "Tom",
+          email: "test@lvh.me"
         },
         relationships: {
           "selected-project": {

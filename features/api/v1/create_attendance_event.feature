@@ -20,7 +20,7 @@ Scenario: Post an valid event using json in POST body
           "user": {
             "data": {
               "id": "1",
-              "type": "admin"
+              "type": "users"
             }
           }
         }
@@ -44,7 +44,7 @@ Scenario: Post an valid event using json in POST body
           "user": {
             "data": {
               "id": "1",
-              "type": "admins"
+              "type": "users"
             }
           }
         },

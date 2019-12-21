@@ -21,7 +21,7 @@ Scenario: Get the current record from an user
           "user": {
             "data": {
               "id": "1",
-              "type": "admins"
+              "type": "users"
             }
           },
           "issue": {

@@ -17,15 +17,16 @@ Scenario: Get
           "user-count": 1
         },
         "relationships": {
-          "current-user": { "data": { "id": "1", "type": "admins" } }
+          "current-user": { "data": { "id": "1", "type": "users" } }
         }
       },
       "included": [{
         "id": "1",
-        "type": "admins",
+        "type": "users",
         "attributes": {
           "firstname": null,
-          "lastname": null
+          "lastname": null,
+          "email": "test@localhost.de"
         },
         "relationships": {
           "selected-project": { "data": null },

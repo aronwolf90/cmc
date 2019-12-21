@@ -10,6 +10,12 @@ describe Api::V1::UserDeserializer do
       {
         id: "1",
         type: "users",
+        attributes: {
+          firstname: "Lara",
+          lastname: "Croft",
+          type: "Admin",
+          email: "test@lvh.me"
+        },
         relationships: {
           "selected-project": {
             data: {
@@ -22,7 +28,11 @@ describe Api::V1::UserDeserializer do
     end
     let(:result) do
       {
-        selected_project_id: "1"
+        selected_project_id: "1",
+        firstname: "Lara",
+        lastname: "Croft",
+        type: "Admin",
+        email: "test@lvh.me"
       }
     end
 

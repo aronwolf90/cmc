@@ -27,7 +27,7 @@ Scenario: Get
           "start-time": "2018-01-29T20:09:37.000+01:00"
         },
         "relationships": {
-          "user": { "data": { "id": "1", "type": "admins"  } },
+          "user": { "data": { "id": "1", "type": "users"  } },
           "issue": { "data": { "id": "1", "type": "issues"  } }
         }
       }],

@@ -82,7 +82,7 @@ Rails.application.routes.draw do
       resources :issues, only: %i[index show update destroy]
       resources :comments, only: :create
 
-      resources :users, only: %i[index update] do
+      resources :users, only: %i[index create update] do
         resource :current_record, only: :show
       end
 

@@ -15,5 +15,6 @@ RSpec.describe Users::CreateMutation do
 
   it "create user" do
     expect { subject }.to change(User, :count).by(1)
+    expect(ActionMailer::Base.deliveries.size).to eq(1)
   end
 end

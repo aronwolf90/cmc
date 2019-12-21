@@ -11,10 +11,11 @@ Scenario: Get
     {
       "data": [{
         "id": "1",
-        "type": "admins",
+        "type": "users",
         "attributes": {
           "firstname": null,
-          "lastname": null
+          "lastname": null,
+          "email": "test@localhost.de"
         },
         "relationships": {
           "issues": { "data": [] },

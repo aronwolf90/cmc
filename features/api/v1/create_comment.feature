@@ -12,7 +12,7 @@ Scenario: Post an valid comment using json in POST body
       "data": {
         "attributes": { "content": "comment" },
         "relationships": {
-          "user": { "data": { "id": "1", "type": "admins" } },
+          "user": { "data": { "id": "1", "type": "users" } },
           "issue": { "data": { "id": "1", "type": "issues" } }
         }
       }
@@ -27,7 +27,7 @@ Scenario: Post an valid comment using json in POST body
         "attributes": { "content": "comment" },
         "relationships": {
           "issue": { "data": { "id": "1", "type": "issues" } },
-          "user": { "data": { "id": "1", "type": "admins" } }
+          "user": { "data": { "id": "1", "type": "users" } }
         },
         "meta": {
           "permissions": {
@@ -54,7 +54,7 @@ Scenario: Post an valid comment using json in POST body
         "type": "comments",
         "attributes": { "content": "comment" },
         "relationships": {
-          "user": { "data": { "id": 1, "type": "admins" } }
+          "user": { "data": { "id": 1, "type": "users" } }
         }
       }
     }

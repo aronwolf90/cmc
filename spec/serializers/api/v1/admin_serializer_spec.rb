@@ -20,10 +20,11 @@ RSpec.describe Api::V1::AdminSerializer, type: :serializer do
     {
       data: {
         id: user.id.to_s,
-        type: "admins",
+        type: "users",
         attributes: {
           firstname: "firstname",
-          lastname: "lastname"
+          lastname: "lastname",
+          email: user.email
         },
         relationships: {
           "selected-project": {

@@ -6,6 +6,6 @@ module Api::V1
     namespace Users
     model_class User
 
-    public :index, :update
+    public :index, :create, :update
   end
 end
