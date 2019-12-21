@@ -16,10 +16,6 @@ module Administration
       edit(render: :update)
     end
 
-    def create
-      super(render: :create)
-    end
-
     def update
       super(render: :update) do |model|
         administration_user_path(model)

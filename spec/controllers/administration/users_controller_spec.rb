@@ -17,9 +17,6 @@ RSpec.describe Administration::UsersController, type: :controller do
   include_examples "standard index action", Administration::Users
   include_examples "standard new action",
                    Administration::Users
-  include_examples "standard create action",
-                   Administration::Users,
-                   %i[administration users]
   include_examples "standard update action", Administration::Users,
                    [:administration, :user, id: 1]
 end

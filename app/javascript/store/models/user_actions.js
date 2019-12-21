@@ -4,6 +4,9 @@ export default {
   getContext (context) {
     return context.dispatch('get', { endpoint, resource: 'context' })
   },
+  createUser (context, payload) {
+    return context.dispatch('create', { resource: 'users', payload })
+  },
   updateUser (context, { entry, selectedProject }) {
     let payload = {
       id: entry.id,

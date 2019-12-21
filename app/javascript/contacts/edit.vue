@@ -1,88 +1,21 @@
 <template lang='pug'>
-  .contacts-edit
-    contact-form(
-      @onSubmit="onSubmit",
-      v-if="result",
-      :name="name",
-      :description="description",
-      :telephone="telephone",
-      :mobile="mobile",
-      :fax="fax",
-      :street="street",
-      :number="number",
-      :zip="zip",
-      :city="city",
-      :country="country"
-    )
+  .contacts-new
+    contact-form(@onSubmit='onSubmit')
 </template>
 
 <script>
 import ContactForm from './form'
-import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   components: {
     ContactForm
   },
-  props: [
-    'contactId'
-  ],
   methods: {
     onSubmit (payload) {
-      this.$store.dispatch('updateContact', {
-        entry: this.contact,
-        payload
-      }).then(() => {
-        location.replace(`/administration/contacts/${this.contactId}`)
+      this.$store.dispatch('createContact', payload).then(() => {
+        location.replace('/administration/contacts')
       })
     }
-  },
-  computed: {
-    contact () {
-      if (!this.result) return
-      return this.$store.getters.entry({
-        type: this.result.data.type,
-        id: this.result.data.id
-      })
-    },
-    name () {
-      return Utils.attribute(this.contact, 'name')
-    },
-    description () {
-      return Utils.attribute(this.contact, 'description')
-    },
-    telephone () {
-      return Utils.attribute(this.contact, 'telephone')
-    },
-    mobile () {
-      return Utils.attribute(this.contact, 'mobile')
-    },
-    fax () {
-      return Utils.attribute(this.contact, 'fax')
-    },
-    avatar () {
-      return Utils.attribute(this.contact, 'avatar')
-    },
-    street () {
-      return Utils.attribute(this.contact, 'address-street')
-    },
-    number () {
-      return Utils.attribute(this.contact, 'address-number')
-    },
-    city () {
-      return Utils.attribute(this.contact, 'address-city')
-    },
-    zip () {
-      return Utils.attribute(this.contact, 'address-zip')
-    },
-    country () {
-      return Utils.attribute(this.contact, 'address-country')
-    }
-  },
-  asyncComputed: {
-    result () {
-      return this.$store.dispatch('contact', this.contactId)
-    }
-  },
+  }
 }
 </script>

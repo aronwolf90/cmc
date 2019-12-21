@@ -23,6 +23,7 @@ import ContactEdit from '../contacts/edit'
 import DocumentNew from '../documents/new'
 import DocumentEdit from '../documents/edit'
 import AdminPayment from '../admin/payments'
+import UserNew from '../users/new'
 
 require('../config')
 
@@ -47,6 +48,7 @@ Vue.component('contact-edit', ContactEdit)
 Vue.component('document-new', DocumentNew)
 Vue.component('document-edit', DocumentEdit)
 Vue.component('payment', AdminPayment)
+Vue.component('user-new', UserNew)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')
