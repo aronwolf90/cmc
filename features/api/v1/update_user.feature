@@ -1,41 +1,23 @@
-Feature: API: update an user
+Feature: API: create an user
 
-Scenario: Put an valid record using json in PUT body
-  Given I am an user with an id of 1
-  And an project exists with an id of "1"
-  And I set headers:
-   | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
-   | Content-Type | application/vnd.api+json |
-  And I send a PATCH request to "/api/v1/users/1" with the following:
-    """
-    {
-      "data": {
-        "id": 1,
-        "type": "users",
-        "relationships": {
-          "selected-project": { "data": { "id": 1, "type": "projects" } }
+  Scenario: Update an user
+    Given The app contain seed data
+    And I set headers:
+     | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
+     | Content-Type | application/vnd.api+json |
+    When I send a PUT request to "/api/v1/users/2" with the following:
+      """
+      {
+        "data": {
+          "id": "2",
+          "type": "users",
+          "attributes": { 
+            "firstname": "New firstname",
+            "lastname": "New lastname",
+            "type": "Customer",
+            "email": "new@lvh.me"
+          }
         }
       }
-    }
-    """
-  Then the response status should be "204"
-
-Scenario: Put an invalid record using json in PUT body
-  Given I am an user with an id of 1
-  And an project exists with an id of "1"
-  And I set headers:
-   | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
-   | Content-Type | application/vnd.api+json |
-  When I send a PATCH request to "/api/v1/users/1" with the following:
-    """
-    {
-      "data": {
-        "id": 1,
-        "type": "users",
-        "relationships": {
-          "selected-project": { "data": { "id": 0, "type": "projects" } }
-        }
-      }
-    }
-    """
-  Then the response status should be "400"
+      """
+    And the response status should be "204"
