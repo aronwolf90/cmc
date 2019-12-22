@@ -76,7 +76,8 @@ export default {
           entry: this.boardList,
           association: 'issues',
           links: {
-            next: `/api/v1/board_lists/${this.listId}/issues?more_id=${this.issues[this.issues.length - 1]}`
+            next: `/api/v1/board_lists/${this.listId}/issues?more_id=${this.issues[this.issues.length - 1]}`,
+            self: this.boardList.data.relationships.issues.links.self
           }
         })
       }
