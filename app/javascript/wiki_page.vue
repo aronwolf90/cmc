@@ -55,10 +55,10 @@ export default {
   display: flex
   margin-right: -14px
   margin-top: -35px
+  height: calc(100% + 16px)
   .container-fluid
     padding-top: 15px
     overflow-y: auto
-    height: calc(100vh - 40px)
   .right-aside
     background-color: #f8f8f8
     border-left: 2px solid #e7e7e7

@@ -68,9 +68,9 @@ export default {
   display: flex
   margin-right: -14px
   margin-top: -35px
+  height: calc(100% + 16px)
   .container-fluid
     padding-top: 15px
     overflow-y: auto
-    height: calc(100vh - 40px)
 </style>
 

@@ -1,5 +1,6 @@
 <template lang='pug'>
 #right-aside
+  .placeholder
   .right-aside(v-bind:class="{ expanded: expanded }")
     .right-aside-container
       slot
@@ -27,20 +28,22 @@ export default {
 
 <style lang='sass' scoped>
 #right-aside
-  min-width: 30px
+  .placeholder
+    width: 0px
+    @media only screen and (max-width: 600px)
+      width: 30px
   .right-aside
     background-color: #f8f8f8
     border-left: 2px solid #e7e7e7
     width: 200px
-    height: calc(100vh - 44px)
+    height: 100%
     .arrow
       position: fixed
       bottom: 25px
       right: 9px
     @media only screen and (max-width: 600px)
-      position: fixed
       right: 0
-      bootom: 0
+      position: fixed
       z-index: 999
       &:not(.expanded)
         width: 30px
