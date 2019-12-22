@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
     resource :organization, only: %i[edit update]
 
-    resources :users, except: %i[edit destroy] do
+    resources :users, except: %i[edit create destroy] do
       scope module: :users do
         resource :configuration, only: %i[edit update destroy]
         resources :records, only: :index
