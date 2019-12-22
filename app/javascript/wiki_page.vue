@@ -1,6 +1,6 @@
 <template lang='pug'>
-  #issue(v-if='wikiPage')
-    .container-fluid
+  show-container(v-if='wikiPage')
+    show-body
       router-view(:wiki-page-id='wikiPage.id')
     right-aside
       category(:wiki-page-id="wikiPageId")
@@ -13,6 +13,8 @@ import Show from 'wiki_page/show'
 import Edit from 'wiki_page/edit'
 import Category from 'wiki_page/category'
 import RightAside from 'components/right_aside'
+import ShowContainer from 'components/show-container'
+import ShowBody from 'components/show-body'
 
 const router = new Router({
   routes: [
@@ -36,7 +38,9 @@ export default {
     Show,
     Edit,
     Category,
-    RightAside
+    RightAside,
+    ShowContainer,
+    ShowBody
   },
   created () {
     this.$store.dispatch('initWikiPage', this.wikiPageId)
@@ -51,19 +55,4 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-#issue
-  display: flex
-  margin-right: -14px
-  margin-top: -35px
-  height: calc(100% + 16px)
-  .container-fluid
-    padding-top: 15px
-    overflow-y: auto
-  .right-aside
-    background-color: #f8f8f8
-    border-left: 2px solid #e7e7e7
-    width: 200px
-    height: calc(100vh - 40px)
-</style>
-
 </style>

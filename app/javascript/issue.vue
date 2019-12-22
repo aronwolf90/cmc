@@ -1,6 +1,6 @@
 <template lang='pug'>
-  #issue(v-if='issue')
-    .container-fluid
+  show-container(v-if='issue')
+    show-body
       router-view(:issue-id='issueId')
       hr.divider
       comments(:issue-id='issueId')
@@ -23,6 +23,8 @@ import SpentTime from 'issue/spent_time'
 import Assigen from 'issue/assigen'
 import Complexity from 'issue/complexity'
 import Comments from 'issue/comments'
+import ShowContainer from 'components/show-container'
+import ShowBody from 'components/show-body'
 
 const router = new Router({
   routes: [
@@ -49,7 +51,9 @@ export default {
     'assigen': Assigen,
     'comments': Comments,
     'complexity': Complexity,
-    RightAside
+    RightAside,
+    ShowContainer,
+    ShowBody
   },
   created () {
     this.$store.dispatch('initIssue', this.issueId)
@@ -64,13 +68,5 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-#issue
-  display: flex
-  margin-right: -14px
-  margin-top: -35px
-  height: calc(100% + 16px)
-  .container-fluid
-    padding-top: 15px
-    overflow-y: auto
 </style>
 

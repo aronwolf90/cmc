@@ -1,9 +1,7 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import Issue from '../../app/javascript/issue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
-import Comments from '../../app/javascript/issue/comments'
-import RightAside from 'components/right_aside'
 
 const localVue = createLocalVue()
 
@@ -14,9 +12,19 @@ localVue.use(VueRouter)
 /* eslint-disable no-unused-expressions */
 
 describe('Issue', () => {
-  subject(() => shallow(Issue, { store: $store, localVue, propsData: { issueId: 1 } }))
+  subject(() => mount(Issue, {
+    store: $store,
+    localVue,
+    propsData: { issueId: 1 },
+    stubs: {
+      RightAside: '<div>Stubbed RightAside</div>',
+      Comments: '<div>Stubbed Comments</div>'
+    }
+  }))
 
-  def('getters', () => ({ entry () { return () => $issue } }))
+  def('getters', () => ({
+    entry () { return () => $issue }
+  }))
   def('actions', () => ({ initIssue () { } }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
   def('issue', () => ({
@@ -26,10 +34,10 @@ describe('Issue', () => {
   }))
 
   it('has comments', () => {
-    expect($subject.find(Comments).props().issueId).to.be.eq(1)
+    expect($subject.html()).to.include('Stubbed Comments')
   })
 
   it('has right asigen', () => {
-    expect($subject.contains(RightAside)).to.be.true
+    expect($subject.html()).to.include('Stubbed RightAside')
   })
 })
