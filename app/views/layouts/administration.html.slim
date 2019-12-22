@@ -22,6 +22,7 @@ html
         section#side-body.container-fluid
           .flash-messages
             = render 'shared/flash_messages'
-          = yield
+          .body-content
+            = yield
 
     script src="https://js.stripe.com/v3/"

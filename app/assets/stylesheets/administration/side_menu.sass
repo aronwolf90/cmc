@@ -58,13 +58,15 @@
 
 #side-body
   padding-top: 22px
-  position: fixed
-  margin-left: $side-menu-width
   margin-top: 51px
   height: calc(100vh - 51px)
   max-height: calc(100vh - 51px)
-  max-width: calc(100% - #{$side-menu-width})
   overflow-y: auto
+  display: flex
+  flex-flow: column
   @media only screen and (max-width: 600px)
     margin-left: 0
     max-width: 100%
+  .body-content
+    flex-grow : 1
+    height: 100%

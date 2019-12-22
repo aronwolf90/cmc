@@ -12,6 +12,6 @@
   .show-container
     display: flex
     margin-right: -14px
-    margin-top: -35px
+    margin-top: -17px
     height: calc(100% + 16px)
 </style>

@@ -38,8 +38,10 @@ end
 Given(/^I am signed in \(multitenant\)$/) do
   find_or_create_current_user
   visit "/users/sign_in"
+  sleep 0.3
   fill_in "organization", with: "test-organization"
   find('input[type="submit"]').click
+  sleep 0.3
   fill_in "user_email", with: "admin@lvh.me"
   fill_in "user_password", with: "testtest"
   find('input[name="commit"]').click

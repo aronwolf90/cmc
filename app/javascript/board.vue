@@ -68,7 +68,7 @@ export default {
   .issues-board
     display: flex
     flex-flow: column
-    height: calc(100% + 7px)
+    height: 100%
     .issues-board-header
       padding-bottom: 10px
       margin-right: 7px
