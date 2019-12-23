@@ -25,3 +25,15 @@ Scenario: Record edit
   And I enter "2200.01.01 01:41:43" into input named "data[end_time]"
   And I click on submit
   Then the page contain the current year
+
+@javascript
+Scenario: Record edit widh datepicker
+  Given The app contain seed data
+  And I am signed in
+  When I click on link "Records"
+  And I click on ".fa-edit"
+  And I click on "#data_end_time"
+  And I click on "tr:last-of-type > [data-day]:last-of-type"
+  And I click on "label"
+  And I click on submit
+  Then the page contain the current year

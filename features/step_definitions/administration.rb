@@ -130,12 +130,9 @@ When(/^Travel to 11.06.2018 17:00:00$/) do
 end
 
 When(/^I drag "([^\"]*)" to "([^\"]*)"$/) do |from, to|
-  sleep 4
   source_node = page.find(from)
   target_node = page.find(to)
   source_node.drag_to(target_node)
-  debugger
-  sleep 5
 end
 
 Then(/^the page contain the text "([^\"]*)"$/) do |text|

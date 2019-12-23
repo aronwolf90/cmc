@@ -9,7 +9,14 @@
 
       .clearfix
     draggable.body(v-model="issues", :options="{group:'issues'}")
-      issue(v-for='issue in issues', :key='issue.id', :issue-id="issue.id", :board-list-id="boardList.id")
+      issue(
+        v-for='issue in issues',
+        :key='issue.id',
+        :issue-id="issue.id",
+        :board-list-id="boardList.id",
+        :id="`list-issue-${issue.id}`",
+        class="list-issue"
+      )
     .more(v-if='showMore') 
       .text(v-on:click.self='loadMore') Load more
 

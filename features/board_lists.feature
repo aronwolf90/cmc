@@ -21,3 +21,27 @@ Scenario: edit board list
   And I click on submit
   And I reload the page
   Then the page contain the text "new board list name"
+
+@javascript
+Scenario: change board lists order
+  Given The app contain seed data
+  And I am signed in
+  When I click on link "Issues"
+  And I drag "#column-1 > .card-header" to "#column-3 > .card-header"
+  Then the element ".column:last-of-type" contain the text "Backlog"
+
+@javascript
+Scenario: change issues order
+  Given The app contain seed data
+  And I am signed in
+  When I click on link "Issues"
+  And I drag "#list-issue-4" to "#list-issue-1"
+  Then the element "#column-1 .list-issue:last-of-type" contain the text "Test issue 4"
+
+@javascript
+Scenario: move issue to other board
+  Given The app contain seed data
+  And I am signed in
+  When I click on link "Issues"
+  And I drag "#list-issue-4" to "#list-issue-5"
+  Then the element "#column-2 .list-issue:last-of-type" contain the text "Test issue 4"
