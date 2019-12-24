@@ -39,7 +39,7 @@ export default {
   methods: {
     deleteIssue (event) {
       this.$store.dispatch('destroy', { entry: this.issue, endpoint: '/api/v1' })
-      Turbolinks.visit('/administration/board') /* eslint-disable-line no-undef */
+      Turbolinks.visit('/administration/board_lists') /* eslint-disable-line no-undef */
       event.preventDefault()
     }
   }

@@ -31,6 +31,14 @@ Scenario: Edit issue
   Then the element "#side-body" contain the text "test"
 
 @javascript
+Scenario: Delete issue
+  Given The app contain seed data 
+  And I am signed in
+  When I click on link "Test issue 1"
+  And I click on ".fa-trash"
+  Then the element "#side-body" contain the text "Backlog"
+
+@javascript
 Scenario: Change user
   Given The app contain seed data 
   And I am signed in
