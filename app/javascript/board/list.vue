@@ -62,7 +62,7 @@ export default {
         return this.$store.getters.associatedEntries({ entry: this.boardList, name: 'issues' })
       },
       set (issues) {
-        for (let i = 0, j = 0; i < issues.length && j < this.issues.length; i++,j++ ) {
+        for (let i = 0, j = 0; i < issues.length || j < this.issues.length; i++,j++ ) {
           if (issues[i] == this.issues[j]) continue
           this.$store.dispatch('updateIssue', {
             entry: issues[i],
@@ -84,7 +84,7 @@ export default {
           association: 'issues',
           links: {
             next: `/api/v1/board_lists/${this.listId}/issues?more_id=${this.issues[this.issues.length - 1]}`,
-            self: this.boardList.data.relationships.issues.links.self
+            self: this.boardList.relationships.issues.links.self
           }
         })
       }

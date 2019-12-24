@@ -352,7 +352,7 @@ CREATE TABLE issues (
     user_id bigint,
     complexity numeric(4,1),
     board_list_id integer NOT NULL,
-    ordinal_number integer,
+    ordinal_number integer DEFAULT 0 NOT NULL,
     deleted_at timestamp without time zone
 );
 
@@ -1240,6 +1240,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190910193903'),
 ('20191112235930'),
 ('20191215220930'),
-('20191215221228');
+('20191215221228'),
+('20191224011754'),
+('20191224013558');
 
 

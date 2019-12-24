@@ -29,6 +29,8 @@ Scenario: change board lists order
   When I click on link "Issues"
   And I drag "#column-1 > .card-header" to "#column-3 > .card-header"
   Then the element ".column:last-of-type" contain the text "Backlog"
+  When I reload the page
+  Then the element ".column:last-of-type" contain the text "Backlog"
 
 @javascript
 Scenario: change issues order
@@ -37,11 +39,16 @@ Scenario: change issues order
   When I click on link "Issues"
   And I drag "#list-issue-4" to "#list-issue-1"
   Then the element "#column-1 .list-issue:last-of-type" contain the text "Test issue 4"
+  When I reload the page
+  Then the element "#column-1 .list-issue:last-of-type" contain the text "Test issue 4"
 
 @javascript
 Scenario: move issue to other board
   Given The app contain seed data
   And I am signed in
   When I click on link "Issues"
-  And I drag "#list-issue-4" to "#list-issue-5"
+  Then the element "#side-body" contain the text "Backlog"
+  When I drag "#list-issue-4" to "#list-issue-5"
+  Then the element "#column-2 .list-issue:last-of-type" contain the text "Test issue 4"
+  When I reload the page
   Then the element "#column-2 .list-issue:last-of-type" contain the text "Test issue 4"
