@@ -101,5 +101,75 @@ describe('Modules.Board', () => {
         )
       })
     })
+    describe('.adjustBoardListIssuesRelationshipLinks', () => {
+      it('when next link is not present do not set it', (done) => {
+        let issues = [{ id: 1, type: 'issues' }]
+        let boardList = {
+          id: 1,
+          type: 'board-lists',
+          relationships: {
+            issues: {
+              data: issues,
+              links: {
+                next: null,
+                self: '/api/v1/board_lists/1'
+              }
+            }
+          }
+        }
+        Board.actions.adjustBoardListIssuesRelationshipLinks({
+          commit: (action, payload) => {
+            expect(action).to.eq('relataionshipLinks')
+            expect(payload).to.eql({
+              entry: boardList,
+              association: 'issues',
+              links: {
+                next: null,
+                self: '/api/v1/board_lists/1'
+              }
+            })
+            done()
+          }
+        }, {
+          boardList,
+          issues
+        })
+      })
+    })
+    describe('.adjustBoardListIssuesRelationshipLinks', () => {
+      it('when next link is present, set it', (done) => {
+        let issues = [{ id: 1, type: 'issues' }, { id: 2, type: 'issues' }]
+        let boardList = {
+          id: 1,
+          type: 'board-lists',
+          relationships: {
+            issues: {
+              data: issues,
+              links: {
+                next: '/api/v1/board_lists/1/issues?more_id=1',
+                self: '/api/v1/board_lists/1'
+              }
+            }
+          }
+        }
+        Board.actions.adjustBoardListIssuesRelationshipLinks({
+          commit: (action, payload) => {
+            expect(action).to.eq('relataionshipLinks')
+            expect(payload).to.eql({
+              entry: boardList,
+              association: 'issues',
+              links: {
+                next: '/api/v1/board_lists/1/issues?more_id=2',
+                self: '/api/v1/board_lists/1'
+              }
+            })
+            done()
+          }
+        }, {
+          boardList,
+          issues
+        })
+      })
+    })
   })
 })

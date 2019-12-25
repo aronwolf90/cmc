@@ -62,31 +62,7 @@ export default {
         return this.$store.getters.associatedEntries({ entry: this.boardList, name: 'issues' })
       },
       set (issues) {
-        for (let i = 0, j = 0; i < issues.length || j < this.issues.length; i++,j++ ) {
-          if (issues[i] == this.issues[j]) continue
-          this.$store.dispatch('updateIssue', {
-            entry: issues[i],
-            attributes: { 'ordinal-number': i },
-            boardList: this.boardList
-          })
-          if (issues[i+1] == this.issues[j]) i++
-          if (issues[i] == this.issues[j+1]) j++
-        }
-        this.$store.commit('changeManyToOneReference', {
-          children: issues,
-          parent: this.boardList,
-          childRelationshipName: 'board-list',
-          parentRelationshipName: 'issues',
-          parentTypes: ['board-lists']
-        })
-        this.$store.commit('relataionshipLinks', {
-          entry: this.boardList,
-          association: 'issues',
-          links: {
-            next: `/api/v1/board_lists/${this.listId}/issues?more_id=${this.issues[this.issues.length - 1]}`,
-            self: this.boardList.relationships.issues.links.self
-          }
-        })
+        return this.$store.dispatch('board/setBoardListIssues', { issues, boardList: this.boardList })
       }
     }
   },
