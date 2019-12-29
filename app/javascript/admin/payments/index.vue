@@ -54,7 +54,7 @@ export default {
   methods: {
     click () {
       this.$store.dispatch('createStripeCheckoutSession').then(result => {
-        const stripe = Stripe('pk_test_jnjnLmEpUo9tbTIEjKKGPr62007x2iQKkM');
+        const stripe = Stripe('pk_live_Dq4ZzdS1gJgbm13XcdqmFvMH00NaWk8hVd');
         stripe.redirectToCheckout({
           sessionId: result.data.data.id
         }).then(function (result) {
