@@ -49,11 +49,10 @@ class Organization < ApplicationRecord
   def invoices
     @invoices ||=
       begin
-        return [] if subscription_id.nil?
         url = [
           Settings.payment.host,
-          "api/v1/subscriptions",
-          subscription_id,
+          "api/v1/organizations",
+          id,
           "invoices"
         ].compact.join("/")
 
@@ -68,6 +67,8 @@ class Organization < ApplicationRecord
             pdf: invoice["attributes"]["pdf"],
           )
         end
+      rescue RestClient::NotFound
+        []
       end
   end
 

@@ -69,7 +69,7 @@ RSpec.describe Organization, type: :model do
   describe "#invoices" do
     it "return invoices if subscription_id!=nil" do
       expect(RestClient).to receive(:get).with(
-        "http://payment:4000/api/v1/subscriptions/1/invoices",
+        "http://payment:4000/api/v1/organizations/1/invoices",
         "Authorization": "Basic YWRtaW46dGVzdHRlc3Q=",
         "Content-Type": "application/json"
       ).and_return(
@@ -90,7 +90,7 @@ RSpec.describe Organization, type: :model do
           }.to_json
         )
       )
-      expect(described_class.new(subscription_id: 1).invoices)
+      expect(described_class.new(id: 1).invoices)
         .to eq([Invoice.new(
           id: "invoice_id",
           created_at: "2019-11-06T19:59:10Z",
@@ -100,8 +100,15 @@ RSpec.describe Organization, type: :model do
           pdf: "https://pay.stripe.com/invoice/invst_9KtFtihugeF8KkYEfFEJltHcg7/pdf"
         )])
     end
-    it "return invoices if subscription_id==nil" do
-      expect(described_class.new(subscription_id: nil).invoices)
+
+    it "when a not found is raised" do
+      expect(RestClient).to receive(:get).with(
+        "http://payment:4000/api/v1/organizations/1/invoices",
+        "Authorization": "Basic YWRtaW46dGVzdHRlc3Q=",
+        "Content-Type": "application/json"
+      ).and_raise(RestClient::NotFound)
+
+      expect(described_class.new(id: 1).invoices)
         .to eq([])
     end
   end
