@@ -21,38 +21,49 @@ RSpec.describe Organization, type: :model do
     end
   end
 
-  it "#subscription" do
-    expect(RestClient).to receive(:get).with(
-      "http://payment:4000/api/v1/organizations/1/subscription",
-      "Authorization": "Basic YWRtaW46dGVzdHRlc3Q=",
-      "Content-Type": "application/json"
-    ).and_return(
-      instance_double(
-        RestClient::Response,
-        body: {
-          data: {
-            id: 1,
-            type: "subscriptions",
-            attributes: {
-              "stripeSessionId": "cs_test_xpK6Pq8jMXbcxlV41ESuACxwqEosAGNM52zTSiqsp7PO1TnuJ23vCUPM",
-              "organizationId": 1,
-              "quantity": 1,
-              "ibanLast4": "4242",
-              "email": "test@example.com"
+  describe "#subscription" do
+    it "when the susbcription exist then it is returned" do
+      expect(RestClient).to receive(:get).with(
+        "http://payment:4000/api/v1/organizations/1/subscription",
+        "Authorization": "Basic YWRtaW46dGVzdHRlc3Q=",
+        "Content-Type": "application/json"
+      ).and_return(
+        instance_double(
+          RestClient::Response,
+          body: {
+            data: {
+              id: 1,
+              type: "subscriptions",
+              attributes: {
+                "stripeSessionId": "cs_test_xpK6Pq8jMXbcxlV41ESuACxwqEosAGNM52zTSiqsp7PO1TnuJ23vCUPM",
+                "organizationId": 1,
+                "quantity": 1,
+                "ibanLast4": "4242",
+                "email": "test@example.com"
+              }
             }
-          }
-        }.to_json
+          }.to_json
+        )
       )
-    )
-    expect(described_class.new(id: 1).subscription)
-      .to eq(Subscription.new(
-               id: 1,
-               stripe_session_id: "cs_test_xpK6Pq8jMXbcxlV41ESuACxwqEosAGNM52zTSiqsp7PO1TnuJ23vCUPM",
-               organization_id: 1,
-               quantity: 1,
-               iban_last4: "4242",
-               email: "test@example.com"
-      ))
+      expect(described_class.new(id: 1).subscription)
+        .to eq(Subscription.new(
+                 id: 1,
+                 stripe_session_id: "cs_test_xpK6Pq8jMXbcxlV41ESuACxwqEosAGNM52zTSiqsp7PO1TnuJ23vCUPM",
+                 organization_id: 1,
+                 quantity: 1,
+                 iban_last4: "4242",
+                 email: "test@example.com"
+        ))
+    end
+
+    it "when the susbcription does not exist then it is not returned" do
+      expect(RestClient).to receive(:get).with(
+        "http://payment:4000/api/v1/organizations/1/subscription",
+        "Authorization": "Basic YWRtaW46dGVzdHRlc3Q=",
+        "Content-Type": "application/json"
+      ).and_raise(RestClient::NotFound)
+      expect(described_class.new(id: 1).subscription).to be_nil
+    end
   end
 
   describe "#invoices" do

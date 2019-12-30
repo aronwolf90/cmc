@@ -32,7 +32,7 @@ Given(/^I am signed in$/) do
 end
 
 Given(/^Organization is not premium$/) do
-  Organization.update_all(subscription_id: nil)
+  Organization.first.update!(subscription_id: nil, id: 2)
 end
 
 Given(/^I am signed in \(multitenant\)$/) do

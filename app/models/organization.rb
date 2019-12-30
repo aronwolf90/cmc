@@ -41,6 +41,8 @@ class Organization < ApplicationRecord
           stripe_session_id: data["attributes"]["stripeSessionId"],
           organization_id: data["attributes"]["organizationId"]
         )
+      rescue RestClient::NotFound
+        nil
       end
   end
 
