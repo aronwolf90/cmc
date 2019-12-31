@@ -11,6 +11,7 @@ module Administration
 
         if @model.present?
           flash[:success] = "You have successfully added you payment information"
+          redirect_to administration_admin_payments_path
         end
       end
     end
