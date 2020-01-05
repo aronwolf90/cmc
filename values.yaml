@@ -20,6 +20,7 @@ webAws:
   directory: webcloudpower/cmc-production
 
 payment:
+  enabled: true
   host: https://payment.cost-manager.com
 
 mailer:

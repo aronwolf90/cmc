@@ -183,3 +183,8 @@ Then(/the page contain the current year/) do
   sleep 0.2
   expect(page).to have_content Date.current.year
 end
+
+Then(/the page contain the year of one week ago/) do
+  sleep 0.2
+  expect(page).to have_content 2.week.ago.year
+end

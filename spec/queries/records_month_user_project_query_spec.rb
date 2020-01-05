@@ -19,6 +19,9 @@ RSpec.describe RecordsMonthUserProjectQuery do
     )
   end
 
+  before { Timecop.freeze("30.12.2019 15:30") }
+  after { Timecop.return  }
+
   before do
     create(
       :record,
@@ -28,9 +31,6 @@ RSpec.describe RecordsMonthUserProjectQuery do
       issue: issue
     )
   end
-
-  before { Timecop.freeze("30.12.2019 15:30") }
-  after { Timecop.return  }
 
   it { is_expected.to eq [record_this_month] }
 end
