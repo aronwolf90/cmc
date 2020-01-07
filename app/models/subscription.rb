@@ -7,7 +7,8 @@ class Subscription < ApplicationApi
     :organization_id,
     :email,
     :quantity,
-    :iban_last4
+    :iban_last4,
+    :premia
   )
 
 

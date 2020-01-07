@@ -39,7 +39,8 @@ RSpec.describe Organization, type: :model do
                 "organizationId": 1,
                 "quantity": 1,
                 "ibanLast4": "4242",
-                "email": "test@example.com"
+                "email": "test@example.com",
+                "premia": 0
               }
             }
           }.to_json
@@ -52,7 +53,8 @@ RSpec.describe Organization, type: :model do
                  organization_id: 1,
                  quantity: 1,
                  iban_last4: "4242",
-                 email: "test@example.com"
+                 email: "test@example.com",
+                 premia: 0
         ))
     end
 

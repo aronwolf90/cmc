@@ -3,14 +3,20 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::SubscriptionSerializer, type: :serializer do
-  let(:subscription) { Subscription.new(iban_last4: "2424") }
+  let(:subscription) do
+    Subscription.new(
+      iban_last4: "2424",
+      premia: 0
+    )
+  end
   let(:expected_result) do
     {
       data: {
         id: "subscription",
         type: "subscriptions",
         attributes: {
-          "iban-last4": subscription.iban_last4
+          "iban-last4": subscription.iban_last4,
+          "premia": 0
         }
       }
     }

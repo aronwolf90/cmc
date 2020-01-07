@@ -19,7 +19,6 @@ Scenario: Create user
   And I click on submit
   Then the element "#side-body" contain the text "firstname"
 
-
 @javascript
 Scenario: Create user on no premium when 6 users exist
   Given Multi tenant is enabled
@@ -37,6 +36,27 @@ Scenario: Create user on no premium when 6 users exist
   And select "Admin" from select box "Type"
   And I click on submit
   Then the element "#side-body" contain the text "firstname"
+
+@javascript
+Scenario: Create user on premium when 6 users exist
+  Given Multi tenant is enabled
+  And The app contain seed data
+  And set "test-organization" as current organization
+  And 5 additional users exist
+  And I am signed in (multitenant)
+  When I click on link "Users"
+  And I click on button "New user"
+  And I click on link "Continue"
+  And I enter "firstname" into input named "Firstname"
+  And I enter "lastname" into input named "Lastname"
+  And I enter "test@email.com" into input named "E-Mail"
+  And select "Admin" from select box "Type"
+  And I click on submit
+  Then the element "#side-body" contain the text "firstname"
+  When I click on link "Admin"
+  And I click on link "Payment"
+  Then the element "#side-body" contain the text "5€/month"
+
 
 @javascript
 Scenario: Edit user

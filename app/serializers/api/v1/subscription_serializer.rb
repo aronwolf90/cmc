@@ -3,7 +3,7 @@
 module Api
   module V1
     class SubscriptionSerializer < TreeSerializer
-      attributes :iban_last4
+      attributes :iban_last4, :premia
 
       def id
         "subscription"

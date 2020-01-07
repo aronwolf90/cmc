@@ -39,7 +39,8 @@ class Organization < ApplicationRecord
           iban_last4: data["attributes"]["ibanLast4"],
           email: data["attributes"]["email"],
           stripe_session_id: data["attributes"]["stripeSessionId"],
-          organization_id: data["attributes"]["organizationId"]
+          organization_id: data["attributes"]["organizationId"],
+          premia: data["attributes"]["premia"]
         )
       rescue RestClient::NotFound
         nil

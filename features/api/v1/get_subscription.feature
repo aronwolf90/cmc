@@ -14,7 +14,8 @@ Scenario: Get
         "id": "subscription",
         "type": "subscriptions",
         "attributes": { 
-          "iban-last4": "4242"
+          "iban-last4": "4242",
+          "premia": 0
         }
       }
     }
