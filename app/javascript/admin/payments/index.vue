@@ -4,6 +4,8 @@
       tbody.table-striped
         tr
           td Iban: **** **** **** {{ subscription.attributes['iban-last4'] }}
+        tr
+          td Cost/Month: {{ subscription.attributes.premia }}€
     .table-responsive
       table.table
         thead

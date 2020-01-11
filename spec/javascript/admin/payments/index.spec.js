@@ -21,7 +21,8 @@ describe('AdminPaymentsIndex', () => {
           id: 'subscription',
           type: 'subscriptions',
           attributes: {
-            'iban-last4': '2424'
+            'iban-last4': '2424',
+            'premia': 5
           }
         }
       })
@@ -48,6 +49,17 @@ describe('AdminPaymentsIndex', () => {
       $subject.vm.$nextTick(() => {
         $subject.vm.$nextTick(() => {
           expect($subject.html()).to.include('**** **** **** 2424')
+          done()
+        })
+      })
+    })
+  })
+
+  it('render premia', (done) => {
+    $subject.vm.$nextTick(() => {
+      $subject.vm.$nextTick(() => {
+        $subject.vm.$nextTick(() => {
+          expect($subject.html()).to.include('5€')
           done()
         })
       })
