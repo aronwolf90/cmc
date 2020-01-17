@@ -9,6 +9,7 @@ module Api
       attribute :firstname
       attribute :lastname
       attribute :email
+      attribute :type
 
       belongs_to :selected_project, serializer: ProjectSerializer
 

@@ -11,8 +11,6 @@ class Subscription < ApplicationApi
     :premia
   )
 
-
-private
   def create
     response = RestClient.post(url, data, Settings.payment.headers.to_h)
     JSON.parse(response.body)["data"].tap do |attributes|
@@ -21,13 +19,16 @@ private
     end
   end
 
-  def update
+  def update(args = {})
+    assign_attributes(args)
+
     response = RestClient.patch(url, data, Settings.payment.headers.to_h)
     JSON.parse(response.body)["data"].tap do |attributes|
       self.quantity = attributes["quantity"]
     end
   end
 
+private
   def url
     [Settings.payment.host, "api/v1/subscriptions", id].compact.join("/")
   end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require_relative "./shared_examples/standart_actions"
+require_relative "../shared_examples/standart_actions"
 
-RSpec.describe Api::V1::CurrentRecordsController, type: :controller do
+RSpec.describe Api::V1::Users::CurrentRecordsController, type: :controller do
   let(:model) { Record.new(id: 1) }
   let(:user) { User.new(id: 1) }
 

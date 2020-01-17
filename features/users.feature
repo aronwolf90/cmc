@@ -45,8 +45,7 @@ Scenario: Create user on premium when 6 users exist
   And 5 additional users exist
   And I am signed in (multitenant)
   When I click on link "Users"
-  And I click on button "New user"
-  And I click on link "Continue"
+  And I click on link "New user"
   And I enter "firstname" into input named "Firstname"
   And I enter "lastname" into input named "Lastname"
   And I enter "test@email.com" into input named "E-Mail"
@@ -55,8 +54,7 @@ Scenario: Create user on premium when 6 users exist
   Then the element "#side-body" contain the text "firstname"
   When I click on link "Admin"
   And I click on link "Payment"
-  Then the element "#side-body" contain the text "5€/month"
-
+  Then the element "#side-body" contain the text "20€"
 
 @javascript
 Scenario: Edit user
@@ -72,12 +70,22 @@ Scenario: Edit user
   And the input "data_firstname" has the value "new firstname"
 
 @javascript
+Scenario: Change employee to admin
+  Given The app contain seed data
+  And I am signed in
+  When I click on ".navbar-nav img"
+  And I click on link "Users"
+  And I click on link "user2 simson"
+  And I click on link "Configuration"
+  And I click on submit
+
+@javascript
 Scenario: Destroy user
   Given The app contain seed data
   And I am signed in
   When I click on link "Users"
   And I click on link "user3 Herrera"
   And I click on link "Configuration"
-  And I click on link "Destroy"
-  Then the page contain the text "user has been destroyed"
-  And the page does not contain the text "user3 Herrera"
+  And I click on button "Destroy"
+  Then the page does not contain the text "user3 Herrera"
+  And the page contain the text "New user"

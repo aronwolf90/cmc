@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "standard api update action" do |operation|
-  describe "PUT udate" do
-    subject { put :update, params: { id: model.id } }
+  subject { put :update, params: { id: model.id } }
+  let(:params) do
+    {
+      "id" => model.id.to_s,
+      "controller" => "api/v1/#{model.class.name.underscore.pluralize}",
+      "action" => "update"
+    }
+  end
 
+  describe "PUT udate" do
     let(:user) { Admin.new }
-    let(:params) do
-      {
-        "id" => model.id.to_s,
-        "controller" => "api/v1/#{model.class.name.underscore.pluralize}",
-        "action" => "update"
-      }
-    end
 
     before do
       allow(model.class).to receive(:find).and_return(model)

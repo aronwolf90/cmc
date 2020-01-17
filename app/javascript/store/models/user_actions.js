@@ -4,8 +4,21 @@ export default {
   getContext (context) {
     return context.dispatch('get', { endpoint, resource: 'context' })
   },
+  updateUserConfiguration (context, { user, payload }) {
+    return context.dispatch('update', {
+      resource: `users/${user.id}`,
+      entry: user,
+      payload
+    })
+  },
   createUser (context, payload) {
     return context.dispatch('create', { resource: 'users', payload })
+  },
+  getUser (context, id) {
+    return context.dispatch('get', {
+      endpoint,
+      resource: `users/${id}`
+    })
   },
   updateUser (context, { entry, selectedProject }) {
     let payload = {
@@ -16,6 +29,9 @@ export default {
       }
     }
     return context.dispatch('update', { entry, payload, endpoint })
+  },
+  destroyUser (context, user) {
+    return context.dispatch('destroy', { entry: user })
   },
   initUsers (context) {
     return context.dispatch('get', {

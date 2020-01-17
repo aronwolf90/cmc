@@ -1,4 +1,7 @@
 export default {
+  getUser (state, getters) {
+    return (id) => getters.entry({ type: 'users', id: id })
+  },
   users (state, getters) {
     return (getters.collection('users') || [])
       .concat(getters.collection('customers') || [])

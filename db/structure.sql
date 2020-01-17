@@ -543,7 +543,8 @@ CREATE TABLE users (
     avatar character varying,
     selected_project_id integer,
     telephone_number character varying,
-    type character varying NOT NULL
+    type character varying NOT NULL,
+    active boolean DEFAULT true NOT NULL
 );
 
 
@@ -1242,6 +1243,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191215220930'),
 ('20191215221228'),
 ('20191224011754'),
-('20191224013558');
+('20191224013558'),
+('20200111154325');
 
 

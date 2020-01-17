@@ -24,6 +24,7 @@ import DocumentNew from '../documents/new'
 import DocumentEdit from '../documents/edit'
 import AdminPayment from '../admin/payments/index.vue'
 import UserNew from '../users/new'
+import UserConfigurationEdit from '../users/configuration/edit.vue'
 
 require('../config')
 
@@ -49,6 +50,7 @@ Vue.component('document-new', DocumentNew)
 Vue.component('document-edit', DocumentEdit)
 Vue.component('payment', AdminPayment)
 Vue.component('user-new', UserNew)
+Vue.component('user-configuration-edit', UserConfigurationEdit)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')

@@ -7,11 +7,11 @@ class Organization < ApplicationRecord
     end
 
     def subscription
-      current.subscription
+      current&.subscription
     end
 
     def invoices
-      current.invoices
+      current&.invoices
     end
 
     def premium?

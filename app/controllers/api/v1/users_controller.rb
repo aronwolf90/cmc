@@ -6,6 +6,14 @@ module Api::V1
     namespace Users
     model_class User
 
-    public :index, :create, :update
+    public :index, :show, :create, :update
+
+    def destroy
+      Api::V1::Users::DestroyOperation.call(
+        params: params,
+        current_user: current_user
+      )
+      head :ok
+    end
   end
 end
