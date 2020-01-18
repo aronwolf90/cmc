@@ -12,7 +12,9 @@ RSpec.describe Api::V1::AdminSerializer, type: :serializer do
       :admin,
       selected_project: project,
       issues: [issue],
-      current_record: record
+      current_record: record,
+      type: "Admin",
+      active: true
     )
   end
 
@@ -24,7 +26,9 @@ RSpec.describe Api::V1::AdminSerializer, type: :serializer do
         attributes: {
           firstname: "firstname",
           lastname: "lastname",
-          email: user.email
+          email: user.email,
+          type: "Admin",
+          active: true
         },
         relationships: {
           "selected-project": {

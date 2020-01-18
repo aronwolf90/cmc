@@ -12,7 +12,9 @@ RSpec.describe Api::V1::EmployeeSerializer, type: :serializer do
       :employee,
       selected_project: project,
       issues: [issue],
-      current_record: record
+      current_record: record,
+      type: "Employee",
+      active: true
     )
   end
 
@@ -24,7 +26,9 @@ RSpec.describe Api::V1::EmployeeSerializer, type: :serializer do
         attributes: {
           firstname: "firstname",
           lastname: "lastname",
-          email: user.email
+          email: user.email,
+          type: "Employee",
+          active: true
         },
         relationships: {
           "selected-project": {

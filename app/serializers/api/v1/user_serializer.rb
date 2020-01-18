@@ -10,6 +10,7 @@ module Api
       attribute :lastname
       attribute :email
       attribute :type
+      attribute :active
 
       belongs_to :selected_project, serializer: ProjectSerializer
 

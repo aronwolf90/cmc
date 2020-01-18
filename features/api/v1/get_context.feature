@@ -26,7 +26,9 @@ Scenario: Get
         "attributes": {
           "firstname": null,
           "lastname": null,
-          "email": "test@localhost.de"
+          "email": "test@localhost.de",
+          "type": "Admin",
+          "active": true
         },
         "relationships": {
           "selected-project": { "data": null },

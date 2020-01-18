@@ -12,7 +12,9 @@ RSpec.describe Api::V1::CustomerSerializer, type: :serializer do
       :customer,
       selected_project: project,
       issues: [issue],
-      current_record: record
+      current_record: record,
+      type: "Customer",
+      active: true
     )
   end
 
@@ -24,7 +26,9 @@ RSpec.describe Api::V1::CustomerSerializer, type: :serializer do
         attributes: {
           firstname: "firstname",
           lastname: "lastname",
-          email: user.email
+          email: user.email,
+          type: "Customer",
+          active: true
         },
         relationships: {
           "selected-project": {

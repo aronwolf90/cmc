@@ -5,6 +5,12 @@ module Api
     module StandartActions
       extend ActiveSupport::Concern
 
+      class_methods do
+        def serializer(clazz = nil)
+          @serializer ||= clazz
+        end
+      end
+
       protected
         def index
           render_json_api json: query
@@ -41,11 +47,12 @@ module Api
         end
 
         def render_json_api(json:, links: true)
-          render(
+          render({
             json: json,
             include: params[:include],
-            links: ({ self: request.path_info } if links)
-          )
+            links: ({ self: request.path_info } if links),
+            serializer: self.class.serializer
+          }.compact)
         end
 
         def query

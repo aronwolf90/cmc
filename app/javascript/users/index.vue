@@ -27,14 +27,14 @@
     br
     br
     
-    ul.list-group.list-lines
-      index-list-item(
-        v-for="user in users",
-        resource="users",
-        :entry-type="user.type",
-        :entry-id="user.id",
-        :text="itemTextFunction(user)"
-      )
+    b-list-group(flush="")
+      b-list-group-item.list-lines(v-for="user in users")
+        b-link.text-dark(:href="`/administration/users/${user.id}`")
+         | {{ user.attributes.firstname }} {{ user.attributes.lastname }}
+        b-badge.pull-right(
+          variant="warning",
+          v-if="!user.attributes.active"
+        ) Disabled
 </template>
 
 <script>

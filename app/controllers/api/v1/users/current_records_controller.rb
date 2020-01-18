@@ -6,6 +6,7 @@ module Api::V1
       include StandartActions
       namespace Records
       model_class Record
+      serializer Api::V1::RecordSerializer
 
       public :show
 

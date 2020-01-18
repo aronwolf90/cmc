@@ -27,7 +27,9 @@ Feature: API: create an user
           "attributes": { 
             "firstname": "Lara",
             "lastname": "Croft",
-            "email": "test@lvh.me"
+            "email": "test@lvh.me",
+            "type": "Admin",
+            "active": true
           },
           "relationships": {
             "selected-project": {
