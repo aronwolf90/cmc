@@ -4,7 +4,7 @@ module Api::V1
   module Users
     class CreateOperation < ApiOperation
       @form = CreateForm
-      @deserializer = UserDeserializer
+      @deserializer = Users::CreateDeserializer
       @model = User
       @policy = UserPolicy
       include StandardCreateOperationConcern

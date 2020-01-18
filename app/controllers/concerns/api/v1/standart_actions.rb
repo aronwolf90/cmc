@@ -47,12 +47,12 @@ module Api
         end
 
         def render_json_api(json:, links: true)
-          render({
+          render(
             json: json,
             include: params[:include],
             links: ({ self: request.path_info } if links),
             serializer: self.class.serializer
-          }.compact)
+          )
         end
 
         def query

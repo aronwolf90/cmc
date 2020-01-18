@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe Api::V1::UserDeserializer do
+describe Api::V1::Users::UpdateDeserializer do
   subject { described_class.normalize(params) }
 
   context "when selected_project is present" do
@@ -13,7 +13,6 @@ describe Api::V1::UserDeserializer do
         attributes: {
           firstname: "Lara",
           lastname: "Croft",
-          type: "Admin",
           email: "test@lvh.me"
         },
         relationships: {
@@ -31,7 +30,6 @@ describe Api::V1::UserDeserializer do
         selected_project_id: "1",
         firstname: "Lara",
         lastname: "Croft",
-        type: "Admin",
         email: "test@lvh.me"
       }
     end
