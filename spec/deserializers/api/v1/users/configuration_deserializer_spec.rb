@@ -11,13 +11,15 @@ describe Api::V1::Users::ConfigurationDeserializer do
         id: "1",
         type: "users",
         attributes: {
-          type: "Admin"
+          type: "Admin",
+          active: false
         }
       }
     end
     let(:result) do
       {
-        type: "Admin"
+        type: "Admin",
+        active: false
       }
     end
 

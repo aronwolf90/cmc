@@ -6,7 +6,7 @@ export default {
   },
   updateUserConfiguration (context, { user, payload }) {
     return context.dispatch('update', {
-      resource: `users/${user.id}`,
+      resource: `users/${user.id}/configuration`,
       entry: user,
       payload
     })

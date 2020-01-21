@@ -13,6 +13,12 @@
         option(value="Admin") Admin
         option(value="Employee") Employee
         option(value="Customer") Customer
+    b-form-checkbox(
+      id="input-active",
+      required="",
+      v-model="data.attributes.active"
+    ) Active
+    br
     b-button(type="submit", variant="success") Update configuration
     b-button.pull-right(variant="destroy", @click="destroy") Destroy
 </template>
@@ -25,7 +31,8 @@ export default {
     return {
       data: {
         attributes: {
-          type: null
+          type: null,
+          active: null
         }
       }
     }
@@ -33,6 +40,7 @@ export default {
   created () {
     this.$store.dispatch('getUser', this.userId).then(response => {
       this.data.attributes.type = response.data.attributes.type
+      this.data.attributes.active = response.data.attributes.active
     })
   },
   computed: {

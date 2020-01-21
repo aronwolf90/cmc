@@ -12,7 +12,11 @@ localVue.use(BootstrapVue)
 /* eslint-disable no-unused-expressions */
 
 describe('Edit', () => {
-  subject(() => mount(Edit, { store: $store, localVue }))
+  subject(() => mount(Edit, {
+    store: $store,
+    localVue,
+    attachToDocument: true
+  }))
 
   def('getters', () => ({
     getUser () { return () => $user }
@@ -21,13 +25,30 @@ describe('Edit', () => {
     getUser () { return Promise.resolve({ data: $user }) }
   }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
-  def('user', () => ({ id: 1, type: 'users', attributes: { type: 'Admin' } }))
+  def('user', () => ({
+    id: 1,
+    type: 'users',
+    attributes: {
+      type: 'Admin',
+      active: true
+    }
+  }))
 
   it('type input has value Admin', (done) => {
     $subject.vm.$nextTick(() => {
       $subject.vm.$nextTick(() => {
         expect($subject.vm.data.attributes.type).to.eq('Admin')
         expect($subject.find('select').element.value).to.eq('Admin')
+        done()
+      })
+    })
+  })
+
+  it('active input has value true', (done) => {
+    $subject.vm.$nextTick(() => {
+      $subject.vm.$nextTick(() => {
+        expect($subject.vm.data.attributes.active).to.eq(true)
+        expect($subject.find('input').element.value).to.eq('true')
         done()
       })
     })
@@ -44,6 +65,26 @@ describe('Edit', () => {
         $subject.find('button.btn-destroy').trigger('click')
         expect($subject.vm.data.attributes.type).to.eq('Admin')
         expect($subject.find('select').element.value).to.eq('Admin')
+      })
+    })
+  })
+
+  it('call updateUserConfiguration when click on submit btn', (done) => {
+    $actions['updateUserConfiguration'] = (_context, { user, payload }) => {
+      expect(user).to.eq($user)
+      expect(payload).to.eql({
+        attributes: {
+          type: 'Admin',
+          active: true
+        }
+      })
+      done()
+      return new Promise(() => {})
+    }
+    $subject.vm.$nextTick(() => {
+      $subject.vm.$nextTick(() => {
+        $subject.find('[type="submit"]').trigger('click')
+        $subject.vm.$nextTick()
       })
     })
   })

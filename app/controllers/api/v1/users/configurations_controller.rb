@@ -7,7 +7,15 @@ module Api::V1
       namespace Users::Configuration
       model_class User
 
-      public :update
+      def update
+        result = run namespace::UpdateOperation
+
+        if result.success?
+          render json: result[:model], status: :ok
+        else
+          render_errors(result[:errors])
+        end
+      end
     end
   end
 end

@@ -80,6 +80,19 @@ Scenario: Change employee to admin
   And I click on submit
 
 @javascript
+Scenario: Inactivate user
+  Given The app contain seed data
+  And I am signed in
+  When I click on ".navbar-nav img"
+  And I click on link "Users"
+  And I click on link "user2 simson"
+  And I click on link "Configuration"
+  And I click on "[for='input-active']"
+  And I click on submit
+  And I click on link "Users"
+  Then the page contain the text "Disabled"
+
+@javascript
 Scenario: Destroy user
   Given The app contain seed data
   And I am signed in
