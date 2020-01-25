@@ -6,6 +6,7 @@ module Api
       include StandartActions
       namespace BoardLists
       model_class BoardList
+      serializer BoardListSerializer
 
       public :index, :show, :update, :destroy
     end

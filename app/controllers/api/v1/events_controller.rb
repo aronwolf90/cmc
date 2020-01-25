@@ -6,6 +6,7 @@ module Api
       include StandartActions
       namespace Events
       model_class Event
+      serializer EventSerializer
 
       public :index, :create, :update, :destroy
     end

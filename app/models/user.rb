@@ -48,4 +48,8 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && active
   end
+
+  def records_count
+    records.count
+  end
 end

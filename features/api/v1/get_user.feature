@@ -17,7 +17,8 @@ Scenario: Get
           "lastname": null,
           "email": "test@localhost.de",
           "type": "Admin",
-          "active": true
+          "active": true,
+          "records-count": 0
         },
         "relationships": {
           "selected-project": {

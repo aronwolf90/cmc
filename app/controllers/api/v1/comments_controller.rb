@@ -6,6 +6,7 @@ module Api
       include StandartActions
       namespace Comments
       model_class Comment
+      serializer CommentSerializer
 
       public :create
     end

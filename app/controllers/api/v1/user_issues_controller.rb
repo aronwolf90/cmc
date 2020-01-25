@@ -4,6 +4,7 @@ module Api::V1
   class UserIssuesController < ApiController
     include StandartActions
     model_class UserIssue
+    serializer UserIssueSerializer
 
     public :index, :show
 

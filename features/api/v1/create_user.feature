@@ -29,7 +29,8 @@ Feature: API: create an user
             "lastname": "Croft",
             "email": "test@lvh.me",
             "type": "Admin",
-            "active": true
+            "active": true,
+            "records-count": 0
           },
           "relationships": {
             "selected-project": {

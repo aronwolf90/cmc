@@ -30,7 +30,8 @@ describe('Edit', () => {
     type: 'users',
     attributes: {
       type: 'Admin',
-      active: true
+      active: true,
+      'records-count': 0
     }
   }))
 
@@ -54,7 +55,7 @@ describe('Edit', () => {
     })
   })
 
-  it('call destroyUser when click on delete btn', (done) => {
+  it('call destroyUser when click on delete btn and records.count==0', (done) => {
     $actions['destroyUser'] = (_context, user) => {
       expect(user).to.eq($user)
       done()

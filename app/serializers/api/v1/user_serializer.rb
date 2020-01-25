@@ -11,6 +11,7 @@ module Api
       attribute :email
       attribute :type
       attribute :active
+      attribute :records_count
 
       belongs_to :selected_project, serializer: ProjectSerializer
 

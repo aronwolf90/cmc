@@ -13,4 +13,8 @@ RSpec.describe User, type: :model do
     expect(subject.avatar.url)
       .to include("/assets/avatar_placeholder")
   end
+
+  it "#records_count" do
+    expect(create(:admin).records_count).to eq(0)
+  end
 end

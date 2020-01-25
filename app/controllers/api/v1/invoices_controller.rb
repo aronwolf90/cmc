@@ -5,6 +5,7 @@ module Api
     class InvoicesController < ApiController
       include StandartActions
       public :index
+      serializer InvoiceSerializer
 
       private
         def query

@@ -31,7 +31,8 @@ RSpec.describe Api::V1::UserSerializer, type: :serializer do
           firstname: "Tom",
           email: "test@lvh.me",
           type: "Admin",
-          active: true
+          active: true,
+          'records-count': 0
         },
         relationships: {
           "selected-project": {
@@ -57,6 +58,8 @@ RSpec.describe Api::V1::UserSerializer, type: :serializer do
       }
     }
   end
+
+  before { allow(user).to receive(:records_count).and_return(0) }
 
   it "serialize record in the correct way" do
     expect(serialize(user)).to eq expected_result

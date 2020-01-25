@@ -47,12 +47,18 @@ module Api
         end
 
         def render_json_api(json:, links: true)
-          render(
+          serializer_hash =
+            if json.is_a?(Array) || json.is_a?(ActiveRecord::Relation)
+              { each_serializer: self.class.serializer }
+            else
+              { serializer: self.class.serializer }
+            end
+
+          render({
             json: json,
             include: params[:include],
             links: ({ self: request.path_info } if links),
-            serializer: self.class.serializer
-          )
+          }.merge(serializer_hash))
         end
 
         def query

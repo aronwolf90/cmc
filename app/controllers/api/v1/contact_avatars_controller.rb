@@ -6,6 +6,7 @@ module Api
       include StandartActions
       model_class ContactAvatar
       namespace ::Api::V1::ContactAvatars
+      serializer ContactSerializer
 
       public :create
 

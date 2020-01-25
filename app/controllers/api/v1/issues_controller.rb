@@ -6,6 +6,7 @@ module Api
       include StandartActions
       namespace Issues
       model_class Issue
+      serializer IssueSerializer
 
       public :index, :show, :update, :destroy
 

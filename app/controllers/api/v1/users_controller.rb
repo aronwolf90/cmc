@@ -5,6 +5,7 @@ module Api::V1
     include StandartActions
     namespace Users
     model_class User
+    serializer UserSerializer
 
     public :index, :show, :create, :update
 

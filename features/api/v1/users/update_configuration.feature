@@ -30,7 +30,8 @@ Scenario: Update successfully user type when updater is a admin
           "lastname": "simson",
           "email": "employee@lvh.me",
           "type": "Customer",
-          "active": false
+          "active": false,
+          "records-count": 2
         },
         "relationships": {
           "selected-project": {

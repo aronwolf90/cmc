@@ -6,6 +6,7 @@ module Api
       include StandartActions
       namespace ::Api::V1::Contacts
       model_class Contact
+      serializer ContactSerializer
 
       public :index, :show, :create, :update, :destroy
     end

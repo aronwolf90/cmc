@@ -20,7 +20,28 @@
     ) Active
     br
     b-button(type="submit", variant="success") Update configuration
-    b-button.pull-right(variant="destroy", @click="destroy") Destroy
+    b-button.pull-right(
+      variant="destroy",
+      @click="destroy",
+      v-if="user.attributes['records-count'] == 0"
+    ) Destroy
+    b-button.pull-right(
+      variant="destroy",
+      v-b-modal.warning-modal="",
+      v-else=""
+    ) Destroy
+    b-modal(id="warning-modal", title="User will only be disabled", header-bg-variant="warning")
+      p 
+        | The user has booked time on tickes, so it can not be removed. It will only
+        | disabled if you continue.
+      template(v-slot:modal-footer="")
+        .w-100
+          b-button(
+            variant="primary",
+            class="float-left",
+            @click="$bvModal.hide('warning-modal')"
+          ) Close
+          b-button.pull-right(variant="success", @click="destroy") Continue
 </template>
 
 <script>

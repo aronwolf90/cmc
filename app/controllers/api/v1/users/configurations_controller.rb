@@ -6,12 +6,13 @@ module Api::V1
       include StandartActions
       namespace Users::Configuration
       model_class User
+      serializer UserSerializer
 
       def update
         result = run namespace::UpdateOperation
 
         if result.success?
-          render json: result[:model], status: :ok
+          render json: result[:model], status: :ok, serializer: serializer
         else
           render_errors(result[:errors])
         end
