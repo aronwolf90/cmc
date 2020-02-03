@@ -59,6 +59,8 @@ spec:
               value: '{{ .Values.mailer.user_name }}'
             - name: MAILER_PASSWORD
               value: '{{ .Values.mailer.password }}' 
+            - name: MAILER_PORT
+              value: '{{ .Values.mailer.port }}'
             - name: PAYMENT_ENABLED
               value: '{{ .Values.payment.enabled }}'
               
