@@ -1,6 +1,7 @@
 multiTenant: true
 installJobDelay: 60
-url: cost-manager.com
+url: ticktensio.com
+deprecatedUrl: cost-manager.com
 ingress:
   enabled: true
   annotations:
@@ -13,6 +14,8 @@ ingress:
       hosts:
         - "*.cost-manager.com"
         - "cost-manager.com"
+        - "*.ticktensio.com"
+        - "ticktensio.com"
 webAws:
   enabled: true
   region: fra1
@@ -21,10 +24,10 @@ webAws:
 
 payment:
   enabled: true
-  host: https://payment.cost-manager.com
+  host: https://payment.ticktensio.com
 
 mailer:
-  smtp_domain: smtp.domain.com 
-  domain: cost-manager.com 
-  user_name: info@cost-manager.com
+  smtp_domain: smtp.migadu.com 
+  domain: ticktensio.com 
+  user_name: info@ticktensio.com
   password:
