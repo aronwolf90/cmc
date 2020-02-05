@@ -73,16 +73,6 @@ describe ApplicationHelper do
     end
   end
 
-  describe "#menu_logo" do
-    subject do
-      helper.menu_logo("logo.png", administration_projects_path)
-    end
-
-    specify do
-      is_expected.to eq '<a href="/administration/projects"><img id="logo" height="21" width="40" src="/assets/logo-bffd6e0f4f022f6866e5494b4c1373c8054675f6e74f28399c62a520233bd048.png" alt="Logo" /></a>'
-    end
-  end
-
   describe "#left_menu" do
     subject do
       helper.left_menu { "</br>".html_safe }

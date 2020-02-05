@@ -9,5 +9,6 @@ if User.none?
     s.password               = "testtest"
     s.selected_project_id    = 1
     s.invitation_accepted_at = Time.zone.now
+    s.active                 = false
   end
 end
