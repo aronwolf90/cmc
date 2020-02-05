@@ -5,12 +5,13 @@ html
     = csrf_meta_tags
 
     = stylesheet_link_tag 'devise', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', defer: true, 'data-turbolinks-track': 'reload'
-
-    = stylesheet_pack_tag 'application', defer: true
-    = javascript_pack_tag 'application', defer: true
 
   body#devise
     = render 'devise/navbar'
     .container
       = yield
+
+    = image_tag 'login_bg.jpg', style: "display: none"
+    = stylesheet_pack_tag 'application'
+    = javascript_include_tag 'application'
+    = javascript_pack_tag 'application'
