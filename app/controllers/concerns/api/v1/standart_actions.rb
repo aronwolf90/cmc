@@ -5,18 +5,13 @@ module Api
     module StandartActions
       extend ActiveSupport::Concern
 
-      class_methods do
-        def serializer(clazz = nil)
-          @serializer ||= clazz
-        end
-      end
-
       protected
         def index
           render_json_api json: query
         end
 
         def show
+          return head :ok if model.nil? # TODO: change this with a 404 error
           render_json_api json: model, links: false
         end
 
@@ -49,9 +44,9 @@ module Api
         def render_json_api(json:, links: true)
           serializer_hash =
             if json.is_a?(Array) || json.is_a?(ActiveRecord::Relation)
-              { each_serializer: self.class.serializer }
+              { each_serializer: serializer }
             else
-              { serializer: self.class.serializer }
+              { serializer: serializer }
             end
 
           render({

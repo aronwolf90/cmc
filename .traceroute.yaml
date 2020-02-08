@@ -4,6 +4,11 @@ ignore_unreachable_actions:
 - authenticate_for$
 - ^knock
 - user_tokens
+- model_class
+- per_page
+- serializer
+- collection_query
+
 ignore_unused_routes:
 - ^devise
 - user_tokens

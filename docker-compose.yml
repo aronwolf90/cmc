@@ -70,8 +70,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
-      - bundle:/usr/local/bundle
+      - .:/app:cached
+      - bundle:/usr/local/bundle:cached
     depends_on:
       - db
       - selenium

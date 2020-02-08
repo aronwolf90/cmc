@@ -105,6 +105,7 @@ Rails.application.routes.draw do
       resources :stripe_checkout_sessions, only: :create
       resources :invoices, only: :index
       resource :subscription, only: :show
+      resources :notifications, only: :index
     end
   end
 end
