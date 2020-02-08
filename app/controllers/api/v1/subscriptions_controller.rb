@@ -4,6 +4,7 @@ module Api
   module V1
     class SubscriptionsController < ApiController
       include StandartActions
+      serializer Api::V1::SubscriptionSerializer
 
       public :show
 

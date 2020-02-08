@@ -5,44 +5,33 @@ module Api
     module BoardLists
       class IssuesController < ApiController
         per_page 15
+        serializer Api::V1::IssueSerializer
+        collection_query Api::V1::BoardLists::Issues::IndexQuery
 
         def index
           render(
-            json: collection.limit(per_page),
+            json: collection_result.collection,
             links: { next: next_more_path },
-            each_serializer: Api::V1::IssueSerializer
+            each_serializer: serializer
           )
         end
 
         private
-          def collection
-            MoreCollectionQuery.call(
-              board_list.issues,
-              more_id: params[:more_id]
+          def collection_result
+            @collection ||= collection_query.call(
+              board_list_id: params[:board_list_id],
+              more_id: params[:more_id],
+              per_page: per_page
             )
           end
 
           def next_more_path
-            return if collection.count <= per_page
+            return unless collection_result.has_more
 
             api_v1_board_list_issues_path(
-              board_list,
+              params[:board_list_id],
               more_id: next_more_id
             )
-          end
-
-          def next_more_id
-            collection.limit(per_page).last.id
-          end
-
-          def board_list
-            @board_list ||= BoardList
-                            .includes(:issues)
-                            .find(params[:board_list_id])
-          end
-
-          def more_id_issue
-            @more_id_issue ||= Issue.find(params[:more_id])
           end
       end
     end

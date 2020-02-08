@@ -377,6 +377,39 @@ ALTER SEQUENCE issues_id_seq OWNED BY issues.id;
 
 
 --
+-- Name: notifications; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE notifications (
+    id bigint NOT NULL,
+    subject character varying,
+    body text,
+    path character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE notifications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
+
+
+--
 -- Name: organizations; Type: TABLE; Schema: test-organization; Owner: -
 --
 
@@ -750,6 +783,13 @@ ALTER TABLE ONLY issues ALTER COLUMN id SET DEFAULT nextval('issues_id_seq'::reg
 
 
 --
+-- Name: notifications id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
+
+
+--
 -- Name: organizations id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
@@ -884,6 +924,14 @@ ALTER TABLE ONLY folders
 
 ALTER TABLE ONLY issues
     ADD CONSTRAINT issues_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY notifications
+    ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
 
 
 --
@@ -1244,6 +1292,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191215221228'),
 ('20191224011754'),
 ('20191224013558'),
-('20200111154325');
+('20200111154325'),
+('20200208003227');
 
 
