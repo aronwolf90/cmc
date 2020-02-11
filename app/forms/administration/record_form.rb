@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "reform/form/coercion"
+gem "dry-types"
 
 module Administration
   class RecordForm < ApplicationForm
