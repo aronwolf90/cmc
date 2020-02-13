@@ -16,20 +16,3 @@ Feature: API: create an user
       }
       """
     And the response status should be "200"
-
-  Scenario: Invalid request
-    Given The app contain seed data
-    And I set headers:
-     | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
-     | Content-Type | application/vnd.api+json |
-    When I send a POST request to "/api/v1/notifications_readed" with the following:
-      """
-      {
-        "data": {
-          "attributes": { 
-            "readed-at": "invalid"
-          }
-        }
-      }
-      """
-    And the response status should be "400"
