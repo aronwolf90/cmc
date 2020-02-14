@@ -1,15 +1,19 @@
 version: '2.2'
 services:
   db:
-    image: postgres:latest
+    image: postgres:11
+    dns: 8.8.8.8
+    environment:
+      - POSTGRES_PASSWORD=postgres
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 1s
       timeout: 5s
-      retries: 30
+      retries: 60
 
   stripe_mock:
     image: registry.gitlab.com/web_utils/mockserver-docker:latest
+    dns: 8.8.8.8
     volumes:
       - ./stripe_mocks:/mocks
     ports:
@@ -17,12 +21,16 @@ services:
 
   payment:
     image: registry.gitlab.com/cmc_system/cmc_payment
+    dns: 8.8.8.8
     depends_on:
-      - db
-      - stripe_mock
+      db:
+        condition: service_healthy
+      stripe_mock:
+        condition: service_started
 
   storage:
     image: minio/minio
+    dns: 8.8.8.8
     entrypoint: sh
     command: -c 'mkdir -p /data/cmc; /usr/bin/minio server /data'
     networks:
@@ -35,6 +43,7 @@ services:
 
   app:
     image: $IMAGE
+    dns: 8.8.8.8
     environment:
       - DB_PASSWORD=postgres
       - DB_HOST=db
@@ -48,10 +57,14 @@ services:
       - AWS_SECRET=secret_key
       - AWS_ENDPOINT=http://storage.lvh.me:9000
     depends_on:
-      - db
-      - selenium
-      - storage
-      - payment
+      db:
+        condition: service_healthy
+      selenium:
+        condition: service_started
+      storage:
+        condition: service_started
+      payment:
+        condition: service_started
 
   selenium:
     image: selenium/standalone-chrome-debug
