@@ -612,7 +612,7 @@ DEPENDENCIES
   spring-watcher-listen
   timecop
   traceroute
-  trailblazer
+  trailblazer (= 2.1.0.rc1)
   trailblazer-cells
   trailblazer-rails (~> 2.1)
   turbolinks
