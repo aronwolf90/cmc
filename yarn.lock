@@ -1779,12 +1779,10 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-bdd-lazy-var@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/bdd-lazy-var/-/bdd-lazy-var-2.1.2.tgz#6d25ba74ac276e30d22b1454142024f50314952c"
-  optionalDependencies:
-    jasmine-core "^2.0.0"
-    mocha "^4.0.0 || ^3.0.0 || ^2.3.0"
+bdd-lazy-var@^2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/bdd-lazy-var/-/bdd-lazy-var-2.5.4.tgz#1b4cafd7c7f15b1f99087a18619610ef81138349"
+  integrity sha512-U7lk5UWkAVnvfG7y578byFatVwFEugwD7Y1mHIih/7L1QkhTkEAwBvXER0SftI4UxTWZnNF0dA9mDJ4tycTZpg==
 
 big.js@^3.1.3:
   version "3.2.0"
@@ -5778,10 +5776,6 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
-jasmine-core@^2.0.0:
-  version "2.99.1"
-  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.99.1.tgz#e6400df1e6b56e130b61c4bcd093daa7f6e8ca15"
-
 jest-changed-files@^22.4.3:
   version "22.4.3"
   resolved "http://registry.npmjs.org/jest-changed-files/-/jest-changed-files-22.4.3.tgz#8882181e022c38bd46a2e4d18d44d19d90a90fb2"
@@ -6860,21 +6854,6 @@ mocha-webpack@^1.0.1:
     strip-ansi "^4.0.0"
     toposort "^1.0.0"
     yargs "^4.8.0"
-
-"mocha@^4.0.0 || ^3.0.0 || ^2.3.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/mocha/-/mocha-4.1.0.tgz#7d86cfbcf35cb829e2754c32e17355ec05338794"
-  dependencies:
-    browser-stdout "1.3.0"
-    commander "2.11.0"
-    debug "3.1.0"
-    diff "3.3.1"
-    escape-string-regexp "1.0.5"
-    glob "7.1.2"
-    growl "1.10.3"
-    he "1.1.1"
-    mkdirp "0.5.1"
-    supports-color "4.4.0"
 
 mocha@^5.0.0:
   version "5.0.0"
