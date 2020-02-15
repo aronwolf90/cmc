@@ -44,7 +44,7 @@ gem "numeric"
 # Trailblazer
 gem "reform", "~> 2.2"
 gem "reform-rails"
-gem "trailblazer"
+gem "trailblazer", "2.1.0.rc1"
 gem "trailblazer-cells"
 gem "trailblazer-rails", "~> 2.1"
 
