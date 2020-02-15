@@ -38,10 +38,10 @@ end
 Given(/^I am signed in \(multitenant\)$/) do
   find_or_create_current_user
   visit "/users/sign_in"
-  sleep 0.3
+  expect(page).to have_css "[name='organization']"
   fill_in "organization", with: "test-organization"
   find('input[type="submit"]').click
-  sleep 0.3
+  expect(page).to have_css "[name='user_email'], #user_email"
   fill_in "user_email", with: "admin@lvh.me"
   fill_in "user_password", with: "testtest"
   find('input[name="commit"]').click
@@ -136,7 +136,6 @@ When(/^I drag "([^\"]*)" to "([^\"]*)"$/) do |from, to|
 end
 
 Then(/^the page contain the text "([^\"]*)"$/) do |text|
-  sleep 0.2
   expect(page).to have_content text
 end
 
@@ -146,20 +145,19 @@ Then (/^I enter enter a file into input named "([^\"]*)"$/) do |element|
 end
 
 Then(/^the page does not contain the text "([^\"]*)"$/) do |text|
-  sleep 0.2
   expect(page).not_to have_content text
 end
 
 Then(/^the element "([^\"]*)" contain the text "([^\"]*)"$/) do |element, text|
+  expect(page).to have_css element
   within element do
-    sleep 0.2
     expect(page).to have_content text
   end
 end
 
 Then(/^the element "([^\"]*)" does not contain the text "([^\"]*)"$/) do |element, text|
+  expect(page).to have_css element
   within element do
-    sleep 0.2
     expect(page).not_to have_content text
   end
 end
