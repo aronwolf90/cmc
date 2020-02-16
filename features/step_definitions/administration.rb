@@ -10,6 +10,24 @@ Given(/^Multi tenant is enabled$/) do
   allow(Settings).to receive(:multi_tenant).and_return(true)
 end
 
+Given(/^a test-organization exists$/) do
+  visit("/")
+  allow(Settings).to receive(:multi_tenant).and_return(true)
+  RestClient.post(
+    "#{Capybara.app_host}/api/v1/test_organizations",
+    { data: { attributes: {} } }.to_json, content_type: :json, accept: :json
+  )
+end
+
+Given(/^a premium test-organization exists$/) do
+  visit("/")
+  allow(Settings).to receive(:multi_tenant).and_return(true)
+  RestClient.post(
+    "#{Capybara.app_host}/api/v1/test_organizations",
+    { data: { attributes: { premium: 1 } } }.to_json, content_type: :json, accept: :json
+  )
+end
+
 def find_or_create_current_user
   Admin.find_or_create_by!(email: "admin@lvh.me") do |user|
     user.password = "testtest"

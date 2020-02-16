@@ -6,7 +6,6 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-require "cucumber/api_steps"
 require "cucumber/rails"
 require "cucumber/rspec/doubles"
 require "selenium-webdriver"
@@ -77,6 +76,7 @@ Capybara.server_port = Settings.test_port
 Capybara.app_host = "http://#{Settings.test_host}:#{Settings.test_port}"
 Capybara.javascript_driver = :selenium
 Capybara.default_max_wait_time = 20
+Capybara.run_server = ENV["CAPYBARA_RUN_SERVER"] == "true" if ENV["CAPYBARA_RUN_SERVER"].present?
 
 Capybara.register_driver :selenium do |app|
   client = Selenium::WebDriver::Remote::Http::Default.new

@@ -1,14 +1,16 @@
 Feature: API: create a contact avatar
 
+@javascript
 Scenario: Create an contact
-  Given I am an user with an id of 1
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type  | multipart/form-data        |
   When I send a multipart POST request to "/api/v1/contact_avatars" with:
        | Name                | Content    | Filename      | Type       |
        | data[file] |        | avatar.jpg | image/jpeg    |
-  Then the JSON response should be:
+  Then the response status should be "201"
+  And the JSON response should be:
     """
     {
       "data": {
@@ -23,4 +25,3 @@ Scenario: Create an contact
       }
     }
     """
-  And the response status should be "201"

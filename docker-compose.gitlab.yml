@@ -44,26 +44,31 @@ services:
   app:
     image: $IMAGE
     dns: 8.8.8.8
+    command:  /bin/sh -c "rails s -b '0.0.0.0'"
+    networks:
+      default:
+        aliases:
+          - test-organization.lvh.me
+          - lvh.me
     environment:
       - DB_PASSWORD=postgres
       - DB_HOST=db
-      - BUNDLE_BIN=false
-      - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
-      - TEST_PORT=3001
-      - SELENIUM_HOST=selenium
-      - SELENIUM_PORT=4444
-      - WEBPACKER_DEV_SERVER_HOST=webpack
       - AWS_KEY=access_key
       - AWS_SECRET=secret_key
       - AWS_ENDPOINT=http://storage.lvh.me:9000
+      - CAPYBARA_RUN_SERVER=false
+      - TEST_PORT=3000
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4444
+      - TEST_HOST=lvh.me
     depends_on:
       db:
         condition: service_healthy
-      selenium:
-        condition: service_started
       storage:
         condition: service_started
       payment:
+        condition: service_started
+      selenium:
         condition: service_started
 
   selenium:

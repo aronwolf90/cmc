@@ -2,7 +2,8 @@ Feature: Wiki page
 
 @javascript
 Scenario: Create wiki page
-  Given I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Wiki"
   And I click on link "New wikicategory"
   And I enter "category title" into input named "data[title]"

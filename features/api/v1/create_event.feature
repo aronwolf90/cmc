@@ -1,7 +1,8 @@
 Feature: API: create an comment
 
+@javascript
 Scenario: Post an valid event using json in POST body
-  Given I am an user with an id of 1
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -22,7 +23,7 @@ Scenario: Post an valid event using json in POST body
     """
     {
       "data": {
-        "id": "1",
+        "id": "2",
         "type": "events",
         "attributes": { 
           "title": "Title",
@@ -37,14 +38,15 @@ Scenario: Post an valid event using json in POST body
             "destroy": true
           }
         },
-        "links": { "self": "/api/v1/events/1" }
+        "links": { "self": "/api/v1/events/2" }
       }
     }
     """
   And the response status should be "201"
 
+  @javascript
   Scenario: Post an invalid event using json in POST body
-    Given I am an user with an id of 1
+    Given a test-organization exists and is loaded
     And I set headers:
      | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
      | Content-Type | application/vnd.api+json |

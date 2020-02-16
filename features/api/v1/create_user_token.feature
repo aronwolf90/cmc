@@ -1,17 +1,12 @@
 Feature: API: create user token
 
+@javascript
 Scenario: Post valid authentication data
-  Given the following employee exist:
-   | id  | email             | password |
-   | 1   | test@localhost.de | testtest |
+  Given a test-organization exists and is loaded
   And I set headers:
    | Content-Type | application/json |
   When I send a POST request to "/api/v1/user_tokens" with the following:
     """
-    { "auth": { "email": "test@localhost.de", "password": "testtest" } }
-    """
-  Then the JSON response should be:
-    """
-    { "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU" }
+    { "auth": { "email": "admin@lvh.me", "password": "testtest" } }
     """
   And the response status should be "201"

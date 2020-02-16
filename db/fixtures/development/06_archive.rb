@@ -5,10 +5,13 @@ Folder.seed do |s|
   s.name = "folder 1"
 end
 
-DocumentFile.seed do |s|
-  s.id   = 1
-  s.file = File.open(Rails.root.join("spec", "fixtures", "document.txt"))
-end
+# id 1
+DocumentFiles::CreateMutation.call(
+  model: DocumentFile.new,
+  file: Rack::Test::UploadedFile.new(
+    Rails.root.join("spec", "fixtures", "document.txt")
+  )
+)
 
 Document.seed do |s|
   s.id               = 1

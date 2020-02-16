@@ -1,8 +1,8 @@
 Feature: API: list issues
 
+@javascript
 Scenario: Get /api/v1/contacts
-  Given a contact exists with an id of 1
-  And I am an user with an id of 1
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -14,17 +14,17 @@ Scenario: Get /api/v1/contacts
         "id": "1",
         "type": "contacts",
         "attributes": { 
-          "name": "Frantz",
+          "name": "Clara",
           "description": "Test description",
-          "telephone": "01727873609",
-          "mobile": "01702876609",
-          "fax": "01727876620",
-          "address-city": "Augsburg",
-          "address-zip": "86153",
-          "address-country": "germany",
-          "address-street": "Street",
-          "address-number": "8",
-          "avatar-url": "/api/v1/contact_avatars/1"
+          "telephone": "01707986607",
+          "mobile": "01707986617",
+          "fax": "01707986617",
+          "address-city": "Barcelona",
+          "address-zip": "08001",
+          "address-country": "Spain",
+          "address-street": "Las Holletas",
+          "address-number": "5",
+          "avatar-url": "/api/v1/contact_avatars/placeholder"
         },
         "links": {
           "self": "/api/v1/contacts/1"

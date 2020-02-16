@@ -1,10 +1,8 @@
 Feature: API: list attendance events
 
+@javascript
 Scenario: Get
-  Given I am an user with an id of 1
-  And the following attendance event exist:
-   | id | user_id | from_day     | to_day       | from_time | to_time |
-   | 1  | 1       | "2019-01-15" | "2019-01-16" | "09:00"   |"18:00"  |
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -21,7 +19,7 @@ Scenario: Get
             "to-day": "2019-01-16",
             "from-time": "09:00",
             "to-time": "18:00",
-            "description": null
+            "description": "Test description"
           },
           "relationships": {
             "user": {

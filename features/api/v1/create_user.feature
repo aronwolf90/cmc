@@ -1,7 +1,8 @@
 Feature: API: create an user
 
+  @javascript
   Scenario: Create an user
-    Given The app contain seed data
+    Given a test-organization exists and is loaded
     And I set headers:
      | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
      | Content-Type | application/vnd.api+json |
@@ -18,7 +19,8 @@ Feature: API: create an user
         }
       }
       """
-    Then the JSON response should be:
+    Then the response status should be "201"
+    And the JSON response should be:
       """
       {
         "data": {
@@ -52,4 +54,3 @@ Feature: API: create an user
         }
       }
       """
-    And the response status should be "201"

@@ -1,10 +1,8 @@
 Feature: API: create an record
 
+@javascript
 Scenario: Put an valid record using json in PUT body
-  Given I am an user with an id of 1
-  And the following record exist:
-   | id | user_id |
-   | 1  | 1       |
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -20,11 +18,9 @@ Scenario: Put an valid record using json in PUT body
     """
   Then the response status should be "204"
 
+@javascript
 Scenario: Put an invalid record using json in PUT body
-  Given I am an user with an id of 1
-  And the following record exist:
-   | id | user_id |
-   | 1  | 1       |
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

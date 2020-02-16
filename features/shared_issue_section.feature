@@ -2,24 +2,24 @@ Feature: schared issue section
 
 @javascript
 Scenario: Start record time
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Issues"
   And I click on "#shared-issue-section .fa-play"
   Then the page contain the element "#shared-issue-section .fa-stop"
 
 @javascript
 Scenario: Stop record time
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   And an acive issue exists
   When I click on "#shared-issue-section .fa-stop"
   Then the page contain the element "#shared-issue-section .fa-play"
 
 @javascript
 Scenario: Filter issues
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   Then the element "#shared-issue-section" contain the text "Test issue 1"
   Then the element "#shared-issue-section" contain the text "Test issue 2"
   When I enter "2" into "#shared-issue-section input"
@@ -29,8 +29,8 @@ Scenario: Filter issues
 # regresion test
 @javascript
 Scenario: Navigate from th current issue to his show view
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   And an acive issue exists
   When I click on link "Test issue 1"
   Then the element "#side-body" contain the text "Test issue 1"

@@ -2,8 +2,8 @@ Feature: Issue
 
 @javascript
 Scenario: Create Issue
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Issues"
   And I click on ".issues-board-body .fa-plus"
   And I enter "issue name" into input named "data_title"
@@ -14,16 +14,16 @@ Scenario: Create Issue
 
 @javascript
 Scenario: Show issue
-  Given The app contain seed data 
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Test issue 1"
   Then the element "#side-body" contain the text "Test issue 1"
   And the element "#side-body" contain the text "description"
 
 @javascript
 Scenario: Edit issue
-  Given The app contain seed data 
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Test issue 1"
   And I click on ".fa-edit"
   And I replace the text "test" from the markdown editor "form .markdown-editor"
@@ -32,16 +32,16 @@ Scenario: Edit issue
 
 @javascript
 Scenario: Delete issue
-  Given The app contain seed data 
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Test issue 1"
   And I click on ".fa-trash"
   Then the element "#side-body" contain the text "Backlog"
 
 @javascript
 Scenario: Change user
-  Given The app contain seed data 
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Test issue 1"
   And I click on "#assigen .text"
   Then the element "#assigen .text" does not contain the text "user2"
@@ -53,8 +53,8 @@ Scenario: Change user
 
 @javascript
 Scenario: Change complexity
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Test issue 1"
   And I click on "#complexity .text"
   And I click on "#complexity .item:nth-child(2)"
