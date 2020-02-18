@@ -95,10 +95,9 @@ end
 
 group :test do
   gem "capybara"
-  gem "cucumber-api-steps", require: false
   gem "cucumber-rails", require: false
-  gem "database_cleaner", require: false
   gem "db-query-matchers"
+  gem "jsonpath", require: false
   gem "selenium-webdriver", require: false
   gem "shoulda-matchers"
   gem "simplecov", require: false
