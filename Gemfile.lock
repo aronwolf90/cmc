@@ -304,7 +304,7 @@ GEM
       shellany (~> 0.0)
     numeric (0.2.0)
     orm_adapter (0.5.0)
-    pager_api (0.2.3)
+    pager_api (0.3.2)
     parallel (1.19.1)
     parser (2.6.3.0)
       ast (~> 2.4.0)
