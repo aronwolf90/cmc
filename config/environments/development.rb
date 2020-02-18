@@ -67,4 +67,3 @@ Rails.application.configure do
     Bullet.add_footer = true
   end
 end
-
