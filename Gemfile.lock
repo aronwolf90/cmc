@@ -234,7 +234,7 @@ GEM
     hash_mapper (0.2.3)
       activesupport (>= 4)
     hirb (0.7.3)
-    holidays (7.1.0)
+    holidays (8.1.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
