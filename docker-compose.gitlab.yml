@@ -1,6 +1,7 @@
 version: '2.2'
 services:
   db:
+    command: "-c fsync=off"
     image: postgres:11
     dns: 8.8.8.8
     environment:
@@ -44,15 +45,14 @@ services:
   app:
     image: $IMAGE
     dns: 8.8.8.8
-    command:  /bin/sh -c "rails s -b '0.0.0.0'"
+    command:  /bin/sh -c "RAILS_ENV=production rails s -b '0.0.0.0'"
     networks:
       default:
         aliases:
           - test-organization.lvh.me
           - lvh.me
     environment:
-      - DB_PASSWORD=postgres
-      - DB_HOST=db
+      - DATABASE_URL=postgres://postgres:postgres@db/database
       - AWS_KEY=access_key
       - AWS_SECRET=secret_key
       - AWS_ENDPOINT=http://storage.lvh.me:9000
@@ -60,7 +60,12 @@ services:
       - TEST_PORT=3000
       - SELENIUM_HOST=selenium
       - SELENIUM_PORT=4444
+      - RAILS_SERVE_STATIC_FILES=true
+      - SEEDS_FOLDER=development
+      - PAYMENT_ENABLED=true
+      - NO_RAISE_MAILER_ERRORS=true
       - TEST_HOST=lvh.me
+      - SECRET_KEY_BASE=5d1ee3590cdac32f527d1c4c835578859ecbd50ac1b03ff6d4689c19d732b5c9050ceb66d8b625cacadb1c1228095a7fd855933ce1881075a577e7cb8aea3432
     depends_on:
       db:
         condition: service_healthy
