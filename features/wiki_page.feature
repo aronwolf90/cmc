@@ -2,8 +2,8 @@ Feature: Wiki page
 
 @javascript
 Scenario: Create wiki page
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Wiki"
   And I click on link "New wikipage"
   And I enter "page title" into input named "data[title]"
@@ -13,8 +13,8 @@ Scenario: Create wiki page
 
 @javascript
 Scenario: Show wiki page
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Wiki"
   And I click on link "wiki page title"
   Then the element "#side-body" contain the text "wiki page title"
@@ -22,8 +22,8 @@ Scenario: Show wiki page
 
 @javascript
 Scenario: Edit wiki page
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Wiki"
   And I click on link "wiki page title"
   And I click on ".fa-edit"
@@ -35,8 +35,8 @@ Scenario: Edit wiki page
 
 @javascript
 Scenario: Change category
-  Given The app contain seed data 
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Wiki"
   And I click on link "wiki page title"
   Then the element "#category .text" does not contain the text "subcategory 1"

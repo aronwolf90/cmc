@@ -1,7 +1,8 @@
 Feature: API: add chuncks to a document file
 
+@javascript
 Scenario: Create an contact
-  Given I am an user with an id of 1
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type  | multipart/form-data        |
@@ -13,7 +14,7 @@ Scenario: Create an contact
     """
     {
       "data": {
-        "id": "1",
+        "id": "2",
         "type": "document-files",
         "meta": {
           "permissions": {
@@ -25,7 +26,7 @@ Scenario: Create an contact
     }
     """
   And the response status should be "201"
-  When I send a multipart PUT request to "/api/v1/document_files/1" with:
+  When I send a multipart PUT request to "/api/v1/document_files/2" with:
        | Name                | Content    | Filename      | Type          |
        | data[file]          |            | document1.txt | plain/txt     |            
   Then the response status should be "204"

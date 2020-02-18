@@ -1,8 +1,8 @@
 Feature: API: create an record
 
+@javascript
 Scenario: Create an contact of kind "person"
-  Given I am an user with an id of 1
-  And a contact avatar exists with an id of 1
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -30,7 +30,7 @@ Scenario: Create an contact of kind "person"
     """
     {
       "data": {
-        "id": "1",
+        "id": "2",
         "type": "contacts",
         "attributes": { 
           "name": "Frantz",
@@ -43,7 +43,7 @@ Scenario: Create an contact of kind "person"
           "address-country": "germany",
           "address-street": "Street",
           "address-number": "8",
-          "avatar-url": "/api/v1/contact_avatars/1"
+          "avatar-url": "/api/v1/contact_avatars/placeholder"
         },
         "meta": {
           "permissions": {
@@ -51,14 +51,15 @@ Scenario: Create an contact of kind "person"
             "destroy": true
           }
         },
-        "links": {"self": "/api/v1/contacts/1"}
+        "links": {"self": "/api/v1/contacts/2"}
       }
     }
     """
-  And the response status should be "201"
+    And the response status should be "201"
 
+  @javascript
   Scenario: Post an invalid record using json in POST body
-    Given I am an user with an id of 1
+    Given a test-organization exists and is loaded
     And I set headers:
      | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
      | Content-Type | application/vnd.api+json |

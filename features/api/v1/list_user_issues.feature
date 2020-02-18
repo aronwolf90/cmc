@@ -1,37 +1,130 @@
 Feature: API: list user issues
 
+@javascript
 Scenario: Get
-  Given I am an user with an id of 1
-  And a project exists with an id of "1"
-  And the following board list exist:
-   | id | project_id |
-   | 1  | 1          |
-  And the following issue exist:
-   | id | board_list_id |
-   | 1  | 1             |
-  And the following record exist:
-   | id | user_id | issue_id |
-   | 1  | 1       | 1        |
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
   And I send a GET request to "/api/v1/user_issues"
   Then the JSON response should be:
     """
-    {
-      "data": [{
-        "id": "1,1",
-        "type": "user-issues",
-        "attributes": { 
-          "spent-time": 60, 
-          "start-time": "2018-01-29T20:09:37.000+01:00"
+    { 
+      "data":[ 
+        { 
+          "id":"1,5",
+          "type":"user-issues",
+          "attributes":{ 
+            "spent-time":3600,
+            "start-time":"2020-02-08T23:00:00.000+01:00"
+          },
+          "relationships":{ 
+            "user":{ 
+              "data":{ 
+                "id":"1",
+                "type":"users"
+              }
+            },
+            "issue":{ 
+              "data":{ 
+                "id":"5",
+                "type":"issues"
+              }
+            }
+          }
         },
-        "relationships": {
-          "user": { "data": { "id": "1", "type": "users"  } },
-          "issue": { "data": { "id": "1", "type": "issues"  } }
+        { 
+          "id":"1,7",
+          "type":"user-issues",
+          "attributes":{ 
+            "spent-time":12600,
+            "start-time":"2020-01-04T22:30:00.000+01:00"
+          },
+          "relationships":{ 
+            "user":{ 
+              "data":{ 
+                "id":"1",
+                "type":"users"
+              }
+            },
+            "issue":{ 
+              "data":{ 
+                "id":"7",
+                "type":"issues"
+              }
+            }
+          }
+        },
+        { 
+          "id":"1,8",
+          "type":"user-issues",
+          "attributes":{ 
+            "spent-time":72000,
+            "start-time":"2019-11-23T04:00:00.000+01:00"
+          },
+          "relationships":{ 
+            "user":{ 
+              "data":{ 
+                "id":"1",
+                "type":"users"
+              }
+            },
+            "issue":{ 
+              "data":{ 
+                "id":"8",
+                "type":"issues"
+              }
+            }
+          }
+        },
+        { 
+          "id":"2,6",
+          "type":"user-issues",
+          "attributes":{ 
+            "spent-time":25200,
+            "start-time":"2019-10-26T17:00:00.000+02:00"
+          },
+          "relationships":{ 
+            "user":{ 
+              "data":{ 
+                "id":"2",
+                "type":"users"
+              }
+            },
+            "issue":{ 
+              "data":{ 
+                "id":"6",
+                "type":"issues"
+              }
+            }
+          }
+        },
+        { 
+          "id":"2,8",
+          "type":"user-issues",
+          "attributes":{ 
+            "spent-time":32400,
+            "start-time":"2019-10-12T15:00:00.000+02:00"
+          },
+          "relationships":{ 
+            "user":{ 
+              "data":{ 
+                "id":"2",
+                "type":"users"
+              }
+            },
+            "issue":{ 
+              "data":{ 
+                "id":"8",
+                "type":"issues"
+              }
+            }
+          }
         }
-      }],
-      "links": { "self": "/api/v1/user_issues" }
+      ],
+      "links":{ 
+        "self":"/api/v1/user_issues"
+      }
     }
     """
   And the response status should be "200"

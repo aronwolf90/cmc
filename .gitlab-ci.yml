@@ -95,8 +95,9 @@ cucumber:
   script:
     - export IMAGE=$CONTAINER_RELEASE_IMAGE
     - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
-    - docker-compose -f docker-compose.gitlab.yml run app bash -c
-      "cp config/database.yml.sample config/database.yml && rake db:create && rake db:schema:load && cucumber"
+    - docker-compose -f docker-compose.gitlab.yml run app rake db:setup
+    - docker-compose -f docker-compose.gitlab.yml up -d
+    - docker-compose -f docker-compose.gitlab.yml run app cucumber
 
 deploy:
   stage: deploy

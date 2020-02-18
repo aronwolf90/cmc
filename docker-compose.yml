@@ -57,6 +57,11 @@ services:
   app:
     image: registry.gitlab.com/cmc_system/cmc:$TAG
     build: .
+    networks:
+      default:
+        aliases:
+          - test-organization.lvh.me
+          - lvh.me
     stdin_open: true
     tty: true
     environment:
@@ -64,13 +69,15 @@ services:
       - DB_HOST=db
       - BUNDLE_BIN=false
       - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
-      - TEST_PORT=3001
+      - TEST_PORT=3000
       - SELENIUM_HOST=selenium
       - SELENIUM_PORT=4444
       - WEBPACKER_DEV_SERVER_HOST=webpack
       - AWS_KEY=access_key
       - AWS_SECRET=secret_key
       - AWS_ENDPOINT=http://storage.lvh.me:9000
+      - CAPYBARA_RUN_SERVER=false
+      - TEST_HOST=lvh.me
     command:  /bin/sh -c "bin/install.sh; rm -r tmp/pids; rails s -b '0.0.0.0'"
     ports:
       - "3000:3000"

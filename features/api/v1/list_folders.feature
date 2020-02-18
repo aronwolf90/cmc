@@ -1,8 +1,8 @@
 Feature: API: list users
 
+@javascript
 Scenario: Get
-  Given I am an user with an id of 1
-  And a folder exists with an id of "1"
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -14,13 +14,13 @@ Scenario: Get
         "id": "1",
         "type": "folders",
         "attributes": {
-          "name": "folder name",
+          "name": "folder 1",
           "root": true
         },
         "relationships": {
           "folder": { "data": null },
           "folders": { "data": [] },
-          "documents": { "data": [] }
+          "documents": { "data": [{ "id": "1", "type": "documents" }] }
         },
         "meta": {
           "permissions": {

@@ -1,7 +1,8 @@
 Feature: API: create an record
 
+@javascript
 Scenario: Post an valid record using json in POST body
-  Given I am an user with an id of 1
+  Given a test-organization exists and is loaded
   And a project exists with an id of "1"
   And the following board list exist:
    | id | project_id |
@@ -28,7 +29,7 @@ Scenario: Post an valid record using json in POST body
     """
     {
       "data": {
-        "id": "1",
+        "id": "7",
         "type": "records",
         "attributes": {
           "start-time": "2018-02-04T13:00:00.000+01:00",
@@ -39,7 +40,7 @@ Scenario: Post an valid record using json in POST body
           "issue": {"data": {"id": "1", "type": "issues"}}
         },
         "links": {
-          "self": "/api/v1/records/1"
+          "self": "/api/v1/records/7"
         },
         "meta": {
           "permissions": {
@@ -52,15 +53,9 @@ Scenario: Post an valid record using json in POST body
     """
   And the response status should be "201"
 
+@javascript
 Scenario: Post an invalid record using json in POST body
-  Given I am an user with an id of 1
-  And a project exists with an id of "1"
-  And the following board list exist:
-   | id | project_id |
-   | 1  | 1          |
-  And the following issue exist:
-   | id | board_list_id |
-   | 1  | 1             |
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

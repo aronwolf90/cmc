@@ -6,6 +6,15 @@ Given(/^an user exists with an id of 1$/) do
   Admin.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
 end
 
+Given(/^a test-organization exists and is loaded$/) do
+  allow(Settings).to receive(:multi_tenant).and_return(true)
+  RestClient.post(
+    "#{Capybara.app_host}/api/v1/test_organizations",
+    { data: { attributes: {} } }.to_json, content_type: :json, accept: :json
+  )
+  allow(Capybara).to receive(:app_host).and_return "http://test-organization.#{Settings.test_host}:#{Settings.test_port}"
+end
+
 Given(/^I am an user with an id of 1$/) do
   Admin.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
 end
@@ -36,24 +45,6 @@ Given(/a contact exists with an id of 1/) do
   )
 end
 
-Given(/^(?:|I )send a multipart (POST|PUT) request (?:for|to) "([^"]*)" with:/) do |verb, path, body|
-  body = body.hashes
-  request_opts = {}
-
-  request_opts[:method] = verb.downcase.to_sym
-  request_opts[:params] = body.inject({}) do |hash, row|
-    if row["Filename"].present?
-      hash[row["Name"]] = Rack::Test::UploadedFile.new(Rails.root.join("features/support/attachments/", row["Filename"]), row["Type"])
-    else
-      hash[row["Name"]] = row["Content"].strip
-    end
-    hash
-  end
-
-
-  request path, request_opts
-end
-
 Given(/^a contact avatar exists with an id of 1/) do
   ContactAvatar.create!(
     id: 1,
@@ -69,11 +60,6 @@ Given(/^a (document|document_file) exists with an id of 1/) do |*_args|
   file = Rails.root.join("features", "support", "attachments", "avatar.jpg")
   ChunckUploader.new(document_file).upload(file)
   FactoryBot.create(:document, document_file: document_file, name: "test")
-end
-
-Then(/^has the following headers:/) do |headers|
-  expect(last_response.headers.slice(*headers.rows_hash.keys).values)
-    .to eq(headers.rows_hash.values)
 end
 
 Then(/^a document_file with an id of 1 and chunck0.txt/) do

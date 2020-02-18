@@ -5,7 +5,7 @@ module Api
     class DocumentFilesController < ApiController
       include StandartActions
       model_class DocumentFile
-      namespace DocumentFiles
+      namespace Api::V1::DocumentFiles
 
       public :create, :update
 

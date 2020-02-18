@@ -1,7 +1,8 @@
 Feature: API: create a stripe checkout session
 
+@javascript
 Scenario: Valid post '/api/v1/stripe_checkout_session'
-  Given I am an user with an id of 1
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

@@ -1,7 +1,7 @@
 Feature: API: PATCH /users/<id>/configuration
 
 Scenario: Update successfully user type when updater is a admin
-  Given The app contain seed data
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -55,7 +55,7 @@ Scenario: Update successfully user type when updater is a admin
     """
 
 Scenario: Update type fail type when updater is a employee
-  Given The app contain seed data
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjJ9.Z4Z9D_QEKSg5mwtQCQYM8u3bgj_GjNBzsDfdy0Bpgok |
    | Content-Type | application/vnd.api+json |

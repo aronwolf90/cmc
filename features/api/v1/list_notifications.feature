@@ -1,7 +1,8 @@
 Feature: API: List current user notifications
 
+@javascript
 Scenario: GET /api/v1/notifications
-  Given The app contain seed data
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -109,8 +110,9 @@ Scenario: GET /api/v1/notifications
     """
   And the response status should be "200"
 
+  @javascript
   Scenario: GET /api/v1/notifications?more_id=8
-  Given The app contain seed data
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

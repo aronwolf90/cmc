@@ -1,41 +1,138 @@
 Feature: API: list users
 
+@javascript
 Scenario: Get
-  And I am an user with an id of 1
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
   And I send a GET request to "/api/v1/users"
   Then the JSON response should be:
     """
-    {
-      "data": [{
-        "id": "1",
-        "type": "users",
-        "attributes": {
-          "firstname": null,
-          "lastname": null,
-          "email": "test@localhost.de",
-          "type": "Admin",
-          "active": true,
-          "records-count": 0
+    { 
+      "data":[ 
+        { 
+          "id":"1",
+          "type":"users",
+          "attributes":{ 
+            "firstname":"Aron",
+            "lastname":"Wolf",
+            "email":"admin@lvh.me",
+            "type":"Admin",
+            "active":true,
+            "records-count":4
+          },
+          "relationships":{ 
+            "selected-project":{ 
+              "data":{ 
+                "id":"1",
+                "type":"projects"
+              }
+            },
+            "issues":{ 
+              "data":[ 
+                { 
+                  "id":"1",
+                  "type":"issues"
+                },
+                { 
+                  "id":"2",
+                  "type":"issues"
+                }
+              ]
+            },
+            "current-record":{ 
+              "data":null
+            }
+          },
+          "links":{ 
+            "self":"/api/v1/users/1"
+          },
+          "meta":{ 
+            "permissions":{ 
+              "update":true,
+              "destroy":true
+            }
+          }
         },
-        "relationships": {
-          "issues": { "data": [] },
-          "current-record": { "data": null },
-          "selected-project": { "data": null }
+        { 
+          "id":"2",
+          "type":"users",
+          "attributes":{ 
+            "firstname":"user2",
+            "lastname":"simson",
+            "email":"employee@lvh.me",
+            "type":"Employee",
+            "active":true,
+            "records-count":2
+          },
+          "relationships":{ 
+            "selected-project":{ 
+              "data":{ 
+                "id":"1",
+                "type":"projects"
+              }
+            },
+            "issues":{ 
+              "data":[ 
+    
+              ]
+            },
+            "current-record":{ 
+              "data":null
+            }
+          },
+          "links":{ 
+            "self":"/api/v1/users/2"
+          },
+          "meta":{ 
+            "permissions":{ 
+              "update":true,
+              "destroy":true
+            }
+          }
         },
-        "links": {
-          "self": "/api/v1/users/1"
-        },
-        "meta": {
-          "permissions": {
-            "update": true,
-            "destroy": true
+        { 
+          "id":"3",
+          "type":"users",
+          "attributes":{ 
+            "firstname":"user3",
+            "lastname":"Herrera",
+            "email":"customer@lvh.me",
+            "type":"Customer",
+            "active":true,
+            "records-count":0
+          },
+          "relationships":{ 
+            "selected-project":{ 
+              "data":{ 
+                "id":"1",
+                "type":"projects"
+              }
+            },
+            "issues":{ 
+              "data":[ 
+    
+              ]
+            },
+            "current-record":{ 
+              "data":null
+            }
+          },
+          "links":{ 
+            "self":"/api/v1/users/3"
+          },
+          "meta":{ 
+            "permissions":{ 
+              "update":true,
+              "destroy":true
+            }
           }
         }
-      }],
-      "links": { "self": "/api/v1/users" }
+      ],
+      "links":{ 
+        "self":"/api/v1/users"
+      }
     }
     """
   And the response status should be "200"

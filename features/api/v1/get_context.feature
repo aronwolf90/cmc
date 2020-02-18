@@ -1,7 +1,8 @@
 Feature: API: get context
 
+@javascript
 Scenario: Get
-  And I am an user with an id of 1
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
@@ -13,8 +14,8 @@ Scenario: Get
         "id": "context",
         "type": "contexts",
         "attributes": {
-          "premium": true, 
-          "user-count": 1
+          "premium": false, 
+          "user-count": 3
         },
         "relationships": {
           "current-user": { "data": { "id": "1", "type": "users" } }
@@ -24,16 +25,21 @@ Scenario: Get
         "id": "1",
         "type": "users",
         "attributes": {
-          "firstname": null,
-          "lastname": null,
-          "email": "test@localhost.de",
+          "firstname": "Aron",
+          "lastname": "Wolf",
+          "email": "admin@lvh.me",
           "type": "Admin",
           "active": true,
-          "records-count": 0
+          "records-count": 4
         },
         "relationships": {
-          "selected-project": { "data": null },
-          "issues": { "data": [] },
+          "selected-project": { "data": { "id": "1", "type": "projects" } },
+          "issues": {
+            "data": [
+              { "id": "1", "type": "issues" },
+              { "id": "2", "type": "issues" }
+            ]
+          },
           "current-record": { "data": null }
         },
         "links": {

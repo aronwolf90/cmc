@@ -42,6 +42,10 @@ module Hack
           request.session_options[:skip] = true
         end
 
+        def verify_authenticity_token
+          super if token.nil?
+        end
+
         # JWT: overriding Knock's method to manually trigger Devise's auth.
         # When there is no token we assume the request comes from the browser so
         # has a session (potentially with warden key) attached.

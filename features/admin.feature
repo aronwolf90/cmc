@@ -2,8 +2,8 @@ Feature: Admin
 
 @javascript
 Scenario: Change time zone 
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Admin"
   And select "London" from select box "data[time_zone]"
   And I click on submit

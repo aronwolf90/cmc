@@ -2,8 +2,8 @@ Feature: Projects
 
 @javascript
 Scenario: Create contact
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Contacts"
   And I click on link "New contact"
   And I enter "New person" into input named "input-name"
@@ -12,8 +12,8 @@ Scenario: Create contact
 
 @javascript
 Scenario: Update contact
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Contacts"
   And I click on link "Clara"
   And I click on ".fa-edit"

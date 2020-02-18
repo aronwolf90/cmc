@@ -2,8 +2,8 @@ Feature: Archive document
 
 @javascript
 Scenario: Create document
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Archive"
   And I click on link "New document"
   And I enter "document name" into input named "Name:"
@@ -14,8 +14,8 @@ Scenario: Create document
 
 @javascript
 Scenario: Update document
-  Given The app contain seed data
-  And I am signed in
+  Given a test-organization exists
+  And I am signed in (multitenant)
   When I click on link "Archive"
   And I click on ".document .fa-edit"
   And I enter "new document name" into input named "Name:"

@@ -1,7 +1,8 @@
 Feature: API: create an user
 
+  @javascript
   Scenario: Update an user
-    Given The app contain seed data
+    Given a test-organization exists and is loaded
     And I set headers:
      | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
      | Content-Type | application/vnd.api+json |

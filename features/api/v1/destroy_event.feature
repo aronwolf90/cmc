@@ -1,8 +1,8 @@
 Feature: API: destroy an event
 
+@javascript
 Scenario: Destroy an event
-  Given I am an user with an id of 1
-  And an event exists with an id of "1"
+  Given a test-organization exists and is loaded
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
