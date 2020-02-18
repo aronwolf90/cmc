@@ -113,9 +113,6 @@ GEM
       gherkin (~> 5.1.0)
       multi_json (>= 1.7.5, < 2.0)
       multi_test (>= 0.1.2)
-    cucumber-api-steps (0.14.0)
-      cucumber (>= 2.0.2)
-      jsonpath (>= 0.1.2)
     cucumber-core (3.2.1)
       backports (>= 3.8.0)
       cucumber-tag_expressions (~> 1.1.0)
@@ -129,7 +126,6 @@ GEM
       railties (>= 4.2, < 7)
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
-    database_cleaner (1.8.2)
     db-query-matchers (0.10.0)
       activesupport (>= 4.0, < 7)
       rspec (~> 3.0)
@@ -249,7 +245,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.1.0)
     jsonapi-renderer (0.2.2)
-    jsonpath (0.8.11)
+    jsonpath (1.0.5)
       multi_json
       to_regexp (~> 0.2.1)
     jwt (1.5.6)
@@ -562,9 +558,7 @@ DEPENDENCIES
   carrierwave
   composite_primary_keys
   config
-  cucumber-api-steps
   cucumber-rails
-  database_cleaner
   db-query-matchers
   devise
   devise_invitable
@@ -575,6 +569,7 @@ DEPENDENCIES
   hash_mapper
   holidays
   jquery-rails
+  jsonpath
   kaminari (~> 1.0.0)
   knock
   listen (>= 3.0.5, < 3.2)
