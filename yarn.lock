@@ -3368,9 +3368,10 @@ dateformat@^3.0.3:
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
 
-dayspan-vuetify@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/dayspan-vuetify/-/dayspan-vuetify-0.3.2.tgz#efd7e7ae9567f7663a4945df1f713f2250c44f09"
+dayspan-vuetify@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/dayspan-vuetify/-/dayspan-vuetify-0.3.6.tgz#46f2473ada08bb362a6e4f1837cb4a0fc360bcf8"
+  integrity sha512-8I5DzQXj86sF6pkVWLNjbsn3OhG4ttAQKQKTXZQgHk62E53POiZ/amjjrtVUO0UoSyWnoLpVDoyXlFbsUv++6g==
   dependencies:
     dayspan "^0.12.2"
     material-design-icons-iconfont "^3.0.3"
