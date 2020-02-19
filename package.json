@@ -63,7 +63,7 @@
     "sinon": "^4.2.1",
     "sinon-chai": "^2.14.0",
     "sinon-stub-promise": "^4.0.0",
-    "timekeeper": "^2.0.0",
+    "timekeeper": "^2.2.0",
     "wait-until": "^0.0.2",
     "webpack-dev-server": "^2.9.5"
   },
