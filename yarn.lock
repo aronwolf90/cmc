@@ -11064,9 +11064,10 @@ vue-runtime-helpers@1.0.0:
   resolved "https://registry.yarnpkg.com/vue-runtime-helpers/-/vue-runtime-helpers-1.0.0.tgz#af5fe1c8d727beb680b2eb9d791c8e022342e54d"
   integrity sha512-DgwCNgIXkq1GJsWwtFOjA/K2nxpjyon/QqAut0EiwrMHBatAPbfdqksDdRoK15b5YrSJRa59rx3pc0L6V4udUA==
 
-vue-search-select@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/vue-search-select/-/vue-search-select-2.4.0.tgz#de5d0c84f5d1818261ad9bf82fd53e5e726199ab"
+vue-search-select@^2.9.3:
+  version "2.9.3"
+  resolved "https://registry.yarnpkg.com/vue-search-select/-/vue-search-select-2.9.3.tgz#39ee37da95179b7fdd8e1cb7636e5c0aaee39be2"
+  integrity sha512-JQBTSKKX3nAoeeEaSqg2iQDtR1YBs0qZ08os/QDOqFocGPSvAffNb4VajSnlFWJlKQDJcev3iQuBLcWM2pxr0Q==
 
 vue-store@^0.3.1:
   version "0.3.1"
