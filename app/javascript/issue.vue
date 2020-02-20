@@ -8,6 +8,7 @@
     right-aside
       assigen(:issue-id='issueId')
       complexity(:issue-id='issueId')
+      due-at(:issue-id='issueId')
 
 </template>
 
@@ -25,6 +26,7 @@ import Complexity from 'issue/complexity'
 import Comments from 'issue/comments'
 import ShowContainer from 'components/show-container'
 import ShowBody from 'components/show-body'
+import DueAt from 'issue/due-at'
 
 const router = new Router({
   routes: [

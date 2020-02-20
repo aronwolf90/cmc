@@ -6,7 +6,9 @@ module Api
       attributes(
         :title,
         :description,
-        :complexity
+        :complexity,
+        :due_at,
+        :deadline_at
       )
 
       belongs_to :user, serializer: UserSerializer
@@ -14,6 +16,14 @@ module Api
       has_many :comments, serializer: CommentSerializer
 
       link(:self) { api_v1_issue_path(object) }
+
+      def due_at
+        object.due_at&.strftime("%d-%m-%Y %H:%M")
+      end
+
+      def deadline_at
+        object.deadline_at&.strftime("%d-%m-%Y %H:%M")
+      end
 
       def self.eager_load_options
         %i[user board_list comments]

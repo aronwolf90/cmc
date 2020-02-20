@@ -3,7 +3,13 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::IssueSerializer, type: :serializer do
-  let(:issue) { build_stubbed(:issue) }
+  let(:issue) do
+    build_stubbed(
+      :issue,
+      due_at: '10-10-2020',
+      deadline_at: '10-10-2020'
+    )
+  end
   let(:user) { build_stubbed(:user) }
 
   let(:expected_result) do
@@ -13,7 +19,9 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
       attributes: {
         title: "title",
         description: "description",
-        complexity: nil
+        complexity: nil,
+        "due-at": '10-10-2020 00:00',
+        "deadline-at": '10-10-2020 00:00'
       },
       relationships: {
         user: { data: nil },

@@ -353,7 +353,9 @@ CREATE TABLE issues (
     complexity numeric(4,1),
     board_list_id integer NOT NULL,
     ordinal_number integer DEFAULT 0 NOT NULL,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    due_at timestamp without time zone,
+    deadline_at timestamp without time zone
 );
 
 
@@ -1303,6 +1305,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191224013558'),
 ('20200111154325'),
 ('20200208003227'),
-('20200215184431');
+('20200215184431'),
+('20200219205732');
 
 

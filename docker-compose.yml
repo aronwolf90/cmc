@@ -6,6 +6,8 @@ services:
       - db_volume:/var/lib/postgresql/data
     ports: 
       - 6432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 1s

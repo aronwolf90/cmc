@@ -6,6 +6,8 @@ module Api::V1
     attribute :description
     attribute :complexity
     attribute :ordinal_number
+    attribute :due_at
+    attribute :deadline_at
     belongs_to :user
     belongs_to :board_list
   end
