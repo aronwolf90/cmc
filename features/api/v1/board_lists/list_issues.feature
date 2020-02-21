@@ -18,7 +18,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
           "attributes":{ 
             "title":"Test issue 4",
             "description":"description for the test issue",
-            "complexity":"5.0"
+            "complexity":"5.0",
+            "due-at": null,
+            "deadline-at": null
           },
           "relationships":{ 
             "user":{ 
@@ -52,7 +54,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
           "attributes":{ 
             "title":"Test issue 3",
             "description":"description for the test issue",
-            "complexity":"3.0"
+            "complexity":"3.0",
+            "due-at": null,
+            "deadline-at": null
           },
           "relationships":{ 
             "user":{ 
@@ -86,7 +90,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
           "attributes":{ 
             "title":"Test issue 2",
             "description":"description for the test issue",
-            "complexity":"2.0"
+            "complexity":"2.0",
+            "due-at": null,
+            "deadline-at": null
           },
           "relationships":{ 
             "user":{ 
@@ -123,7 +129,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
           "attributes":{ 
             "title":"Test issue 1",
             "description":"description for the test issue",
-            "complexity":"2.0"
+            "complexity":"2.0",
+            "due-at": "10-10-2020 00:00",
+            "deadline-at": "10-10-2020 00:00"
           },
           "relationships":{ 
             "user":{ 

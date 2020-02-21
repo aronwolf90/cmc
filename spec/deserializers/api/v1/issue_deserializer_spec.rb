@@ -12,8 +12,8 @@ describe Api::V1::IssueDeserializer do
         description: "description",
         complexity: "0.5",
         "ordinal-number": 1,
-        "due-at": '10-10-2020 00:00',
-        "deadline-at": '10-10-2020 00:00'
+        "due-at": "10-10-2020 00:00",
+        "deadline-at": "10-10-2020 00:00"
       },
       relationships: {
         user: { data: { id: 1, type: "users" } },
@@ -29,8 +29,8 @@ describe Api::V1::IssueDeserializer do
       user_id: 1,
       board_list_id: 1,
       ordinal_number: 1,
-      due_at: '10-10-2020 00:00',
-      deadline_at: '10-10-2020 00:00'
+      due_at: "10-10-2020 00:00",
+      deadline_at: "10-10-2020 00:00"
     }
   end
 
