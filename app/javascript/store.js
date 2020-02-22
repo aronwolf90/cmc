@@ -2,6 +2,7 @@ import JsonApi from 'vuex-jsonapi-client'
 
 import recordActions from 'store/models/record_actions'
 import issueActions from 'store/models/issue_actions'
+import issueGetters from 'store/models/issue_getters'
 import commentActions from 'store/models/comment_actions'
 import boardListActions from 'store/models/board_list_actions'
 import boardListGetters from 'store/models/board_list_getters'
@@ -38,6 +39,7 @@ export default {
     ...wikiCategoryGetters,
     ...boardListGetters,
     ...projectGetters,
+    ...issueGetters,
     currentUser (store) {
       let entry = JsonApi.getters.entry(store.json_api)({
         type: 'contexts',

@@ -27,7 +27,7 @@ Scenario: Edit issue
   When I click on link "Test issue 1"
   And I click on ".fa-edit"
   And I replace the text "test" from the markdown editor "form .markdown-editor"
-  And I click on submit
+  And I click on ".show-body [type='submit']"
   Then the element "#side-body" contain the text "test"
 
 @javascript

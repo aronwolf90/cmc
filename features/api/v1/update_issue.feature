@@ -12,11 +12,61 @@ Scenario: Put an valid issue using json in PUT body
       "data": {
         "id": 1,
         "type": "issues",
-        "attributes": { "title": "title" }
+        "attributes": {
+          "title": "title",
+          "due-at": "12-10-2020 00:00",
+          "deadline-at": "12-10-2020 00:00"
+        }
       }
     }
     """
   Then the response status should be "204"
+  When I send a GET request to "/api/v1/issues/1"
+  Then the response status should be "200"
+  And the JSON response should be:
+    """
+    { 
+      "data":{ 
+        "id":"1",
+        "type":"issues",
+        "attributes":{ 
+          "title":"title",
+          "description":"description for the test issue",
+          "complexity":"2.0",
+          "due-at":"12-10-2020 00:00",
+          "deadline-at":"12-10-2020 00:00"
+        },
+        "relationships":{ 
+          "user":{ 
+            "data":{ 
+              "id":"1",
+              "type":"users"
+            }
+          },
+          "board-list":{ 
+            "data":{ 
+              "id":"1",
+              "type":"board-lists"
+            }
+          },
+          "comments":{ 
+            "data":[ 
+    
+            ]
+          }
+        },
+        "links":{ 
+          "self":"/api/v1/issues/1"
+        },
+        "meta":{ 
+          "permissions":{ 
+            "update":true,
+            "destroy":true
+          }
+        }
+      }
+    }
+    """
 
 @javascript
 Scenario: Put an invalid issue using json in PUT body

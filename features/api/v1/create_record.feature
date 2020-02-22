@@ -3,13 +3,6 @@ Feature: API: create an record
 @javascript
 Scenario: Post an valid record using json in POST body
   Given a test-organization exists and is loaded
-  And a project exists with an id of "1"
-  And the following board list exist:
-   | id | project_id |
-   | 1  | 1          |
-  And the following issue exist:
-   | id | board_list_id |
-   | 1  | 1             |
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

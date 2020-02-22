@@ -8,6 +8,8 @@
     right-aside
       assigen(:issue-id='issueId')
       complexity(:issue-id='issueId')
+      due-at(:issue-id='issueId')
+      deadline-at(:issue-id='issueId')
 
 </template>
 
@@ -25,6 +27,8 @@ import Complexity from 'issue/complexity'
 import Comments from 'issue/comments'
 import ShowContainer from 'components/show-container'
 import ShowBody from 'components/show-body'
+import DueAt from 'issue/due-at'
+import DeadlineAt from 'issue/deadline-at'
 
 const router = new Router({
   routes: [
@@ -53,7 +57,9 @@ export default {
     'complexity': Complexity,
     RightAside,
     ShowContainer,
-    ShowBody
+    ShowBody,
+    DueAt,
+    DeadlineAt
   },
   created () {
     this.$store.dispatch('initIssue', this.issueId)

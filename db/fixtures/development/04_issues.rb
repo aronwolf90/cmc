@@ -8,6 +8,8 @@ Issue.seed do |s|
   s.title          = "Test issue 1"
   s.description    = "description for the test issue"
   s.ordinal_number = 3
+  s.due_at         = "10-10-2020 00:00"
+  s.deadline_at    = "10-10-2020 00:00"
 end
 
 Issue.seed do |s|
