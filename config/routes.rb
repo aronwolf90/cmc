@@ -1,7 +1,21 @@
 # frozen_string_literal: true
 
+require "sidekiq/web"
+require "sidekiq/cron/web"
+
 Rails.application.routes.draw do
   root to: redirect("/users/sign_in")
+
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    ActiveSupport::SecurityUtils.secure_compare(
+      ::Digest::SHA256.hexdigest(username),
+      ::Digest::SHA256.hexdigest("admin")
+    ) & ActiveSupport::SecurityUtils.secure_compare(
+      ::Digest::SHA256.hexdigest(password),
+      ::Digest::SHA256.hexdigest(Settings.admin_password)
+    )
+  end
+  mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users, controllers: { sessions: "sessions" }
 

@@ -33,5 +33,7 @@ module CMC
     config.action_mailer.default_url_options = {
       host: lambda { ApplicationHelper.organization_url }
     }
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

@@ -1,7 +1,7 @@
 multi_tenant: <%= ENV["MULTI_TENANT"] || true%>
 host: <%= ENV["HOST"] || "lvh.me:3000" %>
 admin_password: <%= ENV["ADMIN_PASSWORD"] %>
-test_host: <%= ENV["TEST_HOST"] || (ENV["DOCKER"] && "#{`bin/get_ip.sh`.tr("\n","")}.xip.io") || "localhost" %> 
+test_host: <%= ENV["TEST_HOST"] || "localhost" %> 
 test_port: <%= ENV["TEST_PORT"] || "3001" %>
 stripe_public_key: pk_test_jnjnLmEpUo9tbTIEjKKGPr62007x2iQKkM
 payment:
@@ -10,3 +10,4 @@ payment:
   headers:
     "Authorization": Basic YWRtaW46dGVzdHRlc3Q=
     "Content-Type": application/json
+redis_url: <%= ENV["REDIS_URL"]  %>

@@ -2,13 +2,13 @@
 
 module ApplicationHelper
   module AssideHelper
-    def asside_item(name, path:, policy:)
+    def asside_item(name, path:, policy:, **args)
       return unless policy
 
       clazz = "active" if request.url.ends_with?(url_for(path))
 
       content_tag(:li, class: clazz) do
-        link_to path do
+        link_to path, **args do
           name.to_s.camelize
         end
       end

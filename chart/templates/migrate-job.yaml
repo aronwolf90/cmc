@@ -18,7 +18,6 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh","-c"]
           args: ["rake db:migrate && echo 'migrated successfully'"]
-          imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
               value: 'postgres://{{ .Values.postgresql.postgresqlUser }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
