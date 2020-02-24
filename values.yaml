@@ -2,6 +2,8 @@ multiTenant: true
 installJobDelay: 60
 url: ticktensio.com
 deprecatedUrl: cost-manager.com
+postgresql:
+  postgresqlUsername: root
 ingress:
   enabled: true
   annotations:

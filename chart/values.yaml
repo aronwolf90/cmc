@@ -8,9 +8,14 @@ webDeployment:
   sentryDsn:
   enviroment: production
 postgresql:
-  postgresqlUsername: root
+  postgresqlUsername: postgres
   postgresqlDatabase: database
   postgresqlPassword: repl_password
+redis:
+  usePassword: false
+  cluster:
+    enabled: false
+
 installJobDelay: 5
 databasePersistence:
   storageClassName:
@@ -43,3 +48,6 @@ mailer:
   domain: 
   user_name:
   password:
+payment:
+  enabled: false
+  host: https://example.com

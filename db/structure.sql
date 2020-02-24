@@ -390,7 +390,9 @@ CREATE TABLE notifications (
     readed boolean DEFAULT false NOT NULL,
     user_id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    issue_id bigint,
+    kind integer
 );
 
 
@@ -1087,6 +1089,13 @@ CREATE INDEX index_issues_on_user_id ON issues USING btree (user_id);
 
 
 --
+-- Name: index_notifications_on_issue_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_notifications_on_issue_id ON notifications USING btree (issue_id);
+
+
+--
 -- Name: index_notifications_on_user_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
@@ -1306,6 +1315,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200111154325'),
 ('20200208003227'),
 ('20200215184431'),
-('20200219205732');
+('20200219205732'),
+('20200222230939'),
+('20200223005816');
 
 
