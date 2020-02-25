@@ -9,7 +9,9 @@ RSpec.describe OrganizationSpecificTriggerJob, type: :model do
   let(:job) { CreateNotificationsJob }
 
   it "calls Jobs::CreateNotificationsOperation" do
-    expect(job).to receive(:perform_later).with(organization: organization)
+    expect(job)
+      .to receive(:perform_later)
+      .with(organization_id: organization.id)
 
     subject
   end
