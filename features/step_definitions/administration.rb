@@ -84,10 +84,6 @@ When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
   find("body").click
 end
 
-When(/^wait$/) do
-  debugger
-end
-
 When(/^I check the input named "([^\"]*)"$/) do |name|
   find(:css, "input[name='#{name}']").set(true)
   sleep 0.2
@@ -151,6 +147,18 @@ When(/^I drag "([^\"]*)" to "([^\"]*)"$/) do |from, to|
   source_node = page.find(from)
   target_node = page.find(to)
   source_node.drag_to(target_node)
+end
+
+When(/^I set due at to one hour from now$/) do
+  fill_in(
+    "due-at",
+    with: 1.hour.from_now.strftime("%d-%m-%Y %H:%M"),
+    match: :prefer_exact
+  )
+end
+
+When(/^I sleep "2" seconds/) do
+  sleep 2
 end
 
 Then(/^the page contain the text "([^\"]*)"$/) do |text|
