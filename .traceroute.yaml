@@ -13,3 +13,4 @@ ignore_unreachable_actions:
 ignore_unused_routes:
 - ^devise
 - user_tokens
+- /sidekiq

@@ -18,10 +18,9 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh","-c"]
           args: ["rake db:migrate && echo 'migrated successfully'"]
-          imagePullPolicy: "Always"
           env:
             - name: DATABASE_URL
-              value: 'postgres://{{ .Values.postgresql.postgresqlUser }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
+              value: 'postgres://{{ .Values.postgresql.postgresqlUsername }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
             - name: SECRET_KEY_BASE
               value: '{{ .Values.webDeployment.secretKeyBase }}'
             - name: RAILS_ENV
@@ -30,3 +29,5 @@ spec:
               value: '{{ .Values.multiTenant }}'
             - name: SENTRY_DSN
               value: '{{ .Values.webDeployment.sentryDsn }}'
+            - name: RAILS_LOG_TO_STDOUT
+              value: 'true'

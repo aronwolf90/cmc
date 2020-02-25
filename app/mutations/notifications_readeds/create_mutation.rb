@@ -16,7 +16,7 @@ module NotificationsReadeds
             ":readed_at IS NULL OR created_at <= :readed_at",
             readed_at: readed_at&.to_date
           )
-          .update_all(readed: false, readed: true, updated_at: Time.zone.now)
+          .update_all(readed: true, updated_at: Time.zone.now)
       end
     end
   end

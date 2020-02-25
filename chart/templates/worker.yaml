@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-web
+  name: {{ .Release.Name }}-worker
   labels:
-    name: {{ .Release.Name }}-web
+    name: {{ .Release.Name }}-worker
 spec:
   replicas: 1
   strategy:
@@ -19,6 +19,8 @@ spec:
       containers:
         - name: web
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          command: ["/bin/sh","-c"]
+          args: ["bundle exec sidekiq"]
           ports:
             - containerPort: 3000
           env:
@@ -66,46 +68,3 @@ spec:
               value: 'redis://{{ .Release.Name }}-redis-master'
             - name: RAILS_LOG_TO_STDOUT
               value: 'true'
-              
-          volumeMounts:
-            {{- if .Values.webPersistence.enabled }}
-            - name: files
-              mountPath: /app/uploads
-            {{- end }}
-            - mountPath: /assets
-              name: assets
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - sh
-                  - -c
-                  - "cp -r /app/public/* /assets"
-
-        - image: nginx:1.14-alpine
-          name: nginx
-          ports:
-            - containerPort: 80
-          volumeMounts:
-            - mountPath: /assets
-              name: assets
-              readOnly: true
-            - mountPath: /etc/nginx/nginx.conf
-              name: nginx-conf
-              subPath: nginx.conf
-              readOnly: true
-
-      volumes:
-        {{- if .Values.webPersistence.enabled }}
-        - name: files
-          persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-web-pvc
-        {{- end }}
-        - name: nginx-conf
-          configMap:
-            name: {{ .Release.Name }}-nginx-conf
-            items:
-              - key: nginx.conf
-                path: nginx.conf
-        - name: assets
-          emptyDir: {}

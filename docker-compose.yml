@@ -45,6 +45,9 @@ services:
     volumes:
       - storage_volume:/data
 
+  redis:
+    image: redis
+
   webpack:
     image: registry.gitlab.com/cmc_system/cmc:$TAG
     command: bash -c "bin/install.sh; bin/webpack-dev-server"
@@ -56,6 +59,30 @@ services:
       - .:/app
       - bundle:/usr/local/bundle
 
+  worker:
+    image: registry.gitlab.com/cmc_system/cmc:$TAG
+    build: .
+    stdin_open: true
+    tty: true
+    environment:
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - BUNDLE_BIN=false
+      - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
+      - AWS_KEY=access_key
+      - AWS_SECRET=secret_key
+      - AWS_ENDPOINT=http://storage.lvh.me:9000
+      - REDIS_URL=redis://redis
+    command:  /bin/sh -c "bundle exec sidekiq"
+    volumes:
+      - .:/app:cached
+      - bundle:/usr/local/bundle:cached
+    depends_on:
+      - db
+      - selenium
+      - storage
+      - payment
+      - redis
   app:
     image: registry.gitlab.com/cmc_system/cmc:$TAG
     build: .
@@ -80,6 +107,7 @@ services:
       - AWS_ENDPOINT=http://storage.lvh.me:9000
       - CAPYBARA_RUN_SERVER=false
       - TEST_HOST=lvh.me
+      - REDIS_URL=redis://redis
     command:  /bin/sh -c "bin/install.sh; rm -r tmp/pids; rails s -b '0.0.0.0'"
     ports:
       - "3000:3000"
@@ -91,6 +119,8 @@ services:
       - selenium
       - storage
       - payment
+      - redis
+      - worker
 
   selenium:
     image: selenium/standalone-chrome-debug:$TAG

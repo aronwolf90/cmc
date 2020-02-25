@@ -34,6 +34,8 @@ gem "pundit"
 gem "rein"
 gem "rest-client"
 gem "seed-fu"
+gem "sidekiq"
+gem "sidekiq-cron"
 gem "uglifier"
 gem "webpacker"
 
