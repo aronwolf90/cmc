@@ -12,17 +12,12 @@ spec:
       maxSurge: 2
       maxUnavailable: 1
   template:
-    metadata:
-      labels:
-        app: {{ .Release.Name }}-web
     spec:
       containers:
         - name: web
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh","-c"]
           args: ["bundle exec sidekiq"]
-          ports:
-            - containerPort: 3000
           env:
             - name: DATABASE_URL
               value: 'postgres://{{ .Values.postgresql.postgresqlUsername }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
