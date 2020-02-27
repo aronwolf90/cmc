@@ -6,8 +6,15 @@ module Api::V1
     skip_before_action :verify_authenticity_token
     serializer OrganizationSerializer
     namespace TestOrganizations
+    destroy_operation Api::V1::TestOrganizations::DestroyOperation
 
     public :create
+
+    def destroy
+      destroy_operation.call
+
+      head :ok
+    end
 
     private
       def authenticate!; end

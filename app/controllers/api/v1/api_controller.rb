@@ -16,7 +16,9 @@ module Api
         :per_page,
         :serializer,
         :collection_query,
-        :operation
+        :operation,
+        :create_operation,
+        :destroy_operation
       )
 
       private
@@ -43,6 +45,14 @@ module Api
 
         def self.operation(value, **args)
           before_action -> { @operation ||= value  }, **args
+        end
+
+        def self.create_operation(value, **args)
+          before_action -> { @create_operation ||= value  }, **args
+        end
+
+        def self.destroy_operation(value, **args)
+          before_action -> { @destroy_operation ||= value  }, **args
         end
 
         def serializer

@@ -19,6 +19,10 @@ Given(/^a test-organization exists$/) do
   )
 end
 
+Given(/^no "test-organization" exists$/) do
+  RestClient.delete("#{Capybara.app_host}/api/v1/test_organizations")
+end
+
 Given(/^a premium test-organization exists$/) do
   visit("/")
   allow(Settings).to receive(:multi_tenant).and_return(true)

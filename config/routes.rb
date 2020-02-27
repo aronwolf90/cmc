@@ -121,7 +121,7 @@ Rails.application.routes.draw do
       resource :subscription, only: :show
       resources :notifications, only: :index
       resource :notifications_readed, only: :create
-      resources :test_organizations, only: :create
+      resource :test_organizations, only: %i[create destroy]
     end
   end
 end
