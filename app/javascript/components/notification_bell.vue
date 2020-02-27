@@ -13,8 +13,13 @@
           v-if="unreadCount || unreadCount != 0"
         ) {{ unreadCount }}
     </template>
-    b-card.bell-item.accordion(no-body="", v-if="notifications")
-      div(v-for="notification in notifications", :key="notification.if")
+    b-card.bell-item.accordion(no-body="", v-if="notifications == null")
+      b-card-header.text-center
+        .fa.fa-spinner.fa-spin.text-dark
+    b-card.bell-item.accordion(no-body="", v-else-if="notifications.length == 0")
+      b-card-header.text-center There are no notifications yet
+    b-card.bell-item.accordion(no-body="", v-else="")
+      div(v-for="notification in notifications", :key="notification.id")
         b-card-header(
           :aria-controls="`notification-${notification.id}`",
           data-toggle="collapse",
