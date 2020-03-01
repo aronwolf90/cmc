@@ -82,6 +82,7 @@ group :development, :test do
   gem "bullet"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
+  gem "hashdiff"
   gem "rails-controller-testing"
   gem "rspec-rails"
 

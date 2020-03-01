@@ -45,7 +45,7 @@ Scenario: Put an valid issue using json in PUT body
           },
           "board-list":{ 
             "data":{ 
-              "id":"1",
+              "id":"4",
               "type":"board-lists"
             }
           },

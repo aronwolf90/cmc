@@ -12,7 +12,12 @@ if Apartment::Tenant.current == "public" && Organization.none?
 end
 
 if !Settings.multi_tenant || Apartment::Tenant.current != "public"
+  shared_path = Rails.root.join("db", "fixtures", "shared", "*.rb")
   path = Rails.root.join("db", "fixtures", ENV["SEEDS_FOLDER"] || Rails.env, "*.rb")
+
+  Dir[shared_path].sort.each do |file|
+    load file
+  end
 
   Dir[path].sort.each do |file|
     load file

@@ -5,6 +5,7 @@ class Issue < ApplicationRecord
 
   belongs_to :user
   belongs_to :board_list
+  belongs_to :global_board_list, class_name: "BoardList"
 
   has_one :project, through: :board_list
 

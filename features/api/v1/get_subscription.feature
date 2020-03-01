@@ -17,6 +17,12 @@ Scenario: Get
         "attributes": { 
           "iban-last4": "4242",
           "premia": 0
+        },
+        "meta": {
+          "permissions": {
+            "update": true,
+            "destroy": true
+          }
         }
       }
     }

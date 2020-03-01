@@ -86,7 +86,7 @@ Then(/^the JSON response should be:$/) do |json|
   expected = JSON.parse(json)
   actual = JSON.parse(@response.body)
 
-  expect(actual).to eq(expected)
+  expect(Hashdiff.diff(actual, expected)).to be_empty
 end
 
 Given(/^(?:|I )send a multipart (POST|PUT) request (?:for|to) "([^"]*)" with:/) do |method, path, body|

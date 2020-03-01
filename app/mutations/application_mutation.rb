@@ -9,7 +9,7 @@ class ApplicationMutation
   end
 
   def initialize(model:, user: nil, **attributes)
-    @attributes = attributes.except(:current_user)
+    @attributes = attributes.except(:current_user).with_indifferent_access
     @user = user
     @model = model
   end

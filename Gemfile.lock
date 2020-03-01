@@ -235,6 +235,7 @@ GEM
       rspec (>= 2.99.0, < 4.0)
     hash_mapper (0.2.3)
       activesupport (>= 4)
+    hashdiff (1.0.1)
     hirb (0.7.3)
     holidays (8.1.0)
     http-accept (1.7.0)
@@ -574,6 +575,7 @@ DEPENDENCIES
   font-awesome-rails
   guard-rspec
   hash_mapper
+  hashdiff
   holidays
   jquery-rails
   jsonpath

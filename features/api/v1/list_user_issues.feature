@@ -31,6 +31,12 @@ Scenario: Get
                 "type":"issues"
               }
             }
+          },
+          "meta": {
+            "permissions": {
+              "update":true,
+              "destroy":true
+            }
           }
         },
         { 
@@ -52,6 +58,12 @@ Scenario: Get
                 "id":"7",
                 "type":"issues"
               }
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update":true,
+              "destroy":true
             }
           }
         },
@@ -75,6 +87,12 @@ Scenario: Get
                 "type":"issues"
               }
             }
+          },
+          "meta": {
+            "permissions": {
+              "update":true,
+              "destroy":true
+            }
           }
         },
         { 
@@ -97,6 +115,12 @@ Scenario: Get
                 "type":"issues"
               }
             }
+          },
+          "meta": {
+            "permissions": {
+              "update":true,
+              "destroy":true
+            }
           }
         },
         { 
@@ -118,6 +142,12 @@ Scenario: Get
                 "id":"8",
                 "type":"issues"
               }
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update":true,
+              "destroy":true
             }
           }
         }

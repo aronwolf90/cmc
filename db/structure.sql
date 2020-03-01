@@ -14,6 +14,17 @@ SET row_security = off;
 
 
 
+--
+-- Name: board_list_kind_enum; Type: TYPE; Schema: test-organization; Owner: -
+--
+
+CREATE TYPE board_list_kind_enum AS ENUM (
+    'open',
+    'other',
+    'closed'
+);
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -76,8 +87,9 @@ CREATE TABLE board_lists (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     ordinal_number integer,
-    project_id bigint NOT NULL,
-    deleted_at timestamp without time zone
+    project_id bigint,
+    deleted_at timestamp without time zone,
+    kind board_list_kind_enum
 );
 
 
@@ -355,7 +367,9 @@ CREATE TABLE issues (
     ordinal_number integer DEFAULT 0 NOT NULL,
     deleted_at timestamp without time zone,
     due_at timestamp without time zone,
-    deadline_at timestamp without time zone
+    deadline_at timestamp without time zone,
+    global_board_list_id bigint,
+    global_ordinal_number integer
 );
 
 
@@ -1082,6 +1096,13 @@ CREATE INDEX index_issues_on_deleted_at ON issues USING btree (deleted_at);
 
 
 --
+-- Name: index_issues_on_global_board_list_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_issues_on_global_board_list_id ON issues USING btree (global_board_list_id);
+
+
+--
 -- Name: index_issues_on_user_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
@@ -1239,6 +1260,14 @@ ALTER TABLE ONLY documents
 
 
 --
+-- Name: issues fk_rails_5402f866fb; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY issues
+    ADD CONSTRAINT fk_rails_5402f866fb FOREIGN KEY (global_board_list_id) REFERENCES board_lists(id);
+
+
+--
 -- Name: records fk_rails_6f771fa596; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
 --
 
@@ -1317,6 +1346,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200215184431'),
 ('20200219205732'),
 ('20200222230939'),
-('20200223005816');
+('20200223005816'),
+('20200227231724'),
+('20200228030909'),
+('20200228190735'),
+('20200228195539');
 
 

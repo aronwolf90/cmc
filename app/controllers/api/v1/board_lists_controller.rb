@@ -7,8 +7,17 @@ module Api
       namespace BoardLists
       model_class BoardList
       serializer BoardListSerializer
+      collection_query Api::V1::BoardLists::IndexQuery
 
-      public :index, :show, :update, :destroy
+      public :show, :update, :destroy
+
+      def index
+        collection = collection_query.(
+          project_id: params.dig(:filter, :project_id)
+        )
+
+        render_json_api json: collection
+      end
     end
   end
 end

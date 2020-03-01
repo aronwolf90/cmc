@@ -6,7 +6,7 @@ Scenario: GET /api/v1/board_lists/<id>/issues
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
-  When I send a GET request to "/api/v1/board_lists/1/issues"
+  When I send a GET request to "/api/v1/board_lists/4/issues"
   Then the response status should be "200"
   And the JSON response should be:
     """
@@ -28,7 +28,7 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             },
             "board-list":{ 
               "data":{ 
-                "id":"1",
+                "id":"4",
                 "type":"board-lists"
               }
             },
@@ -64,7 +64,7 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             },
             "board-list":{ 
               "data":{ 
-                "id":"1",
+                "id":"4",
                 "type":"board-lists"
               }
             },
@@ -103,7 +103,7 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             },
             "board-list":{ 
               "data":{ 
-                "id":"1",
+                "id":"4",
                 "type":"board-lists"
               }
             },
@@ -142,7 +142,7 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             },
             "board-list":{ 
               "data":{ 
-                "id":"1",
+                "id":"4",
                 "type":"board-lists"
               }
             },

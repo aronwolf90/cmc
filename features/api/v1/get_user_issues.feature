@@ -19,6 +19,12 @@ Scenario: Get
         "relationships": {
           "user": { "data": { "id": "1", "type": "users" } },
           "issue": { "data": { "id": "1", "type": "issues"  } }
+        },
+        "meta": {
+          "permissions": {
+            "update": true,
+            "destroy": true
+          }
         }
       }
     }

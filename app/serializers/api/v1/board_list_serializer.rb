@@ -5,7 +5,7 @@ module Api
     class BoardListSerializer < ApplicationSerializer
       include Rails.application.routes.url_helpers
 
-      attributes :name
+      attributes :name, :kind
 
       has_many :issues, serializer: IssueSerializer do
         link(:self) { api_v1_board_list_issues_path(object) }

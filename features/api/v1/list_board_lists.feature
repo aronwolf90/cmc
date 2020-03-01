@@ -12,10 +12,11 @@ Scenario: Get
     { 
       "data":[ 
         { 
-          "id":"1",
+          "id":"4",
           "type":"board-lists",
           "attributes":{ 
-            "name":"Backlog"
+            "name":"Backlog",
+            "kind":"open"
           },
           "relationships":{ 
             "issues":{ 
@@ -38,7 +39,7 @@ Scenario: Get
                 }
               ],
               "links":{ 
-                "self":"/api/v1/board_lists/1/issues"
+                "self":"/api/v1/board_lists/4/issues"
               }
             },
             "project":{ 
@@ -49,20 +50,21 @@ Scenario: Get
             }
           },
           "links":{ 
-            "self":"/api/v1/board_lists/1"
+            "self":"/api/v1/board_lists/4"
           },
           "meta":{ 
             "permissions":{ 
               "update":true,
-              "destroy":true
+              "destroy":false
             }
           }
         },
         { 
-          "id":"2",
+          "id":"5",
           "type":"board-lists",
           "attributes":{ 
-            "name":"In development"
+            "name":"In development",
+            "kind":"other"
           },
           "relationships":{ 
             "issues":{ 
@@ -81,7 +83,7 @@ Scenario: Get
                 }
               ],
               "links":{ 
-                "self":"/api/v1/board_lists/2/issues"
+                "self":"/api/v1/board_lists/5/issues"
               }
             },
             "project":{ 
@@ -92,7 +94,7 @@ Scenario: Get
             }
           },
           "links":{ 
-            "self":"/api/v1/board_lists/2"
+            "self":"/api/v1/board_lists/5"
           },
           "meta":{ 
             "permissions":{ 
@@ -102,10 +104,11 @@ Scenario: Get
           }
         },
         { 
-          "id":"3",
+          "id":"6",
           "type":"board-lists",
           "attributes":{ 
-            "name":"Closed"
+            "name":"Closed",
+            "kind":"closed"
           },
           "relationships":{ 
             "issues":{ 
@@ -128,7 +131,7 @@ Scenario: Get
                 }
               ],
               "links":{ 
-                "self":"/api/v1/board_lists/3/issues"
+                "self":"/api/v1/board_lists/6/issues"
               }
             },
             "project":{ 
@@ -139,20 +142,21 @@ Scenario: Get
             }
           },
           "links":{ 
-            "self":"/api/v1/board_lists/3"
+            "self":"/api/v1/board_lists/6"
           },
           "meta":{ 
             "permissions":{ 
               "update":true,
-              "destroy":true
+              "destroy":false
             }
           }
         },
         { 
-          "id":"4",
+          "id":"7",
           "type":"board-lists",
           "attributes":{ 
-            "name":"Test project 2 open"
+            "name":"Test project 2 open",
+            "kind":"open"
           },
           "relationships":{ 
             "issues":{ 
@@ -160,7 +164,7 @@ Scenario: Get
     
               ],
               "links":{ 
-                "self":"/api/v1/board_lists/4/issues"
+                "self":"/api/v1/board_lists/7/issues"
               }
             },
             "project":{ 
@@ -171,7 +175,40 @@ Scenario: Get
             }
           },
           "links":{ 
-            "self":"/api/v1/board_lists/4"
+            "self":"/api/v1/board_lists/7"
+          },
+          "meta":{ 
+            "permissions":{ 
+              "update":true,
+              "destroy":false
+            }
+          }
+        },
+        { 
+          "id":"8",
+          "type":"board-lists",
+          "attributes":{ 
+            "name":"In development",
+            "kind":"other"
+          },
+          "relationships":{ 
+            "issues":{ 
+              "data":[ 
+    
+              ],
+              "links":{ 
+                "self":"/api/v1/board_lists/8/issues"
+              }
+            },
+            "project":{ 
+              "data":{ 
+                "id":"2",
+                "type":"projects"
+              }
+            }
+          },
+          "links":{ 
+            "self":"/api/v1/board_lists/8"
           },
           "meta":{ 
             "permissions":{ 
@@ -179,10 +216,43 @@ Scenario: Get
               "destroy":true
             }
           }
+        },
+        { 
+          "id":"9",
+          "type":"board-lists",
+          "attributes":{ 
+            "name":"Closed",
+            "kind":"closed"
+          },
+          "relationships":{ 
+            "issues":{ 
+              "data":[ 
+    
+              ],
+              "links":{ 
+                "self":"/api/v1/board_lists/9/issues"
+              }
+            },
+            "project":{ 
+              "data":{ 
+                "id":"2",
+                "type":"projects"
+              }
+            }
+          },
+          "links":{ 
+            "self":"/api/v1/board_lists/9"
+          },
+          "meta":{ 
+            "permissions":{ 
+              "update":true,
+              "destroy":false
+            }
+          }
         }
       ],
-      "links":{ 
-        "self":"/api/v1/board_lists"
+      "links": {
+        "self": "/api/v1/board_lists"
       }
     }
     """

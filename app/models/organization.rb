@@ -17,6 +17,10 @@ class Organization < ApplicationRecord
     def premium?
       !Settings.multi_tenant || current.premium?
     end
+
+    def global_board?
+      false
+    end
   end
 
   alias_attribute :to_s, :name

@@ -154,6 +154,7 @@ When(/^I drag "([^\"]*)" to "([^\"]*)"$/) do |from, to|
 end
 
 When(/^I set due at to one hour from now$/) do
+  sleep 0.5
   fill_in(
     "due-at",
     with: 1.hour.from_now.strftime("%d-%m-%Y %H:%M"),

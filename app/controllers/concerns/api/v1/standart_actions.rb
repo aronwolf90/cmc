@@ -7,12 +7,20 @@ module Api
 
       protected
         def index
+          authorize model_class, :index? if model_class.present?
+
           render_json_api json: query
+        rescue Pundit::NotAuthorizedError
+          head :forbidden
         end
 
         def show
+          authorize model, :show? if model.present?
+
           return head :ok if model.nil? # TODO: change this with a 404 error
           render_json_api json: model, links: false
+        rescue Pundit::NotAuthorizedError
+          head :forbidden
         end
 
         def create
@@ -36,9 +44,13 @@ module Api
         end
 
         def destroy
+          authorize model, :destroy? if model.present?
+
           model.destroy!
 
           head :ok
+        rescue Pundit::NotAuthorizedError
+          head :forbidden
         end
 
         def render_json_api(json:, links: true)
@@ -68,7 +80,7 @@ module Api
         end
 
         def id
-          if params[:id].include? ","
+          if params[:id]&.include? ","
             params[:id].split(",")
           else
             params[:id]

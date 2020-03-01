@@ -59,5 +59,29 @@ describe BoardListPolicy do
     it "denies access to the customers" do
       is_expected.not_to permit(Customer.new, BoardList.new)
     end
+
+    it "denies access to the admin when kind==open" do
+      is_expected.not_to permit(Admin.new, BoardList.new(kind: "open"))
+    end
+
+    it "denies access to the the employee when kind==open" do
+      is_expected.not_to permit(Employee.new, BoardList.new(kind: "open"))
+    end
+
+    it "denies access to the the employee when kind==open" do
+      is_expected.not_to permit(Customer.new, BoardList.new(kind: "open"))
+    end
+
+    it "denies access to the admin when kind==closed" do
+      is_expected.not_to permit(Admin.new, BoardList.new(kind: "closed"))
+    end
+
+    it "denies access to the the employee when kind==closed" do
+      is_expected.not_to permit(Employee.new, BoardList.new(kind: "closed"))
+    end
+
+    it "denies access to the the employee when kind==closed" do
+      is_expected.not_to permit(Customer.new, BoardList.new(kind: "closed"))
+    end
   end
 end

@@ -5,7 +5,9 @@ require "rails_helper"
 RSpec.describe Api::V1::BoardListSerializer, type: :serializer do
   let(:issue) { create(:issue, id: 1) }
   let(:project) { create(:project) }
-  let(:board_list) { create(:board_list, issues: [issue], project: project, id: 1) }
+  let(:board_list) do
+    create(:board_list, issues: [issue], project: project, id: 1, kind: "other")
+  end
 
   let(:expected_result) do
     {
@@ -13,7 +15,8 @@ RSpec.describe Api::V1::BoardListSerializer, type: :serializer do
         id: board_list.id.to_s,
         type: "board-lists",
         attributes: {
-          name: "name"
+          name: "name",
+          kind: "other"
         },
         relationships: {
           issues: {
