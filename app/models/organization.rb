@@ -19,7 +19,7 @@ class Organization < ApplicationRecord
     end
 
     def global_board?
-      false
+      current&.global_board? || false
     end
   end
 

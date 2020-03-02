@@ -22,7 +22,7 @@ RSpec.describe JsonApiQuery   do
       board_lists = subject
       board_lists[0].issues.size
       board_lists[1].issues.size
-    end.to make_database_queries(count: 2)
+    end.to make_database_queries(count: 4)
   end
 
   context "query present in the params" do

@@ -9,7 +9,8 @@ module TestOrganizations
       mutation(Organization, :create).call(
         model: model,
         name: "test-organization",
-        time_zone: "Berlin"
+        time_zone: "Berlin",
+        global_board: attributes[:global_board] || false
       )
       model.update!(id: 1)
       model.update!(subscription_id: attributes[:premium] || nil) if attributes[:premium].present?

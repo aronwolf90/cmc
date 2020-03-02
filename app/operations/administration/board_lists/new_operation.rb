@@ -8,6 +8,8 @@ module Administration
       step :assign_project_id
 
       def assign_project_id(options, current_user:, **)
+        return if Organization.global_board?
+
         options[:model].project_id = current_user.selected_project_id
       end
     end

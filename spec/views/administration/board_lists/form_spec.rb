@@ -34,7 +34,9 @@ RSpec.describe "administration/board_lists/form" do
 
     context "with issues" do
       let(:board_list) do
-        build_stubbed(:board_list, project: project, issues: [Issue.new])
+        build_stubbed(:board_list, project: project).tap do |board_list|
+          allow(board_list).to receive(:issues).and_return([Issue.new])
+        end
       end
 
       it { is_expected.to have_css(".disabled") }

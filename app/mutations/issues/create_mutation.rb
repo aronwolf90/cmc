@@ -5,7 +5,7 @@ module Issues
     attr_reader :project_id, :indicated_board_list
 
     def call
-      @project_id = attributes.delete(:project_id)
+      @project_id = attributes.delete(:project_id) || user.selected_project_id
       @indicated_board_list = model.board_list
 
       ActiveRecord::Base.transaction do
