@@ -1,6 +1,10 @@
 class DataAddGlobalBoardLists < ActiveRecord::Migration[5.1]
   def data
     return if BoardList.where(project_id: nil).present?
+    
+    BoardList.where(name: %w[Open Backlog open backlog], kind: nil).update_all(kind: :open)
+    BoardList.where(name: %w[Closed closed], kind: nil).update_all(kind: :closed)
+    BoardList.where(kind: nil).update_all(kind: :other)
 
     open_board_list = BoardList.create!(
       name: "Open",
