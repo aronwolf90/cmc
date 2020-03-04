@@ -1,8 +1,13 @@
 const endpoint = '/api/v1'
 
 export default {
-  getContext (context) {
-    return context.dispatch('get', { endpoint, resource: 'context' })
+  updateContext (context, { entry, attributes }) {
+    return context.dispatch('update', {
+      endpoint,
+      resource: 'context',
+      entry: entry,
+      payload: { attributes }
+    })
   },
   updateUserConfiguration (context, { user, payload }) {
     return context.dispatch('update', {

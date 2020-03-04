@@ -3,7 +3,7 @@
 module Administration
   module Admin
     class PaymentsController < AdministrationController
-      side_menu "administration/organization"
+      side_menu "administration/admin"
       namespace Administration::Admin::Payments
 
       def index

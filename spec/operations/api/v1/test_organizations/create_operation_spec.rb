@@ -13,7 +13,7 @@ RSpec.describe Api::V1::TestOrganizations::CreateOperation do
   let(:current_user) { Admin.new }
 
   before do
-    allow(Api::V1::OrganizationDeserializer)
+    allow(Api::V1::TestOrganizationDeserializer)
       .to receive(:normalize)
       .and_return({})
 

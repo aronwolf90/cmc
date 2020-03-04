@@ -26,6 +26,8 @@ import invoiceActions from 'store/models/invoice_actions'
 import subscriptionActions from 'store/models/subscription_actions'
 import Board from 'store/modules/board'
 import notificationActions from 'store/models/notification_actions'
+import contextGetters from 'store/models/context_getters'
+import contextActions from 'store/models/context_actions'
 
 export default {
   strict: true,
@@ -40,6 +42,7 @@ export default {
     ...boardListGetters,
     ...projectGetters,
     ...issueGetters,
+    ...contextGetters,
     currentUser (store) {
       let entry = JsonApi.getters.entry(store.json_api)({
         type: 'contexts',
@@ -107,6 +110,7 @@ export default {
     ...invoiceActions,
     ...subscriptionActions,
     ...notificationActions,
+    ...contextActions,
 
     initCurrentUser (context) {
       return context.dispatch('getContext').then(response => {

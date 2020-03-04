@@ -5,7 +5,7 @@ module Api::V1
     class CreateOperation < ApiOperation
       success Model(Organization, :new)
       step ValidateStep.new(form: Api::V1::Organizations::CreateForm)
-      success DeserializeStep.new(deserializer: Api::V1::OrganizationDeserializer)
+      success DeserializeStep.new(deserializer: Api::V1::TestOrganizationDeserializer)
       success :mutation
 
     private

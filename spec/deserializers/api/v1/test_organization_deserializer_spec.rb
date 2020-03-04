@@ -2,12 +2,13 @@
 
 require "rails_helper"
 
-describe Api::V1::OrganizationDeserializer do
+describe Api::V1::TestOrganizationDeserializer do
   subject { described_class.normalize(params) }
 
   let(:params) do
     {
       attributes: {
+        premium: true,
         "time-zone": "Madrid",
         "global-board": true
       }
@@ -15,6 +16,7 @@ describe Api::V1::OrganizationDeserializer do
   end
   let(:result) do
     {
+      premium: true,
       time_zone: "Madrid",
       global_board: true
     }

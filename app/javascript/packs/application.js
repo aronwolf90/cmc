@@ -26,6 +26,7 @@ import AdminPayment from '../admin/payments/index.vue'
 import UserNew from '../users/new'
 import UserConfigurationEdit from '../users/configuration/edit.vue'
 import NotificationBell from '../components/notification_bell'
+import ContextEdit from '../admin/context/edit'
 
 require('../config')
 
@@ -53,6 +54,7 @@ Vue.component('payment', AdminPayment)
 Vue.component('user-new', UserNew)
 Vue.component('user-configuration-edit', UserConfigurationEdit)
 Vue.component('notification-bell', NotificationBell)
+Vue.component('context-edit', ContextEdit)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')

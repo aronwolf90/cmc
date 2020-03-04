@@ -19,4 +19,17 @@ RSpec.describe Api::V1::ContextsController, type: :controller do
       subject
     end
   end
+
+  describe "#update" do
+    subject { put :update }
+
+    specify do
+      controller.update_operation = double
+
+      expect(controller.update_operation)
+        .to receive(:call)
+
+      subject
+    end
+  end
 end

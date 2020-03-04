@@ -1,9 +1,9 @@
 = asside policy(Organization).show? do
   = top_asside_item("Admin",
-      path:  %i[edit administration organization],
+      path: %i[administration admin context],
       icon: :gears)
   = asside_item("General",
-      path: edit_administration_organization_path,
+      path: %i[administration admin context],
       policy: true)
   - if Settings.payment.enabled
     = asside_item("Payment",

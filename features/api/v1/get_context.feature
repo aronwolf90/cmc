@@ -15,11 +15,14 @@ Scenario: Get
         "type": "contexts",
         "attributes": {
           "premium": false, 
-          "user-count": 3
+          "user-count": 3,
+          "global-board": false,
+          "time-zone": "Berlin"
         },
         "relationships": {
           "current-user": { "data": { "id": "1", "type": "users" } }
-        }
+        },
+        "links": { "self": "/api/v1/context" }
       },
       "included": [{
         "id": "1",

@@ -4,7 +4,15 @@ require "rails_helper"
 
 RSpec.describe Api::V1::ContextSerializer, type: :serializer do
   let(:user) { build_stubbed(:user) }
-  let(:context) { Context.new(current_user: user, premium: true, user_count: 1) }
+  let(:context) do
+    Context.new(
+      current_user: user,
+      premium: true,
+      user_count: 1,
+      time_zone: "Berlin",
+      global_board: true
+    )
+  end
 
   let(:expected_result) do
     {
@@ -13,10 +21,15 @@ RSpec.describe Api::V1::ContextSerializer, type: :serializer do
         type: "contexts",
         attributes: {
           premium: true,
-          "user-count": 1
+          "user-count": 1,
+          "time-zone": "Berlin",
+          "global-board": true
         },
         relationships: {
           "current-user": { data: { id: user.id.to_s, type: "users" } }
+        },
+        links: {
+          self: "/api/v1/context"
         }
       }
     }

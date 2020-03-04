@@ -98,9 +98,7 @@ When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
 end
 
 When(/^I check the input named "([^\"]*)"$/) do |name|
-  find(:css, "input[name='#{name}']").set(true)
-  sleep 0.2
-  find("body").click
+  check name, allow_label_click: true
 end
 
 When(/^an acive issue exists$/) do
@@ -225,4 +223,8 @@ end
 Then(/the page contain the year of one week ago/) do
   sleep 0.2
   expect(page).to have_content 2.week.ago.year
+end
+
+Then(/the input "([^\"]*)" is checked/) do |input|
+  expect(page).to have_checked_field(input, visible: false)
 end

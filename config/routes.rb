@@ -74,6 +74,7 @@ Rails.application.routes.draw do
     resources :contacts, only: %i[index show new edit]
 
     namespace :admin do
+      resource :context, only: :show
       resources :payments, only: :index
     end
   end
@@ -82,7 +83,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :user_tokens, only: :create
 
-      resource :context, only: :show
+      resource :context, only: %i[show update]
 
       resources :board_lists, only: %i[index show update destroy] do
         scope module: :board_lists do

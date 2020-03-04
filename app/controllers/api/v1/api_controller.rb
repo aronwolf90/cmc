@@ -17,6 +17,7 @@ module Api
         :serializer,
         :collection_query,
         :operation,
+        :update_operation,
         :create_operation,
         :destroy_operation
       )
@@ -45,6 +46,10 @@ module Api
 
         def self.operation(value, **args)
           before_action -> { @operation ||= value  }, **args
+        end
+
+        def self.update_operation(value, **args)
+          before_action -> { @update_operation ||= value  }, **args
         end
 
         def self.create_operation(value, **args)
