@@ -9,22 +9,13 @@ export default {
     })
   },
   getBoardLists (context) {
-    return context.dispatch('initCurrentUser').then(currentUser => {
+    return context.dispatch('initCurrentUser').then(() => {
+      let currentUser = context.getters.currentUser
       let project = currentUser.relationships['selected-project'].data
       let projectId = project ? project.id : null
       return context.dispatch('get', {
         endpoint,
         resource: `board_lists?filter[project_id]=${projectId}&include[]=issues`
-      })
-    })
-  },
-  loadBoardLists (context) {
-    context.dispatch('initCurrentUser').then(currentUser => {
-      let project = currentUser.relationships['selected-project'].data
-      let projectId = project ? project.id : null
-      return context.dispatch('add', {
-        endpoint,
-        resource: `board_lists?filter[project_id]=${projectId}`
       })
     })
   },

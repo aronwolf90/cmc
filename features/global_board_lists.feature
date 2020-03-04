@@ -52,3 +52,11 @@ Scenario: move issue to other board
   Then the element "#column-2 .list-issue:last-of-type" contain the text "Test issue 4"
   When I reload the page
   Then the element "#column-2 .list-issue:last-of-type" contain the text "Test issue 4"
+
+@javascript
+Scenario: change selected project
+  Given a test-organization exists with global board lists
+  And I am signed in (multitenant)
+  When I click on link "Issues"
+  And select "Test project 2" from select box "project-select"
+  Then the element "#side-body" contain the text "Test issue 1"

@@ -65,6 +65,7 @@ module Api
             json: json,
             include: params[:include],
             links: ({ self: request.path_info } if links),
+            option_name: params[:filter] || {}
           }.merge(serializer_hash))
         end
 
@@ -77,6 +78,10 @@ module Api
 
         def model
           @model ||= model_class.find(id)
+        end
+
+        def scope
+          {}
         end
 
         def id

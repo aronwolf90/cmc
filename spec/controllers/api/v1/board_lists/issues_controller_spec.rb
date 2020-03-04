@@ -12,9 +12,9 @@ RSpec.describe Api::V1::BoardLists::IssuesController do
 
     expect(collection_query)
       .to receive(:call)
-      .with(more_id: nil, board_list_id: "1", per_page: 15)
+      .with(more_id: nil, board_list_id: "1", per_page: 15, project_id: "1")
       .and_return(OpenStruct.new(collection: [Issue.new(id: 1)], has_more: false))
 
-    get :index, params: { board_list_id: 1 }
+    get :index, params: { board_list_id: 1, filter: { project_id: 1 } }
   end
 end

@@ -20,6 +20,7 @@ module Api
           def collection_result
             @collection ||= collection_query.call(
               board_list_id: params[:board_list_id],
+              project_id: params.dig(:filter, :project_id),
               more_id: params[:more_id],
               per_page: per_page
             )

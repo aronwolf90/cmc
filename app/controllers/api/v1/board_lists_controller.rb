@@ -18,6 +18,10 @@ module Api
 
         render_json_api json: collection
       end
+
+      def scope
+        params[:filter]
+      end
     end
   end
 end
