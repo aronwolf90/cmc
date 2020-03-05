@@ -44,6 +44,7 @@ export default {
   asyncComputed: {
     result: {
       get () {
+        if (!this.searchText) return 
         return this.$store.dispatch('get', {
           endpoint: '/api/v1',
           resource: `${this.resource}?query=${this.searchText}`

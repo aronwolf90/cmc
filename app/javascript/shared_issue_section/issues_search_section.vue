@@ -18,7 +18,6 @@ export default {
   }),
   created () {
     this.request()
-    this.$store.dispatch('initIssues')
     this.$store.dispatch('initCurrentIssue')
   },
   components: {
