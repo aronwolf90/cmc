@@ -41,11 +41,6 @@ describe('Show', () => {
       expect($subject.find(MarkdownViewer).props().value).to.eq('description')
     })
 
-    it('edit btn point to /edit route', () => {
-      $subject.find('.fa-edit').trigger('click')
-      expect($subject.vm.$router.currentRoute.path).to.eq('/edit')
-    })
-
     it('call visit on click on the destroy btn', () => {
       $subject.find('.btn.btn-sm.btn-outline-danger').trigger('click')
       expect($Turbolinks.visit).to.have.been.called

@@ -5,8 +5,18 @@ module Administration
     side_menu :administration
     namespace Administration::BoardLists
 
-    public :new, :create, :edit, :update, :destroy
+    public :new, :edit, :update, :destroy
 
-    def index; end
+    def create
+      super { "/administration/board_lists" }
+    end
+
+    def update
+      super { "/administration/board_lists" }
+    end
+
+    def destroy
+      super("/administration/board_lists")
+    end
   end
 end

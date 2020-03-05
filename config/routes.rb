@@ -33,10 +33,9 @@ Rails.application.routes.draw do
 
     resource :dashboard, only: :show
     resources :records, except: :show
-    resources :board_lists, only: %i[index new create edit update destroy] do
+    resources :board_lists, only: %i[new create edit update destroy] do
       resources :issues, only: %i[new create]
     end
-    resources :issues, only: :show
     resources :attendances, only: :index
     resource :calender, only: :show
 
@@ -77,6 +76,8 @@ Rails.application.routes.draw do
       resource :context, only: :show
       resources :payments, only: :index
     end
+
+     get "/*path", to: "app#show", format: false
   end
 
   namespace :api do

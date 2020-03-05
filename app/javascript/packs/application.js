@@ -27,6 +27,9 @@ import UserNew from '../users/new'
 import UserConfigurationEdit from '../users/configuration/edit.vue'
 import NotificationBell from '../components/notification_bell'
 import ContextEdit from '../admin/context/edit'
+import Router from 'vue-router'
+import IssueShow from 'issue/show'
+import IssueEdit from 'issue/edit'
 
 require('../config')
 
@@ -70,5 +73,21 @@ document.addEventListener('turbolinks:before-visit', () => {
 })
 
 document.addEventListener('turbolinks:load', () => {
-  var app = new Vue({ el: '#app', store }) /* eslint-disable-line no-unused-vars */
+  const router = new Router({
+    mode: 'history',
+    routes: [
+      { path: '/', redirect: window.location.pathname },
+      { path: '/administration/board_lists', component: IssuesBoard },
+      {
+        path: '/administration/issues/:id',
+        component: Issue,
+        props: true,
+        children: [
+          { path: '', component: IssueShow },
+          { path: 'edit', component: IssueEdit }
+        ]
+      }
+    ]
+  })
+  var app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */
 })

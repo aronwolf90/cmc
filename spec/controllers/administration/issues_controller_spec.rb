@@ -7,9 +7,6 @@ RSpec.describe Administration::IssuesController, type: :controller do
   let(:model) { Issue.new(id: 1) }
   let(:form) { Administration::IssueForm }
 
-  include_examples "standard show action",
-                   Administration::Issues,
-                   params: { board_list_id: 1, id: 1 }
   include_examples "standard new action",
                    Administration::Issues,
                    params: { board_list_id: 1, id: 1 }

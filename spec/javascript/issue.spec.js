@@ -1,12 +1,10 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import Issue from '../../app/javascript/issue'
 import Vuex from 'vuex'
-import VueRouter from 'vue-router'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
-localVue.use(VueRouter)
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
@@ -15,7 +13,7 @@ describe('Issue', () => {
   subject(() => mount(Issue, {
     store: $store,
     localVue,
-    propsData: { issueId: 1 },
+    propsData: { id: 1 },
     stubs: {
       RightAside: '<div>Stubbed RightAside</div>',
       Comments: '<div>Stubbed Comments</div>'

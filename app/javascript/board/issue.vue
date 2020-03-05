@@ -2,7 +2,7 @@
   .card.issue
     .card-body.issue-body.row
       .col-10.text
-        a(v-bind:href='showPath', v-on:click='visitShow($event)')
+        router-link(:to='showPath')
           | {{ issue.attributes.title }}
       .col-2
         issues-record-section(:issue-id="issueId")

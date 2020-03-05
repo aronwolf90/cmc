@@ -5,7 +5,7 @@
         h4 {{ title }}
       .col-sm-2
         .btn-group.float-right
-          b-button(variant='outline-dark', size='sm', to='/edit')
+          b-button(variant='outline-dark', size='sm', :to='`${issueId}/edit`')
             .fa.fa-edit
           .btn.btn-sm.btn-outline-danger(v-on:click='deleteIssue($event)')
             .fa.fa-trash

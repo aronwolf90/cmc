@@ -1,24 +1,19 @@
 <template lang='pug'>
   show-container(v-if='issue')
     show-body
-      router-view(:issue-id='issueId')
+      router-view(:issue-id='id')
       hr.divider
-      comments(:issue-id='issueId')
+      comments(:issue-id='id')
       br
     right-aside
-      assigen(:issue-id='issueId')
-      complexity(:issue-id='issueId')
-      due-at(:issue-id='issueId')
-      deadline-at(:issue-id='issueId')
+      assigen(:issue-id='id')
+      complexity(:issue-id='id')
+      due-at(:issue-id='id')
+      deadline-at(:issue-id='id')
 
 </template>
 
 <script>
-import Router from 'vue-router'
-
-import Show from 'issue/show'
-import Edit from 'issue/edit'
-
 import RightAside from 'components/right_aside'
 
 import SpentTime from 'issue/spent_time'
@@ -30,27 +25,9 @@ import ShowBody from 'components/show-body'
 import DueAt from 'issue/due-at'
 import DeadlineAt from 'issue/deadline-at'
 
-const router = new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Show',
-      component: Show
-    },
-    {
-      path: '/edit',
-      name: 'Edit',
-      component: Edit
-    }
-  ]
-})
-
 export default {
-  props: ['issueId'],
-  router,
+  props: ['id'],
   components: {
-    Show,
-    Edit,
     SpentTime,
     'assigen': Assigen,
     'comments': Comments,
@@ -62,12 +39,11 @@ export default {
     DeadlineAt
   },
   created () {
-    this.$store.dispatch('initIssue', this.issueId)
-    if (!window.location.hash) router.replace('/')
+    this.$store.dispatch('initIssue', this.id)
   },
   computed: {
     issue () {
-      return this.$store.getters.entry({type: 'issues', id: this.issueId})
+      return this.$store.getters.entry({type: 'issues', id: this.id})
     }
   }
 }

@@ -5,7 +5,7 @@ module Administration
     side_menu :administration
     namespace Administration::Issues
 
-    public :show, :new
+    public :new
 
     def create
       super { %i[administration board_lists] }

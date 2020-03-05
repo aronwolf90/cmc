@@ -33,17 +33,8 @@ describe('Issue', () => {
       attributes: { title: 'issues title' }
     }))
 
-    it('contain the title', () => {
-      expect($subject.html()).to.include('issues title')
-    })
-
-    it('call visit on click on the title', () => {
-      $subject.find('a').trigger('click')
-      expect($Turbolinks.visit).to.have.been.called
-    })
-
     it('include show link', () => {
-      expect($subject.html()).to.include('href="/administration/issues/1"')
+      expect($subject.html()).to.include('/administration/issues/1')
     })
 
     it('pass issueId to issue-record-section', () => {

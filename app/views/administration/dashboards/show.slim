@@ -32,7 +32,7 @@
             tbody
               - @model[:worked_issues].each do |issue|
                 tr
-                  td = link_to issue, administration_issue_path(issue), class: "text-dark"
+                  td = link_to issue, "/administration/issues/#{issue.id}", class: "text-dark"
                   td = issue.project
                   td = SpendedTimeIssueUserCalculator.(issue, current_user)
       .card-footer
@@ -54,7 +54,7 @@ br
             tbody
               - @model[:assigned_issues].each do |issue|
                 tr
-                  td = link_to issue, administration_issue_path(issue), class: "text-dark"
+                  td = link_to issue, "/administration/issues/#{issue.id}", class: "text-dark"
                   td = issue.project
                   td = SpendedTimeIssueUserCalculator.(issue, current_user)
       .card-footer
