@@ -59,4 +59,4 @@ Scenario: change selected project
   And I am signed in (multitenant)
   When I click on link "Issues"
   And select "Test project 2" from select box "project-select"
-  Then the element "#side-body" contain the text "Test issue 1"
+  Then the element "#side-body" does not contain the text "Test issue 1"
