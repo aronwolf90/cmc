@@ -14,6 +14,7 @@ module Issues
         model.board_list_id = board_list_id
         model.global_board_list_id = global_board_list_id
         model.ordinal_number = 0
+        model.global_ordinal_number = 0
 
         model.board_list&.issues&.ordered.to_a.each_with_index do |issue, index|
           issue.update!(ordinal_number: (issue.ordinal_number || index) + 1)
