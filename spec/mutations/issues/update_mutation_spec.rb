@@ -85,16 +85,56 @@ RSpec.describe Issues::UpdateMutation do
 
   context "when change board_list and global_board?=true" do
     let(:model) do
-      create(:issue, global_ordinal_number: 1, global_board_list: create(:board_list))
+      create(
+        :issue,
+        global_ordinal_number: 1,
+        global_board_list: create(:board_list)
+      )
     end
     let(:params_board_list_id) { global_board_list.id }
 
-    before { allow(Organization).to receive(:global_board?).and_return true }
+    before do
+      allow(Organization).to receive(:global_board?).and_return true
+    end
 
     specify do
       expect(subject.reload.global_board_list.issues.ordered)
         .to eq([issue1, issue2, subject])
       expect(subject.global_ordinal_number).to eq(3)
+    end
+  end
+
+  context "when the board_list is a project specific and kind==closed" do
+    let!(:closed_board_list) do
+      create(:board_list, project: project, kind: :closed)
+    end
+    let!(:closed_global_board_list) do
+      create(:board_list, project: nil, kind: :closed)
+    end
+    let(:params_board_list_id) { closed_board_list.id }
+
+    before { allow(Organization).to receive(:global_board?).and_return false }
+
+    it "sets global_board_list_id to one that has kind==closed" do
+      subject
+      expect(model.global_board_list).to eq(closed_global_board_list)
+    end
+  end
+
+  context "when the board_list is a global one and kind==closed" do
+    let!(:closed_board_list) do
+      create(:board_list, project: project, kind: :closed)
+    end
+    let!(:closed_global_board_list) do
+      create(:board_list, project: nil, kind: :closed)
+    end
+    let(:params_board_list_id) { closed_global_board_list.id }
+
+    before { allow(Organization).to receive(:global_board?).and_return true }
+
+    it "sets global_board_list_id to one that has kind==closed" do
+      subject
+      expect(model.board_list).to eq(closed_board_list)
     end
   end
 end

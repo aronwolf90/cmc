@@ -18,8 +18,16 @@ module Issues
         if board_list_id.present?
           if global_board?
             attributes[:global_board_list_id] = board_list_id
+            if board_list.closed? && project_closed_board_list.present?
+              attributes[:board_list_id] = project_closed_board_list.id
+              attributes[:ordinal_number] = 0
+            end
           else
             attributes[:board_list_id] = board_list_id
+            if board_list.closed? && global_closed_board_list.present?
+              attributes[:global_board_list_id] = global_closed_board_list.id
+              attributes[:global_ordinal_number] = 0
+            end
           end
         end
 
@@ -52,11 +60,9 @@ module Issues
       end
 
       def board_list
-        if global_board?
-          model.global_board_list
-        else
-          model.board_list
-        end
+        @board_list ||= BoardList.find_by(id:
+          attributes[:board_list_id] || attributes[:global_board_list_id]
+        )
       end
 
       def key
@@ -69,6 +75,15 @@ module Issues
 
       def global_board?
         Organization.global_board?
+      end
+
+      def project_closed_board_list
+        @project_closed_board_list ||=
+          BoardList.closed.find_by(project: model.board_list.project)
+      end
+
+      def global_closed_board_list
+        @global_closed_board_list ||= BoardList.closed.find_by(project: nil)
       end
   end
 end
