@@ -171,5 +171,60 @@ describe('Modules.Board', () => {
         })
       })
     })
+    describe('.updateBoardListIssuesOnServer', () => {
+      const issue1 = { id: 1, type: 'issues' }
+      const issue2 = { id: 2, type: 'issues' }
+      const issue3 = { id: 3, type: 'issues' }
+
+      it('do not call updateIssue when a issue is removed', () => {
+        const context = {
+          rootGetters: {
+            associatedEntries: () => [issue1, issue2, issue3]
+          },
+          dispatch: () => {
+            throw new EvalError()
+          }
+        }
+
+        Board.actions.updateBoardListIssuesOnServer(context, {
+          issues: [issue1, issue2]
+        })
+      })
+
+      it('call updateIssue when a issue is added', (done) => {
+        const context = {
+          rootGetters: {
+            associatedEntries: () => [issue1, issue2, issue3]
+          },
+          dispatch: (context, { entry, attributes }) => {
+            expect(entry.id).to.eq(4)
+            expect(attributes['ordinal-number']).to.eq(3)
+            done()
+          }
+        }
+        const issue4 = { id: 4, type: 'issues' }
+
+        Board.actions.updateBoardListIssuesOnServer(context, {
+          issues: [issue1, issue2, issue3, issue4]
+        })
+      })
+
+      it('call updateIssue when a issue is sorted', (done) => {
+        const context = {
+          rootGetters: {
+            associatedEntries: () => [issue1, issue2, issue3]
+          },
+          dispatch: (context, { entry, attributes }) => {
+            expect(entry.id).to.eq(3)
+            expect(attributes['ordinal-number']).to.eq(0)
+            done()
+          }
+        }
+
+        Board.actions.updateBoardListIssuesOnServer(context, {
+          issues: [issue3, issue2, issue1]
+        })
+      })
+    })
   })
 })

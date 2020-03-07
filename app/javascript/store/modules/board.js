@@ -47,7 +47,7 @@ export default {
     },
     updateBoardListIssuesOnServer (context, { boardList, issues }) {
       let oldIssues = context.rootGetters.associatedEntries({ entry: boardList, name: 'issues' })
-      for (let i = 0, j = 0; i < issues.length || j < oldIssues.length; i++, j++) {
+      for (let i = 0, j = 0; i < issues.length; i++, j++) {
         if (issues[i] === oldIssues[j]) continue
         context.dispatch('updateIssue', {
           entry: issues[i],
