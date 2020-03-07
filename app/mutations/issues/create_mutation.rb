@@ -6,7 +6,7 @@ module Issues
 
     def call
       @project_id = attributes.delete(:project_id) || user.selected_project_id
-      @indicated_board_list = model.board_list
+      @indicated_board_list = BoardList.find(attributes[:board_list_id])
 
       ActiveRecord::Base.transaction do
         model.assign_attributes(attributes)

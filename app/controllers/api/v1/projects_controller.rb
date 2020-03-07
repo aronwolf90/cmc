@@ -6,6 +6,6 @@ module Api::V1
     model_class Project
     serializer ProjectSerializer
 
-    public :index
+    public :index, :show
   end
 end

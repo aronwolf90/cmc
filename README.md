@@ -4,7 +4,7 @@
 * rubycritic: https://cmc_system.gitlab.io/cmc/rubycritic/code_index.html
 
 # About
-Cost Manager Controller is a feature-rich time tracker. Its features include
+Ticktensio is a feature-rich time tracker. Its features include
 * easy time tracking
 * project management
 * wiki
@@ -33,6 +33,13 @@ Right now we only support the kubernetics packet manager named helm.
 
 NOTE: The configuration options for
 the helm package can be found [here](cmc/README.md)
+
+# Tests
+* rspec: docker-compose run app bin/setup
+* cucumber:
+  * docker-compose up
+  * wait until app is ready
+  * docker-compose run app cucumber
 
 # Linters
 * ESLint (Javascipt): docker-compose run yarn eslint

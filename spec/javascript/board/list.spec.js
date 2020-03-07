@@ -54,11 +54,6 @@ describe('List', () => {
       expect($subject.findAll(Issue).at(0).props().boardListId).to.be.eq(1)
       expect($subject.findAll(Issue).at(1).props().boardListId).to.be.eq(1)
     })
-
-    it('call visit on add btn', () => {
-      $subject.find('.fa-plus').trigger('click')
-      expect($Turbolinks.visit).to.have.been.called
-    })
   })
 
   describe('when the boardList is not present', () => {

@@ -33,9 +33,7 @@ Rails.application.routes.draw do
 
     resource :dashboard, only: :show
     resources :records, except: :show
-    resources :board_lists, only: %i[new create edit update destroy] do
-      resources :issues, only: %i[new create]
-    end
+    resources :board_lists, only: %i[new create edit update destroy]
     resources :attendances, only: :index
     resource :calender, only: :show
 
@@ -95,7 +93,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :issues, only: %i[index show update destroy]
+      resources :issues, only: %i[index show create update destroy]
       resources :comments, only: :create
 
       resources :users, only: %i[index show create update destroy] do
@@ -106,7 +104,7 @@ Rails.application.routes.draw do
       end
 
       resources :records, only: %i[create update]
-      resources :projects, only: :index
+      resources :projects, only: %i[index show]
       resources :wiki_categories, only: :index
       resources :wiki_pages, only: %i[show update destroy]
       resources :folders, only: :index

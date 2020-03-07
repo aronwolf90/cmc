@@ -16,6 +16,9 @@ export default {
   initCurrentIssue () {
 
   },
+  createIssue (context, payload) {
+    return context.dispatch('create', { resource: 'issues', payload })
+  },
   updateIssue (context, { entry, attributes, boardList }) {
     let payload = {
       id: entry.id,

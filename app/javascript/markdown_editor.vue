@@ -19,6 +19,7 @@ export default {
       initialValue: this.value,
       events: {
         change: (event) => {
+          this.$emit('input', this.editor.getValue())
           this.$emit('valueChange', this.editor.getValue())
         }
       }

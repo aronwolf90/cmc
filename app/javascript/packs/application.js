@@ -29,6 +29,7 @@ import NotificationBell from '../components/notification_bell'
 import ContextEdit from '../admin/context/edit'
 import Router from 'vue-router'
 import IssueShow from 'issue/show'
+import IssueNew from 'board/issues/new'
 import IssueEdit from 'issue/edit'
 
 require('../config')
@@ -78,6 +79,11 @@ document.addEventListener('turbolinks:load', () => {
     routes: [
       { path: '/', redirect: window.location.pathname },
       { path: '/administration/board_lists', component: IssuesBoard },
+      {
+        path: '/administration/board_lists/:boardListId/issues/new',
+        component: IssueNew,
+        props: true
+      },
       {
         path: '/administration/issues/:id',
         component: Issue,

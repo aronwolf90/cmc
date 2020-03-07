@@ -10,5 +10,6 @@ module Api::V1
     attribute :deadline_at
     belongs_to :user
     belongs_to :board_list
+    belongs_to :project
   end
 end

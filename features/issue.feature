@@ -6,8 +6,18 @@ Scenario: Create Issue
   And I am signed in (multitenant)
   When I click on link "Issues"
   And I click on ".issues-board-body .fa-plus"
-  And I enter "issue name" into input named "data_title"
-  And I enter "description" into input named "data_description"
+  And I enter "issue name" into input named "Title"
+  And I click on submit
+  And I reload the page
+  Then the page contain the text "issue name"
+
+@javascript
+Scenario: Create Issue on global board
+  Given a test-organization exists with global board lists
+  And I am signed in (multitenant)
+  When I click on link "Issues"
+  And I click on ".issues-board-body .fa-plus"
+  And I enter "issue name" into input named "Title"
   And I click on submit
   And I reload the page
   Then the page contain the text "issue name"

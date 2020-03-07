@@ -8,7 +8,7 @@ module Api
       model_class Issue
       serializer IssueSerializer
 
-      public :index, :show, :update, :destroy
+      public :index, :show, :create, :update, :destroy
 
       private
         def query

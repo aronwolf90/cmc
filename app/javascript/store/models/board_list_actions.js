@@ -8,6 +8,12 @@ export default {
       payload: boardLists.map(entry => entry.id)
     })
   },
+  getBoardList (context, id) {
+    return context.dispatch('get', {
+      endpoint,
+      resource: `board_lists/${id}`
+    })
+  },
   getBoardLists (context) {
     return context.dispatch('initCurrentUser').then(() => {
       let currentUser = context.getters.currentUser
