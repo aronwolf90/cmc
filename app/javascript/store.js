@@ -28,6 +28,8 @@ import Board from 'store/modules/board'
 import notificationActions from 'store/models/notification_actions'
 import contextGetters from 'store/models/context_getters'
 import contextActions from 'store/models/context_actions'
+import projectStatusActions from 'store/models/project-status-actions'
+import projectStatusGetters from 'store/models/project-status-getters'
 
 export default {
   strict: true,
@@ -43,6 +45,7 @@ export default {
     ...projectGetters,
     ...issueGetters,
     ...contextGetters,
+    ...projectStatusGetters,
     currentUser (store) {
       let entry = JsonApi.getters.entry(store.json_api)({
         type: 'contexts',
@@ -111,6 +114,7 @@ export default {
     ...subscriptionActions,
     ...notificationActions,
     ...contextActions,
+    ...projectStatusActions,
 
     initCurrentUser (context) {
       return context.dispatch('getContext').then(response => {

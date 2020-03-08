@@ -465,6 +465,38 @@ ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
 
 
 --
+-- Name: project_board_lists; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE project_board_lists (
+    id bigint NOT NULL,
+    name character varying,
+    project_status_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: project_board_lists_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE project_board_lists_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: project_board_lists_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE project_board_lists_id_seq OWNED BY project_board_lists.id;
+
+
+--
 -- Name: records; Type: TABLE; Schema: test-organization; Owner: -
 --
 
@@ -494,6 +526,38 @@ CREATE VIEW project_record_days AS
 
 
 --
+-- Name: project_statuses; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE project_statuses (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    initial boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: project_statuses_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE project_statuses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: project_statuses_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE project_statuses_id_seq OWNED BY project_statuses.id;
+
+
+--
 -- Name: projects; Type: TABLE; Schema: test-organization; Owner: -
 --
 
@@ -502,7 +566,8 @@ CREATE TABLE projects (
     name character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    project_board_list_id bigint
 );
 
 
@@ -818,6 +883,20 @@ ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organization
 
 
 --
+-- Name: project_board_lists id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY project_board_lists ALTER COLUMN id SET DEFAULT nextval('project_board_lists_id_seq'::regclass);
+
+
+--
+-- Name: project_statuses id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY project_statuses ALTER COLUMN id SET DEFAULT nextval('project_statuses_id_seq'::regclass);
+
+
+--
 -- Name: projects id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
@@ -961,6 +1040,22 @@ ALTER TABLE ONLY notifications
 
 ALTER TABLE ONLY organizations
     ADD CONSTRAINT organizations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: project_board_lists project_board_lists_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY project_board_lists
+    ADD CONSTRAINT project_board_lists_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: project_statuses project_statuses_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY project_statuses
+    ADD CONSTRAINT project_statuses_pkey PRIMARY KEY (id);
 
 
 --
@@ -1132,10 +1227,24 @@ CREATE UNIQUE INDEX index_organizations_on_name ON organizations USING btree (na
 
 
 --
+-- Name: index_project_board_lists_on_project_status_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_project_board_lists_on_project_status_id ON project_board_lists USING btree (project_status_id);
+
+
+--
 -- Name: index_projects_on_deleted_at; Type: INDEX; Schema: test-organization; Owner: -
 --
 
 CREATE INDEX index_projects_on_deleted_at ON projects USING btree (deleted_at);
+
+
+--
+-- Name: index_projects_on_project_board_list_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_projects_on_project_board_list_id ON projects USING btree (project_board_list_id);
 
 
 --
@@ -1355,6 +1464,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200301155742'),
 ('20200302162703'),
 ('20200307143755'),
-('20200307144110');
+('20200307144110'),
+('20200307180302'),
+('20200308105226'),
+('20200308112112');
 
 
