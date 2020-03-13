@@ -31,6 +31,9 @@ import Router from 'vue-router'
 import IssueShow from 'issue/show'
 import IssueNew from 'board/issues/new'
 import IssueEdit from 'issue/edit'
+import ProjectsLeftAside from 'components/projects-left-aside'
+import ProjectsIndex from 'projects/index'
+import ProjectStatusShow from 'project-statuses/show'
 
 require('../config')
 
@@ -59,6 +62,7 @@ Vue.component('user-new', UserNew)
 Vue.component('user-configuration-edit', UserConfigurationEdit)
 Vue.component('notification-bell', NotificationBell)
 Vue.component('context-edit', ContextEdit)
+Vue.component('projects-left-aside', ProjectsLeftAside)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')
@@ -78,6 +82,12 @@ document.addEventListener('turbolinks:load', () => {
     mode: 'history',
     routes: [
       { path: '/', redirect: window.location.pathname },
+      { path: '/administration/projects', component: ProjectsIndex },
+      {
+        path: '/administration/project_statuses/:id',
+        component: ProjectStatusShow,
+        props: true
+      },
       { path: '/administration/board_lists', component: IssuesBoard },
       {
         path: '/administration/board_lists/:boardListId/issues/new',

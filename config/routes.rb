@@ -122,6 +122,7 @@ Rails.application.routes.draw do
       resources :notifications, only: :index
       resource :notifications_readed, only: :create
       resource :test_organizations, only: %i[create destroy]
+      resources :project_statuses, only: %i[index show]
     end
   end
 end
