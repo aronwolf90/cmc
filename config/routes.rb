@@ -51,6 +51,8 @@ Rails.application.routes.draw do
         resources :records, only: :index
       end
     end
+    get "/project_statuses/new", to: "projects#index", as: "project_status_new"
+    get "/project_statuses/:id", to: "projects#index", as: "project_status_show"
 
     resource :wiki, only: :show, controller: :wiki do
       scope module: :wiki do
@@ -122,7 +124,7 @@ Rails.application.routes.draw do
       resources :notifications, only: :index
       resource :notifications_readed, only: :create
       resource :test_organizations, only: %i[create destroy]
-      resources :project_statuses, only: %i[index show]
+      resources :project_statuses, only: %i[index create show destroy]
     end
   end
 end

@@ -31,23 +31,37 @@ describe('ShowIssue', () => {
       }
     }
   }
+  let store = {
+    getters: {
+      project () {
+        return () => project
+      },
+      projectStatus () {
+        return () => projectStatus
+      }
+    },
+    actions: {
+      getProjectStatus () {
+        return Promise.resolve({ data: projectStatus })
+      }
+    }
+  }
+
+  it('show title', (done) => {
+    const wrapper = mount(Index, { store: new Vuex.Store(store), localVue })
+
+    wrapper.vm.$nextTick(() => {
+      wrapper.vm.$nextTick(() => {
+        wrapper.vm.$nextTick(() => {
+          expect(wrapper.html()).to.include('New')
+          done()
+        })
+      })
+    })
+  })
 
   it('show projects', (done) => {
-    const wrapper = mount(Index, {
-      store: new Vuex.Store({
-        getters: {
-          project () {
-            return () => project
-          }
-        },
-        actions: {
-          getProjectStatus () {
-            return Promise.resolve({ data: projectStatus })
-          }
-        }
-      }),
-      localVue
-    })
+    const wrapper = mount(Index, { store: new Vuex.Store(store), localVue })
 
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
@@ -55,5 +69,15 @@ describe('ShowIssue', () => {
         done()
       })
     })
+  })
+
+  it('call destroyProjectStatus', (done) => {
+    store.actions['destroyProjectStatus'] = (projectStatus) => {
+      expect(projectStatus).not.to.be.eq(null)
+      done()
+    }
+    const wrapper = mount(Index, { store: new Vuex.Store(store), localVue })
+
+    wrapper.find('.fa-trash').trigger('click')
   })
 })

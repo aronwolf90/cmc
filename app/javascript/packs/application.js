@@ -34,6 +34,7 @@ import IssueEdit from 'issue/edit'
 import ProjectsLeftAside from 'components/projects-left-aside'
 import ProjectsIndex from 'projects/index'
 import ProjectStatusShow from 'project-statuses/show'
+import ProjectStatusNew from 'project-statuses/new'
 
 require('../config')
 
@@ -83,6 +84,10 @@ document.addEventListener('turbolinks:load', () => {
     routes: [
       { path: '/', redirect: window.location.pathname },
       { path: '/administration/projects', component: ProjectsIndex },
+      {
+        path: '/administration/project_statuses/new',
+        component: ProjectStatusNew
+      },
       {
         path: '/administration/project_statuses/:id',
         component: ProjectStatusShow,

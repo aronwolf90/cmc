@@ -1,5 +1,10 @@
 <template lang='pug'>
-  .project-statuses-index
+  .project-status-show
+    .pull-right
+      b-button(variant="outline-danger", size="sm", @click="destroy")
+        .fa.fa-trash
+    h4 {{ title }}
+    br
     ul.list-group.list-lines
       index-list-item(
         v-for="project in projects",
@@ -29,6 +34,12 @@ export default {
     this.fetch()
   },
   computed: {
+    title () {
+      return Utils.attribute(this.projectStatus, 'name')
+    },
+    projectStatus () {
+      return this.$store.getters.projectStatus(this.id)
+    },
     projects () {
       return this.projectsRefs.map(ref => {
         return this.$store.getters.project(ref.id)
@@ -40,10 +51,16 @@ export default {
   },
   methods: {
     fetch () {
-    this.projectsRefs = []
+      this.projectsRefs = []
       return this.$store.dispatch('getProjectStatus', this.id)
         .then(result => {
           this.projectsRefs = result.data.relationships.projects.data
+        })
+    },
+    destroy () {
+      return this.$store.dispatch('destroyProjectStatus', this.projectStatus)
+        .then(result => {
+          this.$router.push('/administration/projects')
         })
     }
   }

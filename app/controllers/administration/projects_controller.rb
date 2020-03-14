@@ -11,6 +11,14 @@ module Administration
 
     def show; end
 
+    def update
+      super { "/administration/projects" }
+    end
+
+    def destroy
+      super("/administration/projects")
+    end
+
   private
     def set_project
       @project = ::Project.find(params[:id])

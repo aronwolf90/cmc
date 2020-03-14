@@ -9,5 +9,15 @@ export default {
       endpoint,
       resource: `project_statuses/${id}?include=projects`
     })
+  },
+  createProjectStatus (context, payload) {
+    return context.dispatch('create', {
+      endpoint,
+      resource: `project_statuses`,
+      payload
+    })
+  },
+  destroyProjectStatus (context, entry) {
+    return context.dispatch('destroy', { entry })
   }
 }

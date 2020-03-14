@@ -6,8 +6,9 @@ module Api
       include StandartActions
       model_class ProjectStatus
       serializer ProjectStatusSerializer
+      namespace ProjectStatuses
 
-      public :index, :show
+      public :index, :create, :show, :destroy
     end
   end
 end

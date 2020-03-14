@@ -10,6 +10,8 @@
       v-for="projectStatus in projectStatuses", :key='projectStatus.id'
     )
       | {{ projectStatus.attributes.name }}
+    left-aside-item.text-center(path="/administration/project_statuses/new")
+      i.fa.fa-plus(aria-hidden="true")
 </template>
 
 <script>
@@ -26,14 +28,24 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('getProjectStatuses').then(response => {
-      this.projectStatusesRefs = Utils.entryArrayToRef(response.data)
-    })
+    this.fetch()
+  },
+  watch: {
+    '$route' (to, from) {
+      this.fetch()
+    }
   },
   computed: {
     projectStatuses () {
       return this.projectStatusesRefs.map(ref => {
         return this.$store.getters.projectStatus(ref.id)
+      })
+    }
+  },
+  methods: {
+    fetch () {
+      this.$store.dispatch('getProjectStatuses').then(response => {
+        this.projectStatusesRefs = Utils.entryArrayToRef(response.data)
       })
     }
   }
