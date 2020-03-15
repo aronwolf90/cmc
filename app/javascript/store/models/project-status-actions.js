@@ -17,6 +17,12 @@ export default {
       payload
     })
   },
+  updateProjectStatus (context, { projectStatus, payload }) {
+    return context.dispatch('update', {
+      entry: projectStatus,
+      payload
+    })
+  },
   destroyProjectStatus (context, entry) {
     return context.dispatch('destroy', { entry })
   }

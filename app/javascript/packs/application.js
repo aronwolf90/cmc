@@ -35,6 +35,7 @@ import ProjectsLeftAside from 'components/projects-left-aside'
 import ProjectsIndex from 'projects/index'
 import ProjectStatusShow from 'project-statuses/show'
 import ProjectStatusNew from 'project-statuses/new'
+import ProjectStatusEdit from 'project-statuses/edit'
 import ProjectNew from 'projects/new'
 import ProjectEdit from 'projects/edit'
 
@@ -99,6 +100,11 @@ document.addEventListener('turbolinks:load', () => {
       {
         path: '/administration/project_statuses/:id',
         component: ProjectStatusShow,
+        props: true
+      },
+      {
+        path: '/administration/project_statuses/:id/edit',
+        component: ProjectStatusEdit,
         props: true
       },
       { path: '/administration/board_lists', component: IssuesBoard },

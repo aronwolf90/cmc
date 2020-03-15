@@ -10,6 +10,7 @@
 import ProjectStatusForm from 'components/project-statuses/form'
 
 export default {
+  props: ['id'],
   components: {
     ProjectStatusForm
   },
@@ -23,10 +24,23 @@ export default {
       errors: []
     }
   },
+  created () {
+    this.$store.dispatch('getProjectStatus', this.id).then(response => {
+      this.form.attributes.name = response.data.attributes.name
+    })
+  },
+  computed: {
+    projectStatus () {
+      return this.$store.getters.projectStatus(this.id)
+    }
+  },
   methods: {
     submit (event) {
-      this.$store.dispatch('createProjectStatus', this.form).then(response => {
-        this.$router.push(`/administration/project_statuses/${response.data.data.id}`)
+      this.$store.dispatch('updateProjectStatus', {
+        payload: this.form,
+        projectStatus: this.projectStatus,
+      }).then(() => {
+        this.$router.push(`/administration/project_statuses/${this.projectStatus.id}`)
       }).catch(({ status, data }) => {
         this.errors = data.errors
       })

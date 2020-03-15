@@ -1,6 +1,12 @@
 <template lang='pug'>
   .project-status-show
-    .pull-right
+    b-button-group.pull-right
+      b-button(
+        variant="outline-secondary",
+        size="sm",
+        :to="`/administration/project_statuses/${this.id}/edit`"
+      )
+        .fa.fa-edit
       b-button(variant="outline-danger", size="sm", @click="destroy")
         .fa.fa-trash
     h4 {{ title }}
