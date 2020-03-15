@@ -8,7 +8,7 @@ module Api
       serializer ProjectStatusSerializer
       namespace ProjectStatuses
 
-      public :index, :create, :show, :destroy
+      public :index, :create, :update, :show, :destroy
     end
   end
 end
