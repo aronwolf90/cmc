@@ -17,6 +17,15 @@ Scenario: Get
         "attributes": {
           "name": "Test project"
         },
+        "relationships": {
+          "project-status": {
+            "data": {
+              "id": "1",
+              "type": "project-statuses"
+            }
+          }
+        },
+        "links": { "self": "/api/v1/projects/1" },
         "meta": {
           "permissions": {
             "update": true,

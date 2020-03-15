@@ -13,11 +13,4 @@ RSpec.describe Administration::ProjectsController, type: :controller do
   include_examples "standard index action", Administration::Projects
   include_examples "basic show action",
                    params: { id: 1 }
-  include_examples "standard new action", Administration::Projects
-  include_examples "standard edit action", Administration::Projects
-  include_examples "standard create action", Administration::Projects
-  include_examples "standard update action", Administration::Projects,
-                   %i[administration projects]
-  include_examples "standard destroy action", Administration::Projects,
-                   %i[administration projects]
 end

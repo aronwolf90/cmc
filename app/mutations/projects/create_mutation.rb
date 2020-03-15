@@ -4,6 +4,12 @@ module Projects
   class CreateMutation < StandardCreateMutation
     def call
       ActiveRecord::Base.transaction do
+        if attributes[:project_status_id].present?
+          attributes[:project_board_list_id] =
+            ProjectStatus.find(attributes[:project_status_id])
+            .project_board_lists.first&.id
+        end
+        attributes.delete(:project_status_id)
         super.tap do
           User.where(selected_project_id: nil)
               .update_all(selected_project_id: model.id)

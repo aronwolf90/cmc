@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Projects::CreateMutation do
+RSpec.describe Projects::UpdateMutation do
   subject do
     described_class.call(
       user: current_user,
@@ -19,9 +19,6 @@ RSpec.describe Projects::CreateMutation do
   end
 
   specify do
-    expect { subject }.to change(Project, :count).by(1)
-    expect(current_user.reload.selected_project).to eq model
-    expect(BoardList.all.map(&:kind)).to eq(%w[open other closed])
     expect(subject.project_board_list.project_status).to eq(project_status)
   end
 end

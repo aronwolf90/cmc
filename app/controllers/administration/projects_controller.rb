@@ -7,17 +7,9 @@ module Administration
     before_action :set_project, only: :show
     namespace Administration::Projects
 
-    public :index, :new, :edit, :create, :update, :destroy
+    public :index
 
     def show; end
-
-    def update
-      super { "/administration/projects" }
-    end
-
-    def destroy
-      super("/administration/projects")
-    end
 
   private
     def set_project

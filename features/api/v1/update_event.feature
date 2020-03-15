@@ -1,4 +1,4 @@
-Feature: API: create a comment
+Feature: API: update a event
 
 @javascript
 Scenario: Put an valid event using json in POST body

@@ -6,7 +6,7 @@ Scenario: Create project
   And I am signed in (multitenant)
   When I click on link "Projects"
   And I click on link "New project"
-  And I enter "project title" into input named "data_name"
+  And I enter "project title" into input named "Name"
   And I click on submit
   Then the element "#side-body" contain the text "project title"
 
@@ -16,7 +16,7 @@ Scenario: Update project
   And I am signed in (multitenant)
   When I click on link "Projects"
   And I click on ".fa-edit"
-  And I enter "project title new" into input named "data_name"
+  And I enter "project title new" into input named "Name"
   And I click on submit
   Then the element "#side-body" contain the text "project title new"
 

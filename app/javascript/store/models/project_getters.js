@@ -14,5 +14,8 @@ export default {
       entry: currentUser,
       name: 'selected-project'
     })
+  },
+  projectStatuses (store, getters) {
+    return getters.collection('project-statuses')
   }
 }

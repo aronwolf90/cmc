@@ -46,7 +46,9 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :projects do
+    get "/projects/new", to: "projects#index", as: "project_new"
+    get "/projects/:id/edit", to: "projects#index", as: "project_edit"
+    resources :projects, only: %i[index show] do
       scope module: :projects do
         resources :records, only: :index
       end
@@ -106,7 +108,7 @@ Rails.application.routes.draw do
       end
 
       resources :records, only: %i[create update]
-      resources :projects, only: %i[index show]
+      resources :projects, only: %i[index show create update destroy]
       resources :wiki_categories, only: :index
       resources :wiki_pages, only: %i[show update destroy]
       resources :folders, only: :index

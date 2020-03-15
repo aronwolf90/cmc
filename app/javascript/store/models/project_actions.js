@@ -22,5 +22,14 @@ export default {
       }
       return context.dispatch('getProject', project.id)
     })
+  },
+  createProject (context, payload) {
+    return context.dispatch('create', { resource: 'projects', payload })
+  },
+  updateProject (context, { project, payload }) {
+    return context.dispatch('update', { entry: project, payload })
+  },
+  destroyProject (context, project) {
+    return context.dispatch('destroy', { entry: project })
   }
 }

@@ -5,7 +5,8 @@ module Api::V1
     include StandartActions
     model_class Project
     serializer ProjectSerializer
+    namespace Projects
 
-    public :index, :show
+    public :index, :show, :create, :update, :destroy
   end
 end
