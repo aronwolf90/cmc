@@ -5,7 +5,7 @@ module ProjectStatuses
     def call
       ActiveRecord::Base.transaction do
         model.update!(attributes)
-        model.project_board_lists.build(name: "Default")
+        model.project_board_lists.create(name: "Default")
         model
       end
     end

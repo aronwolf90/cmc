@@ -15,7 +15,8 @@ RSpec.describe ProjectStatuses::CreateMutation do
     }
   end
 
-  it "create project status with an project_board_list" do
+  specify do
     expect(subject).to be_persisted
+    expect(subject.project_board_lists.first).to be_persisted
   end
 end
