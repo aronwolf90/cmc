@@ -13,10 +13,60 @@ Scenario: Put an valid record using json in PUT body
         "id": 1,
         "type": "project-statuses",
         "attributes": {
-          "name": "New name"
+          "name": "New name",
+          "ordinal_number": 1
         }
 
       }
     }
     """
   Then the response status should be "204"
+  When I send a GET request to "/api/v1/project_statuses/1"
+  Then the JSON response should be:
+    """
+    {
+      "data":{
+        "id":"1",
+        "type":"project-statuses",
+        "attributes":{
+          "name":"New name",
+          "initial":true
+        },
+        "relationships":{
+          "projects":{
+            "data":[
+              {
+                "id":"1",
+                "type":"projects"
+              },
+              {
+                "id":"2",
+                "type":"projects"
+              }
+            ]
+          },
+          "project-board-lists":{
+            "data":[
+              {
+                "id":"1",
+                "type":"project-board-lists"
+              },
+              {
+                "id":"2",
+                "type":"project-board-lists"
+              }
+            ]
+          }
+        },
+        "links":{
+          "self":"/api/v1/project_statuses/1"
+        },
+        "meta":{
+          "permissions":{
+            "update":true,
+            "destroy":true
+          }
+        }
+      }
+    }
+    """

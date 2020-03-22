@@ -2,11 +2,14 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import Index from '../../../app/javascript/project-statuses/show'
 import BootstrapVue from 'bootstrap-vue'
+import VueRouter from 'vue-router'
 
 const localVue = createLocalVue()
+const router = new VueRouter()
 
 localVue.use(Vuex)
 localVue.use(BootstrapVue)
+localVue.use(VueRouter)
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
@@ -48,7 +51,7 @@ describe('ShowIssue', () => {
   }
 
   it('show title', (done) => {
-    const wrapper = mount(Index, { store: new Vuex.Store(store), localVue })
+    const wrapper = mount(Index, { store: new Vuex.Store(store), localVue, router })
 
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
@@ -61,7 +64,7 @@ describe('ShowIssue', () => {
   })
 
   it('show projects', (done) => {
-    const wrapper = mount(Index, { store: new Vuex.Store(store), localVue })
+    const wrapper = mount(Index, { store: new Vuex.Store(store), localVue, router })
 
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
@@ -76,7 +79,7 @@ describe('ShowIssue', () => {
       expect(projectStatus).not.to.be.eq(null)
       done()
     }
-    const wrapper = mount(Index, { store: new Vuex.Store(store), localVue })
+    const wrapper = mount(Index, { store: new Vuex.Store(store), localVue, router })
 
     wrapper.find('.fa-trash').trigger('click')
   })

@@ -15,8 +15,11 @@ RSpec.describe ProjectStatuses::CreateMutation do
     }
   end
 
+  before { create(:project_status, ordinal_number: 1) }
+
   specify do
     expect(subject).to be_persisted
     expect(subject.project_board_lists.first).to be_persisted
+    expect(subject.ordinal_number).to eq 2
   end
 end

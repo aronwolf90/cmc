@@ -128,6 +128,11 @@ Rails.application.routes.draw do
       resource :notifications_readed, only: :create
       resource :test_organizations, only: %i[create destroy]
       resources :project_statuses, only: %i[index create update show destroy]
+      resources :project_board_lists, only: [] do
+        scope module: :project_board_lists do
+          resources :projects, only: :index
+        end
+      end
     end
   end
 end

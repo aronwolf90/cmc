@@ -71,7 +71,7 @@ module Api
 
         def query
           JsonApiQuery.call(
-            model_class.all.includes(serializer.eager_load_options),
+            model_class.all.ordered.includes(serializer.eager_load_options),
             params.to_unsafe_h.deep_symbolize_keys
           )
         end

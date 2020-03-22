@@ -8,13 +8,15 @@ describe Api::V1::ProjectStatusDeserializer do
   let(:params) do
     {
       attributes: {
-        name: "New"
+        name: "New",
+        "ordinal-number": 1
       }
     }
   end
   let(:result) do
     {
-      name: "New"
+      name: "New",
+      ordinal_number: 1
     }
   end
 

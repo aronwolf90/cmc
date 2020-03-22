@@ -28,7 +28,10 @@ Scenario: Post an valid record using json in POST body
           "initial": false
         },
         "relationships": {
-          "projects": {"data": []}
+          "projects": {"data": []},
+          "project-board-lists": {
+            "data": [{"id": "5", "type": "project-board-lists"}]
+           }
         },
         "links": { "self": "/api/v1/project_statuses/4" },
         "meta": {

@@ -20,7 +20,16 @@ Scenario: Get
         },
         "relationships": {
           "projects": {
-            "data": [{"id": "1", "type": "projects"}]
+            "data": [
+              {"id": "1", "type": "projects"},
+              {"id": "2", "type": "projects"}
+            ]
+          },
+          "project-board-lists": {
+            "data": [
+              {"id": "1", "type": "project-board-lists"},
+              {"id": "2", "type": "project-board-lists"}
+            ]
           }
         },
         "links": {

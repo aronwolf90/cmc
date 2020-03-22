@@ -7,7 +7,7 @@ export default {
   getProjectStatus (context, id) {
     return context.dispatch('get', {
       endpoint,
-      resource: `project_statuses/${id}?include=projects`
+      resource: `project_statuses/${id}?include=projects,project_board_lists`
     })
   },
   createProjectStatus (context, payload) {

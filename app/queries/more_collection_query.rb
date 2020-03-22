@@ -51,14 +51,20 @@ class MoreCollectionQuery < ApplicationQuery
       if sort_key.nil?
         result_collection.order(created_at: :desc, id: :desc)
       else
-        result_collection.order(sort_key => :asc)
+        result_collection.order(sort_key => :asc, created_at: :desc, id: :desc)
       end
     end
 
     def collection_by_more_id
       if sort_key.present?
         collection
-          .where("#{sort_key} > ?", sort_attribute)
+          .where("""
+                   #{sort_key} != :sort_attribute AND #{sort_key} > :sort_attribute OR
+                   #{sort_key} = :sort_attribute AND created_at < :created_at
+                 """,
+                 sort_attribute: sort_attribute,
+                 created_at: more_id_entry.created_at
+                )
       else
         collection
           .where("""

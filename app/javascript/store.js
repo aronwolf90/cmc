@@ -30,12 +30,15 @@ import contextGetters from 'store/models/context_getters'
 import contextActions from 'store/models/context_actions'
 import projectStatusActions from 'store/models/project-status-actions'
 import projectStatusGetters from 'store/models/project-status-getters'
+import ProjectsBoard from 'store/modules/projects-board'
+import projectBoardListGetters from 'store/models/project-board-list-getters'
 
 export default {
   strict: true,
   modules: {
     json_api: JsonApi,
-    board: Board
+    board: Board,
+    'projects-board': ProjectsBoard
   },
   getters: {
     ...userGetters,
@@ -46,6 +49,7 @@ export default {
     ...issueGetters,
     ...contextGetters,
     ...projectStatusGetters,
+    ...projectBoardListGetters,
     currentUser (store) {
       let entry = JsonApi.getters.entry(store.json_api)({
         type: 'contexts',

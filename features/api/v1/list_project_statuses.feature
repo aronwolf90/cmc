@@ -11,64 +11,117 @@ Scenario: Get /api/v1/project_statuses
   And the JSON response should be:
     """
     {
-      "data": [{
-        "id": "1",
-        "type": "project-statuses",
-        "attributes": { 
-          "name": "New",
-          "initial": true
-        },
-        "relationships": {
-          "projects": {
-            "data": [{ "id": "1", "type": "projects"}]
+      "data":[
+        {
+          "id":"1",
+          "type":"project-statuses",
+          "attributes":{
+            "name":"New",
+            "initial":true
+          },
+          "relationships":{
+            "projects":{
+              "data":[
+                {
+                  "id":"1",
+                  "type":"projects"
+                },
+                {
+                  "id":"2",
+                  "type":"projects"
+                }
+              ]
+            },
+            "project-board-lists":{
+              "data":[
+                {
+                  "id":"1",
+                  "type":"project-board-lists"
+                },
+                {
+                  "id":"2",
+                  "type":"project-board-lists"
+                }
+              ]
+            }
+          },
+          "links":{
+            "self":"/api/v1/project_statuses/1"
+          },
+          "meta":{
+            "permissions":{
+              "update":true,
+              "destroy":true
+            }
           }
         },
-        "links": { "self": "/api/v1/project_statuses/1" },
-        "meta": {
-          "permissions": {
-            "update": true,
-            "destroy": true
+        {
+          "id":"2",
+          "type":"project-statuses",
+          "attributes":{
+            "name":"Active",
+            "initial":false
+          },
+          "relationships":{
+            "projects":{
+              "data":[
+    
+              ]
+            },
+            "project-board-lists":{
+              "data":[
+                {
+                  "id":"3",
+                  "type":"project-board-lists"
+                }
+              ]
+            }
+          },
+          "links":{
+            "self":"/api/v1/project_statuses/2"
+          },
+          "meta":{
+            "permissions":{
+              "update":true,
+              "destroy":true
+            }
+          }
+        },
+        {
+          "id":"3",
+          "type":"project-statuses",
+          "attributes":{
+            "name":"Archived",
+            "initial":false
+          },
+          "relationships":{
+            "projects":{
+              "data":[
+    
+              ]
+            },
+            "project-board-lists":{
+              "data":[
+                {
+                  "id":"4",
+                  "type":"project-board-lists"
+                }
+              ]
+            }
+          },
+          "links":{
+            "self":"/api/v1/project_statuses/3"
+          },
+          "meta":{
+            "permissions":{
+              "update":true,
+              "destroy":true
+            }
           }
         }
-      },
-      {
-        "id": "2",
-        "type": "project-statuses",
-        "attributes": { 
-          "name": "Active",
-          "initial": false
-        },
-        "relationships": {
-          "projects": {
-            "data": [{"id": "2", "type": "projects"}]
-          }
-        },
-        "links": { "self": "/api/v1/project_statuses/2" },
-        "meta": {
-          "permissions": {
-            "update": true,
-            "destroy": true
-          }
-        }
-      },
-      {
-        "id": "3",
-        "type": "project-statuses",
-        "attributes": { 
-          "name": "Archived",
-          "initial": false
-        },
-        "relationships": {
-          "projects": { "data": [] }
-        },
-        "links": { "self": "/api/v1/project_statuses/3" },
-        "meta": {
-          "permissions": {
-            "update": true,
-            "destroy": true
-          }
-        }
-      }],
-      "links": { "self": "/api/v1/project_statuses" }
+      ],
+      "links":{
+        "self":"/api/v1/project_statuses"
+      }
     }
     """

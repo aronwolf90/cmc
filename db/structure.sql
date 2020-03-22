@@ -534,7 +534,8 @@ CREATE TABLE project_statuses (
     name character varying NOT NULL,
     initial boolean DEFAULT false NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    ordinal_number integer DEFAULT 0 NOT NULL
 );
 
 
@@ -567,7 +568,8 @@ CREATE TABLE projects (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted_at timestamp without time zone,
-    project_board_list_id bigint
+    project_board_list_id bigint,
+    ordinal_number integer DEFAULT 0
 );
 
 
@@ -1467,6 +1469,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200307144110'),
 ('20200307180302'),
 ('20200308105226'),
-('20200308112112');
+('20200308112112'),
+('20200316212018'),
+('20200319202904');
 
 

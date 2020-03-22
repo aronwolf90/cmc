@@ -87,7 +87,7 @@ Then(/^the JSON response should be:$/) do |json|
   actual = JSON.parse(@response.body)
   diff = Hashdiff.diff(actual, expected)
 
-  if diff.first&.third.to_s.size < 7
+  if diff.first&.third.to_s.size < 30
     expect(diff).to be_empty
   else
     expect(actual).to eq(expected)

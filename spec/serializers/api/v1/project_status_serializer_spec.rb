@@ -22,6 +22,9 @@ RSpec.describe Api::V1::ProjectStatusSerializer, type: :serializer do
         relationships: {
           projects: {
             data: [{ id: "1", type: "projects" }]
+          },
+          "project-board-lists": {
+            data: []
           }
         },
         links: {

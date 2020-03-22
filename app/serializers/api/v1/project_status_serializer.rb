@@ -9,6 +9,7 @@ module Api
       )
 
       has_many :projects, serializer: ProjectSerializer
+      has_many :project_board_lists, serializer: ProjectBoardListSerializer
 
       link(:self) { api_v1_project_status_path(object) }
     end
