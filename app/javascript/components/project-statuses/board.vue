@@ -1,5 +1,8 @@
 <template lang='pug'>
-  draggable.body.projects-board-body(v-model="projectBoardLists")
+  draggable.body.projects-board-body(
+    v-model="projectBoardLists",
+    @change="change"
+  )
     list(
       v-for='projectBoardList in projectBoardLists',
       :key='projectBoardList.id',
@@ -27,6 +30,15 @@ export default {
       set (projectBoardLists) {
         this.$store.commit('projects-board/projectBoardLists', projectBoardLists)
       }
+    }
+  },
+  methods: {
+    change (event) {
+      if (!event.moved) return
+      this.$store.dispatch('projects-board/moveProjectBoardList', {
+        projectBoardList: event.moved.element,
+        ordinalNumber: event.moved.newIndex
+      })
     }
   }
 }

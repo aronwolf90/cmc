@@ -48,6 +48,22 @@ export default {
           })
         })
       })
+    },
+    moveProjectBoardList (context, {
+      projectBoardList,
+      ordinalNumber
+    }) {
+      context.dispatch('updateProjectBoardList',
+        {
+          projectBoardList: projectBoardList,
+          payload: {
+            attributes: {
+              'ordinal-number': ordinalNumber
+            }
+          }
+        },
+        { root: true }
+      )
     }
   }
 }

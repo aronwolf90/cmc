@@ -7,6 +7,8 @@ module Api
 
       attributes :name
       has_many :projects, serializer: ProjectSerializer
+
+      link(:self) { api_v1_project_board_list_path(object) }
     end
   end
 end

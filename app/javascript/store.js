@@ -32,6 +32,7 @@ import projectStatusActions from 'store/models/project-status-actions'
 import projectStatusGetters from 'store/models/project-status-getters'
 import ProjectsBoard from 'store/modules/projects-board'
 import projectBoardListGetters from 'store/models/project-board-list-getters'
+import projectBoardListActions from 'store/models/project-board-list-actions'
 
 export default {
   strict: true,
@@ -119,6 +120,7 @@ export default {
     ...notificationActions,
     ...contextActions,
     ...projectStatusActions,
+    ...projectBoardListActions,
 
     initCurrentUser (context) {
       return context.dispatch('getContext').then(response => {
