@@ -15,6 +15,8 @@ class Project < ApplicationRecord
 
   alias_attribute :to_s, :name
 
+  scope :ordered, -> { order(:ordinal_number, :created_at, :id)  }
+
   pg_search_scope(
     :search,
     against: %i[name],

@@ -169,5 +169,32 @@ describe('Modules.ProjectsBoard', () => {
         })
       })
     })
+    describe('.moveProject', () => {
+      it('calls updateProject', (done) => {
+        Board.actions.moveProject({
+          dispatch: (method, params) => {
+            expect(method).to.eq('updateProject')
+            expect(params).to.eql({
+              projectBoardList: projectBoardList1,
+              project: project1,
+              payload: {
+                attributes: { 'ordinal-number': 1 },
+                relationships: {
+                  'project-board-list': {
+                    data: projectBoardList1
+                  }
+                }
+              }
+            })
+            done()
+          }
+        },
+        {
+          projectBoardList: projectBoardList1,
+          project: project1,
+          ordinalNumber: 1
+        })
+      })
+    })
   })
 })

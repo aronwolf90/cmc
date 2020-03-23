@@ -6,7 +6,11 @@
         .fa.fa-edit
 
       .clearfix
-    draggable.body(v-model="projects", :options="{group:'projects'}")
+    draggable.body(
+      v-model="projects",
+      :options="{group:'projects'}",
+      @change="change"
+    )
       project(
         v-for='project in projects',
         :key='project.id',
@@ -62,6 +66,15 @@ export default {
       return this.$store.dispatch('destroyProjectBoardList', this.projectBoardList.id)
     },
     loadMore () {
+    },
+    change (event) {
+      if (!event.moved && !event.added) return
+      let movedAdded = event.moved || event.added
+      this.$store.dispatch('projects-board/moveProject', {
+        projectBoardList: this.projectBoardList,
+        project: movedAdded.element,
+        ordinalNumber: movedAdded.newIndex 
+      })
     }
   }
 }

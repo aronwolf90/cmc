@@ -55,10 +55,33 @@ export default {
     }) {
       context.dispatch('updateProjectBoardList',
         {
-          projectBoardList: projectBoardList,
+          projectBoardList,
           payload: {
             attributes: {
               'ordinal-number': ordinalNumber
+            }
+          }
+        },
+        { root: true }
+      )
+    },
+    moveProject (context, {
+      projectBoardList,
+      project,
+      ordinalNumber
+    }) {
+      context.dispatch('updateProject',
+        {
+          projectBoardList,
+          project,
+          payload: {
+            attributes: {
+              'ordinal-number': ordinalNumber
+            },
+            relationships: {
+              'project-board-list': {
+                data: projectBoardList
+              }
             }
           }
         },
