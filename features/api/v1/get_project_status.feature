@@ -16,6 +16,7 @@ Scenario: Get
         "type": "project-statuses",
         "attributes": {
           "name": "New",
+          "display-as": "board",
           "initial": true
         },
         "relationships": {

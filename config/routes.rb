@@ -56,6 +56,8 @@ Rails.application.routes.draw do
     get "/project_statuses/new", to: "projects#index", as: "project_status_new"
     get "/project_statuses/:id", to: "projects#index", as: "project_status_show"
     get "/project_statuses/:id/edit", to: "projects#index", as: "project_status_edit"
+    get "/project_board_lists/:id/edit", to: "projects#index", as: "project_board_list_edit"
+    get "/project_statuses/:project_status_id/project_board_lists/new", to: "projects#index", as: "project_board_list_new"
 
     resource :wiki, only: :show, controller: :wiki do
       scope module: :wiki do
@@ -128,7 +130,7 @@ Rails.application.routes.draw do
       resource :notifications_readed, only: :create
       resource :test_organizations, only: %i[create destroy]
       resources :project_statuses, only: %i[index create update show destroy]
-      resources :project_board_lists, only: [:update] do
+      resources :project_board_lists, only: %i[show create update destroy] do
         scope module: :project_board_lists do
           resources :projects, only: :index
         end

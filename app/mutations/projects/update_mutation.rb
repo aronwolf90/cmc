@@ -8,13 +8,15 @@ module Projects
           attributes[:project_board_list_id] =
             ProjectStatus.find(attributes[:project_status_id])
             .project_board_lists.first&.id
+        elsif attributes.key?(:project_status_id)
+          attributes[:project_board_list_id] = nil
         end
         attributes.delete(:project_status_id)
 
         super
 
         SortMutation.call(
-          model.project_board_list.projects,
+          model&.project_board_list&.projects,
           sort_key: :ordinal_number,
           model: model
         )

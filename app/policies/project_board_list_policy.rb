@@ -10,6 +10,6 @@ class ProjectBoardListPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.is_a? Admin
+    user.is_a?(Employee) && !record&.projects&.exists?
   end
 end

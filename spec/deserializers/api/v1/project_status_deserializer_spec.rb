@@ -9,14 +9,16 @@ describe Api::V1::ProjectStatusDeserializer do
     {
       attributes: {
         name: "New",
-        "ordinal-number": 1
+        "ordinal-number": 1,
+        "display-as": "list"
       }
     }
   end
   let(:result) do
     {
       name: "New",
-      ordinal_number: 1
+      ordinal_number: 1,
+      display_as: "list"
     }
   end
 

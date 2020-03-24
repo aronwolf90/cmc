@@ -7,7 +7,8 @@ RSpec.describe Api::V1::ProjectStatusSerializer, type: :serializer do
     ProjectStatus.new(
       id: 1,
       name: "New",
-      initial: false
+      initial: false,
+      display_as: "board"
     )
   end
   let(:expected_result) do
@@ -17,7 +18,8 @@ RSpec.describe Api::V1::ProjectStatusSerializer, type: :serializer do
         type: "project-statuses",
         attributes: {
           name: "New",
-          initial: false
+          initial: false,
+          "display-as": "board"
         },
         relationships: {
           projects: {

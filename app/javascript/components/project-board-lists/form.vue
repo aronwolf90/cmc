@@ -16,24 +16,30 @@
         :state="errorStatus('attributes/name')"
       )
         | {{ error.detail }}
-    b-form-group(
-      id="input-group-display-as",
-      label="Display as",
-      label-for="input-display-as"
-    )
-      b-form-select(
-        v-model="value.attributes['display-as']",
-        id="input-display-as"
-      )
-        option(value="list") List
-        option(value="board") Board
     b-button(type="submit", variant="success") Save
+    b-button-group.pull-right
+      b-button(
+        variant="danger",
+        @click="$emit('destroy')",
+        v-if="showDestroyBtn",
+        :disabled="disableDestroyBtn"
+      ) Destroy
+      b-button(
+        variant="secondary",
+        :to="cancelPath"
+      ) Cancel
 </template>
 
 <script>
 
 export default {
-  props: ['value', 'errors'],
+  props: [
+    'value',
+    'errors',
+    'cancel-path',
+    'show-destroy-btn',
+    'disable-destroy-btn'
+  ],
   watch: {
     value () {
       this.$emit('input', this.value)

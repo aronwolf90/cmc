@@ -45,20 +45,13 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-  .issues-board
-    display: flex
-    flex-flow: column
+  .projects-board-body
+    overflow-x: auto
+    overflow-y: auto
+    flex-grow : 1
+    white-space: nowrap
+    margin-right: -15px
+    margin-left: -15px
     height: 100%
-    .issues-board-header
-      padding-bottom: 10px
-      margin-right: 7px
-    .issues-board-body
-      overflow-x: auto
-      overflow-y: auto
-      flex-grow : 1
-      white-space: nowrap
-      margin-right: -15px
-      margin-left: -15px
-      height: 100%
-      padding-left: 13px
+    padding-left: 13px
 </style>

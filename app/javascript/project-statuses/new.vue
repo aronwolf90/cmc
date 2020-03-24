@@ -17,7 +17,8 @@ export default {
     return {
       form: {
         attributes: {
-          name: null
+          name: null,
+          'display-as': 'list'
         }
       },
       errors: []

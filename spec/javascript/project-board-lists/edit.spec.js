@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import ProjectStatusNew from '../../../app/javascript/project-statuses/edit'
+import ProjectBoardListEdit from '../../../app/javascript/project-board-lists/edit'
 import BootstrapVue from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 
@@ -16,43 +16,46 @@ localVue.use(VueRouter)
 /* eslint-disable prefer-promise-reject-errors */
 
 describe('ProjectStatusEdit', () => {
-  const projectStatus = {
+  const projectBoardList = {
     id: 1,
-    type: 'project-statuses',
+    type: 'project-board-lists',
     attributes: {
-      name: 'New',
-      'display-as': 'list'
+      name: 'New'
+    },
+    relationships: {
+      'project-status': {
+        data: { id: 1, type: 'project-statuses' }
+      }
     },
     meta: {
       permissions: {
-        destroy: true,
-        create: true
+        destroy: true
       }
     }
   }
   const store = {
     getters: {
-      projectStatus () {
-        return () => projectStatus
+      projectBoardList () {
+        return () => projectBoardList
       }
     },
     actions: {
-      getProjectStatus () {
-        return Promise.resolve({ data: projectStatus })
+      getProjectBoardList () {
+        return Promise.resolve({ data: projectBoardList })
       },
-      updateProjectStatus (_, { attributes }) {
+      updateProjectBoardList (_, { attributes }) {
         return Promise.resolve()
       }
     }
   }
 
-  it('calls updateProjectStatus when submit is clicked', (done) => {
-    store.actions['updateProjectStatus'] = (_, { payload }) => {
-      expect(payload.attributes).to.eql({ name: 'New', 'display-as': 'list' })
+  it('calls updateProjectBoardList when submit is clicked', (done) => {
+    store.actions['updateProjectBoardList'] = (_, { payload }) => {
+      expect(payload.attributes).to.eql({ name: 'New' })
       done()
       return Promise.resolve()
     }
-    const wrapper = mount(ProjectStatusNew, {
+    const wrapper = mount(ProjectBoardListEdit, {
       router,
       store: new Vuex.Store(store),
       localVue,
@@ -68,7 +71,7 @@ describe('ProjectStatusEdit', () => {
   })
 
   it('initialize inputs', (done) => {
-    const wrapper = mount(ProjectStatusNew, {
+    const wrapper = mount(ProjectBoardListEdit, {
       router,
       store: new Vuex.Store(store),
       localVue
@@ -82,7 +85,7 @@ describe('ProjectStatusEdit', () => {
   })
 
   it('show errors when they are present', (done) => {
-    store.actions['updateProjectStatus'] = (_, { attributes }) => {
+    store.actions['updateProjectBoardList'] = (_, { attributes }) => {
       return Promise.reject({
         status: 'fail',
         data: {
@@ -90,7 +93,7 @@ describe('ProjectStatusEdit', () => {
         }
       })
     }
-    const wrapper = mount(ProjectStatusNew, {
+    const wrapper = mount(ProjectBoardListEdit, {
       store: new Vuex.Store(store),
       localVue,
       attachToDocument: true

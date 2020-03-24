@@ -10,6 +10,7 @@
 
 <script>
 import ProjectForm from 'components/projects/form'
+import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   props: ['id'],
@@ -47,12 +48,31 @@ export default {
   },
   methods: {
     submit () {
+      let path = null
+      const newProjectStatus =
+        Utils.relationship(this.form, 'project-status')
+      const oldProjectStatus =
+        Utils.relationship(this.project, 'project-status')
+      const newProjectStatusId = newProjectStatus ? newProjectStatus.id : null
+      const oldProjectStatusId = oldProjectStatus ? oldProjectStatus.id : null
+
+      if (newProjectStatusId != oldProjectStatusId) {
+        if (!newProjectStatusId) {
+          path = '/administration/projects'
+        } else {
+          path = `/administration/project_statuses/${newProjectStatusId}`
+        }
+      }
+
       this.$store.dispatch('updateProject', {
         payload: this.form,
         project: this.project 
       }).then(() => {
-        const path = '/administration/projects'
-        this.$router.push(path)
+        if (path) {
+          this.$router.push(path)
+        } else {
+          this.$router.go(-1)
+        }
       }).catch(({ status, data }) => {
         this.errors = data.errors
       })

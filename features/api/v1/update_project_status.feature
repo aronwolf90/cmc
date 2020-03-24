@@ -30,7 +30,8 @@ Scenario: Put an valid record using json in PUT body
         "type":"project-statuses",
         "attributes":{
           "name":"New name",
-          "initial":true
+          "initial":true,
+          "display-as": "board"
         },
         "relationships":{
           "projects":{

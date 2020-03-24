@@ -20,6 +20,9 @@ RSpec.describe Api::V1::ProjectBoardListSerializer, type: :serializer do
         relationships: {
           projects: {
             data: []
+          },
+          'project-status': {
+            data: nil
           }
         },
         links: { self: "/api/v1/project_board_lists/1" }

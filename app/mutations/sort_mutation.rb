@@ -11,7 +11,9 @@ class SortMutation < ApplicationMutation
 
   def call
     ActiveRecord::Base.transaction do
-      next if sort_value.nil? || model.nil?
+      next if sort_value.nil?
+      next if model.nil?
+      next if collection.nil?
 
       collection_to_order.each_with_index do |entry, index|
         entry.update!(sort_key =>  index)

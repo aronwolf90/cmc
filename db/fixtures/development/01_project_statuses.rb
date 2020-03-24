@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 ProjectStatus.seed do |s|
-  s.id      = 1
-  s.name    = "New"
-  s.initial = true
+  s.id         = 1
+  s.name       = "New"
+  s.initial    = true
+  s.display_as = "board"
 end
 
 ProjectStatus.seed do |s|

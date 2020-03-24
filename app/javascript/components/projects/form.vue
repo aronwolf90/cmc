@@ -36,7 +36,7 @@
     b-button(type="submit", variant="success") Save
     b-button-group.pull-right
       b-button(variant="danger", @click="destroy") Destroy
-      b-button(variant="secondary", to="/administration/projects") Cancel
+      b-button(variant="secondary", @click="$router.go(-1)") Cancel
 </template>
 
 <script>

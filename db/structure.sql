@@ -536,7 +536,8 @@ CREATE TABLE project_statuses (
     initial boolean DEFAULT false NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    ordinal_number integer DEFAULT 0 NOT NULL
+    ordinal_number integer DEFAULT 0 NOT NULL,
+    display_as character varying DEFAULT 'list'::character varying NOT NULL
 );
 
 
@@ -1473,6 +1474,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200308112112'),
 ('20200316212018'),
 ('20200319202904'),
-('20200323123353');
+('20200323123353'),
+('20200324184439');
 
 

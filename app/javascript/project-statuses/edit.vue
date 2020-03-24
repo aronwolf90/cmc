@@ -27,6 +27,8 @@ export default {
   created () {
     this.$store.dispatch('getProjectStatus', this.id).then(response => {
       this.form.attributes.name = response.data.attributes.name
+      this.form.attributes['display-as'] =
+        response.data.attributes['display-as']
     })
   },
   computed: {

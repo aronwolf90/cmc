@@ -17,7 +17,8 @@ Scenario: Get /api/v1/project_statuses
           "type":"project-statuses",
           "attributes":{
             "name":"New",
-            "initial":true
+            "initial":true,
+            "display-as": "board"
           },
           "relationships":{
             "projects":{
@@ -60,7 +61,8 @@ Scenario: Get /api/v1/project_statuses
           "type":"project-statuses",
           "attributes":{
             "name":"Active",
-            "initial":false
+            "initial":false,
+            "display-as":"list"
           },
           "relationships":{
             "projects":{
@@ -92,7 +94,8 @@ Scenario: Get /api/v1/project_statuses
           "type":"project-statuses",
           "attributes":{
             "name":"Archived",
-            "initial":false
+            "initial":false,
+            "display-as":"list"
           },
           "relationships":{
             "projects":{

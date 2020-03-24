@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import ProjectStatusNew from '../../../app/javascript/project-statuses/new'
+import ProjectBoardListNew from '../../../../app/javascript/project-statuses/project-board-lists/new'
 import BootstrapVue from 'bootstrap-vue'
 import sinon from 'sinon'
 import VueRouter from 'vue-router'
@@ -18,19 +18,16 @@ localVue.use(VueRouter)
 
 const sandbox = sinon.createSandbox()
 
-describe('ProjectStatusNew', () => {
+describe('ProjectBoardListNew', () => {
   afterEach(() => sandbox.restore())
 
-  it('calls createProjectStatus when submit is clicked', (done) => {
-    let wrapper = mount(ProjectStatusNew, {
+  it('calls createProjectBoardList when submit is clicked', (done) => {
+    let wrapper = mount(ProjectBoardListNew, {
       router,
       store: new Vuex.Store({
         actions: {
-          createProjectStatus (_, { attributes }) {
-            expect(attributes).to.eql({
-              name: 'New',
-              'display-as': 'list'
-            })
+          createProjectBoardList (_, { attributes }) {
+            expect(attributes).to.eql({ name: 'New' })
             done()
             return Promise.resolve()
           }
@@ -49,10 +46,10 @@ describe('ProjectStatusNew', () => {
   })
 
   it('show errors when they are present', (done) => {
-    let wrapper = mount(ProjectStatusNew, {
+    let wrapper = mount(ProjectBoardListNew, {
       store: new Vuex.Store({
         actions: {
-          createProjectStatus ({ attributes }) {
+          createProjectBoardList ({ attributes }) {
             return Promise.reject({
               status: 'fail',
               data: {

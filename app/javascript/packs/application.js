@@ -38,6 +38,8 @@ import ProjectStatusNew from 'project-statuses/new'
 import ProjectStatusEdit from 'project-statuses/edit'
 import ProjectNew from 'projects/new'
 import ProjectEdit from 'projects/edit'
+import ProjectBoardListNew from 'project-statuses/project-board-lists/new'
+import ProjectBoardListEdit from 'project-board-lists/edit'
 
 require('../config')
 
@@ -105,6 +107,16 @@ document.addEventListener('turbolinks:load', () => {
       {
         path: '/administration/project_statuses/:id/edit',
         component: ProjectStatusEdit,
+        props: true
+      },
+      {
+        path: '/administration/project_statuses/:projectStatusId/project_board_lists/new',
+        component: ProjectBoardListNew,
+        props: true
+      },
+      {
+        path: '/administration/project_board_lists/:id/edit',
+        component: ProjectBoardListEdit,
         props: true
       },
       { path: '/administration/board_lists', component: IssuesBoard },

@@ -1,9 +1,12 @@
 <template lang='pug'>
   .card.project
     .card-body.project-body.row
-      .col-12.text
-        router-link(:to='showPath')
+      .col-10.text
+        a(:href='showPath')
           | {{ name }}
+      .col-2
+        router-link.text-secondary(:to='editPath')
+          .fa.fa-edit
 </template>
 
 <script>
@@ -19,6 +22,9 @@ export default {
     },
     showPath () {
       return `/administration/projects/${this.projectId}`
+    },
+    editPath () {
+      return `/administration/projects/${this.projectId}/edit`
     },
     name () {
       return Utils.attribute(this.project, 'name')

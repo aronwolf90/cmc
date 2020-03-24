@@ -10,6 +10,12 @@ describe Api::V1::ProjectBoardListDeserializer do
       attributes: {
         name: "Test",
         "ordinal-number": 1
+      },
+      relationships: {
+        data: {
+          id: 1,
+          type: "project-statuses"
+        }
       }
     }
   end

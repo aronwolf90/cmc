@@ -1,8 +1,14 @@
 <template lang='pug'>
   .project-status-show
-    board(v-if="projectBoard")
-    template(v-else="")
+    .project-status-show-header
       b-button-group.pull-right
+        b-button(
+          variant="outline-secondary",
+          size="sm",
+          :to="`/administration/project_statuses/${this.id}/project_board_lists/new`",
+          v-if="projectBoard"
+        )
+          .fa.fa-plus
         b-button(
           variant="outline-secondary",
           size="sm",
@@ -12,6 +18,8 @@
         b-button(variant="outline-danger", size="sm", @click="destroy")
           .fa.fa-trash
       h4 {{ title }}
+    board(v-if="projectBoard")
+    template(v-else="")
       br
       ul.list-group.list-lines
         index-list-item(
@@ -45,7 +53,8 @@ export default {
   },
   computed: {
     projectBoard () {
-      return this.$route.query['project-board'] === 'true'
+      return Utils.attribute(this.projectStatus, "display-as")
+        == "board"
     },
     title () {
       return Utils.attribute(this.projectStatus, 'name')
@@ -80,3 +89,10 @@ export default {
   }
 }
 </script>
+
+<style lang='sass' scoped>
+  .project-status-show
+    display: flex
+    flex-flow: column
+    height: 100%
+</style>

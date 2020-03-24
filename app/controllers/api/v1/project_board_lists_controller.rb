@@ -7,7 +7,7 @@ module Api
       namespace ProjectBoardLists
       model_class ProjectBoardList
 
-      public :update
+      public :show, :create, :update, :destroy
     end
   end
 end

@@ -5,7 +5,8 @@ module Api
     class ProjectStatusSerializer < ApplicationSerializer
       attributes(
         :name,
-        :initial
+        :initial,
+        :display_as
       )
 
       has_many :projects, serializer: ProjectSerializer
