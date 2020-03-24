@@ -205,6 +205,10 @@ Then(/^the page contain the element "([^\"]*)"$/) do |text|
   expect(page).to have_css text
 end
 
+Then(/^the page does not contain the element "([^\"]*)"$/) do |text|
+  expect(page).not_to have_css text
+end
+
 Then(/^I am on page "([^\"]*)"$/) do |link|
   sleep 0.2
   expect(page).to have_current_path(link)

@@ -6,7 +6,8 @@
     :disable-destroy-btn='disableDestroyBtn',
     @submit="submit",
     @destroy="destroy",
-    :cancel-path="`/administration/project_statuses/${projectStatusId}?project-board=true`"
+    :cancel-path="`/administration/project_statuses/${projectStatusId}?project-board=true`",
+    v-if="show"
   )
 </template>
 
@@ -26,12 +27,14 @@ export default {
           name: null
         }
       },
-      errors: []
+      errors: [],
+      show: false
     }
   },
   created () {
     this.$store.dispatch('getProjectBoardList', this.id).then(response => {
       this.form.attributes.name = response.data.attributes.name
+      this.show = true
     })
   },
   computed: {
