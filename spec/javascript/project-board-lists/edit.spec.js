@@ -61,11 +61,17 @@ describe('ProjectStatusEdit', () => {
       localVue,
       attachToDocument: true
     })
-    wrapper.find('#input-name').element.value = 'New'
-    wrapper.find('#input-name').trigger('input')
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
-        wrapper.find('[type="submit"]').trigger('click')
+        wrapper.vm.$nextTick(() => {
+          wrapper.find('#input-name').element.value = 'New'
+          wrapper.find('#input-name').trigger('input')
+          wrapper.vm.$nextTick(() => {
+            wrapper.vm.$nextTick(() => {
+              wrapper.find('[type="submit"]').trigger('click')
+            })
+          })
+        })
       })
     })
   })
@@ -98,12 +104,16 @@ describe('ProjectStatusEdit', () => {
       localVue,
       attachToDocument: true
     })
-    wrapper.find('[type="submit"]').trigger('click')
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
+        wrapper.find('[type="submit"]').trigger('click')
         wrapper.vm.$nextTick(() => {
-          expect(wrapper.vm.errors).to.eql([{ source: { pointer: 'attributes/name' } }])
-          done()
+          wrapper.vm.$nextTick(() => {
+            wrapper.vm.$nextTick(() => {
+              expect(wrapper.vm.errors).to.eql([{ source: { pointer: 'attributes/name' } }])
+              done()
+            })
+          })
         })
       })
     })

@@ -18,7 +18,7 @@ Scenario: Get /api/v1/project_statuses
           "attributes":{
             "name":"New",
             "initial":true,
-            "display-as": "board"
+            "display-as":"board"
           },
           "relationships":{
             "projects":{
@@ -41,6 +41,10 @@ Scenario: Get /api/v1/project_statuses
                 },
                 {
                   "id":"2",
+                  "type":"project-board-lists"
+                },
+                {
+                  "id":"3",
                   "type":"project-board-lists"
                 }
               ]
@@ -73,7 +77,7 @@ Scenario: Get /api/v1/project_statuses
             "project-board-lists":{
               "data":[
                 {
-                  "id":"3",
+                  "id":"4",
                   "type":"project-board-lists"
                 }
               ]
@@ -106,7 +110,7 @@ Scenario: Get /api/v1/project_statuses
             "project-board-lists":{
               "data":[
                 {
-                  "id":"4",
+                  "id":"5",
                   "type":"project-board-lists"
                 }
               ]

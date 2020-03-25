@@ -38,6 +38,7 @@ import ProjectStatusNew from 'project-statuses/new'
 import ProjectStatusEdit from 'project-statuses/edit'
 import ProjectNew from 'projects/new'
 import ProjectEdit from 'projects/edit'
+import ProjectShow from 'projects/show'
 import ProjectBoardListNew from 'project-statuses/project-board-lists/new'
 import ProjectBoardListEdit from 'project-board-lists/edit'
 
@@ -93,6 +94,11 @@ document.addEventListener('turbolinks:load', () => {
       {
         path: '/administration/projects/:id/edit',
         component: ProjectEdit,
+        props: true
+      },
+      {
+        path: '/administration/projects/:id',
+        component: ProjectShow,
         props: true
       },
       {

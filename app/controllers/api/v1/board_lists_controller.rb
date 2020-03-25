@@ -4,7 +4,7 @@ module Api
   module V1
     class BoardListsController < ApiController
       include StandartActions
-      namespace BoardLists
+      namespace ::Api::V1::BoardLists
       model_class BoardList
       serializer BoardListSerializer
       collection_query Api::V1::BoardLists::IndexQuery

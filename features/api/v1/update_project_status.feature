@@ -55,7 +55,11 @@ Scenario: Put an valid record using json in PUT body
               {
                 "id":"2",
                 "type":"project-board-lists"
-              }
+              },
+							{
+							  "id": "3",
+								"type": "project-board-lists"
+							}
             ]
           }
         },

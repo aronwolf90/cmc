@@ -26,7 +26,7 @@ Scenario: Post an valid project board list using json in POST body
     """
     {
       "data": {
-        "id": "5",
+        "id": "6",
         "type": "project-board-lists",
         "attributes": {
           "name": "New"
@@ -40,7 +40,7 @@ Scenario: Post an valid project board list using json in POST body
             }
           }
         },
-        "links": { "self": "/api/v1/project_board_lists/5" },
+        "links": { "self": "/api/v1/project_board_lists/6" },
         "meta": {
           "permissions": {
             "update": true, 

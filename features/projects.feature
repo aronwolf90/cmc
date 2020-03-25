@@ -21,6 +21,13 @@ Scenario: Update project
   Then the element "#side-body" contain the text "project title new"
 
 @javascript
+Scenario: Show project
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Projects"
+  And I click on link "Test project 2"
+
+@javascript
 Scenario: Change projekt on board
   Given a test-organization exists
   And I am signed in (multitenant)

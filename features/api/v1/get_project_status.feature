@@ -29,7 +29,8 @@ Scenario: Get
           "project-board-lists": {
             "data": [
               {"id": "1", "type": "project-board-lists"},
-              {"id": "2", "type": "project-board-lists"}
+              {"id": "2", "type": "project-board-lists"},
+              {"id": "3", "type": "project-board-lists"}
             ]
           }
         },
