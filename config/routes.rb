@@ -111,7 +111,14 @@ Rails.application.routes.draw do
       end
 
       resources :records, only: %i[create update]
-      resources :projects, only: %i[index show create update destroy]
+
+      resources :projects, only: %i[index show create update destroy] do
+        scope module: :projects do
+          resources :project_comments, only: :index
+        end
+      end
+      resources :project_comments, only: %i[create]
+
       resources :wiki_categories, only: :index
       resources :wiki_pages, only: %i[show update destroy]
       resources :folders, only: :index

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "standard api index action" do |_namespace|
+RSpec.shared_examples "standard api index action" do |params: { params: {} }|
   describe "GET index" do
-    subject { get :index }
+    subject { get :index, params }
 
     let(:user) { Admin.new }
 

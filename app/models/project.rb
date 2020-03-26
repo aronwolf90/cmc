@@ -12,6 +12,7 @@ class Project < ApplicationRecord
   has_many :project_record_days, -> { ordered }
   belongs_to :project_board_list
   has_one :project_status, through: :project_board_list
+  has_many :project_comments, -> { ordered }
 
   alias_attribute :to_s, :name
 

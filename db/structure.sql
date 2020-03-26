@@ -498,6 +498,39 @@ ALTER SEQUENCE project_board_lists_id_seq OWNED BY project_board_lists.id;
 
 
 --
+-- Name: project_comments; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE project_comments (
+    id bigint NOT NULL,
+    content character varying NOT NULL,
+    project_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: project_comments_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE project_comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: project_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE project_comments_id_seq OWNED BY project_comments.id;
+
+
+--
 -- Name: records; Type: TABLE; Schema: test-organization; Owner: -
 --
 
@@ -895,6 +928,13 @@ ALTER TABLE ONLY project_board_lists ALTER COLUMN id SET DEFAULT nextval('projec
 
 
 --
+-- Name: project_comments id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY project_comments ALTER COLUMN id SET DEFAULT nextval('project_comments_id_seq'::regclass);
+
+
+--
 -- Name: project_statuses id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
@@ -1053,6 +1093,14 @@ ALTER TABLE ONLY organizations
 
 ALTER TABLE ONLY project_board_lists
     ADD CONSTRAINT project_board_lists_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: project_comments project_comments_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY project_comments
+    ADD CONSTRAINT project_comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -1236,6 +1284,20 @@ CREATE UNIQUE INDEX index_organizations_on_name ON organizations USING btree (na
 --
 
 CREATE INDEX index_project_board_lists_on_project_status_id ON project_board_lists USING btree (project_status_id);
+
+
+--
+-- Name: index_project_comments_on_project_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_project_comments_on_project_id ON project_comments USING btree (project_id);
+
+
+--
+-- Name: index_project_comments_on_user_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_project_comments_on_user_id ON project_comments USING btree (user_id);
 
 
 --
@@ -1477,6 +1539,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200319202904'),
 ('20200323123353'),
 ('20200324184439'),
-('20200326110745');
+('20200326110745'),
+('20200326175523');
 
 
