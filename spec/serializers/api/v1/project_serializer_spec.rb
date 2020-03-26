@@ -3,7 +3,13 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::ProjectSerializer, type: :serializer do
-  let(:project) { Project.new(id: 1, name: "Test") }
+  let(:project) do
+    Project.new(
+      id: 1,
+      name: "Test",
+      description: "Description"
+    )
+  end
   let(:project_status) { ProjectStatus.new(id: 1) }
 
   let(:expected_result) do
@@ -12,7 +18,8 @@ RSpec.describe Api::V1::ProjectSerializer, type: :serializer do
         id: "1",
         type: "projects",
         attributes: {
-          name: "Test"
+          name: "Test",
+          description: "Description"
         },
         relationships: {
           "project-status": {

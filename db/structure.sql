@@ -571,7 +571,8 @@ CREATE TABLE projects (
     updated_at timestamp without time zone NOT NULL,
     deleted_at timestamp without time zone,
     project_board_list_id bigint,
-    ordinal_number integer DEFAULT 0
+    ordinal_number integer DEFAULT 0,
+    description character varying
 );
 
 
@@ -1475,6 +1476,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200316212018'),
 ('20200319202904'),
 ('20200323123353'),
-('20200324184439');
+('20200324184439'),
+('20200326110745');
 
 

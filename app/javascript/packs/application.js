@@ -41,6 +41,7 @@ import ProjectEdit from 'projects/edit'
 import ProjectShow from 'projects/show'
 import ProjectBoardListNew from 'project-statuses/project-board-lists/new'
 import ProjectBoardListEdit from 'project-board-lists/edit'
+import MarkdownEditor from 'markdown_editor'
 
 require('../config')
 
@@ -70,6 +71,7 @@ Vue.component('user-configuration-edit', UserConfigurationEdit)
 Vue.component('notification-bell', NotificationBell)
 Vue.component('context-edit', ContextEdit)
 Vue.component('projects-left-aside', ProjectsLeftAside)
+Vue.component('markdown-editor', MarkdownEditor)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')

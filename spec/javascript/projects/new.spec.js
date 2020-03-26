@@ -35,7 +35,10 @@ describe('ProjectNew', () => {
         },
         actions: {
           createProject (_, { attributes, relationships }) {
-            expect(attributes).to.eql({ name: 'New' })
+            expect(attributes).to.eql({
+              name: 'New',
+              description: null
+            })
             expect(relationships).to.eql({
               'project-status': { data: null }
             })
@@ -76,7 +79,8 @@ describe('ProjectNew', () => {
         }
       }),
       localVue,
-      attachToDocument: true
+      attachToDocument: true,
+      stubs: [ 'markdown-editor' ]
     })
     wrapper.find('[type="submit"]').trigger('click')
     wrapper.vm.$nextTick(() => {

@@ -21,7 +21,8 @@ export default {
     return {
       form: {
         attributes: {
-          name: null
+          name: null,
+          description: null
         },
         relationships: {
           'project-status': {
@@ -42,6 +43,7 @@ export default {
     this.$store.dispatch('getProject', this.id).then(response => {
       this.loaded = true
       this.form.attributes.name = response.data.attributes.name
+      this.form.attributes.description = response.data.attributes.description
       this.form.relationships['project-status'].data =
         response.data.relationships['project-status'].data
     })

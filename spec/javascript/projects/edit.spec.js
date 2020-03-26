@@ -48,7 +48,10 @@ describe('ProjectEdit', () => {
             return Promise.resolve({ data: project })
           },
           updateProject (_, { payload }) {
-            expect(payload.attributes).to.eql({ name: 'Test' })
+            expect(payload.attributes).to.eql({
+              name: 'Test',
+              description: undefined
+            })
             expect(payload.relationships).to.eql({
               'project-status': { data: null }
             })

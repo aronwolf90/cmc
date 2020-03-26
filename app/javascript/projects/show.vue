@@ -1,5 +1,5 @@
 <template lang='pug'>
-  .project-show
+  .project-show(v-if="project")
     b-button-group.pull-right
       b-button(
         variant="outline-secondary",
@@ -15,13 +15,18 @@
       )
         .fa.fa-trash
     h4 {{ name }}
+    markdown-viewer(:value='description')
 </template>
 
 <script>
 import { Utils } from 'vuex-jsonapi-client'
+import MarkdownViewer from '../markdown_viewer'
 
 export default {
   props: ['id'],
+  components: {
+    MarkdownViewer
+  },
   created () {
     this.fetch()
   },
@@ -31,6 +36,9 @@ export default {
     },
     name () {
       return Utils.attribute(this.project, 'name')
+    },
+    description () {
+      return Utils.attribute(this.project, 'description')
     }
   },
   methods: {

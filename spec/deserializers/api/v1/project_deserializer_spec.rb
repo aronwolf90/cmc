@@ -9,7 +9,8 @@ describe Api::V1::ProjectDeserializer do
     {
       attributes: {
         name: "Test",
-        'ordinal-number': 1
+        'ordinal-number': 1,
+        description: "Description"
       },
       relationships: {
         "project-status": { data: { id: 1, type: "projects" } },
@@ -24,7 +25,8 @@ describe Api::V1::ProjectDeserializer do
       name: "Test",
       project_status_id: 1,
       project_board_list_id: 1,
-      ordinal_number: 1
+      ordinal_number: 1,
+      description: "Description"
     }
   end
 

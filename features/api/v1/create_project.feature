@@ -11,7 +11,8 @@ Scenario: Post an valid record using json in POST body
     {
       "data": {
         "attributes": {
-          "name": "New"
+          "name": "New",
+          "description": "Description"
         },
         "relationships": {
           "project-status": {
@@ -29,7 +30,8 @@ Scenario: Post an valid record using json in POST body
         "id": "3",
         "type": "projects",
         "attributes": {
-          "name": "New"
+          "name": "New",
+          "description": "Description"
         },
         "links": { "self": "/api/v1/projects/3" },
         "relationships": {

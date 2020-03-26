@@ -15,7 +15,8 @@ Scenario: Get
         "id": "1",
         "type": "projects",
         "attributes": {
-          "name": "Test project"
+          "name": "Test project",
+          "description": "Test description"
         },
         "relationships": {
           "project-status": {

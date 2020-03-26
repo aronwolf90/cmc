@@ -33,6 +33,10 @@
         :state="errorStatus('attributes/name')"
       )
         | {{ error.detail }}
+    markdown-editor(
+      v-model='value.attributes.description'
+    )
+    br
     b-button(type="submit", variant="success") Save
     b-button-group.pull-right
       b-button(variant="danger", @click="destroy") Destroy
@@ -40,7 +44,6 @@
 </template>
 
 <script>
-
 export default {
   props: ['errors', 'value', 'id'],
   computed: {
