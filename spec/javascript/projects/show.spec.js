@@ -41,7 +41,10 @@ describe('ProjectShow', () => {
     const wrapper = mount(ProjectShow, {
       router,
       store: new Vuex.Store(store),
-      localVue
+      localVue,
+      stubs: {
+        comments: true
+      }
     })
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
@@ -55,7 +58,10 @@ describe('ProjectShow', () => {
     const wrapper = mount(ProjectShow, {
       router,
       store: new Vuex.Store(store),
-      localVue
+      localVue,
+      stubs: {
+        comments: true
+      }
     })
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
@@ -72,7 +78,10 @@ describe('ProjectShow', () => {
     const wrapper = mount(ProjectShow, {
       router,
       store: new Vuex.Store(store),
-      localVue
+      localVue,
+      stubs: {
+        comments: true
+      }
     })
     wrapper.find('.fa-trash').trigger('click')
   })

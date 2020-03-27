@@ -41,6 +41,7 @@ import ProjectEdit from 'projects/edit'
 import ProjectShow from 'projects/show'
 import ProjectBoardListNew from 'project-statuses/project-board-lists/new'
 import ProjectBoardListEdit from 'project-board-lists/edit'
+
 import MarkdownEditor from 'markdown_editor'
 
 require('../config')

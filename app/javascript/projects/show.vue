@@ -16,16 +16,20 @@
         .fa.fa-trash
     h4 {{ name }}
     markdown-viewer(:value='description')
+    hr.divider
+    comments(:projectId="id", v-if="project")
 </template>
 
 <script>
 import { Utils } from 'vuex-jsonapi-client'
 import MarkdownViewer from '../markdown_viewer'
+import Comments from 'components/projects/comments'
 
 export default {
   props: ['id'],
   components: {
-    MarkdownViewer
+    MarkdownViewer,
+    Comments
   },
   created () {
     this.fetch()
