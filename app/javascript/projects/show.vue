@@ -23,7 +23,7 @@
 <script>
 import { Utils } from 'vuex-jsonapi-client'
 import MarkdownViewer from '../markdown_viewer'
-import Comments from 'components/projects/comments'
+import Comments from 'components/comments'
 
 export default {
   props: ['id'],
@@ -53,7 +53,7 @@ export default {
       })
     },
     fetch () {
-      this.$store.dispatch('getProject', this.id)
+      this.$store.dispatch('projectsShow/fetch', this.id)
     },
     visitEditPath () {
       Turbolinks.visit(`/administration/projects/${this.id}/edit`)

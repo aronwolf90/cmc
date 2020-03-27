@@ -1,6 +1,6 @@
 import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Comments from '../../../../app/javascript/components/projects/comments'
+import Comments from '../../../app/javascript/components/comments'
 
 const localVue = createLocalVue()
 
@@ -17,7 +17,14 @@ describe('Comments', () => {
   }
   const store = new Vuex.Store(
     {
-      state: {},
+      modules: {
+        projectsShow: {
+          namespaced: true,
+          getters: {
+            comments () { return [comment] }
+          }
+        }
+      },
       getters: {
         projectComment () { return () => comment }
       },

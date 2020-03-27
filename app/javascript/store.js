@@ -35,13 +35,15 @@ import projectBoardListGetters from 'store/models/project-board-list-getters'
 import projectBoardListActions from 'store/models/project-board-list-actions'
 import projectCommentActions from 'store/models/project-comment-actions'
 import projectCommentGetters from 'store/models/project-comment-getters'
+import ProjectsShow from 'store/modules/projects-show'
 
 export default {
   strict: true,
   modules: {
     json_api: JsonApi,
     board: Board,
-    'projects-board': ProjectsBoard
+    'projects-board': ProjectsBoard,
+    projectsShow: ProjectsShow
   },
   getters: {
     ...userGetters,
