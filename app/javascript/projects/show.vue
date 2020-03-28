@@ -17,7 +17,7 @@
     h4 {{ name }}
     markdown-viewer(:value='description')
     hr.divider
-    comments(:projectId="id", v-if="project")
+    comments(:projectId="id", module='projectsShow', v-if="project")
 </template>
 
 <script>

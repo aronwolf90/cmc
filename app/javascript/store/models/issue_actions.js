@@ -7,6 +7,12 @@ export default {
       resource: `issues/${issueId}?include[]=comments`
     })
   },
+  getIssue (context, issueId) {
+    return context.dispatch('get', {
+      endpoint,
+      resource: `issues/${issueId}?include[]=comments`
+    })
+  },
   initIssues (context) {
     return context.dispatch('get', {
       endpoint,

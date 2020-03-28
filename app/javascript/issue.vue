@@ -3,7 +3,7 @@
     show-body
       router-view(:issue-id='id')
       hr.divider
-      comments(:issue-id='id')
+      comments(module="issuesShow")
       br
     right-aside
       assigen(:issue-id='id')
@@ -19,7 +19,7 @@ import RightAside from 'components/right_aside'
 import SpentTime from 'issue/spent_time'
 import Assigen from 'issue/assigen'
 import Complexity from 'issue/complexity'
-import Comments from 'issue/comments'
+import Comments from 'components/comments'
 import ShowContainer from 'components/show-container'
 import ShowBody from 'components/show-body'
 import DueAt from 'issue/due-at'
@@ -40,6 +40,7 @@ export default {
   },
   created () {
     this.$store.dispatch('initIssue', this.id)
+    this.$store.dispatch('issuesShow/fetch', this.id)
   },
   computed: {
     issue () {

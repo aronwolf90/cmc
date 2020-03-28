@@ -5,6 +5,13 @@ import sinon from 'sinon'
 /* eslint-disable no-unused-expressions */
 
 describe('Modules.Board', () => {
+  const comment = {
+    id: 1,
+    type: 'comments',
+    attributes: {
+      content: 'Content'
+    }
+  }
   describe('.getters', () => {
     describe('.boardLists', () => {
       subject(() => Board.getters.boardLists($state, {}, {}, $rootGetters))

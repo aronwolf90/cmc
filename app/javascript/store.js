@@ -36,6 +36,8 @@ import projectBoardListActions from 'store/models/project-board-list-actions'
 import projectCommentActions from 'store/models/project-comment-actions'
 import projectCommentGetters from 'store/models/project-comment-getters'
 import ProjectsShow from 'store/modules/projects-show'
+import issuesShow from 'store/modules/issues-show'
+import commentGetters from 'store/models/comment-getters'
 
 export default {
   strict: true,
@@ -43,7 +45,8 @@ export default {
     json_api: JsonApi,
     board: Board,
     'projects-board': ProjectsBoard,
-    projectsShow: ProjectsShow
+    projectsShow: ProjectsShow,
+    issuesShow: issuesShow
   },
   getters: {
     ...userGetters,
@@ -56,6 +59,8 @@ export default {
     ...projectStatusGetters,
     ...projectBoardListGetters,
     ...projectCommentGetters,
+    ...commentGetters,
+
     currentUser (store) {
       let entry = JsonApi.getters.entry(store.json_api)({
         type: 'contexts',

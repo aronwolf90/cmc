@@ -22,7 +22,7 @@ import { Utils } from 'vuex-jsonapi-client'
 import MarkdownViewer from 'markdown_viewer'
 
 export default {
-  props: ['projectId'],
+  props: ['module'],
   components: {
     MarkdownViewer
   },
@@ -46,16 +46,13 @@ export default {
   },
   computed: {
     comments () {
-      return this.$store.getters['projectsShow/comments']
+      return this.$store.getters[`${this.module}/comments`]
     }
   },
   methods: {
     comment () {
-      this.newCommentData.relationships.project.data = this.project
-      this.newCommentData.relationships.user.data = this.currentUser
-
       if (!this.newCommentData.attributes.content) return
-      this.$store.dispatch('projectsShow/createComment', this.newCommentData)
+      this.$store.dispatch(`${this.module}/createComment`, this.newCommentData)
       this.$refs.markdownEditor.clear()
       this.newCommentData.attributes.content = ""
     }
