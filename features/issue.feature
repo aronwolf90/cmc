@@ -71,3 +71,14 @@ Scenario: Change complexity
   Then the element "#complexity .text" contain the text "0.5"
   And I reload the page
   Then the element "#complexity .text" contain the text "0.5"
+
+@javascript
+Scenario: Comment
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Test issue 1"
+  When I replace the text "test comment" from the markdown editor ".comments .markdown-editor"
+  And I click on ".comments .btn"
+  Then the element ".comment" contain the text "test comment"
+  When I reload the page
+  Then the element ".comment" contain the text "test comment"

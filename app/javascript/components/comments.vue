@@ -1,6 +1,6 @@
 <template lang='pug'>
   .comments
-    .row(v-for='comment in comments')
+    .row.comment(v-for='comment in comments')
       .col-12
         markdown-viewer(:value='comment.attributes.content')
         hr.divider

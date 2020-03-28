@@ -32,6 +32,7 @@ export default {
     },
     setValue (text) { // hack to allow integration tests
       this.editor.setMarkdown(text)
+      this.$emit('input', this.editor.getValue())
       this.$emit('valueChange', this.editor.getValue())
     }
   }

@@ -107,7 +107,7 @@ When(/^an acive issue exists$/) do
 end
 
 When(/^I replace the text "([^\"]*)" from the markdown editor "([^\"]*)"$/) do |text, element|
-  sleep 0.2
+  sleep 0.5
   js_comand = "$('#{element}')[0].editor.setValue('#{text}')"
   page.driver.browser.execute_script(js_comand)
 end
@@ -124,11 +124,7 @@ end
 
 When(/^I click on "([^\"]*)"$/) do |element|
   sleep 0.8
-  if Capybara.current_driver == :selenium
-    find(element, match: :prefer_exact).click
-  else
-    find("a:has(#{element})", match: :prefer_exact).click
-  end
+  find(element, match: :prefer_exact).click
 end
 
 When(/^I click on link "([^\"]*)"$/) do |text|

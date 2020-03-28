@@ -34,3 +34,15 @@ Scenario: Change projekt on board
   When I click on link "Issues"
   And select "Test project 2" from select box "project-select"
   Then the page contain the text "Test project 2 open"
+
+@javascript
+Scenario: Comment
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Projects"
+  And I click on link "Test project 2"
+  When I replace the text "test comment" from the markdown editor ".comments .markdown-editor"
+  And I click on ".comments .btn"
+  Then the element ".comment" contain the text "test comment"
+  When I reload the page
+  Then the element ".comment" contain the text "test comment"
