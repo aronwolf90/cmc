@@ -11,7 +11,6 @@ Given(/^Multi tenant is enabled$/) do
 end
 
 Given(/^a test-organization exists$/) do
-  visit("/")
   allow(Settings).to receive(:multi_tenant).and_return(true)
   RestClient.post(
     "#{Capybara.app_host}/api/v1/test_organizations",
@@ -41,13 +40,6 @@ Given(/^a premium test-organization exists$/) do
   )
 end
 
-def find_or_create_current_user
-  Admin.find_or_create_by!(email: "admin@lvh.me") do |user|
-    user.password = "testtest"
-    user.password_confirmation = "testtest"
-  end
-end
-
 Given(/^I am registered$/) do
   Admin.create!(email: "admin@lvh.me", password: "testtest", password_confirmation: "testtest")
 end
@@ -67,11 +59,7 @@ Given(/^Organization is not premium$/) do
 end
 
 Given(/^I am signed in \(multitenant\)$/) do
-  find_or_create_current_user
-  visit "/users/sign_in"
-  expect(page).to have_css "[name='organization']"
-  fill_in "organization", with: "test-organization"
-  find('input[type="submit"]').click
+  visit "http://test-organization.lvh.me:3000/users/sign_in"
   expect(page).to have_css "[name='user_email'], #user_email"
   fill_in "user_email", with: "admin@lvh.me"
   fill_in "user_password", with: "testtest"
@@ -87,13 +75,11 @@ Given(/^5 additional users exist$/) do
 end
 
 When(/^I navigate to "([^\"]*)"$/) do |link|
-  sleep 0.2
   visit link
 end
 
 When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
   fill_in name, with: text
-  sleep 0.2
   find("body").click
 end
 
@@ -102,38 +88,43 @@ When(/^I check the input named "([^\"]*)"$/) do |name|
 end
 
 When(/^an acive issue exists$/) do
-  sleep 0.4
+  expect(page).to have_css ".fa-play"
   find(".fa-play", match: :prefer_exact).click
 end
 
 When(/^I replace the text "([^\"]*)" from the markdown editor "([^\"]*)"$/) do |text, element|
-  sleep 0.5
+  expect(page).to have_css element
   js_comand = "$('#{element}')[0].editor.setValue('#{text}')"
   page.driver.browser.execute_script(js_comand)
 end
 
 When(/^I enter "([^\"]*)" into "([^\"]*)"$/) do |text, element|
-  sleep 0.2
+  expect(page).to have_css element
   find(element).set(text)
 end
 
 When(/^I click on submit$/) do
-  sleep 0.2
+  expect(page).to have_css 'input[name="commit"], button[type="submit"]'
   find('input[name="commit"], button[type="submit"]').click
 end
 
 When(/^I click on "([^\"]*)"$/) do |element|
-  sleep 0.8
+  expect(page).to have_css element
   find(element, match: :prefer_exact).click
 end
 
 When(/^I click on link "([^\"]*)"$/) do |text|
-  sleep 0.8
+  expect(page).to have_text text
   find("a", text: text, match: :prefer_exact).click
 end
 
+When(/^I click on aside link "([^\"]*)"$/) do |text|
+  expect(page).to have_text text
+  find(".nav a", text: text, match: :prefer_exact).click
+end
+
 When(/^I click on button "([^\"]*)"$/) do |text|
-  sleep 0.8
+  expect(page).to have_text text
   find("button", text: text, match: :prefer_exact).click
 end
 
@@ -157,7 +148,6 @@ When(/^I drag "([^\"]*)" to "([^\"]*)"$/) do |from, to|
 end
 
 When(/^I set due at to one hour from now$/) do
-  sleep 0.5
   fill_in(
     "due-at",
     with: 1.hour.from_now.strftime("%d-%m-%Y %H:%M"),
@@ -197,7 +187,6 @@ Then(/^the element "([^\"]*)" does not contain the text "([^\"]*)"$/) do |elemen
 end
 
 Then(/^the page contain the element "([^\"]*)"$/) do |text|
-  sleep 0.2
   expect(page).to have_css text
 end
 
@@ -206,22 +195,18 @@ Then(/^the page does not contain the element "([^\"]*)"$/) do |text|
 end
 
 Then(/^I am on page "([^\"]*)"$/) do |link|
-  sleep 0.2
   expect(page).to have_current_path(link)
 end
 
 Then(/^the input "([^\"]*)" has the value "([^\"]*)"$/) do |input_name, value|
-  sleep 0.2
   expect(find_field(input_name).value).to eq value
 end
 
 Then(/the page contain the current year/) do
-  sleep 0.2
   expect(page).to have_content Date.current.year
 end
 
 Then(/the page contain the year of one week ago/) do
-  sleep 0.2
   expect(page).to have_content 2.week.ago.year
 end
 

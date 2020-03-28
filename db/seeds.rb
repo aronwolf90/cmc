@@ -11,7 +11,7 @@ if Apartment::Tenant.current == "public" && Organization.none?
   end
 end
 
-if !Settings.multi_tenant || Apartment::Tenant.current != "public"
+if (!Settings.multi_tenant || Apartment::Tenant.current != "public") && BoardList.none?
   shared_path = Rails.root.join("db", "fixtures", "shared", "*.rb")
   path = Rails.root.join("db", "fixtures", ENV["SEEDS_FOLDER"] || Rails.env, "*.rb")
 
@@ -22,4 +22,8 @@ if !Settings.multi_tenant || Apartment::Tenant.current != "public"
   Dir[path].sort.each do |file|
     load file
   end
+end
+
+ActiveRecord::Base.connection.tables.each do |t|
+  ActiveRecord::Base.connection.reset_pk_sequence!(t)
 end
