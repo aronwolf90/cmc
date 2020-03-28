@@ -31,14 +31,26 @@ Scenario: Show issue
   And the element "#side-body" contain the text "description"
 
 @javascript
-Scenario: Edit issue
+Scenario: Edit issue with all fields changed
   Given a test-organization exists
   And I am signed in (multitenant)
   When I click on link "Test issue 1"
   And I click on ".fa-edit"
-  And I replace the text "test" from the markdown editor "form .markdown-editor"
+  And I enter "new issue name" into input named "name-input"
+  And I replace the text "new description" from the markdown editor "form .markdown-editor"
   And I click on ".show-body [type='submit']"
-  Then the element "#side-body" contain the text "test"
+  Then the element "#side-body" contain the text "new issue name"
+  And the element "#side-body" contain the text "new description"
+
+@javascript
+Scenario: Edit issue with all not necessary fields removed
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Test issue 1"
+  And I click on ".fa-edit"
+  And I replace the text "" from the markdown editor "form .markdown-editor"
+  And I click on ".show-body [type='submit']"
+  Then the element "#side-body" does not contain the text "description for the test issue"
 
 @javascript
 Scenario: Delete issue

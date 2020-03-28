@@ -11,7 +11,6 @@ module Api::V1
         required(:data).schema do
           optional(:attributes).schema do
             optional(:title).filled
-            optional(:description).filled
           end
           optional(:relationships).schema do
             optional(:user).schema(RequiredBelongsToSchema)

@@ -9,8 +9,7 @@ describe Api::V1::Issues::UpdateForm do
     {
       data: {
         attributes: {
-          title: "title",
-          description: "description"
+          title: "title"
         },
         relationships: {
           user: { data: { id: 1, type: "users" } }
@@ -28,6 +27,12 @@ describe Api::V1::Issues::UpdateForm do
     it "form is valid" do
       expect(subject).to be_success
     end
+  end
+
+  it "is valid when description is blank" do
+    params[:data][:attributes][:description] = ""
+
+    expect(subject).to be_success
   end
 
   context "without user id" do

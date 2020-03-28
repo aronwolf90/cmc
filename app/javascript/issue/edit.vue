@@ -6,7 +6,8 @@
           type="text",
           v-model="form.attributes.title",
           required,
-          placeholder="Title"
+          placeholder="Title",
+          id="name-input"
         )
         br
     .row
