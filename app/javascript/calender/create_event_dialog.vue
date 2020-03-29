@@ -66,7 +66,7 @@ export default {
         attributes: {
           title: this.form.title,
           'start-time': `${this.form.date} ${this.form.startTime}`,
-          'end-time': `${this.form.date} ${this.form.endTime}`,
+          'end-time': this.form.endTime ? `${this.form.date} ${this.form.endTime}`: null,
           'all-day': !this.form.nonAllDay,
           'description': this.form.description
         }

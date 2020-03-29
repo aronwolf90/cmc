@@ -70,7 +70,7 @@ export default {
        attributes: {
          title: this.form.title,
          'start-time': `${this.form.date} ${this.form.startTime}`,
-         'end-time': `${this.form.date} ${this.form.endTime}`,
+         'end-time': this.form.endTime ? `${this.form.date} ${this.form.endTime}`: null,
          'all-day': !this.form.nonAllDay,
          'description': this.form.description
        }
@@ -96,7 +96,7 @@ export default {
     },
     startTime () {
       let date = Utils.attribute(this.event, 'start-time')
-      return date.substring(11, 6)
+      return date.substring(11, 16)
     },
     endTime () {
       let date = Utils.attribute(this.event, 'end-time')
@@ -116,7 +116,7 @@ export default {
         Utils.attribute(this.event, 'description')
       this.$set(this.form, "date", this.date)
       this.form.startTime = this.startTime
-      this.form.endTime = this.endTime || this.startTime
+      this.form.endTime = this.endTime
 
       this.jqueryFuncs()
     }
