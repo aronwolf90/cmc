@@ -1,6 +1,6 @@
 <template lang='pug'>
   li.list-group-item
-    a.text-dark(:href="`${resource}/${entryId}`")
+    a.text-dark(:href="`/administration/${resource}/${entryId}`")
       | {{ text || '---' }}
     a.btn.btn-secondary.btn-sm.pull-right(
       v-if="editBtn",
