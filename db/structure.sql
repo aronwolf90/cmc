@@ -328,7 +328,8 @@ CREATE TABLE folders (
     name character varying NOT NULL,
     folder_id bigint,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    project_id bigint
 );
 
 
@@ -1231,6 +1232,13 @@ CREATE INDEX index_folders_on_folder_id ON folders USING btree (folder_id);
 
 
 --
+-- Name: index_folders_on_project_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_folders_on_project_id ON folders USING btree (project_id);
+
+
+--
 -- Name: index_issues_on_board_list_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
@@ -1540,6 +1548,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200323123353'),
 ('20200324184439'),
 ('20200326110745'),
-('20200326175523');
+('20200326175523'),
+('20200329144806');
 
 

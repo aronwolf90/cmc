@@ -9,6 +9,7 @@ module Api
       attributes :description
 
       belongs_to :project_status, serializer: ProjectStatusSerializer
+      has_one :folder, serializer: FolderSerializer
 
       link(:self) { api_v1_project_path(object) }
     end

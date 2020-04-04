@@ -29,7 +29,7 @@ Scenario: Create a document
     """
     {
       "data": {
-        "id": "2",
+        "id": "4",
         "type": "documents",
         "attributes": { 
           "name": "Test",
@@ -44,7 +44,7 @@ Scenario: Create a document
           }
         },
         "links": {
-          "self": "/api/v1/documents/2"
+          "self": "/api/v1/documents/4"
         },
         "meta": {
           "permissions": {

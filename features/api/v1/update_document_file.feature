@@ -14,7 +14,7 @@ Scenario: Create an contact
     """
     {
       "data": {
-        "id": "2",
+        "id": "4",
         "type": "document-files",
         "meta": {
           "permissions": {
@@ -26,7 +26,7 @@ Scenario: Create an contact
     }
     """
   And the response status should be "201"
-  When I send a multipart PUT request to "/api/v1/document_files/2" with:
+  When I send a multipart PUT request to "/api/v1/document_files/4" with:
        | Name                | Content    | Filename      | Type          |
        | data[file]          |            | document1.txt | plain/txt     |            
   Then the response status should be "204"

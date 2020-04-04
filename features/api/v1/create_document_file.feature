@@ -14,7 +14,7 @@ Scenario: Create an contact
     """
     {
       "data": {
-        "id": "2",
+        "id": "4",
         "type": "document-files",
         "meta": {
           "permissions": {

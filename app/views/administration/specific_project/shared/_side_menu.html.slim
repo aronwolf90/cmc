@@ -8,4 +8,7 @@
   = asside_item("Records",
       path: administration_project_records_path(@project),
       policy: policy(Record).index?)
+  = asside_item("Documents",
+      path: administration_project_documents_path(@project),
+      policy: true)
   = render "administration/shared/shared_issue_section"

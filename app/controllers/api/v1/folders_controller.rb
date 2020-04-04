@@ -6,6 +6,6 @@ module Api::V1
     model_class Folder
     serializer FolderSerializer
 
-    public :index
+    public :index, :show
   end
 end

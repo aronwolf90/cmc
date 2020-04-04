@@ -41,8 +41,11 @@ import ProjectEdit from 'projects/edit'
 import ProjectShow from 'projects/show'
 import ProjectBoardListNew from 'project-statuses/project-board-lists/new'
 import ProjectBoardListEdit from 'project-board-lists/edit'
-
 import MarkdownEditor from 'markdown_editor'
+import ProjectsDetailLeftAside from 'components/projects-detail-left-aside'
+import ProjectsDocumentsIndex from 'projects/documents/index'
+import ProjectsDocumentsNew from 'projects/documents/new'
+import ProjectsDocumentsEdit from 'projects/documents/edit'
 
 require('../config')
 
@@ -73,6 +76,7 @@ Vue.component('notification-bell', NotificationBell)
 Vue.component('context-edit', ContextEdit)
 Vue.component('projects-left-aside', ProjectsLeftAside)
 Vue.component('markdown-editor', MarkdownEditor)
+Vue.component('projects-detail-left-aside', ProjectsDetailLeftAside)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')
@@ -102,6 +106,21 @@ document.addEventListener('turbolinks:load', () => {
       {
         path: '/administration/projects/:id',
         component: ProjectShow,
+        props: true
+      },
+      {
+        path: '/administration/projects/:projectId/documents',
+        component: ProjectsDocumentsIndex,
+        props: true
+      },
+      {
+        path: '/administration/projects/:projectId/documents/new',
+        component: ProjectsDocumentsNew,
+        props: true
+      },
+      {
+        path: '/administration/projects/:projectId/documents/:id/edit',
+        component: ProjectsDocumentsEdit,
         props: true
       },
       {
@@ -146,4 +165,8 @@ document.addEventListener('turbolinks:load', () => {
     ]
   })
   var app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */
+  router.beforeEach((to, from, next) => {
+    store.commit('clearCalledUrls')
+    next()
+  })
 })

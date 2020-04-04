@@ -1,5 +1,5 @@
 <template lang='pug'>
-  b-form(@submit="onSubmit")
+  b-form(@submit.prevent="$emit('submit')")
     b-form-group(
       id="input-name-label",
       label="Name:",
@@ -7,7 +7,7 @@
     )
       b-form-input(
         id="input-name",
-        v-model="form.name",
+        v-model="value.attributes.name",
         :state="errorStatus('attributes/name')",
         type="text"
       )
@@ -23,10 +23,11 @@
     b-form-group(
       id="folder-label",
       label="Folder:",
-      label-for="folder"
+      label-for="folder",
+      v-if="selectFolder"
     )
       b-form-select(
-        v-model='form.folder',
+        v-model='value.relationships.folder.data',
         id='folder',
         :state="errorStatus('data/relationships/folder')",
         :options='folders'
@@ -42,56 +43,14 @@
 </template>
 
 <script>
-import InputFile from '../components/inputs/file'
+import InputFile from 'components/inputs/file'
 
 export default {
   components: {
     InputFile
   },
-  props: [
-    'name',
-    'folder-type',
-    'folder-id',
-    'errors'
-  ],
-  data () {
-    return {
-      form: {
-        name: null,
-        folder: null
-      },
-      documentFile: null
-    } 
-  },
-  mounted () {
-    this.form.name = this.name
-    this.form.folder = {
-      type: this.folderType,
-      id: this.folderId
-    }
-  },
+  props: ['value', 'errors', 'select-folder'],
   methods: {
-    onSubmit (event) {
-      event.preventDefault()
-      
-      let payload = {
-        attributes: {
-          name: this.form.name,
-        },
-        relationships: {
-          folder: {
-            data: {
-              id: this.form.folder.id,
-              type: this.form.folder.type
-            }
-          }
-        }
-      }
-      if (this.documentFile) {
-        payload.attributes['document-file-id'] = this.documentFile.id
-      }
-      this.$emit('onSubmit', payload)
-    },
     errorStatus (pointer) {
       let errors = this.findErrors(pointer)
       return errors.length == 0 ? null: false
@@ -105,7 +64,7 @@ export default {
       })
     },
     setDocumentFile (documentFile) {
-      this.documentFile = documentFile
+      this.value.attributes['document-file-id'] = documentFile.id
     },
   },
   computed: {
@@ -119,7 +78,12 @@ export default {
   },
   asyncComputed: {
     result () {
-      return this.$store.dispatch('getArchiveFolders')
+      return this.$store.dispatch('initFolders')
+    }
+  },
+  watch: {
+    value () {
+      this.$emit('input', this.value)
     }
   }
 }

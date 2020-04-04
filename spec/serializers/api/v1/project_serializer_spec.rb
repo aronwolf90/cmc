@@ -7,7 +7,8 @@ RSpec.describe Api::V1::ProjectSerializer, type: :serializer do
     Project.new(
       id: 1,
       name: "Test",
-      description: "Description"
+      description: "Description",
+      folder: Folder.new(id: 1)
     )
   end
   let(:project_status) { ProjectStatus.new(id: 1) }
@@ -27,6 +28,12 @@ RSpec.describe Api::V1::ProjectSerializer, type: :serializer do
               id: "1",
               type: "project-statuses"
             }
+          },
+          "folder": {
+            data: {
+              id: "1",
+              type: "folders"
+            }
           }
         },
         links: { self: "/api/v1/projects/1" }
@@ -34,7 +41,9 @@ RSpec.describe Api::V1::ProjectSerializer, type: :serializer do
     }
   end
 
-  before { allow(project).to receive(:project_status).and_return(project_status) }
+  before do
+    allow(project).to receive(:project_status).and_return(project_status)
+  end
 
   it "serialize project in the correct way" do
     expect(serialize(project)).to eq expected_result

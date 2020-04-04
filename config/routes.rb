@@ -48,6 +48,9 @@ Rails.application.routes.draw do
 
     get "/projects/new", to: "projects#index", as: "project_new"
     get "/projects/:id/edit", to: "projects#index", as: "project_edit"
+    get "/projects/:id/documents", to: "projects#show", as: "project_documents"
+    get "/projects/:id/documents/edit", to: "projects#show", as: "project_documents_edit"
+    get "/projects/:id/documents/new", to: "projects#show", as: "project_documents_new"
     resources :projects, only: %i[index show] do
       scope module: :projects do
         resources :records, only: :index
@@ -121,7 +124,7 @@ Rails.application.routes.draw do
 
       resources :wiki_categories, only: :index
       resources :wiki_pages, only: %i[show update destroy]
-      resources :folders, only: :index
+      resources :folders, only: %i[index show]
       resources :user_issues, only: %i[index show]
       resources :events, only: %i[index create update destroy]
       resources :attendance_days, only: :index

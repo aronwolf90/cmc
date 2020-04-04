@@ -1,5 +1,5 @@
 <template lang='pug'>
-  b-form(@submit="onSubmit")
+  b-form(@submit.prevent="$emit('submit')")
     b-form-group(
       id="input-name-label",
       label="Name:",
@@ -7,7 +7,7 @@
     )
       b-form-input(
         id="input-name",
-        v-model="form.name",
+        v-model="value.attributes.name",
         :state="errorStatus('attributes/name')",
         type="text"
       )
@@ -15,18 +15,13 @@
         v-for="error in findErrors('attributes/name')"
       )
         | {{ error.detail }}
-    input-file(
-      endpoint="/api/v1/document_files",
-      :errors="findErrors('data/attributes/document-file-id')",
-      @input="setDocumentFile"
-    )
     b-form-group(
       id="folder-label",
       label="Folder:",
       label-for="folder"
     )
       b-form-select(
-        v-model='form.folder',
+        v-model='value.folder',
         id='folder',
         :state="errorStatus('data/relationships/folder')",
         :options='folders'
@@ -42,56 +37,28 @@
 </template>
 
 <script>
-import InputFile from '../components/inputs/file'
+import InputFile from 'components/inputs/file'
 
 export default {
   components: {
     InputFile
   },
-  props: [
-    'name',
-    'folder-type',
-    'folder-id',
-    'errors'
-  ],
-  data () {
-    return {
-      form: {
-        name: null,
-        folder: null
-      },
-      documentFile: null
-    } 
-  },
-  mounted () {
-    this.form.name = this.name
-    this.form.folder = {
-      type: this.folderType,
-      id: this.folderId
+  props: ['value', 'errors', 'folders', 'projectFolder'],
+  computed: {
+    folderOptions () {
+      this.folders.map(folder => {
+        if (Utils.esameRef(folder, projectFolder)) {
+          return { value: Utils.entryToRef(folder), text: "" }
+        } else {
+          return {
+            value: Utils.entryToRef(folder),
+            text: Utils.attribute(folder, 'name')
+          }
+        }
+      })
     }
   },
   methods: {
-    onSubmit (event) {
-      event.preventDefault()
-      
-      let payload = {
-        attributes: {
-          name: this.form.name,
-        },
-        relationships: {
-          folder: {
-            data: {
-              id: this.form.folder.id,
-              type: this.form.folder.type
-            }
-          }
-        }
-      }
-      if (this.documentFile) {
-        payload.attributes['document-file-id'] = this.documentFile.id
-      }
-      this.$emit('onSubmit', payload)
-    },
     errorStatus (pointer) {
       let errors = this.findErrors(pointer)
       return errors.length == 0 ? null: false
@@ -108,20 +75,11 @@ export default {
       this.documentFile = documentFile
     },
   },
-  computed: {
-    folders () {
-      if (!this.result) return []
-      return this.result.data.map(folder => ({
-        value: { id: folder.id, type: folder.type },
-        text: folder.attributes.name
-      }))
+  watch: {
+    value () {
+      this.$emit('input', this.value)
     }
   },
-  asyncComputed: {
-    result () {
-      return this.$store.dispatch('getArchiveFolders')
-    }
-  }
 }
 </script>
 

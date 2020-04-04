@@ -34,6 +34,11 @@ module Projects
             ordinal_number: 2,
             project_id: model.id
           )
+          mutation(Folder, :create).call(
+            model: Folder.new,
+            name: model.name,
+            project_id: model.id
+          )
         end
       end
     end

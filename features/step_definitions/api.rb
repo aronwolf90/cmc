@@ -87,9 +87,11 @@ Then(/^the JSON response should be:$/) do |json|
   actual = JSON.parse(@response.body)
   diff = Hashdiff.diff(actual, expected)
 
-  if diff.first&.third.to_s.size < 30
-    expect(diff).to be_empty
-  else
+  if diff.first&.third.to_s.size < 100
+    if ENV["PRINT_RESPONSE"]
+      puts "The response is:" 
+      puts JSON.pretty_generate(actual)
+    end
     expect(actual).to eq(expected)
   end
 end

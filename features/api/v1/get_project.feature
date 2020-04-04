@@ -24,6 +24,12 @@ Scenario: Get
               "id": "1",
               "type": "project-statuses"
             }
+          },
+          "folder": {
+            "data": {
+              "id": "1",
+              "type": "folders"
+            }
           }
         },
         "links": { "self": "/api/v1/projects/1" },

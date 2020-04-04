@@ -7,4 +7,5 @@ RSpec.describe Api::V1::FoldersController, type: :controller do
   let(:model) { Folder.new(id: 1) }
 
   include_examples "standard api index action"
+  include_examples "standard api show action"
 end

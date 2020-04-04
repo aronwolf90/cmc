@@ -17,7 +17,7 @@ export default {
     Folder
   },
   created () {
-    this.$store.dispatch('initFolders')
+    this.$store.dispatch('getArchiveFolders')
   },
   computed: {
     rootFolders() {

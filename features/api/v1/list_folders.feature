@@ -10,26 +10,142 @@ Scenario: Get
   Then the JSON response should be:
     """
     {
-      "data": [{
-        "id": "1",
-        "type": "folders",
-        "attributes": {
-          "name": "folder 1",
-          "root": true
+      "data": [
+        {
+          "id": "1",
+          "type": "folders",
+          "attributes": {
+            "name": "Test project",
+            "root": true
+          },
+          "relationships": {
+            "folder": {
+              "data": null
+            },
+            "folders": {
+              "data": [
+
+              ]
+            },
+            "documents": {
+              "data": [
+                {
+                  "id": "1",
+                  "type": "documents"
+                }
+              ]
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
         },
-        "relationships": {
-          "folder": { "data": null },
-          "folders": { "data": [] },
-          "documents": { "data": [{ "id": "1", "type": "documents" }] }
+        {
+          "id": "2",
+          "type": "folders",
+          "attributes": {
+            "name": "Test project 1",
+            "root": true
+          },
+          "relationships": {
+            "folder": {
+              "data": null
+            },
+            "folders": {
+              "data": [
+
+              ]
+            },
+            "documents": {
+              "data": [
+                {
+                  "id": "2",
+                  "type": "documents"
+                }
+              ]
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
         },
-        "meta": {
-          "permissions": {
-            "update": true,
-            "destroy": true
+        {
+          "id": "3",
+          "type": "folders",
+          "attributes": {
+            "name": "folder 1",
+            "root": true
+          },
+          "relationships": {
+            "folder": {
+              "data": null
+            },
+            "folders": {
+              "data": [
+                {
+                  "id": "4",
+                  "type": "folders"
+                }
+              ]
+            },
+            "documents": {
+              "data": [
+                {
+                  "id": "3",
+                  "type": "documents"
+                }
+              ]
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
+        },
+        {
+          "id": "4",
+          "type": "folders",
+          "attributes": {
+            "name": "folder 2",
+            "root": false
+          },
+          "relationships": {
+            "folder": {
+              "data": {
+                "id": "3",
+                "type": "folders"
+              }
+            },
+            "folders": {
+              "data": [
+
+              ]
+            },
+            "documents": {
+              "data": [
+
+              ]
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
           }
         }
-      }],
-      "links": { "self": "/api/v1/folders" }
+      ],
+      "links": {
+        "self": "/api/v1/folders"
+      }
     }
     """
   And the response status should be "200"

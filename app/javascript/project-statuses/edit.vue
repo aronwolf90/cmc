@@ -2,7 +2,8 @@
   project-status-form(
     v-model="form",
     :errors="errors",
-    @submit="submit"
+    @submit="submit",
+    v-if="show"
   )
 </template>
 
@@ -16,6 +17,7 @@ export default {
   },
   data () {
     return {
+      show: false,
       form: {
         attributes: {
           name: null
@@ -29,6 +31,7 @@ export default {
       this.form.attributes.name = response.data.attributes.name
       this.form.attributes['display-as'] =
         response.data.attributes['display-as']
+      this.show = true
     })
   },
   computed: {

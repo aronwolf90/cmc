@@ -8,5 +8,16 @@ export default {
     return getters.folders.filter(folder => {
       return Utils.attribute(folder, 'root')
     })
+  },
+  projectFolders (store, getters) {
+    return projectId => {
+      return getters.associatedEntries({
+        entry: getters.associatedEntry({
+          entry: getters.project(projectId),
+          name: 'folder'
+        }),
+        name: 'folders'
+      })
+    }
   }
 }

@@ -29,6 +29,6 @@ describe('Document', () => {
 
   it('edit link is presetnt', () => {
     expect($subject.html()).to
-      .include('/administration/archive/documents/1/edit')
+      .include('/documents/1/edit')
   })
 })

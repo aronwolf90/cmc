@@ -38,6 +38,7 @@ import projectCommentGetters from 'store/models/project-comment-getters'
 import ProjectsShow from 'store/modules/projects-show'
 import issuesShow from 'store/modules/issues-show'
 import commentGetters from 'store/models/comment-getters'
+import documentGetters from 'store/models/document-getters'
 
 export default {
   strict: true,
@@ -60,6 +61,7 @@ export default {
     ...projectBoardListGetters,
     ...projectCommentGetters,
     ...commentGetters,
+    ...documentGetters,
 
     currentUser (store) {
       let entry = JsonApi.getters.entry(store.json_api)({

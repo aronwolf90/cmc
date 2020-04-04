@@ -33,12 +33,18 @@ Scenario: Post an valid record using json in POST body
           "name": "New",
           "description": "Description"
         },
-        "links": { "self": "/api/v1/projects/3" },
         "relationships": {
           "project-status": {
             "data": { "id": "1", "type": "project-statuses" }
+          },
+          "folder": {
+            "data": {
+              "id": "5",
+              "type": "folders"
+            }
           }
         },
+        "links": { "self": "/api/v1/projects/3" },
         "meta": {
           "permissions": {
             "update": true, 

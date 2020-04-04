@@ -26,7 +26,7 @@ export default {
       return Utils.attribute(this.document, 'url')
     },
     editLink () {
-      return `/administration/archive/documents/${this.document.id}/edit`
+      return `archive/documents/${this.document.id}/edit`
     }
   }
 }

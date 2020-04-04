@@ -22,6 +22,12 @@ Scenario: GET /api/v1/board_lists/<id>/issues
           "relationships": {
             "project-status": {
               "data": {"id": "1", "type": "project-statuses" }
+            },
+            "folder": {
+              "data": {
+                "id": "1",
+                "type": "folders"
+              }
             }
           },
           "links":{ 

@@ -10,9 +10,10 @@ class Project < ApplicationRecord
   has_many :user_projects
   has_many :users, through: :user_projects
   has_many :project_record_days, -> { ordered }
+  has_many :project_comments, -> { ordered }
   belongs_to :project_board_list
   has_one :project_status, through: :project_board_list
-  has_many :project_comments, -> { ordered }
+  has_one :folder
 
   alias_attribute :to_s, :name
 
