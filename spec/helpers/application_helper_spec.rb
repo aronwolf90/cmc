@@ -30,49 +30,6 @@ describe ApplicationHelper do
     end
   end
 
-  describe "#asside_item" do
-    subject do
-      helper.asside_item(
-        "Projects",
-        path: administration_projects_path,
-        policy: true
-      )
-    end
-
-    specify do
-      is_expected.to eq '<li><a href="/administration/projects">Projects</a></li>'
-    end
-  end
-
-  describe "#top_asside_item" do
-    subject do
-      helper.top_asside_item(
-        "Projects",
-        icon: :building,
-        path: administration_projects_path
-      )
-    end
-
-    specify do
-      is_expected.to eq '<li><a href="/administration/projects"><i class="fa fa-building fa-lg"></i>&nbsp &nbsp Projects</a></li>'
-    end
-  end
-
-  describe "#menu_item" do
-    subject do
-      helper.menu_item(
-        "Projects",
-        path: administration_projects_path,
-        includes: administration_projects_path,
-        policy: true
-      )
-    end
-
-    specify do
-      is_expected.to eq '<li class="nav-item "><a class="nav-link small" href="/administration/projects">Projects</a></li>'
-    end
-  end
-
   describe "#left_menu" do
     subject do
       helper.left_menu { "</br>".html_safe }
@@ -125,7 +82,7 @@ describe ApplicationHelper do
 
   describe "#dropdown_link" do
     subject do
-      helper.dropdown_link "link", administration_projects_path
+      helper.dropdown_link "link", "/administration/projects"
     end
 
     specify do

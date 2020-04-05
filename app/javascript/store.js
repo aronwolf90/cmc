@@ -49,6 +49,14 @@ export default {
     projectsShow: ProjectsShow,
     issuesShow: issuesShow
   },
+  state: {
+    aside: null
+  },
+  mutations: {
+    setAside (state, name) {
+      state.aside = name
+    }
+  },
   getters: {
     ...userGetters,
     ...folderGetters,
@@ -108,6 +116,9 @@ export default {
             userId === event.relationships.user.data.id
         })
       }
+    },
+    aside (state) {
+      return state.aside
     }
   },
   actions: {

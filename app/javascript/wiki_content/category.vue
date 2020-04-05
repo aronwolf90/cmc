@@ -2,7 +2,7 @@
   .category.category-item
     .title.fa.fa-tags 
       | {{ title }}&nbsp;&nbsp
-    a(:href='editLink')
+    router-link(:to='editLink')
       .fa.fa-edit
     .child-pages
       page(

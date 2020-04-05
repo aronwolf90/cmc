@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "administration/board_lists/form" do
+RSpec.describe "administration/board_lists/no_layout_form" do
   helper AdministrationHelper
 
   subject { rendered }

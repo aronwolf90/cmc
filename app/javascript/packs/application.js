@@ -46,6 +46,10 @@ import ProjectsDetailLeftAside from 'components/projects-detail-left-aside'
 import ProjectsDocumentsIndex from 'projects/documents/index'
 import ProjectsDocumentsNew from 'projects/documents/new'
 import ProjectsDocumentsEdit from 'projects/documents/edit'
+import LeftAside from 'components/left-aside'
+import RailsPage from 'components/rails-page'
+import MenuItem from 'components/menu-item'
+import Asides from 'components/asides'
 
 require('../config')
 
@@ -77,10 +81,14 @@ Vue.component('context-edit', ContextEdit)
 Vue.component('projects-left-aside', ProjectsLeftAside)
 Vue.component('markdown-editor', MarkdownEditor)
 Vue.component('projects-detail-left-aside', ProjectsDetailLeftAside)
+Vue.component('left-aside', LeftAside)
+Vue.component('menu-item', MenuItem)
+Vue.component('asides', Asides)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')
 store.commit('vue', Vue)
+window.store = store
 
 if (document.querySelector('meta[name="csrf-token"]')) {
   store.getters.axios.defaults.headers.common['X-CSRF-Token'] =
@@ -95,78 +103,271 @@ document.addEventListener('turbolinks:load', () => {
   const router = new Router({
     mode: 'history',
     routes: [
-      { path: '/', redirect: window.location.pathname },
-      { path: '/administration/projects', component: ProjectsIndex },
-      { path: '/administration/projects/new', component: ProjectNew },
+      {
+        path: '/',
+        redirect: window.location.pathname,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration',
+        component: RailsPage,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/board_lists',
+        component: IssuesBoard,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/board_lists/new',
+        component: RailsPage,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/board_lists/:id/edit',
+        component: RailsPage,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/calender',
+        component: Calender,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/attendances',
+        component: Attendances,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/projects',
+        component: ProjectsIndex,
+        meta: { aside: 'projects' }
+      },
+      {
+        path: '/administration/projects/new',
+        component: ProjectNew,
+        meta: { aside: 'projects' }
+      },
       {
         path: '/administration/projects/:id/edit',
         component: ProjectEdit,
-        props: true
+        props: true,
+        meta: { aside: 'projects' }
       },
       {
         path: '/administration/projects/:id',
         component: ProjectShow,
-        props: true
+        props: true,
+        meta: { aside: 'projects-detail' }
+      },
+      {
+        path: '/administration/projects/:id/records',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'projects-detail' }
       },
       {
         path: '/administration/projects/:projectId/documents',
         component: ProjectsDocumentsIndex,
-        props: true
+        props: true,
+        meta: { aside: 'projects-detail' }
       },
       {
         path: '/administration/projects/:projectId/documents/new',
         component: ProjectsDocumentsNew,
-        props: true
+        props: true,
+        meta: { aside: 'projects-detail' }
       },
       {
         path: '/administration/projects/:projectId/documents/:id/edit',
         component: ProjectsDocumentsEdit,
-        props: true
+        props: true,
+        meta: { aside: 'projects-detail' }
+      },
+      {
+        path: '/administration/records',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'global' }
       },
       {
         path: '/administration/project_statuses/new',
-        component: ProjectStatusNew
+        component: ProjectStatusNew,
+        meta: { aside: 'projects' }
       },
       {
         path: '/administration/project_statuses/:id',
         component: ProjectStatusShow,
-        props: true
+        props: true,
+        meta: { aside: 'projects' }
       },
       {
         path: '/administration/project_statuses/:id/edit',
         component: ProjectStatusEdit,
-        props: true
+        props: true,
+        meta: { aside: 'projects' }
       },
       {
         path: '/administration/project_statuses/:projectStatusId/project_board_lists/new',
         component: ProjectBoardListNew,
-        props: true
+        props: true,
+        meta: { aside: 'projects' }
       },
       {
         path: '/administration/project_board_lists/:id/edit',
         component: ProjectBoardListEdit,
-        props: true
+        props: true,
+        meta: { aside: 'projects' }
       },
-      { path: '/administration/board_lists', component: IssuesBoard },
+      {
+        path: '/administration/board_lists',
+        component: IssuesBoard,
+        meta: { aside: 'projects' }
+      },
       {
         path: '/administration/board_lists/:boardListId/issues/new',
         component: IssueNew,
-        props: true
+        props: true,
+        meta: { aside: 'projects' }
       },
       {
         path: '/administration/issues/:id',
         component: Issue,
         props: true,
         children: [
-          { path: '', component: IssueShow },
-          { path: 'edit', component: IssueEdit }
+          {
+            path: '',
+            component: IssueShow,
+            meta: { aside: 'global' }
+          },
+          {
+            path: 'edit',
+            component: IssueEdit,
+            meta: { aside: 'global' }
+          }
         ]
+      },
+      {
+        path: '/administration/wiki',
+        component: WikiContent,
+        props: true,
+        meta: { aside: 'wiki' }
+      },
+      {
+        path: '/administration/wiki/pages/new',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'wiki' }
+      },
+      {
+        path: '/administration/wiki/pages/:wikiPageId',
+        component: WikiPage,
+        props: true,
+        meta: { aside: 'wiki' }
+      },
+      {
+        path: '/administration/wiki/categories/new',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'wiki' }
+      },
+      {
+        path: '/administration/archive',
+        component: ArchiveContent,
+        props: true,
+        meta: { aside: 'archive' }
+      },
+      {
+        path: '/administration/archive/folders/new',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'archive' }
+      },
+      {
+        path: '/administration/archive/folders/:id/edit',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'archive' }
+      },
+      {
+        path: '/administration/archive/documents/new',
+        component: DocumentNew,
+        props: true,
+        meta: { aside: 'archive' }
+      },
+      {
+        path: '/administration/archive/documents/:documentId/edit',
+        component: DocumentEdit,
+        props: true,
+        meta: { aside: 'archive' }
+      },
+      {
+        path: '/administration/users',
+        component: UserIndex,
+        props: true,
+        meta: { aside: 'users' }
+      },
+      {
+        path: '/administration/contacts',
+        component: ContactsIndex,
+        props: true,
+        meta: { aside: 'contacts' }
+      },
+      {
+        path: '/administration/contacts/new',
+        component: ContactNew,
+        props: true,
+        meta: { aside: 'contacts' }
+      },
+      {
+        path: '/administration/contacts/:contactId',
+        component: Contact,
+        props: true,
+        meta: { aside: 'contacts' }
+      },
+      {
+        path: '/administration/contacts/:contactId/edit',
+        component: ContactEdit,
+        props: true,
+        meta: { aside: 'contacts' }
+      },
+      {
+        path: '/administration/admin/context',
+        component: ContextEdit,
+        props: true,
+        meta: { aside: 'admin' }
+      },
+      {
+        path: '/administration/admin/payments',
+        component: AdminPayment,
+        props: true,
+        meta: { aside: 'admin' }
+      },
+      {
+        path: '/administration/users/:id',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'user-detail' }
+      },
+      {
+        path: '/administration/users/:userId/configuration/edit',
+        component: UserConfigurationEdit,
+        props: true,
+        meta: { aside: 'user-detail' }
+      },
+      {
+        path: '/administration/users/:id/records',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'user-detail' }
       }
     ]
   })
-  var app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */
+
   router.beforeEach((to, from, next) => {
     store.commit('clearCalledUrls')
+    store.commit('setAside', to.meta.aside)
     next()
   })
+  var app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */
 })

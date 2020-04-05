@@ -9,29 +9,29 @@
   .collapse.navbar-collapse#navbarSupportedContent
     = left_menu do
       = menu_item("Projects",
-          path: administration_projects_path,
+          path: '/administration/projects',
           policy: policy(Project).index?,
           includes: "projects")
       = menu_item("Wiki",
-          path: administration_wiki_path,
+          path: '/administration/wiki',
           policy: policy(WikiPage).index?,
           includes: "wiki")
       = menu_item("Archive",
-          path: administration_archive_path,
+          path: '/administration/archive',
           policy: policy(Document).index? && policy(Folder).index?,
           includes: "archive")
       = menu_item("Users",
-          path: administration_users_path,
+          path: '/administration/users',
           policy: policy(User).index?,
           includes: "users")
       = menu_item("Contacts",
-          path: administration_contacts_path,
+          path: '/administration/contacts',
           policy: policy(Contact).index?,
           includes: "contacts")
       = menu_item("Admin",
-          path: %i[administration admin context],
+          path: '/administration/admin/context',
           policy: policy(Organization).index?,
-          includes: "organization")
+          includes: "admin")
 
     = right_menu do
       notification-bell

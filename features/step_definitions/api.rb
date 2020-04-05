@@ -89,7 +89,7 @@ Then(/^the JSON response should be:$/) do |json|
 
   if diff.first&.third.to_s.size < 100
     if ENV["PRINT_RESPONSE"]
-      puts "The response is:" 
+      puts "The response is:"
       puts JSON.pretty_generate(actual)
     end
     expect(actual).to eq(expected)

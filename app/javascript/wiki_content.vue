@@ -1,5 +1,9 @@
 <template lang='pug'>
   #wiki-content
+    .pull-right.btn-group
+      b-button.pull-right(variant="success", to="/administration/wiki/categories/new") New wikicategory
+      b-button.pull-right(variant="success", to="/administration/wiki/pages/new") New wikipage
+    .clearfix
     category(
       v-for='category in rootCategories', 
       :category-id='category.id',

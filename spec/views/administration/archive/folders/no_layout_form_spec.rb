@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "administration/archive/folders/form" do
+RSpec.describe "administration/archive/folders/no_layout_form" do
   helper AdministrationHelper
 
   subject { rendered }

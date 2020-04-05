@@ -1,0 +1,5 @@
+= simple_form_for [:administration, @model.model], as: :data do |f|
+  = f.input :name, required: false
+  = f.input :project_id, collection: Project.all
+
+  = render "administration/shared/form_actions", f: f

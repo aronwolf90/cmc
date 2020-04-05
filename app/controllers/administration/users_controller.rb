@@ -2,8 +2,7 @@
 
 module Administration
   class UsersController < AdministrationController
-    side_menu "administration/users", only: %i[index new create]
-    side_menu "administration/specific_user", only: %i[show update]
+    side_menu :administration
     namespace Administration::Users
 
     public :index

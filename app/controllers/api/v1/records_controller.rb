@@ -3,7 +3,7 @@
 module Api::V1
   class RecordsController < ApiController
     include StandartActions
-    namespace Records
+    namespace ::Api::V1::Records
     model_class Record
 
     public :create, :update

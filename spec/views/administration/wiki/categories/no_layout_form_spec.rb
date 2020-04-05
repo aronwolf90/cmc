@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "administration/wiki/categories/form" do
+RSpec.describe "administration/wiki/categories/no_layout_form" do
   helper AdministrationHelper
 
   subject { rendered }

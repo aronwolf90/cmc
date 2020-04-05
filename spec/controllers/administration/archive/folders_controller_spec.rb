@@ -12,13 +12,13 @@ RSpec.describe Administration::Archive::FoldersController, type: :controller do
                    Administration::ArchiveFolders
   include_examples "standard create action",
                    Administration::ArchiveFolders,
-                   %i[administration archive]
+                   "/administration/archive"
   include_examples "standard edit action",
                    Administration::ArchiveFolders
   include_examples "standard update action",
                    Administration::ArchiveFolders,
-                   %i[administration archive]
+                   "/administration/archive"
   include_examples "standard destroy action",
                    Administration::ArchiveFolders,
-                   %i[administration archive]
+                   "/administration/archive"
 end

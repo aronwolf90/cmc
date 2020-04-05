@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "administration/users/update" do
+RSpec.describe "administration/users/no_layout_update" do
   helper AdministrationHelper
 
   subject { rendered }

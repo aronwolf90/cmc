@@ -3,7 +3,7 @@
     .item
       .name.fa.fa-tags 
         | {{ name }}&nbsp;&nbsp;
-      a(:href='link')
+      router-link(:to='link')
         .fa.fa-edit
     .child-documents
       document(

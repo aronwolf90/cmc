@@ -1,14 +1,3 @@
 = asside policy(@project).show? do
-  = top_asside_item("Projects",
-      path: administration_project_path(@project),
-      icon: :building)
-  = asside_item("Dashboard",
-      path: administration_project_path(@project),
-      policy: true)
-  = asside_item("Records",
-      path: administration_project_records_path(@project),
-      policy: policy(Record).index?)
-  = asside_item("Documents",
-      path: administration_project_documents_path(@project),
-      policy: true)
+  projects-detail-left-aside(id=@project.id)
   = render "administration/shared/shared_issue_section"

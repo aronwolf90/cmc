@@ -1,5 +1,9 @@
 <template lang='pug'>
   #archive-content
+    .pull-right.btn-group
+      b-button.pull-right(variant="success", to="/administration/archive/folders/new") New folder
+      b-button.pull-right(variant="success", to="/administration/archive/documents/new") New document
+    .clearfix
     folder(
       v-for='folder in rootFolders', 
       :folder-id='folder.id',

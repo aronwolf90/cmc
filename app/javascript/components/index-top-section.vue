@@ -5,7 +5,7 @@
         :resource="resource",
         :itemTextFunction="itemTextFunction"
       )
-    a.btn.btn-success(:href="`/administration/${resource}/new`")
+    router-link.btn.btn-success(:to="`/administration/${resource}/new`")
       | {{ newText }}
 </template>
 

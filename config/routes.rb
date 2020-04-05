@@ -33,59 +33,34 @@ Rails.application.routes.draw do
 
     resource :dashboard, only: :show
     resources :records, except: :show
-    resources :board_lists, only: %i[new create edit update destroy]
-    resources :attendances, only: :index
-    resource :calender, only: :show
-
-    resource :organization, only: %i[edit update]
+    resources :board_lists, only: %i[new edit create update destroy]
 
     resources :users, except: %i[edit create destroy] do
       scope module: :users do
-        resource :configuration, only: %i[edit update destroy]
         resources :records, only: :index
       end
     end
 
-    get "/projects/new", to: "projects#index", as: "project_new"
-    get "/projects/:id/edit", to: "projects#index", as: "project_edit"
-    get "/projects/:id/documents", to: "projects#show", as: "project_documents"
-    get "/projects/:id/documents/edit", to: "projects#show", as: "project_documents_edit"
-    get "/projects/:id/documents/new", to: "projects#show", as: "project_documents_new"
-    resources :projects, only: %i[index show] do
+    resource :archive, only: [], controller: :archive do
+      scope module: :archive do
+        resources :folders, except: %i[index show]
+      end
+    end
+
+    resource :wiki, only: [], controller: :wiki do
+      scope module: :wiki do
+        resources :categories, except: %i[index show]
+        resources :pages, only: %i[new create]
+      end
+    end
+
+    resources :projects, only: %i[] do
       scope module: :projects do
         resources :records, only: :index
       end
     end
-    get "/project_statuses/new", to: "projects#index", as: "project_status_new"
-    get "/project_statuses/:id", to: "projects#index", as: "project_status_show"
-    get "/project_statuses/:id/edit", to: "projects#index", as: "project_status_edit"
-    get "/project_board_lists/:id/edit", to: "projects#index", as: "project_board_list_edit"
-    get "/project_statuses/:project_status_id/project_board_lists/new", to: "projects#index", as: "project_board_list_new"
 
-    resource :wiki, only: :show, controller: :wiki do
-      scope module: :wiki do
-        resources :categories, except: %i[index show]
-        resources :pages, only: %i[show new create]
-      end
-    end
-
-    resource :archive, only: :show, controller: :archive do
-      scope module: :archive do
-        resources :folders, except: %i[index show]
-        resources :documents, only: %i[new edit]
-      end
-
-      get "*path" => redirect("/administration")
-    end
-
-    resources :contacts, only: %i[index show new edit]
-
-    namespace :admin do
-      resource :context, only: :show
-      resources :payments, only: :index
-    end
-
-     get "/*path", to: "app#show", format: false
+    get "/*path", to: "app#show", format: false
   end
 
   namespace :api do

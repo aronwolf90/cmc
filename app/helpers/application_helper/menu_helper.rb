@@ -5,9 +5,8 @@ module ApplicationHelper
     def menu_item(name, path:, policy:, includes:)
       return unless policy
 
-      active = "active" if request.original_fullpath.include?(includes)
-      content_tag(:li, class: "nav-item #{active}") do
-        link_to name, path, class: "nav-link small"
+      content_tag(:li, class: "nav-item") do
+        content_tag(:'menu-item', nil, path: path, name: name, 'starts-with': "/administration/#{includes}")
       end
     end
 

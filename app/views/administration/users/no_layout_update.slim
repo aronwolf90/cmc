@@ -1,0 +1,36 @@
+= simple_form_for [:administration, @model], as: :data do |f|
+
+  .row
+    .col-md-6
+      h5 = 'Avatar'
+      | This information will appear on the profile.
+    .col-md-6
+      = f.input :avatar ,as: :image_preview, label: false
+
+  hr.divider
+
+  .row
+    .col-lg-6
+      h5 = 'Main settings'
+      | This information will appear on the profile.
+    .col-lg-6
+      = f.input :firstname, required: false
+      = f.input :lastname, required: false
+      = f.input :email, required: false
+
+  hr.divider
+
+  .row
+    .col-lg-6
+      h5 = 'Contact data'
+      | This information will appear on the profile.
+    .col-lg-6
+      = f.input :telephone_number, required: false
+
+  br
+
+  .row
+    .col-lg-6
+    .col-lg-6
+      = submit_btn(f)
+      = cancel_btn(administration_user_path(f.object), class: 'pull-right')

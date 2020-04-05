@@ -1,13 +1,13 @@
 <template lang='pug'>
   span.projects-left-aside
-    left-aside-item-rails(path="/administration/projects", notShowActive="true")
+    left-aside-item(path="/administration/projects", notShowActive="true")
       i.fa.fa-tasks.fa-lg
         | &nbsp; &nbsp; Project
-    left-aside-item-rails(:path="`/administration/projects/${id}`")
+    left-aside-item(:path="`/administration/projects/${id}`")
       | Dashboard
-    left-aside-item-rails(:path="`/administration/projects/${id}/records`")
+    left-aside-item(:path="`/administration/projects/${id}/records`")
       | Records
-    left-aside-item-rails(:path="`/administration/projects/${id}/documents`")
+    left-aside-item(:path="`/administration/projects/${id}/documents`")
       | Documents
 </template>
 

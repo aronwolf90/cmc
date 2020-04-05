@@ -3,7 +3,7 @@
     a(:href='link', target="_blank")
       .fa.fa-file-text-o 
         | {{ name }}&nbsp;&nbsp;
-    a.edit-btn(:href='editLink')
+    router-link.edit-btn(:to='editLink')
       .fa.fa-edit
 </template>
 

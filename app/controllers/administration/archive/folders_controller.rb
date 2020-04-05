@@ -8,15 +8,15 @@ module Administration
       public :new, :edit
 
       def create
-        super { %i[administration archive] }
+        super { "/administration/archive" }
       end
 
       def update
-        super { %i[administration archive] }
+        super { "/administration/archive" }
       end
 
       def destroy
-        super %i[administration archive]
+        super "/administration/archive"
       end
     end
   end

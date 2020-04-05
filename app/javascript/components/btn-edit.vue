@@ -1,7 +1,7 @@
 <template lang='pug'>
-  a.btn.btn-sm.btn-secondary.btn-outline-dark(
+  router-link.btn.btn-sm.btn-secondary.btn-outline-dark(
     v-if="canEdit",
-    :href="link"
+    :to="link"
   )
     i.fa.fa-edit
 </template>

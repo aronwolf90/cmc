@@ -1,6 +1,6 @@
 <template lang='pug'>
   .page.category-item 
-    a(:href='link')
+    router-link(:to='link')
       .fa.fa-file-text-o 
         | {{this.title }}
 </template>

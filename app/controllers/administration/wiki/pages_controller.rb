@@ -5,10 +5,10 @@ module Administration
     class PagesController < BaseController
       namespace Administration::WikiPages
 
-      public :show, :new
+      public :new
 
       def create
-        super { %i[administration wiki] }
+        super { "/administration/wiki" }
       end
     end
   end

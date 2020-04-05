@@ -8,15 +8,15 @@ module Administration
       public :new, :edit
 
       def create
-        super { %i[administration wiki] }
+        super { "/administration/wiki" }
       end
 
       def update
-        super { %i[administration wiki] }
+        super { "/administration/wiki" }
       end
 
       def destroy
-        super %i[administration wiki]
+        super "/administration/wiki"
       end
     end
   end

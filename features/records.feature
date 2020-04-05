@@ -5,7 +5,7 @@ Scenario: Records index
   Given a test-organization exists
   And I am signed in (multitenant)
   When I click on link "Records"
-  Then the element "#side-body" contain the text "Test issue 5"
+  Then the element "#side-body" contain the text "Test issue 7"
 
 @javascript
 Scenario: Record new

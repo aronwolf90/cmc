@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "administration/users/records/index" do
+RSpec.describe "administration/users/records/no_layout_index" do
   helper AdministrationHelper
 
   subject { rendered }

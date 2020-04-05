@@ -1,10 +1,10 @@
 <template lang='pug'>
   li.list-group-item
-    a.text-dark(:href="`/administration/${resource}/${entryId}`")
+    router-link.text-dark(:to="`/administration/${resource}/${entryId}`")
       | {{ text || '---' }}
-    a.btn.btn-secondary.btn-sm.pull-right(
+    router-link.btn.btn-secondary.btn-sm.pull-right(
       v-if="editBtn",
-      :href="`/administration/${resource}/${entryId}/edit`"
+      :to="`/administration/${resource}/${entryId}/edit`"
     )
       .fa.fa-edit
 </template>

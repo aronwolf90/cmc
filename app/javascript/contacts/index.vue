@@ -12,7 +12,7 @@
     ul.list-group.list-lines
       index-list-item(
         v-for="contact in contacts",
-        resource="/contacts",
+        resource="contacts",
         :entry-type="contact.type",
         :entry-id="contact.id",
         :text="contact.attributes.name"
