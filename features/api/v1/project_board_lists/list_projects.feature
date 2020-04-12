@@ -28,6 +28,12 @@ Scenario: GET /api/v1/board_lists/<id>/issues
                 "id": "1",
                 "type": "folders"
               }
+            },
+            "contact": {
+              "data": {
+                "id": "2",
+                "type": "contacts"
+              }
             }
           },
           "links":{ 

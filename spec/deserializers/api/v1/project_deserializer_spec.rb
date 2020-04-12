@@ -16,6 +16,9 @@ describe Api::V1::ProjectDeserializer do
         "project-status": { data: { id: 1, type: "projects" } },
         'project-board-list': {
           data: { id: 1, type: "project-board-lists" }
+        },
+        contact: {
+          data: { id: 1, type: "contacts" }
         }
       }
     }
@@ -26,7 +29,8 @@ describe Api::V1::ProjectDeserializer do
       project_status_id: 1,
       project_board_list_id: 1,
       ordinal_number: 1,
-      description: "Description"
+      description: "Description",
+      contact_id: 1
     }
   end
 

@@ -10,6 +10,7 @@ module Api
 
       belongs_to :project_status, serializer: ProjectStatusSerializer
       has_one :folder, serializer: FolderSerializer
+      has_one :contact, serializer: ContactSerializer
 
       link(:self) { api_v1_project_path(object) }
     end

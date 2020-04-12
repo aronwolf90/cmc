@@ -10,7 +10,7 @@ export default {
   getProject (context, id) {
     return context.dispatch('get', {
       endpoint,
-      resource: `projects/${id}`
+      resource: `projects/${id}?include=contact`
     })
   },
   getSelectedProject (context) {

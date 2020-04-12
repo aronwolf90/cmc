@@ -37,6 +37,23 @@
       v-model='value.attributes.description'
     )
     br
+    b-form-group(
+      id="input-group-contact",
+      label="Contact",
+      label-for="input-contact"
+    )
+      b-form-select(
+        id="input-contact",
+        v-model="value.relationships.contact.data",
+        :options="contacts",
+        :state="errorStatus('attributes/relationships/contact')",
+        type="text"
+      )
+      b-form-invalid-feedback(
+        v-for="error in findErrors('relationships/contact')",
+        :state="errorStatus('relationships/contact')"
+      )
+        | {{ error.detail }}
     b-button(type="submit", variant="success") Save
     b-button-group.pull-right
       b-button(variant="danger", @click="destroy") Destroy
@@ -45,7 +62,7 @@
 
 <script>
 export default {
-  props: ['errors', 'value', 'id'],
+  props: ['errors', 'value', 'id', 'contactRefs'],
   computed: {
     projectStatuses () {
       return [{ value: null, text: ''}]
@@ -54,6 +71,16 @@ export default {
         return {
           value: { id: projectStatus.id, type: 'project-statuses' },
           text: projectStatus.attributes.name
+        }
+      }))
+    },
+    contacts () {
+      return [{ value: null, text: ''}]
+      .concat((this.contactRefs)
+      .map(ref => {
+        return {
+          value: ref,
+          text: this.$store.getters.entry(ref).attributes.name
         }
       }))
     },

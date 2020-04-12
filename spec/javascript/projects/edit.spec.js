@@ -47,13 +47,17 @@ describe('ProjectEdit', () => {
           getProject () {
             return Promise.resolve({ data: project })
           },
+          getContacts () {
+            return Promise.resolve({ data: [] })
+          },
           updateProject (_, { payload }) {
             expect(payload.attributes).to.eql({
               name: 'Test',
               description: undefined
             })
             expect(payload.relationships).to.eql({
-              'project-status': { data: null }
+              'project-status': { data: null },
+              'contact': { data: null }
             })
             done()
             return Promise.resolve()
@@ -91,6 +95,9 @@ describe('ProjectEdit', () => {
           }
         },
         actions: {
+          getContacts () {
+            return Promise.resolve({ data: [] })
+          },
           getProject () {
             return Promise.resolve({ data: project })
           }
@@ -122,6 +129,9 @@ describe('ProjectEdit', () => {
           }
         },
         actions: {
+          getContacts () {
+            return Promise.resolve({ data: [] })
+          },
           getProject () {
             return Promise.resolve({ data: project })
           }
@@ -152,6 +162,9 @@ describe('ProjectEdit', () => {
           }
         },
         actions: {
+          getContacts () {
+            return Promise.resolve({ data: [] })
+          },
           getProject () {
             return Promise.resolve({ data: project })
           },

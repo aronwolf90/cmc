@@ -4,6 +4,7 @@
     @submit='submit',
     v-model="form",
     :id="id",
+    :contactRefs="contactRefs",
     v-if="loaded"
   )
 </template>
@@ -27,11 +28,15 @@ export default {
         relationships: {
           'project-status': {
             data: null
+          },
+          contact: {
+            data: null
           }
         }
       },
       errors: [],
-      loaded: false
+      loaded: false,
+      contactRefs: []
     }
   },
   computed: {
@@ -46,6 +51,11 @@ export default {
       this.form.attributes.description = response.data.attributes.description
       this.form.relationships['project-status'].data =
         response.data.relationships['project-status'].data
+      this.form.relationships.contact.data =
+        response.data.relationships.contact.data
+    })
+    this.$store.dispatch('getContacts').then(response => {
+      this.contactRefs = Utils.entryArrayToRef(response.data)
     })
   },
   methods: {

@@ -195,7 +195,8 @@ CREATE TABLE contacts (
     address_country character varying,
     contact_avatar_id bigint,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    project_id bigint
 );
 
 
@@ -1211,6 +1212,13 @@ CREATE INDEX index_contacts_on_contact_avatar_id ON contacts USING btree (contac
 
 
 --
+-- Name: index_contacts_on_project_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_contacts_on_project_id ON contacts USING btree (project_id);
+
+
+--
 -- Name: index_documents_on_document_file_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
@@ -1549,6 +1557,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200324184439'),
 ('20200326110745'),
 ('20200326175523'),
-('20200329144806');
+('20200329144806'),
+('20200411234703');
 
 

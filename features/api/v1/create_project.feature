@@ -42,6 +42,9 @@ Scenario: Post an valid record using json in POST body
               "id": "5",
               "type": "folders"
             }
+          },
+          "contact": {
+            "data": null
           }
         },
         "links": { "self": "/api/v1/projects/3" },

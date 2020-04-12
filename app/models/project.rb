@@ -14,6 +14,8 @@ class Project < ApplicationRecord
   belongs_to :project_board_list
   has_one :project_status, through: :project_board_list
   has_one :folder
+  has_one :contact
+  has_many :contacts
 
   alias_attribute :to_s, :name
 
@@ -24,4 +26,12 @@ class Project < ApplicationRecord
     against: %i[name],
     using: { tsearch: { prefix: true } }
   )
+
+  def contact_id=(id)
+    if id.blank?
+      self.contact = nil
+    else
+      self.contact = Contact.find(id)
+    end
+  end
 end

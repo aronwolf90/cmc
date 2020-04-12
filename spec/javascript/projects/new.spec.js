@@ -34,13 +34,17 @@ describe('ProjectNew', () => {
           }
         },
         actions: {
+          getContacts () {
+            return Promise.resolve({ data: [] })
+          },
           createProject (_, { attributes, relationships }) {
             expect(attributes).to.eql({
               name: 'New',
               description: null
             })
             expect(relationships).to.eql({
-              'project-status': { data: null }
+              'project-status': { data: null },
+              'contact': { data: null }
             })
             done()
             return Promise.resolve()
@@ -68,6 +72,9 @@ describe('ProjectNew', () => {
           }
         },
         actions: {
+				  getContacts () {
+					  return Promise.resolve({ data: [] })
+					},
           createProject ({ attributes }) {
             return Promise.reject({
               status: 'fail',

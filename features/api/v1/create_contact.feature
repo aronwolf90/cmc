@@ -30,7 +30,7 @@ Scenario: Create an contact of kind "person"
     """
     {
       "data": {
-        "id": "2",
+        "id": "3",
         "type": "contacts",
         "attributes": { 
           "name": "Frantz",
@@ -51,7 +51,7 @@ Scenario: Create an contact of kind "person"
             "destroy": true
           }
         },
-        "links": {"self": "/api/v1/contacts/2"}
+        "links": {"self": "/api/v1/contacts/3"}
       }
     }
     """

@@ -30,6 +30,12 @@ Scenario: Get
               "id": "1",
               "type": "folders"
             }
+          },
+          "contact": {
+            "data": {
+              "id": "2",
+              "type": "contacts"
+            }
           }
         },
         "links": { "self": "/api/v1/projects/1" },

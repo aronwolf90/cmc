@@ -35,7 +35,7 @@ export default {
   .right-aside
     background-color: #f8f8f8
     border-left: 2px solid #e7e7e7
-    width: 200px
+    width: 210px
     height: 100%
     .arrow
       position: fixed

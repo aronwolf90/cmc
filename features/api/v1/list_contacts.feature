@@ -10,33 +10,63 @@ Scenario: Get /api/v1/contacts
   Then the JSON response should be:
     """
     {
-      "data": [{
-        "id": "1",
-        "type": "contacts",
-        "attributes": { 
-          "name": "Clara",
-          "description": "Test description",
-          "telephone": "01707986607",
-          "mobile": "01707986617",
-          "fax": "01707986617",
-          "address-city": "Barcelona",
-          "address-zip": "08001",
-          "address-country": "Spain",
-          "address-street": "Las Holletas",
-          "address-number": "5",
-          "avatar-url": "/api/v1/contact_avatars/placeholder"
+      "data":[
+        {
+          "id":"1",
+          "type":"contacts",
+          "attributes":{
+            "name":"Clara",
+            "description":"Test description",
+            "telephone":"01707986607",
+            "mobile":"01707986617",
+            "fax":"01707986617",
+            "address-city":"Barcelona",
+            "address-zip":"08001",
+            "address-country":"Spain",
+            "address-street":"Las Holletas",
+            "address-number":"5",
+            "avatar-url":"/api/v1/contact_avatars/placeholder"
+          },
+          "links":{
+            "self":"/api/v1/contacts/1"
+          },
+          "meta":{
+            "permissions":{
+              "update":true,
+              "destroy":true
+            }
+          }
         },
-        "links": {
-          "self": "/api/v1/contacts/1"
-        },
-        "meta": {
-          "permissions": {
-            "update": true,
-            "destroy": true
+        {
+          "id":"2",
+          "type":"contacts",
+          "attributes":{
+            "name":"Project",
+            "description":"Test description",
+            "telephone":"01707986607",
+            "mobile":"01707986617",
+            "fax":"01707986617",
+            "address-city":"Barcelona",
+            "address-zip":"08001",
+            "address-country":"Spain",
+            "address-street":"Las Holletas",
+            "address-number":"5",
+            "avatar-url":"/api/v1/contact_avatars/placeholder"
+          },
+          "links":{
+            "self":"/api/v1/contacts/2"
+          },
+          "meta":{
+            "permissions":{
+              "update":true,
+              "destroy":true
+            }
           }
         }
-      }],
-      "links": { "self": "/api/v1/contacts" }
+      ],
+      "links":{
+        "self":"/api/v1/contacts"
+      }
     }
     """
   And the response status should be "200"

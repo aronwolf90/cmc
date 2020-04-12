@@ -8,5 +8,6 @@ module Api::V1
 
     belongs_to :project_status
     belongs_to :project_board_list
+    belongs_to :contact
   end
 end

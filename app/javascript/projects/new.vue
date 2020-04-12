@@ -2,12 +2,14 @@
   project-form(
     :errors='errors',
     @submit='submit',
-    v-model="form"
+    v-model="form",
+    :contactRefs='contactRefs'
   )
 </template>
 
 <script>
 import ProjectForm from 'components/projects/form'
+import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   components: {
@@ -23,11 +25,18 @@ export default {
         relationships: {
           'project-status': {
             data: null
+          },
+          contact: {
+            data: null
           }
         }
       },
-      errors: []
+      errors: [],
+      contactRefs: []
     }
+  },
+  created () {
+    this.fetch()
   },
   methods: {
     submit (form) {
@@ -35,6 +44,11 @@ export default {
         this.$router.push('/administration/projects')
       }).catch(({ status, data }) => {
         this.errors = data.errors
+      })
+    },
+    fetch () {
+      this.$store.dispatch('getContacts').then(response => {
+        this.contactRefs = Utils.entryArrayToRef(response.data)
       })
     }
   }

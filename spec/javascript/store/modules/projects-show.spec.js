@@ -11,6 +11,18 @@ describe('Store.Modules.ProjectsShow', () => {
       content: 'Content'
     }
   }
+  const project = {
+    id: 1,
+    type: 'projects',
+    attributes: {
+      name: 'project'
+    },
+    relationships: {
+      contact: {
+        data: null
+      }
+    }
+  }
 
   describe('.getters', () => {
     describe('.comments', () => {
@@ -32,8 +44,15 @@ describe('Store.Modules.ProjectsShow', () => {
     describe('.fetch', () => {
       ProjectsShow.actions.fetch({
         dispatch (method, id) {
-          if (id !== 1 && method !== 'getProjectComments') return
-          return Promise.resolve({ data: [projectComment] })
+          if (id !== 1 && method !== 'getProjectComments') {
+            return Promise.resolve({ data: [projectComment] })
+          }
+          if (id !== 1 && method !== 'getProject') {
+            return Promise.resolve({ data: project })
+          }
+          if (id !== 1 && method !== 'getContacts') {
+            return Promise.resolve({ data: [] })
+          }
         },
         commit () {}
       })
