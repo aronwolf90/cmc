@@ -1,5 +1,5 @@
 <template lang='pug'>
-  .spent-time
+  .spent-time(v-if="contact")
     router-link(:to="contactLink").font-weight-bold.text-dark Contact
     details-string-input(
       v-model="nameValue",

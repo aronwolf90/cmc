@@ -24,12 +24,6 @@ export default {
     showPath () {
       return `/administration/issues/${this.issueId}`
     }
-  },
-  methods: {
-    visitShow (event) {
-      Turbolinks.visit(this.showPath) /* eslint-disable-line no-undef */
-      event.preventDefault()
-    }
   }
 }
 

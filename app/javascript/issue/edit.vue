@@ -65,8 +65,11 @@ export default {
       this.form.attributes.description = data
     },
     deleteIssue (event) {
-      this.$store.dispatch('destroy', { entry: this.issue, endpoint: '/api/v1' })
-      Turbolinks.visit('/administration/board') /* eslint-disable-line no-undef */
+      this.$store.dispatch('destroy', {
+        entry: this.issue
+      }).then(() => {
+        this.$router.push('/administration/board')
+      })
     }
   }
 }

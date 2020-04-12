@@ -7,7 +7,7 @@
         .col-sm-2
           project-select
         .col-sm-2
-          a.btn.btn-sm.btn-outline-secondary(v-on:click='visitAdd($event)', :href='addLink')
+          a.btn.btn-sm.btn-outline-secondary(:href='addLink')
             .fa.fa-plus
             |&nbsp add list
 
@@ -43,12 +43,6 @@ export default {
     },
     addLink () {
       return '/administration/board_lists/new'
-    }
-  },
-  methods: {
-    visitAdd (event) {
-      Turbolinks.visit(this.addLink) /* eslint-disable-line no-undef */
-      event.preventDefault()
     }
   }
 }

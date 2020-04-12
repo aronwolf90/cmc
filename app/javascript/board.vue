@@ -7,9 +7,8 @@
         .col-sm-2
           project-select
         .col-sm-2
-          a.btn.btn-sm.btn-outline-secondary(
-            v-on:click='visitAdd($event)',
-            href='/administration/board_lists/new'
+          router-link.btn.btn-sm.btn-outline-secondary(
+            to='/administration/board_lists/new'
           )
             .fa.fa-plus
             |&nbsp add list
@@ -53,10 +52,6 @@ export default {
     }
   },
   methods: {
-    visitAdd (event) {
-      Turbolinks.visit('/administration/board_lists/new') /* eslint-disable-line no-undef */
-      event.preventDefault()
-    },
     fetch () {
       this.$store.dispatch('board/getBoardLists')
     }

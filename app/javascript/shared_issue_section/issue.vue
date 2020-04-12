@@ -1,5 +1,5 @@
 <template lang='pug'>
-  a.issue.row(v-bind:href='showPath', v-on:click='visitShow($event)')
+  a.issue.row(v-bind:href='showPath')
     .col-10.text-section
       | {{ issue.attributes.title }}
     .col-2
@@ -27,12 +27,6 @@ export default {
     },
     showPath () {
       return `/administration/issues/${this.issueId}`
-    }
-  },
-  methods: {
-    visitShow (event) {
-      event.preventDefault()
-      Turbolinks.visit(this.showPath) /* eslint-disable-line no-undef */
     }
   }
 }
