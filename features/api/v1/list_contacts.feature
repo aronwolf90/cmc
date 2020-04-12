@@ -17,6 +17,7 @@ Scenario: Get /api/v1/contacts
           "attributes":{
             "name":"Clara",
             "description":"Test description",
+						"email": "clara@test.example",
             "telephone":"01707986607",
             "mobile":"01707986617",
             "fax":"01707986617",
@@ -43,6 +44,7 @@ Scenario: Get /api/v1/contacts
           "attributes":{
             "name":"Project",
             "description":"Test description",
+						"email": "clara@test.example",
             "telephone":"01707986607",
             "mobile":"01707986617",
             "fax":"01707986617",

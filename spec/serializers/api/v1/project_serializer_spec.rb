@@ -9,7 +9,8 @@ RSpec.describe Api::V1::ProjectSerializer, type: :serializer do
       name: "Test",
       description: "Description",
       folder: Folder.new(id: 1),
-      contact: Contact.new(id: 1)
+      contact: Contact.new(id: 1),
+      main_responsable: User.new(id: 1)
     )
   end
   let(:project_status) { ProjectStatus.new(id: 1) }
@@ -40,6 +41,12 @@ RSpec.describe Api::V1::ProjectSerializer, type: :serializer do
             data: {
               id: "1",
               type: "contacts"
+            }
+          },
+          "main-responsable": {
+            data: {
+              id: "1",
+              type: "users"
             }
           }
         },

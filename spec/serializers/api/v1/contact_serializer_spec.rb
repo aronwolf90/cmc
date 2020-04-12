@@ -7,6 +7,7 @@ RSpec.describe Api::V1::ContactSerializer, type: :serializer do
     build_stubbed(
       :contact,
       name: "Frantz",
+      email: "test@example.com",
       description: "Test description",
       telephone: "01707986607",
       mobile: "01707986617",
@@ -35,6 +36,7 @@ RSpec.describe Api::V1::ContactSerializer, type: :serializer do
         type: "contacts",
         attributes: {
           name: "Frantz",
+          email: "test@example.com",
           description: "Test description",
           telephone: "01707986607",
           mobile: "01707986617",

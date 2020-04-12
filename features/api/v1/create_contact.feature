@@ -35,6 +35,7 @@ Scenario: Create an contact of kind "person"
         "attributes": { 
           "name": "Frantz",
           "description": "Test description",
+					"email": null,
           "telephone": "01727873609",
           "mobile": "01702876609",
           "fax": "01727876620",

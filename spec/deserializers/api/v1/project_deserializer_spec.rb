@@ -19,6 +19,12 @@ describe Api::V1::ProjectDeserializer do
         },
         contact: {
           data: { id: 1, type: "contacts" }
+        },
+        "main-responsable": {
+          "data": {
+            "id": 1,
+            "type": "users"
+          }
         }
       }
     }
@@ -30,7 +36,8 @@ describe Api::V1::ProjectDeserializer do
       project_board_list_id: 1,
       ordinal_number: 1,
       description: "Description",
-      contact_id: 1
+      contact_id: 1,
+      main_responsable_id: 1
     }
   end
 

@@ -10,6 +10,7 @@ describe Api::V1::ContactDeserializer do
       attributes: {
         name: "Frantz",
         description: "Description",
+        email: "test@example.com",
         telephone: "01727873609",
         mobile: "01702876609",
         fax: "01727876620",
@@ -26,6 +27,7 @@ describe Api::V1::ContactDeserializer do
     {
       name: "Frantz",
       description: "Description",
+      email: "test@example.com",
       telephone: "01727873609",
       mobile: "01702876609",
       fax: "01727876620",

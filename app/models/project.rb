@@ -12,6 +12,7 @@ class Project < ApplicationRecord
   has_many :project_record_days, -> { ordered }
   has_many :project_comments, -> { ordered }
   belongs_to :project_board_list
+  belongs_to :main_responsable, class_name: "User"
   has_one :project_status, through: :project_board_list
   has_one :folder
   has_one :contact

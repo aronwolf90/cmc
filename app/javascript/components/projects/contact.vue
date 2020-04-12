@@ -1,7 +1,11 @@
 <template lang='pug'>
   .spent-time
-    mt-2
-    .font-weight-bold Contact
+    router-link(:to="contactLink").font-weight-bold.text-dark Contact
+    details-string-input(
+      v-model="nameValue",
+      :editMode.sync="nameEditMode",
+      @submit="submitName"
+    )
     details-string-input(
       v-model="telephoneNumberValue",
       :editMode.sync="telephoneNumberEditMode",
@@ -40,43 +44,76 @@ export default {
     }
   },
   computed: {
-    telephoneNumberValue: {
+    contact () {
+      return this.$store.getters['projectsShow/contact']
+    },
+    contactLink () {
+      return `/administration/contacts/${this.contact.id}`
+    },
+    nameValue: {
       get () {
-        return this.$store.getters['projectsShow/telephoneNumberValue']
+        return this.$store.getters['projectsShow/contactNameValue']
       },
       set (value) {
-        this.$store.commit('projectsShow/telephoneNumberValue', value)
+        this.$store.commit('projectsShow/contactNameValue', value)
+      }
+    },
+    nameEditMode: {
+      get () {
+        return this.$store.getters['projectsShow/contactNameEditMode']
+      },
+      set (value) {
+        this.$store.commit('projectsShow/contactNameEditMode', value)
+      }
+    },
+    telephoneNumberValue: {
+      get () {
+        return this.$store.getters['projectsShow/contactTelephoneNumberValue']
+      },
+      set (value) {
+        this.$store.commit('projectsShow/contactTelephoneNumberValue', value)
       }
     },
     telephoneNumberEditMode: {
       get () {
-        return this.$store.getters['projectsShow/telephoneNumberEditMode']
+        return this.$store.getters['projectsShow/contactTelephoneNumberEditMode']
       },
       set (value) {
-        this.$store.commit('projectsShow/telephoneNumberEditMode', value)
+        this.$store.commit('projectsShow/contactTelephoneNumberEditMode', value)
       }
     },
     emailValue: {
       get () {
-        return this.$store.getters['projectsShow/emailValue']
+        return this.$store.getters['projectsShow/contactEmailValue']
       },
       set (value) {
-        this.$store.commit('projectsShow/emailValue', value)
+        this.$store.commit('projectsShow/contactEmailValue', value)
       }
     },
     emailEditMode: {
       get () {
-        return this.$store.getters['projectsShow/emailEditMode']
+        return this.$store.getters['projectsShow/contactEmailEditMode']
       },
       set (value) {
-        this.$store.commit('projectsShow/emailEditMode', value)
+        this.$store.commit('projectsShow/contactEmailEditMode', value)
       }
     }
   },
   methods: {
+    submitName () {
+      this.$store.dispatch('updateContact', {
+        entry: this.contact,
+        payload: valueToAttribute(
+          'name',
+          this.nameValue
+        )
+      }).then(() => {
+        this.nameEditMode = false 
+      })
+    },
     submitTelephoneNumber () {
       this.$store.dispatch('updateContact', {
-        entry: this.$store.getters['projectsShow/contact'],
+        entry: this.contact,
         payload: valueToAttribute(
           'telephone',
           this.telephoneNumberValue
@@ -87,7 +124,7 @@ export default {
     },
     submitEmail () {
       this.$store.dispatch('updateContact', {
-        entry: this.$store.getters['projectsShow/contact'],
+        entry: this.contact,
         payload: valueToAttribute('email', this.emailValue)
       }).then(() => {
         this.emailEditMode = false 

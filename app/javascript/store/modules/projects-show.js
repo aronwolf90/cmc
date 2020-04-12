@@ -5,13 +5,19 @@ export default {
   state: {
     projectCommentRefs: [],
     projectId: null,
-    telephoneNumber: {
-      value: '+49 821 598-1111',
-      editMode: false
-    },
-    email: {
-      value: 'aron.wolf@sumcumo.com',
-      editMode: false
+    contact: {
+      name: {
+        value: '',
+        editMode: false
+      },
+      telephoneNumber: {
+        value: '',
+        editMode: false
+      },
+      email: {
+        value: '',
+        editMode: false
+      }
     }
   },
   getters: {
@@ -32,17 +38,23 @@ export default {
         name: 'contact'
       })
     },
-    telephoneNumberValue (state) {
-      return state.telephoneNumber.value
+    contactNameValue (state) {
+      return state.contact.name.value
     },
-    telephoneNumberEditMode (state) {
-      return state.telephoneNumber.editMode
+    contactNameEditMode (state) {
+      return state.contact.name.editMode
     },
-    emailValue (state) {
-      return state.email.value
+    contactTelephoneNumberValue (state) {
+      return state.contact.telephoneNumber.value
     },
-    emailEditMode (state) {
-      return state.email.editMode
+    contactTelephoneNumberEditMode (state) {
+      return state.contact.telephoneNumber.editMode
+    },
+    contactEmailValue (state) {
+      return state.contact.email.value
+    },
+    contactEmailEditMode (state) {
+      return state.contact.email.editMode
     }
   },
   mutations: {
@@ -52,17 +64,23 @@ export default {
     projectId (state, projectId) {
       state.projectId = projectId
     },
-    telephoneNumberValue (state, value) {
-      state.telephoneNumber.value = value
+    contactNameValue (state, value) {
+      state.contact.name.value = value
     },
-    telephoneNumberEditMode (state, value) {
-      state.telephoneNumber.editMode = value
+    contactNameEditMode (state, value) {
+      state.contact.name.editMode = value
     },
-    emailValue (state, value) {
-      state.email.value = value
+    contactTelephoneNumberValue (state, value) {
+      state.contact.telephoneNumber.value = value
     },
-    emailEditMode (state, value) {
-      state.email.editMode = value
+    contactTelephoneNumberEditMode (state, value) {
+      state.contact.telephoneNumber.editMode = value
+    },
+    contactEmailValue (state, value) {
+      state.contact.email.value = value
+    },
+    contactEmailEditMode (state, value) {
+      state.contact.email.editMode = value
     }
   },
   actions: {
@@ -70,11 +88,15 @@ export default {
       context.commit('projectId', id)
       context.dispatch('getProject', id, { root: true }).then(response => {
         context.commit(
-          'telephoneNumberValue',
+          'contactNameValue',
+          Utils.attribute(context.getters.contact, 'name')
+        )
+        context.commit(
+          'contactTelephoneNumberValue',
           Utils.attribute(context.getters.contact, 'telephone')
         )
         context.commit(
-          'emailValue',
+          'contactEmailValue',
           Utils.attribute(context.getters.contact, 'email')
         )
       })

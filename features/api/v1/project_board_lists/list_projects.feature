@@ -34,6 +34,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
                 "id": "2",
                 "type": "contacts"
               }
+            },
+            "main-responsable": {
+              "data": null
             }
           },
           "links":{ 

@@ -607,7 +607,8 @@ CREATE TABLE projects (
     deleted_at timestamp without time zone,
     project_board_list_id bigint,
     ordinal_number integer DEFAULT 0,
-    description character varying
+    description character varying,
+    main_responsable_id bigint
 );
 
 
@@ -1324,6 +1325,13 @@ CREATE INDEX index_projects_on_deleted_at ON projects USING btree (deleted_at);
 
 
 --
+-- Name: index_projects_on_main_responsable_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_projects_on_main_responsable_id ON projects USING btree (main_responsable_id);
+
+
+--
 -- Name: index_projects_on_project_board_list_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
@@ -1501,6 +1509,14 @@ ALTER TABLE ONLY attendance_events
 
 
 --
+-- Name: projects fk_rails_ecb5b76c3d; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY projects
+    ADD CONSTRAINT fk_rails_ecb5b76c3d FOREIGN KEY (main_responsable_id) REFERENCES users(id);
+
+
+--
 -- Name: folders fk_rails_f5f7a22451; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
 --
 
@@ -1558,6 +1574,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200326110745'),
 ('20200326175523'),
 ('20200329144806'),
-('20200411234703');
+('20200411234703'),
+('20200412190726');
 
 

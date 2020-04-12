@@ -56,6 +56,9 @@ Scenario: PATCH
               "id":"1",
               "type":"contacts"
             }
+          },
+          "main-responsable": {
+            "data": null
           }
         },
         "links":{

@@ -36,6 +36,9 @@ Scenario: Get
               "id": "2",
               "type": "contacts"
             }
+          },
+          "main-responsable": {
+            "data": null
           }
         },
         "links": { "self": "/api/v1/projects/1" },

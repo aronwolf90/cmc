@@ -21,6 +21,7 @@
       comments(:projectId="id", module='projectsShow', v-if="project")
     right-aside.right-aside
       contact
+      main-responsable
 </template>
 
 <script>
@@ -32,6 +33,7 @@ import ShowBody from 'components/show-body'
 import RightAside from 'components/right_aside'
 import DetailsStringInput from 'components/details-string-input'
 import Contact from 'components/projects/contact'
+import MainResponsable from 'components/projects/main-responsable'
 
 export default {
   props: ['id'],
@@ -41,7 +43,8 @@ export default {
     ShowContainer,
     ShowBody,
     RightAside,
-    Contact
+    Contact,
+    MainResponsable
   },
   data () {
     return {

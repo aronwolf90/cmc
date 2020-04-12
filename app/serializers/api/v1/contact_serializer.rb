@@ -6,6 +6,7 @@ module Api
       attributes(
         :name,
         :description,
+        :email,
         :telephone,
         :mobile,
         :fax,

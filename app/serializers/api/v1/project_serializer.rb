@@ -9,6 +9,7 @@ module Api
       attributes :description
 
       belongs_to :project_status, serializer: ProjectStatusSerializer
+      belongs_to :main_responsable, serializer: UserSerializer
       has_one :folder, serializer: FolderSerializer
       has_one :contact, serializer: ContactSerializer
 

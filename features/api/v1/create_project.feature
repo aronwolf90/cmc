@@ -17,6 +17,12 @@ Scenario: Post an valid record using json in POST body
         "relationships": {
           "project-status": {
             "data": { "id": 1, "type": "projects" }
+          },
+          "main-responsable": {
+            "data": {
+              "id": "1",
+              "type": "users"
+            }
           }
         }
       }
@@ -45,6 +51,12 @@ Scenario: Post an valid record using json in POST body
           },
           "contact": {
             "data": null
+          },
+          "main-responsable": {
+            "data": {
+              "id": "1",
+              "type": "users"
+            }
           }
         },
         "links": { "self": "/api/v1/projects/3" },

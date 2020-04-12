@@ -4,6 +4,7 @@ module Api::V1
   class ContactDeserializer < ApiDeserializer
     attribute :name
     attribute :description
+    attribute :email
     attribute :telephone
     attribute :mobile
     attribute :fax
