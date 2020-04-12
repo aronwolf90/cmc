@@ -1,6 +1,6 @@
 <template lang='pug'>
   .current-issue(v-if='currentIssue')
-    a(v-bind:href='showPath', v-on:click='visitShow($event)')
+    a(v-bind:href='showPath')
       | {{ title }}
 
 </template>
@@ -26,12 +26,6 @@ export default {
     showPath () {
       if (!this.currentIssue) return
       return `/administration/issues/${this.currentIssue.id}`
-    }
-  },
-  methods: {
-    visitShow (event) {
-      Turbolinks.visit(this.showPath) /* eslint-disable-line no-undef */
-      event.preventDefault()
     }
   }
 }

@@ -1,13 +1,13 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import ProjectSelect from '../../../app/javascript/board/project_select'
-import { FormSelect } from 'bootstrap-vue/es/components'
 import sinon from 'sinon'
+import BootstrapVue from 'bootstrap-vue'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
-localVue.use(FormSelect)
+localVue.use(BootstrapVue)
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */

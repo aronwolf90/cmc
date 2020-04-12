@@ -38,9 +38,11 @@ export default {
   },
   methods: {
     deleteWikiPage (event) {
-      this.$store.dispatch('destroy', { entry: this.wikiPage, endpoint: '/api/v1' })
-      Turbolinks.visit('/administration/board') /* eslint-disable-line no-undef */
-      event.preventDefault()
+      this.$store.dispatch('destroy', {
+        entry: this.wikiPage
+      }).then(() => {
+        location.replace('/administration/wiki')
+      })
     }
   }
 }

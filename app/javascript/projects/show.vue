@@ -5,7 +5,6 @@
         b-button(
           variant="outline-secondary",
           :href="`/administration/projects/${id}/edit`",
-          @click.prevent="visitEditPath",
           size="sm"
         )
           .fa.fa-edit
@@ -71,15 +70,11 @@ export default {
   methods: {
     destroy () {
       this.$store.dispatch('destroyProject', this.project).then(() => {
-        Turbolinks.visit("/administration/projects")
         this.$router.push('/administration/projects')
       })
     },
     fetch () {
       this.$store.dispatch('projectsShow/fetch', this.id)
-    },
-    visitEditPath () {
-      Turbolinks.visit(`/administration/projects/${this.id}/edit`)
     },
     submitTelephoneNumber () {
       this.telephoneNumber.editMode = false 

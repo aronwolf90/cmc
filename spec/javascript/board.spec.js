@@ -6,19 +6,24 @@ import ProjectSelect from '../../app/javascript/board/project_select'
 import SearchSelect from '../../app/javascript/board/search_select'
 import draggable from 'vuedraggable'
 import sinon from 'sinon'
-import { FormInput } from 'bootstrap-vue/es/components'
+import BootstrapVue from 'bootstrap-vue'
+import VueRouter from 'vue-router'
 
 const localVue = createLocalVue()
+const router = new VueRouter()
 
 localVue.use(Vuex)
-localVue.use(FormInput)
+localVue.use(BootstrapVue)
+localVue.use(VueRouter)
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
 
 describe('Board', () => {
   subject(() => shallow(
-    Board, { store: $store, localVue, stubs: { draggable } }
+    Board, {
+      store: $store, localVue, router, stubs: { draggable }
+    }
   ))
 
   def('getters', () => ({
@@ -79,11 +84,8 @@ describe('Board', () => {
 
     it('call visit on add btn', () => {
       $subject.find('.fa-plus').trigger('click')
-      expect($Turbolinks.visit).to.have.been.called
-    })
-
-    it('contain the add link', () => {
-      expect($subject.html()).to.include('href="/administration/board_lists/new"')
+      expect($subject.vm.$route.path)
+        .to.eq('/administration/board_lists/new')
     })
   })
 
@@ -94,7 +96,8 @@ describe('Board', () => {
 
     it('call visit on add btn', () => {
       $subject.find('.fa-plus').trigger('click')
-      expect($Turbolinks.visit).to.have.been.called
+      expect($subject.vm.$route.path)
+        .to.eq('/administration/board_lists/new')
     })
   })
 })

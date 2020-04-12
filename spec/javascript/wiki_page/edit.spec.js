@@ -5,15 +5,13 @@ import MarkdownEditor from '../../../app/javascript/markdown_editor'
 import sinon from 'sinon'
 import VueRouter from 'vue-router'
 import sinonStubPromise from 'sinon-stub-promise'
-import FormInput from 'bootstrap-vue/es/components/form-input/form-input'
-import Form from 'bootstrap-vue/es/components/form/form'
+import BootstrapVue from 'bootstrap-vue'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 localVue.use(VueRouter)
-localVue.component('b-form-input', FormInput)
-localVue.component('b-form', Form)
+localVue.use(BootstrapVue)
 
 sinonStubPromise(sinon)
 
@@ -68,12 +66,6 @@ describe('Edit', () => {
     it('setContent set content value on form', () => {
       $subject.vm.setContent('test')
       expect($subject.vm.form.attributes.content).to.eq('test')
-    })
-
-    it('call visit on click on the destroy btn', () => {
-      $subject.find('.btn-danger').trigger('click')
-      expect($Turbolinks.visit).to
-        .have.been.calledWith('/administration/wiki_content')
     })
 
     it('call destroy action', () => {

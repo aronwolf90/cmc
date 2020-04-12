@@ -72,10 +72,6 @@ export default {
     destroy () {
       return this.$store.dispatch('destroy', { entry: this.boardList })
     },
-    visitAdd (event) {
-      Turbolinks.visit(this.addLink) /* eslint-disable-line no-undef */
-      event.preventDefault()
-    },
     loadMore () {
       this.$store.dispatch('loadAssociationNextPageAccumulative', { 
         entry: this.boardList, 

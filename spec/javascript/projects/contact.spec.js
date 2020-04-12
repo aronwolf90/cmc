@@ -17,30 +17,36 @@ describe('DetailsStringInput', () => {
   const sandbox = sinon.sandbox.create()
   const contact = { id: 1, type: 'contacts' }
   const updateContact = sandbox.stub()
-  const telephoneNumberValue = sandbox.stub()
+  const contactTelephoneNumberValue = sandbox.stub()
   const emailValue = sandbox.stub()
   const store = {
     modules: {
       projectsShow: {
         namespaced: true,
         mutations: {
-          telephoneNumberValue,
+          contactTelephoneNumberValue,
           emailValue
         },
         getters: {
           contact () {
             return contact
           },
-          telephoneNumberValue () {
-            return '+49 821 598-1111'
+          contactNameValue () {
+            return 'project'
           },
-          telephoneNumberEditMode () {
+          contactNameEditMode () {
             return false
           },
-          emailValue () {
+          contactTelephoneNumberValue () {
+            return '+49 821 598-1111'
+          },
+          contactTelephoneNumberEditMode () {
+            return false
+          },
+          contactEmailValue () {
             return 'aron.wolf@test.com'
           },
-          emailEditMode () {
+          contactEmailEditMode () {
             return false
           }
         }
@@ -60,13 +66,13 @@ describe('DetailsStringInput', () => {
         store: new Vuex.Store(store)
       })
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(0)
+        wrapper.findAll(DetailsStringInput).at(1)
 
-      expect(detailsStringInput.vm.value)
+      expect(detailsStringInput.props().value)
         .to.eql('+49 821 598-1111')
     })
 
-    it('call commit("projectsShow/telephoneNumberValue", value) ', () => {
+    it('call commit("projectsShow/contactTelephoneNumberValue", value) ', () => {
       const wrapper = mount(Contact, {
         localVue,
         store: new Vuex.Store(store),
@@ -75,11 +81,11 @@ describe('DetailsStringInput', () => {
         }
       })
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(0)
+        wrapper.findAll(DetailsStringInput).at(1)
 
       detailsStringInput.vm.value = 'hi'
       detailsStringInput.trigger('input')
-      expect(telephoneNumberValue).to.have.been.called
+      expect(contactTelephoneNumberValue).to.have.been.called
     })
 
     it('handle submit', (done) => {
@@ -91,7 +97,7 @@ describe('DetailsStringInput', () => {
         }
       })
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(0)
+        wrapper.findAll(DetailsStringInput).at(1)
 
       detailsStringInput.trigger('submit')
       wrapper.vm.$nextTick(() => {
@@ -118,7 +124,7 @@ describe('DetailsStringInput', () => {
         store: new Vuex.Store(store)
       })
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(1)
+        wrapper.findAll(DetailsStringInput).at(2)
 
       expect(detailsStringInput.vm.value)
         .to.eql('aron.wolf@test.com')
@@ -133,11 +139,11 @@ describe('DetailsStringInput', () => {
         }
       })
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(1)
+        wrapper.findAll(DetailsStringInput).at(2)
 
       detailsStringInput.vm.value = 'hi'
       detailsStringInput.trigger('input')
-      expect(telephoneNumberValue).to.have.been.called
+      expect(contactTelephoneNumberValue).to.have.been.called
     })
 
     it('handle submit', (done) => {
@@ -149,7 +155,7 @@ describe('DetailsStringInput', () => {
         }
       })
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(1)
+        wrapper.findAll(DetailsStringInput).at(2)
 
       detailsStringInput.trigger('submit')
       wrapper.vm.$nextTick(() => {

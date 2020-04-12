@@ -64,8 +64,11 @@ export default {
       this.form.attributes.content = data
     },
     deleteWikiPage (event) {
-      this.$store.dispatch('destroy', { entry: this.wikiPage, endpoint: '/api/v1' })
-      Turbolinks.visit('/administration/wiki_content') /* eslint-disable-line no-undef */
+      this.$store.dispatch('destroy', {
+        entry: this.wikiPage
+      }).then(() => {
+        this.$router.push('/administration/wiki')
+      })
     }
   }
 }

@@ -43,12 +43,6 @@ describe('CurrentIssue', () => {
     it("has currentIssue's title", () => {
       expect($subject.html()).to.include('current issue title')
     })
-
-    it('call visit on click link', () => {
-      $subject.find('a').trigger('click')
-      expect($Turbolinks.visit).to.have
-        .been.calledWith('/administration/issues/1')
-    })
   })
   describe('without currentIssue', () => {
     def('currentIssue', () => undefined)

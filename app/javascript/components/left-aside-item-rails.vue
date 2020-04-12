@@ -1,6 +1,6 @@
 <template lang='pug'>
   li(v-bind:class="{ active: isActive }")
-    a(:href="path", @click.prevent="visit")
+    a(:href="path")
       slot
 </template>
 
@@ -11,11 +11,6 @@ export default {
   computed: {
     isActive () {
       return !this.notShowActive && this.$route.path == this.path
-    }
-  },
-  methods: {
-    visit () {
-      Turbolinks.visit(this.path)
     }
   }
 }

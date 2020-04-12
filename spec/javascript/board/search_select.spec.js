@@ -1,12 +1,12 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import SearchSelect from '../../../app/javascript/board/search_select'
-import { FormInput } from 'bootstrap-vue/es/components'
+import BootstrapVue from 'bootstrap-vue'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
-localVue.use(FormInput)
+localVue.use(BootstrapVue)
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */

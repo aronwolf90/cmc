@@ -4,12 +4,12 @@ import List from '../../../app/javascript/board/list'
 import Issue from '../../../app/javascript/board/issue'
 import draggable from 'vuedraggable'
 import sinon from 'sinon'
-import { FormInput } from 'bootstrap-vue/es/components'
+import BootstrapVue from 'bootstrap-vue'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
-localVue.use(FormInput)
+localVue.use(BootstrapVue)
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
