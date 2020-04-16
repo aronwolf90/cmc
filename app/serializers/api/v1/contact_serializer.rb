@@ -3,6 +3,8 @@
 module Api
   module V1
     class ContactSerializer < ApplicationSerializer
+      set_type :contacts
+
       attributes(
         :name,
         :description,

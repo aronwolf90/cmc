@@ -2,9 +2,9 @@
 
 module SerializerSpecHelper
   def serialize(obj, opts = {})
-    obje = ActiveModelSerializers::Adapter.create(
-      described_class.send(:new, obj), opts
-    )
-    obje.as_json
+    described_class.new(obj).serializable_hash.tap do |hash|
+      hash[:data].compact!
+      hash[:data][:type] = hash[:data][:type].to_s
+    end
   end
 end

@@ -17,7 +17,7 @@ module Api
             BoardList.where(project: project_id)
           else
             BoardList.where.not(project: nil)
-          end.ordered.includes(BoardListSerializer.eager_load_options)
+          end.ordered
         end
       end
     end

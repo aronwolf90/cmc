@@ -38,8 +38,12 @@ export default {
     ProjectSelect,
     SearchSelect
   },
-  created () {
-    this.fetch()
+  beforeRouteEnter (to, from, next) {
+    console.time("concatenation");
+    window.store.dispatch('board/getBoardLists').then(() => {
+      console.timeEnd("concatenation");
+      next()
+    })
   },
   computed: {
     boardLists: {

@@ -181,8 +181,10 @@ export default {
     promptCallback: null,
     editEdventId: null
   }),
-  created () {
-    this.$store.dispatch('initEvents')
+  beforeRouteEnter (to, from, next) {
+    window.store.dispatch('getEvents').then(() => {
+      next()
+    })
   },
   watch:
   {

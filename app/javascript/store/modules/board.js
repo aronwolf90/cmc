@@ -20,7 +20,7 @@ export default {
   },
   actions: {
     getBoardLists (context) {
-      context.dispatch('getBoardLists', null, { root: true }).then(response => {
+      return context.dispatch('getBoardLists', null, { root: true }).then(response => {
         context.commit('boardLists', response.data)
       })
     },

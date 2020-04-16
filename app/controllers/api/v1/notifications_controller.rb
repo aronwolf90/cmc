@@ -9,12 +9,13 @@ module Api
       collection_query Api::V1::Notifications::IndexQuery
 
       def index
-        render(
-          json: collection_result.collection,
-          links: { next: next_more_path },
-          meta: { unreadCount: collection_result.unread_count },
-          each_serializer: serializer
-        )
+        render json: serializer.new(
+          collection_result.collection,
+          {
+            links: { next: next_more_path },
+            meta: { unreadCount: collection_result.unread_count },
+            params: { current_user: current_user }
+          })
       end
 
       private

@@ -27,7 +27,7 @@ module Api
           result = run namespace::CreateOperation
 
           if result.success?
-            render json: result[:model], status: :created
+            render json: serializer.new(result[:model]).serialized_json, status: :created
           else
             render_errors(result[:errors])
           end
@@ -54,19 +54,12 @@ module Api
         end
 
         def render_json_api(json:, links: true)
-          serializer_hash =
-            if json.is_a?(Array) || json.is_a?(ActiveRecord::Relation)
-              { each_serializer: serializer }
-            else
-              { serializer: serializer }
-            end
-
-          render({
-            json: json,
-            include: params[:include],
-            links: ({ self: request.path_info } if links),
-            option_name: params[:filter] || {}
-          }.merge(serializer_hash))
+          render json: serializer.new(json,
+            {
+              include: params[:include],
+              links: ({ self: request.path_info } if links),
+              params: { current_user: current_user }
+            }).serialized_json
         end
 
         def query

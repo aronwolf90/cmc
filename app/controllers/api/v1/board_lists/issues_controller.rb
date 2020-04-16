@@ -9,11 +9,9 @@ module Api
         collection_query Api::V1::BoardLists::Issues::IndexQuery
 
         def index
-          render(
-            json: collection_result.collection,
-            links: { next: next_more_path },
-            each_serializer: serializer
-          )
+          render json: serializer.new(collection_result.collection, {
+            links: { next: next_more_path }
+          })
         end
 
         private

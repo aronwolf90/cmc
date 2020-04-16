@@ -16,7 +16,10 @@ module Api
           project_id: params.dig(:filter, :project_id)
         )
 
-        render_json_api json: collection
+        render json: BoardListSerializer.new(
+          collection,
+          { include: [:issues] }
+        ).serialized_json
       end
     end
   end

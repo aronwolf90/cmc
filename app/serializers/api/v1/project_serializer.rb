@@ -3,17 +3,20 @@
 module Api
   module V1
     class ProjectSerializer < ApplicationSerializer
-      include Rails.application.routes.url_helpers
+      set_type :projects
 
       attributes :name
       attributes :description
 
       belongs_to :project_status, serializer: ProjectStatusSerializer
-      belongs_to :main_responsable, serializer: UserSerializer
-      has_one :folder, serializer: FolderSerializer
-      has_one :contact, serializer: ContactSerializer
+      belongs_to :main_responsable, serializer: UserSerializer,
+        record_type: 'users'
+      has_one :folder, serializer: FolderSerializer,
+        record_type: 'folders'
+      has_one :contact, serializer: ContactSerializer,
+        record_type: :contacts
 
-      link(:self) { api_v1_project_path(object) }
+      link(:self) { |object| "/api/v1/project/#{object.id}" }
     end
   end
 end

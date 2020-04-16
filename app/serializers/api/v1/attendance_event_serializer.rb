@@ -3,6 +3,8 @@
 module Api
   module V1
     class AttendanceEventSerializer < ApplicationSerializer
+      set_type :'attendance-events'
+
       attributes(
         :from_day,
         :to_day,
@@ -10,9 +12,10 @@ module Api
         :to_time,
         :description
       )
-      belongs_to :user, serializer: Api::V1::UserSerializer
+      belongs_to :user, serializer: Api::V1::UserSerializer,
+        record_type: 'users'
 
-      link(:self) { api_v1_attendance_event_path(object) }
+      link(:self) { |object| "/api/v1/attendance_event/#{object.id}" }
 
       def from_time
         object&.from_time&.strftime("%H:%M")

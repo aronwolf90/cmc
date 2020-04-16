@@ -5,11 +5,12 @@ module Api
     class ContextsController < ApiController
       include StandartActions
       update_operation Api::V1::Organizations::UpdateOperation
+      serializer ContextSerializer
 
       def show
         organization = Organization.current
 
-        render json: Context.new(
+        render json: serializer.new(Context.new(
           current_user: current_user,
           premium: organization&.premium?,
           user_count: User.count,
@@ -17,9 +18,9 @@ module Api
           global_board: organization&.global_board
         ), include: [
           :current_user,
-          "current_user.current_record",
-          "current_user.current_record.issue"
-        ]
+          :"current_user.current_record",
+          :"current_user.current_record.issue"
+        ])
       end
 
       def update

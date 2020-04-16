@@ -31,7 +31,7 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
             type: "board-lists"
           }
         },
-        comments: { data: [] }
+        comments: { }
       },
       links: { self: "/api/v1/issues/#{issue.id}" }
     } }

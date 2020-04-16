@@ -193,6 +193,8 @@ GEM
       railties (>= 4.2.0)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
+    fast_jsonapi (1.5)
+      activesupport (>= 4.2)
     ffi (1.12.2)
     fog-aws (3.5.2)
       fog-core (~> 2.1)
@@ -571,6 +573,7 @@ DEPENDENCIES
   devise
   devise_invitable
   factory_bot_rails
+  fast_jsonapi
   fog-aws
   font-awesome-rails
   guard-rspec

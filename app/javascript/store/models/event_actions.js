@@ -4,6 +4,9 @@ export default {
   initEvents (context) {
     return context.dispatch('get', { endpoint, resource: 'events' })
   },
+  getEvents (context) {
+    return context.dispatch('get', { endpoint, resource: 'events' })
+  },
   createEvent (context, { attributes }) {
     let payload = { attributes }
 

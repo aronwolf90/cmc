@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-class ApplicationSerializer < ActiveModel::Serializer
-  include Rails.application.routes.url_helpers
+class ApplicationSerializer
+  include FastJsonapi::ObjectSerializer
+  set_key_transform :dash
 
-  meta do
+  meta do |object, params|
     policy = Pundit::PolicyFinder.new(object).policy
     next if policy.nil?
-    next if scope.nil?
+    next if params[:current_user].nil?
     {
       permissions: {
-        update: policy.new(scope.current_user, object).update?,
-        destroy: policy.new(scope.current_user, object).destroy?
+        update: policy.new(params[:current_user], object).update?,
+        destroy: policy.new(params[:current_user], object).destroy?
       }
     }
   end

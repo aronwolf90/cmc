@@ -50,6 +50,7 @@ import LeftAside from 'components/left-aside'
 import RailsPage from 'components/rails-page'
 import MenuItem from 'components/menu-item'
 import Asides from 'components/asides'
+import VueProgressBar from 'vue-progressbar'
 
 require('../config')
 
@@ -85,6 +86,7 @@ Vue.component('left-aside', LeftAside)
 Vue.component('menu-item', MenuItem)
 Vue.component('asides', Asides)
 
+Vue.use(VueProgressBar, { color: 'MediumSpringGreen' })
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')
 store.commit('vue', Vue)
@@ -222,13 +224,13 @@ document.addEventListener('turbolinks:load', () => {
       {
         path: '/administration/board_lists',
         component: IssuesBoard,
-        meta: { aside: 'projects' }
+        meta: { aside: 'global' }
       },
       {
         path: '/administration/board_lists/:boardListId/issues/new',
         component: IssueNew,
         props: true,
-        meta: { aside: 'projects' }
+        meta: { aside: 'global' }
       },
       {
         path: '/administration/issues/:id',
@@ -364,10 +366,20 @@ document.addEventListener('turbolinks:load', () => {
     ]
   })
 
+  var app = null
   router.beforeEach((to, from, next) => {
     store.commit('clearCalledUrls')
     store.commit('setAside', to.meta.aside)
+    if (app) {
+      app.$Progress.start()
+    }
     next()
   })
-  var app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */
+  router.afterEach((to, from) => {
+    if (app) {
+      app.$Progress.finish()
+    }
+  })
+
+  app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */
 })

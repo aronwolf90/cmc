@@ -3,25 +3,28 @@
 module Api
   module V1
     class IssueSerializer < ApplicationSerializer
+      set_type :issues
+
       attributes(
         :title,
         :description,
-        :complexity,
-        :due_at,
-        :deadline_at
+        :complexity
       )
 
-      belongs_to :user, serializer: UserSerializer
-      has_one :board_list, serializer: BoardListSerializer
-      has_many :comments, serializer: CommentSerializer
+      belongs_to :user, serializer: UserSerializer,
+        record_type: 'users'
+      has_one :board_list, serializer: BoardListSerializer,
+        record_type: 'board-lists'
+      has_many :comments, serializer: CommentSerializer,
+        record_type: 'board-lists', lazy_load_data: true
 
-      link(:self) { api_v1_issue_path(object) }
+      link(:self) { |object| "/api/v1/issues/#{object.id}" }
 
-      def due_at
+      attribute :due_at do |object|
         object.due_at&.strftime("%d-%m-%Y %H:%M")
       end
 
-      def deadline_at
+      attribute :deadline_at do |object|
         object.deadline_at&.strftime("%d-%m-%Y %H:%M")
       end
 

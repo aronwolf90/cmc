@@ -3,6 +3,8 @@
 module Api
   module V1
     class NotificationSerializer < ApplicationSerializer
+      set_type :notifications
+
       attributes(
         :subject,
         :body,

@@ -3,17 +3,18 @@
 module Api
   module V1
     class DocumentSerializer < ApplicationSerializer
-      include Rails.application.routes.url_helpers
+      set_type :documents
 
       attributes :name
       attributes :url
 
-      belongs_to :folder, serializer: FolderSerializer
+      belongs_to :folder, serializer: FolderSerializer,
+        record_type: :folders
 
-      link(:self) { api_v1_document_path(object) }
+      link(:self) { "/api/v1/documents/#{object}" }
 
       def url
-        api_v1_document_file_path(object.document_file)
+        "/api/v1/document_files/#{object.document_file.id}"
       end
     end
   end
