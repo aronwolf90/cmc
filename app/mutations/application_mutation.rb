@@ -5,6 +5,7 @@ class ApplicationMutation
   attr_private :attributes, :user
 
   def self.call(*args)
+    Rails.logger.debug [self, args]
     new(*args).tap(&:call).model
   end
 

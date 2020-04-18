@@ -10,6 +10,7 @@ module Api::V1
 
     def call(options, params:, **_args)
       options[:deserialized_params] = deserializer.call(params[:data])
+      Rails.logger.debug [deserializer, options[:deserialized_params]]
     end
   end
 end
