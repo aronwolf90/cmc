@@ -1,21 +1,13 @@
-import { mount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
+import createWrapper from '../helper'
 import ProjectShow from '../../../app/javascript/projects/show'
-import BootstrapVue from 'bootstrap-vue'
-import VueRouter from 'vue-router'
-
-const localVue = createLocalVue()
-const router = new VueRouter()
-
-localVue.use(Vuex)
-localVue.use(BootstrapVue)
-localVue.use(VueRouter)
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable prefer-promise-reject-errors */
 
 describe('ProjectShow', () => {
+  afterEach(() => (sandbox.restore()))
+
   const project = {
     id: 1,
     type: 'projects',
@@ -26,26 +18,24 @@ describe('ProjectShow', () => {
 
   const store = {
     getters: {
-      project () {
-        return () => project
-      }
+      project: () => project
     },
-    actions: {
-      getProject () {
-        return Promise.resolve({ data: project })
+    dispatch: sandbox.stub()
+  }
+
+  const factory = () => {
+    return createWrapper(ProjectShow, {
+      store,
+      stubs: {
+        comments: true,
+        contact: true,
+        'main-responsable': true
       }
-    }
+    })
   }
 
   it('renders the title', (done) => {
-    const wrapper = mount(ProjectShow, {
-      router,
-      store: new Vuex.Store(store),
-      localVue,
-      stubs: {
-        comments: true
-      }
-    })
+    const wrapper = factory()
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
         expect(wrapper.html()).to.include('Test')
@@ -55,14 +45,7 @@ describe('ProjectShow', () => {
   })
 
   it('renders the edit btn', (done) => {
-    const wrapper = mount(ProjectShow, {
-      router,
-      store: new Vuex.Store(store),
-      localVue,
-      stubs: {
-        comments: true
-      }
-    })
+    const wrapper = factory()
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
         expect(wrapper.find('.fa-edit').exists()).to.be.true
@@ -72,17 +55,10 @@ describe('ProjectShow', () => {
   })
 
   it('calls destroyProject when fa-trash is clicked', (done) => {
-    store.actions['destroyProject'] = () => {
-      done()
-    }
-    const wrapper = mount(ProjectShow, {
-      router,
-      store: new Vuex.Store(store),
-      localVue,
-      stubs: {
-        comments: true
-      }
-    })
+    store.dispatch.returns(Promise.resolve())
+    const wrapper = factory()
     wrapper.find('.fa-trash').trigger('click')
+    expect(store.dispatch).to.have.been.calledWith('destroyProject')
+    done()
   })
 })

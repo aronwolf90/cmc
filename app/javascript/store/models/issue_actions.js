@@ -44,5 +44,11 @@ export default {
       childRelationshipName: 'user',
       parentRelationshipName: 'issues'
     })
+  },
+  closeIssue (context, issue) {
+    return context.dispatch('create', {
+      endpoint,
+      resource: `/issues/${issue.id}/close`
+    })
   }
 }

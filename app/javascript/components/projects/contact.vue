@@ -47,8 +47,12 @@ export default {
     contact () {
       return this.$store.getters['projectsShow/contact']
     },
+    contactId () {
+      if (!this.contact) return
+      return this.contact.id
+    },
     contactLink () {
-      return `/administration/contacts/${this.contact.id}`
+      return `/administration/contacts/${this.contactId}`
     },
     nameValue: {
       get () {

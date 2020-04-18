@@ -72,9 +72,9 @@ describe('ProjectNew', () => {
           }
         },
         actions: {
-				  getContacts () {
-					  return Promise.resolve({ data: [] })
-					},
+          getContacts () {
+            return Promise.resolve({ data: [] })
+          },
           createProject ({ attributes }) {
             return Promise.reject({
               status: 'fail',

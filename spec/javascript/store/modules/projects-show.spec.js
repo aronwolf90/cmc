@@ -70,10 +70,47 @@ describe('Store.Modules.ProjectsShow', () => {
       },
       {})
     })
+    describe('.closeIssue', () => {
+      it('calls dispatch.closeIssue', () => {
+        ProjectsShow.actions.closeIssue({
+          dispatch (method, payload) {
+            expect(method).to.eq('closeIssue')
+          },
+          commit () {}
+        },
+        {})
+      })
+      it('calls commit.removeReminder', () => {
+        ProjectsShow.actions.closeIssue({
+          dispatch (method, payload) {},
+          commit (method) {
+            expect(method).to.eq('removeReminder')
+          }
+        },
+        {})
+      })
+    })
   })
   describe('.mutations', () => {
-    let state = {}
-    ProjectsShow.mutations.comments(state, [projectComment])
-    expect(state).to.eql({ projectCommentRefs: [ { id: 1, type: 'project-comments' } ] })
+    it('comments', () => {
+      let state = {}
+      ProjectsShow.mutations.comments(state, [projectComment])
+      expect(state).to.eql({ projectCommentRefs: [ { id: 1, type: 'project-comments' } ] })
+    })
+    it('removeReminder', () => {
+      let state = {
+        reminderRefs: [
+          { id: '1', type: 'issues' },
+          { id: '2', type: 'issues' }
+        ]
+      }
+      ProjectsShow.mutations.removeReminder(state, {
+        id: '1',
+        type: 'issues'
+      })
+      expect(state).to.eql({
+        reminderRefs: [ { id: '2', type: 'issues' } ]
+      })
+    })
   })
 })

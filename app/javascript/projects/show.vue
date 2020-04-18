@@ -21,6 +21,7 @@
     right-aside.right-aside
       contact
       main-responsable
+      reminder-list
 </template>
 
 <script>
@@ -33,6 +34,7 @@ import RightAside from 'components/right_aside'
 import DetailsStringInput from 'components/details-string-input'
 import Contact from 'components/projects/contact'
 import MainResponsable from 'components/projects/main-responsable'
+import ReminderList from 'components/projects/reminder-list'
 
 export default {
   props: ['id'],
@@ -43,7 +45,8 @@ export default {
     ShowBody,
     RightAside,
     Contact,
-    MainResponsable
+    MainResponsable,
+    ReminderList
   },
   data () {
     return {

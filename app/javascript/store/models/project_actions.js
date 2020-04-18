@@ -31,5 +31,11 @@ export default {
   },
   destroyProject (context, project) {
     return context.dispatch('destroy', { entry: project })
+  },
+  getProjectReminders (context, id) {
+    return context.dispatch('get', {
+      endpoint,
+      resource: `projects/${id}/reminders`
+    })
   }
 }

@@ -1,6 +1,7 @@
 // setup JSDOM
 var jsdom = require('jsdom-global')()
 require('../app/javascript/polyfill')
+const sinon = require('sinon')
 
 const SinonChai = require('sinon-chai')
 const Chai = require('chai')
@@ -12,3 +13,4 @@ global.expect = Chai.expect
 window.Date = Date
 global.jqueryFuncs = function () {}
 global.jsdom = jsdom
+global.sandbox = sinon.sandbox.create()

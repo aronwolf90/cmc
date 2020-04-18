@@ -53,7 +53,7 @@ When(/^I send a (GET|PATCH|POST|PUT|DELETE) request (?:for|to) "([^"]*)"(?: with
         RestClient::Request.execute(
           method: :put,
           url: url,
-          payload: StringIO.new(input),
+          payload: input.present? ? StringIO.new(input) : nil,
           headers: @headers,
           max_redirects: 0
         )
@@ -61,7 +61,7 @@ When(/^I send a (GET|PATCH|POST|PUT|DELETE) request (?:for|to) "([^"]*)"(?: with
         RestClient::Request.execute(
           method: :post,
           url: url,
-          payload: StringIO.new(input),
+          payload: input.present? ? StringIO.new(input) : nil,
           headers: @headers,
           max_redirects: 0
         )

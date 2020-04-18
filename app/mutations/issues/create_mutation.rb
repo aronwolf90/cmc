@@ -6,7 +6,8 @@ module Issues
 
     def call
       @project_id = attributes.delete(:project_id) || user.selected_project_id
-      @indicated_board_list = BoardList.find(attributes[:board_list_id])
+      @indicated_board_list = attributes[:board_list_id].present? ?
+        BoardList.find(attributes[:board_list_id]) : nil
 
       ActiveRecord::Base.transaction do
         model.assign_attributes(attributes)
@@ -29,7 +30,9 @@ module Issues
 
   private
     def global_board_list_id
-      if global_board?
+      if indicated_board_list.nil?
+        BoardList.find_by(project_id: nil, kind: :open).id
+      elsif global_board?
         indicated_board_list&.id
       else
         (BoardList.find_by(project_id: nil, kind: indicated_board_list.kind) ||
@@ -38,9 +41,11 @@ module Issues
     end
 
     def board_list_id
-      return if global_board? && project_id.nil?
+      return if indicated_board_list.present? && global_board? && project_id.nil?
 
-      if global_board?
+      if indicated_board_list.nil?
+        BoardList.find_by(project_id: project_id, kind: :open).id
+      elsif global_board?
         (BoardList.find_by(project_id: project_id, kind: indicated_board_list.kind) ||
          BoardList.find_by(project_id: project_id, kind: :open))&.id
       else
@@ -49,7 +54,7 @@ module Issues
     end
 
     def global_board?
-      indicated_board_list.project_id.nil?
+      indicated_board_list&.project_id.nil?
     end
   end
 end

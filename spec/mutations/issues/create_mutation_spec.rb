@@ -93,4 +93,17 @@ RSpec.describe Issues::CreateMutation do
       expect(subject.reload.global_board_list).to eq global_closed_board_list
     end
   end
+
+  context "when no board_list_id is specified" do
+    let(:attribute_project_id) { project.id }
+    let(:board_list_id) { nil }
+
+    it "use the board list of kind open" do
+      expect(subject.reload.board_list.kind).to eq("open")
+    end
+
+    it "use the board list of kind open" do
+      expect(subject.reload.global_board_list.kind).to eq("open")
+    end
+  end
 end

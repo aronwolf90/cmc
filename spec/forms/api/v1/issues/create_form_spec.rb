@@ -56,16 +56,4 @@ describe Api::V1::Issues::CreateForm do
       )
     end
   end
-
-  context "when boad-list is nil" do
-    before { params[:data][:relationships].delete(:"board-list") }
-
-    it "it has an error: id must be filled" do
-      expect(subject.errors).to eq(
-        data: { relationships: {
-          "board-list": ["is missing"]
-        } }
-      )
-    end
-  end
 end

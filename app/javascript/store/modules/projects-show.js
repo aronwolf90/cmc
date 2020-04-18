@@ -5,6 +5,7 @@ export default {
   state: {
     projectCommentRefs: [],
     projectId: null,
+    reminderRefs: [],
     contact: {
       name: {
         value: '',
@@ -55,11 +56,20 @@ export default {
     },
     contactEmailEditMode (state) {
       return state.contact.email.editMode
+    },
+    reminders (state) {
+      return state.reminderRefs
     }
   },
   mutations: {
     comments (state, comments) {
       state.projectCommentRefs = Utils.entryArrayToRef(comments)
+    },
+    reminders (state, reminders) {
+      state.reminderRefs = Utils.entryArrayToRef(reminders)
+    },
+    addReminder (state, reminder) {
+      state.reminderRefs.push(Utils.entryToRef(reminder))
     },
     projectId (state, projectId) {
       state.projectId = projectId
@@ -81,6 +91,12 @@ export default {
     },
     contactEmailEditMode (state, value) {
       state.contact.email.editMode = value
+    },
+    removeReminder (state, issue) {
+      const index = state.reminderRefs.findIndex(entry => {
+        return Utils.sameRef(entry, issue)
+      })
+      state.reminderRefs.splice(index, 1)
     }
   },
   actions: {
@@ -103,6 +119,11 @@ export default {
       context.dispatch('getProjectComments', id, { root: true }).then(result => {
         context.commit('comments', result.data)
       })
+      context.dispatch(
+        'getProjectReminders', id, { root: true }
+      ).then(result => {
+        context.commit('reminders', result.data)
+      })
     },
     createComment (context, payload) {
       payload['relationships'] = {
@@ -121,6 +142,10 @@ export default {
       ).then(response => {
         context.commit('comments', context.getters.comments.concat(response.data.data))
       })
+    },
+    closeIssue (context, issue) {
+      context.dispatch('closeIssue', issue, { root: true })
+      context.commit('removeReminder', issue)
     }
   }
 }

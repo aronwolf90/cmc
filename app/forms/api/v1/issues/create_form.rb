@@ -14,7 +14,7 @@ module Api::V1
           end
           optional(:relationships).schema do
             optional(:project).schema(RequiredBelongsToSchema)
-            required(:"board-list").schema(RequiredBelongsToSchema)
+            optional(:"board-list").schema(RequiredBelongsToSchema)
           end
         end
       end
