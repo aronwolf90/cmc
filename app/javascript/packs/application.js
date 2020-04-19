@@ -51,6 +51,7 @@ import RailsPage from 'components/rails-page'
 import MenuItem from 'components/menu-item'
 import Asides from 'components/asides'
 import BtnSubmit from 'components/btn-submit'
+import ProjectTickets from 'projects/tickets'
 
 require('../config')
 
@@ -183,6 +184,12 @@ document.addEventListener('turbolinks:load', () => {
       {
         path: '/administration/projects/:projectId/documents/:id/edit',
         component: ProjectsDocumentsEdit,
+        props: true,
+        meta: { aside: 'projects-detail' }
+      },
+      {
+        path: '/administration/projects/:projectId/tickets',
+        component: ProjectTickets,
         props: true,
         meta: { aside: 'projects-detail' }
       },

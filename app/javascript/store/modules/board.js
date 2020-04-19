@@ -19,9 +19,17 @@ export default {
     }
   },
   actions: {
-    getBoardLists (context) {
-      context.dispatch('getBoardLists', null, { root: true }).then(response => {
+    fetch (context, projectId) {
+      return context.dispatch('getBoardLists', projectId)
+    },
+    getBoardLists (context, projectId) {
+      return context.dispatch(
+        'getBoardLists',
+        projectId,
+        { root: true }
+      ).then(response => {
         context.commit('boardLists', response.data)
+        return response
       })
     },
     sortBoardLists (context, boardLists) {

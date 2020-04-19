@@ -14,11 +14,13 @@ export default {
       resource: `board_lists/${id}`
     })
   },
-  getBoardLists (context) {
+  getBoardLists (context, projectId) {
     return context.dispatch('initCurrentUser').then(() => {
-      let currentUser = context.getters.currentUser
-      let project = currentUser.relationships['selected-project'].data
-      let projectId = project ? project.id : null
+      if (!projectId) {
+        let currentUser = context.getters.currentUser
+        let project = currentUser.relationships['selected-project'].data
+        projectId = project ? project.id : null
+      }
       return context.dispatch('get', {
         endpoint,
         resource: `board_lists?filter[project_id]=${projectId}&include[]=issues`

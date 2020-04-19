@@ -9,6 +9,8 @@
       | Records
     left-aside-item(:path="`/administration/projects/${id}/documents`")
       | Documents
+    left-aside-item(:path="`/administration/projects/${id}/tickets`")
+      | Tickets
 </template>
 
 <script>
