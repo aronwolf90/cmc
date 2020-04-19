@@ -1,7 +1,7 @@
 <template lang='pug'>
   b-form.details-string-input(@submit.prevent="submit")
     b-input-group(v-if="internEditMode")
-      b-form-input(v-model="value")
+      b-form-input(v-model="value", :placeholder="placeholder")
       b-input-group-append
         b-button(
           variant="outline-secondary",
@@ -17,7 +17,8 @@
         @click="internEditMode=true"
       )
           .fa.fa-edit
-      .text {{ value }} 
+      .text(v-if="value") {{ value }} 
+      .placeholder(v-else="") {{ placeholder }}
       .clearfix
 </template>
 
@@ -26,6 +27,7 @@
 export default {
   props: {
     value: String,
+    placeholder: String,
     editMode: Boolean
   },
   data () {
@@ -63,6 +65,10 @@ export default {
     margin-right: -11px
     .text 
       word-break: break-word;
+    .placeholder
+      color: rgba(191, 191, 191, 0.87)
+    input::placeholder
+      color: rgba(191, 191, 191, 0.87)
     input
       padding: 3px
       height: auto

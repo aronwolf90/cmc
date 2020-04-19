@@ -4,7 +4,7 @@
       b-button-group.pull-right
         b-button(
           variant="outline-secondary",
-          :href="`/administration/projects/${id}/edit`",
+          :to="`/administration/projects/${id}/edit`",
           size="sm"
         )
           .fa.fa-edit

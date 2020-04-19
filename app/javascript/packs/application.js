@@ -50,6 +50,7 @@ import LeftAside from 'components/left-aside'
 import RailsPage from 'components/rails-page'
 import MenuItem from 'components/menu-item'
 import Asides from 'components/asides'
+import BtnSubmit from 'components/btn-submit'
 
 require('../config')
 
@@ -84,6 +85,7 @@ Vue.component('projects-detail-left-aside', ProjectsDetailLeftAside)
 Vue.component('left-aside', LeftAside)
 Vue.component('menu-item', MenuItem)
 Vue.component('asides', Asides)
+Vue.component('btn-submit', BtnSubmit)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')
@@ -228,7 +230,7 @@ document.addEventListener('turbolinks:load', () => {
         path: '/administration/board_lists/:boardListId/issues/new',
         component: IssueNew,
         props: true,
-        meta: { aside: 'projects' }
+        meta: { aside: 'global' }
       },
       {
         path: '/administration/issues/:id',
@@ -367,6 +369,9 @@ document.addEventListener('turbolinks:load', () => {
   router.beforeEach((to, from, next) => {
     store.commit('clearCalledUrls')
     store.commit('setAside', to.meta.aside)
+    if (to.path !== from.path && from.path !== '/') {
+      store.commit('setPrevPath', from.path)
+    }
     next()
   })
   var app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */

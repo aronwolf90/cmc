@@ -57,7 +57,7 @@
     b-button(type="submit", variant="success") Save
     b-button-group.pull-right
       b-button(variant="danger", @click="destroy") Destroy
-      b-button(variant="secondary", @click="$router.go(-1)") Cancel
+      b-button(variant="secondary", :to="$store.getters.prevPath") Cancel
 </template>
 
 <script>

@@ -50,11 +50,15 @@ export default {
     issuesShow: issuesShow
   },
   state: {
-    aside: null
+    aside: null,
+    prevPath: '/administration'
   },
   mutations: {
     setAside (state, name) {
       state.aside = name
+    },
+    setPrevPath (state, path) {
+      state.prevPath = path
     }
   },
   getters: {
@@ -119,6 +123,9 @@ export default {
     },
     aside (state) {
       return state.aside
+    },
+    prevPath (state) {
+      return state.prevPath
     }
   },
   actions: {

@@ -2,8 +2,9 @@
   .reminder
     .pull-right.b-button
       .fa.fa-check(@click="closeIssue")
-    router-link.text-secondary(:to="`/administration/issues/${id}`")
-      | {{ title }}
+    .title
+      router-link.text-secondary(:to="`/administration/issues/${id}`")
+        | {{ title }}
 </template>
 
 <script>
@@ -34,4 +35,8 @@ export default {
   .reminder
     padding-top: 4px
     padding-bottom: 4px
+    .title
+      overflow: hidden
+      text-overflow: ellipsis
+      max-width: 150px
 </style>

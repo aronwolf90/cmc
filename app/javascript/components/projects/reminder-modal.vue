@@ -3,7 +3,8 @@
     id="modal-new",
     title="New reminder (Ticket)",
     size="xl",
-    v-model="show"
+    v-model="show",
+    @show="reset"
   )
     b-form(@submit.prevent="submit")
       b-form-group(
@@ -47,10 +48,9 @@
         variant="secondary",
         @click="show=false"
       ) Cancel
-      b-button.pull-right(
-        type="submit",
-        variant="success",
-        @click="submit"
+      btn-submit.pull-right(
+        @click="submit",
+        :saving="saving"
       ) Create reminder
 </template>
 
@@ -67,6 +67,7 @@ export default {
   data () {
     return {
       show: false,
+      saving: false,
       form: {
         attributes: {
           title: null,
@@ -83,7 +84,17 @@ export default {
       this.$store.dispatch('getBoardList', this.boardListId)
       this.$store.dispatch('getSelectedProject')
     },
+    reset () {
+      this.saving = false
+      this.form.attributes.title = null
+      this.form.attributes.description = null
+      this.form.attributes['description'] = null
+      this.form.attributes['due-at'] = null
+      this.form.attributes['deadline-at'] = null
+      this.errors = []
+    },
     submit () {
+      this.saving = true
       const payload = {
         attributes: this.form.attributes,
         relationships: {
@@ -95,9 +106,11 @@ export default {
  
       this.$store.dispatch('createIssue', payload).then(response => {
         this.$store.commit('projectsShow/addReminder', response.data.data)
+        this.saving = false
         this.show = false
       }).catch(({ status, data }) => {
         this.errors = data.errors
+        this.saving = false
       })
     },
     errorStatus (pointer) {

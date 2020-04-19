@@ -1,19 +1,23 @@
 <template lang='pug'>
   .spent-time(v-if="contact")
-    router-link(:to="contactLink").font-weight-bold.text-dark Contact
+    .header-text
+      router-link(:to="contactLink").font-weight-bold.text-dark Contact
     details-string-input(
       v-model="nameValue",
       :editMode.sync="nameEditMode",
+      placeholder="Name",
       @submit="submitName"
     )
     details-string-input(
       v-model="telephoneNumberValue",
       :editMode.sync="telephoneNumberEditMode",
+      placeholder="Telephone number",
       @submit="submitTelephoneNumber"
     )
     details-string-input(
       v-model="emailValue",
       :editMode.sync="emailEditMode",
+      placeholder="E-Mail"
       @submit="submitEmail"
     )
 </template>
@@ -138,5 +142,7 @@ export default {
 }
 </script>
 
-<style lang='sass'>
+<style lang='sass' scoped>
+  .header-text
+    margin-bottom: 5px
 </style>
