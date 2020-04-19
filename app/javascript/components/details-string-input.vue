@@ -1,7 +1,14 @@
 <template lang='pug'>
-  b-form.details-string-input(@submit.prevent="submit")
+  b-form.details-string-input(
+    @submit.prevent="submit",
+    :id="id"
+  )
     b-input-group(v-if="internEditMode")
-      b-form-input(v-model="value", :placeholder="placeholder")
+      b-form-input(
+        v-model="value",
+        :placeholder="placeholder",
+        :id="`${id}-input`"
+      )
       b-input-group-append
         b-button(
           variant="outline-secondary",
@@ -28,7 +35,8 @@ export default {
   props: {
     value: String,
     placeholder: String,
-    editMode: Boolean
+    editMode: Boolean,
+    id: String
   },
   data () {
     return {

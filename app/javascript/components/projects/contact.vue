@@ -6,19 +6,22 @@
       v-model="nameValue",
       :editMode.sync="nameEditMode",
       placeholder="Name",
-      @submit="submitName"
+      @submit="submitName",
+      id="contact-name"
     )
     details-string-input(
       v-model="telephoneNumberValue",
       :editMode.sync="telephoneNumberEditMode",
       placeholder="Telephone number",
-      @submit="submitTelephoneNumber"
+      @submit="submitTelephoneNumber",
+      id="contact-telephone-number"
     )
     details-string-input(
       v-model="emailValue",
       :editMode.sync="emailEditMode",
       placeholder="E-Mail"
-      @submit="submitEmail"
+      @submit="submitEmail",
+      id="contact-email"
     )
 </template>
 

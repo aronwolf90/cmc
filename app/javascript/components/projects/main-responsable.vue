@@ -1,5 +1,5 @@
 <template lang='pug'>
-  .main-responsable(v-if="project")
+  #main-responsable(v-if="project")
     detail-select(
       id='main-responsable',
       label="Main responsable",
