@@ -14,7 +14,7 @@ class Project < ApplicationRecord
   belongs_to :project_board_list
   belongs_to :main_responsable, class_name: "User"
   has_one :project_status, through: :project_board_list
-  has_one :folder
+  has_one :folder, dependent: :destroy
   has_one :contact
   has_many :contacts
 

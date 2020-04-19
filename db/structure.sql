@@ -330,7 +330,8 @@ CREATE TABLE folders (
     folder_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    project_id bigint
+    project_id bigint,
+    deleted_at timestamp without time zone
 );
 
 
@@ -1575,6 +1576,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200326175523'),
 ('20200329144806'),
 ('20200411234703'),
-('20200412190726');
+('20200412190726'),
+('20200419215752'),
+('20200419220104');
 
 
