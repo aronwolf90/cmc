@@ -81,6 +81,7 @@ Rails.application.routes.draw do
       resources :issues, only: %i[index show create update destroy] do
         scope module: :issues do
           resource :close, only: :create
+          resources :comments, only: :index
         end
       end
       resources :comments, only: :create

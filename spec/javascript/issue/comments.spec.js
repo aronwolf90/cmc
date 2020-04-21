@@ -13,11 +13,22 @@ describe('Comments', () => {
   subject(() => shallow(Comments, { store: $store, localVue }))
 
   def('getters', () => ({
-    entry () { return () => $issue },
-    associatedEntries () { return () => $comments }
+    entry () { return () => $issue }
   }))
   def('actions', () => ({ initIssue () { return $sinonPromise }, updateIssue () { return $sinonPromise } }))
-  def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
+  def('store', () => (new Vuex.Store({
+    modules: {
+      'issues-show': {
+        namespaced: true,
+        getters: {
+          comments () { return $comments }
+        }
+      }
+    },
+    state: {},
+    getters: $getters,
+    actions: $actions
+  })))
 
   describe('with resolved promise', () => {
     def('comments', () => [$comment])

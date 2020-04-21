@@ -48,11 +48,6 @@ Scenario: Put an valid issue using json in PUT body
               "id":"4",
               "type":"board-lists"
             }
-          },
-          "comments":{ 
-            "data":[ 
-    
-            ]
           }
         },
         "links":{ 

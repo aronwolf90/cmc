@@ -30,12 +30,10 @@ export default {
   actions: {
     fetch (context, id) {
       context.commit('issueId', id)
-      context.dispatch('getIssue', id, { root: true }).then(response => {
-        context.commit('comments', Utils.relationship(response.data, 'comments'))
+      context.dispatch('getIssue', id, { root: true })
+      context.dispatch('getIssueComments', id, { root: true }).then(response => {
+        context.commit('comments', response.data)
       })
-      // context.dispatch('getComments', id, { root: true }).then(result => {
-      //  context.commit('comments', result.data)
-      //  })
     },
     createComment (context, payload) {
       payload['relationships'] = {

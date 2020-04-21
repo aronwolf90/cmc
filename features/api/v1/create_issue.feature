@@ -54,9 +54,6 @@ Feature: API: create an issue
               "id": "4",
               "type": "board-lists"
             }
-          },
-          "comments": {
-            "data": []
           }
         },
         "links": {

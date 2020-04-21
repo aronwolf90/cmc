@@ -37,10 +37,7 @@ export default {
   },
   computed: {
     comments () {
-      return this.$store.getters.associatedEntries({
-        entry: this.issue,
-        name: 'comments'
-      })
+      return this.$store.getters['issues-show/comments']
     },
     issue () {
       return this.$store.getters.entry({id: this.issueId, type: 'issues'})

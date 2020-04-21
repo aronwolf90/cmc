@@ -32,7 +32,7 @@ describe('Store.Modules.IssuesShow', () => {
     describe('.fetch', () => {
       IssuesShow.actions.fetch({
         dispatch (method, id) {
-          if (id !== 1 && method !== 'getIssue') return
+          if (id !== 1 && method !== 'getIssueComments') return
           return Promise.resolve({ data: [comment] })
         },
         commit () {}

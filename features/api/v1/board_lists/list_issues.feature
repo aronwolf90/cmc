@@ -31,11 +31,6 @@ Scenario: GET /api/v1/board_lists/<id>/issues
                 "id":"4",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -67,11 +62,6 @@ Scenario: GET /api/v1/board_lists/<id>/issues
                 "id":"4",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -106,11 +96,6 @@ Scenario: GET /api/v1/board_lists/<id>/issues
                 "id":"4",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -145,11 +130,6 @@ Scenario: GET /api/v1/board_lists/<id>/issues
                 "id":"4",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 

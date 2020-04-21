@@ -33,11 +33,6 @@ Scenario: Get /api/v1/issues
                 "id":"4",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -72,11 +67,6 @@ Scenario: Get /api/v1/issues
                 "id":"4",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -108,11 +98,6 @@ Scenario: Get /api/v1/issues
                 "id":"4",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -144,11 +129,6 @@ Scenario: Get /api/v1/issues
                 "id":"4",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -180,11 +160,6 @@ Scenario: Get /api/v1/issues
                 "id":"5",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -216,11 +191,6 @@ Scenario: Get /api/v1/issues
                 "id":"5",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -252,11 +222,6 @@ Scenario: Get /api/v1/issues
                 "id":"5",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -288,11 +253,6 @@ Scenario: Get /api/v1/issues
                 "id":"6",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -324,11 +284,6 @@ Scenario: Get /api/v1/issues
                 "id":"6",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -360,11 +315,6 @@ Scenario: Get /api/v1/issues
                 "id":"6",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 
@@ -396,11 +346,6 @@ Scenario: Get /api/v1/issues
                 "id":"6",
                 "type":"board-lists"
               }
-            },
-            "comments":{ 
-              "data":[ 
-    
-              ]
             }
           },
           "links":{ 

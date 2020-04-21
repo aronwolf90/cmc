@@ -28,7 +28,7 @@ module Api
       link(:self) { api_v1_board_list_path(object) }
 
       def self.eager_load_options
-        %i[issues project]
+        %i[project]
       end
     end
   end

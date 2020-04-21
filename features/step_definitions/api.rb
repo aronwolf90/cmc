@@ -87,13 +87,11 @@ Then(/^the JSON response should be:$/) do |json|
   actual = JSON.parse(@response.body)
   diff = Hashdiff.diff(actual, expected)
 
-  if diff.first&.third.to_s.size < 100
-    if ENV["PRINT_RESPONSE"]
-      puts "The response is:"
-      puts JSON.pretty_generate(actual)
-    end
-    expect(actual).to eq(expected)
+  if ENV["PRINT_RESPONSE"]
+    puts "The response is:"
+    puts JSON.pretty_generate(actual)
   end
+  expect(actual).to eq(expected)
 end
 
 Given(/^(?:|I )send a multipart (POST|PUT) request (?:for|to) "([^"]*)" with:/) do |method, path, body|
