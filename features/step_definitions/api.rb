@@ -85,7 +85,6 @@ end
 Then(/^the JSON response should be:$/) do |json|
   expected = JSON.parse(json)
   actual = JSON.parse(@response.body)
-  diff = Hashdiff.diff(actual, expected)
 
   if ENV["PRINT_RESPONSE"]
     puts "The response is:"
