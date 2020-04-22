@@ -4,6 +4,7 @@ class BoardList < ApplicationRecord
   acts_as_paranoid
 
   has_many :issues
+  has_many :global_issues, foreign_key: :global_board_list, class_name: "Issue"
 
   belongs_to :project
 
@@ -18,11 +19,10 @@ class BoardList < ApplicationRecord
   def issues
     @issues ||=
       if project_id.nil?
-        Issue
-          .where(global_board_list_id: id)
+        global_issues
           .order(:global_ordinal_number, created_at: :desc)
       else
-        Issue
+        super
           .where(board_list_id: id)
           .order(:ordinal_number, created_at: :desc)
       end

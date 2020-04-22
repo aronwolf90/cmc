@@ -27,12 +27,6 @@ Scenario: Get /api/v1/issues
                 "id":"1",
                 "type":"users"
               }
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"4",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -61,12 +55,6 @@ Scenario: Get /api/v1/issues
                 "id":"1",
                 "type":"users"
               }
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"4",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -92,12 +80,6 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"4",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -123,12 +105,6 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"4",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -154,12 +130,6 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"5",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -185,12 +155,6 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"5",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -216,12 +180,6 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"5",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -247,12 +205,6 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"6",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -278,12 +230,6 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"6",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -309,12 +255,6 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"6",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -340,12 +280,6 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"6",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 

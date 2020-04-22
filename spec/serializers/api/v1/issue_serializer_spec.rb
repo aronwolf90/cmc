@@ -24,13 +24,7 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
         "deadline-at": "10-10-2020 00:00"
       },
       relationships: {
-        user: { data: nil },
-        "board-list": {
-          data: {
-            id: issue.board_list.id.to_s,
-            type: "board-lists"
-          }
-        }
+        user: { data: nil }
       },
       links: { self: "/api/v1/issues/#{issue.id}" }
     } }

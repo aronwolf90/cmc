@@ -8,6 +8,7 @@ module Api
       attributes :name, :kind
 
       has_many :issues, serializer: IssueSerializer do |serializer|
+        next @issues if @issues.present?
         project_id = serializer.send(:instance_options).dig(:option_name, :project_id)
         issues =
           if project_id.present?
@@ -20,7 +21,7 @@ module Api
         link(:next) do
           api_v1_board_list_issues_path(object, more_id: issues.limit(15)&.last&.id) if issues.count > 15
         end
-        issues.limit(15)
+        @issues ||= issues.limit(15)
       end
 
       belongs_to :project, serializer: ProjectSerializer

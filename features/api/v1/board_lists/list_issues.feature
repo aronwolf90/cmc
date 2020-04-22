@@ -25,12 +25,6 @@ Scenario: GET /api/v1/board_lists/<id>/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"4",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -56,12 +50,6 @@ Scenario: GET /api/v1/board_lists/<id>/issues
           "relationships":{ 
             "user":{ 
               "data":null
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"4",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -90,12 +78,6 @@ Scenario: GET /api/v1/board_lists/<id>/issues
                 "id":"1",
                 "type":"users"
               }
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"4",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
@@ -123,12 +105,6 @@ Scenario: GET /api/v1/board_lists/<id>/issues
               "data":{ 
                 "id":"1",
                 "type":"users"
-              }
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"4",
-                "type":"board-lists"
               }
             }
           },

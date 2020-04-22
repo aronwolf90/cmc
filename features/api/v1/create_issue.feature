@@ -20,12 +20,6 @@ Feature: API: create an issue
                 "id": 1,
                 "type": "projects"
               }
-            },
-            "board-list": {
-              "data": {
-                "id": 1,
-                "type": "board-lists"
-              }
             }
           }
         }
@@ -48,12 +42,6 @@ Feature: API: create an issue
         "relationships": {
           "user": { 
             "data": null
-          },
-          "board-list": {
-            "data": {
-              "id": "4",
-              "type": "board-lists"
-            }
           }
         },
         "links": {

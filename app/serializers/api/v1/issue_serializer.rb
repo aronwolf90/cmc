@@ -12,7 +12,6 @@ module Api
       )
 
       belongs_to :user, serializer: UserSerializer
-      has_one :board_list, serializer: BoardListSerializer
 
       link(:self) { api_v1_issue_path(object) }
 
@@ -25,7 +24,7 @@ module Api
       end
 
       def self.eager_load_options
-        %i[user board_list]
+        %i[user]
       end
     end
   end

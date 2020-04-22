@@ -27,12 +27,6 @@ Scenario: Get /api/v1/projects/<id>/reminders
                 "id":"1",
                 "type":"users"
               }
-            },
-            "board-list":{ 
-              "data":{ 
-                "id":"4",
-                "type":"board-lists"
-              }
             }
           },
           "links":{ 
