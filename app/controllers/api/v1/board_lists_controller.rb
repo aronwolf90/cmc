@@ -18,6 +18,14 @@ module Api
 
         render_json_api json: collection
       end
+
+    private
+      def model
+        Api::V1::BoardLists::ShowQuery.(
+          id: params[:id],
+          project_id: params.dig(:filter, :project_id)
+        )
+      end
     end
   end
 end

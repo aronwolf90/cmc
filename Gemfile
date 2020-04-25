@@ -16,6 +16,7 @@ gem "devise_invitable"
 
 # Low level
 gem "active_model_serializers"
+gem "active_record_union"
 gem "acts_as_paranoid"
 gem "carrierwave"
 gem "composite_primary_keys"

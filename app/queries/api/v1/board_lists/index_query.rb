@@ -4,13 +4,23 @@ module Api
   module V1
     module BoardLists
       class IndexQuery < ApplicationQuery
-        attr_reader :project_id
+        attr_reader :project_id, :issues_count
 
-        def initialize(project_id: nil)
+        def initialize(project_id: nil, issues_count: 16)
           @project_id = project_id
+          @issues_count = issues_count
         end
 
         def call
+          issues = Api::V1::BoardLists::Index::IssuesQuery.call(
+            collection,
+            project_id: project_id,
+            count: issues_count
+          )
+          Api::V1::BoardLists::IndexPreloader.call(collection, issues: issues)
+        end
+
+        def collection
           if Organization.global_board?
             BoardList.where(project: nil)
           elsif project_id.present?
