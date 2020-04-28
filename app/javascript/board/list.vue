@@ -3,10 +3,10 @@
     .card-header
       .text.pull-left {{ name }}
       router-link.btn.btn-sm.btn-outline-secondary.pull-right(
-        :to="`/administration/board_lists/${listId}/issues/new`"
+        :to="`board_lists/${listId}/issues/new`"
       )
         .fa.fa-plus
-      a.btn.btn-sm.btn-link.pull-right.text-muted(:href="editLink")
+      router-link.btn.btn-sm.btn-link.pull-right.text-muted(:to="editLink")
         .fa.fa-edit
 
       .clearfix
@@ -49,10 +49,10 @@ export default {
       return Utils.attribute(this.boardList, 'name')
     },
     addLink () {
-      return `/administration/board_lists/${this.boardList.id}/issues/new`
+      return `board_lists/${this.boardList.id}/issues/new`
     },
     editLink () {
-      return `/administration/board_lists/${this.boardList.id}/edit`
+      return `board_lists/${this.boardList.id}/edit`
     },
     showMore () {
       if (!this.boardList) return false

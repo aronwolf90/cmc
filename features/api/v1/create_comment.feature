@@ -1,4 +1,4 @@
-Feature: API: create an comment
+Feature: API: create a comment
 
 @javascript
 Scenario: Post an valid comment using json in POST body

@@ -8,7 +8,7 @@
           project-select
         .col-sm-2
           router-link.btn.btn-sm.btn-outline-secondary(
-            to='/administration/board_lists/new'
+            to='board_lists/new'
           )
             .fa.fa-plus
             |&nbsp add list
@@ -20,7 +20,6 @@
         :list-id='boardList.id',
         :id='`column-${boardList.id}`'
       )
-
 </template>
 
 <script>

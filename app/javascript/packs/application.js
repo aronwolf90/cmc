@@ -52,6 +52,8 @@ import MenuItem from 'components/menu-item'
 import Asides from 'components/asides'
 import BtnSubmit from 'components/btn-submit'
 import ProjectTickets from 'projects/tickets'
+import BoardListNew from 'board_lists/new'
+import BoardListEdit from 'board_lists/edit'
 
 require('../config')
 
@@ -123,12 +125,13 @@ document.addEventListener('turbolinks:load', () => {
       },
       {
         path: '/administration/board_lists/new',
-        component: RailsPage,
+        component: BoardListNew,
         meta: { aside: 'global' }
       },
       {
         path: '/administration/board_lists/:id/edit',
-        component: RailsPage,
+        component: BoardListEdit,
+        props: true,
         meta: { aside: 'global' }
       },
       {
@@ -188,10 +191,44 @@ document.addEventListener('turbolinks:load', () => {
         meta: { aside: 'projects-detail' }
       },
       {
-        path: '/administration/projects/:projectId/tickets',
+        path: '/administration/projects/:projectId/board_lists',
         component: ProjectTickets,
         props: true,
         meta: { aside: 'projects-detail' }
+      },
+      {
+        path: '/administration/projects/:projectId/board_lists/new',
+        component: BoardListNew,
+        meta: { aside: 'projects-detail' }
+      },
+      {
+        path: '/administration/projects/:projectId/board_lists/:boardListId/issues/new',
+        component: IssueNew,
+        props: true,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/projects/:projectId/board_lists/:id/edit',
+        component: BoardListEdit,
+        props: true,
+        meta: { aside: 'projects-detail' }
+      },
+      {
+        path: '/administration/projects/:projectId/issues/:id',
+        component: Issue,
+        props: true,
+        children: [
+          {
+            path: '',
+            component: IssueShow,
+            meta: { aside: 'projects-detail' }
+          },
+          {
+            path: 'edit',
+            component: IssueEdit,
+            meta: { aside: 'projects-detail' }
+          }
+        ]
       },
       {
         path: '/administration/records',
@@ -229,9 +266,19 @@ document.addEventListener('turbolinks:load', () => {
         meta: { aside: 'projects' }
       },
       {
-        path: '/administration/board_lists',
+        path: '/administration/board_lists/',
         component: IssuesBoard,
-        meta: { aside: 'projects' }
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/board_lists/new',
+        component: BoardListNew,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/board_lists/:id/edit',
+        component: RailsPage,
+        meta: { aside: 'global' }
       },
       {
         path: '/administration/board_lists/:boardListId/issues/new',

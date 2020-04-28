@@ -34,7 +34,7 @@ describe('Issue', () => {
     }))
 
     it('include show link', () => {
-      expect($subject.html()).to.include('/administration/issues/1')
+      expect($subject.html()).to.include('issues/1')
     })
 
     it('pass issueId to issue-record-section', () => {

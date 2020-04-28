@@ -15,7 +15,7 @@ Scenario: Can not destroy an board_list of kind other
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
-  When I send a DELETE request to "/api/v1/board_lists/2"
+  When I send a DELETE request to "/api/v1/board_lists/8"
   Then the response status should be "200"
 
 @javascript

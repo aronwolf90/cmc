@@ -7,6 +7,12 @@ export default {
       resource: 'projects'
     })
   },
+  getProjects (context) {
+    return context.dispatch('get', {
+      endpoint,
+      resource: 'projects'
+    })
+  },
   getProject (context, id) {
     return context.dispatch('get', {
       endpoint,

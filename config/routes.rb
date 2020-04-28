@@ -33,7 +33,6 @@ Rails.application.routes.draw do
 
     resource :dashboard, only: :show
     resources :records, except: :show
-    resources :board_lists, only: %i[new edit create update destroy]
 
     resources :users, except: %i[edit create destroy] do
       scope module: :users do
@@ -69,7 +68,7 @@ Rails.application.routes.draw do
 
       resource :context, only: %i[show update]
 
-      resources :board_lists, only: %i[index show update destroy] do
+      resources :board_lists, only: %i[index show create update destroy] do
         scope module: :board_lists do
           collection do
             resource :sort, only: :update

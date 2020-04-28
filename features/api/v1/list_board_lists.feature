@@ -99,7 +99,7 @@ Scenario: Get
           "meta":{ 
             "permissions":{ 
               "update":true,
-              "destroy":true
+              "destroy":false
             }
           }
         },

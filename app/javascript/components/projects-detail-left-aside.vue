@@ -2,14 +2,14 @@
   span.projects-left-aside
     left-aside-item(path="/administration/projects", notShowActive="true")
       i.fa.fa-tasks.fa-lg
-        | &nbsp; &nbsp; Project
+      | &nbsp; &nbsp;{{ name }}
     left-aside-item(:path="`/administration/projects/${id}`")
       | Dashboard
     left-aside-item(:path="`/administration/projects/${id}/records`")
       | Records
     left-aside-item(:path="`/administration/projects/${id}/documents`")
       | Documents
-    left-aside-item(:path="`/administration/projects/${id}/tickets`")
+    left-aside-item(:path="`/administration/projects/${id}/board_lists`")
       | Tickets
 </template>
 
@@ -23,6 +23,20 @@ export default {
   components: {
     LeftAsideItem,
     LeftAsideItemRails
+  },
+  computed: {
+    name () {
+      return Utils.attribute(
+        this.$store.getters.project(this.id),
+        'name'
+      )
+    }
+  },
+  watch: {
+    id (value) {
+      if (!value) return
+      this.$store.dispatch('getProject', this.id)
+    }
   }
 }
 </script>

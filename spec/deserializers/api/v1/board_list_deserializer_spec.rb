@@ -11,7 +11,8 @@ describe Api::V1::BoardListDeserializer do
         name: "name"
       },
       relationships: {
-        issues: { data: [{ id: 1, type: "issues" }] }
+        issues: { data: [{ id: 1, type: "issues" }] },
+        project: { data: { id: 1, type: "projects" } }
       }
     }
   end
@@ -19,6 +20,7 @@ describe Api::V1::BoardListDeserializer do
     {
       name: "name",
       issue_ids: [1],
+      project_id: 1,
       issues_attributes: [{ id: 1, ordinal_number: 0 }]
     }
   end

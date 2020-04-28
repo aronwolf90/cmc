@@ -1,5 +1,12 @@
 <template lang='pug'>
   .tickets
+    router-link.pull-right.btn.btn-sm.btn-outline-secondary(
+      to='board_lists/new'
+    )
+      .fa.fa-plus
+      |&nbsp add list
+    .clearfix
+    .mb-2
     ticket-board-body
 </template>
 

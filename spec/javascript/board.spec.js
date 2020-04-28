@@ -85,7 +85,7 @@ describe('Board', () => {
     it('call visit on add btn', () => {
       $subject.find('.fa-plus').trigger('click')
       expect($subject.vm.$route.path)
-        .to.eq('/administration/board_lists/new')
+        .to.eq('/board_lists/new')
     })
   })
 
@@ -97,7 +97,7 @@ describe('Board', () => {
     it('call visit on add btn', () => {
       $subject.find('.fa-plus').trigger('click')
       expect($subject.vm.$route.path)
-        .to.eq('/administration/board_lists/new')
+        .to.include('board_lists/new')
     })
   })
 })

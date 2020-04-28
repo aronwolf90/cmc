@@ -161,6 +161,14 @@ export default {
         })
       })
     },
+    getCurrentUser (context) {
+      return context.dispatch('getContext').then(response => {
+        return context.dispatch('loadRelationship', {
+          entry: response.data,
+          name: 'current-user'
+        })
+      })
+    },
     initCurrentRecord (context) {
       return context.dispatch('initCurrentUser').then(currentUser => {
         return context.dispatch('loadRelationship', {

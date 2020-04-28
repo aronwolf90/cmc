@@ -14,6 +14,6 @@ class BoardListPolicy < ApplicationPolicy
   end
 
   def destroy?
-    !record.kind.in?(%w[open closed]) && super
+    !record.kind.in?(%w[open closed]) && super && record.issues.none?
   end
 end
