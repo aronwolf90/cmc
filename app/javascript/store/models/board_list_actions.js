@@ -27,11 +27,19 @@ export default {
       })
     })
   },
-  updateBoardList (context, { entry, attributes }) {
+  createBoardList (context, payload) {
+    return context.dispatch('create', {
+      payload,
+      endpoint,
+      resource: '/board_lists'
+    })
+  },
+  updateBoardList (context, { entry, attributes, relationships }) {
     let payload = {
       id: entry.id,
       type: entry.type,
-      attributes
+      attributes,
+      relationships
     }
     return context.dispatch('update', { entry, payload, endpoint })
   },
@@ -44,5 +52,8 @@ export default {
       endpoint,
       parentTypes: ['board-lists']
     })
+  },
+  destroyBoardList (context, entry) {
+    return context.dispatch('destroy', { entry })
   }
 }

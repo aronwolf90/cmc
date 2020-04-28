@@ -6,7 +6,7 @@ Scenario: create board list
   And I am signed in (multitenant)
   And I click on link "Issues"
   And I click on ".fa-plus"
-  And I enter "board list name" into input named "data_name"
+  And I enter "board list name" into input named "Name"
   And I click on submit
   And I reload the page
   Then the page contain the text "board list name"
@@ -17,7 +17,7 @@ Scenario: edit board list
   And I am signed in (multitenant)
   When I click on link "Issues"
   And I click on ".column:first-of-type .fa-edit"
-  And I enter "new board list name" into input named "data_name"
+  And I enter "new board list name" into input named "Name"
   And I click on submit
   And I reload the page
   Then the page contain the text "new board list name"

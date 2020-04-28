@@ -9,7 +9,7 @@ module Api
       serializer BoardListSerializer
       collection_query Api::V1::BoardLists::IndexQuery
 
-      public :show, :update, :destroy
+      public :show, :create, :update, :destroy
 
       def index
         collection = collection_query.(

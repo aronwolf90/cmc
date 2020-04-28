@@ -58,7 +58,7 @@ Scenario: valid data
           "meta":{ 
             "permissions":{ 
               "update":true,
-              "destroy":true
+              "destroy":false
             }
           }
         },

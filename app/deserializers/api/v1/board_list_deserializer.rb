@@ -6,5 +6,6 @@ module Api::V1
     attribute :ordinal_number
     has_many :issues
     has_many_sort :issues, attribute: :ordinal_number
+    belongs_to :project
   end
 end

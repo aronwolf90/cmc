@@ -39,10 +39,10 @@ export default {
       return this.$store.getters.aside
     },
     projectsDetailId () {
-      return this.$route.params.id || this.$route.params.projectId
+      return this.$route.params.projectId || this.$route.params.id
     },
     userDetailId () {
-      return this.$route.params.id || this.$route.params.userId
+      return this.$route.params.userId || this.$route.params.id
     }
   }
 }

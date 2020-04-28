@@ -1,5 +1,10 @@
 <template lang='pug'>
-  date-picker(v-on='$listeners', :value='value', :config='options')
+  date-picker(
+    v-on='$listeners',
+    :value='value',
+    :config='options',
+    autocomplete="off"
+  )
 </template>
 
 <script>
