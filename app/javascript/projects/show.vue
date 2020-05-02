@@ -1,27 +1,13 @@
 <template lang='pug'>
   show-container(v-if="project")
     show-body
-      b-button-group.pull-right
-        b-button(
-          variant="outline-secondary",
-          :to="`/administration/projects/${id}/edit`",
-          size="sm"
-        )
-          .fa.fa-edit
-        b-button(
-          variant="outline-danger",
-          @click="destroy",
-          size="sm"
-        )
-          .fa.fa-trash
-      h4 {{ name }}
-      markdown-viewer(:value='description')
+      router-view(:id="id")
       hr.divider
       comments(:projectId="id", module='projectsShow', v-if="project")
     right-aside.right-aside
       contact
       main-responsable
-      reminder-list
+      reminder-list(:project-id="id")
 </template>
 
 <script>

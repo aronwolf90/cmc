@@ -18,6 +18,7 @@ export default {
   data () {
     return {
       form: {
+        currentTab: 0,
         attributes: {
           name: null,
           description: null
@@ -26,8 +27,18 @@ export default {
           'project-status': {
             data: null
           },
-          contact: {
+          existingContact: {
             data: null
+          },
+          newContact: {
+            data: {
+              attributes: {
+                name: null,
+                description: null,
+                telephone: null,
+                email: null
+              }
+            }
           }
         }
       },
@@ -40,7 +51,24 @@ export default {
   },
   methods: {
     submit (form) {
-      this.$store.dispatch('createProject', this.form).then(response => {
+      const payload = { attributes: this.form.attributes }
+      if (this.form.currentTab == 1) {
+        payload['relationships'] = {
+          contact: {
+            data: { 
+              attributes: this.form.relationships.newContact.data.attributes
+            }
+          }
+        }
+      } else if (this.form.currentTab == 2) {
+        payload['relationships'] = {
+          contact: {
+            data: Utils.entryToRef(this.form.relationships.existingContact.data)
+          }
+        }
+      }
+
+      this.$store.dispatch('createProject', payload).then(response => {
         this.$router.push('/administration/projects')
       }).catch(({ status, data }) => {
         this.errors = data.errors

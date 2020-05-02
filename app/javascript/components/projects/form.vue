@@ -37,32 +37,72 @@
       v-model='value.attributes.description'
     )
     br
-    b-form-group(
-      id="input-group-contact",
-      label="Contact",
-      label-for="input-contact"
-    )
-      b-form-select(
-        id="input-contact",
-        v-model="value.relationships.contact.data",
-        :options="contacts",
-        :state="errorStatus('attributes/relationships/contact')",
-        type="text"
-      )
-      b-form-invalid-feedback(
-        v-for="error in findErrors('relationships/contact')",
-        :state="errorStatus('relationships/contact')"
-      )
-        | {{ error.detail }}
+    b-tabs(content-class="mt-3", v-model="value.currentTab")
+      b-tab(title="No new contact", active="")
+        p No new contact will be created
+      b-tab(title="new contact")
+        form-text-input(
+          id="input-contact-name",
+          v-model="value.relationships.newContact.data.attributes.name",
+          label="Name",
+          :errors="errors",
+          error-path="relationships/contact/data/attributes/name"
+        )
+        br
+        markdown-editor(
+          :value='value.relationships.newContact.data.attributes.name',
+          v-on:valueChange='setDescription'
+        )
+        br
+        form-text-input(
+          id="input-contact-telephone-number",
+          v-model="value.relationships.newContact.data.attributes.telephone",
+          label="Telephone number",
+          :errors="errors",
+          error-path="relationships/contact/data/attributes/telephone-number"
+        )
+        form-text-input(
+          id="input-contact-email",
+          v-model="value.relationships.newContact.data.attributes.email",
+          label="E-Mail",
+          :errors="errors",
+          error-path="relationships/contact/data/attributes/email"
+        )
+      b-tab(title="Select existing contact")
+        b-form-group(
+          id="input-group-contact",
+          label="Contact",
+          label-for="input-contact"
+        )
+          b-form-select(
+            id="input-contact",
+            v-model="value.relationships.existingContact.data",
+            :options="contacts",
+            :state="errorStatus('attributes/relationships/contact')",
+            type="text"
+          )
+          b-form-invalid-feedback(
+            v-for="error in findErrors('relationships/contact')",
+            :state="errorStatus('relationships/contact')"
+          )
+            | {{ error.detail }}
+    br
     b-button(type="submit", variant="success") Save
     b-button-group.pull-right
       b-button(variant="danger", @click="destroy") Destroy
       b-button(variant="secondary", :to="$store.getters.prevPath") Cancel
+    br
+    br
 </template>
 
 <script>
+import FormTextInput from 'components/form-inputs/text'
+
 export default {
   props: ['errors', 'value', 'id', 'contactRefs'],
+  components: {
+    FormTextInput
+  },
   computed: {
     projectStatuses () {
       return [{ value: null, text: ''}]

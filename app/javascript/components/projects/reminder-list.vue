@@ -7,7 +7,8 @@
     reminder(
       v-for="reminder in reminders",
       :id="reminder.id",
-      :type="reminder.type"
+      :type="reminder.type",
+      :project-id="projectId"
     )
 </template>
 
@@ -16,6 +17,7 @@ import Reminder from './reminder'
 import ReminderModal from './reminder-modal'
 
 export default {
+  props: ['projectId'],
   components: {
     Reminder,
     ReminderModal

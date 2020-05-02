@@ -3,7 +3,7 @@
     .pull-right.b-button
       .fa.fa-check(@click="closeIssue")
     .title
-      router-link.text-secondary(:to="`/administration/issues/${id}`")
+      router-link.text-secondary(:to="`${projectId}/issues/${id}`")
         | {{ title }}
 </template>
 
@@ -11,7 +11,7 @@
 import { Utils } from 'vuex-jsonapi-client'
 
 export default {
-  props: ['id', 'type'],
+  props: ['id', 'type', 'projectId'],
   computed: {
     issue () {
       return this.$store.getters.entry({

@@ -12,6 +12,15 @@ module Api::V1
           required(:attributes).schema do
             required(:name).filled
           end
+          optional(:relationships).schema do
+            optional(:contact).schema do
+              optional(:data).schema do
+                optional(:attributes).schema do
+                  required(:name).filled
+                end
+              end
+            end
+          end
         end
       end
     end

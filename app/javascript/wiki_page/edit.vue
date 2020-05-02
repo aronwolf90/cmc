@@ -1,5 +1,5 @@
 <template lang='pug'>
-  b-form(@submit="submit", v-if='form')
+  b-form(@submit="submit", v-if='loaded')
     .row
       .col-12
         b-form-input(
@@ -32,13 +32,23 @@ import MarkdownEditor from '../markdown_editor'
 
 export default {
   props: ['wikiPageId'],
-  data () { return { form: null, isSaving: false } },
+  data () {
+    return {
+      loaded: false,
+      form: null,
+      isSaving: false
+    }
+  },
   components: {
     'markdown-editor': MarkdownEditor
   },
   mounted () {
     this.$store.dispatch('initWikiPage', this.wikiPageId).then(() => {
-      this.form = JSON.parse(JSON.stringify(this.$store.getters.entry({type: 'wiki-pages', id: this.wikiPageId})))
+      this.form = JSON.parse(JSON.stringify(this.$store.getters.entry({
+        type: 'wiki-pages',
+        id: this.wikiPageId
+      })))
+      this.loaded = true
     })
   },
   computed: {

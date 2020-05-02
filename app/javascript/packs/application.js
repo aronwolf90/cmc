@@ -39,6 +39,7 @@ import ProjectStatusEdit from 'project-statuses/edit'
 import ProjectNew from 'projects/new'
 import ProjectEdit from 'projects/edit'
 import ProjectShow from 'projects/show'
+import ProjectDefault from 'projects/default'
 import ProjectBoardListNew from 'project-statuses/project-board-lists/new'
 import ProjectBoardListEdit from 'project-board-lists/edit'
 import MarkdownEditor from 'markdown_editor'
@@ -155,16 +156,24 @@ document.addEventListener('turbolinks:load', () => {
         meta: { aside: 'projects' }
       },
       {
-        path: '/administration/projects/:id/edit',
-        component: ProjectEdit,
-        props: true,
-        meta: { aside: 'projects' }
-      },
-      {
         path: '/administration/projects/:id',
         component: ProjectShow,
         props: true,
-        meta: { aside: 'projects-detail' }
+        meta: { aside: 'projects-detail' },
+        children: [
+          {
+            path: '',
+            component: ProjectDefault,
+            props: true,
+            meta: { aside: 'projects-detail' }
+          },
+          {
+            path: 'edit',
+            component: ProjectEdit,
+            props: true,
+            meta: { aside: 'projects-detail' }
+          }
+        ]
       },
       {
         path: '/administration/projects/:id/records',

@@ -1,94 +1,62 @@
 <template lang='pug'>
-  project-form(
-    :errors='errors',
-    @submit='submit',
-    v-model="form",
-    :id="id",
-    :contactRefs="contactRefs",
-    v-if="loaded"
-  )
+  b-form(@submit.prevent="submit", v-if="formLoaded")
+    b-form-input(
+      type="text",
+      required,
+      v-model="name",
+      placeholder="Title",
+      id="name-input"
+    )
+    br
+    markdown-editor(
+      v-model="description"
+    )
+    br
+    button.btn.btn-sm.btn-success(type='submit')
+      .fa.fa-spinner.fa-spin(v-if='isSaving')
+      | Save
+    .btn-group.float-right
+      router-link.btn.btn-sm.btn-secondary(to='.') Cancel
+      .btn.btn-sm.btn-danger(v-on:click='deleteIssue($event)') Delete
 </template>
 
 <script>
-import ProjectForm from 'components/projects/form'
 import { Utils } from 'vuex-jsonapi-client'
 
 export default {
-  props: ['id'],
-  components: {
-    ProjectForm
-  },
-  data () {
-    return {
-      form: {
-        attributes: {
-          name: null,
-          description: null
-        },
-        relationships: {
-          'project-status': {
-            data: null
-          },
-          contact: {
-            data: null
-          }
-        }
-      },
-      errors: [],
-      loaded: false,
-      contactRefs: []
-    }
-  },
+  params: ['id'],
   computed: {
+    formLoaded () {
+      return this.$store.getters['projectsShow/formLoaded']
+    },
+    name: {
+      get () {
+        return this.$store.getters['projectsShow/formName']
+      },
+      set (value) {
+        this.$store.commit('projectsShow/formName', value)
+      }
+    },
+    description: {
+      get () {
+        return this.$store.getters['projectsShow/formDescription']
+      },
+      set (value) {
+        this.$store.commit('projectsShow/formDescription', value)
+      }
+    },
     project () {
-      return this.$store.getters.project(this.id)
+      return this.$store.getters['projectsShow/project']
     }
-  },
-  created () {
-    this.$store.dispatch('getProject', this.id).then(response => {
-      this.loaded = true
-      this.form.attributes.name = response.data.attributes.name
-      this.form.attributes.description = response.data.attributes.description
-      this.form.relationships['project-status'].data =
-        response.data.relationships['project-status'].data
-      this.form.relationships.contact.data =
-        response.data.relationships.contact.data
-    })
-    this.$store.dispatch('getContacts').then(response => {
-      this.contactRefs = Utils.entryArrayToRef(response.data)
-    })
   },
   methods: {
     submit () {
-      let path = null
-      const newProjectStatus =
-        Utils.relationship(this.form, 'project-status')
-      const oldProjectStatus =
-        Utils.relationship(this.project, 'project-status')
-      const newProjectStatusId = newProjectStatus ? newProjectStatus.id : null
-      const oldProjectStatusId = oldProjectStatus ? oldProjectStatus.id : null
-
-      if (newProjectStatusId != oldProjectStatusId) {
-        if (!newProjectStatusId) {
-          path = '/administration/projects'
-        } else {
-          path = `/administration/project_statuses/${newProjectStatusId}`
-        }
-      }
-
-      this.$store.dispatch('updateProject', {
-        payload: this.form,
-        project: this.project 
-      }).then(() => {
-        if (path) {
-          this.$router.push(path)
-        } else {
-          this.$router.go(-1)
-        }
-      }).catch(({ status, data }) => {
-        this.errors = data.errors
+      this.$store.dispatch('projectsShow/updateProject').then(() => {
+        this.$router.push('.')
       })
     }
-  }
-}
+  } 
+}      
 </script>
+       
+       

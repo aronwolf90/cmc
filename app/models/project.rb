@@ -20,6 +20,8 @@ class Project < ApplicationRecord
 
   alias_attribute :to_s, :name
 
+  accepts_nested_attributes_for :contact
+
   scope :ordered, -> { order(:ordinal_number, :created_at, :id)  }
 
   pg_search_scope(

@@ -1,7 +1,14 @@
 <template lang='pug'>
   .spent-time(v-if="contact")
-    .header-text
-      router-link(:to="contactLink").font-weight-bold.text-dark Contact
+    details-select-header-input(
+      v-model="idValue",
+      :editMode.sync="idEditMode",
+      :options="contactOptions",
+      @submit="submitId",
+      id="contact-id",
+      text="Contact",
+      :link="contactLink"
+    )
     details-string-input(
       v-model="nameValue",
       :editMode.sync="nameEditMode",
@@ -26,7 +33,9 @@
 </template>
 
 <script>
+import { Utils } from 'vuex-jsonapi-client'
 import DetailsStringInput from 'components/details-string-input'
+import DetailsSelectHeaderInput from 'components/details-select-header-input'
 
 const valueToAttribute = (key, value) => {
   const result = {
@@ -40,7 +49,8 @@ const valueToAttribute = (key, value) => {
 
 export default {
   components: {
-    DetailsStringInput
+    DetailsStringInput,
+    DetailsSelectHeaderInput
   },
   data () {
     return {
@@ -60,6 +70,30 @@ export default {
     },
     contactLink () {
       return `/administration/contacts/${this.contactId}`
+    },
+    contactOptions () {
+      return this.$store.getters['projectsShow/contacts'].map(contact => {
+        return {
+          text: Utils.attribute(contact, 'name'),
+          value: Utils.entryToRef(contact)
+        }
+      })
+    },
+    idValue: {
+      get () {
+        return this.$store.getters['projectsShow/contactIdValue']
+      },
+      set (value) {
+        this.$store.commit('projectsShow/contactIdValue', value)
+      }
+    },
+    idEditMode: {
+      get () {
+        return this.$store.getters['projectsShow/contactIdEditMode']
+      },
+      set (value) {
+        this.$store.commit('projectsShow/contactIdEditMode', value)
+      }
     },
     nameValue: {
       get () {
@@ -111,6 +145,9 @@ export default {
     }
   },
   methods: {
+    submitId () {
+      this.$store.dispatch('projectsShow/changeContact')
+    },
     submitName () {
       this.$store.dispatch('updateContact', {
         entry: this.contact,

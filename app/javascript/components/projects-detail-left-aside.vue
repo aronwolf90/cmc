@@ -1,6 +1,6 @@
 <template lang='pug'>
   span.projects-left-aside
-    left-aside-item(path="/administration/projects", notShowActive="true")
+    left-aside-item(:path="`/administration/projects/${id}`", notShowActive="true")
       i.fa.fa-tasks.fa-lg
       | &nbsp; &nbsp;{{ name }}
     left-aside-item(:path="`/administration/projects/${id}`")

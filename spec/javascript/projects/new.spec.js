@@ -59,6 +59,7 @@ describe('ProjectNew', () => {
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
         wrapper.find('[type="submit"]').trigger('click')
+        done()
       })
     })
   })

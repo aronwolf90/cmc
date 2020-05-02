@@ -16,7 +16,7 @@ Scenario: Update project
   And I am signed in (multitenant)
   When I click on link "Projects"
   And I click on ".fa-edit"
-  And I enter "project title new" into input named "Name"
+  And I enter "project title new" into input named "name-input"
   And I click on submit
   Then the element "#side-body" contain the text "project title new"
 

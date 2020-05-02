@@ -10,6 +10,16 @@ describe Api::V1::Projects::CreateForm do
       data: {
         attributes: {
           name: "Test"
+        },
+        "relationships": {
+          "contact": {
+            "data": {
+              "attributes": {
+                name: "Test name",
+                description: "Test name"
+              }
+            }
+          }
         }
       }
     }
@@ -23,6 +33,22 @@ describe Api::V1::Projects::CreateForm do
 
   context "when name is nil" do
     before { params[:data][:attributes][:name] = nil }
+
+    it "form is invalid" do
+      expect(subject).to be_failure
+    end
+  end
+
+  context "when context name in not present" do
+    before do
+      params.dig(
+        :data,
+        :relationships,
+        :contact,
+        :data,
+        :attributes
+      )[:name] = nil
+    end
 
     it "form is invalid" do
       expect(subject).to be_failure

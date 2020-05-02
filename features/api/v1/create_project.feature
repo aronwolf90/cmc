@@ -15,6 +15,14 @@ Scenario: Post an valid record using json in POST body
           "description": "Description"
         },
         "relationships": {
+          "contact": {
+            "data": {
+              "attributes": {
+                "name": "Test name",
+                "description": "Test name"
+              }
+            }
+          },
           "project-status": {
             "data": { "id": 1, "type": "projects" }
           },
@@ -50,7 +58,10 @@ Scenario: Post an valid record using json in POST body
             }
           },
           "contact": {
-            "data": null
+            "data": {
+              "id": "3",
+              "type": "contacts"
+            }
           },
           "main-responsable": {
             "data": {

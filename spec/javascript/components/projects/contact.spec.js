@@ -15,6 +15,9 @@ describe('DetailsStringInput', () => {
     commit,
     getters: {
       'projectsShow/contact': contact,
+      'projectsShow/contacts': [contact],
+      'projectsShow/contactIdValue': { id: 1, type: 'contacts' },
+      'projectsShow/contactIdEditMode': false,
       'projectsShow/contactNameValue': 'project',
       'projectsShow/contactNameEditMode': false,
       'projectsShow/contactTelephoneNumberValue': '+49 821 598-1111',
@@ -36,7 +39,7 @@ describe('DetailsStringInput', () => {
     it('pass telephone value to component', () => {
       const wrapper = createWrapper(Contact, { store, stubs: { DetailsStringInput } })
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(1)
+        wrapper.findAll(DetailsStringInput).at(2)
 
       expect(detailsStringInput.props().value)
         .to.eql('+49 821 598-1111')
@@ -45,7 +48,7 @@ describe('DetailsStringInput', () => {
     it('call commit("projectsShow/contactTelephoneNumberValue", value) ', () => {
       const wrapper = factory()
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(1)
+        wrapper.findAll(DetailsStringInput).at(2)
 
       detailsStringInput.vm.value = 'hi'
       detailsStringInput.trigger('input')
@@ -55,7 +58,7 @@ describe('DetailsStringInput', () => {
     it('handle submit', (done) => {
       const wrapper = factory()
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(1)
+        wrapper.findAll(DetailsStringInput).at(2)
 
       detailsStringInput.trigger('submit')
       wrapper.vm.$nextTick(() => {
@@ -79,7 +82,7 @@ describe('DetailsStringInput', () => {
     it('pass email value to component', () => {
       const wrapper = factory()
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(2)
+        wrapper.findAll(DetailsStringInput).at(3)
 
       expect(detailsStringInput.vm.value)
         .to.eql('aron.wolf@test.com')
@@ -88,7 +91,7 @@ describe('DetailsStringInput', () => {
     it('call commit("projectsShow/emailValue", value) ', () => {
       const wrapper = factory()
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(2)
+        wrapper.findAll(DetailsStringInput).at(3)
 
       detailsStringInput.vm.value = 'hi'
       detailsStringInput.trigger('input')
@@ -99,7 +102,7 @@ describe('DetailsStringInput', () => {
     it('handle submit', (done) => {
       const wrapper = factory()
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(2)
+        wrapper.findAll(DetailsStringInput).at(3)
 
       detailsStringInput.trigger('submit')
       wrapper.vm.$nextTick(() => {

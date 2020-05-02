@@ -18,7 +18,16 @@ describe Api::V1::ProjectDeserializer do
           data: { id: 1, type: "project-board-lists" }
         },
         contact: {
-          data: { id: 1, type: "contacts" }
+          data: {
+            id: 1,
+            type: "contacts",
+            attributes: {
+              name: "Test name",
+              description: "Test description",
+              telephone: "01707876609",
+              email: "test@example.com"
+            }
+          }
         },
         "main-responsable": {
           "data": {
@@ -37,7 +46,13 @@ describe Api::V1::ProjectDeserializer do
       ordinal_number: 1,
       description: "Description",
       contact_id: 1,
-      main_responsable_id: 1
+      main_responsable_id: 1,
+      contact_attributes: {
+        name: "Test name",
+        description: "Test description",
+        telephone: "01707876609",
+        email: "test@example.com"
+      }
     }
   end
 
