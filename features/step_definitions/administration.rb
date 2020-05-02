@@ -118,6 +118,11 @@ When(/^I click on link "([^\"]*)"$/) do |text|
   find("a", text: text, match: :prefer_exact).click
 end
 
+When(/^I click on body link "([^\"]*)"$/) do |text|
+  expect(page).to have_text text
+  find(".body-content a", text: text, match: :prefer_exact).click
+end
+
 When(/^I click on aside link "([^\"]*)"$/) do |text|
   expect(page).to have_text text
   find(".nav a", text: text, match: :prefer_exact).click
