@@ -15,7 +15,7 @@ Scenario: Record new
   And I click on link "New record"
   And select "Test issue 1" from select box "data[issue_id]"
   And I click on "#data_start_time"
-  And I click on "tr:last-of-type > [data-day]:last-of-type"
+  And I click on "tr:last-of-type > [data-day]:nth-last-of-type(2)"
   And I click on "label"
   And I click on "#data_end_time"
   And I click on "tr:last-of-type > [data-day]:last-of-type"

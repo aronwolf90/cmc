@@ -15,7 +15,12 @@ export default {
   },
   getProjectFolder (context, projectId) {
     return context.dispatch('getProject', projectId).then(response => {
-      return context.dispatch('getFolder', response.data.id)
+      return context.dispatch(
+        'loadRelationship', {
+          entry: response.data,
+          name: 'folder'
+        }
+      )
     })
   }
 }

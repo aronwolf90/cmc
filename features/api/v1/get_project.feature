@@ -29,6 +29,9 @@ Scenario: Get
             "data": {
               "id": "1",
               "type": "folders"
+            },
+            "links": {
+              "self": "/api/v1/folders/1"
             }
           },
           "contact": {

@@ -53,8 +53,8 @@ export default {
       })
     },
     fetch () {
-      this.$store.dispatch('getProjectFolder', this.projectId).then(response => {
-        this.form.relationships.folder.data = Utils.entryToRef(response.data)
+      this.$store.dispatch('getProjectFolder', this.projectId).then(data => {
+        this.form.relationships.folder.data = Utils.entryToRef(data)
       })
     }
   }

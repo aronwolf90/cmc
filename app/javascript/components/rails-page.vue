@@ -10,6 +10,11 @@ export default {
       html: '<span></span>'
     }
   },
+  created () {
+    setTimeout(() => {
+      jqueryFuncs();
+    }, 100)
+  },
   beforeRouteEnter (to, from, next) {
     window.store.getters.axios.get(
       to.fullPath,

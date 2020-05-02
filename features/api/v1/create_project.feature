@@ -55,7 +55,10 @@ Scenario: Post an valid record using json in POST body
             "data": {
               "id": "5",
               "type": "folders"
-            }
+              },
+              "links": {
+                "self": "/api/v1/folders/5"
+              }
           },
           "contact": {
             "data": {

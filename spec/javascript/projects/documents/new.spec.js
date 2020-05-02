@@ -30,7 +30,7 @@ describe('ProjectsDocumentsNew', () => {
       store: new Vuex.Store({
         actions: {
           getProjectFolder () {
-            return Promise.resolve({ data: folder })
+            return Promise.resolve(folder)
           },
           createDocument (_, payload) {
             expect(payload).to.eql({

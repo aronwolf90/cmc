@@ -182,6 +182,12 @@ document.addEventListener('turbolinks:load', () => {
         meta: { aside: 'projects-detail' }
       },
       {
+        path: '/administration/projects/:id/records/new',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'projects-detail' }
+      },
+      {
         path: '/administration/projects/:projectId/documents',
         component: ProjectsDocumentsIndex,
         props: true,
@@ -241,6 +247,18 @@ document.addEventListener('turbolinks:load', () => {
       },
       {
         path: '/administration/records',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/records/new',
+        component: RailsPage,
+        props: true,
+        meta: { aside: 'global' }
+      },
+      {
+        path: '/administration/records/:id/edit',
         component: RailsPage,
         props: true,
         meta: { aside: 'global' }
