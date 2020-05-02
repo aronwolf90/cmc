@@ -1,7 +1,6 @@
 import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import CurrentIssue from '../../../app/javascript/shared_issue_section/current_issue'
-import sinon from 'sinon'
 import {
   helperState,
   helperMutations,
@@ -27,10 +26,6 @@ describe('CurrentIssue', () => {
   })))
 
   def('getterData', () => ({ currentIssue: $currentIssue }))
-
-  def('Turbolinks', () => ({ visit: sinon.spy() }))
-
-  beforeEach(() => { global.Turbolinks = $Turbolinks })
 
   describe('with currentIssue', () => {
     def('currentIssue', () => ({

@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import Issue from '../../../app/javascript/board/issue'
 import IssuesRecordSection from '../../../app/javascript/components/issues_record_section'
 import draggable from 'vuedraggable'
-import sinon from 'sinon'
 
 const localVue = createLocalVue()
 
@@ -21,9 +20,6 @@ describe('Issue', () => {
   }))
   def('actions', () => ({ initBoardsLists () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
-  def('Turbolinks', () => ({ visit: sinon.spy() }))
-
-  beforeEach(() => (global.Turbolinks = $Turbolinks))
 
   describe('when the issue is present and his data is correct', () => {
     def('issue', () => ({

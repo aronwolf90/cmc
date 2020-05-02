@@ -21,9 +21,7 @@ describe('Show', () => {
   def('getters', () => ({ entry () { return () => $wikiPage } }))
   def('actions', () => ({ initWikiPage () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
-  def('Turbolinks', () => ({ visit: sinon.spy() }))
 
-  beforeEach(() => (global.Turbolinks = $Turbolinks))
   afterEach(() => $subject.vm.$router.push('/'))
 
   describe('with wikiPage', () => {

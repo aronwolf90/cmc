@@ -5,7 +5,6 @@ import List from '../../app/javascript/board/list'
 import ProjectSelect from '../../app/javascript/board/project_select'
 import SearchSelect from '../../app/javascript/board/search_select'
 import draggable from 'vuedraggable'
-import sinon from 'sinon'
 import BootstrapVue from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 
@@ -44,10 +43,7 @@ describe('Board', () => {
       }
     }
   })))
-  def('Turbolinks', () => ({ visit: sinon.spy() }))
   def('boardLists', () => [])
-
-  beforeEach(() => (global.Turbolinks = $Turbolinks))
 
   it('the SearchSelect is present', () => {
     expect($subject.find(SearchSelect).exists()).to.be.true

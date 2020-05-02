@@ -60,7 +60,6 @@ gem "bootstrap3-datetimepicker-rails"
 gem "jquery-rails"
 gem "momentjs-rails"
 gem "select2-rails"
-gem "turbolinks"
 
 # Template
 gem "font-awesome-rails"

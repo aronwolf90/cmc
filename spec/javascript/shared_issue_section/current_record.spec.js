@@ -19,10 +19,8 @@ describe('CurrentRecord', () => {
   }))
   def('actions', () => ({ initCurrentRecord () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
-  def('Turbolinks', () => ({ visit: sinon.spy() }))
 
   beforeEach(() => {
-    global.Turbolinks = $Turbolinks
     this.clock = sinon.useFakeTimers(new Date('Wed Feb 21 2018 12:30:10 GMT+0000 (UTC)'))
   })
   afterEach(() => (this.clock = this.clock.restore()))

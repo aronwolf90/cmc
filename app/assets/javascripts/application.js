@@ -2,7 +2,6 @@
 //= require rails-ujs
 //= require popper
 //= require bootstrap
-//= require turbolinks
 //= require select2
 //= require moment
 //= require bootstrap-datetimepicker
@@ -45,12 +44,5 @@ jQuery.extend(true, jQuery.fn.datetimepicker.defaults, {
     clear:    'fa fa-trash-alt',    
     close:    'fa fa-times-circle'  
   }
-});
-
-document.addEventListener('turbolinks:load', () => {                                                                      
-  return setTimeout(( () => {
-    return jqueryFuncs();
-  }
-  ), 100);
 });
 
