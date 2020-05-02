@@ -80,3 +80,16 @@ Scenario: Show ticket
   And I click on body link "Test issue 1"
   Then the page contain the text "description for the test issue"
   And the page contain the text "Test project"
+
+@javascript
+Scenario: Create Issue
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Projects"
+  And I click on link "Test project"
+  And I click on link "Tickets"
+  And I click on ".issues-board-body .fa-plus"
+  And I enter "issue name" into input named "Title"
+  And I click on submit
+  And I reload the page
+  Then the page contain the text "Test project"

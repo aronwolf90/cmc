@@ -220,7 +220,7 @@ document.addEventListener('turbolinks:load', () => {
         path: '/administration/projects/:projectId/board_lists/:boardListId/issues/new',
         component: IssueNew,
         props: true,
-        meta: { aside: 'global' }
+        meta: { aside: 'projects-detail' }
       },
       {
         path: '/administration/projects/:projectId/board_lists/:id/edit',

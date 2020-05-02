@@ -19,7 +19,7 @@
     markdown-editor(v-model='form.attributes.description')
     br
     b-button(type="submit", variant="success") Create issue
-    b-button.pull-right(variant="secondary", to="/administration/board_lists") Cancel
+    b-button.pull-right(variant="secondary", to="../..") Cancel
 </template>
 
 <script>
@@ -74,7 +74,7 @@ export default {
  
       this.$store.dispatch('createIssue', payload).then(() => {
         this.$store.dispatch('board/getBoardLists').then(() => {
-          this.$router.push('/administration/board_lists')
+          this.$router.push('../..')
         })
       }).catch(({ status, data }) => {
         this.errors = data.errors
