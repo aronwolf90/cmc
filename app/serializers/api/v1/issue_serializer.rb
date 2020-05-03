@@ -8,7 +8,8 @@ module Api
         :description,
         :complexity,
         :due_at,
-        :deadline_at
+        :deadline_at,
+        :status
       )
 
       belongs_to :user, serializer: UserSerializer

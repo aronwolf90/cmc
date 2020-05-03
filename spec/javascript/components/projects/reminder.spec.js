@@ -10,7 +10,8 @@ describe('Reminder', () => {
     id: 1,
     type: 'issues',
     attributes: {
-      title: 'Test title'
+      title: 'Test title',
+      status: 'none'
     }
   }
   const dispatch = sandbox.stub()
@@ -45,5 +46,21 @@ describe('Reminder', () => {
     wrapper.find('.fa-check').trigger('click')
 
     expect(dispatch).to.have.been.calledWith('projectsShow/closeIssue')
+  })
+
+  it('has .bg-warning when status is warning', () => {
+    issue.attributes.status = 'warning'
+    const wrapper = factory()
+
+    expect(wrapper.find('.bg-warning').exists()).to.be.true
+    expect(wrapper.find('.text-secondary').exists()).to.be.true
+  })
+
+  it('has .bg-warning when status is warning', () => {
+    issue.attributes.status = 'danger'
+    const wrapper = factory()
+
+    expect(wrapper.find('.bg-danger.text-white').exists()).to.be.true
+    expect(wrapper.find('.text-secondary').exists()).to.be.false
   })
 })

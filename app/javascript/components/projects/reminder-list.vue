@@ -1,5 +1,5 @@
 <template lang='pug'>
-  .reminder-list.spent-time
+  .reminder-list
     .pull-right.b-button(v-b-modal.modal-new="")
       .fa.fa-plus
     .font-weight-bold.text-dark Reminders
@@ -30,5 +30,10 @@ export default {
 }
 </script>
 
-<style lang='sass'>
+<style lang='sass' scoped>
+  .reminder-list
+    padding-left: 17px
+    padding-right: 17px
+    color: grey
+    border-bottom: 1px solid #e7e7e7
 </style>

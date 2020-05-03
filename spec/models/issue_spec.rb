@@ -15,4 +15,38 @@ RSpec.describe Issue, type: :model do
   describe "#to_s" do
     it { expect(subject.to_s).to eq(subject.title) }
   end
+
+  describe "#status" do
+    context "when not due at or deadline at are not set" do
+      subject { Issue.new }
+
+      specify do
+        expect(subject.status).to eq :none
+      end
+    end
+
+    context "when not due at or deadline at has been reached" do
+      subject { Issue.new(due_at: 1.day.from_now) }
+
+      specify do
+        expect(subject.status).to eq :none
+      end
+    end
+
+    context "when due_at has been reached" do
+      subject { Issue.new(due_at: 1.day.ago) }
+
+      specify do
+        expect(subject.status).to eq :warning
+      end
+    end
+
+    context "when deadline_at has been reached" do
+      subject { Issue.new(deadline_at: 1.day.ago) }
+
+      specify do
+        expect(subject.status).to eq :danger
+      end
+    end
+  end
 end

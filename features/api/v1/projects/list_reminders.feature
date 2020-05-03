@@ -19,7 +19,8 @@ Scenario: Get /api/v1/projects/<id>/reminders
             "description":"description for the test issue",
             "complexity":"2.0",
             "due-at": "10-10-2020 00:00",
-            "deadline-at": "10-10-2020 00:00"
+            "deadline-at": "10-10-2020 00:00",
+            "status": "none"
           },
           "relationships":{ 
             "user":{ 

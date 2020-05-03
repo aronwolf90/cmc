@@ -21,7 +21,8 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
         description: "description",
         complexity: nil,
         "due-at": "10-10-2020 00:00",
-        "deadline-at": "10-10-2020 00:00"
+        "deadline-at": "10-10-2020 00:00",
+        status: :none
       },
       relationships: {
         user: { data: nil }

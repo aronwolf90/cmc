@@ -37,7 +37,8 @@ Feature: API: create an issue
           "description": "description",
           "complexity": null,
           "due-at": null,
-          "deadline-at": null
+          "deadline-at": null,
+          "status": "none"
         },
         "relationships": {
           "user": { 

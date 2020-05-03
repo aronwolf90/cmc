@@ -21,4 +21,11 @@ class Issue < ApplicationRecord
     against: %i[title description],
     using: { tsearch: { prefix: true } }
   )
+
+  def status
+    return :danger if deadline_at.present? && deadline_at <= Time.zone.now
+    return :warning if due_at.present? && due_at <= Time.zone.now
+
+    :none
+  end
 end

@@ -1,9 +1,9 @@
 <template lang='pug'>
-  .reminder
+  .reminder(:class="statusClass")
     .pull-right.b-button
       .fa.fa-check(@click="closeIssue")
     .title
-      router-link.text-secondary(:to="`${projectId}/issues/${id}`")
+      router-link(:to="`${projectId}/issues/${id}`", :class="statusClass")
         | {{ title }}
 </template>
 
@@ -21,6 +21,15 @@ export default {
     },
     title () {
       return Utils.attribute(this.issue, 'title')
+    },
+    statusClass () {
+      if (Utils.attribute(this.issue, 'status') === 'warning') {
+        return 'bg-warning text-secondary'
+      }
+      if (Utils.attribute(this.issue, 'status') === 'danger') {
+        return 'bg-danger text-white'
+      }
+      return 'text-secondary'
     }
   },
   methods: {
@@ -35,6 +44,11 @@ export default {
   .reminder
     padding-top: 4px
     padding-bottom: 4px
+    margin-left: -18px
+    margin-right: -18px
+    padding-left: 18px
+    padding-right: 18px
+    border-bottom: 1px solid #e7e7e7
     .title
       overflow: hidden
       text-overflow: ellipsis

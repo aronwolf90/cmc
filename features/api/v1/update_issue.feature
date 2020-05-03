@@ -34,7 +34,8 @@ Scenario: Put an valid issue using json in PUT body
           "description":"description for the test issue",
           "complexity":"2.0",
           "due-at":"12-10-2020 00:00",
-          "deadline-at":"12-10-2020 00:00"
+          "deadline-at":"12-10-2020 00:00",
+          "status": "none"
         },
         "relationships":{ 
           "user":{ 
