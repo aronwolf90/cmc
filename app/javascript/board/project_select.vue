@@ -1,6 +1,11 @@
 <template lang='pug'>
   #complexity(v-if='projects && currentUser')
-    b-form-select(v-model='selected', :options='options', size="sm", id="project-select")
+    b-form-select(
+      v-model='selected',
+      :options='options',
+      size="sm",
+      id="project-select"
+    )
 </template>
 
 <script>
@@ -13,9 +18,17 @@ export default {
   },
   computed: {
     options () {
-      return (this.projects || []).map(project => {
+      let firstEntry = []
+      if (Utils.attribute(this.context, 'global-board')) {
+        firstEntry = [{ value: null, text: 'All' }]
+      }
+      return firstEntry.concat((this.projects || [])
+      .map(project => {
         return { value: project.id, text: project.attributes.name }
-      })
+      }))
+    },
+    context () {
+      return this.$store.getters.context
     },
     projects () {
       return this.$store.getters.projects

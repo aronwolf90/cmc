@@ -13,7 +13,7 @@ module Api::V1
             optional(:title).filled
           end
           optional(:relationships).schema do
-            optional(:project).schema(RequiredBelongsToSchema)
+            optional(:project).schema(OptionalBelongsToSchema)
             optional(:"board-list").schema(RequiredBelongsToSchema)
           end
         end

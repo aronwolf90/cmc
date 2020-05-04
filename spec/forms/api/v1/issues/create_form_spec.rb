@@ -33,13 +33,21 @@ describe Api::V1::Issues::CreateForm do
     end
   end
 
+  context "when project is null" do
+    before { params[:data][:relationships][:project][:data] = nil }
+
+    it "it has an error: id must be filled" do
+      expect(subject).to be_success
+    end
+  end
+
   context "with invalid project id" do
     before { params[:data][:relationships][:project][:data][:id] = nil }
 
     it "it has an error: id must be filled" do
       expect(subject.errors).to eq(
         data: { relationships: {
-          project: { data: { id: ["must be filled"] } }
+          project: { data: ["Does not exists"] }
         } }
       )
     end

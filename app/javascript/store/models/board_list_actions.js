@@ -21,9 +21,15 @@ export default {
         let project = currentUser.relationships['selected-project'].data
         projectId = project ? project.id : null
       }
+      let resource = null
+      if (projectId) {
+        resource = `board_lists?filter[project_id]=${projectId}&include[]=issues`
+      } else {
+        resource = `board_lists?&include[]=issues`
+      }
       return context.dispatch('get', {
         endpoint,
-        resource: `board_lists?filter[project_id]=${projectId}&include[]=issues`
+        resource
       })
     })
   },
