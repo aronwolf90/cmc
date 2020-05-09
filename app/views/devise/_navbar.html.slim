@@ -1,3 +1,7 @@
 nav.navbar.navbar-light
   .pull-left
     = image_tag 'logo.png', id: 'logo'
+  .pull-right
+    - if Settings.multi_tenant
+      = link_to "Register", new_registration_path, class: "text-white mr-3"
+    = link_to "Login", new_session_path(User), class: "text-white mr-3"
