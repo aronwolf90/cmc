@@ -8,8 +8,12 @@ module Api
       protected
         def index
           authorize model_class, :index? if model_class.present?
+          page = (params[:page] || 1).to_i
+          per_page = per_page() || 10
 
-          render_json_api json: query
+          render_json_api json: query.offset(per_page * (page - 1)).limit(per_page), meta: {
+            count: query.count
+          }
         rescue Pundit::NotAuthorizedError
           head :forbidden
         end
@@ -53,7 +57,7 @@ module Api
           head :forbidden
         end
 
-        def render_json_api(json:, links: true)
+        def render_json_api(json:, links: true, meta: {})
           serializer_hash =
             if json.is_a?(Array) || json.is_a?(ActiveRecord::Relation)
               { each_serializer: serializer }
@@ -65,7 +69,8 @@ module Api
             json: json,
             include: params[:include],
             links: ({ self: request.path_info } if links),
-            option_name: params[:filter] || {}
+            option_name: params[:filter] || {},
+            meta: meta
           }.merge(serializer_hash))
         end
 

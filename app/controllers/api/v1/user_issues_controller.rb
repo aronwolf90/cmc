@@ -6,6 +6,8 @@ module Api::V1
     model_class UserIssue
     serializer UserIssueSerializer
 
+    per_page 300
+
     public :index, :show
 
     private

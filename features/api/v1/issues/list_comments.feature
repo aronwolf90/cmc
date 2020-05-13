@@ -11,6 +11,9 @@ Scenario: GET /api/v1/issues/<id>/comments
   And the JSON response should be:
     """
     { 
+      "meta": {
+        "count": 0
+      },
       "data":[], 
       "links":{ 
         "self":"/api/v1/issues/1/comments"

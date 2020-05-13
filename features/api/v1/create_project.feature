@@ -41,7 +41,7 @@ Scenario: Post an valid record using json in POST body
     """
     {
       "data": {
-        "id": "3",
+        "id": "18",
         "type": "projects",
         "attributes": {
           "name": "New",
@@ -51,13 +51,19 @@ Scenario: Post an valid record using json in POST body
           "project-status": {
             "data": { "id": "1", "type": "project-statuses" }
           },
+          "main-responsable": {
+            "data": {
+              "id": "1",
+              "type": "users"
+            }
+          },
           "folder": {
             "data": {
-              "id": "5",
+              "id": "20",
               "type": "folders"
               },
               "links": {
-                "self": "/api/v1/folders/5"
+                "self": "/api/v1/folders/20"
               }
           },
           "contact": {
@@ -65,15 +71,9 @@ Scenario: Post an valid record using json in POST body
               "id": "3",
               "type": "contacts"
             }
-          },
-          "main-responsable": {
-            "data": {
-              "id": "1",
-              "type": "users"
-            }
           }
         },
-        "links": { "self": "/api/v1/projects/3" },
+        "links": { "self": "/api/v1/projects/18" },
         "meta": {
           "permissions": {
             "update": true, 

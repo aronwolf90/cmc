@@ -5,6 +5,7 @@ module Api::V1
     class ProjectCommentsController < ApiController
       include StandartActions
       serializer ProjectCommentSerializer
+      per_page 100
 
       public :index
 

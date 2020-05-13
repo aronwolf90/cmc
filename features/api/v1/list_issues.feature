@@ -10,6 +10,9 @@ Scenario: Get /api/v1/issues
   Then the JSON response should be:
     """
     { 
+      "meta": {
+        "count": 11
+      },
       "data":[ 
         { 
           "id":"1",

@@ -7,6 +7,7 @@ module Api
       namespace Issues
       model_class Issue
       serializer IssueSerializer
+      per_page 15
 
       public :index, :show, :create, :update, :destroy
 

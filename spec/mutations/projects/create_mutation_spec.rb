@@ -17,6 +17,13 @@ RSpec.describe Projects::CreateMutation do
   let!(:project_board_list) do
     create(:project_board_list, project_status: project_status)
   end
+  let!(:project1) do
+    create(
+      :project,
+      ordinal_number: 0,
+      project_board_list: project_board_list
+    )
+  end
 
   specify do
     expect { subject }.to change(Project, :count).by(1)
@@ -24,5 +31,7 @@ RSpec.describe Projects::CreateMutation do
     expect(BoardList.all.map(&:kind)).to eq(%w[open other closed])
     expect(subject.project_board_list.project_status).to eq(project_status)
     expect(subject.folder).to be_present
+    expect(subject.ordinal_number).to eq 0
+    expect(project1.reload.ordinal_number).to eq 1
   end
 end

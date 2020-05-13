@@ -141,10 +141,187 @@ Scenario: Get
               "destroy": true
             }
           }
+        },
+        {
+          "id": "5",
+          "type": "folders",
+          "attributes": {
+            "name": "Test project 3",
+            "root": true
+          },
+          "relationships": {
+            "folder": {
+              "data": null
+            },
+            "folders": {
+              "data": [
+
+              ]
+            },
+            "documents": {
+              "data": [
+
+              ]
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
+        },
+        {
+          "id": "6",
+          "type": "folders",
+          "attributes": {
+            "name": "Test project 4",
+            "root": true
+          },
+          "relationships": {
+            "folder": {
+              "data": null
+            },
+            "folders": {
+              "data": [
+
+              ]
+            },
+            "documents": {
+              "data": [
+
+              ]
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
+        },
+        {
+          "id": "7",
+          "type": "folders",
+          "attributes": {
+            "name": "Test project 5",
+            "root": true
+          },
+          "relationships": {
+            "folder": {
+              "data": null
+            },
+            "folders": {
+              "data": [
+
+              ]
+            },
+            "documents": {
+              "data": [
+
+              ]
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
+        },
+        {
+          "id": "8",
+          "type": "folders",
+          "attributes": {
+            "name": "Test project 6",
+            "root": true
+          },
+          "relationships": {
+            "folder": {
+              "data": null
+            },
+            "folders": {
+              "data": [
+
+              ]
+            },
+            "documents": {
+              "data": [
+
+              ]
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
+        },
+        {
+          "id": "9",
+          "type": "folders",
+          "attributes": {
+            "name": "Test project 7",
+            "root": true
+          },
+          "relationships": {
+            "folder": {
+              "data": null
+            },
+            "folders": {
+              "data": [
+
+              ]
+            },
+            "documents": {
+              "data": [
+
+              ]
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
+        },
+        {
+          "id": "10",
+          "type": "folders",
+          "attributes": {
+            "name": "Test project 8",
+            "root": true
+          },
+          "relationships": {
+            "folder": {
+              "data": null
+            },
+            "folders": {
+              "data": [
+
+              ]
+            },
+            "documents": {
+              "data": [
+
+              ]
+            }
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
         }
       ],
       "links": {
         "self": "/api/v1/folders"
+      },
+      "meta": {
+        "count": 19
       }
     }
     """

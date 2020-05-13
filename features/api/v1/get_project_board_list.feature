@@ -10,30 +10,96 @@ Scenario: Get
   Then the response status should be "200"
   And the JSON response should be:
     """
-    { 
-      "data":{ 
-        "id":"1",
-        "type":"project-board-lists",
-        "attributes":{ 
-          "name":"New"
+    {
+      "data": {
+        "id": "1",
+        "type": "project-board-lists",
+        "attributes": {
+          "name": "New"
         },
-        "relationships":{ 
-          "projects":{
+        "relationships": {
+          "projects": {
             "data": [
-              {"id": "1", "type": "projects" }
+              {
+                "id": "1",
+                "type": "projects"
+              },
+              {
+                "id": "3",
+                "type": "projects"
+              },
+              {
+                "id": "4",
+                "type": "projects"
+              },
+              {
+                "id": "5",
+                "type": "projects"
+              },
+              {
+                "id": "6",
+                "type": "projects"
+              },
+              {
+                "id": "7",
+                "type": "projects"
+              },
+              {
+                "id": "8",
+                "type": "projects"
+              },
+              {
+                "id": "9",
+                "type": "projects"
+              },
+              {
+                "id": "10",
+                "type": "projects"
+              },
+              {
+                "id": "11",
+                "type": "projects"
+              },
+              {
+                "id": "12",
+                "type": "projects"
+              },
+              {
+                "id": "13",
+                "type": "projects"
+              },
+              {
+                "id": "14",
+                "type": "projects"
+              },
+              {
+                "id": "15",
+                "type": "projects"
+              },
+              {
+                "id": "16",
+                "type": "projects"
+              },
+              {
+                "id": "17",
+                "type": "projects"
+              }
             ]
           },
-          "project-status":{
-            "data": { "id": "1", "type": "project-statuses" }
+          "project-status": {
+            "data": {
+              "id": "1",
+              "type": "project-statuses"
+            }
           }
         },
-        "links":{ 
-          "self":"/api/v1/project_board_lists/1"
+        "links": {
+          "self": "/api/v1/project_board_lists/1"
         },
-        "meta":{ 
-          "permissions":{ 
-            "update":true,
-            "destroy":false
+        "meta": {
+          "permissions": {
+            "update": true,
+            "destroy": false
           }
         }
       }

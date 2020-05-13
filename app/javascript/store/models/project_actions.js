@@ -7,10 +7,11 @@ export default {
       resource: 'projects'
     })
   },
-  getProjects (context) {
+  getProjects (context, page) {
+    page = page || 1
     return context.dispatch('get', {
       endpoint,
-      resource: 'projects'
+      resource: `projects?page=${page}`
     })
   },
   getProject (context, id) {

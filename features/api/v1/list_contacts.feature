@@ -10,6 +10,9 @@ Scenario: Get /api/v1/contacts
   Then the JSON response should be:
     """
     {
+      "meta": {
+        "count": 2 
+      },
       "data":[
         {
           "id":"1",

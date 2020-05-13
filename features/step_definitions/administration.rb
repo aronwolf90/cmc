@@ -149,7 +149,7 @@ end
 When(/^I drag "([^\"]*)" to "([^\"]*)"$/) do |from, to|
   source_node = page.find(from)
   target_node = page.find(to)
-  source_node.drag_to(target_node)
+  source_node.drag_to(target_node, delay: 2)
 end
 
 When(/^I set due at to one hour from now$/) do

@@ -10,6 +10,9 @@ Scenario: Get /api/v1/events
   Then the JSON response should be:
     """
     {
+      "meta": {
+        "count": 1
+      },
       "data": [{
         "id": "1",
         "type": "events",

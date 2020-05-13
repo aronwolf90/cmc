@@ -37,7 +37,9 @@ Scenario: move project status
   Given a test-organization exists
   And I am signed in (multitenant)
   When I click on link "Projects"
-  And I drag "#project-status-1" to "#project-status-3"
+  Then the page contain the text "Test project 10"
+  And the page contain the text "New"
+  When I drag "#project-status-1" to "#project-status-3"
   Then the element ".project-status:last-of-type" contain the text "New"
   When I reload the page
   Then the element ".project-status:last-of-type" contain the text "New"

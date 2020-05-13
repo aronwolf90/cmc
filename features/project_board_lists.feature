@@ -17,7 +17,8 @@ Scenario: move project to other board
   And I am signed in (multitenant)
   When I click on link "Projects"
   And I click on aside link "New"
-  When I drag "#list-project-2" to "#list-project-1"
-  Then the element "#column-1 .list-project:last-of-type" contain the text "Test project 2"
+  Then the page does not contain the text "Test project 10"
+  When I drag "#list-project-1" to "#list-project-2"
+  Then the element "#column-2 .list-project:first-of-type" contain the text "Test project 2"
   When I reload the page
-  Then the element "#column-1 .list-project:last-of-type" contain the text "Test project 2"
+  Then the element "#column-2 .list-project:first-of-type" contain the text "Test project 2"

@@ -13,7 +13,7 @@
             .fa.fa-plus
             |&nbsp add list
 
-    draggable.body.issues-board-body(v-model="boardLists", :force-fallback="true")
+    draggable.body.issues-board-body(v-model="boardLists")
       list(
         v-for='boardList in boardLists',
         :key='boardList.id',

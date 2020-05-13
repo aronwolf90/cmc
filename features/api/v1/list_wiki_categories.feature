@@ -10,6 +10,9 @@ Scenario: Get
   Then the JSON response should be:
     """
     { 
+      "meta": {
+        "count": 3
+      },
       "data":[ 
         { 
           "id":"1",

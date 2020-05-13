@@ -175,6 +175,7 @@ export default {
       context.dispatch('getContacts', null, { root: true }).then(result => {
         context.commit('contacts', result.data)
       })
+      context.dispatch('getProjectStatuses', null, { root: true })
     },
     setContact (context) {
       context.commit(
@@ -241,6 +242,21 @@ export default {
       }).then(() => {
         context.dispatch('setContact')
         context.commit('contactIdEditMode', false)
+      })
+    },
+    changeProjectStatus (context, projectStatus) {
+      return context.dispatch('update', {
+        entry: context.getters.project,
+        payload: {
+          relationships: {
+            'project-status': {
+              data: projectStatus
+            }
+          }
+        }
+      },
+      {
+        root: true
       })
     }
   }

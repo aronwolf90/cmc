@@ -7,6 +7,8 @@ module Api::V1
     model_class User
     serializer UserSerializer
 
+    per_page 300
+
     public :index, :show, :create, :update
 
     def destroy

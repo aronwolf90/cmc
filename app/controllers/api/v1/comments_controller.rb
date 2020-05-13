@@ -8,6 +8,8 @@ module Api
       model_class Comment
       serializer CommentSerializer
 
+      per_page 100
+
       public :create
     end
   end

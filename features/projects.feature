@@ -8,6 +8,7 @@ Scenario: Create project
   And I click on link "New project"
   And I enter "project title" into input named "Name"
   And I click on submit
+  And I click on "[aria-label='Go to last page']"
   Then the element "#side-body" contain the text "project title"
 
 @javascript
@@ -96,3 +97,25 @@ Scenario: Change main responsable
   Then the page contain the text "New reminder"
   When I reload the page
   Then the page contain the text "New reminder"
+
+@javascript
+Scenario: Change project status
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Projects"
+  And I click on link "Test project"
+  And I click on "#project-status-select .text"
+  Then the element "#project-status-select .text" does not contain the text "Active"
+  And I click on "#project-status-select input"
+  And I click on "#project-status-select .item:nth-child(3)"
+  Then the element "#project-status-select .text" contain the text "Active"
+  And I reload the page
+  Then the element "#project-status-select .text" contain the text "Active"
+
+@javascript
+Scenario: Paggination
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Projects"
+  And I click on "[aria-label='Go to page 2']"
+  Then the page contain the text "Test project 11"

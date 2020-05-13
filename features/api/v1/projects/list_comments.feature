@@ -11,6 +11,9 @@ Scenario: GET /api/v1/projects/<id>/project_comments
   And the JSON response should be:
     """
     { 
+      "meta": {
+        "count": 1
+      },
       "data":[ 
         { 
           "id":"1",

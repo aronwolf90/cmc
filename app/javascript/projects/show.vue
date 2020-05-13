@@ -5,6 +5,7 @@
       hr.divider
       comments(:projectId="id", module='projectsShow', v-if="project")
     right-aside.right-aside
+      project-status-select
       contact
       main-responsable
       reminder-list(:project-id="id")
@@ -21,6 +22,7 @@ import DetailsStringInput from 'components/details-string-input'
 import Contact from 'components/projects/contact'
 import MainResponsable from 'components/projects/main-responsable'
 import ReminderList from 'components/projects/reminder-list'
+import ProjectStatusSelect from 'components/projects/project-status-select'
 
 export default {
   props: ['id'],
@@ -32,7 +34,8 @@ export default {
     RightAside,
     Contact,
     MainResponsable,
-    ReminderList
+    ReminderList,
+    ProjectStatusSelect
   },
   data () {
     return {
