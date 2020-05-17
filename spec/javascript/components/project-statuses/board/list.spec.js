@@ -17,6 +17,13 @@ describe('project-statuses/board/list', () => {
     type: 'project-board-lists',
     attributes: {
       name: 'Project board list name'
+    },
+    relationships: {
+      projects: {
+        links: {
+          next: '/next'
+        }
+      }
     }
   }
   const project = {
@@ -33,6 +40,9 @@ describe('project-statuses/board/list', () => {
         getters: {
           projectBoardListProjects () {
             return () => [project]
+          },
+          loadMoreLink () {
+            return () => '/next'
           }
         }
       }
@@ -79,6 +89,24 @@ describe('project-statuses/board/list', () => {
     })
     wrapper.vm.$nextTick(() => {
       expect(wrapper.html()).to.include('stubed-project')
+      done()
+    })
+  })
+
+  it('renders more', (done) => {
+    const wrapper = mount(List, {
+      store,
+      localVue,
+      router,
+      propsData: {
+        projectBoardListId: '1'
+      },
+      stubs: {
+        Project: '<div>stubed-project</div>'
+      }
+    })
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.html()).to.include('more')
       done()
     })
   })

@@ -79,12 +79,12 @@ Scenario: Get
               {
                 "id": "16",
                 "type": "projects"
-              },
-              {
-                "id": "17",
-                "type": "projects"
               }
-            ]
+            ],
+            "links": {
+              "self": "/api/v1/project_board_lists/1/projects",
+              "next": "/api/v1/project_board_lists/1/projects?more_id=16"
+            }
           },
           "project-status": {
             "data": {

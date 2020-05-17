@@ -44,11 +44,11 @@ export default {
     editLink () {
       return `/administration/project_board_lists/${this.projectBoardList.id}/edit`
     },
+    loadMoreLink () {
+      return this.$store.getters['projects-board/loadMoreLink'](this.projectBoardListId)
+    },
     showMore () {
-      return false
-      // if (!this.projectBoardList) return false
-      // if (!this.boardList.relationships['issues'].links) return false
-      // return !!this.boardList.relationships['issues'].links.next
+      return !!this.loadMoreLink
     },
     projects: {
       get () {
@@ -66,6 +66,10 @@ export default {
       return this.$store.dispatch('destroyProjectBoardList', this.projectBoardList.id)
     },
     loadMore () {
+      return this.$store.dispatch(
+        'projects-board/loadMoreProjectForBoardListProjects',
+        this.projectBoardList
+      )
     },
     change (event) {
       if (!event.moved && !event.added) return

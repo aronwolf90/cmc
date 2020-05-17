@@ -5,7 +5,8 @@ export default {
   namespaced: true,
   state: {
     projectBoardListRefs: null,
-    projectBoardListProjectRefs: {}
+    projectBoardListProjectRefs: {},
+    loadMoreLinks: {}
   },
   getters: {
     projectBoardLists (state, _getters, _rootState, rootGetters) {
@@ -17,6 +18,9 @@ export default {
         return state.projectBoardListProjectRefs[projectBoardList.id]
           .map(ref => rootGetters.entry(ref))
       }
+    },
+    loadMoreLink (state) {
+      return (projectBoardListId) => state.loadMoreLinks[projectBoardListId]
     }
   },
   mutations: {
@@ -30,6 +34,13 @@ export default {
       }
       Vue.set(state.projectBoardListProjectRefs,
         projectBoardList.id, Utils.entryArrayToRef(projects))
+    },
+    addProjectsToBoardLists (state, { projectBoardListId, projects }) {
+      state.projectBoardListProjectRefs[projectBoardListId]
+        .push(...Utils.entryArrayToRef(projects))
+    },
+    setLoadMoreLink (state, { projectBoardListId, link }) {
+      Vue.set(state.loadMoreLinks, projectBoardListId, link)
     }
   },
   actions: {
@@ -45,6 +56,10 @@ export default {
           context.commit('projectBoardListProjects', {
             projectBoardList,
             projects: Utils.relationship(projectBoardList, 'projects')
+          })
+          context.commit('setLoadMoreLink', {
+            projectBoardListId: projectBoardList.id,
+            link: projectBoardList.relationships.projects.links.next
           })
         })
       })
@@ -87,6 +102,19 @@ export default {
         },
         { root: true }
       )
+    },
+    loadMoreProjectForBoardListProjects (context, projectBoardList) {
+      const url = projectBoardList.relationships.projects.links.next
+      context.dispatch('get', { url }, { root: true }).then(response => {
+        context.commit('addProjectsToBoardLists', {
+          projectBoardListId: projectBoardList.id,
+          projects: response.data
+        })
+        context.commit('setLoadMoreLink', {
+          projectBoardListId: projectBoardList.id,
+          link: response.links.next
+        })
+      })
     }
   }
 }

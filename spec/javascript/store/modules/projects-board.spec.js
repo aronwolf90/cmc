@@ -12,7 +12,14 @@ describe('Modules.ProjectsBoard', () => {
   const projectBoardList1 = {
     id: '1',
     type: 'project-board-lists',
-    relationships: { projects: { data: [projectRef1, projectRef2] } }
+    relationships: {
+      projects: {
+        data: [projectRef1, projectRef2],
+        links: {
+          next: '/more'
+        }
+      }
+    }
   }
   const projectBoardList2 = {
     id: '2',
@@ -72,6 +79,17 @@ describe('Modules.ProjectsBoard', () => {
         expect(result).to.eql([project1, project2])
       })
     })
+    it('.loadMoreLink', () => {
+      const result = Board.getters.loadMoreLink(
+        {
+          loadMoreLinks: {
+            1: '/more'
+          }
+        }
+      )(projectBoardList1.id)
+
+      expect(result).to.eql('/more')
+    })
   })
 
   describe('.mutations', () => {
@@ -104,17 +122,51 @@ describe('Modules.ProjectsBoard', () => {
         })
       })
     })
+    describe('.addProjectsToBoardLists', () => {
+      const state = {
+        projectBoardListProjectRefs: {
+          1: []
+        }
+      }
+
+      Board.mutations.addProjectsToBoardLists(state, {
+        projectBoardListId: projectBoardList1.id,
+        projects: [project1]
+      })
+
+      expect(state.projectBoardListProjectRefs).to.eql({
+        1: [projectRef1]
+      })
+    })
+    describe('.setLoadMoreLink', () => {
+      const state = {
+        loadMoreLinks: {}
+      }
+
+      Board.mutations.setLoadMoreLink(state, {
+        projectBoardListId: 1,
+        link: '/more'
+      })
+
+      expect(state.loadMoreLinks).to.eql({
+        1: '/more'
+      })
+    })
   })
 
   describe('.actions', () => {
     describe('.fetch', () => {
       it('calls commit("boardLists", args)', (done) => {
         Board.actions.fetch({
-          commit: (method, projectBoardLists) => {
-            if (method !== 'projectBoardLists') return null
-            expect(projectBoardLists)
-              .to.eql([projectBoardListRef1, projectBoardListRef2])
-            done()
+          commit: (method, params) => {
+            if (method === 'projectBoardLists') {
+              expect(params)
+                .to.eql([projectBoardListRef1, projectBoardListRef2])
+              done()
+            }
+            if (method === 'setLoadMoreLinks') {
+              expect(params).to.eql({ projectBoardListId: 1, link: '/more' })
+            }
           },
           dispatch: sinon
             .stub()
@@ -194,6 +246,37 @@ describe('Modules.ProjectsBoard', () => {
           project: project1,
           ordinalNumber: 1
         })
+      })
+    })
+    describe('.loadMoreProjectForBoardListProjects', () => {
+      it('calls addProjectsToBoardLists', (done) => {
+        const projectBoardList = {
+          id: 1,
+          type: 'project-board-lists',
+          relationships: {
+            projects: {
+              links: {
+                next: '/more'
+              }
+            }
+          }
+        }
+        Board.actions.loadMoreProjectForBoardListProjects({
+          dispatch: (method, params, { root }) => {
+            expect(method).to.eq('get')
+            expect(params).to.eql({ url: '/more' })
+            expect(root).to.be.true
+            return Promise.resolve({ data: [project1] })
+          },
+          commit: (method, params) => {
+            expect(method).to.eq('addProjectsToBoardLists')
+            expect(params).to.eql({
+              projectBoardListId: 1,
+              projects: [project1]
+            })
+            done()
+          }
+        }, projectBoardList)
       })
     })
   })

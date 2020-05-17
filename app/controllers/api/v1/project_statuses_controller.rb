@@ -9,6 +9,14 @@ module Api
       namespace ProjectStatuses
 
       public :index, :create, :update, :show, :destroy
+
+    private
+      def model
+        @model ||= Api::V1::ProjectStatuses::ShowQuery.call(
+          project_status_id: params[:id],
+          includes: params.dig(:include).to_s.split(",")
+        )
+      end
     end
   end
 end

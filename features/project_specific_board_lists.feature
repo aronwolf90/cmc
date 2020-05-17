@@ -8,7 +8,8 @@ Scenario: create board list
   And I click on ".fa-plus"
   And I enter "board list name" into input named "Name"
   And I click on submit
-  And I reload the page
+  Then the page contain the text "board list name"
+  When I reload the page
   Then the page contain the text "board list name"
 
 @javascript

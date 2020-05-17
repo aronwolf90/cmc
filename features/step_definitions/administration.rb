@@ -160,8 +160,15 @@ When(/^I set due at to one hour from now$/) do
   )
 end
 
-When(/^I sleep "2" seconds/) do
-  sleep 2
+When(/^I sleep "([^\"]*)" seconds/) do |seconds|
+  sleep seconds.to_i.seconds
+end
+
+When(/^I reload until "([^\"]*)" with text "([^\"]*)"$/) do |element, text|
+  20.times do
+    page.driver.browser.navigate.refresh
+    break if page.has_css?(element, wait: 1.second, text: text)
+  end
 end
 
 Then(/^the page contain the text "([^\"]*)"$/) do |text|

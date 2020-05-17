@@ -32,7 +32,12 @@ Scenario: Post an valid project board list using json in POST body
           "name": "New"
         },
         "relationships": {
-          "projects": {"data": []},
+          "projects": {
+            "data": [],
+            "links": {
+              "self": "/api/v1/project_board_lists/6/projects"
+            }
+          },
           "project-status": {
             "data": {
               "id": "1",
