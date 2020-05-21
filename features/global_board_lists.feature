@@ -8,6 +8,7 @@ Scenario: create board list
   And I click on ".fa-plus"
   And I enter "board list name" into input named "Name"
   And I click on submit
+  Then the page contain the text "board list name"
   And I reload the page
   Then the page contain the text "board list name"
 
@@ -61,5 +62,19 @@ Scenario: change selected project
   Given a test-organization exists with global board lists
   And I am signed in (multitenant)
   When I click on link "Issues"
-  And select "Test project 2" from select box "project-select"
+  Then the element "#side-body" contain the text "Open"
+  When I click on "#project-select" 
+  And I click on "[role='option']" with "Test project 2"
   Then the element "#side-body" does not contain the text "Test issue 1"
+
+@javascript
+Scenario: search and change selected project
+  Given a test-organization exists with global board lists
+  And I am signed in (multitenant)
+  When I click on link "Issues"
+  Then the element "#side-body" contain the text "Open"
+  When I click on "#project-select" 
+  And I enter "project 12" into input "#project-select input"
+  And I click on "[role='option']" with "Test project 12"
+  Then the page does not contain the element ".list-issue"
+

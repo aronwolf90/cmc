@@ -2,9 +2,9 @@
   .issues-board
     .issues-board-header
       .row
-        .col-sm-8
+        .col-sm-6
           search-select
-        .col-sm-2
+        .col-sm-4
           project-select
         .col-sm-2
           router-link.btn.btn-sm.btn-outline-secondary(

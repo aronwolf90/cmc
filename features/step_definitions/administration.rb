@@ -83,6 +83,10 @@ When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
   find("body").click
 end
 
+When(/^I enter "([^\"]*)" into input "([^\"]*)"$/) do |text, element|
+  find(element).set text
+end
+
 When(/^I check the input named "([^\"]*)"$/) do |name|
   check name, allow_label_click: true
 end
@@ -111,6 +115,11 @@ end
 When(/^I click on "([^\"]*)"$/) do |element|
   expect(page).to have_css element
   find(element, match: :prefer_exact).click
+end
+
+When(/^I click on "([^\"]*)" with "([^\"]*)"$/) do |element, text|
+  expect(page).to have_css element
+  find(element, text: text, match: :prefer_exact).click
 end
 
 When(/^I click on link "([^\"]*)"$/) do |text|

@@ -31,7 +31,7 @@ module Api
           def next_more_path
             return unless collection_result.has_more
 
-            api_v1_board_list_issues_path(
+            api_v1_project_board_list_projects_path(
               params[:project_board_list_id],
               more_id: next_more_id
             )

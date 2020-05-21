@@ -29,14 +29,6 @@ Scenario: Show project
   And I click on link "Test project 2"
 
 @javascript
-Scenario: Change projekt on board
-  Given a test-organization exists
-  And I am signed in (multitenant)
-  When I click on link "Issues"
-  And select "Test project 2" from select box "project-select"
-  Then the page contain the text "Test project 2 open"
-
-@javascript
 Scenario: Comment
   Given a test-organization exists
   And I am signed in (multitenant)

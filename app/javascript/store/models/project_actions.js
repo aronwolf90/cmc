@@ -44,5 +44,11 @@ export default {
       endpoint,
       resource: `projects/${id}/reminders`
     })
+  },
+  searchProject (context, search) {
+    return context.dispatch('get', {
+      endpoint,
+      resource: `projects?query=${search}`
+    })
   }
 }

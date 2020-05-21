@@ -60,10 +60,12 @@ class MoreCollectionQuery < ApplicationQuery
         collection
           .where("""
                    #{sort_key} != :sort_attribute AND #{sort_key} > :sort_attribute OR
-                   #{sort_key} = :sort_attribute AND created_at < :created_at
+                   #{sort_key} = :sort_attribute AND created_at < :created_at OR
+                   #{sort_key} = :sort_attribute AND created_at = :created_at AND id < :id
                  """,
                  sort_attribute: sort_attribute,
-                 created_at: more_id_entry.created_at
+                 created_at: more_id_entry.created_at,
+                 id: more_id_entry.id
                 )
       else
         collection

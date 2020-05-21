@@ -55,6 +55,7 @@ import BtnSubmit from 'components/btn-submit'
 import ProjectTickets from 'projects/tickets'
 import BoardListNew from 'board_lists/new'
 import BoardListEdit from 'board_lists/edit'
+import 'vue-select/dist/vue-select.css'
 
 require('../config')
 

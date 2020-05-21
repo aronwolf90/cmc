@@ -23,12 +23,12 @@ Scenario: Edit project project board list
   Then the page contain the text "Changed"
   And the page does not contain the text "In contact"
 
-  @javascript
-  Scenario: Destroy project board list
-    Given a test-organization exists
-    And I am signed in (multitenant)
-    When I click on link "Projects"
-    And I click on aside link "New"
-    And I click on "#column-3 .card-header .fa-edit"
-    And I click on button "Destroy"
-    Then the page does not contain the element "#column-3"
+@javascript
+Scenario: Destroy project board list
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Projects"
+  And I click on aside link "New"
+  And I click on "#column-3 .card-header .fa-edit"
+  And I click on button "Destroy"
+  Then the page does not contain the element "#column-3"

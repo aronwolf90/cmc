@@ -617,7 +617,66 @@ Scenario: GET /api/v1/board_lists/<id>/issues
         }
       ],
       "links": {
-        "next": "/api/v1/board_lists/1/issues?more_id=16"
+        "next": "/api/v1/project_board_lists/1/projects?more_id=16"
+      }
+    }
+    """
+
+@javascript
+Scenario: GET /api/v1/board_lists/<id>/issues
+  Given a test-organization exists and is loaded
+  And I set headers:
+   | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
+   | Content-Type | application/vnd.api+json |
+  When I send a GET request to "/api/v1/project_board_lists/1/projects?more_id=16"
+  Then the response status should be "200"
+  And the JSON response should be:
+    """
+    { 
+      "data": [ 
+        { 
+          "id": "17", 
+          "type": "projects", 
+          "attributes": { 
+            "name": "Test project 17", 
+            "description": "Test description" 
+          },
+          "relationships": {
+            "project-status": {
+              "data": {
+                "id": "1",
+                "type": "project-statuses"
+              }
+            },
+            "main-responsable": {
+              "data": null
+            },
+            "folder": {
+              "data": {
+                "id": "19",
+                "type": "folders"
+              },
+              "links": {
+                "self": "/api/v1/folders/19"
+              }
+            },
+            "contact": {
+              "data": null
+            }
+          },
+          "links": {
+            "self": "/api/v1/projects/17"
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
+        }
+      ],
+      "links": {
+        "next": null
       }
     }
     """

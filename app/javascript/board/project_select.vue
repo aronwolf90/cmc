@@ -1,30 +1,37 @@
 <template lang='pug'>
-  #complexity(v-if='projects && currentUser')
-    b-form-select(
+  #project-select(v-if='projects && currentUser')
+    v-select(
       v-model='selected',
       :options='options',
-      size="sm",
-      id="project-select"
+      @search="fetchOptions"
     )
 </template>
 
 <script>
 import { Utils } from 'vuex-jsonapi-client'
+import VSelect from 'vue-select'
 
 export default {
+  components: {
+    VSelect
+  },
   created () {
-    this.$store.dispatch('initProjects')
-    this.$store.dispatch('initCurrentUser')
+    this.$store.dispatch('getProjects')
+    this.$store.dispatch('initCurrentUser').then(() => {
+      const currentUser = this.$store.getters.currentUser
+      const project = Utils.relationship(this.currentUser, 'selected-project')
+      this.$store.dispatch('getProject', project.id)
+    })
   },
   computed: {
     options () {
       let firstEntry = []
       if (Utils.attribute(this.context, 'global-board')) {
-        firstEntry = [{ value: null, text: 'All' }]
+        firstEntry = [{ code: '', label: 'All' }]
       }
       return firstEntry.concat((this.projects || [])
       .map(project => {
-        return { value: project.id, text: project.attributes.name }
+        return { code: project.id, label: project.attributes.name }
       }))
     },
     context () {
@@ -37,44 +44,36 @@ export default {
       return this.$store.getters.currentUser
     },
     selectedProject () {
-      return Utils.relationship(this.currentUser, 'selected-project')
+      return this.$store.getters.relationship({
+        entry: this.currentUser,
+        name: 'selected-project'
+      })
     },
     selected: {
       get () {
         if (this.selectedProject) {
-          this.selectedChanged(this.selectedProject.id)
-          return this.selectedProject.id
+          return {
+            code: this.selectedProject.id,
+            label: Utils.attribute(this.selectedProject, 'name')
+          }
         }
-        this.selectedChanged(null)
-        return null
+        return { code: '', label: 'All'}
       },
       set (value) {
         this.$store.dispatch('updateUser', {
           entry: this.currentUser,
           selectedProject: this.$store.getters.entry({
-            id: value, type: 'projects' }) || null
+            id: value.code, type: 'projects' }) || null
         }).then(() => this.$store.dispatch('board/getBoardLists'))
       }
     }
   },
   methods: {
-    /*
-    * HACK: when click and return to this page turbolinks not preserve
-    * the selected option so a few milliseconds appear wrong option. This
-    * hack sole this
-    */
-    selectedChanged (value) {
-      setTimeout(() => {
-        let option = null
-        if (value) {
-          option = document.querySelectorAll(`#complexity option[value="${value}"]`)
-        }
-        else {
-          option = document.querySelectorAll('#complexity option')
-        }
-
-        if (option.length) option[0].setAttribute('selected', true)
-      }, 10)
+    fetchOptions (search, loading) {
+      loading(true)
+      this.$store.dispatch('searchProject', search).then(() => {
+        loading(false)
+      })
     }
   }
 }

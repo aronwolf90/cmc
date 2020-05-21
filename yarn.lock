@@ -11144,6 +11144,11 @@ vue-search-select@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/vue-search-select/-/vue-search-select-2.4.0.tgz#de5d0c84f5d1818261ad9bf82fd53e5e726199ab"
 
+vue-select@^3.10.3:
+  version "3.10.3"
+  resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-3.10.3.tgz#60659dc07ec4c96ec270fb12558eab7b938f5004"
+  integrity sha512-SgLmiSwnJwT2erxjq42AA1iTzu1uqhA5MPuF4UDtGot5YSgJLKy71H0LO0hHaBpIjb7d/nJHiufYKcrSakaupw==
+
 vue-store@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/vue-store/-/vue-store-0.3.1.tgz#9d046ca4991bfd686f2697c6ac6c29b7f7917fd0"
