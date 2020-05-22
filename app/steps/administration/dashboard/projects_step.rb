@@ -2,11 +2,11 @@
 
 module Administration::Dashboard
   class ProjectsStep < ApplicationStep
-    def self.call(options, current_user:, **)
+    def self.call(options, current_user:, params:,**)
       init(options)
 
-      options["model"][:projects] =
-        Project.all.map do |project|
+      projects =
+        Project.ordered.page(params[:project_page] || 1).per(5).map do |project|
           [
             project,
             total_spent_time(current_user, project),
@@ -14,6 +14,10 @@ module Administration::Dashboard
             last_month_spent_time(current_user, project)
           ]
         end
+      options["model"][:projects] = 
+        Kaminari.paginate_array(projects, total_count: Project.count)
+        .page(params[:project_page] || 1)
+        .per(5)
     end
 
     def self.init(options)

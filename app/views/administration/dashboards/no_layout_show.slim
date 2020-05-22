@@ -17,6 +17,10 @@
                   td = seconds_to_time(total_spent_time)
                   td = seconds_to_time(month_spent_time)
                   td = seconds_to_time(last_month_spent_time)
+      .card-footer
+        .pull-right
+          = paginate(@model[:projects],
+            param_name: :project_page)
 
   .col-lg-6
     br.d-lg-none
