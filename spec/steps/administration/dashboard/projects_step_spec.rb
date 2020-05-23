@@ -25,7 +25,9 @@ RSpec.describe Administration::Dashboard::ProjectsStep do
       .to receive(:call).with([record]).and_return(3600.seconds)
     allow(SqlSpendedTimeCalculator)
       .to receive(:call).with([]).and_return(0.seconds)
-    allow(Project).to receive(:all).and_return([project])
+    allow(Project).to receive(:ordered)
+      .and_return(Kaminari.paginate_array([project], total_count: 1))
+    allow(Project).to receive(:count).and_return(1)
     subject
   end
 

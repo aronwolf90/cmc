@@ -5,7 +5,7 @@
     :label-for="id"
   )
     b-form-input(
-      id="input-name",
+      :id="id",
       :value="value",
       :state="errorStatus(errorPath)",
       type="text",

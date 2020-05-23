@@ -21,9 +21,10 @@ export default {
     })
   },
   getSelectedProject (context) {
-    context.dispatch('initCurrentUser').then(() => {
+    return context.dispatch('initCurrentUser').then(() => {
       let currentUser = context.getters.currentUser
       let project = currentUser.relationships['selected-project'].data
+      if (!project) return Promise.resolve({ data: null })
       if (context.getters.project(project.id)) {
         return Promise.resolve({ data: context.getters.project(project.id) })
       }

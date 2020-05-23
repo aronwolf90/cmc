@@ -1,21 +1,17 @@
 <template lang='pug'>
   b-form(@submit="submit")
-    b-form-group(
-      id="input-group-title",
+    text-input(
+      id="input-title",
+      :errors="errors",
+      v-model="form.attributes.title",
       label="Title",
-      label-for="input-title"
+      error-path="attributes/title"
     )
-      b-form-input(
-        id="input-title",
-        v-model="form.attributes.title",
-        :state="errorStatus('attributes/title')",
-        type="text"
-      )
-      b-form-invalid-feedback(
-        v-for="error in findErrors('attributes/title')",
-        :state="errorStatus('attributes/title')"
-      )
-        | {{ error.detail }}
+    project-select(
+      v-model="form.relationships.project.data",
+      v-if="isGlobalBoard"
+    )
+    br
     markdown-editor(v-model='form.attributes.description')
     br
     b-button(type="submit", variant="success") Create issue
@@ -23,11 +19,15 @@
 </template>
 
 <script>
+import { Utils } from 'vuex-jsonapi-client'
 import MarkdownEditor from 'markdown_editor'
+import TextInput from 'components/form-inputs/text'
+import ProjectSelect from 'components/project-select'
 
 export default {
   components: {
-    MarkdownEditor
+    TextInput,
+    ProjectSelect
   },
   props: ['boardListId'],
   data () {
@@ -36,6 +36,11 @@ export default {
         attributes: {
           title: null,
           description: null
+        },
+        relationships: {
+          project: {
+            data: null
+          }
         }
       },
       errors: []
@@ -50,15 +55,23 @@ export default {
     },
     selectedProject () {
       return this.$store.getters.selectedProject
+    },
+    isGlobalBoard () {
+      return Utils.attribute(this.$store.getters.context, 'global-board')
     }
   },
   methods: {
     fetch () {
       this.$store.dispatch('getBoardList', this.boardListId)
-      this.$store.dispatch('getSelectedProject')
+      this.$store.dispatch('getProjects')
+      this.$store.dispatch('getContext')
+      this.$store.dispatch('getSelectedProject').then(() => {
+        this.form.relationships.project.data = Utils.entryToRef(this.selectedProject)
+      })
     },
     submit (event) {
       event.preventDefault()
+      const project = this.form.relationships.project.data
 
       const payload = {
         attributes: this.form.attributes,
@@ -67,7 +80,7 @@ export default {
             data: this.boardList
           },
           'project': {
-            data: this.selectedProject
+            data: project
           }
         }
       }

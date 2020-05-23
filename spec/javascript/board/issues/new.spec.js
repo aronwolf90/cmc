@@ -45,6 +45,7 @@ describe('New', () => {
           }
         },
         actions: {
+          getSelectedProject () {},
           createIssue (_, { attributes, relationships }) {
             expect(attributes).to.eql({
               title: 'title',
@@ -62,6 +63,7 @@ describe('New', () => {
       localVue,
       attachToDocument: true
     })
+    console.log(wrapper.html())
     console.log(wrapper.html())
     wrapper.find('#input-title').element.value = 'title'
     wrapper.find('#input-title').trigger('input')
@@ -97,6 +99,7 @@ describe('New', () => {
           }
         },
         actions: {
+          getSelectedProject () {},
           createIssue (_, { attributes }) {
             return Promise.resolve()
           }
@@ -135,6 +138,7 @@ describe('New', () => {
           }
         },
         actions: {
+          getSelectedProject () {},
           createIssue ({ attributes }) {
             return Promise.reject({
               status: 'fail',
