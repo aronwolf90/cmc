@@ -7,8 +7,7 @@
       :errors="errors",
       error-path="attributes/name"
     )
-    form-select(
-      id="input-project",
+    project-select(
       v-model="value.relationships.project.data",
       label="Project",
       :errors="errors",
@@ -22,13 +21,13 @@
 <script>
 import { Utils } from 'vuex-jsonapi-client'
 import FormTextInput from 'components/form-inputs/text'
-import FormSelect from 'components/form-inputs/select'
+import ProjectSelect from 'components/project-select'
 
 export default {
   props: ['errors', 'value', 'projectRefs'],
   components: {
     FormTextInput,
-    FormSelect
+    ProjectSelect
   },
   computed: {
     projects () {
