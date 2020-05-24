@@ -5,7 +5,9 @@
     @search="fetchOptions",
     :value="(value || {}).id",
     :options="options",
-    id="project-select"
+    id="project-select",
+    :errors="errors",
+    :error-path="errorPath"
   )
 </template>
 
@@ -23,6 +25,14 @@ export default {
       default: null
     },
     label: {
+      type: String,
+      default: ''
+    },
+    errors: {
+      type: Array,
+      default: []
+    },
+    errorPath: {
       type: String,
       default: ''
     }

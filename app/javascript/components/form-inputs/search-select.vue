@@ -3,22 +3,33 @@
     b-form-group(
       :id="`input-group-${id}`",
       :label="label",
-      v-if="label"
+      v-if="label",
+      v-bind:class="{ error: errorStatus == false }"
     )
       v-select(
         @input='input',
         :value='currentValue',
         :options='selectOptions',
         @search="search",
-        :id="id"
+        :id="id",
       )
-    v-select(
-      @input="input",
-      :value="currentValue",
-      :options='selectOptions',
-      @search="search",
-      v-else=""
-    )
+      b-form-invalid-feedback(
+        v-for="error in selectedErrors",
+        :state="errorStatus"
+      )
+        | {{ error.detail }}
+    template(v-else="")
+      v-select(
+        @input="input",
+        :value="currentValue",
+        :options='selectOptions',
+        @search="search",
+      )
+      b-form-invalid-feedback(
+        v-for="error in selectedErrors",
+        :state="errorStatus"
+      )
+          | {{ error.detail }}
 </template>
 
 <script>
@@ -41,6 +52,14 @@ export default {
     id: {
       type: String,
       default: String
+    },
+    errors: {
+      type: Array,
+      default: []
+    },
+    errorPath: {
+      type: String,
+      default: ''
     }
   },
   components: {
@@ -59,6 +78,17 @@ export default {
           label: option.text
         }
       })
+    },
+    selectedErrors () {
+      return this.errors.filter(error => {
+        return error.source.pointer.includes(this.errorPath)
+      })
+      .filter((error, index, self) => {
+        return self.findIndex(value => value.detail == error.detail) === index;
+      })
+    },
+    errorStatus () {
+      return this.selectedErrors.length == 0 ? null: false
     }
   },
   methods: {
@@ -71,3 +101,9 @@ export default {
   }
 }
 </script>
+
+<style lang='sass'>
+  .error
+    .vs__dropdown-toggle
+      border: 1px solid red
+</style>

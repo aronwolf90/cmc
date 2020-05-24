@@ -23,6 +23,22 @@ Scenario: Create Issue on global board
   Then the page contain the text "issue name"
 
 @javascript
+Scenario: Create Issue on global board when all is selected
+  Given a test-organization exists with global board lists
+  And I am signed in (multitenant)
+  When I click on link "Issues"
+  And I click on "#project-select" 
+  And I click on "[role='option']" with "All"
+  And I click on ".issues-board-body .fa-plus"
+  And I enter "issue name" into input named "Title"
+  And I click on "#project-select" 
+  And I click on "[role='option']" with "Test project 2"
+  When I click on submit
+  Then the page contain the text "issue name"
+  When I reload the page
+  Then the page contain the text "issue name"
+
+@javascript
 Scenario: Show issue
   Given a test-organization exists
   And I am signed in (multitenant)

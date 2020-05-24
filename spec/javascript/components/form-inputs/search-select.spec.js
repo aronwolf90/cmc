@@ -48,4 +48,27 @@ describe('DetailsStringInput', () => {
 
     expect(wrapper.html()).to.include('Test')
   })
+
+  it('renders error', (done) => {
+    const propsData = {
+      label: 'Project',
+      errorPath: '/data/attributes/description',
+      errors: [{
+        source: {
+          pointer: '/data/attributes/description'
+        },
+        detail: 'Test'
+      }]
+    }
+    const wrapper = factory(propsData)
+
+    wrapper.vm.$nextTick(() => {
+      wrapper.vm.$nextTick(() => {
+        wrapper.vm.$nextTick(() => {
+          expect(wrapper.html()).to.include('Test')
+          done()
+        })
+      })
+    })
+  })
 })

@@ -8,8 +8,11 @@
       error-path="attributes/title"
     )
     project-select(
+      label="Project",
       v-model="form.relationships.project.data",
-      v-if="isGlobalBoard"
+      v-if="isGlobalBoard",
+      :errors="errors",
+      error-path="relationships/project"
     )
     br
     markdown-editor(v-model='form.attributes.description')
@@ -83,6 +86,10 @@ export default {
             data: project
           }
         }
+      }
+
+      if (!payload.relationships.project.data) {
+        delete payload.relationships.project
       }
  
       this.$store.dispatch('createIssue', payload).then(() => {
