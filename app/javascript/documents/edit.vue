@@ -9,7 +9,9 @@
       :errors="errors"
     )
       b-button(type="submit", variant="success") Update document
-      a.btn.btn-secondary.pull-right(href='/administration/archive') Cancel
+      b-button-group.pull-right
+        b-button.pull-right(variant="danger", @click="destroy") Destroy
+        b-button(to='/administration/archive') Cancel
 </template>
 
 <script>
@@ -34,10 +36,15 @@ export default {
         entry: this.document,
         payload
       }).then(() => {
-        location.replace(`/administration/archive`)
+        this.$router.push('/administration/archive')
       })
       .catch(({ status, data }) => {
         this.errors = data.errors
+      })
+    },
+    destroy () {
+      return this.$store.dispatch('destroy', this.document).then(result => {
+        this.$router.push('/administration/archive')
       })
     }
   },

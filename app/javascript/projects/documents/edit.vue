@@ -7,7 +7,9 @@
       :errors="errors"
     )
       b-button(type="submit", variant="success") Update document
-      b-button.pull-right(variant="secondary", :to="cancelPath") Cancel
+      b-button-group.pull-right
+        b-button.pull-right(variant="danger", @click="destroy") Destroy
+        b-button.pull-right(variant="secondary", :to="cancelPath") Cancel
 </template>
 
 <script>
@@ -49,6 +51,11 @@ export default {
       return this.$store.dispatch('getDocument', this.id).then(result => {
         this.form.attributes.name = Utils.attribute(result.data, 'name')
         this.show = true
+      })
+    },
+    destroy () {
+      return this.$store.dispatch('destroy', this.document).then(result => {
+        this.$router.push('..')
       })
     }
   },

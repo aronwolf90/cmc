@@ -21,7 +21,7 @@ export default {
     onSubmit (payload) {
       this.$store.dispatch('createDocument', payload)
       .then(() => {
-        location.replace('/administration/archive')
+        this.$router.push('/administration/archive')
       })
       .catch(({ status, data }) => {
         this.errors = data.errors
