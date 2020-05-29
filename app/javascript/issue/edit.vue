@@ -58,7 +58,7 @@ export default {
         attributes: this.form.attributes
       }).then(() => {
         this.isSaving = false
-        this.$router.replace('/')
+        this.$router.replace('.')
       })
     },
     setDescription (data) {
