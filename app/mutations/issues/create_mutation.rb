@@ -17,14 +17,18 @@ module Issues
         model.ordinal_number = 0
         model.global_ordinal_number = 0
 
-        model.board_list&.issues&.ordered.to_a.each_with_index do |issue, index|
-          issue.update!(ordinal_number: (issue.ordinal_number || index) + 1)
-        end
-        model.global_board_list&.issues&.ordered.to_a.each_with_index do |issue, index|
-          issue.update!(global_ordinal_number: (issue.ordinal_number || index) + 1)
-        end
-
         model.save!
+
+        SortMutation.call(
+          model.board_list&.issues&.reorder(ordinal_number: :asc, id: :desc),
+          sort_key: :ordinal_number,
+          model: model
+        )
+        SortMutation.call(
+          model.global_board_list&.issues&.reorder(global_ordinal_number: :asc, id: :desc),
+          sort_key: :global_ordinal_number,
+          model: model
+        )
       end
     end
 
