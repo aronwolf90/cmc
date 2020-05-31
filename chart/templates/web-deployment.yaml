@@ -51,15 +51,30 @@ spec:
             - name: HOST
               value: '{{ .Values.url }}'
             - name: MAILER_SMTP_DOMAIN 
-              value: '{{ .Values.mailer.smtp_domain }}'
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-mailer
+                  key: smtpDomain
             - name: MAILER_DOMAIN 
-              value: '{{ .Values.mailer.domain }}'
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-mailer
+                  key: domain
             - name: MAILER_USER_NAME
-              value: '{{ .Values.mailer.user_name }}'
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-mailer
+                  key: userName
             - name: MAILER_PASSWORD
-              value: '{{ .Values.mailer.password }}' 
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-mailer
+                  key: password
             - name: MAILER_PORT
-              value: '{{ .Values.mailer.port }}'
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-mailer
+                  key: port
             - name: PAYMENT_ENABLED
               value: '{{ .Values.payment.enabled }}'
             - name: REDIS_URL

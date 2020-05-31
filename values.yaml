@@ -35,5 +35,5 @@ mailer:
   smtp_domain: smtp.migadu.com 
   domain: ticktensio.com 
   user_name: info@ticktensio.com
-  port: 587
-  password:
+  port: "587"
+  password: ""

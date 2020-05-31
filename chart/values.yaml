@@ -11,6 +11,9 @@ postgresql:
   postgresqlUsername: postgres
   postgresqlDatabase: database
   postgresqlPassword: repl_password
+  extraEnv: []
+  image:
+    tag: 10.6.0
 redis:
   usePassword: false
   cluster:
@@ -44,10 +47,12 @@ ingress:
   #     hosts:
   #     - chart-example.local
 mailer:
-  smtp_domain: 
-  domain: 
-  user_name:
-  password:
+  createSecret: true
+  smtp_domain: ""
+  domain: ""
+  user_name: ""
+  password: ""
+  port: ""
 payment:
   enabled: false
   host: https://example.com
