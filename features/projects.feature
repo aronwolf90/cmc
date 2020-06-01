@@ -8,7 +8,8 @@ Scenario: Create project
   And I click on link "New project"
   And I enter "project title" into input named "Name"
   And I click on submit
-  And I click on "[aria-label='Go to last page']"
+  Then the element "#side-body" contain the text "Test project 2"
+  When I click on "[aria-label='Go to last page']"
   Then the element "#side-body" contain the text "project title"
 
 @javascript

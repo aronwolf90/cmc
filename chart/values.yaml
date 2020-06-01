@@ -11,9 +11,6 @@ postgresql:
   postgresqlUsername: postgres
   postgresqlDatabase: database
   postgresqlPassword: repl_password
-  extraEnv: []
-  image:
-    tag: 10.6.0
 redis:
   usePassword: false
   cluster:
