@@ -125,6 +125,7 @@ Rails.application.routes.draw do
           resources :projects, only: :index
         end
       end
+      resource :health_check, only: :show
     end
   end
 end

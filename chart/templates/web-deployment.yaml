@@ -20,7 +20,9 @@ spec:
         - name: web
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           ports:
-            - containerPort: 3000
+            - name: http
+              containerPort: 3000
+              protocol: TCP
           env:
             - name: DATABASE_URL
               value: 'postgres://{{ .Values.postgresql.postgresqlUsername }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
@@ -96,6 +98,14 @@ spec:
                   - sh
                   - -c
                   - "cp -r /app/public/* /assets"
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health_check
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health_check
+              port: http
 
         - image: nginx:1.14-alpine
           name: nginx

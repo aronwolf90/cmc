@@ -4,6 +4,7 @@ stages:
   - build
   - test
   - deploy
+  - test_production
   - tag_latest
 
 variables:
@@ -127,19 +128,6 @@ deploy:
   only:
     - master
 
-tag_latest:
-  stage: tag_latest
-  image: docker:latest
-  services:
-    - docker:dind
-  script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker pull $CONTAINER_RELEASE_IMAGE
-    - docker tag $CONTAINER_RELEASE_IMAGE $CI_REGISTRY_IMAGE:latest
-    - docker push $CI_REGISTRY_IMAGE:latest
-  only:
-    - master
-
 pages:
   stage: deploy
   image: alpine:latest
@@ -159,3 +147,28 @@ pages:
     - schedules
   except:
     - schedules
+
+test_production:
+  stage: test_production
+  services:
+    - name: selenium/standalone-chrome-debug
+      alias: selenium
+  variables:
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
+  script:
+    - cd /app
+    - bin/production_tests.rb
+
+tag_latest:
+  stage: tag_latest
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker pull $CONTAINER_RELEASE_IMAGE
+    - docker tag $CONTAINER_RELEASE_IMAGE $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
+  only:
+    - master
