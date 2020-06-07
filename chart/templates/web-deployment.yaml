@@ -103,10 +103,10 @@ spec:
               path: /api/v1/health_check
               port: http
           readinessProbe:
+            failureThreshold: 6
             httpGet:
               path: /api/v1/health_check
               port: http
-
         - image: nginx:1.14-alpine
           name: nginx
           ports:
