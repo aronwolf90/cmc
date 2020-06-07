@@ -103,14 +103,14 @@ cucumber:
 deploy:
   stage: deploy
   image: aronwolf/helm-doctl
-  allow_failure: true
   variables:
     GIT_STRATEGY: clone
   environment:
     name: production
-    url: http://cost-manager.com
+    url: https://ticktensio.com
   script:
     - doctl kubernetes cluster kubeconfig save webcloudpower
+    - velero backup create ticktensio-$CI_COMMIT_SHA --include-namespaces cmc-production
     - helm init --upgrade
     - kubectl delete jobs -n cmc-production --all
     - helm upgrade cmc-production chart --install --wait --force

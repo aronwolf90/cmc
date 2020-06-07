@@ -9,7 +9,7 @@ Scenario: create board list
   And I enter "board list name" into input named "Name"
   And I click on submit
   Then the page contain the text "board list name"
-  And I reload the page
+  When I reload the page
   Then the page contain the text "board list name"
 
 @javascript
@@ -20,7 +20,8 @@ Scenario: edit board list
   And I click on ".column:first-of-type .fa-edit"
   And I enter "new board list name" into input named "Name"
   And I click on submit
-  And I reload the page
+  Then the page contain the text "new board list name"
+  When I reload the page
   Then the page contain the text "new board list name"
 
 @javascript
