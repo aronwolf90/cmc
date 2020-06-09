@@ -19,7 +19,7 @@ module Api
               collection,
               more_id: more_id,
               per_page: per_page,
-              sort_key: :ordinal_number
+              sort_key: Organization.global_board? ? :global_ordinal_number : :ordinal_number
             )
           end
 
