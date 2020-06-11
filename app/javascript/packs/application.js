@@ -454,7 +454,7 @@ document.addEventListener('turbolinks:load', () => {
     if (to.path !== from.path && from.path !== '/') {
       store.commit('setPrevPath', from.path)
     }
-    toggleAsideExpanded() /* eslint-disable-line no-undef */
+    toggleAsideExpanded(false) /* eslint-disable-line no-undef */
     $('.navbar-collapse').collapse('hide') /* eslint-disable-line no-undef */
     next()
   })
