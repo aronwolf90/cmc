@@ -1,5 +1,5 @@
 <template lang='pug'>
-  span.projects-left-aside
+  left-aside-container.projects-left-aside
     left-aside-item(path="/administration")
       | Dashboard
     left-aside-item(path="/administration/records")
@@ -13,11 +13,13 @@
 </template>
 
 <script>
+import LeftAsideContainer from 'components/left-aside-container'
 import LeftAsideItem from 'components/left-aside-item'
 
 export default {
   components: {
-    LeftAsideItem,
+    LeftAsideContainer,
+    LeftAsideItem
   }
 }
 </script>

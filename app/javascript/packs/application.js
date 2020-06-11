@@ -454,6 +454,8 @@ document.addEventListener('turbolinks:load', () => {
     if (to.path !== from.path && from.path !== '/') {
       store.commit('setPrevPath', from.path)
     }
+    toggleAsideExpanded() /* eslint-disable-line no-undef */
+    $('.navbar-collapse').collapse('hide') /* eslint-disable-line no-undef */
     next()
   })
   var app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */

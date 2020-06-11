@@ -7,6 +7,14 @@
 //= require moment
 //= require bootstrap-datetimepicker
 
+var toggleAsideExpanded = function () {
+  const sideMenu = document.getElementsByClassName('side-menu')
+  sideMenu[0].classList.toggle('expanded')
+  window.leftAsideExpanded = !window.leftAsideExpanded
+  document.querySelector('#side-toggle-btn > .fa').classList.toggle('fa-angle-right')
+  document.querySelector('#side-toggle-btn > .fa').classList.toggle('fa-angle-left')
+}
+
 this.jqueryFuncs = () => {
   $('.datetimepicker').datetimepicker({
     sideBySide: true,
@@ -25,14 +33,14 @@ this.jqueryFuncs = () => {
   });
   $('.modal-content').click(event => event.stopPropagation());                                                     
 
-  return document.getElementById("side-toggle-btn").addEventListener("click", () => {
-    const sideMenu = document.getElementsByClassName("side-menu");
-    sideMenu[0].classList.toggle("expanded");
-    document.querySelector("#side-toggle-btn > .fa").classList.toggle("fa-angle-right");                           
-    return document.querySelector("#side-toggle-btn > .fa").classList.toggle("fa-angle-left");
-  });
-};
-  
+  if (document.getElementById('side-toggle-btn').binded) return
+  document.getElementById('side-toggle-btn').binded = true
+
+  document.getElementById('side-toggle-btn').addEventListener('click', (event) => {
+    toggleAsideExpanded()
+  })
+}
+
 jQuery.extend(true, jQuery.fn.datetimepicker.defaults, {                                                           
   icons: {
     time:     'fa fa-clock',
