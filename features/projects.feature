@@ -16,7 +16,7 @@ Scenario: Create project
 Scenario: Update project
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on ".fa-edit"
   And I enter "project title new" into input named "name-input"
   And I click on submit
@@ -26,14 +26,14 @@ Scenario: Update project
 Scenario: Show project
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project 2"
 
 @javascript
 Scenario: Comment
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project 2"
   When I replace the text "test comment" from the markdown editor ".comments .markdown-editor"
   And I click on ".comments .btn"
@@ -45,7 +45,7 @@ Scenario: Comment
 Scenario: Edit contact inputs
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on "#contact-name .fa-edit"
   And I enter "New name" into input named "contact-name-input"
@@ -65,7 +65,7 @@ Scenario: Edit contact inputs
 Scenario: Change main responsable
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on "#main-responsable .text"
   Then the element "#main-responsable .text" does not contain the text "user2"
@@ -79,7 +79,7 @@ Scenario: Change main responsable
 Scenario: Change main responsable
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on ".reminder-list .fa-plus"
   And I enter "New reminder" into input named "Title"
@@ -95,7 +95,7 @@ Scenario: Change main responsable
 Scenario: Change project status
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on "#project-status-select .text"
   Then the element "#project-status-select .text" does not contain the text "Active"
@@ -109,6 +109,6 @@ Scenario: Change project status
 Scenario: Paggination
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on "[aria-label='Go to page 2']"
   Then the page contain the text "Test project 11"

@@ -17,6 +17,7 @@
       tbody
         project-index-item(
           v-for="project in projects",
+          :key="project.id"
           :project-id="project.id",
           :project-type="project.type"
         )
@@ -43,25 +44,36 @@ export default {
   },
   data () {
     return {
-      page: 1
+      count: 1,
+      page: 1,
+      projectRefs: []
     }
   },
-  asyncComputed: {
-    result: {
-      get () {
-        return this.$store.dispatch('getProjects', this.page)
-      },
-      watch: ['page']
-    }
+  beforeRouteEnter (to, from, next) {
+    window.store.dispatch('getProjects', to.query.page).then(result => {
+      next(vm => {
+        vm.count = result.meta.count
+        vm.page = to.query.page || 1
+        vm.projectRefs = Utils.entryArrayToRef(result.data)
+      })
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    window.store.dispatch('getProjects', to.query.page).then(result => {
+      this.count = result.meta.count
+      this.page = to.query.page || 1
+      this.projectRefs = Utils.entryArrayToRef(result.data)
+      next()
+    })
   },
   computed: {
-    projects () {
-      if (!this.result) return []
-      return this.result.data
-    },
     pages () {
-      if (!this.result) return 1
-      return Math.ceil(this.result.meta.count/10)
+      return Math.ceil(this.count/10)
+    },
+    projects () {
+      return this.projectRefs.map(ref => {
+        return this.$store.getters.entry(ref)
+      })
     }
   },
   methods: {

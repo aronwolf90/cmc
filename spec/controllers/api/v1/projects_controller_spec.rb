@@ -6,6 +6,11 @@ require_relative "./shared_examples/standart_actions"
 RSpec.describe Api::V1::ProjectsController, type: :controller do
   let(:model) { Project.new(id: 1) }
 
+  before do
+    allow(Api::V1::Projects::IndexQuery).to receive(:call)
+      .and_return(Kaminari.paginate_array([model]))
+  end
+
   include_examples "standard api show action"
   include_examples "standard api index action"
   include_examples "standard api create action",

@@ -137,6 +137,12 @@ When(/^I click on aside link "([^\"]*)"$/) do |text|
   find(".nav a", text: text, match: :prefer_exact).click
 end
 
+When(/^I click on navbar link "([^\"]*)"$/) do |text|
+  expect(page).to have_text text
+  find("nav.fixed-top a", text: text, match: :prefer_exact).click
+  expect(page).to have_css("nav.fixed-top a.active", text: text)
+end
+
 When(/^I click on button "([^\"]*)"$/) do |text|
   expect(page).to have_text text
   find("button", text: text, match: :prefer_exact).click

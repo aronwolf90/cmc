@@ -8,5 +8,9 @@ module Api::V1
     namespace Projects
 
     public :index, :show, :create, :update, :destroy
+
+    private def query
+      Api::V1::Projects::IndexQuery.call(query: params[:query])
+    end
   end
 end
