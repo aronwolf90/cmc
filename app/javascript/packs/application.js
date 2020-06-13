@@ -80,7 +80,6 @@ Vue.component('contact-edit', ContactEdit)
 Vue.component('document-new', DocumentNew)
 Vue.component('document-edit', DocumentEdit)
 Vue.component('payment', AdminPayment)
-Vue.component('user-new', UserNew)
 Vue.component('user-configuration-edit', UserConfigurationEdit)
 Vue.component('notification-bell', NotificationBell)
 Vue.component('context-edit', ContextEdit)
@@ -388,6 +387,12 @@ document.addEventListener('turbolinks:load', () => {
       {
         path: '/administration/users',
         component: UserIndex,
+        props: true,
+        meta: { aside: 'users' }
+      },
+      {
+        path: '/administration/users/new',
+        component: UserNew,
         props: true,
         meta: { aside: 'users' }
       },
