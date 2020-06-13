@@ -48,7 +48,7 @@ class RegistrationForm < ApplicationForm
   end
 
   def not_allowed_name
-    return unless name.in?(Settings.organization_blacklist) 
+    return unless name.in?(Settings.organization_blacklist)
 
     errors.add(:name, "Use a different name")
   end

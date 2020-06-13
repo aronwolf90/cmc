@@ -47,7 +47,7 @@ describe RegistrationForm do
   context "organization name is in a blacklist" do
     before { allow(Settings).to receive(:organization_blacklist).and_return %w[about] }
 
-    let(:invalid_params) { valid_params.merge(name: 'about' ) }
+    let(:invalid_params) { valid_params.merge(name: "about") }
 
     specify do
       expect(subject.validate(invalid_params)).to be false
