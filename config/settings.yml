@@ -11,3 +11,6 @@ payment:
     "Authorization": Basic YWRtaW46dGVzdHRlc3Q=
     "Content-Type": application/json
 redis_url: <%= ENV["REDIS_URL"]  %>
+organization_blacklist:
+  - about
+  - payment 

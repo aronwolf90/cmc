@@ -27,6 +27,7 @@ class RegistrationForm < ApplicationForm
   validate :same_password
   validate :password_length
   validate :uniq_organization_name
+  validate :not_allowed_name
 
   def same_password
     return if confirmation_password == password
@@ -43,6 +44,12 @@ class RegistrationForm < ApplicationForm
   def uniq_organization_name
     return unless Organization.exists?(name: name)
 
-    errors.add(:password, "Organization is not uniq")
+    errors.add(:name, "Organization is not uniq")
+  end
+
+  def not_allowed_name
+    return unless name.in?(Settings.organization_blacklist) 
+
+    errors.add(:name, "Use a different name")
   end
 end
