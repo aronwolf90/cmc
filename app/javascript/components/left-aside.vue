@@ -9,7 +9,7 @@
     left-aside-item(path="/administration/attendances")
       | Attendances
     left-aside-item(path="/administration/board_lists")
-      | Issues
+      | Tickets
 </template>
 
 <script>

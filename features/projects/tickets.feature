@@ -4,7 +4,7 @@ Feature: Board lists
 Scenario: create board list
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Tickets"
   And I click on link "add list"
@@ -19,7 +19,7 @@ Scenario: create board list
 Scenario: edit board list
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Tickets"
   And I click on ".column:first-of-type .fa-edit"
@@ -34,7 +34,7 @@ Scenario: edit board list
 Scenario: change board lists order
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Tickets"
   And I drag "#column-4 > .card-header" to "#column-6 > .card-header"
@@ -47,7 +47,7 @@ Scenario: change board lists order
 Scenario: change issues order
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Tickets"
   And I drag "#list-issue-4" to "#list-issue-1"
@@ -60,7 +60,7 @@ Scenario: change issues order
 Scenario: move issue to other board
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Tickets"
   Then the element "#side-body" contain the text "Backlog"
@@ -74,7 +74,7 @@ Scenario: move issue to other board
 Scenario: Show ticket
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Tickets"
   And I click on body link "Test issue 1"
@@ -85,7 +85,7 @@ Scenario: Show ticket
 Scenario: Create Issue
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Tickets"
   And I click on ".issues-board-body .fa-plus"

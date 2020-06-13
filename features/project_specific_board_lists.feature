@@ -4,7 +4,7 @@ Feature: Board lists
 Scenario: create board list
   Given a test-organization exists
   And I am signed in (multitenant)
-  And I click on link "Issues"
+  And I click on link "Tickets"
   And I click on ".fa-plus"
   And I enter "board list name" into input named "Name"
   And I click on submit
@@ -16,7 +16,7 @@ Scenario: create board list
 Scenario: edit board list
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Issues"
+  When I click on link "Tickets"
   And I click on ".column:first-of-type .fa-edit"
   And I enter "new board list name" into input named "Name"
   And I click on submit
@@ -27,7 +27,7 @@ Scenario: edit board list
 Scenario: change board lists order
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Issues"
+  When I click on link "Tickets"
   Then the page contain the text "Test project"
   When I drag "#column-4 > .card-header" to "#column-6 > .card-header"
   Then the element ".column:last-of-type" contain the text "Backlog"
@@ -38,7 +38,7 @@ Scenario: change board lists order
 Scenario: change issues order
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Issues"
+  When I click on link "Tickets"
   Then the page contain the text "Test project"
   When I drag "#list-issue-4" to "#list-issue-1"
   Then the element "#column-4 .list-issue:last-of-type" contain the text "Test issue 4"
@@ -49,7 +49,7 @@ Scenario: change issues order
 Scenario: move issue to other board
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Issues"
+  When I click on link "Tickets"
   Then the element "#side-body" contain the text "Backlog"
   And the page contain the text "Test project"
   When I drag "#list-issue-4" to "#list-issue-5"
@@ -61,7 +61,7 @@ Scenario: move issue to other board
 Scenario: change selected project
   Given a test-organization exists with global board lists
   And I am signed in (multitenant)
-  When I click on link "Issues"
+  When I click on link "Tickets"
   Then the element "#side-body" contain the text "Open"
   When I click on "#project-select" 
   And I click on "[role='option']" with "Test project 2"

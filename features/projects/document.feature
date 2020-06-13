@@ -4,7 +4,7 @@ Feature: Project documents
 Scenario: Create document
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Documents"
   And I click on link "New document"
@@ -17,7 +17,7 @@ Scenario: Create document
 Scenario: Create document
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Projects"
+  When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Documents"
   And I click on ".fa-edit"
