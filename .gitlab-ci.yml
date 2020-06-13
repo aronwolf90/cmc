@@ -111,7 +111,7 @@ deploy:
   script:
     - doctl kubernetes cluster kubeconfig save webcloudpower
     - velero backup create ticktensio-deploy-$(date +%Y%m%d%H%M%S) --include-namespaces cmc-production
-    - helm init --upgrade
+    - helm init --client-only
     - kubectl delete jobs -n cmc-production --all
     - helm upgrade cmc-production chart --install --wait --force
         -f values.yaml
