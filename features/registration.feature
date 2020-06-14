@@ -16,7 +16,7 @@ Scenario: Create successfully a new organization
   And I enter "test@email.lvh" into input named "user[email]"
   And I enter "password123" into input named "user[password]"
   And I click on submit
-  Then the element "body" contain the text "Signed in successfully."
+  Then the element "body" contain the text "Dashboard"
 
 @javascript
 Scenario: Can not register a blacklisted name

@@ -1,18 +1,23 @@
 <template lang='pug'>
-  .card.project
-    .card-body.project-body.row
-      .col-10.text
-        a(:href='showPath')
-          | {{ name }}
-      .col-2
-        router-link.text-secondary(:to='editPath')
-          .fa.fa-edit
+  board-item
+    template(v-slot:text="")
+      router-link(:to="showPath")
+        | {{ name }}
+    template(v-slot:main-action="")
+      router-link.text-secondary(:to='editPath')
+        .fa.fa-edit
+    template(v-slot:extra-information="")
+      b-badge(v-if="mainResponsable") {{ mainResponsableName }}
 </template>
 
 <script>
 import { Utils } from 'vuex-jsonapi-client'
+import BoardItem from 'components/boards/items'
 
 export default {
+  components: {
+    BoardItem
+  },
   props: { 
     'project-id': { required: true }
   },
@@ -28,6 +33,16 @@ export default {
     },
     name () {
       return Utils.attribute(this.project, 'name')
+    },
+    mainResponsableName () {
+      return Utils.attribute(this.mainResponsable, 'firstname') + " " +
+        Utils.attribute(this.mainResponsable, 'lastname')
+    },
+    mainResponsable () {
+      return this.$store.getters.relationship({
+        entry: this.project,
+        name: 'main-responsable'
+      })
     }
   }
 }

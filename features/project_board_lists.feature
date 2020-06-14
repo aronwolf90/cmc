@@ -6,7 +6,7 @@ Scenario: move project status
   And I am signed in (multitenant)
   When I click on link "Projects"
   And I click on aside link "New"
-  And I drag "#column-1" to "#column-3"
+  And I drag "#column-1 .card-header" to "#column-3 .card-header"
   Then the element ".column:last-of-type" contain the text "New"
   When I reload the page
   Then the element ".column:last-of-type" contain the text "New"

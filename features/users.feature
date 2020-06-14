@@ -64,9 +64,9 @@ Scenario: Edit user
   And I click on link "user2 simson"
   And I enter "new firstname" into input named "data_firstname"
   And I click on submit
-  Then the page contain the text "user has been updated"
-  And I reload the page
-  And the input "data_firstname" has the value "new firstname"
+  Then the input "data_firstname" has the value "new firstname"
+  When I reload the page
+  Then the input "data_firstname" has the value "new firstname"
 
 @javascript
 Scenario: Change employee to admin

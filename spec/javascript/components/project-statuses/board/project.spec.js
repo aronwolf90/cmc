@@ -1,41 +1,49 @@
-import { mount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
+import createWrapper from '../../../helper'
 import Project from '../../../../../app/javascript/components/project-statuses/board/project'
-import VueRouter from 'vue-router'
-
-const localVue = createLocalVue()
-const router = new VueRouter()
-
-localVue.use(Vuex)
-localVue.use(VueRouter)
+import sinon from 'sinon'
 
 /* eslint-disable no-undef, no-unused-expressions */
 
 describe('project-statuses/board/project', () => {
+  const user = {
+    attributes: {
+      firstname: 'Firstname',
+      lastname: 'Lastname'
+    }
+  }
   const project = {
     id: '1',
     type: 'projects',
     attributes: {
       name: 'Name'
+    },
+    relationships: {
+      'main-responsable': {
+        id: 1,
+        type: 'users'
+      }
     }
   }
 
   it('render project name', (done) => {
-    const store = new Vuex.Store({
-      getters: {
-        project () {
-          return () => project
+    const stubedRelationship = sinon.stub()
+    const stubedProject = sinon.stub()
+    stubedProject.withArgs('1').returns(project)
+    stubedRelationship.withArgs({ id: 1, type: 'users' }).returns(user)
+    const wrapper = createWrapper(Project, {
+      propsData: {
+        projectId: '1'
+      },
+      mocks: {
+        $store: {
+          getters: {
+            project: stubedProject,
+            relationship: stubedRelationship
+          }
         }
       }
     })
-    const wrapper = mount(Project, {
-      store,
-      localVue,
-      router,
-      propsData: {
-        projectId: '1'
-      }
-    })
+
     wrapper.vm.$nextTick(() => {
       expect(wrapper.html()).to.include('Name')
       done()

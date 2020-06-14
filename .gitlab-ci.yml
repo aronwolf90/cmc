@@ -114,7 +114,7 @@ deploy:
     - helm init --client-only
     - kubectl delete jobs -n cmc-production --all
     - helm upgrade cmc-production chart --install --wait --force
-        --timeout=600
+        --timeout=800
         -f values.yaml
         --set image.tag=$CI_COMMIT_SHA
         --set image.repository=$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
