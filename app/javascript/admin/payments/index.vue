@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import Vue from 'vue/dist/vue.common'
+
 export default {
   asyncComputed: {
     subscriptionResult () {
@@ -37,6 +39,11 @@ export default {
     },
     invoicesResult () {
       return this.$store.dispatch('invoices')
+    }
+  },
+  mounted () {
+    if (Vue.loadScript) {
+      Vue.loadScript('https://js.stripe.com/v3/')
     }
   },
   computed: {

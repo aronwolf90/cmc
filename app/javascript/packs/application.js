@@ -56,8 +56,11 @@ import ProjectTickets from 'projects/tickets'
 import BoardListNew from 'board_lists/new'
 import BoardListEdit from 'board_lists/edit'
 import 'vue-select/dist/vue-select.css'
+import LoadScript from 'vue-plugin-load-script'
 
 require('../config')
+
+Vue.use(LoadScript)
 
 Vue.component('issues_board', IssuesBoard)
 Vue.component('issue', Issue)
