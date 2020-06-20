@@ -91,6 +91,11 @@ cucumber:
   image:
     name: docker/compose:1.24.1
     entrypoint: ["/bin/sh", "-c"]
+  artifacts:
+    when: on_failure
+    paths:
+      - screenshots
+    expire_in: 30 days
   services:
     - docker:dind
   script:

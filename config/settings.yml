@@ -3,7 +3,7 @@ host: <%= ENV["HOST"] || "lvh.me:3000" %>
 admin_password: <%= ENV["ADMIN_PASSWORD"] || "testtest" %>
 test_host: <%= ENV["TEST_HOST"] || "localhost" %> 
 test_port: <%= ENV["TEST_PORT"] || "3001" %>
-stripe_public_key: pk_test_jnjnLmEpUo9tbTIEjKKGPr62007x2iQKkM
+stripe_public_key: <%= ENV["STRIPE_PUBLIC_KEY"] || "pk_test_jnjnLmEpUo9tbTIEjKKGPr62007x2iQKkM" %>
 payment:
   enabled: <%= ENV["PAYMENT_ENABLED"] %>
   host: <%= ENV["PAYMENT_HOST"] || "http://payment:4000" %>

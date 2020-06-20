@@ -59,6 +59,10 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :admin do
+      resources :payments, only: :index
+    end
+
     get "/*path", to: "app#show", format: false
   end
 

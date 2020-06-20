@@ -14,8 +14,8 @@ Scenario: Get
       "data": {
         "id": "subscription",
         "type": "subscriptions",
-        "attributes": { 
-          "iban-last4": "4242",
+        "attributes": {
+          "iban-last4": null,
           "premia": 0
         },
         "meta": {

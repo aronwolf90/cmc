@@ -90,7 +90,32 @@ Then(/^the JSON response should be:$/) do |json|
     puts "The response is:"
     puts JSON.pretty_generate(actual)
   end
-  expect(actual).to eq(expected)
+
+  expect(actual).to match(expected)
+end
+
+Then(/^the JSON response should match:$/) do |json|
+  expected = JSON.parse(json).to_s
+  actual = JSON.parse(@response.body).to_s
+
+  if ENV["PRINT_RESPONSE"]
+    puts "The response is:"
+    puts JSON.pretty_generate(JSON.parse(json))
+  end
+
+  regexes = expected.scan(/<([^>]*)>/).map(&:first)
+
+  literal_parts = expected.split(/<[^>]*>/).map do |part|
+    Regexp.quote(part)
+  end
+
+  index = -1
+  expected_regex = literal_parts.inject do |result, part|
+    index += 1
+    result + regexes[index] + part
+  end
+
+  expect(actual).to match(Regexp.new(expected_regex))
 end
 
 Given(/^(?:|I )send a multipart (POST|PUT) request (?:for|to) "([^"]*)" with:/) do |method, path, body|

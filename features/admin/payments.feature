@@ -1,16 +1,18 @@
 Feature: Payment page
 
 @javascript
-Scenario: Visit payment page when a subscription exist
+Scenario: Create/Update subscription
   Given a test-organization exists
   And I am signed in (multitenant)
   When I click on link "Admin"
   And I click on link "Payment"
   Then the page contain the text "Add payment informations"
-
-  #@javascript
-  #Scenario: Call payment callback from stripe
-  #  Given a test-organization exists
-  #  And I am signed in (multitenant)
-  #  When I navigate to "/administration/admin/payments?stripe_session_id=cs_test_8fh4AlX39Ncd3y8Rz2ysYSFOhPm8a4xkP4F2TnVOGnAMb61zyuCxXr50"
-  #  Then the page contain the text "You have successfully added you payment information"
+  And I click on button "Add payment informations"
+  And I enter "test@example.com" into input named "email"
+  And I enter "4242424242424242" into input named "cardNumber"
+  And I enter "12/40" into input named "cardExpiry"
+  And I enter "1234" into input named "cardCvc"
+  And I enter "Lara Croft" into input named "billingName"
+  And I select the value "DE" from select box "billingCountry"
+  And I click on ".SubmitButton-IconContainer"
+  Then the page contain the text "Add payment informations"

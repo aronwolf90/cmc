@@ -152,6 +152,12 @@ When(/^select "([^\"]*)" from select box "([^\"]*)"$/) do |text, name|
   select text, from: name
 end
 
+When(/^I select the value "([^\"]*)" from select box "([^\"]*)"$/) do |value, name|
+  option_xpath = "//*[@name='#{name}']/option[@value='#{value}']"
+  option = find(:xpath, option_xpath).text
+  select option, from: name
+end
+
 When(/^I reload the page$/) do
   sleep 0.2 # wait for for unfinished requests
   page.driver.browser.navigate.refresh
@@ -184,6 +190,10 @@ When(/^I reload until "([^\"]*)" with text "([^\"]*)"$/) do |element, text|
     page.driver.browser.navigate.refresh
     break if page.has_css?(element, wait: 1.second, text: text)
   end
+end
+
+When(/^I wait until "([^\"]*)" has the text "([^\"]*)"$/) do |element, text|
+  page.has_css?(element, wait: 80.seconds, text: text)
 end
 
 Then(/^the page contain the text "([^\"]*)"$/) do |text|

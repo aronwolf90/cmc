@@ -72,6 +72,8 @@ services:
     image: $IMAGE
     dns: 8.8.8.8
     command:  sh -c "RAILS_ENV=production rails s -b '0.0.0.0'"
+    volumes:
+      - ./screenshots/:/app/screenshots/
     networks:
       default:
         aliases:

@@ -10,11 +10,11 @@ Scenario: Valid post '/api/v1/stripe_checkout_session'
     """
     {}
     """
-  Then the JSON response should be:
+  Then the JSON response should match:
     """
     {
       "data": {
-        "id": "cs_test_8fh4AlX39Ncd3y8Rz2ysYSFOhPm8a4xkP4F2TnVOGnAMb61zyuCxXr50",
+        "id": "cs_test_<.*>",
         "type": "stripe-checkout-sessions"
       }
     }

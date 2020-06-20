@@ -9,11 +9,12 @@ RSpec.describe Administration::Admin::Payments::IndexOperation do
 
   let(:current_user) { Admin.new(email: "test@example.com") }
   let(:organization) { Organization.new(id: 1) }
+  let(:subscription) { Subscription.new(id: 1) }
 
   before do
     allow(Organization).to receive(:current).and_return(organization)
     allow(Admin).to receive(:first).and_return(current_user)
-    allow(Subscription).to receive(:create_or_update).and_return(Subscription.new)
+    allow(Subscription).to receive(:create_or_update).and_return(subscription)
     allow(User).to receive(:count).and_return(1)
   end
 
@@ -26,8 +27,12 @@ RSpec.describe Administration::Admin::Payments::IndexOperation do
     end
   end
 
-  context "when stripe_session_id is in the params and subscription_id=nil" do
+  context "when stripe_session_id is in the params and Organization#subscription=nil" do
     let(:params) { { stripe_session_id: "test_id" } }
+
+    before do
+      allow(organization).to receive(:subscription).and_return(nil)
+    end
 
     it "call Subscription.create" do
       expect(subject[:model]).to be_a Subscription
@@ -41,9 +46,13 @@ RSpec.describe Administration::Admin::Payments::IndexOperation do
     end
   end
 
-  context "when stripe_session_id is in the params and subscription_id!=nil" do
+  context "when stripe_session_id is in the params and Organization#subscription!=nil" do
     let(:params) { { stripe_session_id: "test_id" } }
     let(:organization) { Organization.new(id: 1, subscription_id: 1) }
+
+    before do
+      allow(organization).to receive(:subscription).and_return(subscription)
+    end
 
     it "call Subscription.create" do
       expect(subject[:model]).to be_a Subscription

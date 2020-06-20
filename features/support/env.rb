@@ -35,3 +35,11 @@ end
 
 Capybara.server = :puma # Until your setup is working
 Capybara.server = :puma, { Silent: true } # To clean up your test output
+
+After do |scenario|
+  next unless scenario.failed?
+
+  page.save_screenshot(Rails.root.join("screenshots/error.png"))
+  STDERR.puts page.driver.browser.manage.logs.get(:browser)
+  Cucumber.wants_to_quit = true
+end

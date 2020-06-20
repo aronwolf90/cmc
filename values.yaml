@@ -26,6 +26,7 @@ webAws:
 payment:
   enabled: true
   host: https://payment.ticktensio.com
+  stripePublicKey: pk_live_Dq4ZzdS1gJgbm13XcdqmFvMH00NaWk8hVd
 
 mailer:
   smtp_domain: smtp.migadu.com 

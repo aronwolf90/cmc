@@ -4,7 +4,7 @@ Feature: Projects
 Scenario: Create contact
   Given a test-organization exists
   And I am signed in (multitenant)
-  When I click on link "Contacts"
+  When I click on link "Contact"
   And I click on link "New contact"
   And I enter "New person" into input named "input-name"
   And I click on submit

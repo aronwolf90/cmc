@@ -13,6 +13,6 @@ RSpec.describe "administration/admin/payments/index" do
   end
 
   it "render payment" do
-    expect(subject).to have_css "payment"
+    expect(subject).to have_css "router-view"
   end
 end
