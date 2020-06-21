@@ -40,6 +40,14 @@ Given(/^a premium test-organization exists$/) do
   )
 end
 
+Given(/^no payment data is present$/) do
+  host = Settings.payment.host
+  RestClient.delete(
+    "#{host}/api/v1/testing",
+    Settings.payment.headers.to_h
+  )
+end
+
 Given(/^I am registered$/) do
   Admin.create!(email: "admin@lvh.me", password: "testtest", password_confirmation: "testtest")
 end
