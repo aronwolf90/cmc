@@ -37,7 +37,8 @@ class ChunckUploader < BaseUploader
   end
 
   def url
-    s3_file.url(
+    s3_bucket.files.get_url(
+      file_path,
       1.day.from_now.to_i,
       query: { "response-content-disposition" => "inline" }
     )
