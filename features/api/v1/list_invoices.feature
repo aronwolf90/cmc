@@ -3,6 +3,7 @@ Feature: API: list users
 @javascript
 Scenario: Get
   Given a test-organization exists and is loaded
+  And payment data is present
   And I set headers:
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |

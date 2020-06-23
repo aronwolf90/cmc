@@ -40,6 +40,15 @@ Given(/^a premium test-organization exists$/) do
   )
 end
 
+Given(/^payment data is present$/) do
+  host = Settings.payment.host
+  RestClient.post(
+    "#{host}/api/v1/testing",
+    "",
+    Settings.payment.headers.to_h
+  )
+end
+
 Given(/^no payment data is present$/) do
   host = Settings.payment.host
   RestClient.delete(

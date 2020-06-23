@@ -105,6 +105,18 @@ cucumber:
     - docker-compose -f docker-compose.gitlab.yml up -d
     - docker-compose -f docker-compose.gitlab.yml run app cucumber
 
+backup:
+  stage: test
+  image: aronwolf/helm-doctl
+  environment:
+    name: production
+    url: https://ticktensio.com
+  script:
+    - doctl kubernetes cluster kubeconfig save webcloudpower
+    - velero backup create ticktensio-deploy-$(date +%Y%m%d%H%M%S) --include-namespaces cmc-production
+  only:
+    - master
+
 deploy:
   stage: deploy
   image: aronwolf/helm-doctl
@@ -115,7 +127,6 @@ deploy:
     url: https://ticktensio.com
   script:
     - doctl kubernetes cluster kubeconfig save webcloudpower
-    - velero backup create ticktensio-deploy-$(date +%Y%m%d%H%M%S) --include-namespaces cmc-production
     - helm init --client-only
     - kubectl delete jobs -n cmc-production --all
     - helm upgrade cmc-production chart --install --wait --force
