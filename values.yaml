@@ -14,7 +14,7 @@ ingress:
     kubernetes.io/tls-acme: true
     nginx.ingress.kubernetes.io/proxy-body-size: "10m"
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      if ($host ~ ^(.+)cost-manager\.com$) {
+      if ($host ~ ^(.*)cost-manager\.com$) {
         return 301 https://$1ticktensio.com$request_uri;
       }
   tls:

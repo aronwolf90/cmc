@@ -176,6 +176,8 @@ test_production:
   script:
     - cd /app
     - bin/production_tests.rb
+  only:
+    - master
 
 tag_latest:
   stage: tag_latest
