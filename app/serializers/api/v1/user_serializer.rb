@@ -3,7 +3,6 @@
 module Api
   module V1
     class UserSerializer < ApplicationSerializer
-      include Rails.application.routes.url_helpers
       type "users"
 
       attribute :firstname

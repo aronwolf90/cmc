@@ -3,8 +3,6 @@
 module Api
   module V1
     class RecordSerializer < ApplicationSerializer
-      include Rails.application.routes.url_helpers
-
       attributes :start_time, :end_time
 
       belongs_to :user, serializer: UserSerializer

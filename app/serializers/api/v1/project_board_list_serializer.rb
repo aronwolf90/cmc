@@ -3,8 +3,6 @@
 module Api
   module V1
     class ProjectBoardListSerializer < ApplicationSerializer
-      include Rails.application.routes.url_helpers
-
       attributes :name
       has_many :projects, serializer: ProjectSerializer do |serializer|
         link(:self) { api_v1_project_board_list_projects_path(object) }

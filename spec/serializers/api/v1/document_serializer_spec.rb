@@ -37,4 +37,12 @@ RSpec.describe Api::V1::DocumentSerializer, type: :serializer do
   it "serialize document in the correct way" do
     expect(serialize(document)).to eq expected_result
   end
+
+  context "when file is not present" do
+    before { document.document_file = nil }
+
+    it "not raise an error" do
+      expect { serialize(document) }.not_to raise_error
+    end
+  end
 end

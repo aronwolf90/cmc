@@ -3,8 +3,6 @@
 module Api
   module V1
     class WikiPageSerializer < ApplicationSerializer
-      include Rails.application.routes.url_helpers
-
       attributes :title
       attributes :content
 

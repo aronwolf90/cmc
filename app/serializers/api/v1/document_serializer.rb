@@ -13,6 +13,8 @@ module Api
       link(:self) { api_v1_document_path(object) }
 
       def url
+        return if object.document_file.nil?
+
         api_v1_document_file_path(object.document_file)
       end
     end

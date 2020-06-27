@@ -65,4 +65,12 @@ RSpec.describe Api::V1::ProjectSerializer, type: :serializer do
   it "serialize project in the correct way" do
     expect(serialize(project)).to eq expected_result
   end
+
+  context "without folder" do
+    before { project.folder = nil }
+
+    it "not raise an error" do
+      expect { serialize(project) }.not_to raise_error
+    end
+  end
 end
