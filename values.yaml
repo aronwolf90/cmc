@@ -1,6 +1,7 @@
 multiTenant: true
 installJobDelay: 60
 url: ticktensio.com
+deprecatedUrl: cost-manager.com
 postgresql:
   master:
     podAnnotations:
@@ -15,6 +16,8 @@ ingress:
   tls:
     - secretName: cost-manager-tls
       hosts:
+        - "*.cost-manager.com"
+        - "cost-manager.com"
         - "*.ticktensio.com"
         - "ticktensio.com"
 webAws:
