@@ -42,14 +42,18 @@ class RegistrationForm < ApplicationForm
   end
 
   def uniq_organization_name
-    return unless Organization.exists?(name: name)
+    return unless Organization.exists?(name: organization_name)
 
     errors.add(:name, "Organization is not uniq")
   end
 
   def not_allowed_name
-    return unless name.in?(Settings.organization_blacklist)
+    return unless organization_name.in?(Settings.organization_blacklist)
 
     errors.add(:name, "Use a different name")
+  end
+
+  def organization_name
+    name&.to_domain
   end
 end

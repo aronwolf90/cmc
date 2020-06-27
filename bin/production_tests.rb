@@ -45,3 +45,6 @@ fill_in "Email", with: "test@ticktensio.com"
 fill_in "Password", with: "testtest"
 click_button "Login"
 raise "not loged in" unless page.has_text?("Dashboard")
+click_on "Tickets"
+find(".list-issue a", match: :prefer_exact).click
+find("label", text: "Compexity", match: :prefer_exact)

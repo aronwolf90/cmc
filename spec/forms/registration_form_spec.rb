@@ -9,7 +9,7 @@ describe RegistrationForm do
 
   let(:valid_params) do
     {
-      name: "test",
+      name: "Test Name",
       time_zone: "Berlin",
       firstname: "Bob",
       lastname: "Marley",
@@ -37,7 +37,10 @@ describe RegistrationForm do
   end
 
   context "organization already exists" do
-    before { allow(Organization).to receive(:exists?).and_return true }
+    before do
+      allow(Organization)
+        .to receive(:exists?).with(name: "test-name").and_return true
+    end
 
     specify do
       expect(subject.validate(valid_params)).to be false
@@ -45,7 +48,9 @@ describe RegistrationForm do
   end
 
   context "organization name is in a blacklist" do
-    before { allow(Settings).to receive(:organization_blacklist).and_return %w[about] }
+    before do
+      allow(Settings).to receive(:organization_blacklist).and_return %w[about]
+    end
 
     let(:invalid_params) { valid_params.merge(name: "about") }
 
