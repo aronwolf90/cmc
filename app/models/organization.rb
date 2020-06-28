@@ -80,4 +80,18 @@ class Organization < ApplicationRecord
   def premium?
     subscription_id.present? || !Settings.payment.enabled
   end
+
+  def google_calender_authorization_data
+    GoogleAuthorizationData.new(
+      access_token: google_calender_access_token,
+      expires_at: google_calender_expires_at&.to_datetime,
+      refresh_token: google_calender_refresh_token
+    )
+  end
+
+  def google_calender_authorization_data=(authorization_data)
+    self.google_calender_access_token = authorization_data.access_token
+    self.google_calender_expires_at = authorization_data&.expires_at
+    self.google_calender_refresh_token = authorization_data.refresh_token
+  end
 end

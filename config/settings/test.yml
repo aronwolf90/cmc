@@ -2,3 +2,6 @@ multi_tenant: false
 admin_password: testtest
 payment:
   enabled: true
+google_calender:
+  client_id: "test"
+  client_secret: "test"

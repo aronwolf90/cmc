@@ -7,7 +7,23 @@ module Api::V1
       @deserializer = EventDeserializer
       @model = Event
       @policy = EventPolicy
+      @no_mutation_step = true
+      success :organization
       include StandardCreateOperationConcern
+      success :main_operation
+
+    private
+      def organization(ctx, **)
+        ctx[:organization] = Organization.current
+      end
+
+      def main_operation(_, model:, deserialized_params:, organization:, **)
+        ::Events::CreateOperation.(
+          model: model,
+          attributes: deserialized_params,
+          organization: organization
+        )
+      end
     end
   end
 end

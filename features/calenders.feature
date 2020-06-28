@@ -1,4 +1,4 @@
-Feature: Projects
+Feature: Calender
 
 @javascript
 Scenario: Create calender
