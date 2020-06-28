@@ -47,4 +47,4 @@ click_button "Login"
 raise "not loged in" unless page.has_text?("Dashboard")
 click_on "Tickets"
 find(".list-issue a", match: :prefer_exact).click
-find("label", text: "Compexity", match: :prefer_exact)
+find("label", text: "Complexity", match: :prefer_exact)

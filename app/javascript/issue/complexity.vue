@@ -1,7 +1,7 @@
 <template lang='pug'>
   right-aside-select(
     id="complexity",
-    :label='"Compexity"',
+    label="Complexity",
     :options='options',
     :item='item',
     @select="onSelect"
