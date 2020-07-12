@@ -14,3 +14,9 @@ redis_url: <%= ENV["REDIS_URL"]  %>
 organization_blacklist:
   - about
   - payment 
+google_calender:
+  web_hook: <%= ENV["GOOGLE_CALENDER_WEB_HOOK"] %>
+  client_id: <%= ENV["GOOGLE_CALENDER_CLIENT_ID"] %>
+  client_secret: <%= ENV["GOOGLE_CALENDER_CLIENT_SECRET"] %>
+  authorization_uri: 'https://accounts.google.com/o/oauth2/auth'
+  token_credential_uri: 'https://accounts.google.com/o/oauth2/token'

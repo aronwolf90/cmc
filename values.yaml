@@ -41,3 +41,6 @@ mailer:
   user_name: info@ticktensio.com
   port: "587"
   password: ""
+
+google:
+  webHook: true

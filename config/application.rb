@@ -5,6 +5,7 @@ require_relative "boot"
 require "rails/all"
 require_relative "../lib/apartment_middleware"
 require_relative "../lib/paginator"
+require_relative "../lib/google_calender_client"
 
 # Require the gems listed in Gemfile, including any gems
 # you"ve limited to :test, :development, or :production.

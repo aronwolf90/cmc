@@ -79,6 +79,18 @@ spec:
                 secretKeyRef:
                   name: {{ .Release.Name }}-mailer
                   key: port
+            - name: GOOGLE_CALENDER_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-google
+                  key: clientId
+            - name: GOOGLE_CLIENT_CALENDER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-google
+                  key: calenderSecret
+            - name: GOOGLE_CALENDER_WEB_HOOK
+              value: '{{ .Values.google.webHook }}'
             - name: PAYMENT_ENABLED
               value: '{{ .Values.payment.enabled }}'
             - name: REDIS_URL

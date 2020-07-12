@@ -20,6 +20,7 @@ variables:
   AWS_KEY: access_key
   AWS_SECRET: secret_key
   AWS_ENDPOINT: http://minio:9000
+  TZ: Europe/Berlin
 
 build:
   stage: build
@@ -141,6 +142,8 @@ deploy:
         --set webAws.secret=$WEB_AWS_SECRET
         --set webDeployment.sentryDsn=$SENTRY_DSN
         --set mailer.password=$MAILER_PASSWORD
+        --set google.clientId=$GOOGLE_CLIENT_ID
+        --set google.calenderSecret=$GOOGLE_CALENDER_SECRET
         --namespace cmc-production
   only:
     - master
