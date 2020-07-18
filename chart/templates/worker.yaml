@@ -21,63 +21,10 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh","-c"]
           args: ["bundle exec sidekiq"]
-          env:
-            - name: DATABASE_URL
-              value: 'postgres://{{ .Values.postgresql.postgresqlUsername }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
-            - name: SECRET_KEY_BASE
-              value: '{{ .Values.webDeployment.secretKeyBase }}'
-            - name: RAILS_ENV
-              value: '{{ .Values.webDeployment.enviroment }}'
-            - name: MULTI_TENANT
-              value: '{{ .Values.multiTenant }}'
-            - name: SENTRY_DSN
-              value: '{{ .Values.webDeployment.sentryDsn }}'
-            - name: ADMIN_PASSWORD
-              value: '{{ .Values.admin_password }}'
-            - name: AWS_ENABLED
-              value: '{{ .Values.webAws.enabled }}'
-            - name: AWS_KEY
-              value: '{{ .Values.webAws.key }}'
-            - name: AWS_SECRET
-              value: '{{ .Values.webAws.secret }}'
-            - name: AWS_REGION
-              value: '{{ .Values.webAws.region }}'
-            - name: AWS_ENDPOINT
-              value: '{{ .Values.webAws.endpoint }}'
-            - name: AWS_DIRECTORY
-              value: '{{ .Values.webAws.directory }}'
-            - name: PAYMENT_HOST
-              value: '{{ .Values.payment.host }}'
-            - name: HOST
-              value: '{{ .Values.url }}'
-            - name: MAILER_SMTP_DOMAIN 
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}-mailer
-                  key: smtpDomain
-            - name: MAILER_DOMAIN 
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}-mailer
-                  key: domain
-            - name: MAILER_USER_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}-mailer
-                  key: userName
-            - name: MAILER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}-mailer
-                  key: password
-            - name: MAILER_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}-mailer
-                  key: port
-            - name: PAYMENT_ENABLED
-              value: '{{ .Values.payment.enabled }}'
-            - name: REDIS_URL
-              value: 'redis://{{ .Release.Name }}-redis-master'
-            - name: RAILS_LOG_TO_STDOUT
-              value: 'true'
+          envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+          - secretRef:
+              name: {{ .Release.Name }}-mailer
+          - secretRef:
+              name: {{ .Release.Name }}-google

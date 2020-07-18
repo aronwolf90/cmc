@@ -18,16 +18,6 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh","-c"]
           args: ["rake db:migrate && echo 'migrated successfully'"]
-          env:
-            - name: DATABASE_URL
-              value: 'postgres://{{ .Values.postgresql.postgresqlUsername }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
-            - name: SECRET_KEY_BASE
-              value: '{{ .Values.webDeployment.secretKeyBase }}'
-            - name: RAILS_ENV
-              value: '{{ .Values.webDeployment.enviroment }}'
-            - name: MULTI_TENANT
-              value: '{{ .Values.multiTenant }}'
-            - name: SENTRY_DSN
-              value: '{{ .Values.webDeployment.sentryDsn }}'
-            - name: RAILS_LOG_TO_STDOUT
-              value: 'true'
+          envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config

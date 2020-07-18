@@ -24,12 +24,12 @@ RSpec.describe GoogleCalenders::ImportEventOperation do
     allow(GoogleCalenderClient)
       .to receive(:get_event)
       .and_return(double(
-        id: "id",
-        updated: 1.hour.ago,
-        summary: "Title",
-        start: 1.hour.ago,
-        end: 1.hour.from_now,
-        description: "description"
+                    id: "id",
+                    updated: 1.hour.ago,
+                    summary: "Title",
+                    start: double(date_time: 1.hour.ago),
+                    end: double(date_time: 1.hour.from_now),
+                    description: "description"
       )
     )
     allow(GoogleCalenders::AuthorizeOperation).to receive(:call)

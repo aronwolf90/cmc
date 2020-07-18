@@ -15,7 +15,7 @@ module GoogleCalenders
     end
 
     def get_google_calender_event(ctx, google_calender_event_id:, organization:, google_authorization_data:, **)
-      ctx[:google_calender_event] = 
+      ctx[:google_calender_event] =
         GoogleCalenderClient.get_event(
           organization.google_calender_id,
           google_calender_event_id,

@@ -5,7 +5,7 @@ module GoogleCalenders
     def perform(organization, google_calender_event_id:)
       Apartment::Tenant.switch(organization.name) do
         GoogleCalenders::ImportEventOperation.(
-          organization: organization, 
+          organization: organization,
           google_calender_event_id: google_calender_event_id
         )
       end
