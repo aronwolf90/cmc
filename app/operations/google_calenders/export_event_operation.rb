@@ -2,13 +2,33 @@
 
 module GoogleCalenders
   class ExportEventOperation < ApplicationOperation
-    success :organization!
+    success :authorize
+    success :get_google_calender_event
+    step :check
     success :call_google_api
-    success :mutate
+    success :update_event
 
   private
-    def organization!(options, **)
-      options[:organization] ||= Organization.current
+    def authorize(ctx, organization:, **)
+      ctx[:google_authorization_data] =
+        GoogleCalenders::AuthorizeOperation.(organization: organization)[:google_authorization_data]
+    end
+
+    def get_google_calender_event(ctx, event:, google_authorization_data:, organization:, **)
+      return if event.google_calender_event_id.nil?
+
+      ctx[:google_calender_event] =
+        GoogleCalenderClient.get_event(
+          organization.google_calender_id,
+          event.google_calender_event_id,
+          google_authorization_data: google_authorization_data
+        )
+    end
+
+    def check(ctx, event:, google_calender_event: nil, **)
+      return true if google_calender_event.nil?
+
+      event.updated_at > google_calender_event.updated
     end
 
     def call_google_api(ctx, event:, organization:, **)
@@ -44,11 +64,8 @@ module GoogleCalenders
       ctx[:google_calender_event_id] = google_event.id
     end
 
-    def mutate(_, event:, google_calender_event_id:, **)
-      StandardUpdateMutation.(
-        model: event,
-        google_calender_event_id: google_calender_event_id
-      )
+    def update_event(_, event:, google_calender_event_id:, **)
+      event.update!(google_calender_event_id: google_calender_event_id)
     end
   end
 end

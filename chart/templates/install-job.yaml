@@ -19,14 +19,6 @@ spec:
           command: ["/bin/sh","-c"]
           args: ["sleep {{ .Values.installJobDelay }}; rake db:schema:load; rake db:seed"]
           imagePullPolicy: "Always"
-          env:
-            - name: DATABASE_URL
-              value: 'postgres://{{ .Values.postgresql.postgresqlUsername }}:{{ .Values.postgresql.postgresqlPassword }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.postgresqlDatabase }}'
-            - name: SECRET_KEY_BASE
-              value: '{{ .Values.webDeployment.secretKeyBase }}'
-            - name: RAILS_ENV
-              value: '{{ .Values.webDeployment.enviroment }}'
-            - name: MULTI_TENANT
-              value: '{{ .Values.multiTenant }}'
-            - name: SENTRY_DSN
-              value: '{{ .Values.webDeployment.sentryDsn }}'
+          envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config

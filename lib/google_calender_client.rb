@@ -34,6 +34,12 @@ class GoogleCalenderClient
     calender_service.insert_calendar(calender)
   end
 
+  def self.get_event(google_calender_id, google_calender_event_id, **args)
+    calender_service = new(**args).calender_service
+
+    calender_service.get_event(google_calender_id, google_calender_event_id)
+  end
+
   def self.create_event(google_calender_id:, title:, description:, start_time:, end_time:, **args)
     calender_service = new(**args).calender_service
 
@@ -63,14 +69,17 @@ class GoogleCalenderClient
   def self.authorize!(**args)
     google_authorization_data = args[:google_authorization_data]
 
-    return google_authorization_data if google_authorization_data.expires_at > Time.zone.now + 1.minute
+    if google_authorization_data.expires_at.present? &&
+       google_authorization_data.expires_at > Time.zone.now + 1.minute
+      return google_authorization_data
+    end
 
     client = new(**args).client
     client.update!(google_authorization_data.to_h)
     response = client.refresh!
     GoogleAuthorizationData.new(
-      access_token: respone[:access_token],
-      expires_at: response[:expires_at],
+      access_token: response["access_token"],
+      expires_at: response["expires_at"],
       refresh_token: google_authorization_data.refresh_token
     )
   end
@@ -92,7 +101,6 @@ class GoogleCalenderClient
   def authentication_url
     client.authorization_uri.to_s
   end
-
 
   def client
     @client ||= Signet::OAuth2::Client.new(client_options.merge(google_authorization_data.to_h))

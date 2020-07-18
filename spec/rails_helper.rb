@@ -72,3 +72,4 @@ Fog::Storage
  .directories
  .create(key: "cmc/test")
 Sidekiq::Testing.fake!
+ActiveJob::Base.queue_adapter = :test

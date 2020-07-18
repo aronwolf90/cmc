@@ -20,6 +20,13 @@ class GoogleCalendersController < ApplicationController
 
   def notification
     organization = Organization.current
-    return if organization.nil?
+    return head(:bad_request) if organization.nil?
+
+    GoogleCalenders::ImportEventJob.perform_later(
+      organization,
+      google_calender_event_id: request.headers["X-Goog-Resource-ID"]
+    )
+
+    head :ok
   end
 end
