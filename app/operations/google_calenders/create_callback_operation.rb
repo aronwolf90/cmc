@@ -19,7 +19,7 @@ module GoogleCalenders
       )
     end
 
-    def create_web_hook(ctx, calender:, google_authorization_data:)
+    def create_web_hook(ctx, calender:, google_authorization_data:, **)
       GoogleCalenderClient.watch(
         google_calender_id: calender.id,
         google_authorization_data: google_authorization_data

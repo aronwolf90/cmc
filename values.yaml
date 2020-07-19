@@ -43,4 +43,4 @@ mailer:
   password: ""
 
 google:
-  webHook: true
+  webHook: "true"

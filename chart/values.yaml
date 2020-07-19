@@ -55,6 +55,6 @@ payment:
   host: https://example.com
 
 google:
-  webHook: false
+  webHook: "false"
   clientId: ""
   calenderSecret: ""

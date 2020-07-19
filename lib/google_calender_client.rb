@@ -87,7 +87,7 @@ class GoogleCalenderClient
   def self.watch(google_calender_id:, **args)
     calender_service = new(**args).calender_service
     address = ApplicationHelper.organization_url + "/google_calenders/notification"
-    address = address.tr("http://", "https://")
+    address = address.gsub("http://", "https://")
 
     calender_service.watch_event(
       google_calender_id,
