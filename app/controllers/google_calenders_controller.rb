@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class GoogleCalendersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def create_callback
     if Organization.current.nil?
       organization = Organization.find_by(name: params[:state])
@@ -19,8 +21,10 @@ class GoogleCalendersController < ApplicationController
   end
 
   def notification
-    organization = Organization.current
-    return head(:bad_request) if organization.nil?
+    logger.info "Headers: #{request.headers.env.reject { |key| key.to_s.include?('.') }}"
+    logger.info "Body: #{request.body.read}"
+
+    organization = Organization.find_by(name: params[:organization])
 
     GoogleCalenders::ImportEventJob.perform_later(
       organization,

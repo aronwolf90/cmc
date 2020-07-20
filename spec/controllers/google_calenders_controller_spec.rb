@@ -20,16 +20,14 @@ RSpec.describe GoogleCalendersController do
   end
 
   describe "GET notification" do
-    subject { get :notification, params: { code: "code", state: "test-name" }  }
-
     before do
-      sign_in(Admin.new)
-      allow(Organization).to receive(:current).and_return(organization)
+      allow(Organization).to receive(:find).and_return(organization)
     end
 
     specify do
       expect(GoogleCalenders::ImportEventJob).to receive(:perform_later)
       subject
+      post :notification, params: { code: "code", state: "test-name" }
     end
   end
 end

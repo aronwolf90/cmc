@@ -47,6 +47,11 @@ module ApplicationHelper
     ApplicationHelper.organization_url(*args)
   end
 
+  def google_calender_notification_url(organization_name)
+    address = Settings.host + "/google_calenders/notification?organization=#{organization_name}"
+    "https://" + address.gsub("http://", "")
+  end
+
   def dropdown_link(*args, **options, &block)
     options[:class] ||= ""
     options[:class] += " dropdown-item"

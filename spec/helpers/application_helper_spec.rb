@@ -119,4 +119,11 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe "google_calender_notification_url" do
+    specify do
+      expect(helper.google_calender_notification_url("test"))
+        .to eq("https://lvh.me:3000/google_calenders/notification?organization=test")
+    end
+  end
 end

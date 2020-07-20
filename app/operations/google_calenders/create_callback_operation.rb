@@ -2,9 +2,11 @@
 
 module GoogleCalenders
   class CreateCallbackOperation < ApplicationOperation
+    include ApplicationHelper
+
     success :get_authorization
     success :create_google_calender
-    success :create_web_hook if Settings.google_calender.web_hook
+    success :create_web_hook
     success :mutate
 
   private
@@ -19,10 +21,13 @@ module GoogleCalenders
       )
     end
 
-    def create_web_hook(ctx, calender:, google_authorization_data:, **)
+    def create_web_hook(ctx, calender:, google_authorization_data:, organization:, **)
+      return unless Settings.google_calender.web_hook
+
       GoogleCalenderClient.watch(
         google_calender_id: calender.id,
-        google_authorization_data: google_authorization_data
+        google_authorization_data: google_authorization_data,
+        url: google_calender_notification_url(organization.name)
       )
     end
 

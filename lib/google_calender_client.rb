@@ -84,15 +84,14 @@ class GoogleCalenderClient
     )
   end
 
-  def self.watch(google_calender_id:, **args)
+  def self.watch(google_calender_id:, url:, **args)
     calender_service = new(**args).calender_service
-    address = ApplicationHelper.organization_url + "/google_calenders/notification"
-    address = address.gsub("http://", "https://")
 
     calender_service.watch_event(
       google_calender_id,
       Google::Apis::CalendarV3::Channel.new(
-        address: address,
+        id: "channel-#{google_calender_id.sub(/@.*/, '')}",
+        address: url,
         type: "web_hook"
       )
     )

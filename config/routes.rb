@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :registrations, only: %i[new create]
   resource :terms, only: :show
   get "google_calenders/create_callback", to: "google_calenders#create_callback"
-  get "google_calenders/notification", to: "google_calenders#notification"
+  post "google_calenders/notification", to: "google_calenders#notification"
 
   namespace :admin_area do
     root to: "organizations#index"

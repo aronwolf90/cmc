@@ -20,21 +20,58 @@ RSpec.describe GoogleCalenders::CreateCallbackOperation do
     allow(GoogleCalenderClient)
       .to receive(:create_calender).and_return(calender)
     allow(GoogleCalenders::CreateCallbackMutation).to receive(:call)
+    allow(GoogleCalenderClient).to receive(:watch)
   end
 
-  specify do
-    result = described_class.call(organization: organization, code: "code")
+  context "when web_hook is disabled" do
+    before do
+      allow(Settings.google_calender).to receive(:web_hook).and_return(false)
+    end
 
-    expect(GoogleCalenderClient)
-      .to have_received(:create_calender)
-      .with(name: "test-name", google_authorization_data: google_authorization_data)
-    expect(GoogleCalenders::CreateCallbackMutation)
-      .to have_received(:call)
-      .with(
-        organization: organization,
-        calender: calender,
-        google_calender_authorization_data: google_authorization_data
-      )
-    expect(result[:organization]).to eq(organization)
+    specify do
+      result = described_class.call(organization: organization, code: "code")
+
+      expect(GoogleCalenderClient)
+        .to have_received(:create_calender)
+        .with(name: "test-name", google_authorization_data: google_authorization_data)
+      expect(GoogleCalenders::CreateCallbackMutation)
+        .to have_received(:call)
+        .with(
+          organization: organization,
+          calender: calender,
+          google_calender_authorization_data: google_authorization_data
+        )
+      expect(GoogleCalenderClient).not_to have_received(:watch)
+      expect(result[:organization]).to eq(organization)
+    end
+  end
+
+  context "when web_book is enabled" do
+    before do
+      allow(Settings.google_calender).to receive(:web_hook).and_return(true)
+    end
+
+    specify do
+      result = described_class.call(organization: organization, code: "code")
+
+      expect(GoogleCalenderClient)
+        .to have_received(:create_calender)
+        .with(name: "test-name", google_authorization_data: google_authorization_data)
+      expect(GoogleCalenders::CreateCallbackMutation)
+        .to have_received(:call)
+        .with(
+          organization: organization,
+          calender: calender,
+          google_calender_authorization_data: google_authorization_data
+        )
+      expect(GoogleCalenderClient)
+        .to have_received(:watch)
+        .with(
+          google_calender_id: "test",
+          google_authorization_data: google_authorization_data,
+          url: "https://lvh.me:3000/google_calenders/notification?organization=test-name"
+        )
+      expect(result[:organization]).to eq(organization)
+    end
   end
 end
