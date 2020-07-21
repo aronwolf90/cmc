@@ -106,6 +106,8 @@ GEM
       deep_merge (~> 1.2.1)
       dry-validation (>= 0.10.4)
     connection_pool (2.2.2)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     crass (1.0.6)
     cucumber (3.1.2)
       builder (>= 2.1.2)
@@ -458,6 +460,7 @@ GEM
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     rubyzip (2.2.0)
+    safe_yaml (1.0.5)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -564,6 +567,7 @@ GEM
     unf_ext (0.0.7.6)
     unicode-display_width (1.6.0)
     uniform_notifier (1.13.0)
+    vcr (6.0.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.6.2)
@@ -571,6 +575,10 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webmock (3.8.3)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     webpacker (3.5.3)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
@@ -657,7 +665,9 @@ DEPENDENCIES
   trailblazer-rails (~> 2.1)
   turbolinks
   uglifier
+  vcr
   web-console (>= 3.3.0)
+  webmock
   webpacker
 
 BUNDLED WITH

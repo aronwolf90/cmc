@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe GoogleCalenders::ImportEventOperation do
   subject(:call) do
     described_class.(
-      google_calender_event_id: google_calender_event_id,
+      google_calender_event: google_calender_event,
       organization: organization
     )
   end
@@ -19,6 +19,16 @@ RSpec.describe GoogleCalenders::ImportEventOperation do
     )
   end
   let(:event) { Event.new }
+  let(:google_calender_event) do
+    double(
+      id: "id",
+      updated: 1.hour.ago,
+      summary: "Title",
+      start: double(date_time: 1.hour.ago),
+      end: double(date_time: 1.hour.from_now),
+      description: "description"
+    )
+  end
 
   before do
     allow(GoogleCalenderClient)

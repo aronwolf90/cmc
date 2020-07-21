@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe GoogleCalenders::ImportEventJob, type: :model do
   subject(:perform) do
-    described_class.perform_now(organization, google_calender_event_id: "test")
+    described_class.perform_now(organization, "{}")
   end
 
   let(:organization) { Organization.new }

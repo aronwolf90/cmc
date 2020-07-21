@@ -25,7 +25,7 @@ RSpec.describe GoogleCalendersController do
     end
 
     specify do
-      expect(GoogleCalenders::ImportEventJob).to receive(:perform_later)
+      expect(GoogleCalenders::ImportEventsJob).to receive(:perform_later)
       subject
       post :notification, params: { code: "code", state: "test-name" }
     end

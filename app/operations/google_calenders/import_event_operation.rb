@@ -3,7 +3,6 @@
 module GoogleCalenders
   class ImportEventOperation < ApplicationOperation
     success :authorize
-    success :get_google_calender_event
     success :get_event
     step :check
     success :save_event
@@ -11,20 +10,13 @@ module GoogleCalenders
   private
     def authorize(ctx, organization:, **)
       ctx[:google_authorization_data] =
-        GoogleCalenders::AuthorizeOperation.(organization: organization)[:google_authorization_data]
+        GoogleCalenders::AuthorizeOperation
+        .call(organization: organization)[:google_authorization_data]
     end
 
-    def get_google_calender_event(ctx, google_calender_event_id:, organization:, google_authorization_data:, **)
-      ctx[:google_calender_event] =
-        GoogleCalenderClient.get_event(
-          organization.google_calender_id,
-          google_calender_event_id,
-          google_authorization_data: google_authorization_data
-        )
-    end
-
-    def get_event(ctx, google_calender_event_id:, **)
-      ctx[:event] = Event.find_or_initialize_by(google_calender_event_id: google_calender_event_id)
+    def get_event(ctx, google_calender_event:, **)
+      ctx[:event] =
+        Event.find_or_initialize_by(google_calender_event_id: google_calender_event.id)
     end
 
     def check(ctx, event:, google_calender_event:, **)

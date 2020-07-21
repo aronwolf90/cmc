@@ -26,10 +26,7 @@ class GoogleCalendersController < ApplicationController
 
     organization = Organization.find_by(name: params[:organization])
 
-    GoogleCalenders::ImportEventJob.perform_later(
-      organization,
-      google_calender_event_id: request.headers["X-Goog-Resource-ID"]
-    )
+    GoogleCalenders::ImportEventsJob.perform_later(organization)
 
     head :ok
   end

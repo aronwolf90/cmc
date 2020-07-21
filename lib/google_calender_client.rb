@@ -40,6 +40,12 @@ class GoogleCalenderClient
     calender_service.get_event(google_calender_id, google_calender_event_id)
   end
 
+  def self.list_events(google_calender_id, **args)
+    calender_service = new(**args).calender_service
+
+    calender_service.list_events(google_calender_id)
+  end
+
   def self.create_event(google_calender_id:, title:, description:, start_time:, end_time:, **args)
     calender_service = new(**args).calender_service
 
@@ -121,7 +127,11 @@ class GoogleCalenderClient
       {
         scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
         redirect_uri: "http://#{Settings.host}/google_calenders/create_callback",
-        state: organization&.name
-      }.merge(Settings.google_calender).compact
+        state: organization&.name,
+        client_id: Settings.google_calender.client_id,
+        client_secret: Settings.google_calender.client_secret,
+        authorization_uri: Settings.google_calender.authorization_uri,
+        token_credential_uri: Settings.google_calender.token_credential_uri
+      }.compact
     end
 end
