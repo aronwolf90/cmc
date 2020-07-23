@@ -5,7 +5,7 @@ module GoogleCalenders
     success :authorize
     success :get_event
     step :check
-    success :save_event
+    success :save_or_delete_event
 
   private
     def authorize(ctx, organization:, **)
@@ -21,17 +21,22 @@ module GoogleCalenders
 
     def check(ctx, event:, google_calender_event:, **)
       return true if event.updated_at.nil?
+      return true if google_calender_event.status == "cancelled"
 
       event.updated_at < google_calender_event.updated
     end
 
-    def save_event(_, event:, google_calender_event:, **)
-      event.update!(
-        title: google_calender_event.summary,
-        start_time: google_calender_event.start.date_time,
-        end_time: google_calender_event.end.date_time,
-        description: google_calender_event.description
-      )
+    def save_or_delete_event(_, event:, google_calender_event:, **)
+      if google_calender_event.status == "cancelled"
+        event.destroy!
+      else
+        event.update!(
+          title: google_calender_event.summary,
+          start_time: google_calender_event.start.date_time,
+          end_time: google_calender_event.end.date_time,
+          description: google_calender_event.description
+        )
+      end
     end
   end
 end

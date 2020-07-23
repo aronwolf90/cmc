@@ -5,6 +5,7 @@ module GoogleCalenders
     success :authorize
     success :get_google_calender_events
     success :trigger_event_importers
+    success :save_sync_token
 
   private
     def authorize(ctx, organization:, **)
@@ -21,7 +22,8 @@ module GoogleCalenders
       ctx[:google_calender_events] =
         GoogleCalenderClient.list_events(
           organization.google_calender_id,
-          google_authorization_data: google_authorization_data
+          google_authorization_data: google_authorization_data,
+          sync_token: organization.sync_token
         )
     end
 
@@ -32,6 +34,10 @@ module GoogleCalenders
           google_calender_event.to_json
         )
       end
+    end
+
+    def save_sync_token(ctx, organization:, google_calender_events:, **)
+      organization.update!(sync_token: google_calender_events.next_sync_token)
     end
   end
 end

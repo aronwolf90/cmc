@@ -20,12 +20,13 @@ RSpec.describe GoogleCalenders::ImportEventOperation do
   end
   let(:event) { Event.new }
   let(:google_calender_event) do
-    double(
+    Google::Apis::CalendarV3::Event.new(
       id: "id",
       updated: 1.hour.ago,
+      status: status,
       summary: "Title",
-      start: double(date_time: 1.hour.ago),
-      end: double(date_time: 1.hour.from_now),
+      start: Google::Apis::CalendarV3::EventDateTime.new(date_time: 1.hour.ago),
+      end: Google::Apis::CalendarV3::EventDateTime.new(date_time: 1.hour.from_now),
       description: "description"
     )
   end
@@ -47,11 +48,20 @@ RSpec.describe GoogleCalenders::ImportEventOperation do
     allow(Event).to receive(:find_or_initialize_by).and_return(event)
   end
 
-  context "when Event#google_calender_event_id is nil" do
-    let(:google_calender_event_id) { nil }
+  context "when status != canceled" do
+    let(:status) { "confirmed" }
 
     specify do
       expect(event).to receive(:update!)
+      call
+    end
+  end
+
+  context "when status == canceled" do
+    let(:status) { "cancelled" }
+
+    specify do
+      expect(event).to receive(:destroy!)
       call
     end
   end

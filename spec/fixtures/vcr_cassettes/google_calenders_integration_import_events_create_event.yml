@@ -5,7 +5,7 @@ http_interactions:
     uri: https://accounts.google.com/o/oauth2/token
     body:
       encoding: ASCII-8BIT
-      string: grant_type=refresh_token&refresh_token=1%2F%2F09GxtNICPh-n7CgYIARAAGAkSNwF-L9IrHl2ZDITFmhrclr34MWEzVVk7r8zhE_KDCVZtiiW6uqZvK4cW3viv6AbWDxO-dL87YtA&client_id=634131184869-qt64vu47i164012oc80l7ga8f1mf61aj.apps.googleusercontent.com&client_secret=NJsF7zJau-tuXmquGzrHsg4V
+      string: grant_type=refresh_token&refresh_token=REFRESH_TOKEN&client_id=CLIENT_ID&client_secret=CLIENT_SECRET
     headers:
       User-Agent:
       - Faraday v1.0.0
@@ -27,7 +27,7 @@ http_interactions:
       - Referer
       - X-Origin
       Date:
-      - Tue, 21 Jul 2020 21:48:33 GMT
+      - Thu, 23 Jul 2020 22:02:24 GMT
       Server:
       - scaffolding on HTTPServer2
       Cache-Control:
@@ -48,15 +48,15 @@ http_interactions:
       encoding: ASCII-8BIT
       string: |-
         {
-          "access_token": "ya29.a0AfH6SMAu0XPSXNu0ijDO0HxvJ4kt-w03vKKT7PckXXRxnZQVvNzvKZy4cUDJV-B94E_iw3dxG-hUTqjTaDYTI1FW1X4_TkYRaa-RcJZcvlkj5_47XpLgsUAIZ-ZvLRhc_BD21KuSniuTub_-FFD8botk62FX2Bth24M",
+          "access_token": "ACCESS_TOKEN",
           "expires_in": 3599,
           "scope": "https://www.googleapis.com/auth/calendar",
           "token_type": "Bearer"
         }
-  recorded_at: Tue, 21 Jul 2020 21:48:33 GMT
+  recorded_at: Thu, 23 Jul 2020 22:02:24 GMT
 - request:
     method: get
-    uri: https://www.googleapis.com/calendar/v3/calendars/sj68t3sbene75h08sc7d0b7i6c@group.calendar.google.com/events
+    uri: https://www.googleapis.com/calendar/v3/calendars/7q0l65fkmgppe7jrno6emqj6o4@group.calendar.google.com/events
     body:
       encoding: UTF-8
       string: ''
@@ -68,11 +68,11 @@ http_interactions:
       Accept-Encoding:
       - gzip,deflate
       Date:
-      - Tue, 21 Jul 2020 21:48:33 GMT
+      - Thu, 23 Jul 2020 22:02:24 GMT
       X-Goog-Api-Client:
       - gl-ruby/2.6.2 gdcl/0.41.0
       Authorization:
-      - Bearer ya29.a0AfH6SMAu0XPSXNu0ijDO0HxvJ4kt-w03vKKT7PckXXRxnZQVvNzvKZy4cUDJV-B94E_iw3dxG-hUTqjTaDYTI1FW1X4_TkYRaa-RcJZcvlkj5_47XpLgsUAIZ-ZvLRhc_BD21KuSniuTub_-FFD8botk62FX2Bth24M
+      - Bearer ACCESS_TOKEN
       Content-Type:
       - application/x-www-form-urlencoded
   response:
@@ -80,14 +80,14 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Cache-Control:
-      - private, max-age=0, must-revalidate, no-transform
-      Date:
-      - Tue, 21 Jul 2020 21:48:33 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Expires:
-      - Tue, 21 Jul 2020 21:48:33 GMT
+      - Thu, 23 Jul 2020 22:02:24 GMT
+      Cache-Control:
+      - private, max-age=0, must-revalidate, no-transform
+      Date:
+      - Thu, 23 Jul 2020 22:02:24 GMT
       Vary:
       - Origin
       - Referer
@@ -113,39 +113,39 @@ http_interactions:
       string: |
         {
          "kind": "calendar#events",
-         "etag": "\"p32kbtbsel3fuk0g\"",
+         "etag": "\"p338d3r74lviek0g\"",
          "summary": "Test",
-         "updated": "2020-07-21T21:42:59.721Z",
+         "updated": "2020-07-23T22:00:38.818Z",
          "timeZone": "UTC",
          "accessRole": "owner",
          "defaultReminders": [],
-         "nextSyncToken": "CKi-r46o3-oCEKi-r46o3-oCGAU=",
+         "nextSyncToken": "CNDR7OSv5OoCENDR7OSv5OoCGAU=",
          "items": [
           {
            "kind": "calendar#event",
-           "etag": "\"3190735559442000\"",
-           "id": "4qeoddnqdbr96r7umheat8299c",
+           "etag": "\"3191083277636000\"",
+           "id": "18a9t3c5dnn46voqn6c8imajm4",
            "status": "confirmed",
-           "htmlLink": "https://www.google.com/calendar/event?eid=NHFlb2RkbnFkYnI5NnI3dW1oZWF0ODI5OWMgc2o2OHQzc2JlbmU3NWgwOHNjN2QwYjdpNmNAZw",
-           "created": "2020-07-21T21:42:59.000Z",
-           "updated": "2020-07-21T21:42:59.721Z",
-           "summary": "Test",
+           "htmlLink": "https://www.google.com/calendar/event?eid=MThhOXQzYzVkbm40NnZvcW42YzhpbWFqbTQgN3EwbDY1ZmttZ3BwZTdqcm5vNmVtcWo2bzRAZw",
+           "created": "2020-07-23T22:00:38.000Z",
+           "updated": "2020-07-23T22:00:38.818Z",
+           "summary": "New event",
            "description": "Test",
            "creator": {
             "email": "aronwolf90@gmail.com"
            },
            "organizer": {
-            "email": "sj68t3sbene75h08sc7d0b7i6c@group.calendar.google.com",
+            "email": "7q0l65fkmgppe7jrno6emqj6o4@group.calendar.google.com",
             "displayName": "Test",
             "self": true
            },
            "start": {
-            "dateTime": "2020-07-21T20:42:59Z"
+            "dateTime": "2020-07-23T21:00:32Z"
            },
            "end": {
-            "dateTime": "2020-07-21T21:42:59Z"
+            "dateTime": "2020-07-23T22:00:32Z"
            },
-           "iCalUID": "4qeoddnqdbr96r7umheat8299c@google.com",
+           "iCalUID": "18a9t3c5dnn46voqn6c8imajm4@google.com",
            "sequence": 0,
            "reminders": {
             "useDefault": true
@@ -153,13 +153,13 @@ http_interactions:
           }
          ]
         }
-  recorded_at: Tue, 21 Jul 2020 21:48:33 GMT
+  recorded_at: Thu, 23 Jul 2020 22:02:24 GMT
 - request:
     method: post
     uri: https://accounts.google.com/o/oauth2/token
     body:
       encoding: ASCII-8BIT
-      string: grant_type=refresh_token&refresh_token=1%2F%2F09GxtNICPh-n7CgYIARAAGAkSNwF-L9IrHl2ZDITFmhrclr34MWEzVVk7r8zhE_KDCVZtiiW6uqZvK4cW3viv6AbWDxO-dL87YtA&client_id=634131184869-qt64vu47i164012oc80l7ga8f1mf61aj.apps.googleusercontent.com&client_secret=NJsF7zJau-tuXmquGzrHsg4V
+      string: grant_type=refresh_token&refresh_token=REFRESH_TOKEN&client_id=CLIENT_ID&client_secret=CLIENT_SECRET
     headers:
       User-Agent:
       - Faraday v1.0.0
@@ -181,7 +181,7 @@ http_interactions:
       - Referer
       - X-Origin
       Date:
-      - Tue, 21 Jul 2020 21:48:33 GMT
+      - Thu, 23 Jul 2020 22:02:25 GMT
       Server:
       - scaffolding on HTTPServer2
       Cache-Control:
@@ -202,10 +202,10 @@ http_interactions:
       encoding: ASCII-8BIT
       string: |-
         {
-          "access_token": "ya29.a0AfH6SMCsqg1046R77q0q5e2_RpHgXtiwUb7MBqr8cnTaTH3zkTuanO5PABADkjqfFShztfegGFrlPSK1eJizSYsD2oPODaWKIdxbeT37-c7MySgnDErc4IcJ6nThliA6ytexBLo89xLrMvnv-IXEYiZ7Up_nD_76ng8",
+          "access_token": "ACCESS_TOKEN",
           "expires_in": 3599,
           "scope": "https://www.googleapis.com/auth/calendar",
           "token_type": "Bearer"
         }
-  recorded_at: Tue, 21 Jul 2020 21:48:33 GMT
+  recorded_at: Thu, 23 Jul 2020 22:02:25 GMT
 recorded_with: VCR 6.0.0

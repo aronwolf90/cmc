@@ -298,7 +298,8 @@ CREATE TABLE events (
     start_time timestamp without time zone,
     end_time timestamp without time zone,
     description text,
-    google_calender_event_id character varying
+    google_calender_event_id character varying,
+    deleted_at timestamp without time zone
 );
 
 
@@ -449,7 +450,8 @@ CREATE TABLE organizations (
     google_calender_id character varying,
     google_calender_access_token character varying,
     google_calender_expires_at timestamp without time zone,
-    google_calender_refresh_token character varying
+    google_calender_refresh_token character varying,
+    sync_token character varying
 );
 
 
@@ -1240,6 +1242,13 @@ CREATE INDEX index_documents_on_folder_id ON documents USING btree (folder_id);
 
 
 --
+-- Name: index_events_on_deleted_at; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_events_on_deleted_at ON events USING btree (deleted_at);
+
+
+--
 -- Name: index_folders_on_folder_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
@@ -1584,9 +1593,13 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200412190726'),
 ('20200419215752'),
 ('20200419220104'),
-('20200628210927'),
 ('20200628135029'),
 ('20200628135640'),
+('20200628210927'),
 ('20200705121509'),
 ('20200705121742'),
-('20200707180726');
+('20200707180726'),
+('20200722221017'),
+('20200723205354');
+
+

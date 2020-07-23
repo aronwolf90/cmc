@@ -40,10 +40,10 @@ class GoogleCalenderClient
     calender_service.get_event(google_calender_id, google_calender_event_id)
   end
 
-  def self.list_events(google_calender_id, **args)
+  def self.list_events(google_calender_id, sync_token:, **args)
     calender_service = new(**args).calender_service
 
-    calender_service.list_events(google_calender_id)
+    calender_service.list_events(google_calender_id, sync_token: sync_token)
   end
 
   def self.create_event(google_calender_id:, title:, description:, start_time:, end_time:, **args)
@@ -70,6 +70,12 @@ class GoogleCalenderClient
     )
 
     calender_service.update_event(google_calender_id, google_calender_event_id, event)
+  end
+
+  def self.delete_event(google_calender_id:, google_calender_event_id:, **args)
+    calender_service = new(**args).calender_service
+
+    calender_service.delete_event(google_calender_id, google_calender_event_id)
   end
 
   def self.authorize!(**args)

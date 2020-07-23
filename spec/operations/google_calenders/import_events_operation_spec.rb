@@ -34,11 +34,17 @@ RSpec.describe GoogleCalenders::ImportEventsOperation do
   specify do
     expect(GoogleCalenderClient)
       .to receive(:list_events)
-      .with("id", google_authorization_data: google_authorization_data)
+      .with(
+        "id",
+        google_authorization_data: google_authorization_data,
+        sync_token: nil
+      )
       .and_return(google_calender_events)
     expect(GoogleCalenders::AuthorizeOperation).to receive(:call)
       .and_return(google_authorization_data: google_authorization_data)
     expect(GoogleCalenders::ImportEventJob).to receive(:perform_later)
+    expect(organization).to receive(:update!)
+      .with(sync_token: google_calender_events.next_sync_token)
     call
   end
 end
