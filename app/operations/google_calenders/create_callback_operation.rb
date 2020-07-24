@@ -8,6 +8,7 @@ module GoogleCalenders
     success :create_google_calender
     success :create_web_hook
     success :mutate
+    success :export_events
 
   private
     def get_authorization(ctx, code:, **)
@@ -31,12 +32,16 @@ module GoogleCalenders
       )
     end
 
-    def mutate(options, organization:, calender:, google_authorization_data:, **)
+    def mutate(_, organization:, calender:, google_authorization_data:, **)
       GoogleCalenders::CreateCallbackMutation.(
         organization: organization,
         calender: calender,
         google_calender_authorization_data: google_authorization_data
       )
+    end
+
+    def export_events(ctx, organization:, **)
+      GoogleCalenders::ExportEventsJob.perform_later(organization)
     end
   end
 end

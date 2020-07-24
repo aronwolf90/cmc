@@ -8,6 +8,8 @@ module Api
       model_class Event
       serializer EventSerializer
 
+      per_page 400
+
       public :index, :create, :update, :destroy
     end
   end

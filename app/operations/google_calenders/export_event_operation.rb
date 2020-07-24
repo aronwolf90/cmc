@@ -33,7 +33,13 @@ module GoogleCalenders
 
     def call_google_api(ctx, event:, organization:, **)
       google_event =
-        if event.google_calender_event_id.present?
+        if event.deleted?
+          GoogleCalenderClient.delete_event(
+            google_calender_id: organization.google_calender_id,
+            google_calender_event_id: event.google_calender_event_id,
+            google_authorization_data: organization.google_calender_authorization_data
+          )
+        elsif event.google_calender_event_id.present?
           GoogleCalenderClient.update_event(
             google_calender_id: organization.google_calender_id,
             google_calender_event_id: event.google_calender_event_id,
@@ -61,10 +67,12 @@ module GoogleCalenders
             google_authorization_data: organization.google_calender_authorization_data
           )
         end
-      ctx[:google_calender_event_id] = google_event.id
+      ctx[:google_calender_event_id] = google_event&.id || event.google_calender_event_id
     end
 
     def update_event(_, event:, google_calender_event_id:, **)
+      return if event.google_calender_event_id.present?
+
       event.update!(google_calender_event_id: google_calender_event_id)
     end
   end

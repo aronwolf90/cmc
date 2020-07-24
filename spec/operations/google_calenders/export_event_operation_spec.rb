@@ -90,4 +90,20 @@ RSpec.describe GoogleCalenders::ExportEventOperation do
       expect(GoogleCalenderClient).not_to have_received(:update_event)
     end
   end
+
+  context "when the event was deleted" do
+    let(:event) do
+      Event.new(deleted_at: Time.zone.now, google_calender_event_id: "id", updated_at: Time.zone.now)
+    end
+
+    before do
+      allow(GoogleCalenderClient)
+        .to receive(:get_event).and_return(double(id: "id", updated: 1.hour.ago))
+    end
+
+    specify do
+      expect(GoogleCalenderClient).to receive(:delete_event)
+      call
+    end
+  end
 end

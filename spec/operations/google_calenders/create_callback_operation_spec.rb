@@ -5,7 +5,7 @@ require_relative "../shared_examples/standard_create_operation"
 
 RSpec.describe GoogleCalenders::CreateCallbackOperation do
   let(:calender) { double(id: "test") }
-  let(:organization) { Organization.new(name: "test-name") }
+  let(:organization) { Organization.new(id: 1, name: "test-name") }
   let(:google_authorization_data) do
     GoogleAuthorizationData.new(
       access_token: "access_token",
