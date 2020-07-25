@@ -13,7 +13,7 @@ class ApartmentMiddleware < Apartment::Elevators::Generic
     return if request.host.count(".") < 2
 
     tenant_name_candidate = request.host.split(".").first
-    return if tenant_name_candidate =~ /^[0-9]+$/
+    return if tenant_name_candidate.match?(/^[0-9]+$/)
 
     tenant_name_candidate
   end
