@@ -26,7 +26,7 @@ module GoogleCalenders
     end
 
     def check(ctx, event:, google_calender_event: nil, **)
-      return true if google_calender_event.nil?
+      return true if google_calender_event.nil? || event.deleted?
 
       event.updated_at > google_calender_event.updated
     end
