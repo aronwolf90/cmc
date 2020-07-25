@@ -27,33 +27,37 @@ module GoogleCalenders
 
     def check(ctx, event:, google_calender_event: nil, **)
       return true if google_calender_event.nil?
+      return true if event.deleted? && google_calender_event.status != "cancelled"
+      return false if event.deleted? && google_calender_event.status == "cancelled"
 
       event.updated_at > google_calender_event.updated
     end
 
     def call_google_api(ctx, event:, organization:, **)
-      google_event =
-        if event.deleted?
-          GoogleCalenderClient.delete_event(
-            google_calender_id: organization.google_calender_id,
-            google_calender_event_id: event.google_calender_event_id,
-            google_authorization_data: organization.google_calender_authorization_data
-          )
-        elsif event.google_calender_event_id.present?
-          GoogleCalenderClient.update_event(
-            google_calender_id: organization.google_calender_id,
-            google_calender_event_id: event.google_calender_event_id,
-            title: event.title,
-            description: event.description,
-            start_time: {
-              date_time: event.start_time.rfc3339
-            },
-            end_time: {
-              date_time: event.end_time.rfc3339
-            },
-            google_authorization_data: organization.google_calender_authorization_data
-          )
-        else
+      ctx[:google_calender_event_id] = event.google_calender_event_id
+
+      if event.deleted?
+        GoogleCalenderClient.delete_event(
+          google_calender_id: organization.google_calender_id,
+          google_calender_event_id: event.google_calender_event_id,
+          google_authorization_data: organization.google_calender_authorization_data
+        )
+      elsif event.google_calender_event_id.present?
+        GoogleCalenderClient.update_event(
+          google_calender_id: organization.google_calender_id,
+          google_calender_event_id: event.google_calender_event_id,
+          title: event.title,
+          description: event.description,
+          start_time: {
+            date_time: event.start_time.rfc3339
+          },
+          end_time: {
+            date_time: event.end_time.rfc3339
+          },
+          google_authorization_data: organization.google_calender_authorization_data
+        )
+      else
+        ctx[:google_calender_event_id] =
           GoogleCalenderClient.create_event(
             google_calender_id: organization.google_calender_id,
             title: event.title,
@@ -65,9 +69,8 @@ module GoogleCalenders
               date_time: event.end_time.rfc3339
             },
             google_authorization_data: organization.google_calender_authorization_data
-          )
-        end
-      ctx[:google_calender_event_id] = google_event&.id || event.google_calender_event_id
+          ).id
+      end
     end
 
     def update_event(_, event:, google_calender_event_id:, **)

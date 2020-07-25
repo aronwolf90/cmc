@@ -10,7 +10,7 @@ RSpec.describe GoogleCalenders::ExportEventJob, type: :model do
 
   before do
     allow(GoogleCalenders::ExportEventOperation).to receive(:call)
-    allow(Event).to receive(:find).and_return(event)
+    allow(Event).to receive(:unscoped).and_return(double(find: event))
   end
 
   it "calls Jobs::CreateNotificationsOperation" do

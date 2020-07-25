@@ -25,11 +25,14 @@ RSpec.describe GoogleCalenders::ExportEventOperation do
       refresh_token: "refresh_token"
     )
   end
+  let(:google_calender_event) do
+    Google::Apis::CalendarV3::Event.new(id: "id", updated: 1.hour.ago)
+  end
 
   before do
-    allow(GoogleCalenderClient).to receive(:create_event).and_return(double(id: "id"))
-    allow(GoogleCalenderClient).to receive(:update_event).and_return(double(id: "id"))
-    allow(GoogleCalenderClient).to receive(:get_event).and_return(double(id: "id", updated: 1.hour.ago))
+    allow(GoogleCalenderClient).to receive(:create_event).and_return(google_calender_event)
+    allow(GoogleCalenderClient).to receive(:update_event).and_return(google_calender_event)
+    allow(GoogleCalenderClient).to receive(:get_event).and_return(google_calender_event)
     allow(GoogleCalenderClient).to receive(:authorize!).and_return(google_authorization_data)
     allow(GoogleCalenders::AuthorizeOperation).to receive(:call)
       .and_return(google_authorization_data: google_authorization_data)
@@ -82,7 +85,7 @@ RSpec.describe GoogleCalenders::ExportEventOperation do
     let(:google_calender_event_id) { "event_id" }
 
     before do
-      allow(GoogleCalenderClient).to receive(:get_event).and_return(double(id: "id", updated: 1.hour.from_now))
+      allow(GoogleCalenderClient).to receive(:get_event).and_return(double(id: "id", updated: 1.hour.from_now, status: nil))
     end
 
     specify do
@@ -98,7 +101,7 @@ RSpec.describe GoogleCalenders::ExportEventOperation do
 
     before do
       allow(GoogleCalenderClient)
-        .to receive(:get_event).and_return(double(id: "id", updated: 1.hour.ago))
+        .to receive(:get_event).and_return(double(id: "id", updated: 1.hour.ago, status: nil))
     end
 
     specify do

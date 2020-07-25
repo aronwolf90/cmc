@@ -5,7 +5,7 @@ module Events
     def perform(organization, event_id)
       Apartment::Tenant.switch(organization.name) do
         Events::ExportOperation.(
-          event: Event.find(event_id),
+          event: Event.unscoped.find(event_id),
           organization: organization
         )
       end
