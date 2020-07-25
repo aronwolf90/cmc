@@ -3,7 +3,7 @@
 module Administration
   module Users
     class BaseController < AdministrationController
-      side_menu "administration/specific_user"
+      side_menu :administration
     end
   end
 end

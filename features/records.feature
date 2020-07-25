@@ -34,3 +34,10 @@ Scenario: Record edit
   And I click on "label"
   And I click on submit
   Then the page contain the year of one week ago
+
+@javascript
+Scenario: Downlad csv
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Records"
+  And I click on ".fa-file-excel-o"
