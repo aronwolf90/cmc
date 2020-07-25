@@ -21,6 +21,7 @@ gem "acts_as_paranoid"
 gem "carrierwave"
 gem "composite_primary_keys"
 gem "config"
+gem "dry-struct"
 gem "fog-aws"
 gem "hash_mapper"
 gem "holidays"
@@ -67,6 +68,9 @@ gem "font-awesome-rails"
 gem "simple_form"
 gem "slim-rails"
 
+# Apis
+gem "google-api-client", require: "google/apis/calendar_v3"
+
 group :production do
   gem "sentry-raven"
 end
@@ -106,4 +110,6 @@ group :test do
   gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "timecop"
+  gem "vcr"
+  gem "webmock"
 end

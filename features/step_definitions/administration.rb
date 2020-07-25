@@ -203,9 +203,10 @@ When(/^I sleep "([^\"]*)" seconds/) do |seconds|
 end
 
 When(/^I reload until "([^\"]*)" with text "([^\"]*)"$/) do |element, text|
-  20.times do
+  40.times do
     page.driver.browser.navigate.refresh
     break if page.has_css?(element, wait: 1.second, text: text)
+    sleep 0.2
   end
 end
 

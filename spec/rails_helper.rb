@@ -9,6 +9,8 @@ Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |file| require file }
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
 require "rspec/rails"
+require "sidekiq/testing"
+require "webmock/rspec"
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -70,3 +72,10 @@ Fog::Storage
  .new(AvatarUploader.fog_credentials)
  .directories
  .create(key: "cmc/test")
+Sidekiq::Testing.fake!
+ActiveJob::Base.queue_adapter = :test
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+end

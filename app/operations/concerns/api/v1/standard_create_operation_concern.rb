@@ -9,7 +9,9 @@ module Api::V1
       step ValidateStep.new(form: @form)
       success DeserializeStep.new(deserializer: @deserializer)
       step self::Policy::Pundit(@policy, :create?) if @policy
-      success CreateMutationStep
+      unless @no_mutation_step
+        success CreateMutationStep
+      end
     end
   end
 end

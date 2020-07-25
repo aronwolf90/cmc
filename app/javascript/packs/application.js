@@ -8,7 +8,6 @@ import SharedIssueSection from '../shared_issue_section'
 import WikiContent from '../wiki_content'
 import WikiPage from '../wiki_page'
 import ArchiveContent from '../archive_content'
-import PersonalDashboardGraph from '../personal_dashboard_graph'
 import ProjectSearchSelect from '../project_search_select'
 import Calender from '../calender'
 import Timepicker from '../components/timepicker'
@@ -68,7 +67,6 @@ Vue.component('shared-issue-section', SharedIssueSection)
 Vue.component('wiki-content', WikiContent)
 Vue.component('wiki-page', WikiPage)
 Vue.component('archive-content', ArchiveContent)
-Vue.component('personal_dashboard_graph', PersonalDashboardGraph)
 Vue.component('project-search-select', ProjectSearchSelect)
 Vue.component('calender', Calender)
 Vue.component('timepicker', Timepicker)

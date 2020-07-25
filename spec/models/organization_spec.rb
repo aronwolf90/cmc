@@ -144,4 +144,47 @@ RSpec.describe Organization, type: :model do
       expect(described_class.premium?).to eq false
     end
   end
+
+  describe "#google_calender_authorization_data" do
+    subject(:google_calender_authorization_data) do
+      described_class.new(
+        google_calender_access_token: "access_token",
+        google_calender_expires_at: DateTime.parse("10.10.2020 10:10:00"),
+        google_calender_refresh_token: "refresh_token"
+      ).google_calender_authorization_data
+    end
+
+    specify do
+      expect(google_calender_authorization_data).to eq(
+        GoogleAuthorizationData.new(
+          access_token: "access_token",
+          expires_at: DateTime.parse("10.10.2020 10:10:00"),
+          refresh_token: "refresh_token"
+        )
+      )
+    end
+  end
+
+  describe "#google_calender_authorization_data=" do
+    subject(:organization) { Organization.new }
+
+    let(:google_calender_authorization_data) do
+      GoogleAuthorizationData.new(
+        access_token: "access_token",
+        expires_at: DateTime.parse("10.10.2020 10:10:00"),
+        refresh_token: "refresh_token"
+      )
+    end
+
+    specify do
+      organization.google_calender_authorization_data =
+        google_calender_authorization_data
+
+      expect(organization).to have_attributes(
+        google_calender_access_token: "access_token",
+        google_calender_expires_at: DateTime.parse("10.10.2020 10:10:00").in_time_zone,
+        google_calender_refresh_token: "refresh_token"
+      )
+    end
+  end
 end

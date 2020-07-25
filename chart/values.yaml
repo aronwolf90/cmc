@@ -53,3 +53,8 @@ mailer:
 payment:
   enabled: false
   host: https://example.com
+
+google:
+  webHook: "false"
+  clientId: ""
+  calenderSecret: ""
