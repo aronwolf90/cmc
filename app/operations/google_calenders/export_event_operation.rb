@@ -23,9 +23,11 @@ module GoogleCalenders
           event.google_calender_event_id,
           google_authorization_data: google_authorization_data
         )
+    rescue Google::Apis::ClientError
     end
 
     def check(ctx, event:, google_calender_event: nil, **)
+      return false if event.deleted? && google_calender_event.nil?
       return true if google_calender_event.nil?
       return true if event.deleted? && google_calender_event.status != "cancelled"
       return false if event.deleted? && google_calender_event.status == "cancelled"
@@ -33,16 +35,14 @@ module GoogleCalenders
       event.updated_at > google_calender_event.updated
     end
 
-    def call_google_api(ctx, event:, organization:, **)
-      ctx[:google_calender_event_id] = event.google_calender_event_id
-
+    def call_google_api(ctx, event:, google_calender_event: nil, organization:, **)
       if event.deleted?
         GoogleCalenderClient.delete_event(
           google_calender_id: organization.google_calender_id,
           google_calender_event_id: event.google_calender_event_id,
           google_authorization_data: organization.google_calender_authorization_data
         )
-      elsif event.google_calender_event_id.present?
+      elsif google_calender_event.present?
         GoogleCalenderClient.update_event(
           google_calender_id: organization.google_calender_id,
           google_calender_event_id: event.google_calender_event_id,
@@ -57,7 +57,7 @@ module GoogleCalenders
           google_authorization_data: organization.google_calender_authorization_data
         )
       else
-        ctx[:google_calender_event_id] =
+        ctx[:google_calender_event] =
           GoogleCalenderClient.create_event(
             google_calender_id: organization.google_calender_id,
             title: event.title,
@@ -69,14 +69,12 @@ module GoogleCalenders
               date_time: event.end_time.rfc3339
             },
             google_authorization_data: organization.google_calender_authorization_data
-          ).id
+          )
       end
     end
 
-    def update_event(_, event:, google_calender_event_id:, **)
-      return if event.google_calender_event_id.present?
-
-      event.update!(google_calender_event_id: google_calender_event_id)
+    def update_event(_, event:, google_calender_event:, **)
+      event.update!(google_calender_event_id: google_calender_event.id)
     end
   end
 end

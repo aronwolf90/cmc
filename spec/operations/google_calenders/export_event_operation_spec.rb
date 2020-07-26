@@ -30,6 +30,7 @@ RSpec.describe GoogleCalenders::ExportEventOperation do
   end
 
   before do
+    allow(event).to receive(:update!)
     allow(GoogleCalenderClient).to receive(:create_event).and_return(google_calender_event)
     allow(GoogleCalenderClient).to receive(:update_event).and_return(google_calender_event)
     allow(GoogleCalenderClient).to receive(:get_event).and_return(google_calender_event)
@@ -106,6 +107,24 @@ RSpec.describe GoogleCalenders::ExportEventOperation do
 
     specify do
       expect(GoogleCalenderClient).to receive(:delete_event)
+      call
+    end
+  end
+
+  context "when Google::Apis::ClientError is raiced" do
+    let(:event) do
+      Event.new(deleted_at: Time.zone.now, google_calender_event_id: "id", updated_at: Time.zone.now)
+    end
+
+    before do
+      allow(GoogleCalenderClient)
+        .to receive(:get_event).and_raise(Google::Apis::ClientError.new(nil))
+    end
+
+    specify do
+      expect(event).not_to receive(:update!)
+      expect(GoogleCalenderClient).not_to have_received(:update_event)
+      expect(GoogleCalenderClient).not_to have_received(:create_event)
       call
     end
   end

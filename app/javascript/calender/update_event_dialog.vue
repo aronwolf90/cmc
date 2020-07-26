@@ -1,49 +1,52 @@
 <template lang='pug'>
-    #update-event-dialog.modal.fade(
-      tabindex='-1',
-      role='dialog',
-      data-backdrop="false",
-      aria-labelledby='exampleModalLabel',
-      aria-hidden='true'
-    )
-      .modal-dialog.modal-dialog-centered(role='document')
-        .modal-content
-          .modal-header
-            h5#exampleModalLabel.modal-title Edit event
-            button.close(type='button', data-dismiss='modal', aria-label='Close')
-              span(aria-hidden='true') ×
-          .modal-body
-            .row
-              .col-12.label
-                | Title
-                input.form-control(v-model='form.title')
-            .row
-              .col-6.label
-                | Date
-                datepicker(v-model='form.date')
-              .col-6.label
-                | Time
-                .input-group
-                  .input-group-prepend
-                    .input-group-text
-                      input(v-model='form.nonAllDay', type='checkbox', @change="jqueryFuncs()")
-                  template(v-if='form.nonAllDay')
-                    timepicker(v-model='form.startTime')
-                    timepicker(v-model='form.endTime')
-                  input.form-control(v-else, disabled=true)
-            .row
-              .col-12.label
-                | Description
-                textarea.form-control(v-model='form.description')
-          .modal-footer
-            button.btn.btn-danger(
-              @click='destroy',
-              data-dismiss='modal'
-            ) Delete
-            button.btn.btn-success(
-              @click='update',
-              data-dismiss='modal'
-            ) Save changes
+  b-modal#update-event-dialog(
+    centered="",
+    title="Edit event"
+  )
+    .row
+      .col-12.label
+        | Title
+        input.form-control(v-model='form.title')
+    .row
+      .col-6.label
+        | Date
+        b-form-datepicker(
+          v-model='form.date',
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+        )
+      .col-6.label
+        | Time
+        .input-group
+          .input-group-prepend
+            .input-group-text
+              input(v-model='form.nonAllDay', type='checkbox')
+          template(v-if='form.nonAllDay')
+            b-form-timepicker(
+              v-model='form.startTime',
+              placeholder="From",
+              :hour12=`false`
+            )
+              template(v-slot:button-content="")
+            b-form-timepicker(
+              v-model='form.endTime',
+              placeholder="To",
+              :hour12=`false`
+            )
+              template(v-slot:button-content="")
+          input.form-control(v-else, disabled=true)
+    .row
+      .col-12.label
+        | Description
+        textarea.form-control(v-model='form.description')
+    template(v-slot:modal-footer="")
+      button.btn.btn-danger(
+        @click='destroy',
+        data-dismiss='modal'
+      ) Delete
+      btn-submit(
+        @click="update",
+        :saving="saving"
+      ) Save changes
 </template>
 
 <script>
@@ -53,6 +56,7 @@ export default {
   props: ['eventId'],
   data () {
    return {
+     saving: false,
      form: {
        title: null,
        date: null,
@@ -65,6 +69,7 @@ export default {
   },
   methods: {
    update () {
+     this.saving = true
      this.$store.dispatch('updateEvent', {
        entry: this.event,
        attributes: {
@@ -74,10 +79,14 @@ export default {
          'all-day': !this.form.nonAllDay,
          'description': this.form.description
        }
+     }).then(() => {
+       this.saving = false
+       this.$root.$emit('bv::hide::modal', 'update-event-dialog')
      })
     },
     destroy () {
       this.$store.dispatch('destroyEvent', this.event)
+      this.$root.$emit('bv::hide::modal', 'update-event-dialog')
     },
     jqueryFuncs () {
       setTimeout(() => jqueryFuncs(), 100)

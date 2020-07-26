@@ -1,7 +1,5 @@
 <template lang='pug'>
 .calender
-  create-event-dialog
-  update-event-dialog(:event-id='editEdventId')
   .header.row
     .col-sm-3
       .btn-group
@@ -29,13 +27,10 @@
           .fa.fa-angle-right.fa-lg
     .col-sm-3
       .pull-right
-        a.btn.btn-outline-secondary(
-          href='#',
-          data-toggle="modal",
-          data-target="#create-event-dialog"
+        b-button(
+          v-b-modal.create-event-dialog="",
+          variant="outline-secondary"
         ) Add event
-
-
 
   .content.vuetify
     ds-gestures(@swipeleft='next', @swiperight='prev')
@@ -71,6 +66,8 @@
             @added='handleAdd',
             @moved='handleMove'
           )
+  create-event-dialog
+  update-event-dialog(:event-id='editEdventId')
 </template>
 
 <script>
@@ -341,7 +338,7 @@ export default {
     },
     edit(calendarEvent) {
       this.editEdventId = calendarEvent.data.id
-      $('#update-event-dialog').modal('show') 
+      this.$root.$emit('bv::show::modal', 'update-event-dialog')
     },
     editPlaceholder(createEdit) {},
     add(day) {},
