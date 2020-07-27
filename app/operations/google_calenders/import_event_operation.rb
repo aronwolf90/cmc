@@ -31,9 +31,9 @@ module GoogleCalenders
         event.destroy!
       else
         event.update!(
-          title: google_calender_event.summary,
-          start_time: google_calender_event.start.date_time,
-          end_time: google_calender_event.end.date_time,
+          title: google_calender_event.summary || " ",
+          start_time: google_calender_event.start.date_time || google_calender_event.start.date,
+          end_time: google_calender_event.end.date_time || google_calender_event.end.date,
           description: google_calender_event.description
         )
       end

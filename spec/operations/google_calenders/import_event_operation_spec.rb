@@ -65,4 +65,27 @@ RSpec.describe GoogleCalenders::ImportEventOperation do
       call
     end
   end
+
+  context "when datetime is nil but date is present" do
+    let(:google_calender_event) do
+      Google::Apis::CalendarV3::Event.new(
+        id: "id",
+        updated: 1.hour.ago,
+        summary: "Title",
+        start: Google::Apis::CalendarV3::EventDateTime.new(date: "01.01.2020".to_date),
+        end: Google::Apis::CalendarV3::EventDateTime.new(date: "02.01.2020".to_date),
+        description: "description"
+      )
+    end
+
+    specify do
+      expect(event).to receive(:update!).with(
+        title: "Title",
+        start_time: "01.01.2020".to_date,
+        end_time: "02.01.2020".to_date,
+        description: "description"
+      )
+      call
+    end
+  end
 end
