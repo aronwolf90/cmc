@@ -95,8 +95,18 @@ Then(/^the JSON response should be:$/) do |json|
 end
 
 Then(/^the JSON response should match:$/) do |json|
-  expected = JSON.parse(json).to_s
-  actual = JSON.parse(@response.body).to_s
+  sort_hash = lambda do |hash|
+    hash.sort_by { |key, value| key }.map do |key, value|
+      if value.is_a?(Hash)
+        [key, sort_hash.(value)]
+      else
+        [key, value]
+      end
+    end.to_h
+  end
+
+  expected = sort_hash.(JSON.parse(json)).to_s
+  actual = sort_hash.(JSON.parse(@response.body)).to_s
 
   if ENV["PRINT_RESPONSE"]
     puts "The response is:"

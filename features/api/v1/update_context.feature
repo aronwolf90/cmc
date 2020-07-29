@@ -22,7 +22,7 @@ Feature: API: update context
     Then the response status should be "200"
     When I send a GET request to "/api/v1/context"
     Then the response status should be "200"
-    And the JSON response should be:
+    And the JSON response should match:
       """
       {
          "data":{
@@ -32,7 +32,9 @@ Feature: API: update context
                "premium":false,
                "user-count":3,
                "time-zone":"Madrid",
-               "global-board":true
+               "global-board":true,
+               "google-calender-authorization-url": "<.*>",
+               "google-calender-integrated": false
             },
             "relationships":{
                "current-user":{

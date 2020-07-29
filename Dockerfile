@@ -17,9 +17,6 @@ RUN echo "export PATH=/app/bin:$PATH" >> ~/.profile && \
   bundle install --jobs $(nproc) && \
   yarn install
 
-COPY --from=registry.gitlab.com/cmc_system/cmc:latest /app/public /app/public
-COPY --from=registry.gitlab.com/cmc_system/cmc:latest /app/tmp/cache /app/tmp/cache
-
 COPY . ./
 
 RUN SECRET_KEY_BASE='9479a648d2fb' \
