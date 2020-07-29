@@ -17,7 +17,9 @@ Scenario: Get
           "premium": false, 
           "user-count": 3,
           "global-board": false,
-          "time-zone": "Berlin"
+          "time-zone": "Berlin",
+          "google-calender-integrated": false,
+					"google-calender-authorization-url": "https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=634131184869-qt64vu47i164012oc80l7ga8f1mf61aj.apps.googleusercontent.com&redirect_uri=http://lvh.me:3000/google_calenders/create_callback&response_type=code&scope=https://www.googleapis.com/auth/calendar&state=test-organization"
         },
         "relationships": {
           "current-user": { "data": { "id": "1", "type": "users" } }

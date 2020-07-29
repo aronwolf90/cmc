@@ -7,7 +7,9 @@ class Context < ActiveModelSerializers::Model
     :premium,
     :user_count,
     :time_zone,
-    :global_board
+    :global_board,
+    :google_calender_integrated,
+    :google_calender_authorization_url
   )
 
   delegate :id, to: :current_user, prefix: true

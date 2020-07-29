@@ -10,7 +10,9 @@ RSpec.describe Api::V1::ContextSerializer, type: :serializer do
       premium: true,
       user_count: 1,
       time_zone: "Berlin",
-      global_board: true
+      global_board: true,
+      google_calender_integrated: true,
+      google_calender_authorization_url: "http://test.com"
     )
   end
 
@@ -23,7 +25,9 @@ RSpec.describe Api::V1::ContextSerializer, type: :serializer do
           premium: true,
           "user-count": 1,
           "time-zone": "Berlin",
-          "global-board": true
+          "global-board": true,
+          "google-calender-integrated": true,
+          "google-calender-authorization-url": "http://test.com"
         },
         relationships: {
           "current-user": { data: { id: user.id.to_s, type: "users" } }

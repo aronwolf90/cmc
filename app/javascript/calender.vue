@@ -1,10 +1,12 @@
 <template lang='pug'>
 .calender
   .header.row
-    .col-sm-3
+    .col-md-3.col-4
       .btn-group
         slot(name='today', v-bind='{setToday, todayDate, calendar}')
-          a.btn.btn-outline-secondary(@click='setToday') Today
+          a.btn.btn-outline-secondary(@click='setToday')
+            .i.fa.fa-calendar-check-o.d-md-none(aria-hidden="true")
+            .d-none.d-md-block Today
         slot(name='view', v-bind='{currentType, types}')
           a.btn.btn-outline-secondary.dropdown-toggle(
             data-toggle='dropdown',
@@ -17,20 +19,27 @@
               @click='currentType = type',
               v-for='type in types'
             ) {{ type.label }}
-    .col-sm-6.text-center
+    .col-5.col-md-3.text-center
       slot(name='prev', v-bind='{prev, prevLabel, calendar}')
-        button.btn.btn-link(@click='prev')
+        button.btn.btn-link.pl-1(@click='prev')
           .fa.fa-angle-left.fa-lg
       slot(name='summary', v-bind='{summary, calendar}') {{ summary}} 
       slot(name='next', v-bind='{next, nextLabel, calendar}')
-        button.btn.btn-link(@click='next')
+        button.btn.btn-link.pr-1(@click='next')
           .fa.fa-angle-right.fa-lg
-    .col-sm-3
-      .pull-right
+    .col-3.col-md-6
+      .pull-right.btn-group
+        calenders-google-subscription-btn(
+          :is-google-integrated="isGoogleIntegrated",
+          :authorization-url="googleCalenderAuthorizationUrl",
+          v-if="isAdmin"
+        )
         b-button(
           v-b-modal.create-event-dialog="",
           variant="outline-secondary"
-        ) Add event
+        ) 
+          i.fa.fa-plus.d-md-none(aria-hidden="true")
+          .d-none.d-md-block Add event
 
   .content.vuetify
     ds-gestures(@swipeleft='next', @swiperight='prev')
@@ -71,6 +80,8 @@
 </template>
 
 <script>
+import CalendersGoogleSubscriptionBtn from 'components/calenders/google-subscription-btn'
+
 import {
   Constants,
   Sorts,
@@ -93,7 +104,8 @@ export default {
   name: 'dsCalendarApp',
   components: {
     CreateEventDialog,
-    UpdateEventDialog
+    UpdateEventDialog,
+    CalendersGoogleSubscriptionBtn
   },
   props:
   {
@@ -180,14 +192,33 @@ export default {
   }),
   created () {
     this.$store.dispatch('initEvents')
+    this.$store.dispatch('initCurrentUser')
   },
   watch:
   {
     'events': 'applyEvents',
     'calendar': 'applyEvents'
   },
-  computed:
-  {
+  computed: {
+    isGoogleIntegrated () {
+      return Utils.attribute(
+        this.$store.getters.context,
+        "google-calender-integrated"
+      )
+    },
+    googleCalenderAuthorizationUrl () {
+      return Utils.attribute(
+        this.$store.getters.context,
+        "google-calender-authorization-url"
+      )
+    },
+    isAdmin () {
+      if (!this.$store.getters.currentUser) return false
+      return Utils.attribute(
+        this.$store.getters.currentUser,
+        "type"
+      ) == "Admin"
+    },
     events () {
       return (this.$store.getters.collection('events') || []).map(event => {
         let startTime = Utils.attribute(event, 'start-time')
