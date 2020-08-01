@@ -39,6 +39,7 @@ import ProjectsShow from 'store/modules/projects-show'
 import issuesShow from 'store/modules/issues-show'
 import commentGetters from 'store/models/comment-getters'
 import documentGetters from 'store/models/document-getters'
+import CalenderActions from 'store/models/calender_actions'
 
 export default {
   strict: true,
@@ -152,6 +153,7 @@ export default {
     ...projectStatusActions,
     ...projectBoardListActions,
     ...projectCommentActions,
+    ...CalenderActions,
 
     initCurrentUser (context) {
       return context.dispatch('getContext').then(response => {

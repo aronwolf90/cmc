@@ -12,7 +12,7 @@ describe('CalendersGoogleSubscriptionBtn', () => {
       }
     })
 
-    expect(wrapper.html()).to.include('Integrate with google calender')
+    expect(wrapper.html()).to.include('Integrate with google')
   })
 
   it('show  "Cancel google calender integration" when isGoogleIntegrated< is true', () => {
@@ -22,6 +22,6 @@ describe('CalendersGoogleSubscriptionBtn', () => {
       }
     })
 
-    expect(wrapper.html()).to.include('Is integrated with google calender')
+    expect(wrapper.html()).to.include('Destroy google integration')
   })
 })

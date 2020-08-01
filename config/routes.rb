@@ -132,6 +132,11 @@ Rails.application.routes.draw do
         end
       end
       resource :health_check, only: :show
+      resource :calenders, only: [] do
+        scope module: :calenders do
+          resource :google_integration, only: :destroy
+        end
+      end
     end
   end
 end

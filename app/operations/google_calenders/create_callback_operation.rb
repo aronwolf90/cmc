@@ -11,8 +11,10 @@ module GoogleCalenders
     success :export_events
 
   private
-    def get_authorization(ctx, code:, **)
+    def get_authorization(ctx, code:, organization:, **)
       ctx[:google_authorization_data] = GoogleCalenderClient.get_access_token(code: code)
+      ctx[:google_authorization_data].refresh_token ||=
+        organization.google_calender_authorization_data.refresh_token
     end
 
     def create_google_calender(ctx, google_authorization_data:, organization:, **)
