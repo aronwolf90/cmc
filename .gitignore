@@ -26,6 +26,7 @@
 .tmp/
 .nyc_output/
 coverage/
+tags
 
 /node_modules
 /yarn-error.log

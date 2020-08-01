@@ -32,7 +32,8 @@
         calenders-google-subscription-btn(
           :is-google-integrated="isGoogleIntegrated",
           :authorization-url="googleCalenderAuthorizationUrl",
-          v-if="isAdmin"
+          v-if="isAdmin",
+          @destroy="destroyCalendersGoogleIntegration"
         )
         b-button(
           v-b-modal.create-event-dialog="",
@@ -305,6 +306,11 @@ export default {
   },
   methods:
   {
+    destroyCalendersGoogleIntegration () {
+      this.$store.dispatch('destroyCalendersGoogleIntegration').then(() => {
+        location.reload()
+      })
+    },
     setState(state)
     {
       state.eventSorter = state.listTimes
