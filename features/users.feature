@@ -7,18 +7,20 @@ Scenario: List user
   When I click on link "Users"
   Then the element "#side-body" contain the text "Aron"
 
-  #@javascript
-  #Scenario: Create user
-  #  Given a test-organization exists
-  #  And I am signed in (multitenant)
-  #  When I click on link "Users"
-  #  And I click on link "New user"
-  #  And I enter "firstname" into input named "Firstname"
-  #  And I enter "lastname" into input named "Lastname"
-  #  And I enter "test@email.com" into input named "E-Mail"
-  #  And select "Admin" from select box "Type"
-  #  And I click on submit
-  #  Then the element "#side-body" contain the text "firstname"
+@javascript
+Scenario: Create user
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  And the mailbox is empty"
+  When I click on link "Users"
+  And I click on link "New user"
+  And I enter "firstname" into input named "Firstname"
+  And I enter "lastname" into input named "Lastname"
+  And I enter "test@email.com" into input named "E-Mail"
+  And select "Admin" from select box "Type"
+  And I click on submit
+  Then the element "#side-body" contain the text "firstname"
+  And a email was sent
 
   #@javascript
   #Scenario: Create user on no premium when 6 users exist

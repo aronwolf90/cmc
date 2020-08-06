@@ -91,6 +91,10 @@ Given(/^5 additional users exist$/) do
   FactoryBot.create_list(:admin, 5)
 end
 
+Given(/^the mailbox is empty"$/) do
+  RestClient.delete("mail_hog:8025/api/v1/messages")
+end
+
 When(/^I navigate to "([^\"]*)"$/) do |link|
   visit link
 end
@@ -267,4 +271,9 @@ end
 
 Then(/the input "([^\"]*)" is checked/) do |input|
   expect(page).to have_checked_field(input, visible: false)
+end
+
+Then(/^a email was sent$/) do
+  response = JSON.parse(RestClient.get("mail_hog:8025/api/v1/messages").body)
+  expect(response.size >= 1).to eq(true)
 end

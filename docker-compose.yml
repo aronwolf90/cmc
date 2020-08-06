@@ -14,6 +14,11 @@ services:
       timeout: 5s
       retries: 30
 
+  mail_hog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+
   stripe_mock:
     image: registry.gitlab.com/web_utils/mockserver-docker:latest
     volumes:
@@ -73,6 +78,8 @@ services:
       - AWS_SECRET=secret_key
       - AWS_ENDPOINT=http://storage.lvh.me:9000
       - REDIS_URL=redis://redis
+      - MAILER_SMTP_DOMAIN=mail_ho
+      - MAILER_PORT=1025 
     command:  /bin/sh -c "bundle exec sidekiq"
     volumes:
       - .:/app:cached
@@ -108,6 +115,8 @@ services:
       - CAPYBARA_RUN_SERVER=false
       - TEST_HOST=lvh.me
       - REDIS_URL=redis://redis
+      - MAILER_SMTP_DOMAIN=mail_hog
+      - MAILER_PORT=1025 
     command:  /bin/sh -c "bin/install.sh; rm -r tmp/pids; rails s -b '0.0.0.0'"
     ports:
       - "3000:3000"
@@ -121,6 +130,7 @@ services:
       - payment
       - redis
       - worker
+      - mail_hog
 
   selenium:
     image: selenium/standalone-chrome-debug
