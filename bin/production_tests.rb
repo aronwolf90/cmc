@@ -5,6 +5,7 @@ require "capybara"
 require "capybara/dsl"
 require "selenium-webdriver"
 require "rest-client"
+require "net/imap"
 
 Capybara.run_server = false
 Capybara.current_driver = :selenium
@@ -26,12 +27,20 @@ Capybara.register_driver :selenium do |app|
 end
 
 include Capybara::DSL
+imap = Net::IMAP.new('imap.migadu.com', 993, true)
+imap.authenticate('LOGIN', 'test@ticktensio.com', ENV["TESTUSER_PASSWORD"])
+imap.examine('INBOX')
 
 RestClient.delete(
   'https://ticktensio.com/api/v1/test_organizations'
 )
+
+
 visit("https://about.ticktensio.com/")
 click_on "Register"
+imap = Net::IMAP.new('imap.migadu.com', ssl: true)
+imap.authenticate('LOGIN', 'test@ticktensio.com', ENV["TESTUSER_PASSWORD"])
+imap.examine('INBOX')
 fill_in "Name", with: "test-organization"
 select "(GMT+01:00) Berlin", from: "Time zone"
 fill_in "Firstname", with: "Lara"
@@ -48,3 +57,22 @@ raise "not loged in" unless page.has_text?("Dashboard")
 click_on "Tickets"
 find(".list-issue a", match: :prefer_exact).click
 find("label", text: "Complexity", match: :prefer_exact)
+
+15.times do |time|
+  email_id = imap.search(["UNSEEN"]).last
+  if email_id.nil?
+    sleep 2
+    continue
+  end
+  email = imap.fetch(email_id,'ENVELOPE').first.attr["ENVELOPE"]
+  
+  if email.subject != "Wellcome to Ticktensio" ||
+     Time.parse(email.date) < (Time.now - 60)
+    raise "Organization email was not sent" if time >= 29
+    sleep 2
+  else
+    break
+  end
+end
+
+puts "success"

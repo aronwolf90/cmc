@@ -10,6 +10,7 @@ class Registration
     :lastname,
     :email,
     :password,
-    :organization
+    :organization,
+    :user
   )
 end

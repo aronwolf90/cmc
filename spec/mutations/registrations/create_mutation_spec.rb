@@ -29,7 +29,12 @@ RSpec.describe Registrations::CreateMutation do
     expect(Apartment::Tenant).to receive(:create).with("test")
     expect(Apartment::Tenant).to receive(:switch).with("test").and_yield
 
-    expect { subject }.to change(Organization, :count).by(1)
+    expect do
+      registration = subject
+      expect(registration.organization).to be_a(Organization)
+      expect(registration.user).to be_a(User)
+    end
+      .to change(Organization, :count).by(1)
       .and change(User, :count)
   end
 end

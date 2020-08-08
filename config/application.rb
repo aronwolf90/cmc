@@ -36,5 +36,14 @@ module CMC
     }
 
     config.active_job.queue_adapter = :sidekiq
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address:              ENV["MAILER_SMTP_DOMAIN"],
+      domain:               ENV["MAILER_DOMAIN"],
+      port:                 ENV["MAILER_PORT"] || 465,
+      user_name:            ENV["MAILER_USER_NAME"],
+      password:             ENV["MAILER_PASSWORD"],
+      authentication:       'login'
+    }
   end
 end

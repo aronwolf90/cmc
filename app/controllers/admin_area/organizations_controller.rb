@@ -3,7 +3,7 @@
 module AdminArea
   class OrganizationsController < AdminAreaController
     side_menu :admin_area
-    namespace Organizations
+    namespace AdminArea::Organizations
 
     public :index
   end

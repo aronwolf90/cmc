@@ -6,7 +6,7 @@ module Registrations
       ActiveRecord::Base.transaction do
         model.organization = create_organization
         Apartment::Tenant.switch(organization_name) do
-          create_user
+          model.user = create_user
         end
         model
       end

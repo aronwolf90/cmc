@@ -78,9 +78,9 @@ services:
       - AWS_SECRET=secret_key
       - AWS_ENDPOINT=http://storage.lvh.me:9000
       - REDIS_URL=redis://redis
-      - MAILER_SMTP_DOMAIN=mail_ho
+      - MAILER_SMTP_DOMAIN=mail_hog
       - MAILER_PORT=1025 
-    command:  /bin/sh -c "bundle exec sidekiq"
+    command:  /bin/sh -c "bundle exec sidekiq -C config/sidekiq.yml"
     volumes:
       - .:/app:cached
       - bundle:/usr/local/bundle:cached

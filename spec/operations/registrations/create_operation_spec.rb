@@ -4,7 +4,44 @@ require "rails_helper"
 require_relative "../shared_examples/standard_create_operation"
 
 RSpec.describe Registrations::CreateOperation do
-  it_should_behave_like "standard create operation",
-    form_class: RegistrationForm,
-    mutation: Registrations::CreateMutation
+  subject(:call) { described_class.call(params: params, current_user: nil) }
+
+  let(:params) do
+    {
+      data: {
+        name: "Test Name",
+        time_zone: "Berlin",
+        firstname: "Bob",
+        lastname: "Marley",
+        email: "test@email.com",
+        password: "password",
+        confirmation_password: "password",
+        terms_service: true
+      }
+    }
+  end
+  let(:organization) { Organization.new(id: 1) }
+  let(:user) { Admin.new(id: 1) }
+
+  before do
+    result = double(success?: true)
+    form = double(call: result)
+    allow(RegistrationForm)
+      .to receive(:new).and_return(form)
+    allow(result).to receive(:save).and_yield({})
+    allow(Organization).to receive(:find).and_return(organization)
+  end
+
+  specify do
+    expect(Registrations::CreateMutation)
+      .to receive(:call)
+      .and_return(
+        Registration.new(
+          organization: organization,
+          user: user
+        )
+      )
+
+    expect { call }.to have_enqueued_job
+  end
 end

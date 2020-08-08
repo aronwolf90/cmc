@@ -45,10 +45,15 @@ services:
       - MINIO_ACCESS_KEY=access_key
       - MINIO_SECRET_KEY=secret_key
 
+  mail_hog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+
   worker:
     image: $IMAGE
     dns: 8.8.8.8
-    command: sh -c "RAILS_ENV=production bundle exec sidekiq"
+    command: sh -c "RAILS_ENV=production bundle exec sidekiq -C config/sidekiq.yml"
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db/database
       - AWS_KEY=access_key
@@ -58,6 +63,8 @@ services:
       - NO_RAISE_MAILER_ERRORS=true
       - REDIS_URL=redis://redis
       - SECRET_KEY_BASE=5d1ee3590cdac32f527d1c4c835578859ecbd50ac1b03ff6d4689c19d732b5c9050ceb66d8b625cacadb1c1228095a7fd855933ce1881075a577e7cb8aea3432
+      - MAILER_SMTP_DOMAIN=mail_hog
+      - MAILER_PORT=1025 
     depends_on:
       db:
         condition: service_healthy
@@ -95,6 +102,8 @@ services:
       - REDIS_URL=redis://redis
       - TEST_HOST=lvh.me
       - SECRET_KEY_BASE=5d1ee3590cdac32f527d1c4c835578859ecbd50ac1b03ff6d4689c19d732b5c9050ceb66d8b625cacadb1c1228095a7fd855933ce1881075a577e7cb8aea3432
+      - MAILER_SMTP_DOMAIN=mail_hog
+      - MAILER_PORT=1025 
     ports:
       - "3000:3000"
     depends_on:

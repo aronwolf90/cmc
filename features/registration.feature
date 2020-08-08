@@ -3,6 +3,7 @@ Feature: Archive folder
 @javascript
 Scenario: Create successfully a new organization
   Given no "test-organization" exists
+  And the mailbox is empty"
   When I navigate to "/registrations/new"
   And I enter "test-organization" into input named "data[name]"
   And select "Berlin" from select box "data[time_zone]"
@@ -17,6 +18,7 @@ Scenario: Create successfully a new organization
   And I enter "password123" into input named "user[password]"
   And I click on submit
   Then the element "body" contain the text "Dashboard"
+  And a email was sent
 
 @javascript
 Scenario: Can not register a blacklisted name
