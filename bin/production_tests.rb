@@ -35,7 +35,6 @@ RestClient.delete(
   'https://ticktensio.com/api/v1/test_organizations'
 )
 
-
 visit("https://about.ticktensio.com/")
 click_on "Register"
 imap = Net::IMAP.new('imap.migadu.com', ssl: true)

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Organization < ApplicationRecord
+  scope :ordered, -> { order(created_at: :desc, id: :desc)  }
+
   class << self
     def current
       find_by(name: Apartment::Tenant.current)

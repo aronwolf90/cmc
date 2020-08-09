@@ -187,4 +187,13 @@ RSpec.describe Organization, type: :model do
       )
     end
   end
+
+  describe "ordered" do
+    let!(:organization_old) { create(:organization, created_at: 3.minute.ago, name: "old") }
+    let!(:organization_new) { create(:organization, created_at: Time.zone.now, name: "new") }
+
+    it "return organization ordered" do
+      expect(described_class.ordered).to eq([organization_new, organization_old])
+    end
+  end
 end

@@ -7,7 +7,7 @@ module AdminArea
       step Policy::Pundit(ProjectPolicy, :index?)
 
       def model(options, current_user:, **)
-        options["model"] = Organization.all
+        options["model"] = Organization.ordered
       end
     end
   end
