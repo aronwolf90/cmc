@@ -1,4 +1,5 @@
 ul.list-group.list-lines
   - @model.each do |organization|
     li.list-group-item
+      .text-dark.pull-right = organization.created_at&.strftime("%d-%m-%Y %H:%M")
       .text-dark = organization
