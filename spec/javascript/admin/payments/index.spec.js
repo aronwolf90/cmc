@@ -33,8 +33,8 @@ describe('AdminPaymentsIndex', () => {
           id: 'invoice_id',
           type: 'invoices',
           attributes: {
-            'amount-paid': 8,
-            'amount-due': 8,
+            'amount-paid': 800,
+            'amount-due': 800,
             'amount-remaining': 0,
             pdf: 'https://pay.stripe.com/invoice/invst_9KtFtihugeF8KkYEfFEJltHcg7/pdf'
           }
@@ -80,7 +80,7 @@ describe('AdminPaymentsIndex', () => {
   it('render invoice table body', (done) => {
     $subject.vm.$nextTick(() => {
       $subject.vm.$nextTick(() => {
-        expect($subject.html()).to.include(8)
+        expect($subject.html()).to.include('€8.00')
         done()
       })
     })

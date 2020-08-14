@@ -21,9 +21,9 @@
         tbody
           tr(v-for="invoice in invoices")
             td {{ invoice.attributes['created-at'] }}
-            td {{ invoice.attributes['amount-paid'] }}
-            td {{ invoice.attributes['amount-due'] }}
-            td {{ invoice.attributes['amount-remaining'] }}
+            td {{ formatMoney(invoice.attributes['amount-paid']) }}
+            td {{ formatMoney(invoice.attributes['amount-due']) }}
+            td {{ formatMoney(invoice.attributes['amount-remaining']) }}
             td 
               a.pull-right.btn.btn-secondary(:href="invoice.attributes.pdf")
                 i.fa.fa-file-pdf-o(aria-hidden="true")
@@ -70,6 +70,11 @@ export default {
           alert(result)
         })
       })
+    },
+    formatMoney (number) {
+      return new Intl.NumberFormat('de-DE',
+      { style: 'currency', currency: 'EUR' })
+      .format(number/100.0)
     }
   }
 }
