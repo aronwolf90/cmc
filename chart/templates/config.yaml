@@ -21,3 +21,5 @@ data:
   PAYMENT_ENABLED: '{{ .Values.payment.enabled }}'
   REDIS_URL: 'redis://{{ .Release.Name }}-redis-master'
   RAILS_LOG_TO_STDOUT: 'true'
+  HEADER_JS: |
+{{ .Values.headerJs | indent 4 }}

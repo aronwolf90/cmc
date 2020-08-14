@@ -20,3 +20,5 @@ google_calender:
   client_secret: <%= ENV["GOOGLE_CALENDER_CLIENT_SECRET"] || "test" %>
   authorization_uri: 'https://accounts.google.com/o/oauth2/auth'
   token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
+header_js: |
+  <%= ENV["HEADER_JS"].to_s.gsub("\n", "\n  ") %>

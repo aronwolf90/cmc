@@ -11,6 +11,8 @@ html
     = stylesheet_pack_tag 'application'
 
     = stylesheet_link_tag 'administration', media: 'all', 'data-turbolinks-track': 'reload'
+    
+    =Settings.header_js&.html_safe
   body
     javascript:
       window.stripe_public_key = '#{Settings.stripe_public_key}'
