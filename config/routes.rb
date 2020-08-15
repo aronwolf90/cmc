@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resource :dashboard, only: :show
     resources :records, except: :show
 
-    resources :users, except: %i[edit create destroy] do
+    resources :users, except: %i[index edit create destroy] do
       scope module: :users do
         resources :records, only: :index
       end

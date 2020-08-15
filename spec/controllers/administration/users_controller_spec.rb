@@ -14,7 +14,6 @@ RSpec.describe Administration::UsersController, type: :controller do
       .and_return(Organization.new(time_zone: "Berlin"))
   end
 
-  include_examples "standard index action", Administration::Users
   include_examples "standard new action",
                    Administration::Users
   include_examples "standard update action", Administration::Users,

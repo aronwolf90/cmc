@@ -5,8 +5,6 @@ module Administration
     side_menu :administration
     namespace Administration::Users
 
-    public :index
-
     def new
       super(render: :create)
     end
