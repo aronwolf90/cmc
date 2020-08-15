@@ -56,6 +56,7 @@ import BoardListNew from 'board_lists/new'
 import BoardListEdit from 'board_lists/edit'
 import 'vue-select/dist/vue-select.css'
 import LoadScript from 'vue-plugin-load-script'
+import VueAnalytics from 'vue-analytics'
 
 require('../config')
 
@@ -464,5 +465,13 @@ document.addEventListener('turbolinks:load', () => {
     $('.navbar-collapse').collapse('hide') /* eslint-disable-line no-undef */
     next()
   })
+
+  if (window.googleAnalyticsId) {
+    Vue.use(VueAnalytics, {
+      id: window.googleAnalyticsId,
+      router
+    })
+  }
+
   var app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */
 })

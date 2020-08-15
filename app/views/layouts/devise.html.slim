@@ -6,7 +6,7 @@ html
     = csrf_meta_tags
 
     = stylesheet_link_tag 'devise', media: 'all', 'data-turbolinks-track': 'reload'
-    =Settings.header_js&.html_safe
+    = Settings.devise_header_js&.html_safe
 
   body#devise
     = render 'devise/navbar'
