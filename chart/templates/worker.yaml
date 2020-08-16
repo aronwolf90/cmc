@@ -28,3 +28,22 @@ spec:
               name: {{ .Release.Name }}-mailer
           - secretRef:
               name: {{ .Release.Name }}-google
+          ports:
+            - containerPort: 7433
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7433
+            initialDelaySeconds: 80
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7433
+            initialDelaySeconds: 80
+            timeoutSeconds: 5
+          lifecycle:
+            preStop:
+              exec:
+                command: ["bin/sidekiq_quiet.sh"]
+      terminationGracePeriodSeconds: 60

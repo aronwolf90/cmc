@@ -324,6 +324,8 @@ GEM
     multi_json (1.15.0)
     multi_test (0.1.2)
     multipart-post (2.1.1)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
     nenv (0.3.0)
     netrc (0.11.0)
     nio4r (2.5.2)
@@ -458,6 +460,7 @@ GEM
     rubocop-rspec (1.25.1)
       rubocop (>= 0.53.0)
     ruby-progressbar (1.10.1)
+    ruby2_keywords (0.0.2)
     ruby_dep (1.5.0)
     rubyzip (2.2.0)
     safe_yaml (1.0.5)
@@ -492,6 +495,9 @@ GEM
     sidekiq-cron (1.2.0)
       fugit (~> 1.1)
       sidekiq (>= 4.2.1)
+    sidekiq_alive (2.0.2)
+      sidekiq
+      sinatra
     signet (0.14.0)
       addressable (~> 2.3)
       faraday (>= 0.17.3, < 2.0)
@@ -504,6 +510,11 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.1)
+    sinatra (2.0.8.1)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.8.1)
+      tilt (~> 2.0)
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -652,6 +663,7 @@ DEPENDENCIES
   shoulda-matchers
   sidekiq
   sidekiq-cron
+  sidekiq_alive
   simple_form
   simplecov
   slim-rails
