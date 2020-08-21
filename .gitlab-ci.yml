@@ -144,6 +144,9 @@ deploy:
         --set mailer.password=$MAILER_PASSWORD
         --set google.clientId=$GOOGLE_CLIENT_ID
         --set google.calenderSecret=$GOOGLE_CALENDER_SECRET
+        --set reCaptcha.siteKey=$RECAPTCHA_SITE_KEY 
+        --set reCaptcha.secretKey=$RECAPTCHA_SECRET_KEY
+        --set reCaptcha.ignoreKey=$RECAPTCHA_IGNORE_KEY
         --namespace cmc-production
   only:
     - master

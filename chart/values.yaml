@@ -60,3 +60,9 @@ google:
   calenderSecret: ""
 deviseHeaderJs: ""
 administrationHeaderJs: ""
+
+reCaptcha:
+  enabled: false
+  siteKey: ''
+  secretKey: ''
+  ignoreKey: ''

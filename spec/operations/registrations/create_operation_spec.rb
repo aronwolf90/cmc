@@ -4,7 +4,7 @@ require "rails_helper"
 require_relative "../shared_examples/standard_create_operation"
 
 RSpec.describe Registrations::CreateOperation do
-  subject(:call) { described_class.call(params: params, current_user: nil) }
+  subject(:call) { described_class.call(params: params, current_user: nil, recaptcha: recaptcha) }
 
   let(:params) do
     {
@@ -22,6 +22,7 @@ RSpec.describe Registrations::CreateOperation do
   end
   let(:organization) { Organization.new(id: 1) }
   let(:user) { Admin.new(id: 1) }
+  let(:recaptcha) { true  }
 
   before do
     result = double(success?: true)
@@ -43,5 +44,15 @@ RSpec.describe Registrations::CreateOperation do
       )
 
     expect { call }.to have_enqueued_job
+  end
+
+  context "recaptcha is false" do
+    let(:recaptcha) { false }
+
+    specify do
+      expect(Registrations::CreateMutation)
+        .not_to receive(:call)
+      expect(call.failure?).to eq true
+    end
   end
 end

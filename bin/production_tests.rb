@@ -37,6 +37,7 @@ RestClient.delete(
 
 visit("https://about.ticktensio.com/")
 click_on "Register"
+visit("#{current_url}?recaptcha_ignore_key=#{ENV["RECAPTCHA_IGNORE_KEY"]}")
 imap = Net::IMAP.new('imap.migadu.com', ssl: true)
 imap.authenticate('LOGIN', 'test@ticktensio.com', ENV["TESTUSER_PASSWORD"])
 imap.examine('INBOX')
@@ -48,6 +49,12 @@ fill_in "Email", with: "test@ticktensio.com"
 fill_in "Password", with: "testtest"
 fill_in "Confirmation password", with: "testtest"
 check "Terms of service"
+page.driver.browser.execute_script(<<~JS)
+  input = document.createElement('input')
+  input.setAttribute('value', '#{ENV["RECAPTCHA_IGNORE_KEY"]}')
+  input.setAttribute('name', 'recaptcha_ignore_key')
+  document.getElementsByTagName('form')[0].appendChild(input)
+JS
 click_on "Create Registration"
 fill_in "Email", with: "test@ticktensio.com"
 fill_in "Password", with: "testtest"

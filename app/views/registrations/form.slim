@@ -1,4 +1,4 @@
-= simple_form_for @model, as: :data do |f|
+= simple_form_for @form, as: :data do |f|
   #box
     = f.input :name
     = f.input :time_zone, as: :time_zone
@@ -10,6 +10,9 @@
     = f.input :password
     = f.input :confirmation_password
     = f.input :terms_service, as: :boolean, label: terms_service_label
+    - if Settings.recaptcha_enabled && Settings.recaptcha_ignore_key != params[:recaptcha_ignore_key]
+      = recaptcha_tags
+      br
 
     .fieldset
       = f.submit class: "btn btn-success"

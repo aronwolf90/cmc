@@ -73,6 +73,7 @@ gem "google-api-client", require: "google/apis/calendar_v3"
 
 # Other
 gem "sidekiq_alive"
+gem "recaptcha", require: "recaptcha/rails"
 
 group :production do
   gem "sentry-raven"

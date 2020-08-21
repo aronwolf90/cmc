@@ -62,3 +62,6 @@ administrationHeaderJs:
   <script>
     window.googleAnalyticsId = 'UA-127775143-2'
   </script>
+
+reCaptcha:
+  enabled: true

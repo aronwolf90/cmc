@@ -11,7 +11,7 @@ RSpec.describe "registrations/form" do
 
   before do
     sign_in(Admin.new)
-    assign(:model, form)
+    assign(:form, form)
     render
   end
 
