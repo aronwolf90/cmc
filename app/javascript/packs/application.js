@@ -57,6 +57,7 @@ import BoardListEdit from 'board_lists/edit'
 import 'vue-select/dist/vue-select.css'
 import LoadScript from 'vue-plugin-load-script'
 import VueAnalytics from 'vue-analytics'
+import * as Sentry from '@sentry/browser'
 
 require('../config')
 
@@ -101,6 +102,10 @@ window.store = store
 if (document.querySelector('meta[name="csrf-token"]')) {
   store.getters.axios.defaults.headers.common['X-CSRF-Token'] =
     document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+}
+
+if (window.sentry_dsn) {
+  Sentry.init({ dsn: window.sentry_dsn })
 }
 
 document.addEventListener('turbolinks:before-visit', () => {

@@ -16,6 +16,7 @@ html
   body
     javascript:
       window.stripe_public_key = '#{Settings.stripe_public_key}'
+      window.sentry_dsn = '#{Settings.sentry_dbs}' 
     #app
       = render 'administration/shared/navbar'
       .wraper

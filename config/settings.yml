@@ -26,3 +26,4 @@ administration_header_js: |
   <%= ENV["ADMINISTRATION_HEADER_JS"].to_s.gsub("\n", "\n  ") %>
 recaptcha_enabled: <%= ENV["RECAPTCHA_ENABLED"] %>
 recaptcha_ignore_key: <%= ENV["RECAPTCHA_IGNORE_KEY"] %>
+sentry_dbs: <%= ENV["SENTRY_DSN"] %>
