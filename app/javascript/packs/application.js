@@ -104,8 +104,9 @@ if (document.querySelector('meta[name="csrf-token"]')) {
     document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 }
 
+window.Sentry = Sentry
 if (window.sentry_dsn) {
-  Sentry.init({ dsn: window.sentry_dsn })
+  window.Sentry.init({ dsn: window.sentry_dsn })
 }
 
 document.addEventListener('turbolinks:before-visit', () => {

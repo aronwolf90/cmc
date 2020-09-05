@@ -6,17 +6,18 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1"
 
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application'
+
+    javascript:
+      window.stripe_public_key = '#{Settings.stripe_public_key}'
+      window.sentry_dsn = '#{Settings.sentry_dsn}' 
 
     = javascript_pack_tag 'application'
-    = stylesheet_pack_tag 'application'
 
     = stylesheet_link_tag 'administration', media: 'all', 'data-turbolinks-track': 'reload'
     
     = Settings.administration_header_js&.html_safe
   body
-    javascript:
-      window.stripe_public_key = '#{Settings.stripe_public_key}'
-      window.sentry_dsn = '#{Settings.sentry_dbs}' 
     #app
       = render 'administration/shared/navbar'
       .wraper
