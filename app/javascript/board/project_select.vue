@@ -20,7 +20,9 @@ export default {
     this.$store.dispatch('initCurrentUser').then(() => {
       const currentUser = this.$store.getters.currentUser
       const project = Utils.relationship(this.currentUser, 'selected-project')
-      this.$store.dispatch('getProject', project.id)
+      if (project) {
+        this.$store.dispatch('getProject', project.id)
+      }
     })
   },
   computed: {
