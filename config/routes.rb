@@ -137,6 +137,7 @@ Rails.application.routes.draw do
           resource :google_integration, only: :destroy
         end
       end
+      resources :labels
     end
   end
 end

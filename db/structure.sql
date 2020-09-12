@@ -398,6 +398,38 @@ ALTER SEQUENCE issues_id_seq OWNED BY issues.id;
 
 
 --
+-- Name: labels; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE labels (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    color character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: labels_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE labels_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: labels_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE labels_id_seq OWNED BY labels.id;
+
+
+--
 -- Name: notifications; Type: TABLE; Schema: test-organization; Owner: -
 --
 
@@ -918,6 +950,13 @@ ALTER TABLE ONLY issues ALTER COLUMN id SET DEFAULT nextval('issues_id_seq'::reg
 
 
 --
+-- Name: labels id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY labels ALTER COLUMN id SET DEFAULT nextval('labels_id_seq'::regclass);
+
+
+--
 -- Name: notifications id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
@@ -1080,6 +1119,14 @@ ALTER TABLE ONLY folders
 
 ALTER TABLE ONLY issues
     ADD CONSTRAINT issues_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: labels labels_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY labels
+    ADD CONSTRAINT labels_pkey PRIMARY KEY (id);
 
 
 --
@@ -1600,6 +1647,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200705121742'),
 ('20200707180726'),
 ('20200722221017'),
-('20200723205354');
+('20200723205354'),
+('20200817203548');
 
 
