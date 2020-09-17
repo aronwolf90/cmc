@@ -34,6 +34,7 @@ export default {
       context.dispatch('getIssueComments', id, { root: true }).then(response => {
         context.commit('comments', response.data)
       })
+      context.dispatch('getLabels', null, { root: true })
     },
     createComment (context, payload) {
       payload['relationships'] = {

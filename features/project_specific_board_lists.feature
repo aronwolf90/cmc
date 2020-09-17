@@ -40,7 +40,7 @@ Scenario: change issues order
   And I am signed in (multitenant)
   When I click on link "Tickets"
   Then the page contain the text "Test project"
-  When I drag "#list-issue-4" to "#list-issue-1"
+  When I drag "#list-issue-4" to "#list-issue-1 .badge"
   Then the element "#column-4 .list-issue:last-of-type" contain the text "Test issue 4"
   When I reload the page
   Then the element "#column-4 .list-issue:last-of-type" contain the text "Test issue 4"

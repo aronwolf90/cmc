@@ -1,9 +1,8 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import Issue from '../../../app/javascript/board/issue'
 import IssuesRecordSection from '../../../app/javascript/components/issues_record_section'
 import draggable from 'vuedraggable'
-import sinon from 'sinon'
 
 const localVue = createLocalVue()
 
@@ -13,17 +12,22 @@ localVue.use(Vuex)
 /* eslint-disable no-unused-expressions */
 
 describe('Issue', () => {
-  subject(() => shallow(Issue, {
-    store: $store, localVue, propsData: { issueId: 1, boardListId: 1 }, stubs: { draggable } }))
+  subject(() => mount(Issue, {
+    store: $store,
+    localVue,
+    propsData: { issueId: 1, boardListId: 1 },
+    stubs: {
+      draggable,
+      IssuesRecordSection
+    }
+  }))
 
   def('getters', () => ({
-    entry () { return () => $issue }
+    entry () { return () => $issue },
+    relationship () { return () => null }
   }))
   def('actions', () => ({ initBoardsLists () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
-  def('Turbolinks', () => ({ visit: sinon.spy() }))
-
-  beforeEach(() => (global.Turbolinks = $Turbolinks))
 
   describe('when the issue is present and his data is correct', () => {
     def('issue', () => ({
@@ -35,10 +39,6 @@ describe('Issue', () => {
 
     it('include show link', () => {
       expect($subject.html()).to.include('issues/1')
-    })
-
-    it('pass issueId to issue-record-section', () => {
-      expect($subject.find(IssuesRecordSection).props().issueId).to.eq(1)
     })
   })
 })

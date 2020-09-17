@@ -31,6 +31,12 @@ Scenario: Get /api/v1/issues
                 "id":"1",
                 "type":"users"
               }
+            },
+            "labels": {
+              "data": [{ 
+                "id": "1",
+                "type": "labels"
+              }]
             }
           },
           "links":{ 
@@ -60,6 +66,9 @@ Scenario: Get /api/v1/issues
                 "id":"1",
                 "type":"users"
               }
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -86,6 +95,9 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -112,6 +124,9 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -138,6 +153,9 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -164,6 +182,9 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -190,6 +211,9 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -216,6 +240,9 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -242,6 +269,9 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -268,6 +298,9 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -294,6 +327,9 @@ Scenario: Get /api/v1/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 

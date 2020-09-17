@@ -26,6 +26,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -52,6 +55,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
           "relationships":{ 
             "user":{ 
               "data":null
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -81,6 +87,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
                 "id":"1",
                 "type":"users"
               }
+            },
+            "labels": {
+              "data": []
             }
           },
           "links":{ 
@@ -110,6 +119,12 @@ Scenario: GET /api/v1/board_lists/<id>/issues
                 "id":"1",
                 "type":"users"
               }
+            },
+            "labels": {
+              "data": [{
+                "id": "1",
+                "type": "labels"
+              }]
             }
           },
           "links":{ 

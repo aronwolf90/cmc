@@ -18,7 +18,8 @@ describe Api::V1::IssueDeserializer do
       relationships: {
         user: { data: { id: 1, type: "users" } },
         "board-list": { data: { id: 1, type: "board-lists" } },
-        "project": { data: { id: 1, type: "projects" } }
+        project: { data: { id: 1, type: "projects" } },
+        labels: { data: [ { id: 1, type: "labels" } ] }
       }
     }
   end
@@ -32,7 +33,8 @@ describe Api::V1::IssueDeserializer do
       ordinal_number: 1,
       due_at: "10-10-2020 00:00",
       deadline_at: "10-10-2020 00:00",
-      project_id: 1
+      project_id: 1,
+      label_ids: [1]
     }
   end
 

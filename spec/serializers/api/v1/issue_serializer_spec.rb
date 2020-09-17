@@ -25,10 +25,20 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
         status: :none
       },
       relationships: {
-        user: { data: nil }
+        user: { data: nil },
+        labels: {
+          data: [{
+            id: "1",
+            type: "labels"
+          }]
+        }
       },
       links: { self: "/api/v1/issues/#{issue.id}" }
     } }
+  end
+
+  before do
+    allow(issue).to receive(:labels).and_return([Label.new(id: 1)])
   end
 
   it "serialize record in the correct way" do

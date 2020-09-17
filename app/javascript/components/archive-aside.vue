@@ -36,7 +36,7 @@ export default {
         })
       },
       set (projectStatuses) {
-        this.projectStatusesRefs = Utils.entryArrayToRef(projectStatuses) 
+        this.projectStatusesRefs = Utils.entryArrayToRef(projectStatuses)
       }
     }
   },

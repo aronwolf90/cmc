@@ -357,6 +357,38 @@ ALTER SEQUENCE folders_id_seq OWNED BY folders.id;
 
 
 --
+-- Name: issue_labels; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE issue_labels (
+    id bigint NOT NULL,
+    issue_id bigint,
+    label_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: issue_labels_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE issue_labels_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: issue_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE issue_labels_id_seq OWNED BY issue_labels.id;
+
+
+--
 -- Name: issues; Type: TABLE; Schema: test-organization; Owner: -
 --
 
@@ -943,6 +975,13 @@ ALTER TABLE ONLY folders ALTER COLUMN id SET DEFAULT nextval('folders_id_seq'::r
 
 
 --
+-- Name: issue_labels id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY issue_labels ALTER COLUMN id SET DEFAULT nextval('issue_labels_id_seq'::regclass);
+
+
+--
 -- Name: issues id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
@@ -1111,6 +1150,14 @@ ALTER TABLE ONLY events
 
 ALTER TABLE ONLY folders
     ADD CONSTRAINT folders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: issue_labels issue_labels_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY issue_labels
+    ADD CONSTRAINT issue_labels_pkey PRIMARY KEY (id);
 
 
 --
@@ -1307,6 +1354,20 @@ CREATE INDEX index_folders_on_folder_id ON folders USING btree (folder_id);
 --
 
 CREATE INDEX index_folders_on_project_id ON folders USING btree (project_id);
+
+
+--
+-- Name: index_issue_labels_on_issue_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_issue_labels_on_issue_id ON issue_labels USING btree (issue_id);
+
+
+--
+-- Name: index_issue_labels_on_label_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_issue_labels_on_label_id ON issue_labels USING btree (label_id);
 
 
 --
@@ -1648,6 +1709,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200707180726'),
 ('20200722221017'),
 ('20200723205354'),
-('20200817203548');
+('20200817203548'),
+('20200913093640');
 
 

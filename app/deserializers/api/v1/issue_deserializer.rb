@@ -11,5 +11,6 @@ module Api::V1
     belongs_to :user
     belongs_to :board_list
     belongs_to :project
+    has_many :labels
   end
 end

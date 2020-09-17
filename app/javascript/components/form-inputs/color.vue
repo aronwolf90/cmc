@@ -8,7 +8,7 @@
       :id="id",
       :value="value",
       :state="errorStatus(errorPath)",
-      type="text",
+      type="color",
       @input="input"
     )
     b-form-invalid-feedback(

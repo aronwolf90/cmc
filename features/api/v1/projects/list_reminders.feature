@@ -24,10 +24,16 @@ Scenario: Get /api/v1/projects/<id>/reminders
           },
           "relationships":{ 
             "user":{ 
-              "data":{ 
+              "data": { 
                 "id":"1",
                 "type":"users"
               }
+            },
+            "labels": {
+              "data": [{
+                "id": "1",
+                "type": "labels"
+              }]
             }
           },
           "links":{ 

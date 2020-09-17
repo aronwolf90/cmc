@@ -40,6 +40,7 @@ import issuesShow from 'store/modules/issues-show'
 import commentGetters from 'store/models/comment-getters'
 import documentGetters from 'store/models/document-getters'
 import CalenderActions from 'store/models/calender_actions'
+import LabelActions from 'store/models/label-actions'
 
 export default {
   strict: true,
@@ -154,6 +155,7 @@ export default {
     ...projectBoardListActions,
     ...projectCommentActions,
     ...CalenderActions,
+    ...LabelActions,
 
     initCurrentUser (context) {
       return context.dispatch('getContext').then(response => {

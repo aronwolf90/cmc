@@ -10,6 +10,7 @@
       complexity(:issue-id='id')
       due-at(:issue-id='id')
       deadline-at(:issue-id='id')
+      labels(:issue-ref='issue')
 
 </template>
 
@@ -24,6 +25,7 @@ import ShowContainer from 'components/show-container'
 import ShowBody from 'components/show-body'
 import DueAt from 'issue/due-at'
 import DeadlineAt from 'issue/deadline-at'
+import Labels from 'issue/labels'
 
 export default {
   props: ['id'],
@@ -36,7 +38,8 @@ export default {
     ShowContainer,
     ShowBody,
     DueAt,
-    DeadlineAt
+    DeadlineAt,
+    Labels
   },
   created () {
     this.$store.dispatch('initIssue', this.id)

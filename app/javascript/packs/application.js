@@ -58,6 +58,7 @@ import 'vue-select/dist/vue-select.css'
 import LoadScript from 'vue-plugin-load-script'
 import VueAnalytics from 'vue-analytics'
 import * as Sentry from '@sentry/browser'
+import vSelect from 'vue-select'
 
 require('../config')
 
@@ -93,6 +94,7 @@ Vue.component('left-aside', LeftAside)
 Vue.component('menu-item', MenuItem)
 Vue.component('asides', Asides)
 Vue.component('btn-submit', BtnSubmit)
+Vue.component('v-select', vSelect)
 
 let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')

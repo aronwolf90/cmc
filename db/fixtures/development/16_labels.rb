@@ -11,3 +11,8 @@ Label.seed do |s|
   s.name  = "Important"
   s.color = "#ff0000"
 end
+
+IssueLabel.seed do |s|
+  s.label_id = 1
+  s.issue_id = 1
+end

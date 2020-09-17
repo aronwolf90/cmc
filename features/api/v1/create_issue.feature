@@ -43,6 +43,9 @@ Feature: API: create an issue
         "relationships": {
           "user": { 
             "data": null
+          },
+          "labels": {
+            "data": []
           }
         },
         "links": {

@@ -23,7 +23,6 @@
 
 <script>
 import { Utils } from 'vuex-jsonapi-client'
-import MarkdownEditor from 'markdown_editor'
 import TextInput from 'components/form-inputs/text'
 import ProjectSelect from 'components/project-select'
 

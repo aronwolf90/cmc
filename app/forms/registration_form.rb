@@ -4,7 +4,6 @@ require "reform/form/coercion"
 
 class RegistrationForm < ApplicationForm
   model Registration
-
   property :name
   property :time_zone
 

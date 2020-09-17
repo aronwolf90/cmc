@@ -13,6 +13,7 @@ module Api
       )
 
       belongs_to :user, serializer: UserSerializer
+      has_many :labels, serializer: LabelSerializer
 
       link(:self) { api_v1_issue_path(object) }
 

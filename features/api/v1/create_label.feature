@@ -22,14 +22,14 @@ Scenario: POST /api/v1/labels
     """
     {
       "data": {
-        "id": "1",
+        "id": "3",
         "type": "labels",
         "attributes": {
           "name": "warning",
           "color": "#FFFF00"
         },
         "links": {
-          "self": "/api/v1/labels/1"
+          "self": "/api/v1/labels/3"
         },
         "meta": {
           "permissions": {

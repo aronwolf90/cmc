@@ -1,28 +1,45 @@
 <template lang='pug'>
-  .card.issue
-    .card-body.issue-body.row
-      .col-10.text
-        router-link(:to='showPath')
-          | {{ issue.attributes.title }}
-      .col-2
-        issues-record-section(:issue-id="issueId")
+  board-item
+    template(v-slot:text="")
+      router-link(:to="showPath")
+        | {{ name }}
+    template(v-slot:main-action="")
+      issues-record-section(:issue-id="issueId")
+    template(v-slot:extra-information="")
+      template(v-for="label in labels")
+        b-badge(
+          v-bind:style="{ 'background-color': label.attributes.color }"
+        ) {{ label.attributes.name }}
+        |&nbsp;
 </template>
 
 <script>
 
+import { Utils } from 'vuex-jsonapi-client'
+import BoardItem from '../components/boards/items'
 import IssuesRecordSection from '../components/issues_record_section'
 
 export default {
   props: { 'issue-id': { required: true }, 'board-list-id': { required: true } },
   components: {
-    'issues-record-section': IssuesRecordSection
+    IssuesRecordSection,
+    BoardItem
   },
   computed: {
     issue () {
       return this.$store.getters.entry({type: 'issues', id: this.issueId})
     },
+    name () {
+      return Utils.attribute(this.issue, 'title')
+    },
     showPath () {
       return `issues/${this.issueId}`
+    },
+    labels () {
+      return this.$store.getters.relationship({
+        entry: this.issue,
+        name: 'labels'
+      }) || []
     }
   }
 }

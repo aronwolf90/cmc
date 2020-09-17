@@ -13,6 +13,8 @@ class Issue < ApplicationRecord
   has_many :issues
   has_many :records
   has_many :user_issues
+  has_many :issue_labels
+  has_many :labels, through: :issue_labels
 
   alias_attribute :to_s, :title
 

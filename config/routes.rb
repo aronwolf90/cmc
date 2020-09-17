@@ -137,7 +137,7 @@ Rails.application.routes.draw do
           resource :google_integration, only: :destroy
         end
       end
-      resources :labels
+      resources :labels, except: %i[new edit]
     end
   end
 end
