@@ -3,7 +3,8 @@
   #box
     - if Apartment::Tenant.current == "public" && Settings.multi_tenant
       = label_tag :organization, "Organization"
-      = text_field_tag :organization, nil, class: "form-control"
+      = text_field_tag :organization, nil, class: "form-control",
+        value: session[:organization_display_name]
       br
       br
       fieldset.login

@@ -17,10 +17,9 @@ class RegistrationsController < ApplicationController
       current_user: current_user
     )
 
-    puts params.to_unsafe_hash
-
     @model = result[:model]
     @form = result["contract.default"]
+    session[:organization_display_name] = params.dig(:data, :name)
 
     if result.success?
       redirect_to helpers.organization_sign_in_url(@model.organization)
