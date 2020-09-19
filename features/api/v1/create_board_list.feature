@@ -24,7 +24,7 @@ Scenario: Post an valid event using json in POST body
         "type": "board-lists",
         "attributes": { 
           "name": "Test name",
-          "kind": null
+          "kind": "other"
         },
         "relationships": {
           "issues": {

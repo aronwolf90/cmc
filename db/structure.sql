@@ -89,7 +89,7 @@ CREATE TABLE board_lists (
     ordinal_number integer,
     project_id bigint,
     deleted_at timestamp without time zone,
-    kind board_list_kind_enum
+    kind board_list_kind_enum DEFAULT 'other'::board_list_kind_enum NOT NULL
 );
 
 
@@ -1710,6 +1710,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200722221017'),
 ('20200723205354'),
 ('20200817203548'),
-('20200913093640');
+('20200913093640'),
+('20200919103321');
 
 
