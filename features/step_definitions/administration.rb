@@ -101,7 +101,6 @@ end
 
 When(/^I enter "([^\"]*)" into input named "([^\"]*)"$/) do |text, name|
   fill_in name, with: text
-  find("body").click
 end
 
 When(/^I enter "([^\"]*)" into input "([^\"]*)"$/) do |text, element|

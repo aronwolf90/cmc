@@ -24,7 +24,7 @@
     template(v-slot:modal-footer="")
       b-button(
         variant="secondary",
-        @click="show=false"
+        @click="show=false",
       ) Cancel
       btn-submit.pull-right(
         @click="submit",

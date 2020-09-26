@@ -2,7 +2,7 @@
   .labels
     .pull-right.b-button(v-b-modal.modal-label-new="")
       .fa.fa-plus
-    .title.pointer(@click="$bvModal.show('modal-label-index')")
+    a.title.pointer(@click="$bvModal.show('modal-label-index')")
       | Labels
     v-select(
       id="labels",
@@ -89,11 +89,11 @@ export default {
   .labels
     margin-left: 7px
     margin-right: 3px
-  .title
+  a.title
     margin-top: 8px
-    margin-left: 17px
+    margin-left: 14px
     margin-bottom: 4px
-    color: grey
+    color: grey !important
   .fa.fa-plus
     color: grey !important
   .pointer
