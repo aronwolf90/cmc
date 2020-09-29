@@ -4,18 +4,20 @@ ENV DOCKER true
 
 WORKDIR  /app
 
-COPY Gemfile Gemfile.lock yarn.lock package.json ./
 RUN echo "export PATH=/app/bin:$PATH" >> ~/.profile && \
-  apk add --update \
+  apk add --no-cache \
   tzdata postgresql-client \
   libressl-dev gnupg libstdc++ \
   less git g++ make \
   bash openssh-client \
   nodejs yarn vim tmux \
   postgresql-dev \
-  grep && \
-  bundle install --jobs $(nproc) && \
-  yarn install
+  grep
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install --jobs $(nproc)
+COPY yarn.lock package.json ./
+RUN yarn install && yarn cache clean
 
 COPY . ./
 

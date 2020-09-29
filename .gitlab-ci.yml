@@ -84,7 +84,7 @@ mocha:
     - cd /app
     - yarn test
 
-cucumber:
+cucumber_api:
   stage: test
   variables:
     GIT_STRATEGY: clone
@@ -100,11 +100,36 @@ cucumber:
   services:
     - docker:dind
   script:
+    - echo "run $CI_NODE_INDEX / $CI_NODE_TOTAL"
     - export IMAGE=$CONTAINER_RELEASE_IMAGE
     - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
     - docker-compose -f docker-compose.gitlab.yml run app bash -c "RAILS_ENV=production rake db:setup"
     - docker-compose -f docker-compose.gitlab.yml up -d
-    - docker-compose -f docker-compose.gitlab.yml run app cucumber
+    - docker-compose -f docker-compose.gitlab.yml run app cucumber features/api
+
+cucumber:
+  stage: test
+  parallel: 4
+  variables:
+    GIT_STRATEGY: clone
+    DOCKER_HOST: tcp://docker:2375
+  image:
+    name: docker/compose:1.24.1
+    entrypoint: ["/bin/sh", "-c"]
+  artifacts:
+    when: on_failure
+    paths:
+      - screenshots
+    expire_in: 30 days
+  services:
+    - docker:dind
+  script:
+    - echo "run $CI_NODE_INDEX / $CI_NODE_TOTAL"
+    - export IMAGE=$CONTAINER_RELEASE_IMAGE
+    - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
+    - docker-compose -f docker-compose.gitlab.yml run app bash -c "RAILS_ENV=production rake db:setup"
+    - docker-compose -f docker-compose.gitlab.yml up -d
+    - docker-compose -f docker-compose.gitlab.yml run -e CI_NODE_INDEX=$CI_NODE_INDEX -e CI_NODE_TOTAL=$CI_NODE_TOTAL app bin/ci_split_cucumber.sh
 
 backup:
   stage: test

@@ -2,9 +2,7 @@
 
 set -euo pipefail
 
-PART=$(expr $(find $3 -type f | wc -l) / $1 + 1)
-TOP=$(eval expr 0)
+PART_SIZE=$(( $(find $3 -type f -regex $4| wc -l) / $1 + 1 ))
+TOP=$(( $PART_SIZE * ($2 - 1) + 1 ))
 
-echo "$PART"
-
-find features/ -type f | tail -n+$TOP | head -n$PART
+find $3 -type f -regex $4 | tail -n+$TOP | head -n$PART_SIZE
