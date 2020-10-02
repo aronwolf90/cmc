@@ -6,6 +6,7 @@ html
     = csrf_meta_tags
 
     = stylesheet_link_tag 'devise', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application'
     = Settings.devise_header_js&.html_safe
 
   body#devise

@@ -7,6 +7,15 @@
       label="Title",
       error-path="attributes/title"
     )
+    multiselect-input(
+      id="input-labels",
+      :errors="errors",
+      v-model="form.relationships.labels.data",
+      label="Labels",
+      :options="labels",
+      :getLabel="getLabelForLabels",
+      error-path="relationships/labels"
+    )
     project-select(
       label="Project",
       v-model="form.relationships.project.data",
@@ -24,12 +33,14 @@
 <script>
 import { Utils } from 'vuex-jsonapi-client'
 import TextInput from 'components/form-inputs/text'
+import MultiselectInput from 'components/form-inputs/multiselect'
 import ProjectSelect from 'components/project-select'
 
 export default {
   components: {
     TextInput,
-    ProjectSelect
+    ProjectSelect,
+    MultiselectInput
   },
   props: ['boardListId'],
   data () {
@@ -42,6 +53,9 @@ export default {
         relationships: {
           project: {
             data: null
+          },
+          labels: {
+            data: []
           }
         }
       },
@@ -60,6 +74,10 @@ export default {
     },
     isGlobalBoard () {
       return Utils.attribute(this.$store.getters.context, 'global-board')
+    },
+    labels () {
+      if (!this.$store.getters.collection('labels')) return []
+      return Utils.entryArrayToRef(this.$store.getters.collection('labels'))
     }
   },
   methods: {
@@ -67,6 +85,7 @@ export default {
       this.$store.dispatch('getBoardList', this.boardListId)
       this.$store.dispatch('getProjects')
       this.$store.dispatch('getContext')
+      this.$store.dispatch('getLabels')
       this.$store.dispatch('getSelectedProject').then(() => {
         this.form.relationships.project.data = Utils.entryToRef(this.selectedProject)
       })
@@ -98,6 +117,12 @@ export default {
       }).catch(({ status, data }) => {
         this.errors = data.errors
       })
+    },
+    getLabelForLabels (labelRef) {
+      return Utils.attribute(
+        this.$store.getters.entry(labelRef),
+        'name'
+      )
     },
     errorStatus (pointer) {
       let errors = this.findErrors(pointer)
