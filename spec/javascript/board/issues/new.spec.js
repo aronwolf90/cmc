@@ -37,6 +37,9 @@ describe('New', () => {
           }
         },
         getters: {
+          collection () {
+            return () => []
+          },
           boardList () {
             return () => ({ id: 1, type: 'board-lists' })
           },
@@ -91,6 +94,9 @@ describe('New', () => {
           }
         },
         getters: {
+          collection () {
+            return () => []
+          },
           boardList () {
             return () => ({ id: 1, type: 'board-lists' })
           },
@@ -130,6 +136,9 @@ describe('New', () => {
       },
       store: new Vuex.Store({
         getters: {
+          collection () {
+            return () => []
+          },
           boardList () {
             return () => ({ id: 1, type: 'board-lists' })
           },
