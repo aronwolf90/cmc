@@ -93,6 +93,7 @@ export default {
     submit (event) {
       event.preventDefault()
       const project = this.form.relationships.project.data
+      const labels = this.form.relationships.labels.data
 
       const payload = {
         attributes: this.form.attributes,
@@ -102,6 +103,9 @@ export default {
           },
           'project': {
             data: project
+          },
+          labels: {
+            data: labels
           }
         }
       }
@@ -109,7 +113,7 @@ export default {
       if (!payload.relationships.project.data) {
         delete payload.relationships.project
       }
- 
+
       this.$store.dispatch('createIssue', payload).then(() => {
         this.$store.dispatch('board/getBoardLists').then(() => {
           this.$router.push('../..')

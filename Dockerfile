@@ -24,6 +24,8 @@ COPY . ./
 RUN SECRET_KEY_BASE='9479a648d2fb' \
   DATABASE_URL=postgres://root:password@db%5Ftest/root \
   RAILS_ENV=production \
-  bundle exec rake assets:precompile
+  bundle exec rails assets:clean webpacker:compile && \
+  rm -r tmp/ && \
+  mkdir -p tmp/pids
 
 CMD bundle exec puma -C config/puma.rb
