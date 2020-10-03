@@ -1,6 +1,6 @@
 nav.navbar.navbar-light
   .pull-left
-    = image_tag 'logo.png', id: 'logo'
+    = image_pack_tag "images/logo.png", id: 'logo'
   .pull-right
     - if Settings.multi_tenant
       = link_to "Register", new_registration_url(host: Settings.host), class: "text-white mr-3"

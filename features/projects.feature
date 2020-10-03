@@ -76,7 +76,7 @@ Scenario: Change main responsable
   Then the element "#main-responsable .text" contain the text "user2"
 
 @javascript
-Scenario: Change main responsable
+Scenario: Create new reminder
   Given a test-organization exists
   And I am signed in (multitenant)
   When I click on navbar link "Projects"

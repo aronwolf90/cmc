@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:worked_issues) }
   it do
     expect(subject.avatar.url)
-      .to include("/assets/avatar_placeholder")
+      .to include("avatar_placeholder")
   end
 
   it "#records_count" do

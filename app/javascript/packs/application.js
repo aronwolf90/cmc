@@ -62,9 +62,18 @@ import vSelect from 'vue-select'
 import jQuery from 'jquery'
 import 'bootstrap'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
+import 'font-awesome/css/font-awesome.min.css'
+
+const $ = jQuery
+window.jQuery = jQuery
+window.$ = $
+
+require('jquery-ujs')
+require.context('../images', true)
+require('stylesheets/devise')
+require('stylesheets/administration')
 
 require('../config')
-
 Vue.use(LoadScript)
 
 Vue.component('issues_board', IssuesBoard)
@@ -103,10 +112,6 @@ let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')
 store.commit('vue', Vue)
 window.store = store
-
-const $ = jQuery
-window.jQuery = jQuery
-window.$ = $
 
 if (document.querySelector('meta[name="csrf-token"]')) {
   store.getters.axios.defaults.headers.common['X-CSRF-Token'] =

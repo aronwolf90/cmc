@@ -12,7 +12,7 @@ module ApplicationHelper
 
     def menu_logo(logo, path)
       content_tag :"router-link", to: path do
-        image_tag logo, id: "logo", height: 21, width: 40
+        image_pack_tag logo, id: "logo", height: 21, width: 40
       end
     end
 
