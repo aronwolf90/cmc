@@ -39,26 +39,16 @@ describe('DetailsStringInput', () => {
     it('pass telephone value to component', () => {
       const wrapper = createWrapper(Contact, { store, stubs: { DetailsStringInput } })
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(2)
+        wrapper.findAll(DetailsStringInput).at(1)
 
       expect(detailsStringInput.props().value)
         .to.eql('+49 821 598-1111')
     })
 
-    it('call commit("projectsShow/contactTelephoneNumberValue", value) ', () => {
-      const wrapper = factory()
-      const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(2)
-
-      detailsStringInput.vm.value = 'hi'
-      detailsStringInput.trigger('input')
-      expect(commit).to.have.been.calledWith('projectsShow/contactTelephoneNumberValue')
-    })
-
     it('handle submit', (done) => {
       const wrapper = factory()
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(2)
+        wrapper.findAll(DetailsStringInput).at(1)
 
       detailsStringInput.trigger('submit')
       wrapper.vm.$nextTick(() => {
@@ -82,27 +72,16 @@ describe('DetailsStringInput', () => {
     it('pass email value to component', () => {
       const wrapper = factory()
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(3)
+        wrapper.findAll(DetailsStringInput).at(2)
 
       expect(detailsStringInput.vm.value)
         .to.eql('aron.wolf@test.com')
     })
 
-    it('call commit("projectsShow/emailValue", value) ', () => {
-      const wrapper = factory()
-      const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(3)
-
-      detailsStringInput.vm.value = 'hi'
-      detailsStringInput.trigger('input')
-      expect(commit).to.have.been
-        .calledWith('projectsShow/contactTelephoneNumberValue')
-    })
-
     it('handle submit', (done) => {
       const wrapper = factory()
       const detailsStringInput =
-        wrapper.findAll(DetailsStringInput).at(3)
+        wrapper.findAll(DetailsStringInput).at(2)
 
       detailsStringInput.trigger('submit')
       wrapper.vm.$nextTick(() => {

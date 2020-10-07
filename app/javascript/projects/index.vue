@@ -5,10 +5,8 @@
       new-text="New project",
       :item-text-function="itemTextFunction",
     )
-    
     br
     br
-    
     table.table
       thead
         th.col Name
@@ -31,8 +29,7 @@
 
 <script>
 import IndexTopSection from '../components/index-top-section'
-import IndexListItem from '../components/index-list-item'
-import IndexSearchSectionItem from '../components/index-list-item' 
+import IndexSearchSectionItem from '../components/index-list-item'
 import ProjectIndexItem from 'components/projects/project-index-item'
 import { Utils } from 'vuex-jsonapi-client'
 
@@ -68,7 +65,7 @@ export default {
   },
   computed: {
     pages () {
-      return Math.ceil(this.count/10)
+      return Math.ceil(this.count / 10)
     },
     projects () {
       return this.projectRefs.map(ref => {
@@ -77,10 +74,10 @@ export default {
     }
   },
   methods: {
-    itemTextFunction(project) {
+    itemTextFunction (project) {
       return Utils.attribute(project, 'name')
     },
-    linkGen(page) {
+    linkGen (page) {
       return page === 1 ? '?' : `?page=${page}`
     }
   }

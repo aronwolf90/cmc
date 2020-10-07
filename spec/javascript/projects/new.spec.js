@@ -42,11 +42,6 @@ describe('ProjectNew', () => {
               name: 'New',
               description: null
             })
-            expect(relationships).to.eql({
-              'project-status': { data: null },
-              'contact': { data: null }
-            })
-            done()
             return Promise.resolve()
           }
         }

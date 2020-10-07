@@ -28,7 +28,8 @@
           :entry-type="project.type",
           :entry-id="project.id",
           :text="project.attributes.name",
-          :editBtn="true"
+          :editBtn="true",
+          :key="project.id"
         )
 </template>
 

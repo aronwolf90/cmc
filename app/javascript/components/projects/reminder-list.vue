@@ -8,7 +8,8 @@
       v-for="reminder in reminders",
       :id="reminder.id",
       :type="reminder.type",
-      :project-id="projectId"
+      :project-id="projectId",
+      :key="reminder.id"
     )
 </template>
 

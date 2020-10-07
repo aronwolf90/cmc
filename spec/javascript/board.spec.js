@@ -81,23 +81,11 @@ describe('Board', () => {
       }
       $subject.vm.boardLists = boardLists
     })
-
-    it('call visit on add btn', () => {
-      $subject.find('.fa-plus').trigger('click')
-      expect($subject.vm.$route.path)
-        .to.eq('/board_lists/new')
-    })
   })
 
   describe('without boardLists', () => {
     it('contain the list element', () => {
       expect($subject.findAll(List).length).to.eq(0)
-    })
-
-    it('call visit on add btn', () => {
-      $subject.find('.fa-plus').trigger('click')
-      expect($subject.vm.$route.path)
-        .to.include('board_lists/new')
     })
   })
 })

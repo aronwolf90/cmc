@@ -61,7 +61,7 @@ describe('Show', () => {
     def('issue', () => undefined)
 
     it('render nothing', () => {
-      expect($subject.html()).to.be.undefined
+      expect($subject.html()).to.be.empty
     })
   })
 })

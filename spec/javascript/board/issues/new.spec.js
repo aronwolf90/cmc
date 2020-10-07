@@ -1,174 +1,103 @@
-import { mount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
-import New from '../../../../app/javascript/board/issues/new'
-import BootstrapVue from 'bootstrap-vue'
-import sinon from 'sinon'
-import VueRouter from 'vue-router'
-
-const localVue = createLocalVue()
-const router = new VueRouter()
-
-localVue.use(Vuex)
-localVue.use(BootstrapVue)
-localVue.use(VueRouter)
+import createWrapper from '../../helper'
+import BoardIssuesNew from '../../../../app/javascript/board/issues/new'
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable prefer-promise-reject-errors */
 
-const sandbox = sinon.createSandbox()
+describe('BoardIssuesNew', () => {
+  let wrapper = null
 
-describe('New', () => {
-  afterEach(() => sandbox.restore())
-
-  it('calls createIssue when submit is clicked', (done) => {
-    let wrapper = mount(New, {
-      stubs: {
-        MarkdownEditor: '<input type="text" id="input-description">'
-      },
-      router,
-      store: new Vuex.Store({
-        modules: {
-          board: {
-            namespaced: true,
-            actions: {
-              getBoardLists () { Promise.resolve() }
-            }
-          }
-        },
-        getters: {
-          collection () {
-            return () => []
-          },
-          boardList () {
-            return () => ({ id: 1, type: 'board-lists' })
-          },
-          selectedProject () {
-            return { id: 1, type: 'projects' }
-          }
-        },
-        actions: {
-          getSelectedProject () {},
-          createIssue (_, { attributes, relationships }) {
-            expect(attributes).to.eql({
-              title: 'title',
-              description: null
-            })
-            expect(relationships).to.eql({
-              project: { data: { id: 1, type: 'projects' } },
-              'board-list': { data: { id: 1, type: 'board-lists' } }
-            })
-            done()
-            return Promise.resolve()
-          }
-        }
-      }),
-      localVue,
-      attachToDocument: true
-    })
-    console.log(wrapper.html())
-    console.log(wrapper.html())
-    wrapper.find('#input-title').element.value = 'title'
-    wrapper.find('#input-title').trigger('input')
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        sandbox.stub(window.location, 'replace')
-        wrapper.find('[type="submit"]').trigger('click')
-      })
-    })
+  afterEach(() => {
+    sandbox.restore()
+    wrapper.destroy()
   })
 
-  it('calls location.replate when no error is present', (done) => {
-    let wrapper = mount(New, {
-      stubs: {
-        MarkdownEditor: '<input id="input-description"/>'
-      },
-      router,
-      store: new Vuex.Store({
-        modules: {
-          board: {
-            namespaced: true,
-            actions: {
-              getBoardLists () { Promise.resolve() }
-            }
-          }
-        },
+  const dispatch = sandbox.stub()
+  const options = {
+    attachToDocument: true,
+    stubs: {
+      MarkdownEditor: true,
+      MultiselectInput: true,
+      textInput: true
+    },
+    mocks: {
+      $store: {
+        dispatch: dispatch,
         getters: {
-          collection () {
-            return () => []
-          },
-          boardList () {
-            return () => ({ id: 1, type: 'board-lists' })
-          },
-          selectedProject () {
-            return { id: 1, type: 'projects' }
-          }
-        },
-        actions: {
-          getSelectedProject () {},
-          createIssue (_, { attributes }) {
-            return Promise.resolve()
-          }
+          collection: () => [],
+          boardList: () => ({ id: 1, type: 'board-lists' }),
+          selectedProject: { id: 1, type: 'projects' }
         }
-      }),
-      localVue,
-      attachToDocument: true
-    })
-    wrapper.find('#input-title').element.value = 'title'
-    wrapper.find('#input-title').trigger('input')
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        wrapper.find('[type="submit"]').trigger('click')
-        wrapper.vm.$nextTick(() => {
-          wrapper.vm.$nextTick(() => {
-            // expect(wrapper.vm.$route.path).to.be.eq('/administration/board_lists')
-            done()
-          })
-        })
-      })
-    })
+      }
+    }
+  }
+
+  dispatch.returns(Promise.resolve())
+
+  it('renders labels input', async () => {
+    const entry = {
+      id: 1,
+      type: 'labels',
+      attributes: {
+        color: 'FF5733'
+      }
+    }
+    options.mocks.$store.getters.collection = () => [entry]
+    options.mocks.$store.getters.entry = () => entry
+    wrapper = createWrapper(BoardIssuesNew, options)
+    const labelInput = wrapper.find('#input-labels')
+
+    expect(labelInput.props().options)
+      .to.eql([{ id: 1, type: 'labels' }])
+    expect(labelInput.props().getColor({ id: 1, type: 'labels' }))
+      .to.eq('FF5733')
+    expect(labelInput.props().value).to.eql([])
+    expect(labelInput.props().errors).to.eql([])
   })
 
-  it('show errors when they are present', (done) => {
-    let wrapper = mount(New, {
-      stubs: {
-        MarkdownEditor: '<input id="input-description"/>'
-      },
-      store: new Vuex.Store({
-        getters: {
-          collection () {
-            return () => []
-          },
-          boardList () {
-            return () => ({ id: 1, type: 'board-lists' })
-          },
-          selectedProject () {
-            return { id: 1, type: 'projects' }
-          }
-        },
-        actions: {
-          getSelectedProject () {},
-          createIssue ({ attributes }) {
-            return Promise.reject({
-              status: 'fail',
-              data: {
-                errors: [{ source: { pointer: 'attributes/title' } }]
-              }
-            })
-          }
-        }
-      }),
-      localVue,
-      attachToDocument: true
-    })
+  it('calls createIssue when submit is clicked', async () => {
+    wrapper = createWrapper(BoardIssuesNew, options)
+    wrapper.find('#input-description').vm.$emit('input', 'description')
+    wrapper.find('#input-labels').vm.$emit('input', [{ id: '1', type: 'labels' }])
+    wrapper.find('#input-title').vm.$emit('input', 'title')
+    await wrapper.vm.$nextTick()
     wrapper.find('[type="submit"]').trigger('click')
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        wrapper.vm.$nextTick(() => {
-          expect(wrapper.vm.errors).to.eql([{ source: { pointer: 'attributes/title' } }])
-          done()
-        })
-      })
+    await wrapper.vm.$nextTick()
+
+    expect(dispatch).to.have.been.calledWith('createIssue', {
+      attributes: {
+        title: 'title',
+        description: 'description'
+      },
+      relationships: {
+        'board-list': {
+          data: { id: 1, type: 'board-lists' }
+        },
+        project: {
+          data: { id: 1, type: 'projects' }
+        },
+        labels: {
+          data: [{ id: '1', type: 'labels' }]
+        }
+      }
     })
+  })
+
+  it('show errors when they are present', async () => {
+    dispatch.withArgs('createIssue').returns(
+      Promise.reject({
+        status: 'fail',
+        data: {
+          errors: [{ source: { pointer: 'attributes/title' } }]
+        }
+      })
+    )
+    wrapper = createWrapper(BoardIssuesNew, options)
+    wrapper.find('[type="submit"]').trigger('click')
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.errors).to.eql([{ source: { pointer: 'attributes/title' } }])
   })
 })

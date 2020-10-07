@@ -60,7 +60,7 @@ describe('List', () => {
     def('boardList', () => undefined)
 
     it('render nothing', () => {
-      expect($subject.html()).to.eq(undefined)
+      expect($subject.html()).to.empty
     })
   })
 })

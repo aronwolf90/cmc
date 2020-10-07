@@ -1,17 +1,18 @@
 <template lang='pug'>
   .index-search-section
     b-form-input(
-      type='text', 
-      v-model='searchText', 
+      type='text',
+      v-model='searchText',
       placeholder='Search',
       @focus.native="focused = true",
       autocomplete="off"
     )
     .items(v-if="focused")
       index-search-section-item(
-        v-for="entry in items", 
+        v-for="entry in items",
         :text="itemTextFunction(entry)",
-        :link="`/administration/${resource}/${entry.id}`"
+        :link="`/administration/${resource}/${entry.id}`",
+        :key="entry.id"
       )
 </template>
 

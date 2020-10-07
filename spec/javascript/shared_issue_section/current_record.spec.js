@@ -66,7 +66,7 @@ describe('CurrentRecord', () => {
     def('currentRecord', () => undefined)
 
     it('render nothing', () => {
-      expect($subject.html()).to.be.undefined
+      expect($subject.html()).to.be.empty
     })
   })
 })

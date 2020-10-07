@@ -1,5 +1,5 @@
 <template lang='pug'>
-  b-form(@submit="submit")
+  b-form(@submit.prevent="submit")
     text-input(
       id="input-title",
       :errors="errors",
@@ -14,6 +14,7 @@
       label="Labels",
       :options="labels",
       :getLabel="getLabelForLabels",
+      :getColor="getColorForLabels",
       error-path="relationships/labels"
     )
     project-select(
@@ -24,7 +25,10 @@
       error-path="relationships/project"
     )
     br
-    markdown-editor(v-model='form.attributes.description')
+    markdown-editor(
+      id="input-description"
+      v-model='form.attributes.description'
+    )
     br
     b-button(type="submit", variant="success") Create issue
     b-button.pull-right(variant="secondary", to="../..") Cancel
@@ -35,6 +39,7 @@ import { Utils } from 'vuex-jsonapi-client'
 import TextInput from 'components/form-inputs/text'
 import MultiselectInput from 'components/form-inputs/multiselect'
 import ProjectSelect from 'components/project-select'
+import FormMixin from 'mixins/form'
 
 export default {
   components: {
@@ -43,6 +48,7 @@ export default {
     MultiselectInput
   },
   props: ['boardListId'],
+  mixins: [FormMixin],
   data () {
     return {
       form: {
@@ -76,7 +82,6 @@ export default {
       return Utils.attribute(this.$store.getters.context, 'global-board')
     },
     labels () {
-      if (!this.$store.getters.collection('labels')) return []
       return Utils.entryArrayToRef(this.$store.getters.collection('labels'))
     }
   },
@@ -91,7 +96,6 @@ export default {
       })
     },
     submit (event) {
-      event.preventDefault()
       const project = this.form.relationships.project.data
       const labels = this.form.relationships.labels.data
 
@@ -101,7 +105,7 @@ export default {
           'board-list': {
             data: this.boardList
           },
-          'project': {
+          project: {
             data: project
           },
           labels: {
@@ -128,18 +132,12 @@ export default {
         'name'
       )
     },
-    errorStatus (pointer) {
-      let errors = this.findErrors(pointer)
-      return errors.length == 0 ? null: false
-    },
-    findErrors (pointer) {
-      return this.errors.filter(error => {
-        return error.source.pointer.includes(pointer)
-      })
-      .filter((error, index, self) => {
-        return self.findIndex(value => value.detail == error.detail) === index;
-      })
-    },
+    getColorForLabels (labelRef) {
+      return Utils.attribute(
+        this.$store.getters.entry(labelRef),
+        'color'
+      )
+    }
   }
 }
 </script>

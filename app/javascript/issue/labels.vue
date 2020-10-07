@@ -30,12 +30,14 @@
 import { Utils } from 'vuex-jsonapi-client'
 import LabelModal from './label-modal'
 import LabelModalIndex from './label-modal-index'
+import VSelect from 'vue-select'
 
 export default {
   props: ['issueRef'],
   components: {
     LabelModal,
-    LabelModalIndex
+    LabelModalIndex,
+    VSelect
   },
   data () {
     return {
