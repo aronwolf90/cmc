@@ -12,7 +12,7 @@ RUN echo "export PATH=/app/bin:$PATH" >> ~/.profile && \
   bash openssh-client \
   nodejs yarn vim tmux \
   postgresql-dev \
-  grep
+  grep curl
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --jobs $(nproc)

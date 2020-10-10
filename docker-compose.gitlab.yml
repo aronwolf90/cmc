@@ -1,82 +1,14 @@
 version: '2.2'
 services:
-  db:
-    command: "-c fsync=off"
-    image: postgres:11
-    dns: 8.8.8.8
-    environment:
-      - POSTGRES_PASSWORD=postgres
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 1s
-      timeout: 5s
-      retries: 60
-
-  redis:
-    image: redis
-
-  stripe_mock:
-    image: registry.gitlab.com/web_utils/mockserver-docker:latest
-    dns: 8.8.8.8
-    volumes:
-      - ./stripe_mocks:/mocks
-    ports:
-      - "8080:8080"
-
-  payment:
-    image: registry.gitlab.com/cmc_system/cmc_payment
-    dns: 8.8.8.8
-    depends_on:
-      db:
-        condition: service_healthy
-      stripe_mock:
-        condition: service_started
-
-  storage:
-    image: minio/minio
-    dns: 8.8.8.8
-    entrypoint: sh
-    command: -c 'mkdir -p /data/cmc; /usr/bin/minio server /data'
-    networks:
-      default:
-        aliases:
-          - storage.lvh.me
-    environment:
-      - MINIO_ACCESS_KEY=access_key
-      - MINIO_SECRET_KEY=secret_key
-
-  mail_hog:
-    image: mailhog/mailhog
-    ports:
-      - "8025:8025"
-
-  worker:
-    image: $IMAGE
-    dns: 8.8.8.8
-    command: sh -c "RAILS_ENV=production bundle exec sidekiq -C config/sidekiq.yml"
-    environment:
-      - DATABASE_URL=postgres://postgres:postgres@db/database
-      - AWS_KEY=access_key
-      - AWS_SECRET=secret_key
-      - AWS_ENDPOINT=http://storage.lvh.me:9000
-      - PAYMENT_ENABLED=true
-      - NO_RAISE_MAILER_ERRORS=true
-      - REDIS_URL=redis://redis
-      - SECRET_KEY_BASE=5d1ee3590cdac32f527d1c4c835578859ecbd50ac1b03ff6d4689c19d732b5c9050ceb66d8b625cacadb1c1228095a7fd855933ce1881075a577e7cb8aea3432
-      - MAILER_SMTP_DOMAIN=mail_hog
-      - MAILER_PORT=1025 
-    depends_on:
-      db:
-        condition: service_healthy
-      storage:
-        condition: service_started
-      payment:
-        condition: service_started
-      redis:
-        condition: service_started
-
   app:
     image: $IMAGE
+    extra_hosts:
+      - db:$POSTGRES_IP
+      - redis:$REDIS_IP
+      - storage.lvh.me:$STORAGE_IP
+      - mail_hog:$MAIL_HOG_IP
+      - stripe_mock:$STRIPE_MOCK_IP
+      - payment:$PAYMENT_IP
     dns: 8.8.8.8
     command:  sh -c "RAILS_ENV=production rails s -b '0.0.0.0'"
     volumes:
@@ -104,19 +36,9 @@ services:
       - SECRET_KEY_BASE=5d1ee3590cdac32f527d1c4c835578859ecbd50ac1b03ff6d4689c19d732b5c9050ceb66d8b625cacadb1c1228095a7fd855933ce1881075a577e7cb8aea3432
       - MAILER_SMTP_DOMAIN=mail_hog
       - MAILER_PORT=1025 
+      - DISABLE_DATABASE_ENVIRONMENT_CHECK=true
     ports:
       - "3000:3000"
-    depends_on:
-      db:
-        condition: service_healthy
-      storage:
-        condition: service_started
-      payment:
-        condition: service_started
-      redis:
-        condition: service_started
-      worker:
-        condition: service_started
 
   selenium:
     image: selenium/standalone-chrome-debug

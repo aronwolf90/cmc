@@ -1,18 +1,16 @@
 image: $CONTAINER_RELEASE_IMAGE
 
 stages:
-  - build
+  #  - build
   - test
   - deploy
   - test_production
   - tag_latest
 
 variables:
-  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
-  POSTGRES_PASSWORD: password
-  POSTGRES_DB: root
-  POSTGRES_USER: root
-  DATABASE_URL: postgres://root:password@postgres/root
+  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/cmc_system/cmc/feature-migrate-dc-gitlab-to-gitlab-ci:4a8803baef27115af0fbcdc2db8036c1aa2ec4e7
+  POSTGRES_PASSWORD: postgres
+  DATABASE_URL: postgres://postgres:postgres@postgres/database
   GIT_STRATEGY: none
   MINIO_ACCESS_KEY: access_key
   MINIO_SECRET_KEY: secret_key
@@ -22,18 +20,18 @@ variables:
   AWS_ENDPOINT: http://minio:9000
   TZ: Europe/Berlin
 
-build:
-  stage: build
-  image: docker:latest
-  variables:
-    GIT_STRATEGY: clone
-  services:
-    - docker:dind
-  script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker pull $CI_REGISTRY_IMAGE
-    - docker build --cache-from $CI_REGISTRY_IMAGE -t $CONTAINER_RELEASE_IMAGE .
-    - docker push $CONTAINER_RELEASE_IMAGE
+  #build:
+  #  stage: build
+  #  image: docker:latest
+  #  variables:
+  #    GIT_STRATEGY: fetch
+  #  services:
+  #    - docker:dind
+  #  script:
+  #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  #    - docker pull $CI_REGISTRY_IMAGE
+  #    - docker build --cache-from $CI_REGISTRY_IMAGE -t $CONTAINER_RELEASE_IMAGE .
+  #    - docker push $CONTAINER_RELEASE_IMAGE
 
 helm_lint:
   stage: test
@@ -84,52 +82,71 @@ mocha:
     - cd /app
     - yarn test
 
-cucumber_api:
+.cucumber:
   stage: test
   variables:
-    GIT_STRATEGY: clone
-    DOCKER_HOST: tcp://docker:2375
-  image:
-    name: docker/compose:1.24.1
-    entrypoint: ["/bin/sh", "-c"]
+    GIT_STRATEGY: fetch
+    FF_NETWORK_PER_BUILD: "true"
+    AWS_ENDPOINT: "http://storage.lvh.me:9000"
+    PAYMENT_ENABLED: "true"
+    NO_RAISE_MAILER_ERRORS: "true"
+    REDIS_URL: "redis://redis"
+    DISABLE_DATABASE_ENVIRONMENT_CHECK: "true"
+    CAPYBARA_RUN_SERVER: "false"
+    TEST_PORT: "3000"
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
+    RAILS_SERVE_STATIC_FILES: "true"
+    SEEDS_FOLDER: development
+    TEST_HOST: "lvh.me"
+    SECRET_KEY_BASE:  "5d1ee3590cdac32f527d1c4c835578859ecbd50ac1b03ff6d4689c19d732b5c9050ceb66d8b625cacadb1c1228095a7fd855933ce1881075a577e7cb8aea3432"
+    MAILER_SMTP_DOMAIN: mail_hog
+    MAILER_PORT: 1025 
   artifacts:
     when: on_failure
     paths:
       - screenshots
     expire_in: 30 days
   services:
-    - docker:dind
+    - name: redis
+    - name: postgres:11
+      alias: db
+      command: ['-c', 'fsync=off']
+    - name: minio/minio 
+      entrypoint: ['sh']
+      command: ['-c', 'mkdir -p /data/cmc; /usr/bin/minio server /data']
+      alias: storage.lvh.me
+    - name: mailhog/mailhog
+      alias: mail_hog
+    - name: selenium/standalone-chrome-debug
+      alias: selenium 
+    - name: registry.gitlab.com/web_utils/mockserver-docker:latest
+      alias: stripe_mock 
+      command: ['sh', '-c', 'mockserver -p 8080 -m /build/stripe_mocks']
+    - name: registry.gitlab.com/cmc_system/cmc_payment 
+      alias: payment
+      command: ['sh', '-c', 'export DATABASE_URL=postgres://postgres:postgres@postgres/payment; mix ecto.setup; mix phx.server']
+    - name: $CONTAINER_RELEASE_IMAGE
+      command: ['sh', '-c', 'curl lvh.me:3000 --retry 30 --retry-connrefused --retry-delay 3 && RAILS_ENV=production bundle exec sidekiq -C config/sidekiq.yml']
+      alias: worker
+    - name: $CONTAINER_RELEASE_IMAGE
+      command: ['sh', '-c', 'RAILS_ENV=production rake db:setup && rails s -b 0.0.0.0']
+      alias: lvh.me
+  before_script:
+    - export TEST_HOST="$(getent hosts lvh.me | awk '{ print $1 }').xip.io"
+    - curl $TEST_HOST:3000 --retry 20 --retry-connrefused --retry-delay 3
+    - curl worker:7433 --retry 20 --retry-connrefused --retry-delay 3
+
+cucumber_api:
+  extends: .cucumber
   script:
-    - echo "run $CI_NODE_INDEX / $CI_NODE_TOTAL"
-    - export IMAGE=$CONTAINER_RELEASE_IMAGE
-    - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
-    - docker-compose -f docker-compose.gitlab.yml run app bash -c "RAILS_ENV=production rake db:setup"
-    - docker-compose -f docker-compose.gitlab.yml up -d
-    - docker-compose -f docker-compose.gitlab.yml run app cucumber features/api
+    - cucumber features/api
 
 cucumber:
-  stage: test
+  extends: .cucumber
   parallel: 4
-  variables:
-    GIT_STRATEGY: clone
-    DOCKER_HOST: tcp://docker:2375
-  image:
-    name: docker/compose:1.24.1
-    entrypoint: ["/bin/sh", "-c"]
-  artifacts:
-    when: on_failure
-    paths:
-      - screenshots
-    expire_in: 30 days
-  services:
-    - docker:dind
   script:
-    - echo "run $CI_NODE_INDEX / $CI_NODE_TOTAL"
-    - export IMAGE=$CONTAINER_RELEASE_IMAGE
-    - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
-    - docker-compose -f docker-compose.gitlab.yml run app bash -c "RAILS_ENV=production rake db:setup"
-    - docker-compose -f docker-compose.gitlab.yml up -d
-    - docker-compose -f docker-compose.gitlab.yml run -e CI_NODE_INDEX=$CI_NODE_INDEX -e CI_NODE_TOTAL=$CI_NODE_TOTAL app bin/ci_split_cucumber.sh
+    - bin/ci_split_cucumber.sh
 
 backup:
   stage: test
