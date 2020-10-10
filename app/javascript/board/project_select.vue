@@ -18,7 +18,6 @@ export default {
   created () {
     this.$store.dispatch('getProjects')
     this.$store.dispatch('initCurrentUser').then(() => {
-      const currentUser = this.$store.getters.currentUser
       const project = Utils.relationship(this.currentUser, 'selected-project')
       if (project) {
         this.$store.dispatch('getProject', project.id)
@@ -32,9 +31,9 @@ export default {
         firstEntry = [{ code: '', label: 'All' }]
       }
       return firstEntry.concat((this.projects || [])
-      .map(project => {
-        return { code: project.id, label: project.attributes.name }
-      }))
+        .map(project => {
+          return { code: project.id, label: project.attributes.name }
+        }))
     },
     context () {
       return this.$store.getters.context
@@ -59,7 +58,7 @@ export default {
             label: Utils.attribute(this.selectedProject, 'name')
           }
         }
-        return { code: '', label: 'All'}
+        return { code: '', label: 'All' }
       },
       set (value) {
         this.$store.dispatch('updateUser', {

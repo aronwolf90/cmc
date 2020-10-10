@@ -1,15 +1,15 @@
 <template lang='pug'>
   .search-select
     b-form-input(
-      type='text', 
-      v-model='searchText', 
+      type='text',
+      v-model='searchText',
       placeholder='Search',
       @focus.native="focused = true",
       autocomplete="off"
     )
     .items(v-if="focused")
       slot(
-        v-for="item in items", 
+        v-for="item in items",
         v-bind:item=item",
         :key="item.id"
       )
@@ -17,11 +17,11 @@
 
 <script>
 import SearchSelectItem from './search-select-item'
- 
+
 export default {
   data () {
-    return { 
-      searchText: '', 
+    return {
+      searchText: '',
       focused: false,
       requestItems: null
     }
@@ -40,8 +40,8 @@ export default {
   asyncComputed: {
     items: {
       get () {
-        this.$store.dispatch('get', { 
-          url: `${this.endpoint}?query=${this.searchText}`,
+        this.$store.dispatch('get', {
+          url: `${this.endpoint}?query=${this.searchText}`
         }).then(response => response.data)
       },
       watch: ['searchText']

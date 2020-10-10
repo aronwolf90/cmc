@@ -20,7 +20,7 @@ Scenario: Get /api/v1/projects/<id>/reminders
             "complexity":"2.0",
             "due-at": "10-10-2020 00:00",
             "deadline-at": "10-10-2020 00:00",
-            "status": "none"
+            "status": "danger"
           },
           "relationships":{ 
             "user":{ 

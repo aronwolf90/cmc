@@ -14,8 +14,9 @@
         :id="id",
       )
       b-form-invalid-feedback(
-        v-for="error in selectedErrors",
-        :state="errorStatus"
+        v-for="(error, index) in selectedErrors",
+        :state="errorStatus",
+        :key="index"
       )
         | {{ error.detail }}
     template(v-else="")
@@ -26,8 +27,9 @@
         @search="search",
       )
       b-form-invalid-feedback(
-        v-for="error in selectedErrors",
-        :state="errorStatus"
+        v-for="(error, index) in selectedErrors",
+        :state="errorStatus",
+        :key="index"
       )
           | {{ error.detail }}
 </template>

@@ -12,8 +12,9 @@
       @input="input"
     )
     b-form-invalid-feedback(
-      v-for="error in findErrors(errorPath)",
-      :state="errorStatus(errorPath)"
+      v-for="(error, index) in findErrors(errorPath)",
+      :state="errorStatus(errorPath)",
+      :key="index"
     )
       | {{ error.detail }}
 </template>

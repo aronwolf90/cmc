@@ -1,28 +1,28 @@
 <template lang='pug'>
   .search
     b-form-input(
-      type='text', 
-      v-model='searchText', 
-      placeholder='Search', 
+      type='text',
+      v-model='searchText',
+      placeholder='Search',
       size='sm',
       @focus.native="focused = true"
     )
     .items(v-if="issues.length && focused")
       search-select-item(
-        v-for="issue in issues", 
-        :issue-id="issue.id",
+        v-for="issue in issues",
+        :issue-ref="issue",
         :key="issue.id"
       )
 </template>
 
 <script>
-import SearchSelectItem from './search_select_item'
- 
+import SearchSelectItem from 'components/ticket-board/search-select-item'
+
 export default {
   data () {
-    return { 
-      searchText: '', 
-      focused: false ,
+    return {
+      searchText: '',
+      focused: false,
       requestIssues: null
     }
   },
@@ -42,15 +42,15 @@ export default {
       return this.relevantIssues || []
     },
     relevantIssues () {
-      return this.requestIssues || this.$store.getters.metaCollection('issues') 
+      return this.requestIssues || this.$store.getters.metaCollection('issues')
     }
   },
   methods: {
     request () {
-      this.$store.dispatch('request', { 
-        url: `/api/v1/issues?query=${this.searchText}`,
+      this.$store.dispatch('request', {
+        url: `/api/v1/issues?query=${this.searchText}`
       }).then(response => {
-        this.requestIssues = response.data 
+        this.requestIssues = response.data
       })
     }
   },
