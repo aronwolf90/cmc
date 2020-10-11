@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   db:
-    command: "-c fsync=off"
+    command: "-c fsync=off synchronous_commit=off full_page_writes=off"
     image: postgres:11
     dns: 8.8.8.8
     environment:
