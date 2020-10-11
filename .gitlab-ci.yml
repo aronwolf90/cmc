@@ -96,6 +96,7 @@ cucumber_api:
     when: on_failure
     paths:
       - screenshots
+      - log
     expire_in: 30 days
   services:
     - docker:dind
@@ -120,6 +121,8 @@ cucumber:
     when: on_failure
     paths:
       - screenshots
+      - log
+    expire_in: 30 days
     expire_in: 30 days
   services:
     - docker:dind

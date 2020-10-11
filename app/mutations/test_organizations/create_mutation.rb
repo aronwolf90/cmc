@@ -15,6 +15,7 @@ module TestOrganizations
       model.update!(id: 1)
       model.update!(subscription_id: attributes[:premium] || nil) if attributes[:premium].present?
       ActiveRecord::Base.connection.reset_pk_sequence!("public.organizations")
+      ActiveRecord::Base.connection.clear_cache! # TODO: check why prepared_statements problem appear on rails 6
     end
 
     def organization

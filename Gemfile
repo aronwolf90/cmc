@@ -3,10 +3,10 @@
 source "https://rubygems.org"
 source "https://rails-assets.org"
 
-gem "rails", "~> 5.1.3"
+gem "rails", "~> 6.0"
 
 # Fundamental
-gem "apartment"
+gem "apartment", git: "https://github.com/influitive/apartment.git", branch: "development"
 gem "pg"
 gem "puma", "~> 3.7"
 
@@ -22,6 +22,7 @@ gem "carrierwave"
 gem "composite_primary_keys"
 gem "config"
 gem "dry-struct"
+gem "dry-validation", "0.11.1"
 gem "fog-aws"
 gem "hash_mapper"
 gem "holidays"
@@ -29,6 +30,7 @@ gem "kaminari", "~> 1.2.1"
 gem "knock"
 gem "lp_csv_exportable"
 gem "migration_data"
+gem "pagy"
 gem "pager_api"
 gem "pg_search"
 gem "pgreset"
@@ -36,20 +38,22 @@ gem "pundit"
 gem "rein"
 gem "rest-client"
 gem "seed-fu"
-gem "sidekiq"
+gem "sidekiq", "~> 6.0.7"
 gem "sidekiq-cron"
 gem "uglifier"
-gem "webpacker"
+gem "webpacker", "~> 3.5.3"
 
 # ruby extensions
 gem "attr_extras"
 gem "numeric"
 
 # Trailblazer
-gem "reform", "~> 2.2"
+gem "reform", "2.2"
 gem "reform-rails"
 gem "trailblazer", "2.1.0.rc1"
 gem "trailblazer-cells"
+gem "trailblazer-context", "0.1.2"
+gem "trailblazer-operation", "~> 0.4.1"
 gem "trailblazer-rails", "~> 2.1"
 
 # Template
@@ -71,7 +75,8 @@ end
 group :development do
   gem "guard-rspec", require: false
   gem "listen", ">= 3.0.5", "< 3.2"
-  gem "rubocop-rails_config", require: false
+  gem "rubocop", "~> 0.73.0"
+  gem "rubocop-rails_config", "~> 0.6.2", require: false
   gem "rubocop-rspec", require: false
   gem "web-console", ">= 3.3.0"
 end
@@ -96,7 +101,7 @@ end
 
 group :test do
   gem "capybara"
-  gem "cucumber-rails", require: false
+  gem "cucumber-rails", "2.0.0", require: false
   gem "db-query-matchers"
   gem "jsonpath", require: false
   gem "selenium-webdriver", require: false

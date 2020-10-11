@@ -45,5 +45,6 @@ module CMC
       password:             ENV["MAILER_PASSWORD"],
       authentication:       'login'
     }
+    config.hosts = nil
   end
 end
