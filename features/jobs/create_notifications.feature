@@ -11,8 +11,8 @@ Scenario: create notifications
   Then the page contain the text "description for the test issue"
   When I set due at to one hour from now
   And I click on ".due-at button"
-  And I navigate to "http://admin:testtest@lvh.me:3000/sidekiq/cron"
+  And I navigate to sidekiq/cron
   And I click on "[action='/sidekiq/cron/create_notifications/enque'] [type='submit']"
-  And I navigate to "http://test-organization.lvh.me:3000/administration"
+  And I navigate to home
   And I reload until ".badge-pill" with text "1" 
   Then the element ".badge-pill" contain the text "1"

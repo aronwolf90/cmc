@@ -76,7 +76,7 @@ Given(/^Organization is not premium$/) do
 end
 
 Given(/^I am signed in \(multitenant\)$/) do
-  visit "http://test-organization.lvh.me:3000/users/sign_in"
+  visit "http://test-organization.#{Settings.test_host}:#{Settings.test_port}/users/sign_in"
   expect(page).to have_css "[name='user_email'], #user_email"
   fill_in "user_email", with: "admin@lvh.me"
   fill_in "user_password", with: "testtest"
@@ -93,6 +93,14 @@ end
 
 Given(/^the mailbox is empty"$/) do
   RestClient.delete("mail_hog:8025/api/v1/messages")
+end
+
+When(/^I navigate to home$/) do
+  visit "http://test-organization.#{Settings.test_host}:#{Settings.test_port}/administration"
+end
+
+When(/^I navigate to sidekiq\/cron$/) do
+  visit "http://admin:testtest@#{Settings.test_host}:#{Settings.test_port}/sidekiq/cron"
 end
 
 When(/^I navigate to "([^\"]*)"$/) do |link|
@@ -273,6 +281,11 @@ Then(/the input "([^\"]*)" is checked/) do |input|
 end
 
 Then(/^a email was sent$/) do
-  response = JSON.parse(RestClient.get("mail_hog:8025/api/v1/messages").body)
+  response = 0
+  8.times do
+    response = JSON.parse(RestClient.get("mail_hog:8025/api/v1/messages").body)
+    break if response.size >= 1
+    sleep 1
+  end
   expect(response.size >= 1).to eq(true)
 end
