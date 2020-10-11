@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}-service
 spec:
   selector:
-    app: {{ .Release.Name }}-web
+    app.kubernetes.io/name: {{ .Release.Name }}-web
   type: NodePort
   ports:
   - name: http

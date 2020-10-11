@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-web
+        app.kubernetes.io/name: {{ .Release.Name }}-web
     spec:
       containers:
         - name: web
