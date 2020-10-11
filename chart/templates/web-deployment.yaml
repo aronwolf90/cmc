@@ -1,11 +1,14 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-web
   labels:
-    name: {{ .Release.Name }}-web
+    app.kubernetes.io/name: {{ .Release.Name }}-web
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Release.Name }}-web
   strategy:
     type: RollingUpdate
     rollingUpdate:
