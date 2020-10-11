@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require Rails.root.join("lib/factory_bot/step_definitions")
-
 Given(/^an user exists with an id of 1$/) do
   Admin.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Project < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
   acts_as_paranoid
 
   has_many :board_lists, dependent: :destroy

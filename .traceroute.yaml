@@ -9,8 +9,11 @@ ignore_unreachable_actions:
 - serializer
 - collection_query
 - operation
+- action_mailbox/inbound_emails
 
 ignore_unused_routes:
 - ^devise
 - user_tokens
 - /sidekiq
+- action_mailbox/inbound_emails
+
