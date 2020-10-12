@@ -7,25 +7,29 @@ module Issues
     def call
       @project_id = attributes.delete(:project_id) || user.selected_project_id
       @indicated_board_list = attributes[:board_list_id].present? ?
-        BoardList.find(attributes[:board_list_id]) : nil
+      BoardList.find(attributes[:board_list_id]) : nil
+
+      model.assign_attributes(attributes)
+
+      model.board_list_id = board_list_id
+      model.global_board_list_id = global_board_list_id
+      model.ordinal_number = 0
+      model.global_ordinal_number = 0
+      ordered_issues =
+        model.board_list&.issues&.reorder(ordinal_number: :asc, id: :desc)
+      global_ordered_issues =
+        model.global_board_list&.issues&.reorder(global_ordinal_number: :asc, id: :desc),
 
       ActiveRecord::Base.transaction do
-        model.assign_attributes(attributes)
-
-        model.board_list_id = board_list_id
-        model.global_board_list_id = global_board_list_id
-        model.ordinal_number = 0
-        model.global_ordinal_number = 0
-
         model.save!
 
         SortMutation.call(
-          model.board_list&.issues&.reorder(ordinal_number: :asc, id: :desc),
+          ordered_issues,
           sort_key: :ordinal_number,
           model: model
         )
         SortMutation.call(
-          model.global_board_list&.issues&.reorder(global_ordinal_number: :asc, id: :desc),
+          global_ordered_issues,
           sort_key: :global_ordinal_number,
           model: model
         )

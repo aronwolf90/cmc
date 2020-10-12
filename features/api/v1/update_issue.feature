@@ -43,7 +43,7 @@ Scenario: Put an valid issue using json in PUT body
           "complexity":"2.0",
           "due-at":"12-10-2020 00:00",
           "deadline-at":"12-10-2020 00:00",
-          "status": "none"
+          "status": "danger"
         },
         "relationships":{ 
           "user":{ 
