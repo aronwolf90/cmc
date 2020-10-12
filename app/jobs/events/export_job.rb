@@ -2,6 +2,8 @@
 
 module Events
   class ExportJob < ApplicationJob
+    discard_on ActiveRecord::RecordNotFound
+
     def perform(organization, event_id)
       Apartment::Tenant.switch(organization.name) do
         Events::ExportOperation.(

@@ -95,6 +95,10 @@ Given(/^the mailbox is empty"$/) do
   RestClient.delete("mail_hog:8025/api/v1/messages")
 end
 
+When(/^I navigate admin_area$/) do
+  visit "http://admin:testtest@#{Settings.test_host}:#{Settings.test_port}/admin_area"
+end
+
 When(/^I navigate to home$/) do
   visit "http://test-organization.#{Settings.test_host}:#{Settings.test_port}/administration"
 end

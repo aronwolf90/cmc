@@ -2,6 +2,9 @@
 
 module GoogleCalenders
   class ExportEventJob < ApplicationJob
+    discard_on ActiveRecord::RecordNotFound
+    discard_on Signet::AuthorizationError
+
     def perform(organization, event_id)
       Apartment::Tenant.switch(organization.name) do
         GoogleCalenders::ExportEventOperation.(

@@ -5,16 +5,8 @@ class ApplicationMutation
   attr_private :attributes, :user
 
   def self.call(*args)
-    retried ||= false
     Rails.logger.debug [self, args]
     new(*args).tap(&:call).model
-  rescue ActiveRecord::PreparedStatementCacheExpired
-    if retried
-      raise
-    else
-      retried = true
-      retry
-    end
   end
 
   def initialize(model:, user: nil, **attributes)

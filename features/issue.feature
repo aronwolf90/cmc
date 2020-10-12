@@ -33,7 +33,7 @@ Scenario: Create Issue on global board when all is selected
   And I enter "issue name" into input named "Title"
   And I click on "#project-select" 
   And I click on "[role='option']" with "Test project 2"
-  When I click on submit
+  And I click on submit
   Then the page contain the text "issue name"
   When I reload the page
   Then the page contain the text "issue name"
