@@ -6,6 +6,7 @@ module TestOrganizations
       Organizations::DestroyMutation.call(
         model: organization
       ) if organization.present?
+      ActiveRecord::Base.connection.clear_cache!
       mutation(Organization, :create).call(
         model: model,
         name: "test-organization",
