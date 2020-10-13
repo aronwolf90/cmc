@@ -11,6 +11,7 @@ Scenario: Create/Update subscription
   And I click on button "Add payment informations"
   And I enter "test@example.com" into input named "email"
   And I click on "[name='cardNumber']"
+  And I sleep "1" seconds
   And I enter "4242424242424242" into input named "cardNumber"
   And I enter "12/40" into input named "cardExpiry"
   And I enter "1234" into input named "cardCvc"
@@ -23,6 +24,7 @@ Scenario: Create/Update subscription
   And I click on button "Add payment informations"
   And I enter "test@example.com" into input named "email"
   And I click on "[name='cardNumber']"
+  And I sleep "1" seconds
   And I enter "5555555555554444" into input named "cardNumber"
   And I enter "12/40" into input named "cardExpiry"
   And I enter "1234" into input named "cardCvc"

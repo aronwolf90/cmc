@@ -20,11 +20,11 @@ class BoardList < ApplicationRecord
     @issues ||=
       if project_id.nil?
         global_issues
-          .order(:global_ordinal_number, created_at: :desc)
+          .order(:global_ordinal_number, created_at: :desc, id: :desc)
       else
         super
           .where(board_list_id: id)
-          .order(:ordinal_number, created_at: :desc)
+          .order(:ordinal_number, created_at: :desc, id: :desc)
       end
   end
 end

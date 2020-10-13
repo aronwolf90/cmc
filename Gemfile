@@ -3,10 +3,10 @@
 source "https://rubygems.org"
 source "https://rails-assets.org"
 
-gem "rails", "~> 6.0"
+gem "rails", "~> 5.1.3"
 
 # Fundamental
-gem "apartment", git: "https://github.com/influitive/apartment.git", branch: "development"
+gem "apartment"
 gem "pg"
 gem "puma", "~> 3.7"
 

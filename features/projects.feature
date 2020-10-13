@@ -81,6 +81,7 @@ Scenario: Create new reminder
   And I am signed in (multitenant)
   When I click on navbar link "Projects"
   And I click on link "Test project"
+  Then the page contain the text "Test project"
   And I click on ".reminder-list .fa-plus"
   And I enter "New reminder" into input named "Title"
   And I click on "#input-group-due-at"
