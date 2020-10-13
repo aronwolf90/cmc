@@ -18,6 +18,7 @@ gem "devise_invitable"
 gem "active_model_serializers"
 gem "active_record_union"
 gem "acts_as_paranoid"
+gem "bulk_insert"
 gem "carrierwave"
 gem "composite_primary_keys"
 gem "config"
@@ -57,7 +58,6 @@ gem "trailblazer-operation", "~> 0.4.1"
 gem "trailblazer-rails", "~> 2.1"
 
 # Template
-gem "font-awesome-rails"
 gem "simple_form"
 gem "slim-rails"
 

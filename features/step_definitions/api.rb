@@ -3,19 +3,6 @@
 require "jsonpath"
 require "nokogiri"
 
-if defined?(Rack)
-
-  # Monkey patch Rack::MockResponse to work properly with response debugging
-  class Rack::MockResponse
-    def to_str
-      body
-    end
-  end
-
-  World(Rack::Test::Methods)
-
-end
-
 def set_header(key, value)
   @headers ||= {}
   @headers[key] = value
@@ -91,7 +78,7 @@ Then(/^the JSON response should be:$/) do |json|
     puts JSON.pretty_generate(actual)
   end
 
-  expect(actual).to match(expected)
+  expect(Hashdiff.diff(actual, expected)).to eq([])
 end
 
 Then(/^the JSON response should match:$/) do |json|

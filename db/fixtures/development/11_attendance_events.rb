@@ -1,21 +1,37 @@
 # frozen_string_literal: true
 
-AttendanceEvent.seed do |s|
-  s.id          = 1
-  s.from_day    = "2019-01-15"
-  s.to_day      = "2019-01-16"
-  s.from_time   = "09:00"
-  s.to_time     = "18:00"
-  s.description = "Test description"
-  s.user_id     = 1
-end
+AttendanceEvent.bulk_insert(
+  :id,
+  :from_day,
+  :to_day,
+  :from_time,
+  :to_time,
+  :description,
+  :user_id,
+  :created_at,
+  :updated_at
+) do |worker|
+  worker.add(
+    id: 1,
+    from_day: "2019-01-15",
+    to_day: "2019-01-16",
+    from_time: "08:00",
+    to_time: "17:00",
+    description: "Test description",
+    user_id: 1,
+    created_at: Time.zone.now,
+    updated_at: Time.zone.now
+  )
 
-AttendanceEvent.seed do |s|
-  s.id          = 2
-  s.from_day    = Date.today + 1.day
-  s.to_day      = Date.today + 1.day
-  s.from_time   = Time.zone.now + 1.day
-  s.to_time     = Time.zone.now + 1.day + 10.seconds
-  s.description = "Test description"
-  s.user_id     = 1
+  worker.add(
+    id: 2,
+    from_day: Date.today + 1.day,
+    to_day: Date.today + 1.day,
+    from_time: Time.zone.now + 1.day,
+    to_time: Time.zone.now + 1.day + 10.seconds,
+    description: "Test description",
+    user_id: 1,
+    created_at: Time.zone.now,
+    updated_at: Time.zone.now
+  )
 end

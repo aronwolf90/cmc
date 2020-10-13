@@ -4,7 +4,6 @@ require "uri"
 
 module ApplicationHelper
   include Pundit
-  include FontAwesome::Rails::IconHelper
   include BtnHelper
   include MenuHelper
   include AssideHelper

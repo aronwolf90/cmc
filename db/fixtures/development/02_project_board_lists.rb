@@ -1,31 +1,39 @@
 # frozen_string_literal: true
 
-ProjectBoardList.seed do |s|
-  s.id                = 1
-  s.name              = "New"
-  s.project_status_id = 1
-end
+ProjectBoardList.bulk_insert(
+  :id,
+  :name,
+  :project_status_id,
+  :created_at,
+  :updated_at
+) do |worker|
+  worker.add(
+    id: 1,
+    name: "New",
+    project_status_id: 1
+  )
 
-ProjectBoardList.seed do |s|
-  s.id                = 2
-  s.name              = "In contact"
-  s.project_status_id = 1
-end
+  worker.add(
+    id: 2,
+    name: "In contact",
+    project_status_id: 1
+  )
 
-ProjectBoardList.seed do |s|
-  s.id                = 3
-  s.name              = "In revision"
-  s.project_status_id = 1
-end
+  worker.add(
+    id: 3,
+    name: "In revision",
+    project_status_id: 1
+  )
 
-ProjectBoardList.seed do |s|
-  s.id                = 4
-  s.name              = "Default"
-  s.project_status_id = 2
-end
+  worker.add(
+    id: 4,
+    name: "Default",
+    project_status_id: 2
+  )
 
-ProjectBoardList.seed do |s|
-  s.id                = 5
-  s.name              = "Default"
-  s.project_status_id = 3
+  worker.add(
+    id: 5,
+    name: "Default",
+    project_status_id: 3
+  )
 end

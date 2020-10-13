@@ -1,15 +1,27 @@
 # frozen_string_literal: true
 
-Label.seed do |s|
-  s.id    = 1
-  s.name  = "Bug"
-  s.color = "#ff0000"
-end
+Label.bulk_insert(
+  :id,
+  :name,
+  :color,
+  :created_at,
+  :updated_at
+) do |worker|
+  worker.add(
+    id: 1,
+    name: "Bug",
+    color: "#ff0000",
+    created_at: Time.zone.now,
+    updated_At: Time.zone.now
+  )
 
-Label.seed do |s|
-  s.id    = 2
-  s.name  = "Important"
-  s.color = "#ff0000"
+  worker.add(
+    id: 2,
+    name: "Important",
+    color: "#ff0000",
+    created_at: Time.zone.now,
+    updated_At: Time.zone.now
+  )
 end
 
 IssueLabel.seed do |s|

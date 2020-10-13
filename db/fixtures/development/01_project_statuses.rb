@@ -1,20 +1,37 @@
 # frozen_string_literal: true
 
-ProjectStatus.seed do |s|
-  s.id         = 1
-  s.name       = "New"
-  s.initial    = true
-  s.display_as = "board"
-end
+ProjectStatus.bulk_insert(
+  :id,
+  :name,
+  :initial,
+  :display_as,
+  :created_at,
+  :updated_at
+) do |worker|
+  worker.add(
+    id: 1,
+    name: "New",
+    initial: true,
+    display_as: "board",
+    created_at: Time.zone.now,
+    updated_at: Time.zone.now
+  )
 
-ProjectStatus.seed do |s|
-  s.id      = 2
-  s.name    = "Active"
-  s.initial = false
-end
+  worker.add(
+    id: 2,
+    name: "Active",
+    initial: false,
+    display_as: "list",
+    created_at: Time.zone.now,
+    updated_at: Time.zone.now
+  )
 
-ProjectStatus.seed do |s|
-  s.id      = 3
-  s.name    = "Archived"
-  s.initial = false
+  worker.add(
+    id: 3,
+    name: "Archived",
+    initial: false,
+    display_as: "list",
+    created_at: Time.zone.now,
+    updated_at: Time.zone.now
+  )
 end

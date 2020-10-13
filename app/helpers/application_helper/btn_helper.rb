@@ -16,14 +16,14 @@ module ApplicationHelper
     def edit_btn(object, path)
       return unless policy(object).edit?
 
-      link_to fa_icon(:edit), path,
+      link_to '<i class="fa fa-edit"></i>'.html_safe, path,
               class: "btn btn-sm btn-secondary"
     end
 
     def csv_btn(object, path)
       return unless policy(object).index?
 
-      link_to fa_icon(:"file-excel-o"), path + ".csv",
+      link_to '<i class="fa fa-excel-o"></i>'.html_safe, path + ".csv",
               class: "btn btn-sm btn-success"
     end
 

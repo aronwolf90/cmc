@@ -17,7 +17,7 @@ module ApplicationHelper
     def top_asside_item(name, icon:, path:)
       content_tag(:li) do
         link_to path do
-          concat fa_icon(icon, class: "fa-lg")
+          concat "<i class='fa fa-#{name} fa-lg'></i>".html_safe
           concat "&nbsp &nbsp #{name}".html_safe
         end
       end

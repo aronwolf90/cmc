@@ -2,50 +2,72 @@
 
 date = "Sun, 16 Feb 2020 22:40:55 CET +01:00".to_date
 
-Record.seed do |s|
-  s.id          = 1
-  s.user_id     = 1
-  s.issue_id    = 5
-  s.start_time  = date - 1.week - 1.hour
-  s.end_time    = date - 1.week
-end
+Record.bulk_insert(
+  :id,
+  :user_id,
+  :issue_id,
+  :start_time,
+  :end_time,
+  :created_at,
+  :updated_at
+) do |worker|
+  worker.add(
+    id: 1,
+    user_id: 1,
+    issue_id: 5,
+    start_time: Time.zone.parse((date - 1.week - 1.hour).to_s),
+    end_time: Time.zone.parse((date - 1.week).to_s),
+    created_at: Time.zone.now,
+    updated_at: Time.zone.now
+  )
 
-Record.seed do |s|
-  s.id          = 2
-  s.user_id     = 1
-  s.issue_id    = 7
-  s.start_time  = date - 3.weeks - 2.hours
-  s.end_time    = date - 3.weeks
-end
+  worker.add(
+    id: 2,
+    user_id: 1,
+    issue_id: 7,
+    start_time: Time.zone.parse((date - 3.weeks - 2.hours).to_s),
+    end_time: Time.zone.parse((date - 3.weeks).to_s),
+    created_at: Time.zone.now,
+    updated_at: Time.zone.now
+  )
 
-Record.seed do |s|
-  s.id          = 3
-  s.user_id     = 1
-  s.issue_id    = 7
-  s.start_time  = date - 6.weeks - 1.5.hours
-  s.end_time    = date - 6.weeks
-end
+  worker.add(
+    id: 3,
+    user_id: 1,
+    issue_id: 7,
+    start_time: Time.zone.parse((date - 6.weeks - 1.5.hours).to_s),
+    end_time: Time.zone.parse((date - 6.weeks).to_s),
+    updated_at: Time.zone.now,
+    created_at: Time.zone.now
+  )
 
-Record.seed do |s|
-  s.id          = 4
-  s.user_id     = 1
-  s.issue_id    = 8
-  s.start_time  = date - 12.weeks - 20.hours
-  s.end_time    = date - 12.weeks
-end
+  worker.add(
+    id: 4,
+    user_id: 1,
+    issue_id: 8,
+    start_time: Time.zone.parse((date - 12.weeks - 20.hours).to_s),
+    end_time: Time.zone.parse((date - 12.weeks).to_s),
+    created_at: Time.zone.now,
+    updated_at: Time.zone.now
+  )
 
-Record.seed do |s|
-  s.id          = 5
-  s.user_id     = 2
-  s.issue_id    = 6
-  s.start_time  = date - 16.weeks - 7.hours
-  s.end_time    = date - 16.weeks
-end
+  worker.add(
+    id: 5,
+    user_id: 2,
+    issue_id: 6,
+    start_time: Time.zone.parse((date - 16.weeks - 7.hours).to_s),
+    end_time: Time.zone.parse((date - 16.weeks).to_s),
+    created_at: Time.zone.now,
+    updated_at: Time.zone.now
+  )
 
-Record.seed do |s|
-  s.id          = 6
-  s.user_id     = 2
-  s.issue_id    = 8
-  s.start_time  = date - 18.weeks - 9.hours
-  s.end_time    = date - 18.weeks
+  worker.add(
+    id: 6,
+    user_id: 2,
+    issue_id: 8,
+    start_time: Time.zone.parse((date - 18.weeks - 9.hours).to_s),
+    end_time: Time.zone.parse((date - 18.weeks).to_s),
+    created_at: Time.zone.now,
+    updated_at: Time.zone.now
+  )
 end

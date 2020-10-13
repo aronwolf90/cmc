@@ -1,7 +1,7 @@
 = simple_form_for(resource, as: resource_name, url: password_path(resource_name)) do |f|
   = render 'shared/errors', object: f.object
   #box
-    = f.input :email, required: false, autofocus: true, label: fa_icon(:user, text: 'Email')
+    = f.input :email, required: false, autofocus: true, label: '<i class="fa fa-user"></i> Email'.html_safe
       = f.input_field :email, required: false, autofocus: true, class: 'string email optional form-control'
     br
     fieldset.login
