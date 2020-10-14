@@ -1,6 +1,6 @@
 <template lang='pug'>
   .d-flex.flex-row
-    .w-100.mr-2
+    .flex-fill.mr-2
       index-search-section(
         :resource="resource",
         :itemTextFunction="itemTextFunction"
@@ -19,8 +19,8 @@ export default {
     IndexSearchSectionItem
   },
   data () {
-    return { 
-      searchText: '', 
+    return {
+      searchText: '',
       focused: false
     }
   },
