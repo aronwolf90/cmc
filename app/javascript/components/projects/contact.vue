@@ -5,9 +5,11 @@
       :editMode.sync="idEditMode",
       :options="contactOptions",
       @submit="submitId",
+      :getOptionLabel="getContactLabel",
       id="contact-id",
       text="Contact",
-      :link="contactLink"
+      :link="contactLink",
+      @search="searchForContact"
     )
     details-string-input(
       v-model="nameValue",
@@ -72,12 +74,7 @@ export default {
       return `/administration/contacts/${this.contactId}`
     },
     contactOptions () {
-      return this.$store.getters['projectsShow/contacts'].map(contact => {
-        return {
-          text: Utils.attribute(contact, 'name'),
-          value: Utils.entryToRef(contact)
-        }
-      })
+      return this.$store.getters['projectsShow/contacts']
     },
     idValue: {
       get () {
@@ -145,6 +142,14 @@ export default {
     }
   },
   methods: {
+    async searchForContact (search, loading) {
+      loading(true)
+      await this.$store.dispatch('projectsShow/searchForContact', search)
+      loading(false)
+    },
+    getContactLabel (contactRef) {
+      return Utils.attribute(this.$store.getters.entry(contactRef), 'name')
+    },
     submitId () {
       this.$store.dispatch('projectsShow/changeContact')
     },
@@ -156,7 +161,7 @@ export default {
           this.nameValue
         )
       }).then(() => {
-        this.nameEditMode = false 
+        this.nameEditMode = false
       })
     },
     submitTelephoneNumber () {
@@ -167,7 +172,7 @@ export default {
           this.telephoneNumberValue
         )
       }).then(() => {
-        this.telephoneNumberEditMode = false 
+        this.telephoneNumberEditMode = false
       })
     },
     submitEmail () {
@@ -175,7 +180,7 @@ export default {
         entry: this.contact,
         payload: valueToAttribute('email', this.emailValue)
       }).then(() => {
-        this.emailEditMode = false 
+        this.emailEditMode = false
       })
     }
   }

@@ -90,6 +90,17 @@ describe('Store.Modules.ProjectsShow', () => {
         {})
       })
     })
+    describe('.searchForContact', () => {
+      it('calls dispatch.searchForContact', () => {
+        ProjectsShow.actions.searchForContact({
+          dispatch (method, payload) {
+            expect(method).to.eq('searchContacts')
+          },
+          commit () {}
+        },
+        {})
+      })
+    })
   })
   describe('.mutations', () => {
     it('comments', () => {

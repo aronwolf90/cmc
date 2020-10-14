@@ -232,7 +232,7 @@ export default {
         payload: {
           relationships: {
             contact: {
-              data: context.getters.contactIdValue
+              data: Utils.entryToRef(context.getters.contactIdValue)
             }
           }
         }
@@ -258,6 +258,14 @@ export default {
       {
         root: true
       })
+    },
+    async searchForContact (context, value) {
+      const result = await context.dispatch(
+        'searchContacts',
+        value,
+        { root: true }
+      )
+      context.commit('contacts', result.data)
     }
   }
 }

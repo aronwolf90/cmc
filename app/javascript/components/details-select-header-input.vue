@@ -1,20 +1,23 @@
 <template lang='pug'>
-  b-form.details-string-input(
+  b-form.details-select-header-input(
     @submit.prevent="submit",
     :id="id"
   )
     b-input-group(v-if="internEditMode")
-      b-form-select(
+      v-select.flex-fill(
         v-model="value",
         :id="`${id}-input`",
         :options="options"
+        @search="search",
+        :getOptionLabel="getOptionLabel",
+        :filterable="false"
       )
       b-input-group-append
         b-button(
           variant="outline-secondary",
           size="sm",
           type="submit"
-        ) 
+        )
           .fa.fa-spinner.fa-spin(v-if='isSaving')
           template(v-else='') ok
     span(v-else="")
@@ -29,15 +32,20 @@
 </template>
 
 <script>
+import VSelect from 'vue-select'
 
 export default {
+  components: {
+    VSelect
+  },
   props: {
-    value: String,
+    value: Object,
     editMode: Boolean,
     id: String,
     options: Array,
     text: String,
-    link: String
+    link: String,
+    getOptionLabel: Function
   },
   data () {
     return {
@@ -46,6 +54,9 @@ export default {
     }
   },
   methods: {
+    search (loading, search) {
+      this.$emit('search', loading, search)
+    },
     submit () {
       this.isSaving = true
       this.$emit('submit')
@@ -72,7 +83,7 @@ export default {
 <style lang='sass' scoped>
   .details-string-input
     margin-right: -11px
-    .text 
+    .text
       word-break: break-word;
     input
       padding: 3px
