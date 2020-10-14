@@ -23,7 +23,7 @@ module ApplicationHelper
     def csv_btn(object, path)
       return unless policy(object).index?
 
-      link_to '<i class="fa fa-excel-o"></i>'.html_safe, path + ".csv",
+      link_to '<i class="fa fa-file-excel-o"></i>'.html_safe, path + ".csv",
               class: "btn btn-sm btn-success"
     end
 
