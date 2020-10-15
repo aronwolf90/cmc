@@ -8,34 +8,34 @@
       autocomplete="off"
     )
     .items(v-if="focused")
-      index-search-section-item(
+      search-select-item(
         v-for="entry in items",
-        :text="itemTextFunction(entry)",
+        :title="itemTextFunction(entry)",
         :link="`/administration/${resource}/${entry.id}`",
         :key="entry.id"
       )
 </template>
 
 <script>
-import IndexSearchSection from './index-search-section'
+import SearchSelectItem from 'components/search-select-item'
 import IndexSearchSectionItem from './index-search-section-item'
 
 export default {
   components: {
-    IndexSearchSection,
+    SearchSelectItem,
     IndexSearchSectionItem
   },
   data () {
-    return { 
-      searchText: '', 
+    return {
+      searchText: '',
       focused: false
     }
   },
   props: [
-    "resource",
-    "basePath",
-    "attribute",
-    "itemTextFunction"
+    'resource',
+    'basePath',
+    'attribute',
+    'itemTextFunction'
   ],
   computed: {
     items () {

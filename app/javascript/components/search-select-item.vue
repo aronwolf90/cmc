@@ -1,6 +1,6 @@
 <template lang='pug'>
   router-link.search-select-item(:to="link")
-    .title {{ title }}
+    .title.text-dark {{ title }}
     .extra-information
       slot
 </template>

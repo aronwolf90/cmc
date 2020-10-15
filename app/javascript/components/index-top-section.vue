@@ -5,8 +5,9 @@
         :resource="resource",
         :itemTextFunction="itemTextFunction"
       )
-    router-link.btn.btn-success(:to="`/administration/${resource}/new`")
-      | {{ newText }}
+    slot(name="btn-new")
+      router-link.btn.btn-success(:to="`/administration/${resource}/new`")
+        | {{ newText }}
 </template>
 
 <script>
