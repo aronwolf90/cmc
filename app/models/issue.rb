@@ -20,8 +20,13 @@ class Issue < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: %i[title description],
-    using: { tsearch: { prefix: true } }
+    against: {
+      title: "A",
+      description: "B"
+    },
+    using: {
+      tsearch: { prefix: true }
+    }
   )
 
   def status

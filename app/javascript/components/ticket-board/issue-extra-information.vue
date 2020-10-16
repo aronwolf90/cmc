@@ -1,5 +1,5 @@
 <template lang='pug'>
-  .issue-extra-information
+  .issue-extra-information(v-if="issue")
     template(v-for="label in labels")
       b-badge(
         v-bind:style="{ 'background-color': label.attributes.color }"
@@ -16,10 +16,7 @@ export default {
       return this.$store.getters.entry(this.issueRef)
     },
     labels () {
-      return this.$store.getters.relationship({
-        entry: this.issue,
-        name: 'labels'
-      }) || []
+      return this.$store.getters.relationship(this.issue, 'labels') || []
     }
   }
 }

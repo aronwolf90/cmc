@@ -1,7 +1,8 @@
 <template lang='pug'>
   search-select-item(
     :title="title",
-    :link="link"
+    :link="link",
+    v-if="issue"
   )
     issue-extra-information(:issueRef='issueRef')
 </template>
@@ -25,7 +26,7 @@ export default {
       return Utils.attribute(this.issue, 'title')
     },
     link () {
-      return `issues/${this.issue.id}`
+      return `issues/${this.issueRef.id}`
     }
   }
 }
