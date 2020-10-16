@@ -7,11 +7,11 @@
       size='sm',
       @focus.native="focused = true"
     )
-    .items(v-if="issues.length && focused")
+    .items(v-if="issueRefs.length && focused")
       search-select-item(
-        v-for="issue in issues",
-        :issue-ref="issue",
-        :key="issue.id"
+        v-for="issueRef in issueRefs",
+        :issue-ref="issueRef",
+        :key="issueRef.id"
       )
 </template>
 
@@ -23,7 +23,7 @@ export default {
     return {
       searchText: '',
       focused: false,
-      requestIssues: null
+      issueRefs: []
     }
   },
   mounted () {
@@ -37,20 +37,12 @@ export default {
   components: {
     SearchSelectItem
   },
-  computed: {
-    issues () {
-      return this.relevantIssues || []
-    },
-    relevantIssues () {
-      return this.requestIssues || this.$store.getters.metaCollection('issues')
-    }
-  },
   methods: {
     request () {
       this.$store.dispatch('request', {
         url: `/api/v1/issues?query=${this.searchText}`
       }).then(response => {
-        this.requestIssues = response.data
+        this.issueRefs = response.data
       })
     }
   },

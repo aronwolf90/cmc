@@ -1,7 +1,8 @@
 <template lang='pug'>
   search-select-item(
     :title="title",
-    :link="link"
+    :link="link",
+    v-if="issueRef"
   )
     issue-extra-information(:issueRef='issueRef')
 </template>
