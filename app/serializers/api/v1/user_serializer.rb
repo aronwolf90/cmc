@@ -11,6 +11,7 @@ module Api
       attribute :type
       attribute :active
       attribute :records_count
+      attribute :avatar_url
 
       belongs_to :selected_project, serializer: ProjectSerializer
 

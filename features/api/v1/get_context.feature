@@ -35,7 +35,8 @@ Scenario: Get
           "email": "admin@lvh.me",
           "type": "Admin",
           "active": true,
-          "records-count": 4
+          "records-count": 4,
+          "avatar-url": "/packs/images/avatar_placeholder<.+>" 
         },
         "relationships": {
           "selected-project": { "data": { "id": "1", "type": "projects" } },

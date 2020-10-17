@@ -7,6 +7,19 @@ import IssueExtraInformation from 'components/ticket-board/issue-extra-informati
 describe('IssueExtraInformation', () => {
   const entry = sandbox.stub()
   const relationship = sandbox.stub()
+  const issue = {
+    id: '1',
+    type: 'issues',
+    attributes: {
+      title: 'Test title'
+    },
+    relationships: {
+      labels: [{
+        id: '1',
+        type: 'labels'
+      }]
+    }
+  }
   const factory = ({ propsData } = {}) => {
     return createWrapper(IssueExtraInformation, {
       propsData: {
@@ -28,11 +41,13 @@ describe('IssueExtraInformation', () => {
   }
 
   beforeEach(() => {
-    const issue = {
+    const user = {
       id: '1',
-      type: 'issues',
+      type: 'users',
       attributes: {
-        title: 'Test title'
+        'avatar-url': 'avatar.png',
+        firstname: 'Lara',
+        lastname: 'Croft'
       },
       relationships: {
         labels: [{
@@ -49,6 +64,7 @@ describe('IssueExtraInformation', () => {
         name: 'Test label'
       }
     }])
+    relationship.withArgs(issue, 'user').returns(user)
   })
 
   afterEach(() => {
@@ -66,5 +82,21 @@ describe('IssueExtraInformation', () => {
     })
 
     expect(wrapper.html()).to.include('Test label')
+    expect(wrapper.html()).to.include('avatar.png')
+    expect(wrapper.html()).to.include('Lara Croft')
+    expect(wrapper.html()).to.include('img')
+  })
+
+  it('does not an image when user is not present', () => {
+    relationship.withArgs(issue, 'user').returns(null)
+    const wrapper = factory({
+      propsData: {
+        issueRef: {
+          id: '1',
+          type: 'issues'
+        }
+      }
+    })
+    expect(wrapper.html()).not.to.include('img')
   })
 })

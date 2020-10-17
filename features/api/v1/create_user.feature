@@ -20,7 +20,7 @@ Feature: API: create an user
       }
       """
     Then the response status should be "201"
-    And the JSON response should be:
+    And the JSON response should match:
       """
       {
         "data": {
@@ -32,7 +32,8 @@ Feature: API: create an user
             "email": "test@lvh.me",
             "type": "Admin",
             "active": true,
-            "records-count": 0
+            "records-count": 0,
+            "avatar-url": "/packs/images/avatar_placeholder<.+>"  
           },
           "relationships": {
             "selected-project": {

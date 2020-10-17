@@ -19,7 +19,7 @@ Scenario: Update successfully user type when updater is a admin
     }
     """
   Then the response status should be "200"
-  And the JSON response should be:
+  And the JSON response should match:
     """
     {
       "data": {
@@ -31,7 +31,8 @@ Scenario: Update successfully user type when updater is a admin
           "email": "employee@lvh.me",
           "type": "Customer",
           "active": false,
-          "records-count": 2
+          "records-count": 2,
+          "avatar-url": "/packs/images/avatar_placeholder<.+>" 
         },
         "relationships": {
           "selected-project": {
