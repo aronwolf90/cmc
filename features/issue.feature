@@ -84,11 +84,13 @@ Scenario: Change user
   When I click on link "Test issue 1"
   And I click on "#assigen .text"
   Then the element "#assigen .text" does not contain the text "user2"
-  And I click on "#assigen input"
+  When I click on "#assigen input"
   And I click on "#assigen .item:nth-child(2)"
   Then the element "#assigen .text" contain the text "user2"
-  And I reload the page
+  When I reload the page
   Then the element "#assigen .text" contain the text "user2"
+  When I click on link "Tickets"
+  Then the page contain the element "[alt='user2 simson']"
 
 @javascript
 Scenario: Change complexity
