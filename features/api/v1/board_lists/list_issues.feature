@@ -29,6 +29,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -58,6 +61,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -90,6 +96,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -125,6 +134,9 @@ Scenario: GET /api/v1/board_lists/<id>/issues
                 "id": "1",
                 "type": "labels"
               }]
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 

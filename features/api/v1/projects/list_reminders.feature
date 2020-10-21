@@ -34,6 +34,9 @@ Scenario: Get /api/v1/projects/<id>/reminders
                 "id": "1",
                 "type": "labels"
               }]
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 

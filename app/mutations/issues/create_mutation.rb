@@ -15,6 +15,7 @@ module Issues
       model.global_board_list_id = global_board_list_id
       model.ordinal_number = 0
       model.global_ordinal_number = 0
+      model.created_by = user
       ordered_issues = model.board_list&.issues
       global_ordered_issues = model.global_board_list&.issues
 

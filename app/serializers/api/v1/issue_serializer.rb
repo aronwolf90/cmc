@@ -12,6 +12,7 @@ module Api
         :status
       )
 
+      belongs_to :created_by, serializer: UserSerializer
       belongs_to :user, serializer: UserSerializer
       has_many :labels, serializer: LabelSerializer
 

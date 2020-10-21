@@ -1,31 +1,32 @@
 <template lang='pug'>
-  b-form.details-date-time(@submit="submit")
-    label(:for="id")
-      | {{ label }}
-    b-input-group
-      datetimepicker(
-        :id="id",
-        placeholder="01-01-2020 00:00",
-        :value="value",
-        @input="$emit('input', $event)"
-      )
-      b-input-group-append
-        b-button.fa.fa-spinner.fa-spin(v-if='isSaving')
-        b-button(
-          type="submit",
-          variant="outline-secondary",
-          v-else="",
-          v-bind:class="{ persisted: isPersisted }"
-        ) Ok
-    .divider
+  right-aside-item.details-date-time(:label="label", :label-for="id")
+    template(v-slot:content="")
+      b-form.details-date-time(@submit="submit")
+        b-input-group
+          datetimepicker(
+            :id="id",
+            placeholder="01-01-2020 00:00",
+            :value="value",
+            @input="$emit('input', $event)"
+          )
+          b-input-group-append
+            b-button.fa.fa-spinner.fa-spin(v-if='isSaving')
+            b-button(
+              type="submit",
+              variant="outline-secondary",
+              v-else="",
+              v-bind:class="{ persisted: isPersisted }"
+            ) Ok
 </template>
 
 <script>
 import Datetimepicker from './datetimepicker'
+import RightAsideItem from 'components/right-aside-item'
 
 export default {
   components: {
-    Datetimepicker
+    Datetimepicker,
+    RightAsideItem
   },
   props: {
     label: String,
@@ -42,8 +43,8 @@ export default {
   },
   created () {
     setTimeout(( () => {
-      return jqueryFuncs();
-    }), 100);
+      return jqueryFuncs()
+    }), 100)
   },
   methods: {
     submit (event) {
@@ -55,25 +56,19 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-  .details-date-time
-    input::placeholder
-      color: rgba(191, 191, 191, 0.87)
-    input:not(:focus)
-      background-color: #f8f8f8
+.details-date-time
+  form
+    margin-left: -12px
+  input::placeholder
+    color: rgba(191, 191, 191, 0.87)
+  input:not(:focus)
+    background-color: #f8f8f8
+    border: none
+    color: grey !important
+    &+.input-group-append button.persisted[type="submit"]
+      opacity: 0.3
       border: none
-      color: grey !important
-      &+.input-group-append button.persisted[type="submit"]
-        opacity: 0.3
-        border: none
-        &:hover
-          background-color: #f8f8f8 !important
-          color: grey !important
-    .divider
-      margin-top: 0
-      margin-bottom: 0
-    label
-      margin-top: 8px
-      margin-left: 18px
-      margin-bottom: 0
-      color: grey
+      &:hover
+        background-color: #f8f8f8 !important
+        color: grey !important
 </style>

@@ -7,7 +7,8 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
     build_stubbed(
       :issue,
       due_at: "10-10-2120",
-      deadline_at: "10-10-2120"
+      deadline_at: "10-10-2120",
+      created_by: User.new(id: 1)
     )
   end
   let(:user) { build_stubbed(:user) }
@@ -31,6 +32,12 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
             id: "1",
             type: "labels"
           }]
+        },
+        "created-by": {
+          data: {
+            id: "1",
+            type: "users"
+          }
         }
       },
       links: { self: "/api/v1/issues/#{issue.id}" }

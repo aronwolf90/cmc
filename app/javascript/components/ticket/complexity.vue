@@ -10,7 +10,7 @@
 
 <script>
 import { Utils } from 'vuex-jsonapi-client'
-import Select from './right_aside_select'
+import Select from 'issue/right_aside_select'
 
 export default {
   props: ['issueId'],

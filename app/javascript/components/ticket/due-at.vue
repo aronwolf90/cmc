@@ -1,9 +1,9 @@
 <template lang='pug'>
-  details-date-time.deadline-at(
+  details-date-time.due-at(
     @submit="submit",
-    label="Deadline at",
+    label="Due at",
     id="due-at",
-    v-model="attributes['deadline-at']",
+    v-model="attributes['due-at']",
     :isSaving="isSaving",
     :isPersisted="isPersisted"
   )
@@ -21,16 +21,16 @@ export default {
   data () {
     return {
       isSaving: false,
-      persistedDeadlineAt: null,
+      persistedDueAt: null,
       attributes: {
-        'deadline-at': null
+        'due-at': null
       }
     }
   },
   created () {
     this.$store.dispatch('initIssue', this.issueId).then(response => {
-      this.persistedDeadlineAt = Utils.attribute(response.data, 'deadline-at')
-      this.attributes['deadline-at'] = Utils.attribute(response.data, 'deadline-at')
+      this.persistedDueAt = Utils.attribute(response.data, 'due-at')
+      this.attributes['due-at'] = Utils.attribute(response.data, 'due-at')
     })
   },
   computed: {
@@ -38,22 +38,22 @@ export default {
       return this.$store.getters.issue(this.issueId)
     },
     isPersisted () {
-      return this.persistedDeadlineAt == this.attributes['deadline-at']
+      return this.persistedDueAt === this.attributes['due-at']
     }
   },
   methods: {
     submit (event) {
       this.isSaving = true
       this.$store.dispatch('updateIssue', {
-         entry: this.issue,
-         attributes: this.attributes
+        entry: this.issue,
+        attributes: this.attributes
       }).then((response) => {
         this.isSaving = false
-        this.persistedDeadlineAt = this
+        this.persistedDueAt = this
           .$store
           .getters
           .issue(this.issueId)
-          .attributes['deadline-at']
+          .attributes['due-at']
       })
     }
   }

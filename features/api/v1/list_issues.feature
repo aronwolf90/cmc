@@ -37,6 +37,9 @@ Scenario: Get /api/v1/issues
                 "id": "1",
                 "type": "labels"
               }]
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -69,6 +72,9 @@ Scenario: Get /api/v1/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -98,6 +104,9 @@ Scenario: Get /api/v1/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -127,6 +136,9 @@ Scenario: Get /api/v1/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -156,6 +168,9 @@ Scenario: Get /api/v1/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -185,6 +200,9 @@ Scenario: Get /api/v1/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -214,6 +232,9 @@ Scenario: Get /api/v1/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -243,6 +264,9 @@ Scenario: Get /api/v1/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -272,6 +296,9 @@ Scenario: Get /api/v1/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -301,6 +328,9 @@ Scenario: Get /api/v1/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -330,6 +360,9 @@ Scenario: Get /api/v1/issues
             },
             "labels": {
               "data": []
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links":{ 
@@ -384,6 +417,9 @@ Scenario: Get /api/v1/issues
               "data": [
 
               ]
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links": {
@@ -415,6 +451,9 @@ Scenario: Get /api/v1/issues
               "data": [
 
               ]
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links": {
@@ -452,6 +491,9 @@ Scenario: Get /api/v1/issues
                   "type": "labels"
                 }
               ]
+            },
+            "created-by": {
+              "data": null
             }
           },
           "links": {

@@ -41,6 +41,10 @@ RSpec.describe Issues::CreateMutation do
     expect(subject.reload.global_ordinal_number).to eq(0)
   end
 
+  it "set created_by" do
+    expect(subject.reload.created_by).to eq(current_user)
+  end
+
   context "when board_list_id is project specific and kind==open" do
     it "set orginal_number==0 and set as global_board_list the one with kind open" do
       expect(subject.reload.global_board_list).to eq global_open_board_list

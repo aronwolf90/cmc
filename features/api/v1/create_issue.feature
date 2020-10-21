@@ -46,6 +46,12 @@ Feature: API: create an issue
           },
           "labels": {
             "data": []
+          },
+          "created-by": {
+            "data": {
+              "id": "1",
+              "type": "users"
+            }
           }
         },
         "links": {

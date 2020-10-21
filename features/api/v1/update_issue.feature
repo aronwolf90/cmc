@@ -57,6 +57,9 @@ Scenario: Put an valid issue using json in PUT body
               "id": "1",
               "type": "labels"
             }]
+          },
+          "created-by": {
+            "data": null
           }
         },
         "links":{ 

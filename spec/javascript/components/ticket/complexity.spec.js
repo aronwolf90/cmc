@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Complexity from '../../../app/javascript/issue/complexity'
+import Complexity from 'components/ticket/complexity'
 import sinon from 'sinon'
 
 const localVue = createLocalVue()

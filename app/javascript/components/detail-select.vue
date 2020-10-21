@@ -1,17 +1,20 @@
 <template lang='pug'>
-  div
-    label.font-weight-bold {{ label }}
-    basic-select(
-      :options="options",
-      :selected-option="item",
-      placeholder="select item",
-      @select="select"
-    )
-    hr.divider
+  right-aside-item(
+    :label="label"
+  )
+    template(v-slot:content="")
+      .select
+        basic-select(
+          :options="options",
+          :selected-option="item",
+          placeholder="select item",
+          @select="select"
+        )
 </template>
 
 <script>
 import { BasicSelect } from 'vue-search-select'
+import RightAsideItem from 'components/right-aside-item'
 
 export default {
   props: ['item', 'options', 'label'],
@@ -22,20 +25,15 @@ export default {
     select (item) { this.$emit('select', item) }
   },
   components: {
-    BasicSelect
+    BasicSelect,
+    RightAsideItem
   }
 }
 </script>
 
 <style lang='sass' scoped>
-label
-  margin-top: 8px
-  margin-left: 18px
-  margin-bottom: 0
-  color: grey
-.divider
-  margin-top: 0
-  margin-bottom: 0
+.select
+  margin-left: -18px
 </style>
 
 <style lang='sass'>

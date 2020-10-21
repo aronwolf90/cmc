@@ -406,7 +406,8 @@ CREATE TABLE issues (
     due_at timestamp without time zone,
     deadline_at timestamp without time zone,
     global_board_list_id bigint,
-    global_ordinal_number integer
+    global_ordinal_number integer,
+    created_by_id bigint
 );
 
 
@@ -1378,6 +1379,13 @@ CREATE INDEX index_issues_on_board_list_id ON issues USING btree (board_list_id)
 
 
 --
+-- Name: index_issues_on_created_by_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_issues_on_created_by_id ON issues USING btree (created_by_id);
+
+
+--
 -- Name: index_issues_on_deleted_at; Type: INDEX; Schema: test-organization; Owner: -
 --
 
@@ -1576,6 +1584,14 @@ ALTER TABLE ONLY issues
 
 
 --
+-- Name: issues fk_rails_181d01bbf3; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY issues
+    ADD CONSTRAINT fk_rails_181d01bbf3 FOREIGN KEY (created_by_id) REFERENCES users(id);
+
+
+--
 -- Name: documents fk_rails_404da7ca3d; Type: FK CONSTRAINT; Schema: test-organization; Owner: -
 --
 
@@ -1711,6 +1727,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200723205354'),
 ('20200817203548'),
 ('20200913093640'),
-('20200919103321');
+('20200919103321'),
+('20201018132403');
 
 

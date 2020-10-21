@@ -16,7 +16,8 @@ describe('Issue', () => {
     propsData: { id: 1 },
     stubs: {
       RightAside: '<div>Stubbed RightAside</div>',
-      Comments: '<div>Stubbed Comments</div>'
+      Comments: '<div>Stubbed Comments</div>',
+      CreatedBy: true
     }
   }))
 

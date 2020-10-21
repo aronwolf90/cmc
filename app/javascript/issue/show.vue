@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     issue () {
-      return this.$store.getters.entry({type: 'issues', id: this.issueId})
+      return this.$store.getters.entry({ type: 'issues', id: this.issueId })
     },
     title () {
       return Utils.attribute(this.issue, 'title')
