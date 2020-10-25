@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.6.0",
-    "@sentry/browser": "^5.22.3",
+    "@sentry/browser": "^5.27.1",
     "@std/esm": "^0.19.7",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.18.1",
