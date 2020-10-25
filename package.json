@@ -5,7 +5,7 @@
     "@rails/webpacker": "^3.6.0",
     "@sentry/browser": "^5.22.3",
     "@std/esm": "^0.19.7",
-    "bootstrap": "^4.5.2",
+    "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.18.1",
     "dateformat": "^3.0.3",
     "dayspan-vuetify": "^0.3.6",
