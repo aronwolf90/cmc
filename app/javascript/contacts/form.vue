@@ -1,57 +1,61 @@
 <template lang='pug'>
   b-form(@submit="onSubmit")
-    b-form-input(
-      id="input-name",
-      v-model="form.name",
-      type="text",
-      placeholder="Lastname, Name"
-    )
+    .row
+      .col-md-5
+        form-input-avatar(
+          id="input-group-1",
+          api-url="/api/v1/contact_avatars",
+          @change="changeFile",
+          :avatar-url="avatarUrl"
+        )
+      .col-md-7
+        b-form-group(
+          id="input-name",
+          label="Name:",
+          label-for="input-telephone"
+        )
+          b-form-input(
+            id="input-name",
+            v-model="form.name",
+            type="text",
+            placeholder="Lastname, Name"
+          )
+        b-form-group(
+          id="input-group-telephone",
+          label="Telephone:",
+          label-for="input-telephone"
+        )
+          b-form-input(
+            id="input-telephone",
+            v-model="form.telephone",
+            type="text"
+          )
+        b-form-group(
+          id="input-group-mobile",
+          label="Mobile:",
+          label-for="input-mobile"
+        )
+          b-form-input(
+            id="input-mobile",
+            v-model="form.mobile",
+            type="text"
+          )
+        b-form-group(
+          id="input-group-fax",
+          label="Fax:",
+          label-for="input-fax"
+        )
+          b-form-input(
+            id="input-fax",
+            v-model="form.fax",
+            type="text"
+          )
     br
     markdown-editor(
       :value='description',
       v-on:valueChange='setDescription'
     )
     br
-    b-form-group(
-      id="input-group-1",
-      label="Avatar:",
-      label-for="input-1"
-    )
-      b-form-file(
-        placeholder="Choose a file...",
-        @input="changeFile",
-        drop-placeholder="Drop file here..."
-      )
-    b-form-group(
-      id="input-group-telephone",
-      label="Telephone:",
-      label-for="input-telephone"
-    )
-      b-form-input(
-        id="input-telephone",
-        v-model="form.telephone",
-        type="text"
-      )
-    b-form-group(
-      id="input-group-mobile",
-      label="Mobile:",
-      label-for="input-mobile"
-    )
-      b-form-input(
-        id="input-mobile",
-        v-model="form.mobile",
-        type="text"
-      )
-    b-form-group(
-      id="input-group-fax",
-      label="Fax:",
-      label-for="input-fax"
-    )
-      b-form-input(
-        id="input-fax",
-        v-model="form.fax",
-        type="text"
-      )
     hr.divider
     .row
       .col-4
@@ -118,10 +122,12 @@
 
 <script>
 import MarkdownEditor from '../markdown_editor'
+import FormInputAvatar from 'components/form-inputs/avatar'
 
 export default {
   components: {
-    MarkdownEditor
+    MarkdownEditor,
+    FormInputAvatar
   },
   props: [
     'name',
@@ -133,7 +139,8 @@ export default {
     'number',
     'zip',
     'city',
-    'country'
+    'country',
+    'avatar-url'
   ],
   data () {
     return {
@@ -150,7 +157,7 @@ export default {
         country: null
       },
       contactAvatar: null
-    } 
+    }
   },
   mounted () {
     this.form.name = this.name
@@ -167,7 +174,7 @@ export default {
   methods: {
     onSubmit (event) {
       event.preventDefault()
-      
+
       let payload = {
         attributes: {
           name: this.form.name,
@@ -179,7 +186,7 @@ export default {
           'address-number': this.form.number,
           'address-zip': this.form.zip,
           'address-city': this.form.city,
-          'address-country': this.form.country,
+          'address-country': this.form.country
         }
       }
       if (this.contactAvatar) {
@@ -190,16 +197,8 @@ export default {
     setDescription (value) {
       this.form.description = value
     },
-    changeFile (file) {
-      let formData = new FormData();
-      let headers = { 'Content-Type': 'multipart/form-data' }
-      formData.append('data[file]', file)
-      let that = this
-
-      this.$store.getters.axios.post( '/api/v1/contact_avatars', formData, { headers })
-      .then(function(response) {
-        that.contactAvatar = response.data.data
-      })
+    changeFile (response) {
+      this.contactAvatar = response
     }
   }
 }

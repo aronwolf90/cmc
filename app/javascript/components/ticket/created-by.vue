@@ -12,10 +12,7 @@ import RightAsideItem from 'components/right-aside-item'
 
 export default {
   props: {
-    issueRef: {
-      id: String,
-      type: String
-    }
+    issueRef: Object
   },
   components: {
     RightAsideItem

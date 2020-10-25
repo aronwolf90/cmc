@@ -1,5 +1,7 @@
 <template lang='pug'>
-  button.btn.btn-sm.btn-danger.btn-outline-danger(
+  b-button(
+    variant="outline-danger",
+    size="sm",
     v-if="canDestroy",
     @click="$emit('destroy')"
   )

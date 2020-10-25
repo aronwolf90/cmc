@@ -12,7 +12,8 @@
       :number="number",
       :zip="zip",
       :city="city",
-      :country="country"
+      :country="country",
+      :avatar-url="avatarUrl"
     )
 </template>
 
@@ -77,12 +78,15 @@ export default {
     },
     country () {
       return Utils.attribute(this.contact, 'address-country')
+    },
+    avatarUrl () {
+      return Utils.attribute(this.contact, 'avatar-url')
     }
   },
   asyncComputed: {
     result () {
       return this.$store.dispatch('contact', this.contactId)
     }
-  },
+  }
 }
 </script>
