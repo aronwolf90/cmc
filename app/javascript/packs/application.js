@@ -1,3 +1,5 @@
+import 'stylesheets/devise.sass'
+
 import Vue from 'vue/dist/vue.common'
 import Vuex from 'vuex'
 import Store from '../store'
@@ -63,6 +65,7 @@ import jQuery from 'jquery'
 import 'bootstrap'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
 import 'font-awesome/css/font-awesome.min.css'
+import 'stylesheets/administration.sass'
 
 const $ = jQuery
 window.jQuery = jQuery
@@ -70,8 +73,6 @@ window.$ = $
 
 require('jquery-ujs')
 require.context('../images', true)
-require('stylesheets/devise')
-require('stylesheets/administration')
 
 require('../config')
 Vue.use(LoadScript)

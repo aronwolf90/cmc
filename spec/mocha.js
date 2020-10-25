@@ -13,4 +13,4 @@ global.expect = Chai.expect
 window.Date = Date
 global.jqueryFuncs = function () {}
 global.jsdom = jsdom
-global.sandbox = sinon.sandbox.create()
+global.sandbox = sinon.createSandbox()
