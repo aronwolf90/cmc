@@ -7,7 +7,7 @@
 ```console
 $ git clone git@gitlab.com:cmc_system/cmc.git
 $ cd cmc
-$ helm install cmc
+$ helm install ticktensio
 ```
 
 ## Introduction
@@ -17,7 +17,7 @@ This chart bootstraps a [CMC](https://about.cost-manager.com/) deployment on a [
 ## Prerequisites
 
 - Git to clone the project
-- Kubernetes 1.4+ with Beta APIs enabled
+- Kubernetes 1.5+ with Beta APIs enabled
 - helm >= v2.3.0 to run "weighted" hooks in right order.
 - PV provisioner support in the underlying infrastructure (with persistence storage enabled)
 
@@ -28,7 +28,7 @@ To install the chart with the release name `my-release`:
 ```console
 $ git clone git@gitlab.com:cmc_system/cmc.git
 $ cd cmc
-$ helm install --name my-release cmc
+$ helm install --name my-release ticktensio
 ```
 
 The command deploys CMC on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -40,7 +40,7 @@ The command deploys CMC on the Kubernetes cluster in the default configuration. 
 To uninstall/delete the `my-release` deployment:
 
 ```console
-$ helm delete my-release
+$ helm delete --purge ticktensio
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -85,7 +85,7 @@ Alternatively, a YAML file that specifies the values for the above parameters ca
 ```console
 $ git clone git@gitlab.com:cmc_system/cmc.git
 $ cd cmc
-$ helm install --name my-release -f values.yaml cmc
+$ helm install --name ticktensio -f values.yaml cmc
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
@@ -101,7 +101,13 @@ See the [Configuration](#configuration) section to configure the PVC.
 
 This chart provides support for Ingress resource. If you have an available Ingress Controller such as Nginx or Traefik you maybe want to set `ingress.enabled` to true and choose an `ingress.url` for the URL. Then, you should be able to access the installation using that address.
 
+## Upgrade
+```console
+$ helm delete jobs --all
+$ helm upgrade -f values.yaml ticktensio
+```
+
 ## Multi tenant on localhost
 
-- Execute: `helm install cmc --set multiTenant=true`
+- Execute: `helm install ticktensio --set multiTenant=true`
 - Use the following domain: `<ip>.xip.io`. Use `kubectl get services` to get the ip.
