@@ -10,8 +10,8 @@
       complexity(:issue-id='id')
       due-at(:issue-id='id')
       deadline-at(:issue-id='id')
-      labels(:issue-ref='issue')
-      CreatedBy(:issue-ref='issue')
+      labels(:issue-ref='issueRef')
+      CreatedBy(:issue-ref='issueRef')
 </template>
 
 <script>
@@ -48,8 +48,11 @@ export default {
     this.$store.dispatch('issuesShow/fetch', this.id)
   },
   computed: {
+    issueRef () {
+      return { type: 'issues', id: this.id }
+    },
     issue () {
-      return this.$store.getters.entry({ type: 'issues', id: this.id })
+      return this.$store.getters.entry(this.issueRef)
     }
   }
 }

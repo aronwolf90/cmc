@@ -1,5 +1,7 @@
 <template lang='pug'>
-  router-link.btn.btn-sm.btn-secondary.btn-outline-dark(
+  b-button(
+    variant="outline-dark",
+    size="sm",
     v-if="canEdit",
     :to="link"
   )
@@ -25,8 +27,8 @@ export default {
       })
     },
     canEdit () {
-      return this.entry && 
-             this.entry.meta && 
+      return this.entry &&
+             this.entry.meta &&
              this.entry.meta.permissions &&
              this.entry.meta.permissions.update
     }
