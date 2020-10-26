@@ -6,7 +6,7 @@ Scenario: Create contact
   And I am signed in (multitenant)
   When I click on link "Contact"
   And I click on link "New contact"
-  And I enter "New person" into input named "input-name"
+  And I enter "New person" into input named "Name:"
   And I click on submit
   Then the element "#side-body" contain the text "New person"
 

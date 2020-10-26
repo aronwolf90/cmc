@@ -1,6 +1,10 @@
 <template lang='pug'>
   .contacts-new
-    contact-form(@onSubmit='onSubmit')
+    contact-form(
+      @onSubmit='onSubmit',
+      submit-text="Create contact",
+      :saving="saving"
+    )
 </template>
 
 <script>
@@ -10,10 +14,17 @@ export default {
   components: {
     ContactForm
   },
+  data () {
+    return {
+      saving: false
+    }
+  },
   methods: {
     onSubmit (payload) {
+      this.saving = true
       this.$store.dispatch('createContact', payload).then(() => {
-        location.replace('/administration/contacts')
+        this.$router.push('/administration/contacts')
+        this.saving = false
       })
     }
   }

@@ -9,7 +9,8 @@
       :value="value",
       :state="errorStatus(errorPath)",
       type="text",
-      @input="input"
+      @input="input",
+      :placeholder="placeholder"
     )
     b-form-invalid-feedback(
       v-for="(error, index) in findErrors(errorPath)",
@@ -22,16 +23,20 @@
 <script>
 
 export default {
-  props: ['id', 'label', 'errors', 'error-path', 'value'],
+  props: ['id', 'label', 'errors', 'error-path', 'value', 'placeholder'],
   methods: {
     input (value) {
       this.$emit('input', value)
     },
     errorStatus (pointer) {
+      if (!pointer) return null
+
       let errors = this.findErrors(pointer)
       return errors.length === 0 ? null : false
     },
     findErrors (pointer) {
+      if (!pointer) return []
+
       return this.errors.filter(error => {
         return error.source.pointer.includes(pointer)
       })

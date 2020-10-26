@@ -1,55 +1,35 @@
 <template lang='pug'>
   b-form(@submit="onSubmit")
-    .row
-      .col-md-5
-        form-input-avatar(
-          id="input-group-1",
+    .d-flex.flex-column.flex-md-row
+      .d-flex.justify-content-center
+        form-input-avatar.mr-4(
+          id="avatar",
           api-url="/api/v1/contact_avatars",
           @change="changeFile",
           :avatar-url="avatarUrl"
         )
-      .col-md-7
-        b-form-group(
+      .flex-md-fill
+        form-input-text(
           id="input-name",
           label="Name:",
-          label-for="input-telephone"
+          placeholder="Lastname, Name",
+          v-model="form.name"
         )
-          b-form-input(
-            id="input-name",
-            v-model="form.name",
-            type="text",
-            placeholder="Lastname, Name"
-          )
-        b-form-group(
+        form-input-text(
           id="input-group-telephone",
           label="Telephone:",
-          label-for="input-telephone"
+          v-model="form.telephone"
         )
-          b-form-input(
-            id="input-telephone",
-            v-model="form.telephone",
-            type="text"
-          )
-        b-form-group(
+        form-input-text(
           id="input-group-mobile",
           label="Mobile:",
-          label-for="input-mobile"
+          v-model="form.mobile"
         )
-          b-form-input(
-            id="input-mobile",
-            v-model="form.mobile",
-            type="text"
-          )
-        b-form-group(
+        form-input-text(
           id="input-group-fax",
           label="Fax:",
-          label-for="input-fax"
+          v-model="form.fax"
         )
-          b-form-input(
-            id="input-fax",
-            v-model="form.fax",
-            type="text"
-          )
     br
     markdown-editor(
       :value='description',
@@ -59,63 +39,38 @@
     hr.divider
     .row
       .col-4
-        b-form-group(
+        form-input-text(
           id="input-group-street",
           label="Street:",
-          label-for="input-street"
+          v-model="form.street"
         )
-          b-form-input(
-            id="input-street",
-            v-model="form.street",
-            type="text"
-          )
       .col-4
-        b-form-group(
+        form-input-text(
           id="input-group-number",
           label="Number:",
-          label-for="input-number"
+          v-model="form.number"
         )
-          b-form-input(
-            id="input-number",
-            v-model="form.number",
-            type="text"
-          )
       .col-4
-        b-form-group(
+        form-input-text(
           id="input-group-zip",
           label="Zip:",
-          label-for="input-zip"
+          v-model="form.zip"
         )
-          b-form-input(
-            id="input-zip",
-            v-model="form.zip",
-            type="text"
-          )
     .row
       .col-4
-        b-form-group(
+        form-input-text(
           id="input-group-city",
           label="City:",
-          label-for="input-city"
+          v-model="form.city"
         )
-          b-form-input(
-            id="input-city",
-            v-model="form.city",
-            type="text"
-          )
       .col-4
-        b-form-group(
+        form-input-text(
           id="input-group-country",
           label="Country:",
-          label-for="input-country"
+          v-model="form.country"
         )
-          b-form-input(
-            id="input-country",
-            v-model="form.country",
-            type="text"
-          )
-    b-button(type="submit", variant="success") Create contact
-    a.btn.btn-secondary.pull-right(href='/administration/contacts') Cancel
+    btn-submit(:saving="saving") {{ submitText }}
+    b-button.pull-right(variant="secondary", to='/administration/contacts') Cancel
     br
     br
 </template>
@@ -123,11 +78,15 @@
 <script>
 import MarkdownEditor from '../markdown_editor'
 import FormInputAvatar from 'components/form-inputs/avatar'
+import FormInputText from 'components/form-inputs/text'
+import BtnSubmit from 'components/btn-submit'
 
 export default {
   components: {
     MarkdownEditor,
-    FormInputAvatar
+    FormInputAvatar,
+    FormInputText,
+    BtnSubmit
   },
   props: [
     'name',
@@ -140,7 +99,9 @@ export default {
     'zip',
     'city',
     'country',
-    'avatar-url'
+    'avatar-url',
+    'submit-text',
+    'saving'
   ],
   data () {
     return {
@@ -181,7 +142,7 @@ export default {
           description: this.form.description,
           telephone: this.form.telephone,
           mobile: this.form.mobile,
-          'address-fax': this.form.fax,
+          fax: this.form.fax,
           'address-street': this.form.street,
           'address-number': this.form.number,
           'address-zip': this.form.zip,

@@ -93,8 +93,8 @@ export default {
   },
   methods: {
     destroyContact () {
-      this.$store.dispatch('destroyContact', this.contact) 
-      location.replace('/administration/contacts')
+      this.$store.dispatch('destroyContact', this.contact)
+      this.$router.push('/administration/contacts')
     }
   }
 }

@@ -13,7 +13,9 @@
       :zip="zip",
       :city="city",
       :country="country",
-      :avatar-url="avatarUrl"
+      :avatar-url="avatarUrl",
+      submit-text="Update contact",
+      :saving="saving"
     )
 </template>
 
@@ -28,13 +30,20 @@ export default {
   props: [
     'contactId'
   ],
+  data () {
+    return {
+      saving: false
+    }
+  },
   methods: {
     onSubmit (payload) {
+      this.saving = true
       this.$store.dispatch('updateContact', {
         entry: this.contact,
         payload
       }).then(() => {
-        location.replace(`/administration/contacts/${this.contactId}`)
+        this.$router.push(`/administration/contacts/${this.contactId}`)
+        this.saving = false
       })
     }
   },
