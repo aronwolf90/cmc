@@ -3,8 +3,7 @@ kind: Job
 metadata:
   name: {{ .Release.Name }}-migrate-task
   annotations:
-    "helm.sh/hook": post-upgrade
-    "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
+    "helm.sh/hook": pre-upgrade
 spec:
   template:
     metadata:

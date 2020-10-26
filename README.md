@@ -18,6 +18,7 @@ I wrote this because I was unsatisfied with existing solutions.
 - Install docker and docker-compose
 - Execute:  git clone git@gitlab.com:cmc_system/cmc.git
 - Execute: docker-compose run app bin/setup
+- Execute: docker-compose run payment mix ecto.setup
 - Execute: docker-compose up
 - open http://test-organization.lvh.me:3000 
 
@@ -29,7 +30,7 @@ Right now we only support the kubernetics packet manager named helm.
 - Install helm on it
 - Execute: git clone git@gitlab.com:cmc_system/cmc.git
 - Execute: cd cmc
-- Execute: helm install cmc/ --name cmc-production
+- Execute: helm install cmc/ --name ticktensio
 
 NOTE: The configuration options for
 the helm package can be found [here](cmc/README.md)
