@@ -88,7 +88,7 @@ describe('DetailsStringInput', () => {
     })
   })
 
-  it('spinner works correctly', (done) => {
+  it('spinner works correctly', async () => {
     const wrapper = mount(DetailsStringInput, {
       localVue,
       attachToDocument: true,
@@ -97,18 +97,15 @@ describe('DetailsStringInput', () => {
       }
     })
     wrapper.find('button').trigger('click')
-    wrapper.vm.$nextTick(() => {
-      expect(wrapper.html()).to.include('fa-spinner')
-      wrapper.setProps({ editMode: false })
-      wrapper.vm.$nextTick(() => {
-        expect(wrapper.find('input').exists()).to.be.false
-        wrapper.setProps({ editMode: true })
-        wrapper.vm.$nextTick(() => {
-          expect(wrapper.find('input').exists()).to.be.true
-          expect(wrapper.html()).not.to.include('fa-spinner')
-          done()
-        })
-      })
-    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).to.include('fa-spinner')
+    wrapper.setProps({ editMode: false })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('input').exists()).to.be.false
+    wrapper.setProps({ editMode: true })
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('input').exists()).to.be.true
+    expect(wrapper.html()).not.to.include('fa-spinner')
   })
 })
