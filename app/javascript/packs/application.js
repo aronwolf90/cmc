@@ -491,6 +491,7 @@ if (window.googleAnalyticsId) {
 
 document.addEventListener('DOMContentLoaded', () => {
   window.app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */
+  window.jqueryFuncs()
 })
 
 var toggleAsideExpanded = function (status) {

@@ -5,17 +5,18 @@
       new-text="New contact",
       :item-text-function="itemTextFunction"
     )
-    
+
     br
     br
-    
+
     ul.list-group.list-lines
       index-list-item(
         v-for="contact in contacts",
         resource="contacts",
         :entry-type="contact.type",
         :entry-id="contact.id",
-        :text="contact.attributes.name"
+        :text="contact.attributes.name",
+        :editBtn="true"
       )
 </template>
 

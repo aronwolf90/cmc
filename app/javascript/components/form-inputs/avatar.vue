@@ -1,11 +1,11 @@
 <template lang='pug'>
-  b-form-group(
+  b-form-group.form-input-avatar(
     :id="`input-group-${id}`",
     :label="label",
     :label-for="id"
   )
-    label(:for="`input-${id}`")
-      img.img-fluid.img-thumbnail(
+    label.d-flex.justify-content-center(:for="`input-${id}`")
+      img.img-thumbnail(
         ref="previewImage",
         :src="src"
       )
@@ -63,3 +63,14 @@ export default {
   }
 }
 </script>
+
+<style lang='sass'>
+.form-input-avatar
+  height: 310px
+  .bv-no-focus-ring
+    height: 260px
+    label
+      height: 100%
+      img
+        max-height: 100%
+</style>
