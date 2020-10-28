@@ -5,10 +5,11 @@
     :label-for="id"
   )
     label.d-flex.justify-content-center(:for="`input-${id}`")
-      img.img-thumbnail(
-        ref="previewImage",
-        :src="src"
-      )
+      .d-flex.flex-column.justify-content-center
+        img.img-thumbnail(
+          ref="previewImage",
+          :src="src"
+        )
     b-progress.mb-2(
       :value="progress",
       :max="100"
