@@ -41,6 +41,7 @@ import commentGetters from 'store/models/comment-getters'
 import documentGetters from 'store/models/document-getters'
 import CalenderActions from 'store/models/calender_actions'
 import LabelActions from 'store/models/label-actions'
+import ProjectsLeftAside from 'store/modules/projects-left-aside'
 
 export default {
   strict: true,
@@ -49,7 +50,8 @@ export default {
     board: Board,
     'projects-board': ProjectsBoard,
     projectsShow: ProjectsShow,
-    issuesShow: issuesShow
+    issuesShow: issuesShow,
+    projectsLeftAside: ProjectsLeftAside
   },
   state: {
     aside: null,

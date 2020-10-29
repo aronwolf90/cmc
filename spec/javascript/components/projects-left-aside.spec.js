@@ -26,19 +26,19 @@ describe('ProjectsLeftAside', () => {
   }
 
   it('show spinner when the promise is not resolved', (done) => {
-    const store = new Vuex.Store({
-      getters: {
-        projectStatus () {
-          return () => projectStatus1
-        }
-      },
-      actions: {
-        getProjectStatuses () {
-          return Promise.resolve({ data: [projectStatus1] })
+    const dispatch = sandbox.stub()
+    const wrapper = mount(ProjectsLeftAside, {
+      router,
+      localVue,
+      mocks: {
+        $store: {
+          getters: {
+            'projectsLeftAside/projectStatuses': [projectStatus1]
+          },
+          dispatch
         }
       }
     })
-    const wrapper = mount(ProjectsLeftAside, { store, router, localVue })
     wrapper.vm.$nextTick(() => {
       wrapper.vm.$nextTick(() => {
         wrapper.vm.$nextTick(() => {

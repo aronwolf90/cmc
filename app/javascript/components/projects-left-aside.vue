@@ -20,47 +20,34 @@
 <script>
 import draggable from 'vuedraggable'
 import LeftAsideItem from 'components/left-aside-item'
-import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   components: {
     LeftAsideItem,
     draggable
   },
-  data () {
-    return {
-      projectStatusesRefs: []
-    }
-  },
   created () {
-    this.fetch()
+    this.$store.dispatch('projectsLeftAside/fetch')
   },
   watch: {
     '$route' (to, from) {
-      this.fetch()
+      this.$store.dispatch('projectsLeftAside/fetch')
     }
   },
   computed: {
     projectStatuses: {
       get () {
-        return this.projectStatusesRefs.map(ref => {
-          return this.$store.getters.projectStatus(ref.id)
-        })
+        return this.$store.getters['projectsLeftAside/projectStatuses']
       },
       set (projectStatuses) {
-        this.projectStatusesRefs = Utils.entryArrayToRef(projectStatuses) 
+        this.$store.commit('projectsLeftAside/projectStatuses', projectStatuses)
       }
     }
   },
   methods: {
-    fetch () {
-      this.$store.dispatch('getProjectStatuses').then(response => {
-        this.projectStatusesRefs = Utils.entryArrayToRef(response.data)
-      })
-    },
     changed (event) {
       if (!event.moved) return
-      this.$store.dispatch('updateProjectStatus', { 
+      this.$store.dispatch('updateProjectStatus', {
         projectStatus: event.moved.element,
         payload: { attributes: { 'ordinal-number': event.moved.newIndex } }
       })
