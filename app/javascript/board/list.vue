@@ -19,7 +19,7 @@
         :id="`list-issue-${issue.id}`",
         class="list-issue"
       )
-    .more(v-if='showMore') 
+    .more(v-if='showMore')
       .text(v-on:click.self='loadMore') Load more
 
 </template>
@@ -38,7 +38,7 @@ export default {
   created () {
     this.$store.dispatch('loadRelationship', {
       entry: this.boardList,
-      name: 'issues' 
+      name: 'issues'
     })
   },
   computed: {
@@ -73,8 +73,8 @@ export default {
       return this.$store.dispatch('destroy', { entry: this.boardList })
     },
     loadMore () {
-      this.$store.dispatch('loadAssociationNextPageAccumulative', { 
-        entry: this.boardList, 
+      this.$store.dispatch('loadAssociationNextPageAccumulative', {
+        entry: this.boardList,
         association: 'issues'
       })
     }

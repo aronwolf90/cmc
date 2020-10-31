@@ -23,7 +23,7 @@
       slot(name='prev', v-bind='{prev, prevLabel, calendar}')
         button.btn.btn-link.pl-1(@click='prev')
           .fa.fa-angle-left.fa-lg
-      slot(name='summary', v-bind='{summary, calendar}') {{ summary}} 
+      slot(name='summary', v-bind='{summary, calendar}') {{ summary}}
       slot(name='next', v-bind='{next, nextLabel, calendar}')
         button.btn.btn-link.pr-1(@click='next')
           .fa.fa-angle-right.fa-lg
@@ -38,7 +38,7 @@
         b-button(
           v-b-modal.create-event-dialog="",
           variant="outline-secondary"
-        ) 
+        )
           i.fa.fa-plus.d-md-none(aria-hidden="true")
           .d-none.d-md-block Add event
 
@@ -84,18 +84,9 @@
 import CalendersGoogleSubscriptionBtn from 'components/calenders/google-subscription-btn'
 
 import {
-  Constants,
   Sorts,
-  Calendar,
-  Day,
-  Units,
-  Weekday,
-  Month,
-  DaySpan,
-  PatternMap,
-  Time,
-  Op
-} from 'dayspan';
+  Calendar
+} from 'dayspan'
 import 'dayspan-vuetify/dist/lib/dayspan-vuetify.min.css'
 import { Utils } from 'vuex-jsonapi-client'
 import CreateEventDialog from 'calender/create_event_dialog'
@@ -113,8 +104,8 @@ export default {
     calendar:
     {
       type: Calendar,
-      default() {
-        return Calendar.months();
+      default () {
+        return Calendar.months()
       }
     },
     readOnly:
@@ -125,60 +116,60 @@ export default {
     types:
     {
       type: Array,
-      default() {
-        return this.$dsDefaults().types;
+      default () {
+        return this.$dsDefaults().types
       }
     },
     allowsAddToday:
     {
       type: Boolean,
-      default() {
-        return this.$dsDefaults().allowsAddToday;
+      default () {
+        return this.$dsDefaults().allowsAddToday
       }
     },
     formats:
     {
-      validate(x) {
-        return this.$dsValidate(x, 'formats');
+      validate (x) {
+        return this.$dsValidate(x, 'formats')
       },
-      default() {
-        return this.$dsDefaults().formats;
+      default () {
+        return this.$dsDefaults().formats
       }
     },
     labels:
     {
-      validate(x) {
-        return this.$dsValidate(x, 'labels');
+      validate (x) {
+        return this.$dsValidate(x, 'labels')
       },
-      default() {
-        return this.$dsDefaults().labels;
+      default () {
+        return this.$dsDefaults().labels
       }
     },
     styles:
     {
-      validate(x) {
-        return this.$dsValidate(x, 'styles');
+      validate (x) {
+        return this.$dsValidate(x, 'styles')
       },
-      default() {
-        return this.$dsDefaults().styles;
+      default () {
+        return this.$dsDefaults().styles
       }
     },
     optionsDialog:
     {
-      validate(x) {
-        return this.$dsValidate(x, 'optionsDialog');
+      validate (x) {
+        return this.$dsValidate(x, 'optionsDialog')
       },
-      default() {
-        return this.$dsDefaults().optionsDialog;
+      default () {
+        return this.$dsDefaults().optionsDialog
       }
     },
     promptDialog:
     {
-      validate(x) {
-        return this.$dsValidate(x, 'promptDialog');
+      validate (x) {
+        return this.$dsValidate(x, 'promptDialog')
       },
-      default() {
-        return this.$dsDefaults().promptDialog;
+      default () {
+        return this.$dsDefaults().promptDialog
       }
     }
   },
@@ -204,32 +195,32 @@ export default {
     isGoogleIntegrated () {
       return Utils.attribute(
         this.$store.getters.context,
-        "google-calender-integrated"
+        'google-calender-integrated'
       )
     },
     googleCalenderAuthorizationUrl () {
       return Utils.attribute(
         this.$store.getters.context,
-        "google-calender-authorization-url"
+        'google-calender-authorization-url'
       )
     },
     isAdmin () {
       if (!this.$store.getters.currentUser) return false
       return Utils.attribute(
         this.$store.getters.currentUser,
-        "type"
-      ) == "Admin"
+        'type'
+      ) === 'Admin'
     },
     events () {
       return (this.$store.getters.collection('events') || []).map(event => {
         let startTime = Utils.attribute(event, 'start-time')
         let endTime = Utils.attribute(event, 'end-time')
-        let allDay = Utils.attribute(event, 'all-day') 
+        let allDay = Utils.attribute(event, 'all-day')
 
         return {
           data: {
             title: Utils.attribute(event, 'title'),
-            color: '#b3b3ff', 
+            color: '#b3b3ff',
             id: event.id
           },
           schedule: {
@@ -237,70 +228,58 @@ export default {
             month: [parseInt(startTime.substring(5, 7)) - 1],
             dayOfMonth: [parseInt(startTime.substring(8, 10))],
             times: allDay ? null : [startTime.substring(11, 19)],
-            duration: allDay ? null : (new Date(endTime) - new Date(startTime))/3600000
+            duration: allDay ? null : (new Date(endTime) - new Date(startTime)) / 3600000
           }
         }
       })
     },
     currentType:
     {
-      get()
-      {
+      get () {
         return this.types.find((type) =>
           type.type === this.calendar.type &&
           type.size === this.calendar.size
-        ) || this.types[0];
+        ) || this.types[0]
       },
-      set(type)
-      {
-        this.rebuild(undefined, true, type);
+      set (type) {
+        this.rebuild(undefined, true, type)
       }
     },
-    summary()
-    {
-      let small = this.$vuetify.breakpoint.xs;
-      if (small)
-      {
-        return this.calendar.start.format( this.formats.xs );
+    summary () {
+      let small = this.$vuetify.breakpoint.xs
+      if (small) {
+        return this.calendar.start.format(this.formats.xs)
       }
-      let large = this.$vuetify.breakpoint.mdAndUp;
-      return this.calendar.summary(false, !large, false, !large);
+      let large = this.$vuetify.breakpoint.mdAndUp
+      return this.calendar.summary(false, !large, false, !large)
     },
-    todayDate()
-    {
-      return this.$dayspan.today.format( this.formats.today );
+    todayDate () {
+      return this.$dayspan.today.format(this.formats.today)
     },
-    nextLabel()
-    {
-      return this.labels.next( this.currentType );
+    nextLabel () {
+      return this.labels.next(this.currentType)
     },
-    prevLabel()
-    {
-      return this.labels.prev( this.currentType );
+    prevLabel () {
+      return this.labels.prev(this.currentType)
     },
-    hasCreatePopover()
-    {
-      return !!this.$scopedSlots.eventCreatePopover;
+    hasCreatePopover () {
+      return !!this.$scopedSlots.eventCreatePopover
     },
-    canAddDay()
-    {
-      return false//this.$dayspan.features.addDay && !this.readOnly && !this.$dayspan.readOnly;
+    canAddDay () {
+      return false// this.$dayspan.features.addDay && !this.readOnly && !this.$dayspan.readOnly;
     },
-    canAddTime()
-    {
-      return false//this.$dayspan.features.addTime && !this.readOnly && !this.$dayspan.readOnly;
+    canAddTime () {
+      return false// this.$dayspan.features.addTime && !this.readOnly && !this.$dayspan.readOnly;
     }
   },
-  mounted()
-  {
-    if (!this.$dayspan.promptOpen)
-    {
+  mounted () {
+    if (!this.$dayspan.promptOpen) {
       this.$dayspan.promptOpen = (question, callback) => {
-        this.promptVisible = false;
-        this.promptQuestion = question;
-        this.promptCallback = callback;
-        this.promptVisible = true;
-      };
+        this.promptVisible = false
+        this.promptQuestion = question
+        this.promptCallback = callback
+        this.promptVisible = true
+      }
     }
     this.applyEvents()
   },
@@ -311,34 +290,28 @@ export default {
         location.reload()
       })
     },
-    setState(state)
-    {
+    setState (state) {
       state.eventSorter = state.listTimes
         ? Sorts.List([Sorts.FullDay, Sorts.Start])
-        : Sorts.Start;
-      this.calendar.set( state );
-      this.triggerChange();
+        : Sorts.Start
+      this.calendar.set(state)
+      this.triggerChange()
     },
-    applyEvents()
-    {
-      if (this.events)
-      {
-        this.calendar.removeEvents();
-        this.calendar.addEvents(this.events);
+    applyEvents () {
+      if (this.events) {
+        this.calendar.removeEvents()
+        this.calendar.addEvents(this.events)
       }
     },
-    isType(type, aroundDay)
-    {
-      let cal = this.calendar;
+    isType (type, aroundDay) {
+      let cal = this.calendar
       return (cal.type === type.type && cal.size === type.size &&
-          (!aroundDay || cal.span.matchesDay(aroundDay)));
+          (!aroundDay || cal.span.matchesDay(aroundDay)))
     },
-    rebuild (aroundDay, force, forceType)
-    {
-      let type = forceType || this.currentType || this.types[ 2 ];
-      if (this.isType( type, aroundDay ) && !force)
-      {
-        return;
+    rebuild (aroundDay, force, forceType) {
+      let type = forceType || this.currentType || this.types[ 2 ]
+      if (this.isType(type, aroundDay) && !force) {
+        return
       }
       let input = {
         type: type.type,
@@ -352,42 +325,38 @@ export default {
         fill: !type.listTimes,
         otherwiseFocus: type.focus,
         repeatCovers: type.repeat
-      };
-      this.setState( input );
+      }
+      this.setState(input)
     },
-    next()
-    {
-      this.calendar.unselect().next();
-      this.triggerChange();
+    next () {
+      this.calendar.unselect().next()
+      this.triggerChange()
     },
-    prev()
-    {
-      this.calendar.unselect().prev();
-      this.triggerChange();
+    prev () {
+      this.calendar.unselect().prev()
+      this.triggerChange()
     },
-    setToday()
-    {
-      this.rebuild( this.$dayspan.today );
+    setToday () {
+      this.rebuild(this.$dayspan.today)
     },
-    viewDay(day)
-    {
-      this.rebuild( day, false, this.types[ 0 ] );
+    viewDay (day) {
+      this.rebuild(day, false, this.types[ 0 ])
     },
-    edit(calendarEvent) {
+    edit (calendarEvent) {
       this.editEdventId = calendarEvent.data.id
       this.$root.$emit('bv::show::modal', 'update-event-dialog')
     },
-    editPlaceholder(createEdit) {},
-    add(day) {},
-    addAt(dayHour) {},
-    addToday() {},
-    handleAdd(addEvent) {},
-    handleMove(moveEvent) {},
-    chooseOption(option) {},
-    choosePrompt(yes) {},
-    eventFinish(ev) {},
-    eventsRefresh() {},
-    triggerChange() {}
+    editPlaceholder (createEdit) {},
+    add (day) {},
+    addAt (dayHour) {},
+    addToday () {},
+    handleAdd (addEvent) {},
+    handleMove (moveEvent) {},
+    chooseOption (option) {},
+    choosePrompt (yes) {},
+    eventFinish (ev) {},
+    eventsRefresh () {},
+    triggerChange () {}
   }
 }
 </script>

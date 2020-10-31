@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Issue from '../../../app/javascript/board/issue'
-import IssuesRecordSection from '../../../app/javascript/components/issues_record_section'
+import Issue from 'board/issue'
+import IssuesRecordSection from 'components/issues-record-section'
 import draggable from 'vuedraggable'
 
 const localVue = createLocalVue()

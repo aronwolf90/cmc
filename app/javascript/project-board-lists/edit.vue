@@ -42,7 +42,7 @@ export default {
       return this.$store.getters.projectBoardList(this.id)
     },
     projectStatusId () {
-      if (!this.projectBoardList) return 
+      if (!this.projectBoardList) return
       return Utils.relationship(this.projectBoardList, 'project-status').id
     },
     disableDestroyBtn () {
@@ -54,7 +54,7 @@ export default {
     submit (event) {
       this.$store.dispatch('updateProjectBoardList', {
         payload: this.form,
-        projectBoardList: this.projectBoardList,
+        projectBoardList: this.projectBoardList
       }).then(() => {
         this.$router.push(`/administration/project_statuses/${this.projectStatusId}?project-board=true`)
       }).catch(({ status, data }) => {

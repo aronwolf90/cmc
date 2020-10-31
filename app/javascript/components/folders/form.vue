@@ -44,42 +44,28 @@ export default {
     InputFile
   },
   props: ['value', 'errors', 'folders', 'projectFolder'],
-  computed: {
-    folderOptions () {
-      this.folders.map(folder => {
-        if (Utils.esameRef(folder, projectFolder)) {
-          return { value: Utils.entryToRef(folder), text: "" }
-        } else {
-          return {
-            value: Utils.entryToRef(folder),
-            text: Utils.attribute(folder, 'name')
-          }
-        }
-      })
-    }
-  },
   methods: {
     errorStatus (pointer) {
       let errors = this.findErrors(pointer)
-      return errors.length == 0 ? null: false
+      return errors.length === 0 ? null : false
     },
     findErrors (pointer) {
       return this.errors.filter(error => {
         return error.source.pointer.includes(pointer)
       })
-      .filter((error, index, self) => {
-        return self.findIndex(value => value.detail == error.detail) === index;
-      })
+        .filter((error, index, self) => {
+          return self.findIndex(value => value.detail === error.detail) === index
+        })
     },
     setDocumentFile (documentFile) {
       this.documentFile = documentFile
-    },
+    }
   },
   watch: {
     value () {
       this.$emit('input', this.value)
     }
-  },
+  }
 }
 </script>
 

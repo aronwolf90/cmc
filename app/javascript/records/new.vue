@@ -18,7 +18,7 @@ export default {
   methods: {
     submit (event) {
       event.preventDefault()
- 
+
       this.$store.dispatch('createRecord', this.data).then(() => {
         location.replace('/administration/rrecords')
       }).catch(({ status, data }) => {

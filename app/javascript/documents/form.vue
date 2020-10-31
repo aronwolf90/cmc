@@ -61,7 +61,7 @@ export default {
         folder: null
       },
       documentFile: null
-    } 
+    }
   },
   mounted () {
     this.form.name = this.name
@@ -73,10 +73,10 @@ export default {
   methods: {
     onSubmit (event) {
       event.preventDefault()
-      
+
       let payload = {
         attributes: {
-          name: this.form.name,
+          name: this.form.name
         },
         relationships: {
           folder: {
@@ -94,19 +94,19 @@ export default {
     },
     errorStatus (pointer) {
       let errors = this.findErrors(pointer)
-      return errors.length == 0 ? null: false
+      return errors.length === 0 ? null : false
     },
     findErrors (pointer) {
       return this.errors.filter(error => {
         return error.source.pointer.includes(pointer)
       })
-      .filter((error, index, self) => {
-        return self.findIndex(value => value.detail == error.detail) === index;
-      })
+        .filter((error, index, self) => {
+          return self.findIndex(value => value.detail === error.detail) === index
+        })
     },
     setDocumentFile (documentFile) {
       this.documentFile = documentFile
-    },
+    }
   },
   computed: {
     folders () {

@@ -6,7 +6,7 @@
       a.fa.fa-step-forward.fa-fw(:href='`?start-date=${next}`')
     br
     .table-responsive
-      table.table.table-bordered 
+      table.table.table-bordered
         thead
           th
           header-cell(
@@ -40,7 +40,7 @@ import HeaderCell from 'attendances/header_cell'
 import UserCell from 'attendances/user_cell'
 import BodyCell from 'attendances/body_cell'
 import Modal from 'attendances/modal'
- 
+
 export default {
   components: {
     HeaderCell,
@@ -54,15 +54,15 @@ export default {
       currentUser: null,
       prev: null,
       current: null,
-      next: null,
+      next: null
     }
   },
   created () {
-    this.$store.dispatch('users') 
+    this.$store.dispatch('users')
   },
   computed: {
     startDate () {
-      var urlParams = new URLSearchParams(location.search);
+      var urlParams = new URLSearchParams(location.search)
       return urlParams.get('start-date')
     },
     currentAttendanceDayType () {
@@ -102,7 +102,7 @@ export default {
       this.currentAttendanceDay = day
       this.currentUser = user
       if (this.$refs.modal) this.$refs.modal.show()
-    },
+    }
   },
   watch: {
     startDate () {

@@ -18,9 +18,9 @@ export default {
   },
   computed: {
     attendanceDay () {
-      return this.$store.getters.entry({ 
+      return this.$store.getters.entry({
         id: this.attendanceDayId,
-        type: "attendance-days"
+        type: 'attendance-days'
       })
     },
     day () {

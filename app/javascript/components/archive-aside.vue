@@ -48,7 +48,7 @@ export default {
     },
     changed (event) {
       if (!event.moved) return
-      this.$store.dispatch('updateProjectStatus', { 
+      this.$store.dispatch('updateProjectStatus', {
         projectStatus: event.moved.element,
         payload: { attributes: { 'ordinal-number': event.moved.newIndex } }
       })

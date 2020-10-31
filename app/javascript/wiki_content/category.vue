@@ -1,18 +1,18 @@
 <template lang='pug'>
   .category.category-item
-    .title.fa.fa-tags 
+    .title.fa.fa-tags
       | {{ title }}&nbsp;&nbsp
     router-link(:to='editLink')
       .fa.fa-edit
     .child-pages
       page(
-        v-for='page in pages', 
+        v-for='page in pages',
         :page-id='page.id',
         :key="page.key"
       )
     .child-categories
       category(
-        v-for='category in categories', 
+        v-for='category in categories',
         :category-id='category.id',
         :key='category.id'
       )
@@ -30,13 +30,13 @@ export default {
   },
   computed: {
     category () {
-      return this.$store.getters.entry({ 
+      return this.$store.getters.entry({
         id: this.categoryId,
         type: 'wiki-categories'
       })
     },
     categories () {
-      return this.$store.getters.associatedEntries({ 
+      return this.$store.getters.associatedEntries({
         entry: this.category,
         name: 'wiki-categories'
       })

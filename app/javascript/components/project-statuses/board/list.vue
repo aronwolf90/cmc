@@ -18,7 +18,7 @@
         :id="`list-project-${project.id}`",
         class="list-project"
       )
-    .more(v-if='showMore') 
+    .more(v-if='showMore')
       .text(v-on:click.self='loadMore') Load more
 
 </template>
@@ -52,8 +52,7 @@ export default {
     },
     projects: {
       get () {
-        return this.$store.getters['projects-board/projectBoardListProjects']
-          (this.projectBoardList)
+        return this.$store.getters['projects-board/projectBoardListProjects'](this.projectBoardList)
       },
       set (projects) {
         return this.$store.commit('projects-board/projectBoardListProjects',
@@ -77,7 +76,7 @@ export default {
       this.$store.dispatch('projects-board/moveProject', {
         projectBoardList: this.projectBoardList,
         project: movedAdded.element,
-        ordinalNumber: movedAdded.newIndex 
+        ordinalNumber: movedAdded.newIndex
       })
     }
   }

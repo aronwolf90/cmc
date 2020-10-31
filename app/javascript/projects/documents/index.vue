@@ -54,7 +54,7 @@ export default {
   },
   watch: {
     'projectId': 'fetch'
-  },
+  }
 }
 </script>
 
@@ -63,12 +63,12 @@ export default {
   .archive-tree-item
     padding-left: 32px
     position: relative
-    &:before 
+    &:before
       content: ""
       position: absolute
-      border-top: 1px solid #000 
+      border-top: 1px solid #000
       top: 11px
-      width: 8px    
+      width: 8px
       height: 0
       left: 12px
     &:after
@@ -78,7 +78,7 @@ export default {
       border-left: 1px solid #000
       height: 100%
       top: 3px
-    &:last-child::after 
+    &:last-child::after
       height: 8px
 
 </style>

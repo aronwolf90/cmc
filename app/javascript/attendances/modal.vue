@@ -1,7 +1,7 @@
 <template lang='pug'>
   b-modal(:title="day", ref="modal", @ok="onSubmit", visible=true)
     template(slot="modal-title")
-      
+
     b-form(@submit="onSubmit")
       b-form-group(
         label="Description"
@@ -32,7 +32,7 @@
 </template>
 
 <script>
- 
+
 export default {
   props: [
     'day',
@@ -68,7 +68,7 @@ export default {
       let data = {
         attributes: {
           description: this.form.description,
-          "from-day": this.form.fromDay
+          'from-day': this.form.fromDay
         },
         relationships: {
           user: {
@@ -81,7 +81,7 @@ export default {
       }
 
       if (this.attendanceEvent) {
-        this.$store.dispatch('updateAttendanceEvent', { 
+        this.$store.dispatch('updateAttendanceEvent', {
           entry: this.attendanceEvent,
           payload: data
         })

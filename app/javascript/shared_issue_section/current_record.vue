@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import IssueRecordSection from 'components/issues_record_section'
+import IssueRecordSection from 'components/issues-record-section'
 import { Utils } from 'vuex-jsonapi-client'
 
 export default {

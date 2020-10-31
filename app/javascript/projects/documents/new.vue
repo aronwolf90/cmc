@@ -45,12 +45,12 @@ export default {
   methods: {
     submit () {
       this.$store.dispatch('createDocument', this.form)
-      .then(() => {
-        this.$router.push(`/administration/projects/${this.projectId}/documents`)
-      })
-      .catch(({ status, data }) => {
-        this.errors = data.errors
-      })
+        .then(() => {
+          this.$router.push(`/administration/projects/${this.projectId}/documents`)
+        })
+        .catch(({ status, data }) => {
+          this.errors = data.errors
+        })
     },
     fetch () {
       this.$store.dispatch('getProjectFolder', this.projectId).then(data => {

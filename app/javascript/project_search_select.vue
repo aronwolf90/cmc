@@ -1,14 +1,14 @@
 <template lang='pug'>
   .project-search
     b-form-input(
-      type='text', 
-      v-model='searchText', 
+      type='text',
+      v-model='searchText',
       placeholder='Search',
       @focus.native="focused = true"
     )
     .items(v-if="focused")
       project-search-select-item(
-        v-for="project in projects", 
+        v-for="project in projects",
         :project-id="project.id",
         :key="project.id"
       )
@@ -16,11 +16,11 @@
 
 <script>
 import ProjectSearchSelectItem from './project_search_select_item'
- 
+
 export default {
   data () {
-    return { 
-      searchText: '', 
+    return {
+      searchText: '',
       focused: false,
       requestProjects: null
     }
@@ -45,14 +45,14 @@ export default {
     },
     relevantProjects () {
       return this.requestProjects || this.$store.getters.metaCollection('projects')
-    },
+    }
   },
   methods: {
     request () {
-      this.$store.dispatch('request', { 
-        url: `/api/v1/projects?query=${this.searchText}`,
+      this.$store.dispatch('request', {
+        url: `/api/v1/projects?query=${this.searchText}`
       }).then(response => {
-        this.requestProjects = response.data 
+        this.requestProjects = response.data
       })
     }
   },

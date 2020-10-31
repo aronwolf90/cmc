@@ -42,9 +42,10 @@ export default {
     }
   },
   created () {
-    setTimeout(( () => {
+    setTimeout(() => {
+      // eslint-disable-next-line no-undef
       return jqueryFuncs()
-    }), 100)
+    }, 100)
   },
   methods: {
     submit (event) {

@@ -1,7 +1,7 @@
 <template lang='pug'>
-  .document.archive-tree-item 
+  .document.archive-tree-item
     a(:href='link', target="_blank")
-      .fa.fa-file-text-o 
+      .fa.fa-file-text-o
         | {{ name }}&nbsp;&nbsp;
     router-link.edit-btn(:to='editLink')
       .fa.fa-edit
@@ -14,9 +14,9 @@ export default {
   props: ['documentId'],
   computed: {
     document () {
-      return this.$store.getters.entry({ 
+      return this.$store.getters.entry({
         id: this.documentId,
-        type: "documents"
+        type: 'documents'
       })
     },
     name () {

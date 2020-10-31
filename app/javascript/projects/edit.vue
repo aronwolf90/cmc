@@ -21,8 +21,6 @@
 </template>
 
 <script>
-import { Utils } from 'vuex-jsonapi-client'
-
 export default {
   params: ['id'],
   computed: {
@@ -55,8 +53,6 @@ export default {
         this.$router.push('.')
       })
     }
-  } 
-}      
+  }
+}
 </script>
-       
-       

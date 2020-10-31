@@ -1,19 +1,19 @@
 <template lang='pug'>
   .folder.archive-tree-item
     .item
-      .name.fa.fa-tags 
+      .name.fa.fa-tags
         | {{ name }}&nbsp;&nbsp;
       router-link(:to='link')
         .fa.fa-edit
     .child-documents
       document(
-        v-for='document in documents', 
+        v-for='document in documents',
         :document-id='document.id',
         :key="document.key"
       )
     .child-folders
       folder(
-        v-for='folder in folders', 
+        v-for='folder in folders',
         :folder-id='folder.id',
         :key='folder.id'
       )
@@ -31,13 +31,13 @@ export default {
   },
   computed: {
     folder () {
-      return this.$store.getters.entry({ 
+      return this.$store.getters.entry({
         id: this.folderId,
         type: 'folders'
       })
     },
     folders () {
-      return this.$store.getters.associatedEntries({ 
+      return this.$store.getters.associatedEntries({
         entry: this.folder,
         name: 'folders'
       })

@@ -1,6 +1,6 @@
 import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import IssuesRecordSection from '../../../app/javascript/components/issues_record_section'
+import IssuesRecordSection from 'components/issues-record-section'
 import sinon from 'sinon'
 
 const localVue = createLocalVue()

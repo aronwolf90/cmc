@@ -43,9 +43,9 @@ export default {
       }).then(() => {
         this.$router.push(`/administration/projects/${this.projectId}/documents`)
       })
-      .catch(({ status, data }) => {
-        this.errors = data.errors
-      })
+        .catch(({ status, data }) => {
+          this.errors = data.errors
+        })
     },
     fetch () {
       return this.$store.dispatch('getDocument', this.id).then(result => {

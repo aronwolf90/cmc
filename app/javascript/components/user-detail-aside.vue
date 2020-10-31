@@ -17,7 +17,7 @@ import LeftAsideItem from 'components/left-aside-item'
 export default {
   props: ['id'],
   components: {
-    LeftAsideItem,
+    LeftAsideItem
   }
 }
 </script>

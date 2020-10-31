@@ -24,7 +24,7 @@
             td {{ formatMoney(invoice.attributes['amount-paid']) }}
             td {{ formatMoney(invoice.attributes['amount-due']) }}
             td {{ formatMoney(invoice.attributes['amount-remaining']) }}
-            td 
+            td
               a.pull-right.btn.btn-secondary(:href="invoice.attributes.pdf")
                 i.fa.fa-file-pdf-o(aria-hidden="true")
 </template>
@@ -63,7 +63,8 @@ export default {
   methods: {
     click () {
       this.$store.dispatch('createStripeCheckoutSession').then(result => {
-        const stripe = Stripe(window.stripe_public_key);
+        // eslint-disable-next-line no-undef
+        const stripe = Stripe(window.stripe_public_key)
         stripe.redirectToCheckout({
           sessionId: result.data.data.id
         }).then(function (result) {
@@ -73,8 +74,8 @@ export default {
     },
     formatMoney (number) {
       return new Intl.NumberFormat('de-DE',
-      { style: 'currency', currency: 'EUR' })
-      .format(number/100.0)
+        { style: 'currency', currency: 'EUR' })
+        .format(number / 100.0)
     }
   }
 }

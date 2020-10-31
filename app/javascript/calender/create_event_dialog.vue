@@ -54,22 +54,20 @@
 </template>
 
 <script>
-import { Utils } from 'vuex-jsonapi-client'
- 
 export default {
   props: ['eventId'],
   data () {
-   return {
-     saving: false,
-     form: {
-       title: null,
-       date: null,
-       startTime: '',
-       endTime: '',
-       nonAllDay: null,
-       description: null
-     }
-   }
+    return {
+      saving: false,
+      form: {
+        title: null,
+        date: null,
+        startTime: '',
+        endTime: '',
+        nonAllDay: null,
+        description: null
+      }
+    }
   },
   methods: {
     create () {
@@ -78,7 +76,7 @@ export default {
         attributes: {
           title: this.form.title,
           'start-time': `${this.form.date} ${this.form.startTime}`,
-          'end-time': this.form.endTime ? `${this.form.date} ${this.form.endTime}`: null,
+          'end-time': this.form.endTime ? `${this.form.date} ${this.form.endTime}` : null,
           'all-day': !this.form.nonAllDay,
           'description': this.form.description
         }
@@ -88,9 +86,10 @@ export default {
       })
     },
     jqueryFuncs () {
+      // eslint-disable-next-line no-undef
       setTimeout(() => jqueryFuncs(), 100)
     }
-  },
+  }
 }
 </script>
 

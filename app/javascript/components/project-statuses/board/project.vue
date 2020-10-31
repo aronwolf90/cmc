@@ -18,7 +18,7 @@ export default {
   components: {
     BoardItem
   },
-  props: { 
+  props: {
     'project-id': { required: true }
   },
   computed: {
@@ -35,7 +35,7 @@ export default {
       return Utils.attribute(this.project, 'name')
     },
     mainResponsableName () {
-      return Utils.attribute(this.mainResponsable, 'firstname') + " " +
+      return Utils.attribute(this.mainResponsable, 'firstname') + ' ' +
         Utils.attribute(this.mainResponsable, 'lastname')
     },
     mainResponsable () {

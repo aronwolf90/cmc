@@ -22,15 +22,15 @@ export default {
     },
     errorStatus (pointer) {
       let errors = this.findErrors(pointer)
-      return errors.length == 0 ? null: false
+      return errors.length === 0 ? null : false
     },
     findErrors (pointer) {
       return this.errors.filter(error => {
         return error.source.pointer.includes(pointer)
       })
-      .filter((error, index, self) => {
-        return self.findIndex(value => value.detail == error.detail) === index;
-      })
+        .filter((error, index, self) => {
+          return self.findIndex(value => value.detail === error.detail) === index
+        })
     }
   }
 }

@@ -10,9 +10,9 @@ export default {
   props: ['attendance-day-id', 'user-id', 'user-type'],
   computed: {
     attendanceDay () {
-      return this.$store.getters.entry({ 
+      return this.$store.getters.entry({
         id: this.attendanceDayId,
-        type: "attendance-days"
+        type: 'attendance-days'
       })
     },
     attendanceEventClass () {
@@ -40,7 +40,7 @@ export default {
   methods: {
     onClick () {
       this.$emit(
-        'showModal', { 
+        'showModal', {
           day: this.attendanceDay,
           user: this.user
         }

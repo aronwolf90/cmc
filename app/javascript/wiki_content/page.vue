@@ -1,7 +1,7 @@
 <template lang='pug'>
-  .page.category-item 
+  .page.category-item
     router-link(:to='link')
-      .fa.fa-file-text-o 
+      .fa.fa-file-text-o
         | {{this.title }}
 </template>
 
@@ -12,9 +12,9 @@ export default {
   props: ['pageId'],
   computed: {
     page () {
-      return this.$store.getters.entry({ 
+      return this.$store.getters.entry({
         id: this.pageId,
-        type: "wiki-pages"
+        type: 'wiki-pages'
       })
     },
     title () {

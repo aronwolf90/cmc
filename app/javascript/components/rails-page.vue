@@ -12,15 +12,16 @@ export default {
   },
   created () {
     setTimeout(() => {
-      jqueryFuncs();
+      // eslint-disable-next-line no-undef
+      jqueryFuncs()
     }, 100)
   },
   beforeRouteEnter (to, from, next) {
     window.store.getters.axios.get(
       to.fullPath,
-      { headers: { LAYOUT: false }}
+      { headers: { LAYOUT: false } }
     ).then(response => {
-     next(vm => {
+      next(vm => {
         vm.html = response.data
       })
     })

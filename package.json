@@ -78,7 +78,7 @@
     "test": "./scripts/test_js.sh",
     "test:watch": "./scripts/test_js.sh spec/javascript --watch",
     "report": "cross-env NODE_ENV=test nyc report",
-    "eslint": "eslint app/javascript spec"
+    "eslint": "eslint --ext .js,.vue app/javascript spec"
   },
   "nyc": {
     "exclude": [

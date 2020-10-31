@@ -43,7 +43,7 @@ export default {
     submit (event) {
       this.$store.dispatch('updateProjectStatus', {
         payload: this.form,
-        projectStatus: this.projectStatus,
+        projectStatus: this.projectStatus
       }).then(() => {
         this.$router.push(`/administration/project_statuses/${this.projectStatus.id}`)
       }).catch(({ status, data }) => {

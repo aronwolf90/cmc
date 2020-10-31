@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     wikiPage () {
-      return this.$store.getters.entry({type: 'wiki-pages', id: this.wikiPageId})
+      return this.$store.getters.entry({ type: 'wiki-pages', id: this.wikiPageId })
     },
     title () {
       return Utils.attribute(this.wikiPage, 'title')

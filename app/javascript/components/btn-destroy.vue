@@ -27,8 +27,8 @@ export default {
       })
     },
     canDestroy () {
-      return this.entry && 
-             this.entry.meta && 
+      return this.entry &&
+             this.entry.meta &&
              this.entry.meta.permissions &&
              this.entry.meta.permissions.destroy
     }

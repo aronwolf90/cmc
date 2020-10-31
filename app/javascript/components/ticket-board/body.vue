@@ -13,9 +13,7 @@ import Draggable from 'vuedraggable'
 import List from 'board/list'
 import ProjectSelect from 'board/project_select'
 import SearchSelect from 'board/search_select'
-import { Utils } from 'vuex-jsonapi-client'
-import { mapGetters, mapMutations } from 'vuex'
- 
+
 export default {
   components: {
     Draggable,

@@ -62,24 +62,24 @@ export default {
     },
     loadMore () {
       this.$store
-      .dispatch('loadMoreNotifications', this.loadMorePath)
-      .then(response => {
-        response.data.forEach(notification => {
-          let notificationAdded = this.notifications.some(localNotification => {
-            return Utils.sameRef(localNotification, notification)
+        .dispatch('loadMoreNotifications', this.loadMorePath)
+        .then(response => {
+          response.data.forEach(notification => {
+            let notificationAdded = this.notifications.some(localNotification => {
+              return Utils.sameRef(localNotification, notification)
+            })
+            if (!notificationAdded) this.notifications.push(notification)
+            this.loadMorePath = response.links.next
           })
-          if (!notificationAdded) this.notifications.push(notification)
-          this.loadMorePath = response.links.next
         })
-      })
     },
     notificationsReaded () {
-      if (!this.notifications || !this.notifications[0]) return 
+      if (!this.notifications || !this.notifications[0]) return
       this.$store
-      .dispatch('notificationsReaded', { readedAt: this.notifications[0].attributes['created_at']  })
-      .then(() => {
-        this.unreadCount = 0
-      })
+        .dispatch('notificationsReaded', { readedAt: this.notifications[0].attributes['created_at'] })
+        .then(() => {
+          this.unreadCount = 0
+        })
     }
   }
 }

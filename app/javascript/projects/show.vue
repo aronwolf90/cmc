@@ -68,7 +68,7 @@ export default {
       this.$store.dispatch('projectsShow/fetch', this.id)
     },
     submitTelephoneNumber () {
-      this.telephoneNumber.editMode = false 
+      this.telephoneNumber.editMode = false
     }
   }
 }

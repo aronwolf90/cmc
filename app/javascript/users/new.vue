@@ -68,7 +68,7 @@ export default {
   methods: {
     onSubmit (event) {
       event.preventDefault()
- 
+
       this.$store.dispatch('createUser', this.data).then(() => {
         location.replace('/administration/users')
       })

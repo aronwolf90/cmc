@@ -11,7 +11,7 @@
 import ProjectBoardListForm from 'components/project-board-lists/form'
 
 export default {
-  props: ['project-status-id'], 
+  props: ['project-status-id'],
   components: {
     ProjectBoardListForm
   },

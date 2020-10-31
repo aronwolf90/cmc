@@ -30,7 +30,7 @@ export default {
     errors: Array,
     endpoint: String,
     slizeSize: {
-      default: 6*1024*1024
+      default: 6 * 1024 * 1024
     }
   },
   data () {
@@ -43,7 +43,7 @@ export default {
     changeFile (file) {
       let formData = new FormData()
       let headers = { 'Content-Type': 'multipart/form-data' }
-      let nextSlice =  this.slizeSize + 1
+      let nextSlice = this.slizeSize + 1
       let blob = file.slice(0, nextSlice, file.type)
       let that = this
       let onUploadProgress = (progressEvent) => {
@@ -77,8 +77,8 @@ export default {
 
       let headers = { 'Content-Type': 'multipart/form-data' }
       let formData = new FormData()
-      let nextSlice = start + this.slizeSize + 1;
-      var blob = file.slice(start, nextSlice);
+      let nextSlice = start + this.slizeSize + 1
+      var blob = file.slice(start, nextSlice)
       let that = this
       let onUploadProgress = (progressEvent) => {
         this.loaded = lastChunckSize + progressEvent.loaded
@@ -97,8 +97,8 @@ export default {
   },
   computed: {
     errorStatus () {
-      return this.errors.length == 0 ? null: false
-    },
+      return this.errors.length === 0 ? null : false
+    }
   }
 }
 
@@ -106,4 +106,3 @@ export default {
 
 <style lang='sass' scoped>
 </style>
-

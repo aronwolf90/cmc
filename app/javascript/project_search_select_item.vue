@@ -1,17 +1,17 @@
 <template lang='pug'>
-.item 
+.item
   a(:href="link") {{ name }}
 </template>
 
 <script>
 import { Utils } from 'vuex-jsonapi-client'
- 
+
 export default {
   props: ['projectId'],
   computed: {
     project () {
       return this.$store.getters.entry({
-        id: this.projectId, 
+        id: this.projectId,
         type: 'projects'
       })
     },
