@@ -42,6 +42,7 @@ import documentGetters from 'store/models/document-getters'
 import CalenderActions from 'store/models/calender_actions'
 import LabelActions from 'store/models/label-actions'
 import ProjectsLeftAside from 'store/modules/projects-left-aside'
+import ProjectsIndex from 'store/modules/projects-index'
 
 export default {
   strict: true,
@@ -51,7 +52,8 @@ export default {
     'projects-board': ProjectsBoard,
     projectsShow: ProjectsShow,
     issuesShow: issuesShow,
-    projectsLeftAside: ProjectsLeftAside
+    projectsLeftAside: ProjectsLeftAside,
+    projectsIndex: ProjectsIndex
   },
   state: {
     aside: null,

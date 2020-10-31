@@ -21,9 +21,10 @@
         )
     b-pagination-nav(
       :link-gen="linkGen",
-      :number-of-pages="pages",
-      v-model="page",
-      use-router=""
+      :number-of-pages="paginationPageCount",
+      :value="paginationCurrentPage",
+      use-router="",
+      @page-click.prevent=""
     )
 </template>
 
@@ -39,39 +40,36 @@ export default {
     ProjectIndexItem,
     IndexSearchSectionItem
   },
-  data () {
-    return {
-      count: 1,
-      page: 1,
-      projectRefs: []
-    }
-  },
-  beforeRouteEnter (to, from, next) {
-    window.store.dispatch('getProjects', to.query.page).then(result => {
-      next(vm => {
-        vm.count = result.meta.count
-        vm.page = to.query.page || 1
-        vm.projectRefs = Utils.entryArrayToRef(result.data)
-      })
-    })
-  },
-  beforeRouteUpdate (to, from, next) {
-    window.store.dispatch('getProjects', to.query.page).then(result => {
-      this.count = result.meta.count
-      this.page = to.query.page || 1
-      this.projectRefs = Utils.entryArrayToRef(result.data)
-      next()
-    })
-  },
   computed: {
-    pages () {
-      return Math.ceil(this.count / 10)
-    },
     projects () {
-      return this.projectRefs.map(ref => {
-        return this.$store.getters.entry(ref)
-      })
+      return this.$store.getters['projectsIndex/projects']
+    },
+    paginationPageCount () {
+      return this.$store.getters['projectsIndex/paginationPageCount']
+    },
+    paginationCurrentPage () {
+      return this.$store.getters['projectsIndex/paginationCurrentPage']
+    },
+    fetchingPage () {
+      return this.$store.getters['projectsIndex/fetchingPage']
     }
+  },
+  async beforeRouteEnter (to, from, next) {
+    const promise = window.store.dispatch(
+      'projectsIndex/fetch',
+      to.query.page
+    )
+    if (window.store.getters['projectsIndex/fetchingPage'] ===
+      window.store.getters['projectsIndex/paginationCurrentPage']) {
+      next()
+    } else {
+      await promise
+      next()
+    }
+  },
+  async beforeRouteUpdate (to, from, next) {
+    await window.store.dispatch('projectsIndex/fetch', to.query.page)
+    next()
   },
   methods: {
     itemTextFunction (project) {
