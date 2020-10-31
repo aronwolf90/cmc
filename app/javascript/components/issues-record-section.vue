@@ -1,5 +1,5 @@
 <template lang='pug'>
-  .issues_record_section
+  .issues-record-section
     .clock(
       v-if='record',
       @click.stop.prevent='clickStop'
@@ -29,7 +29,10 @@ export default {
   },
   computed: {
     issue () {
-      return this.$store.getters.entry({type: 'issues', id: this.issueId})
+      return this.$store.getters.entry({
+        type: 'issues',
+        id: this.issueId
+      })
     },
     currentUser () {
       return this.$store.getters.currentUser
@@ -47,7 +50,6 @@ export default {
   },
   methods: {
     clickPlay () {
-      console.log("---------------------------------------")
       this.$store.dispatch('createRecord', {
         attributes: { 'start-time': (new Date()).toString() },
         user: this.currentUser,
@@ -78,14 +80,6 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-  .issue
-    margin: 5px
-    box-shadow: 0 1px 2px rgba(186,186,186,0.5)
-    .issue-body
-      padding: 0.5rem
-      .text
-        overflow: hidden
-        text-overflow: ellipsis
-        a
-          color: black
+.issues-record-section
+  cursor: pointer
 </style>

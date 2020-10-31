@@ -13,7 +13,7 @@
 
 import { Utils } from 'vuex-jsonapi-client'
 import BoardItem from '../components/boards/items'
-import IssuesRecordSection from '../components/issues_record_section'
+import IssuesRecordSection from 'components/issues-record-section'
 import IssueExtraInformation from 'components/ticket-board/issue-extra-information'
 
 export default {

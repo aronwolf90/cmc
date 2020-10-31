@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+import Draggable from 'vuedraggable'
 import List from 'board/list'
 import ProjectSelect from 'board/project_select'
 import SearchSelect from 'board/search_select'
- 
+
 export default {
   components: {
     Draggable,

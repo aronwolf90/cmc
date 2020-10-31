@@ -81,7 +81,7 @@ export default {
     }
   },
   methods: {
-    itemTextFunction(user) {
+    itemTextFunction (user) {
       return `${user.attributes.firstname} ${user.attributes.lastname}`
     }
   }

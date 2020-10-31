@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import IssueRecordSection from 'components/issues_record_section'
+import IssueRecordSection from 'components/issues-record-section'
 import { Utils } from 'vuex-jsonapi-client'
 
 export default {
@@ -43,15 +43,15 @@ export default {
     userIssue () {
       if (!this.currentUser) return
       return this.$store.getters.entry({
-        type: 'user-issues', 
+        type: 'user-issues',
         id: `${this.currentUser.id},${this.issueId}`
       })
     }
   },
   methods: {
     aditionalTime () {
-      if (!this.currentIssue) return 0 
-      if (this.currentIssue.id != this.issueId) return 0 
+      if (!this.currentIssue) return 0
+      if (this.currentIssue.id !== this.issueId) return 0
       let startTime = (new Date(this.currentRecord.attributes['start-time'])).getTime()
       let currentTime = new Date().getTime()
       return (currentTime - startTime) / 1000

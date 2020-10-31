@@ -105,24 +105,24 @@ export default {
   },
   computed: {
     projectStatuses () {
-      return [{ value: null, text: ''}]
-      .concat((this.$store.getters.projectStatuses || [])
-      .map(projectStatus => {
-        return {
-          value: { id: projectStatus.id, type: 'project-statuses' },
-          text: projectStatus.attributes.name
-        }
-      }))
+      return [{ value: null, text: '' }]
+        .concat((this.$store.getters.projectStatuses || [])
+          .map(projectStatus => {
+            return {
+              value: { id: projectStatus.id, type: 'project-statuses' },
+              text: projectStatus.attributes.name
+            }
+          }))
     },
     contacts () {
-      return [{ value: null, text: ''}]
-      .concat((this.contactRefs)
-      .map(ref => {
-        return {
-          value: ref,
-          text: this.$store.getters.entry(ref).attributes.name
-        }
-      }))
+      return [{ value: null, text: '' }]
+        .concat((this.contactRefs)
+          .map(ref => {
+            return {
+              value: ref,
+              text: this.$store.getters.entry(ref).attributes.name
+            }
+          }))
     },
     project () {
       if (!this.id) return null
@@ -142,15 +142,15 @@ export default {
     },
     errorStatus (pointer) {
       let errors = this.findErrors(pointer)
-      return errors.length == 0 ? null: false
+      return errors.length === 0 ? null : false
     },
     findErrors (pointer) {
       return this.errors.filter(error => {
         return error.source.pointer.includes(pointer)
       })
-      .filter((error, index, self) => {
-        return self.findIndex(value => value.detail == error.detail) === index;
-      })
+        .filter((error, index, self) => {
+          return self.findIndex(value => value.detail === error.detail) === index
+        })
     },
     destroy () {
       this.$store.dispatch('destroyProject', this.project).then(() => {

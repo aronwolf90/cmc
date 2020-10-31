@@ -49,7 +49,9 @@ export default {
     },
     options: {
       type: Array,
-      default: []
+      default () {
+        return []
+      }
     },
     id: {
       type: String,
@@ -57,7 +59,9 @@ export default {
     },
     errors: {
       type: Array,
-      default: []
+      default () {
+        return []
+      }
     },
     errorPath: {
       type: String,
@@ -85,12 +89,12 @@ export default {
       return this.errors.filter(error => {
         return error.source.pointer.includes(this.errorPath)
       })
-      .filter((error, index, self) => {
-        return self.findIndex(value => value.detail == error.detail) === index;
-      })
+        .filter((error, index, self) => {
+          return self.findIndex(value => value.detail === error.detail) === index
+        })
     },
     errorStatus () {
-      return this.selectedErrors.length == 0 ? null: false
+      return this.selectedErrors.length === 0 ? null : false
     }
   },
   methods: {

@@ -13,7 +13,6 @@
 <script>
 import TicketBoardBody from 'components/ticket-board/body'
 
-
 export default {
   props: ['projectId'],
   components: {

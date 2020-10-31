@@ -26,9 +26,9 @@ export default {
     }
   },
   props: [
-    "resource",
-    "itemTextFunction",
-    "newText"
+    'resource',
+    'itemTextFunction',
+    'newText'
   ]
 }
 </script>

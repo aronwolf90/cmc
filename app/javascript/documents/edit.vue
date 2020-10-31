@@ -38,9 +38,9 @@ export default {
       }).then(() => {
         this.$router.push('/administration/archive')
       })
-      .catch(({ status, data }) => {
-        this.errors = data.errors
-      })
+        .catch(({ status, data }) => {
+          this.errors = data.errors
+        })
     },
     destroy () {
       return this.$store.dispatch('destroy', this.document).then(result => {

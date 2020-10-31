@@ -53,4 +53,3 @@ export default {
       .arrow
         display: none
 </style>
-

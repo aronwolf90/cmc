@@ -14,9 +14,7 @@
 <script>
 import Draggable from 'vuedraggable'
 import List from './board/list'
-import { Utils } from 'vuex-jsonapi-client'
-import { mapGetters, mapMutations } from 'vuex'
- 
+
 export default {
   components: {
     Draggable,

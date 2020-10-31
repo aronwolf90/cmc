@@ -8,20 +8,20 @@
 </template>
 
 <script>
-  import datePicker from 'vue-bootstrap-datetimepicker';
-   
-  export default {    
-    props: ['value'],
-    data () {
-      return {
-        options: {
-          format: 'DD-MM-YYYY HH:mm',
-          useCurrent: false,
-        }       
+import datePicker from 'vue-bootstrap-datetimepicker'
+
+export default {
+  props: ['value'],
+  data () {
+    return {
+      options: {
+        format: 'DD-MM-YYYY HH:mm',
+        useCurrent: false
       }
-    },
-    components: {
-      datePicker
     }
+  },
+  components: {
+    datePicker
   }
+}
 </script>

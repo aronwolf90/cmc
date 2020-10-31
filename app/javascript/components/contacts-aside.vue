@@ -9,7 +9,7 @@ import LeftAsideItem from 'components/left-aside-item'
 
 export default {
   components: {
-    LeftAsideItem,
+    LeftAsideItem
   }
 }
 </script>

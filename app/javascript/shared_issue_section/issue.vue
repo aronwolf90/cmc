@@ -8,7 +8,7 @@
 
 <script>
 import { Utils } from 'vuex-jsonapi-client'
-import IssuesRecordSection from 'components/issues_record_section'
+import IssuesRecordSection from 'components/issues-record-section'
 
 export default {
   components: {
@@ -20,7 +20,9 @@ export default {
   },
   computed: {
     issue () {
-      return this.$store.getters.entry({type: 'issues', id: this.issueId})
+      return this.$store.getters.entry({
+        type: 'issues', id: this.issueId
+      })
     },
     boardListId () {
       return Utils.relationship(this.issue, 'board-list').id

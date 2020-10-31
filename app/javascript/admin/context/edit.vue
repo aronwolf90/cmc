@@ -181,8 +181,8 @@ export default {
     return {
       form: {
         attributes: {
-          "time-zone": null,
-          "global-board": null
+          'time-zone': null,
+          'global-board': null
         }
       },
       errors: []
@@ -202,7 +202,7 @@ export default {
   methods: {
     submit (event) {
       event.preventDefault()
- 
+
       this.$store.dispatch('updateContext', {
         entry: this.context,
         attributes: this.form.attributes
@@ -214,16 +214,16 @@ export default {
     },
     errorStatus (pointer) {
       let errors = this.findErrors(pointer)
-      return errors.length == 0 ? null: false
+      return errors.length === 0 ? null : false
     },
     findErrors (pointer) {
       return this.errors.filter(error => {
         return error.source.pointer.includes(pointer)
       })
-      .filter((error, index, self) => {
-        return self.findIndex(value => value.detail == error.detail) === index;
-      })
-    },
+        .filter((error, index, self) => {
+          return self.findIndex(value => value.detail === error.detail) === index
+        })
+    }
   }
 }
 </script>

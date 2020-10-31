@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { Utils } from 'vuex-jsonapi-client'
 import MarkdownViewer from 'markdown_viewer'
 
 export default {
@@ -54,7 +53,7 @@ export default {
       if (!this.newCommentData.attributes.content) return
       this.$store.dispatch(`${this.module}/createComment`, this.newCommentData)
       this.$refs.markdownEditor.clear()
-      this.newCommentData.attributes.content = ""
+      this.newCommentData.attributes.content = ''
     }
   }
 }

@@ -51,44 +51,45 @@
 
 <script>
 import { Utils } from 'vuex-jsonapi-client'
- 
+
 export default {
   props: ['eventId'],
   data () {
-   return {
-     saving: false,
-     form: {
-       title: null,
-       date: null,
-       startTime: null,
-       endTime: null,
-       nonAllDay: null,
-       description: null
-     }
-   }
+    return {
+      saving: false,
+      form: {
+        title: null,
+        date: null,
+        startTime: null,
+        endTime: null,
+        nonAllDay: null,
+        description: null
+      }
+    }
   },
   methods: {
-   update () {
-     this.saving = true
-     this.$store.dispatch('updateEvent', {
-       entry: this.event,
-       attributes: {
-         title: this.form.title,
-         'start-time': `${this.form.date} ${this.form.startTime}`,
-         'end-time': this.form.endTime ? `${this.form.date} ${this.form.endTime}`: null,
-         'all-day': !this.form.nonAllDay,
-         'description': this.form.description
-       }
-     }).then(() => {
-       this.saving = false
-       this.$root.$emit('bv::hide::modal', 'update-event-dialog')
-     })
+    update () {
+      this.saving = true
+      this.$store.dispatch('updateEvent', {
+        entry: this.event,
+        attributes: {
+          title: this.form.title,
+          'start-time': `${this.form.date} ${this.form.startTime}`,
+          'end-time': this.form.endTime ? `${this.form.date} ${this.form.endTime}` : null,
+          'all-day': !this.form.nonAllDay,
+          'description': this.form.description
+        }
+      }).then(() => {
+        this.saving = false
+        this.$root.$emit('bv::hide::modal', 'update-event-dialog')
+      })
     },
     destroy () {
       this.$store.dispatch('destroyEvent', this.event)
       this.$root.$emit('bv::hide::modal', 'update-event-dialog')
     },
     jqueryFuncs () {
+      // eslint-disable-next-line no-undef
       setTimeout(() => jqueryFuncs(), 100)
     }
   },
@@ -115,15 +116,15 @@ export default {
   },
   watch: {
     event () {
-      if (this.loadedId == this.eventId) return
+      if (this.loadedId === this.eventId) return
       this.loadedId = this.eventId
-      this.form.title = 
+      this.form.title =
         Utils.attribute(this.event, 'title')
       this.form.nonAllDay =
         !Utils.attribute(this.event, 'all-day')
       this.form.description =
         Utils.attribute(this.event, 'description')
-      this.$set(this.form, "date", this.date)
+      this.$set(this.form, 'date', this.date)
       this.form.startTime = this.startTime
       this.form.endTime = this.endTime
 

@@ -54,8 +54,8 @@ export default {
   },
   computed: {
     projectBoard () {
-      return Utils.attribute(this.projectStatus, "display-as")
-        == "board"
+      return Utils.attribute(this.projectStatus, 'display-as') ===
+        'board'
     },
     title () {
       return Utils.attribute(this.projectStatus, 'name')

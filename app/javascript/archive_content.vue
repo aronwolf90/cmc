@@ -5,7 +5,7 @@
       b-button.pull-right(variant="success", to="/administration/archive/documents/new") New document
     .clearfix
     folder(
-      v-for='folder in rootFolders', 
+      v-for='folder in rootFolders',
       :folder-id='folder.id',
       :key='folder.id'
     )
@@ -14,7 +14,6 @@
 
 <script>
 import Folder from 'archive_content/folder'
-import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   components: {
@@ -24,7 +23,7 @@ export default {
     this.$store.dispatch('getArchiveFolders')
   },
   computed: {
-    rootFolders() {
+    rootFolders () {
       return this.$store.getters.rootFolders
     }
   }
@@ -36,12 +35,12 @@ export default {
   .archive-tree-item
     padding-left: 32px
     position: relative
-    &:before 
+    &:before
       content: ""
       position: absolute
-      border-top: 1px solid #000 
+      border-top: 1px solid #000
       top: 11px
-      width: 8px    
+      width: 8px
       height: 0
       left: 12px
     &:after
@@ -51,7 +50,7 @@ export default {
       border-left: 1px solid #000
       height: 100%
       top: 3px
-    &:last-child::after 
+    &:last-child::after
       height: 8px
 
 </style>

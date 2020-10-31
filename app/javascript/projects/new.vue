@@ -52,15 +52,15 @@ export default {
   methods: {
     submit (form) {
       const payload = { attributes: this.form.attributes }
-      if (this.form.currentTab == 1) {
+      if (this.form.currentTab === 1) {
         payload['relationships'] = {
           contact: {
-            data: { 
+            data: {
               attributes: this.form.relationships.newContact.data.attributes
             }
           }
         }
-      } else if (this.form.currentTab == 2) {
+      } else if (this.form.currentTab === 2) {
         payload['relationships'] = {
           contact: {
             data: Utils.entryToRef(this.form.relationships.existingContact.data)

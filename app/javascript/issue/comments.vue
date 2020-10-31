@@ -40,7 +40,7 @@ export default {
       return this.$store.getters['issues-show/comments']
     },
     issue () {
-      return this.$store.getters.entry({id: this.issueId, type: 'issues'})
+      return this.$store.getters.entry({ id: this.issueId, type: 'issues' })
     },
     currentUser () {
       return this.$store.getters.currentUser
@@ -55,7 +55,7 @@ export default {
         attributes: this.newCommentData.attributes
       })
       this.$refs.markdownEditor.clear()
-      this.newCommentData.attributes.content = ""
+      this.newCommentData.attributes.content = ''
     }
   }
 }

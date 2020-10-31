@@ -31,7 +31,7 @@
       v-else=""
     ) Destroy
     b-modal(id="warning-modal", title="User will only be disabled", header-bg-variant="warning")
-      p 
+      p
         | The user has booked time on tickes, so it can not be removed. It will only
         | disabled if you continue.
       template(v-slot:modal-footer="")
@@ -72,7 +72,7 @@ export default {
   methods: {
     submit (event) {
       event.preventDefault()
- 
+
       this.$store.dispatch('updateUserConfiguration', { user: this.user, payload: this.data }).then(() => {
         location.reload()
       })

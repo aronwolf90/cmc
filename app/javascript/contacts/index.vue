@@ -45,7 +45,7 @@ export default {
     }
   },
   methods: {
-    itemTextFunction(contact) {
+    itemTextFunction (contact) {
       return contact.attributes.name
     }
   }

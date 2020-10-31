@@ -14,7 +14,7 @@
           variant="outline-secondary",
           size="sm",
           type="submit"
-        ) 
+        )
           .fa.fa-spinner.fa-spin(v-if='isSaving')
           template(v-else='') ok
     span(v-else="")
@@ -24,7 +24,7 @@
         @click="internEditMode=true"
       )
           .fa.fa-edit
-      .text(v-if="value") {{ value }} 
+      .text(v-if="value") {{ value }}
       .placeholder(v-else="") {{ placeholder }}
       .clearfix
 </template>
@@ -71,7 +71,7 @@ export default {
 <style lang='sass' scoped>
   .details-string-input
     margin-right: -11px
-    .text 
+    .text
       word-break: break-word;
     .placeholder
       color: rgba(191, 191, 191, 0.87)

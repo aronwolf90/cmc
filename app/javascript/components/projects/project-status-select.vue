@@ -32,7 +32,7 @@ export default {
       return this.$store.getters.entry(projectStatusRef)
     },
     item () {
-      return { 
+      return {
         value: this.projectStatus,
         text: Utils.attribute(this.projectStatus, 'name')
       }

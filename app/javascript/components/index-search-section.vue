@@ -39,13 +39,13 @@ export default {
   ],
   computed: {
     items () {
-      return this.result && this.result.data || []
+      return (this.result && this.result.data) || []
     }
   },
   asyncComputed: {
     result: {
       get () {
-        if (!this.searchText) return 
+        if (!this.searchText) return
         return this.$store.dispatch('get', {
           endpoint: '/api/v1',
           resource: `${this.resource}?query=${this.searchText}`

@@ -11,8 +11,8 @@ import Issue from 'shared_issue_section/issue'
 import { Utils } from 'vuex-jsonapi-client'
 
 export default {
-  data: () => ({ 
-    searchText: '', 
+  data: () => ({
+    searchText: '',
     time: '00:00:00',
     requestIssues: null
   }),
@@ -38,8 +38,8 @@ export default {
   },
   methods: {
     request () {
-      this.$store.dispatch('add', { 
-        url: `/api/v1/issues?query=${this.searchText}`,
+      this.$store.dispatch('add', {
+        url: `/api/v1/issues?query=${this.searchText}`
       }).then(response => {
         this.requestIssues = response.data
       })

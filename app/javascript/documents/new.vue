@@ -20,12 +20,12 @@ export default {
   methods: {
     onSubmit (payload) {
       this.$store.dispatch('createDocument', payload)
-      .then(() => {
-        this.$router.push('/administration/archive')
-      })
-      .catch(({ status, data }) => {
-        this.errors = data.errors
-      })
+        .then(() => {
+          this.$router.push('/administration/archive')
+        })
+        .catch(({ status, data }) => {
+          this.errors = data.errors
+        })
     }
   }
 }

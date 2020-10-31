@@ -1,11 +1,9 @@
 <template lang='pug'>
-.item 
+.item
   a(:href="link") {{ text }}
 </template>
 
 <script>
-import { Utils } from 'vuex-jsonapi-client'
- 
 export default {
   props: [
     'link',

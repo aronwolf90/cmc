@@ -39,12 +39,12 @@ export default {
   },
   mounted () {
     this.$store.dispatch('initIssue', this.issueId).then(() => {
-      this.form = JSON.parse(JSON.stringify(this.$store.getters.entry({type: 'issues', id: this.issueId})))
+      this.form = JSON.parse(JSON.stringify(this.$store.getters.entry({ type: 'issues', id: this.issueId })))
     })
   },
   computed: {
     issue () {
-      return this.$store.getters.entry({type: 'issues', id: this.issueId})
+      return this.$store.getters.entry({ type: 'issues', id: this.issueId })
     }
   },
   methods: {

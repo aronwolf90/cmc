@@ -10,7 +10,7 @@ export default {
   props: ['path', 'notShowActive'],
   computed: {
     isActive () {
-      return !this.notShowActive && this.$route.path == this.path
+      return !this.notShowActive && this.$route.path === this.path
     }
   }
 }

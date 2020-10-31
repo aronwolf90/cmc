@@ -30,7 +30,9 @@ export default {
     },
     errors: {
       type: Array,
-      default: []
+      default () {
+        return []
+      }
     },
     errorPath: {
       type: String,
