@@ -1,11 +1,11 @@
 import createWrapper from '../../helper'
-import BoardIssuesNew from '../../../../app/javascript/board/issues/new'
+import BoardIssuesNew from 'board/issues/new'
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable prefer-promise-reject-errors */
 
-describe('BoardIssuesNew', () => {
+describe('board/issues/new.vue', () => {
   let wrapper = null
 
   afterEach(() => {
@@ -58,9 +58,13 @@ describe('BoardIssuesNew', () => {
 
   it('calls createIssue when submit is clicked', async () => {
     wrapper = createWrapper(BoardIssuesNew, options)
+    wrapper.vm.$router.push('/board_lists/1/issues/new')
+
     wrapper.find('#input-description').vm.$emit('input', 'description')
     wrapper.find('#input-labels').vm.$emit('input', [{ id: '1', type: 'labels' }])
-    wrapper.find('#input-title').vm.$emit('input', 'title')
+    wrapper.find('#input-user').vm.$emit('input', [{ id: '1', type: 'users' }])
+    wrapper.find('#input-title').vm
+      .$emit('input', 'title')
     await wrapper.vm.$nextTick()
     wrapper.find('[type="submit"]').trigger('click')
     await wrapper.vm.$nextTick()
@@ -79,9 +83,13 @@ describe('BoardIssuesNew', () => {
         },
         labels: {
           data: [{ id: '1', type: 'labels' }]
+        },
+        user: {
+          data: [{ id: '1', type: 'users' }]
         }
       }
     })
+    expect(wrapper.vm.$route.path).to.eq('/board_lists')
   })
 
   it('show errors when they are present', async () => {
@@ -94,6 +102,7 @@ describe('BoardIssuesNew', () => {
       })
     )
     wrapper = createWrapper(BoardIssuesNew, options)
+
     wrapper.find('[type="submit"]').trigger('click')
     await wrapper.vm.$nextTick()
     await wrapper.vm.$nextTick()

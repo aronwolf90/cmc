@@ -12,7 +12,8 @@
         type="text"
       )
       b-form-invalid-feedback(
-        v-for="error in findErrors('attributes/name')"
+        v-for="(error, index) in findErrors('attributes/name')",
+        :key="index"
       )
         | {{ error.detail }}
     input-file(
@@ -33,7 +34,8 @@
         :options='folders'
       )
       b-form-invalid-feedback(
-        v-for="error in findErrors('data/relationships/folder')"
+        v-for="(error, index) in findErrors('data/relationships/folder')",
+        :key="index"
       )
         | {{ error.detail }}
 

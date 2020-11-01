@@ -27,9 +27,9 @@ Scenario: Create Issue on global board when all is selected
   Given a test-organization exists with global board lists
   And I am signed in (multitenant)
   When I click on link "Tickets"
+  And I sleep "1" seconds
   And I click on "#project-select" 
   And I click on "[role='option']" with "All"
-  And I sleep "1" seconds
   And I click on ".issues-board-body .fa-plus"
   And I enter "issue name" into input named "Title"
   And I click on "#project-select" 

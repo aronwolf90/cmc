@@ -44,7 +44,19 @@ export default {
       resource: 'users'
     })
   },
+  getUsers (context) {
+    return context.dispatch('get', {
+      endpoint,
+      resource: 'users'
+    })
+  },
   users (context) {
     return this.dispatch('initUsers')
+  },
+  searchUser (context, search) {
+    return context.dispatch('get', {
+      endpoint,
+      resource: `users?query=${search}`
+    })
   }
 }

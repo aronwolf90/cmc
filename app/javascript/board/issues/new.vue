@@ -17,7 +17,15 @@
       :getColor="getColorForLabels",
       error-path="relationships/labels"
     )
+    user-select(
+      id="input-user",
+      label="Assigned to",
+      v-model="form.relationships.user.data",
+      :errors="errors",
+      error-path="relationships/user"
+    )
     project-select(
+      id="project-select"
       label="Project",
       v-model="form.relationships.project.data",
       v-if="isGlobalBoard",
@@ -38,14 +46,16 @@
 import { Utils } from 'vuex-jsonapi-client'
 import TextInput from 'components/form-inputs/text'
 import MultiselectInput from 'components/form-inputs/multiselect'
-import ProjectSelect from 'components/project-select'
+import ProjectSelect from 'components/form-inputs/project-select'
+import UserSelect from 'components/form-inputs/user-select'
 import FormMixin from 'mixins/form'
 
 export default {
   components: {
     TextInput,
     ProjectSelect,
-    MultiselectInput
+    MultiselectInput,
+    UserSelect
   },
   props: ['boardListId'],
   mixins: [FormMixin],
@@ -62,6 +72,9 @@ export default {
           },
           labels: {
             data: []
+          },
+          user: {
+            data: null
           }
         }
       },
@@ -94,10 +107,12 @@ export default {
       this.$store.dispatch('getSelectedProject').then(() => {
         this.form.relationships.project.data = Utils.entryToRef(this.selectedProject)
       })
+      this.$store.dispatch('getUsers')
     },
     submit (event) {
       const project = this.form.relationships.project.data
       const labels = this.form.relationships.labels.data
+      const user = this.form.relationships.user.data
 
       const payload = {
         attributes: this.form.attributes,
@@ -110,6 +125,9 @@ export default {
           },
           labels: {
             data: labels
+          },
+          user: {
+            data: user
           }
         }
       }
