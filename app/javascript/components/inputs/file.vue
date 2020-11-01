@@ -18,7 +18,8 @@
     )
 
     b-form-invalid-feedback(
-      v-for="error in errors"
+      v-for="(error, index) in errors",
+      :key="index"
     )
       | {{ error.detail }}
 </template>

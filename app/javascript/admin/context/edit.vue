@@ -163,7 +163,8 @@
         <option value="Samoa">(GMT+13:00) Samoa</option>
         <option value="Tokelau Is.">(GMT+13:00) Tokelau Is.</option>
       b-form-invalid-feedback(
-        v-for="error in findErrors('attributes/time-zone')"
+        v-for="(error, index) in findErrors('attributes/time-zone')",
+        :key="index"
       )
         | {{ error.detail }}
     b-form-checkbox(

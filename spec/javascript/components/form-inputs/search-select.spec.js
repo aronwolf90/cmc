@@ -16,28 +16,26 @@ describe('DetailsStringInput', () => {
 
   it('renders options', () => {
     const propsData = {
-      options: [{ value: '1', text: 'Test option' }]
+      options: [{ id: '1', type: 'users' }]
     }
     const wrapper = factory(propsData)
     const vSelect = wrapper.find(VSelect)
 
-    expect(vSelect.vm.options).to.eql([{ code: '1', label: 'Test option' }])
+    expect(vSelect.vm.options).to.eql([{ id: '1', type: 'users' }])
   })
 
-  it('select value', (done) => {
+  it('select value', async () => {
     const propsData = {
-      value: '1',
-      options: [{ value: '1', text: 'Test' }]
+      value: { id: '1', type: 'users' },
+      options: [{ id: '1', type: 'users' }]
     }
     const wrapper = factory(propsData)
     const vSelect = wrapper.find(VSelect)
 
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        expect(vSelect.vm.value).to.eql({ code: '1', label: 'Test' })
-        done()
-      })
-    })
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+
+    expect(vSelect.vm.value).to.eql({ id: '1', type: 'users' })
   })
 
   it('renders label', () => {

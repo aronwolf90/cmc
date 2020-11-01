@@ -8,9 +8,10 @@
     )
       v-select(
         @input='input',
-        :value='currentValue',
-        :options='selectOptions',
+        :value='value',
+        :options='options',
         @search="search",
+        :getOptionLabel="getOptionLabel",
         :id="id",
       )
       b-form-invalid-feedback(
@@ -22,8 +23,8 @@
     template(v-else="")
       v-select(
         @input="input",
-        :value="currentValue",
-        :options='selectOptions',
+        :value="value",
+        :options='options',
         @search="search",
       )
       b-form-invalid-feedback(
@@ -40,7 +41,7 @@ import VSelect from 'vue-select'
 export default {
   props: {
     value: {
-      type: String,
+      type: Object,
       default: null
     },
     label: {
@@ -66,25 +67,15 @@ export default {
     errorPath: {
       type: String,
       default: ''
+    },
+    getOptionLabel: {
+      type: Function
     }
   },
   components: {
     VSelect
   },
   computed: {
-    currentValue () {
-      return this.selectOptions.find(option => {
-        return option.code === this.value
-      })
-    },
-    selectOptions () {
-      return this.options.map(option => {
-        return {
-          code: option.value,
-          label: option.text
-        }
-      })
-    },
     selectedErrors () {
       return this.errors.filter(error => {
         return error.source.pointer.includes(this.errorPath)
@@ -102,7 +93,7 @@ export default {
       this.$emit('search', search, loading)
     },
     input (value) {
-      this.$emit('input', value.code)
+      this.$emit('input', value)
     }
   }
 }

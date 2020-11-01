@@ -12,8 +12,9 @@
         type="text"
       )
       b-form-invalid-feedback(
-        v-for="error in findErrors('attributes/name')",
-        :state="errorStatus('attributes/name')"
+        v-for="(error, index) in findErrors('attributes/name')",
+        :state="errorStatus('attributes/name')",
+        :key="index"
       )
         | {{ error.detail }}
     b-form-group(
@@ -29,8 +30,9 @@
         type="text"
       )
       b-form-invalid-feedback(
-        v-for="error in findErrors('attributes/name')",
-        :state="errorStatus('attributes/name')"
+        v-for="(error, index) in findErrors('attributes/name')",
+        :state="errorStatus('attributes/name')",
+        :key="index"
       )
         | {{ error.detail }}
     markdown-editor(
@@ -82,8 +84,9 @@
             type="text"
           )
           b-form-invalid-feedback(
-            v-for="error in findErrors('relationships/contact')",
-            :state="errorStatus('relationships/contact')"
+            v-for="(error, index) in findErrors('relationships/contact')",
+            :state="errorStatus('relationships/contact')",
+            :key="index"
           )
             | {{ error.detail }}
     br

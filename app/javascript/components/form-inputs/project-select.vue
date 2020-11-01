@@ -3,11 +3,12 @@
     :label="label",
     @input="input",
     @search="fetchOptions",
-    :value="(value || {}).id",
+    :value="value",
     :options="options",
-    id="project-select",
+    :id="id",
     :errors="errors",
-    :error-path="errorPath"
+    :error-path="errorPath",
+    :getOptionLabel="getOptionLabel"
   )
 </template>
 
@@ -20,6 +21,7 @@ export default {
     SearchSelect
   },
   props: {
+    id: String,
     value: {
       type: Object,
       default: null
@@ -41,23 +43,23 @@ export default {
   },
   computed: {
     options () {
-      return (((this.$store || {}).getters || {}).projects || []).map(project => {
-        return {
-          value: project.id,
-          text: Utils.attribute(project, 'name')
-        }
-      })
+      return Utils.entryArrayToRef(this.$store.getters.collection('projects'))
     }
   },
   methods: {
     input (value) {
-      this.$emit('input', { id: value, type: 'projects' })
+      this.$emit('input', value)
     },
     fetchOptions (search, loading) {
       loading(true)
       this.$store.dispatch('searchProject', search).then(() => {
         loading(false)
       })
+    },
+    getOptionLabel (projectRef) {
+      console.log('hiiii')
+      const project = this.$store.getters.entry(projectRef)
+      return `${Utils.attribute(project, 'name')}`
     }
   }
 }

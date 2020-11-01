@@ -21,7 +21,7 @@
 <script>
 import { Utils } from 'vuex-jsonapi-client'
 import FormTextInput from 'components/form-inputs/text'
-import ProjectSelect from 'components/project-select'
+import ProjectSelect from 'components/form-inputs/project-select'
 
 export default {
   props: ['errors', 'value', 'projectRefs'],

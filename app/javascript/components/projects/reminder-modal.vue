@@ -19,8 +19,9 @@
           type="text"
         )
         b-form-invalid-feedback(
-          v-for="error in findErrors('attributes/title')",
-          :state="errorStatus('attributes/title')"
+          v-for="(error, index) in findErrors('attributes/title')",
+          :state="errorStatus('attributes/title')",
+          :key="index"
         )
           | {{ error.detail }}
       b-form-group(
