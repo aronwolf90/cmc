@@ -52,6 +52,12 @@ Feature: API: create an issue
               "id": "1",
               "type": "users"
             }
+          },
+          "board-list": {
+            "data": {
+              "id": "4",
+              "type": "board-lists"
+            }
           }
         },
         "links": {

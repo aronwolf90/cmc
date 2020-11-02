@@ -8,7 +8,8 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
       :issue,
       due_at: "10-10-2120",
       deadline_at: "10-10-2120",
-      created_by: User.new(id: 1)
+      created_by: User.new(id: 1),
+      board_list: BoardList.new(id: 1)
     )
   end
   let(:user) { build_stubbed(:user) }
@@ -37,6 +38,12 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
           data: {
             id: "1",
             type: "users"
+          }
+        },
+        "board-list": {
+          data: {
+            id: "1",
+            type: "board-lists"
           }
         }
       },

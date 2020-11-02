@@ -18,11 +18,23 @@ Scenario: Put an valid issue using json in PUT body
           "deadline-at": "12-10-2020 00:00"
         },
         "relationships": {
+          "user":{ 
+            "data":{ 
+              "id":"2",
+              "type":"users"
+            }
+          },
           "labels": {
             "data": [{
               "id": 1,
               "type": "labels"
             }]
+          },
+          "board-list": {
+            "data": {
+              "id": "5",
+              "type": "board-lists"
+            }
           }
         }
       }
@@ -48,7 +60,7 @@ Scenario: Put an valid issue using json in PUT body
         "relationships":{ 
           "user":{ 
             "data":{ 
-              "id":"1",
+              "id":"2",
               "type":"users"
             }
           },
@@ -60,6 +72,12 @@ Scenario: Put an valid issue using json in PUT body
           },
           "created-by": {
             "data": null
+          },
+          "board-list": {
+            "data": {
+              "id": "5",
+              "type": "board-lists"
+            }
           }
         },
         "links":{ 
