@@ -91,10 +91,12 @@ describe('Store.Modules.ProjectsShow', () => {
       })
     })
     describe('.searchForContact', () => {
-      it('calls dispatch.searchForContact', () => {
+      it('calls dispatch.searchForContact', (done) => {
         ProjectsShow.actions.searchForContact({
           dispatch (method, payload) {
             expect(method).to.eq('searchContacts')
+            done()
+            return Promise.resolve([])
           },
           commit () {}
         },

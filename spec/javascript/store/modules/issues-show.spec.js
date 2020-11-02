@@ -11,32 +11,58 @@ describe('Store.Modules.IssuesShow', () => {
       content: 'Content'
     }
   }
+  const boardList = {
+    id: 1,
+    type: 'board-lists',
+    attributes: {
+      name: 'In progress'
+    }
+  }
 
   describe('.getters', () => {
-    describe('.comments', () => {
-      it('transform boardListsRefs to a boardList list', () => {
-        const result = IssuesShow.getters.comments({
-          commentRefs: [{ id: 1, type: 'comments' }]
-        },
-        {},
-        {},
-        {
-          comment () { return comment }
-        })
-
-        expect(result).to.eql([comment])
+    it('.comments', () => {
+      const result = IssuesShow.getters.comments({
+        commentRefs: [{ id: 1, type: 'comments' }]
+      }, {}, {}, {
+        comment () { return comment }
       })
+
+      expect(result).to.eql([comment])
+    })
+    it('.boardLists', () => {
+      const entry = sandbox.stub()
+
+      entry.withArgs({ id: 1, type: 'board-lists' }).returns(boardList)
+      const result = IssuesShow.getters.boardLists({
+        boardListRefs: [{ id: 1, type: 'board-lists' }]
+      }, {}, {}, {
+        entry
+      })
+
+      expect(result).to.eql([boardList])
     })
   })
   describe('.actions', () => {
-    describe('.fetch', () => {
-      IssuesShow.actions.fetch({
-        dispatch (method, id) {
-          if (id !== 1 && method !== 'getIssueComments') return
-          return Promise.resolve({ data: [comment] })
-        },
-        commit () {}
-      })
+    it('.fetch', async () => {
+      const dispatch = sandbox.stub()
+      const commit = sandbox.stub()
+
+      dispatch.returns(Promise.resolve())
+      dispatch.withArgs('getIssueComments', '1').returns(Promise.resolve({ data: [comment] }))
+      dispatch.withArgs('getBoardLists').returns(Promise.resolve({ data: [boardList] }))
+      await IssuesShow.actions.fetch({
+        dispatch,
+        commit
+      }, '1')
+
+      expect(dispatch).to.have.been
+        .calledWith('get', `issues/1?include=board_list`, { root: true })
+      expect(commit).to.have.been.calledWith('issueId', '1')
+      expect(dispatch).to.have.been.calledWith('getIssueComments', '1')
+      expect(commit).to.have.been.calledWith('comments', [comment])
+      expect(dispatch).to.have.been.calledWith('getLabels')
+      expect(dispatch).to.have.been.calledWith('getBoardLists')
+      expect(commit).to.have.been.calledWith('boardLists', [boardList])
     })
     describe('.createComment', () => {
       IssuesShow.actions.createComment({
@@ -53,10 +79,19 @@ describe('Store.Modules.IssuesShow', () => {
     })
   })
   describe('.mutations', () => {
-    let state = {}
-    IssuesShow.mutations.comments(state, [comment])
-    expect(state).to.eql({
-      commentRefs: [ { id: 1, type: 'comments' } ]
+    it('.comments', () => {
+      let state = {}
+      IssuesShow.mutations.comments(state, [comment])
+      expect(state).to.eql({
+        commentRefs: [ { id: 1, type: 'comments' } ]
+      })
+    })
+    it('.boardLists', () => {
+      let state = {}
+      IssuesShow.mutations.boardLists(state, [boardList])
+      expect(state).to.eql({
+        boardListRefs: [ { id: 1, type: 'board-lists' } ]
+      })
     })
   })
 })

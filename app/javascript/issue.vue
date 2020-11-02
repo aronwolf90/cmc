@@ -7,18 +7,19 @@
       br
     right-aside
       assigen(:issue-id='id')
+      board-list(:issue-ref='issueRef')
       complexity(:issue-id='id')
       due-at(:issue-id='id')
       deadline-at(:issue-id='id')
       labels(:issue-ref='issueRef')
-      CreatedBy(:issue-ref='issueRef')
+      created-by(:issue-ref='issueRef')
 </template>
 
 <script>
 import RightAside from 'components/right_aside'
-
-import SpentTime from 'issue/spent_time'
-import Assigen from 'issue/assigen'
+import SpentTime from 'components/ticket/spent-time'
+import Assigen from 'components/ticket/assigen'
+import BoardList from 'components/ticket/board-list'
 import Complexity from 'components/ticket/complexity'
 import Comments from 'components/comments'
 import ShowContainer from 'components/show-container'
@@ -32,9 +33,10 @@ export default {
   props: ['id'],
   components: {
     SpentTime,
-    'assigen': Assigen,
-    'comments': Comments,
-    'complexity': Complexity,
+    BoardList,
+    Assigen,
+    Comments,
+    Complexity,
     RightAside,
     ShowContainer,
     ShowBody,
@@ -44,7 +46,6 @@ export default {
     CreatedBy
   },
   created () {
-    this.$store.dispatch('initIssue', this.id)
     this.$store.dispatch('issuesShow/fetch', this.id)
   },
   computed: {
@@ -57,6 +58,3 @@ export default {
   }
 }
 </script>
-
-<style lang='sass' scoped>
-</style>

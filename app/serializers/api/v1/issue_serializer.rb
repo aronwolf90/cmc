@@ -14,6 +14,7 @@ module Api
 
       belongs_to :created_by, serializer: UserSerializer
       belongs_to :user, serializer: UserSerializer
+      belongs_to :board_list, serializer: BoardListSerializer
       has_many :labels, serializer: LabelSerializer
 
       link(:self) { api_v1_issue_path(object) }
