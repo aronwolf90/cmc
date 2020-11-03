@@ -47,13 +47,14 @@ export default {
       let nextSlice = this.slizeSize + 1
       let blob = file.slice(0, nextSlice, file.type)
       let that = this
-      let onUploadProgress = (progressEvent) => {
-        this.loaded = progressEvent.loaded
-      }
 
       formData.append('data[file]', blob, file.name)
       if (nextSlice <= file.size) {
         formData.append('data[not_finished]', true)
+      }
+
+      let onUploadProgress = (progressEvent) => {
+        this.loaded = (progressEvent.loaded / progressEvent.total) * blob.size
       }
 
       this.fileSize = file.size
@@ -82,7 +83,7 @@ export default {
       var blob = file.slice(start, nextSlice)
       let that = this
       let onUploadProgress = (progressEvent) => {
-        this.loaded = lastChunckSize + progressEvent.loaded
+        this.loaded = lastChunckSize + (progressEvent.loaded / progressEvent.total) * blob.size
       }
 
       formData.append('data[file]', blob)
