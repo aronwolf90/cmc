@@ -49,7 +49,11 @@ module Issues
 
     private
       def issue_to_order
-        board_list&.issues&.sort_by { |issue| [issue.ordinal_number, issue.id] }.to_a.reject do |issue|
+        issues = board_list&.issues&.sort_by do |issue|
+          [issue.send(key), issue.id]
+        end.to_a
+
+        issues.reject do |issue|
           issue == model
         end
       end

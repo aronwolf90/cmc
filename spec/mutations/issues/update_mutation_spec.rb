@@ -57,15 +57,33 @@ RSpec.describe Issues::UpdateMutation do
     end
   end
 
-  context "when the board_list is a global one"  do
+  context "when the board_list is a global one and global_ordinal_number == ordinal_number"  do
     before { allow(Organization).to receive(:global_board?).and_return true }
 
     let(:params_board_list_id) { global_board_list.id }
 
-    it "set ordinal_number on project specific board" do
+    it "set global_ordinal_number correctly" do
       expect(subject.reload.global_board_list.issues.order(:id))
         .to eq([issue1, issue2, subject])
       expect(subject.global_ordinal_number).to eq(3)
+    end
+  end
+
+  context "when global_board?==true and global_ordinal_number != ordinal_number"  do
+    let(:params_board_list_id) { global_board_list.id }
+
+    before do
+      allow(Organization).to receive(:global_board?).and_return true
+      issue1.update!(ordinal_number: 2)
+      issue2.update!(ordinal_number: 1)
+      model.update!(ordinal_number: 0)
+    end
+
+    it "set global_ordinal_number correctly" do
+      subject
+      expect(issue1.reload.global_ordinal_number).to eq(0)
+      expect(issue2.reload.global_ordinal_number).to eq(1)
+      expect(model.reload.global_ordinal_number).to eq(3)
     end
   end
 
