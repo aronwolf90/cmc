@@ -45,3 +45,14 @@ Scenario: Change category
   Then the element "#category .text" contain the text "subcategory 1"
   And I reload the page
   Then the element "#category .text" contain the text "subcategory 1"
+
+@javascript
+Scenario: Destroy wiki page
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Wiki"
+  And I click on link "wiki page title"
+  And I click on ".fa-trash"
+  And I click on button "YES"
+  Then the page contain the text "New wikicategory"
+  Then the page does not contain the text "wiki page title"

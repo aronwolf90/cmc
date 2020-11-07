@@ -66,6 +66,8 @@ import 'bootstrap'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import 'stylesheets/administration.sass'
+import WikiPageShow from 'wiki_page/show'
+import WikiPageEdit from 'wiki_page/edit'
 
 const $ = jQuery
 window.jQuery = jQuery
@@ -364,7 +366,19 @@ const router = new Router({
       path: '/administration/wiki/pages/:wikiPageId',
       component: WikiPage,
       props: true,
-      meta: { aside: 'wiki' }
+      meta: { aside: 'wiki' },
+      children: [
+        {
+          path: '',
+          component: WikiPageShow,
+          meta: { aside: 'global' }
+        },
+        {
+          path: 'edit',
+          component: WikiPageEdit,
+          meta: { aside: 'global' }
+        }
+      ]
     },
     {
       path: '/administration/wiki/categories/new',

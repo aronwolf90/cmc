@@ -67,7 +67,7 @@ export default {
         attributes: this.form.attributes
       }).then(() => {
         this.isSaving = false
-        this.$router.replace('/')
+        this.$router.replace('.')
       })
     },
     setContent (data) {
@@ -83,6 +83,3 @@ export default {
   }
 }
 </script>
-
-<style lang='sass' scoped>
-</style>

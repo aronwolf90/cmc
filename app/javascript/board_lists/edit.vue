@@ -3,25 +3,27 @@
     :errors='errors',
     v-model="form",
     :projectRefs='projectRefs',
-    @submit='submit'
+    @submit='submit',
+    v-if="boardList"
   )
     b-button(type="submit", variant="success") Update board list
     b-btn-group.pull-right
-      b-button(
-        v-if="boardList.meta.permissions.destroy",
-        variant="danger",
-        @click="destroy"
+      form-btn-destroy(
+        :entry-ref="boardList",
+        @destroy="destroy"
       ) Destroy
       b-button(variant="secondary", to="..") Cancel
 </template>
 
 <script>
 import BoardListForm from 'components/board-lists/form'
+import FormBtnDestroy from 'components/form-btn-destroy'
 import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   components: {
-    BoardListForm
+    BoardListForm,
+    FormBtnDestroy
   },
   props: ['id'],
   data () {
