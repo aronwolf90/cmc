@@ -1,14 +1,18 @@
 <template lang='pug'>
   .show(v-if='wikiPage')
-    .row
-      .col-sm-10
-        h4 {{ title }}
-      .col-sm-2
-        .btn-group.float-right
-          b-button(variant='outline-dark', size='sm', to='/edit')
-            .fa.fa-edit
-          .btn.btn-sm.btn-outline-danger(v-on:click='deleteWikiPage($event)')
-            .fa.fa-trash
+    .header
+      .btn-toolbox.float-right
+        b-button.mr-1(
+          variant='outline-dark',
+          size='sm',
+          :to="`${wikiPageId}/edit`"
+        )
+          .fa.fa-edit
+        show-btn-destroy(
+          @destroy="deleteWikiPage",
+          :entry-ref="wikiPage",
+        )
+      h4 {{ title }}
     .body
       markdown-viewer(:value='content')
 </template>
@@ -16,11 +20,13 @@
 <script>
 import { Utils } from 'vuex-jsonapi-client'
 import MarkdownViewer from '../markdown_viewer'
+import ShowBtnDestroy from 'components/show-btn-destroy'
 
 export default {
   props: ['wikiPageId'],
   components: {
-    'markdown-viewer': MarkdownViewer
+    MarkdownViewer,
+    ShowBtnDestroy
   },
   mounted () {
     this.$store.dispatch('initWikiPage', this.wikiPageId)
@@ -37,12 +43,9 @@ export default {
     }
   },
   methods: {
-    deleteWikiPage (event) {
-      this.$store.dispatch('destroy', {
-        entry: this.wikiPage
-      }).then(() => {
-        location.replace('/administration/wiki')
-      })
+    async deleteWikiPage () {
+      await this.$store.dispatch('destroy', this.wikiPage)
+      this.$router.push('/administration/wiki')
     }
   }
 }

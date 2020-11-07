@@ -1,20 +1,21 @@
 <template lang='pug'>
   b-button(
-    variant="outline-danger",
-    size="sm",
+    :variant="variant",
+    :size="size",
     v-if="canDestroy",
-    @click="$emit('destroy')"
+    @click="showConfirmDialog"
   )
-    i.fa.fa-trash
+    slot
 </template>
 
 <script>
 
 export default {
   props: [
-    'basePath',
     'entryId',
-    'entryType'
+    'entryType',
+    'variant',
+    'size'
   ],
   computed: {
     link () {
@@ -31,6 +32,21 @@ export default {
              this.entry.meta &&
              this.entry.meta.permissions &&
              this.entry.meta.permissions.destroy
+    }
+  },
+  methods: {
+    async showConfirmDialog () {
+      const confirmResult = await this.$bvModal.msgBoxConfirm('Do you really want to delete it?', {
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'danger',
+        okTitle: 'YES',
+        cancelTitle: 'NO',
+        footerClass: 'p-2',
+        hideHeaderClose: false,
+        centered: true
+      })
+      if (confirmResult) this.$emit('destroy')
     }
   }
 }

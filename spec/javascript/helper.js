@@ -10,7 +10,7 @@ localVue.use(Vuex)
 localVue.use(BootstrapVue)
 localVue.use(VueRouter)
 
-export default (element, options) => {
+export default (element, options = {}) => {
   const store = options['store']
   delete options.store
   return mount(element, {

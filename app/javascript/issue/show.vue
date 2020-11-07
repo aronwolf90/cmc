@@ -1,14 +1,15 @@
 <template lang='pug'>
   .show(v-if='issue')
-    .row
-      .col-sm-10
-        h4 {{ title }}
-      .col-sm-2
-        .btn-group.float-right
-          b-button(variant='outline-dark', size='sm', :to='`${issueId}/edit`')
-            .fa.fa-edit
-          .btn.btn-sm.btn-outline-danger(v-on:click='deleteIssue($event)')
-            .fa.fa-trash
+    .header
+      .btn-toolbar.float-right
+        b-button.mr-1(variant='outline-dark', size='sm', :to='`${issueId}/edit`')
+          .fa.fa-edit
+        show-btn-destroy(
+          :entry-ref="issue",
+          @destroy='deleteIssue'
+        )
+          .fa.fa-trash
+      h4 {{ title }}
     .body
       markdown-viewer(:value='description')
 </template>
@@ -16,11 +17,13 @@
 <script>
 import { Utils } from 'vuex-jsonapi-client'
 import MarkdownViewer from '../markdown_viewer'
+import ShowBtnDestroy from 'components/show-btn-destroy'
 
 export default {
   props: ['issueId'],
   components: {
-    'markdown-viewer': MarkdownViewer
+    MarkdownViewer,
+    ShowBtnDestroy
   },
   mounted () {
     this.$store.dispatch('initIssue', this.issueId)

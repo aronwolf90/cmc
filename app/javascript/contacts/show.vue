@@ -4,16 +4,15 @@
       .d-md-flex.flex-row
         .right.ml-md-4.order-1.w-100
           .pull-right
-            .btn-group
-              btn-edit(
+            b-button-toolbar
+              btn-edit.mr-1(
                 base-path="/administration/contacts",
                 :entry-type="result.data.type",
                 :entry-id="result.data.id"
               )
-              btn-destroy(
+              show-btn-destroy(
                 @destroy="destroyContact",
-                :entry-type="result.data.type",
-                :entry-id="result.data.id"
+                :entry-ref="result.data",
               )
           h4 {{ name }}
           .description {{ description }}
@@ -32,14 +31,14 @@
 
 <script>
 import BtnEdit from '../components/btn-edit'
-import BtnDestroy from '../components/btn-destroy'
+import ShowBtnDestroy from 'components/show-btn-destroy'
 import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   props: ['contactId'],
   components: {
     BtnEdit,
-    BtnDestroy
+    ShowBtnDestroy
   },
   mounted () {
     this.$store.dispatch('contact', this.contactId)

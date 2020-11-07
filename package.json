@@ -34,7 +34,6 @@
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
-    "postcss-smart-import": "^0.7.6",
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/plugin-transform-async-to-generator": "^7.12.1",
@@ -60,6 +59,7 @@
     "mocha-webpack": "^1.0.1",
     "node-sass": "^4.13.1",
     "nyc": "^11.9.0",
+    "postcss-smart-import": "^0.7.6",
     "pug": "^2.0.4",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",

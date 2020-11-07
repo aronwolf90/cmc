@@ -42,8 +42,8 @@ describe('Show', () => {
     })
 
     it('call visit on click on the destroy btn', (done) => {
-      $subject.find('.btn.btn-sm.btn-outline-danger')
-        .trigger('click')
+      $subject.find('show-btn-destroy-stub')
+        .vm.$emit('destroy')
       $subject.vm.$nextTick(() => {
         $subject.vm.$nextTick(() => {
           expect($subject.vm.$route.path)

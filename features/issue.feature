@@ -75,7 +75,9 @@ Scenario: Delete issue
   And I am signed in (multitenant)
   When I click on link "Test issue 1"
   And I click on ".fa-trash"
-  Then the element "#side-body" contain the text "Backlog"
+  When I click on button "YES"
+  Then the page does not contain the element "#list-issue-2"
+  And the page does not contain the element "#list-issue-1"
 
 @javascript
 Scenario: Change user

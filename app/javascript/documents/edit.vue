@@ -10,17 +10,22 @@
     )
       b-button(type="submit", variant="success") Update document
       b-button-group.pull-right
-        b-button.pull-right(variant="danger", @click="destroy") Destroy
+        form-btn-destroy(
+          @destroy="destroy",
+          :entry-ref="document"
+        )
         b-button(to='/administration/archive') Cancel
 </template>
 
 <script>
 import DocumentForm from './form'
+import FormBtnDestroy from 'components/form-btn-destroy'
 import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   components: {
-    DocumentForm
+    DocumentForm,
+    FormBtnDestroy
   },
   props: [
     'documentId'

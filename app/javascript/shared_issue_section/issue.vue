@@ -1,5 +1,5 @@
 <template lang='pug'>
-  a.issue.row(v-bind:href='showPath')
+  a.issue.row(v-bind:href='showPath', v-if="issue")
     .col-10.text-section
       | {{ issue.attributes.title }}
     .col-2
@@ -14,7 +14,9 @@ export default {
   components: {
     'issues-record-section': IssuesRecordSection
   },
-  props: { issueId: { required: true } },
+  props: {
+    issueId: { required: true }
+  },
   created () {
     this.$store.dispatch('initCurrentIssue')
   },
