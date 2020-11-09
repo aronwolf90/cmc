@@ -10,7 +10,10 @@ module Api::V1
     public :index, :show, :create, :update, :destroy
 
     private def query
-      Api::V1::Projects::IndexQuery.call(query: params[:query])
+      Api::V1::Projects::IndexQuery.call(
+        query: params[:query],
+        includes: params[:include]
+      )
     end
   end
 end

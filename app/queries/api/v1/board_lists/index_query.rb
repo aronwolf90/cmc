@@ -4,11 +4,12 @@ module Api
   module V1
     module BoardLists
       class IndexQuery < ApplicationQuery
-        attr_reader :project_id, :issues_count
+        attr_reader :project_id, :issues_count, :includes
 
-        def initialize(project_id: nil, issues_count: 16)
+        def initialize(project_id: nil, issues_count: 16, includes: nil)
           @project_id = project_id
           @issues_count = issues_count
+          @includes = includes
         end
 
         def call
@@ -17,7 +18,14 @@ module Api
             project_id: project_id,
             count: issues_count
           )
-          Api::V1::BoardLists::IndexPreloader.call(collection, issues: issues)
+          issues_includes = DotStrings::SubPartExtractor.call(
+            includes,
+            "issues"
+          )
+          Api::V1::BoardLists::IndexPreloader.call(
+            collection,
+            issues: issues.includes(DotStrings::HashConverter.call(issues_includes))
+          )
         end
 
         def collection

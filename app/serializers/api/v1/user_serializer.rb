@@ -13,10 +13,10 @@ module Api
       attribute :records_count
       attribute :avatar_url
 
-      belongs_to :selected_project, serializer: ProjectSerializer
+      belongs_to :selected_project, serializer: ProjectSerializer, type: :projects
 
       has_many :issues, serializer: IssueSerializer
-      has_one :current_record, serializer: RecordSerializer
+      has_one :current_record, serializer: RecordSerializer, type: :records
 
       link(:self) { api_v1_user_path(object) }
 

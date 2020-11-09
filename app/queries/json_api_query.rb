@@ -12,17 +12,18 @@ class JsonApiQuery < ApplicationQuery
   def initialize(relation, sort: [], include: [], filter: {}, query: nil, **)
     @relation = relation
     @sort_options = sort
-    @include_options = include
+    @include_options = include.is_a?(Array) ? include.join(",") : include.to_s
     @filter_params = filter
     @query = query
   end
 
   def call
-    collection = relation
-                 .where(filter_options)
-                 .order(sort_options)
-                 .ordered
-                 .includes(include_options)
+    collection =
+      relation
+      .where(filter_options)
+      .order(sort_options)
+      .ordered
+      .includes(DotStrings::HashConverter.call(include_options.split(",")))
 
     if query.present?
       collection.search(query)
