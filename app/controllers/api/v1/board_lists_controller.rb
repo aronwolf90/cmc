@@ -13,7 +13,8 @@ module Api
 
       def index
         collection = collection_query.(
-          project_id: params.dig(:filter, :project_id)
+          project_id: params.dig(:filter, :project_id),
+          includes: includes
         )
 
         render_json_api json: collection

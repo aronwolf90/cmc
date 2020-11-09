@@ -7,7 +7,7 @@ module Api
       attributes :description
 
       belongs_to :project_status, serializer: ProjectStatusSerializer
-      belongs_to :main_responsable, serializer: UserSerializer
+      belongs_to :main_responsable, serializer: UserSerializer, type: :users
       has_one :folder, serializer: FolderSerializer do
         link(:self) do
           next if object.folder.nil?

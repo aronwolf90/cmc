@@ -22,10 +22,16 @@ RSpec.describe Api::V1::ProjectCommentSerializer, type: :serializer do
         },
         relationships: {
           project: {
-            data: nil
+            data: {
+              id: "1",
+              type: "projects"
+            }
           },
           user: {
-            data: nil
+            data: {
+              id: "1",
+              type: "users"
+            }
           }
         }
       }

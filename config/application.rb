@@ -6,6 +6,9 @@ require "rails/all"
 require_relative "../lib/apartment_middleware"
 require_relative "../lib/paginator"
 require_relative "../lib/google_calender_client"
+require_relative "../lib/dot_strings/base"
+require_relative "../lib/dot_strings/hash_converter"
+require_relative "../lib/dot_strings/sub_part_extractor"
 
 # Require the gems listed in Gemfile, including any gems
 # you"ve limited to :test, :development, or :production.

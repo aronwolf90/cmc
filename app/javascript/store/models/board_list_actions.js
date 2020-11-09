@@ -23,9 +23,9 @@ export default {
       }
       let resource = null
       if (projectId) {
-        resource = `board_lists?filter[project_id]=${projectId}&include[]=issues,issues.labels,issues.user`
+        resource = `board_lists?filter[project_id]=${projectId}&include=issues,issues.labels,issues.user`
       } else {
-        resource = `board_lists?&include[]=issues,issues.labels`
+        resource = `board_lists?&include=issues,issues.labels`
       }
       return context.dispatch('get', {
         endpoint,

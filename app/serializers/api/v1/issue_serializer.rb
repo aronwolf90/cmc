@@ -12,7 +12,7 @@ module Api
         :status
       )
 
-      belongs_to :created_by, serializer: UserSerializer
+      belongs_to :created_by, serializer: UserSerializer, type: :users
       belongs_to :user, serializer: UserSerializer
       belongs_to :board_list, serializer: BoardListSerializer
       has_many :labels, serializer: LabelSerializer
@@ -28,7 +28,7 @@ module Api
       end
 
       def self.eager_load_options
-        %i[user]
+        %i[user created_by labels]
       end
     end
   end

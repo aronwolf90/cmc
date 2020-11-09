@@ -77,7 +77,7 @@ module Api
         def query
           JsonApiQuery.call(
             model_class.all.includes(serializer.eager_load_options),
-            params.to_unsafe_h.deep_symbolize_keys
+            params.to_unsafe_h.deep_symbolize_keys.merge(include: includes)
           )
         end
 
@@ -95,6 +95,11 @@ module Api
           else
             params[:id]
           end
+        end
+
+        def includes
+          includes = params[:include].is_a?(Array) ? params[:include].join(",") : params[:include].to_s
+          includes.split(",")
         end
     end
   end

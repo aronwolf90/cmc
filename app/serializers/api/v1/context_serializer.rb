@@ -3,7 +3,7 @@
 module Api
   module V1
     class ContextSerializer < ApplicationSerializer
-      belongs_to :current_user, serializer: UserSerializer
+      belongs_to :current_user, serializer: UserSerializer, type: :users
       attributes(
         :premium,
         :user_count,
