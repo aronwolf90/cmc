@@ -78,4 +78,3 @@ Scenario: search and change selected project
   And I enter "project 12" into input "#project-select input"
   And I click on "[role='option']" with "Test project 12"
   Then the page does not contain the element ".list-issue"
-

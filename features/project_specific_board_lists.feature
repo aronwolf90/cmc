@@ -2,7 +2,7 @@ Feature: Board lists
 
 @javascript
 Scenario: create board list
-  Given a test-organization exists
+  Given a test-organization exists with project specific board lists
   And I am signed in (multitenant)
   And I click on link "Tickets"
   And I click on ".fa-plus"
@@ -14,7 +14,7 @@ Scenario: create board list
 
 @javascript
 Scenario: edit board list
-  Given a test-organization exists
+  Given a test-organization exists with project specific board lists
   And I am signed in (multitenant)
   When I click on link "Tickets"
   And I click on ".column:first-of-type .fa-edit"
@@ -25,7 +25,7 @@ Scenario: edit board list
 
 @javascript
 Scenario: change board lists order
-  Given a test-organization exists
+  Given a test-organization exists with project specific board lists
   And I am signed in (multitenant)
   When I click on link "Tickets"
   Then the page contain the text "Test project"
@@ -36,7 +36,7 @@ Scenario: change board lists order
 
 @javascript
 Scenario: change issues order
-  Given a test-organization exists
+  Given a test-organization exists with project specific board lists
   And I am signed in (multitenant)
   When I click on link "Tickets"
   Then the page contain the text "Test project"
@@ -47,7 +47,7 @@ Scenario: change issues order
 
 @javascript
 Scenario: move issue to other board
-  Given a test-organization exists
+  Given a test-organization exists with project specific board lists
   And I am signed in (multitenant)
   When I click on link "Tickets"
   Then the element "#side-body" contain the text "Backlog"
@@ -56,13 +56,3 @@ Scenario: move issue to other board
   Then the element "#column-5 .list-issue:last-of-type" contain the text "Test issue 4"
   When I reload the page
   Then the element "#column-5 .list-issue:last-of-type" contain the text "Test issue 4"
-
-@javascript
-Scenario: change selected project
-  Given a test-organization exists with global board lists
-  And I am signed in (multitenant)
-  When I click on link "Tickets"
-  Then the element "#side-body" contain the text "Open"
-  When I click on "#project-select" 
-  And I click on "[role='option']" with "Test project 2"
-  Then the element "#side-body" does not contain the text "Test issue 1"

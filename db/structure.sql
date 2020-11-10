@@ -511,7 +511,7 @@ CREATE TABLE organizations (
     time_zone character varying NOT NULL,
     time_zone_seconds integer,
     subscription_id integer,
-    global_board boolean DEFAULT false NOT NULL,
+    global_board boolean DEFAULT true NOT NULL,
     google_calender_id character varying,
     google_calender_access_token character varying,
     google_calender_expires_at timestamp without time zone,
@@ -1728,6 +1728,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200817203548'),
 ('20200913093640'),
 ('20200919103321'),
-('20201018132403');
+('20201018132403'),
+('20201110190116');
 
 

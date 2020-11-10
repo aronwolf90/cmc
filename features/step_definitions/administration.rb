@@ -18,6 +18,15 @@ Given(/^a test-organization exists$/) do
   )
 end
 
+Given(/^a test-organization exists with project specific board lists$/) do
+  visit("/")
+  RestClient.post(
+    "#{Capybara.app_host}/api/v1/test_organizations",
+    { data: { attributes: { "global-board": false } } }.to_json,
+    content_type: :json, accept: :json
+  )
+end
+
 Given(/^a test-organization exists with global board lists$/) do
   visit("/")
   RestClient.post(
