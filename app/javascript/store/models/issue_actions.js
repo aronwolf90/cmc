@@ -50,5 +50,10 @@ export default {
       endpoint,
       resource: `/issues/${issue.id}/close`
     })
+  },
+  searchIssue (context, searchText) {
+    return context.dispatch(
+      'get', `/api/v1/issues?query=${searchText}&sort[created_at]=desc`
+    )
   }
 }

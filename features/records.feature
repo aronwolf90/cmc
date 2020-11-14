@@ -13,13 +13,14 @@ Scenario: Record new
   And I am signed in (multitenant)
   When I click on link "Records"
   And I click on link "New record"
-  And select "Test issue 1" from select box "data[issue_id]"
-  And I click on "#data_start_time"
+  And I click on "#issue-input" 
+  And I click on "[role='option']" with "Test issue 1"
+  And I click on "label" with "Start time"
   And I click on "tr:last-of-type > [data-day]:nth-last-of-type(2)"
-  And I click on "label"
-  And I click on "#data_end_time"
+  And I click on ".search-section" 
+  And I click on "label" with "End time"
   And I click on "tr:last-of-type > [data-day]:last-of-type"
-  And I click on "label"
+  And I click on ".search-section"
   And I click on submit
   Then the element "#side-body" contain the text "Test issue 1"
 

@@ -11,7 +11,7 @@ describe('EditIssue', () => {
     sandbox.restore()
   })
 
-  it('have title input', (done) => {
+  it('have title input', async () => {
     dispatch.returns(Promise.resolve())
     const issue = {
       id: 1,
@@ -24,6 +24,9 @@ describe('EditIssue', () => {
       stubs: {
         'markdown-editor': true
       },
+      data () {
+        return { form: { attributes: {} } }
+      },
       mocks: {
         $store: {
           dispatch,
@@ -33,14 +36,10 @@ describe('EditIssue', () => {
         }
       }
     })
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
 
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        wrapper.vm.$nextTick(() => {
-          expect(wrapper.find('input#name-input').exists()).to.be.true
-          done()
-        })
-      })
-    })
+    expect(wrapper.find('input#name-input').exists()).to.be.true
   })
 })

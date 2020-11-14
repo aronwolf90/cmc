@@ -43,6 +43,7 @@ import CalenderActions from 'store/models/calender_actions'
 import LabelActions from 'store/models/label-actions'
 import ProjectsLeftAside from 'store/modules/projects-left-aside'
 import ProjectsIndex from 'store/modules/projects-index'
+import recordsForm from 'store/modules/records-form'
 
 export default {
   strict: true,
@@ -53,7 +54,8 @@ export default {
     projectsShow: ProjectsShow,
     issuesShow: issuesShow,
     projectsLeftAside: ProjectsLeftAside,
-    projectsIndex: ProjectsIndex
+    projectsIndex: ProjectsIndex,
+    recordsForm
   },
   state: {
     aside: null,

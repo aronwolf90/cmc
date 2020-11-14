@@ -4,13 +4,16 @@
     :label="label",
     :label-for="id"
   )
-    b-form-input(
+    b-form-input.date_time.datetimepicker(
       :id="id",
       :value="value",
       :state="errorStatus(errorPath)",
       type="text",
       @input="input",
-      :placeholder="placeholder"
+      @update="input",
+      :placeholder="placeholder",
+      :required="required",
+      ref="input"
     )
     b-form-invalid-feedback(
       v-for="(error, index) in findErrors(errorPath)",
@@ -21,15 +24,29 @@
 </template>
 
 <script>
-
 export default {
   props: {
     id: String,
     label: String,
-    errors: Array,
+    errors: {
+      type: Array,
+      default: () => []
+    },
     errorPath: String,
     value: String,
-    placeholder: String
+    placeholder: String,
+    required: Boolean
+  },
+  data () {
+    return {
+      elem: null
+    }
+  },
+  created () {
+    setTimeout(() => {
+      // eslint-disable-next-line no-undef
+      jqueryFuncs()
+    }, 10)
   },
   methods: {
     input (value) {
@@ -44,7 +61,7 @@ export default {
     findErrors (pointer) {
       if (!pointer) return []
 
-      return (this.errors || []).filter(error => {
+      return this.errors.filter(error => {
         return error.source.pointer.includes(pointer)
       })
         .filter((error, index, self) => {
