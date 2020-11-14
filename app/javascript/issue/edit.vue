@@ -37,9 +37,10 @@ export default {
   components: {
     'markdown-editor': MarkdownEditor
   },
-  mounted () {
-    this.$store.dispatch('initIssue', this.issueId).then(() => {
-      this.form = JSON.parse(JSON.stringify(this.$store.getters.entry({ type: 'issues', id: this.issueId })))
+  async beforeRouteEnter (to, from, next) {
+    await window.store.dispatch('initIssue', to.params.id)
+    next(vm => {
+      vm.form = JSON.parse(JSON.stringify(vm.$store.getters.entry({ type: 'issues', id: vm.issueId })))
     })
   },
   computed: {

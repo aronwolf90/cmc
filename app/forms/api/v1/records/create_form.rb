@@ -13,7 +13,6 @@ module Api::V1
             required(:"start-time").filled
           end
           required(:relationships).schema do
-            required(:user).schema(RequiredBelongsToSchema)
             required(:issue).schema(RequiredBelongsToSchema)
           end
         end

@@ -68,6 +68,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'stylesheets/administration.sass'
 import WikiPageShow from 'wiki_page/show'
 import WikiPageEdit from 'wiki_page/edit'
+import RecordsNew from 'pages/records/new'
 
 const $ = jQuery
 window.jQuery = jQuery
@@ -273,7 +274,7 @@ const router = new Router({
     },
     {
       path: '/administration/records/new',
-      component: RailsPage,
+      component: RecordsNew,
       props: true,
       meta: { aside: 'global' }
     },

@@ -12,7 +12,6 @@ describe Api::V1::Records::CreateForm do
           "start-time": Time.zone.now
         },
         relationships: {
-          user: { data: { id: 1, type: "users" } },
           issue: { data: { id: 1, type: "issues" } }
         }
       }
@@ -35,14 +34,6 @@ describe Api::V1::Records::CreateForm do
 
     it "has an error" do
       expect(subject.errors).to eq(data: { attributes: { "start-time": ["is missing"] } })
-    end
-  end
-
-  context "without user" do
-    before { params[:data][:relationships].delete :user }
-
-    it "has an error" do
-      expect(subject.errors).to eq(data: { relationships: { user: ["is missing"] } })
     end
   end
 
