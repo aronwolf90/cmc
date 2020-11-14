@@ -497,14 +497,14 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-if (window.googleAnalyticsId) {
-  Vue.use(VueAnalytics, {
-    id: window.googleAnalyticsId,
-    router
-  })
-}
-
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.googleAnalyticsId) {
+    Vue.use(VueAnalytics, {
+      id: window.googleAnalyticsId,
+      router
+    })
+  }
+
   window.app = new Vue({ el: '#app', store, router }) /* eslint-disable-line no-unused-vars */
   window.jqueryFuncs()
 })
