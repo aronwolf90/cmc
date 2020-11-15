@@ -4,8 +4,8 @@
       | Dashboard
     left-aside-item(path="/administration/records")
       | Records
-    left-aside-item(path="/administration/calender")
-      | Calender
+    left-aside-item(path="/administration/calendar")
+      | Calendar
     left-aside-item(path="/administration/attendances")
       | Attendances
     left-aside-item(path="/administration/board_lists")

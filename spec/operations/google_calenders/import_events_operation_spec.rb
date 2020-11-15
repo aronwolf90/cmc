@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe GoogleCalenders::ImportEventsOperation do
+RSpec.describe GoogleCalendars::ImportEventsOperation do
   subject(:call) do
     described_class.call(organization: organization)
   end
@@ -11,13 +11,13 @@ RSpec.describe GoogleCalenders::ImportEventsOperation do
     Event.new(
       title: "Title",
       description: "Description",
-      google_calender_event_id: google_calender_event_id,
+      google_calendar_event_id: google_calendar_event_id,
       start_time: "10.10.2020 10:10:00",
       end_time: "10.10.2020 10:20:00",
       updated_at: Time.zone.now
     )
   end
-  let(:organization) { Organization.new(id: 1, google_calender_id: "id") }
+  let(:organization) { Organization.new(id: 1, google_calendar_id: "id") }
   let(:google_authorization_data) do
     GoogleAuthorizationData.new(
       access_token: "token",
@@ -25,26 +25,26 @@ RSpec.describe GoogleCalenders::ImportEventsOperation do
       refresh_token: "refresh_token"
     )
   end
-  let(:google_calender_events) do
+  let(:google_calendar_events) do
     Google::Apis::CalendarV3::Events.new(
       items: [Google::Apis::CalendarV3::Event.new]
     )
   end
 
   specify do
-    expect(GoogleCalenderClient)
+    expect(GoogleCalendarClient)
       .to receive(:list_events)
       .with(
         "id",
         google_authorization_data: google_authorization_data,
         sync_token: nil
       )
-      .and_return(google_calender_events)
-    expect(GoogleCalenders::AuthorizeOperation).to receive(:call)
+      .and_return(google_calendar_events)
+    expect(GoogleCalendars::AuthorizeOperation).to receive(:call)
       .and_return(google_authorization_data: google_authorization_data)
-    expect(GoogleCalenders::ImportEventJob).to receive(:perform_later)
+    expect(GoogleCalendars::ImportEventJob).to receive(:perform_later)
     expect(organization).to receive(:update!)
-      .with(sync_token: google_calender_events.next_sync_token)
+      .with(sync_token: google_calendar_events.next_sync_token)
     call
   end
 end

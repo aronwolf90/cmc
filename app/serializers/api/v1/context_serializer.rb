@@ -9,8 +9,8 @@ module Api
         :user_count,
         :time_zone,
         :global_board,
-        :google_calender_integrated,
-        :google_calender_authorization_url
+        :google_calendar_integrated,
+        :google_calendar_authorization_url
       )
 
       link(:self) { api_v1_context_path }

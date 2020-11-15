@@ -2,14 +2,14 @@
 
 require "rails_helper"
 
-RSpec.describe Api::V1::Calenders::GoogleIntegrationsController, type: :controller do
+RSpec.describe Api::V1::Calendars::GoogleIntegrationsController, type: :controller do
   let(:current_user) { Admin.new }
   let(:organization) { Organization.new }
 
   before do
     sign_in(current_user)
     allow(Organization).to receive(:current).and_return(organization)
-    expect(Api::V1::Calenders::GoogleIntegrations::DestroyOperation)
+    expect(Api::V1::Calendars::GoogleIntegrations::DestroyOperation)
       .to receive(:call)
       .with(current_user: current_user, params: {}, organization: organization)
       .and_return(result)

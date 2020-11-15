@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe GoogleCalenders::ExportEventsOperation do
+RSpec.describe GoogleCalendars::ExportEventsOperation do
   subject(:call) do
     described_class.call(organization: organization)
   end
@@ -10,14 +10,14 @@ RSpec.describe GoogleCalenders::ExportEventsOperation do
   let(:event) do
     Event.new(id: 1)
   end
-  let(:organization) { Organization.new(google_calender_id: "id") }
+  let(:organization) { Organization.new(google_calendar_id: "id") }
 
   before do
     allow(Event).to receive(:find_each).and_yield(event)
   end
 
   specify do
-    expect(GoogleCalenders::ExportEventJob).to receive(:perform_later)
+    expect(GoogleCalendars::ExportEventJob).to receive(:perform_later)
     call
   end
 end

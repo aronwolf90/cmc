@@ -298,7 +298,7 @@ CREATE TABLE events (
     start_time timestamp without time zone,
     end_time timestamp without time zone,
     description text,
-    google_calender_event_id character varying,
+    google_calendar_event_id character varying,
     deleted_at timestamp without time zone
 );
 
@@ -512,10 +512,10 @@ CREATE TABLE organizations (
     time_zone_seconds integer,
     subscription_id integer,
     global_board boolean DEFAULT true NOT NULL,
-    google_calender_id character varying,
-    google_calender_access_token character varying,
-    google_calender_expires_at timestamp without time zone,
-    google_calender_refresh_token character varying,
+    google_calendar_id character varying,
+    google_calendar_access_token character varying,
+    google_calendar_expires_at timestamp without time zone,
+    google_calendar_refresh_token character varying,
     sync_token character varying
 );
 
@@ -1729,6 +1729,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200913093640'),
 ('20200919103321'),
 ('20201018132403'),
-('20201110190116');
+('20201110190116'),
+('20201115001108');
 
 

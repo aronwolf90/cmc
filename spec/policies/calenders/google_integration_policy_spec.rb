@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Calenders::GoogleIntegrationPolicy do
+describe Calendars::GoogleIntegrationPolicy do
   subject { described_class }
 
   permissions :destroy? do

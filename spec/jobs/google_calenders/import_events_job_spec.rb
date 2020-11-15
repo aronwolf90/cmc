@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe GoogleCalenders::ImportEventsJob, type: :model do
+RSpec.describe GoogleCalendars::ImportEventsJob, type: :model do
   subject(:perform) do
     described_class.perform_now(organization)
   end
@@ -10,7 +10,7 @@ RSpec.describe GoogleCalenders::ImportEventsJob, type: :model do
   let(:organization) { Organization.new }
 
   it "calls Jobs::CreateNotificationsOperation" do
-    expect(GoogleCalenders::ImportEventsOperation)
+    expect(GoogleCalendars::ImportEventsOperation)
       .to receive(:call)
       .with(organization: organization)
     perform

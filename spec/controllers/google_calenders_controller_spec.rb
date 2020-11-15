@@ -3,13 +3,13 @@
 require "rails_helper"
 require_relative "./shared_examples/standart_actions"
 
-RSpec.describe GoogleCalendersController do
+RSpec.describe GoogleCalendarsController do
   let(:organization) { Organization.new(id: 1, name: "test-name") }
 
   describe "GET create_callback" do
     before do
       sign_in(Admin.new)
-      allow(GoogleCalenders::CreateCallbackOperation)
+      allow(GoogleCalendars::CreateCallbackOperation)
         .to receive(:call).and_return(organization: organization)
     end
 
@@ -25,7 +25,7 @@ RSpec.describe GoogleCalendersController do
     end
 
     specify do
-      expect(GoogleCalenders::ImportEventsJob).to receive(:perform_later)
+      expect(GoogleCalendars::ImportEventsJob).to receive(:perform_later)
       subject
       post :notification, params: { code: "code", state: "test-name" }
     end

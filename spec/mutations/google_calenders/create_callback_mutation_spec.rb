@@ -2,18 +2,18 @@
 
 require "rails_helper"
 
-RSpec.describe GoogleCalenders::CreateCallbackMutation do
+RSpec.describe GoogleCalendars::CreateCallbackMutation do
   subject(:call) do
     described_class.call(
       organization: organization,
-      calender: calender,
-      google_calender_authorization_data: google_calender_authorization_data
+      calendar: calendar,
+      google_calendar_authorization_data: google_calendar_authorization_data
     )
   end
 
   let(:organization) { create(:organization) }
-  let(:calender) { double(id: "calender_id") }
-  let(:google_calender_authorization_data) do
+  let(:calendar) { double(id: "calendar_id") }
+  let(:google_calendar_authorization_data) do
     GoogleAuthorizationData.new(
       access_token: "access_token",
       expires_at: DateTime.parse("10.10.2020 10:10:00"),
@@ -23,8 +23,8 @@ RSpec.describe GoogleCalenders::CreateCallbackMutation do
 
   specify do
     expect { call }
-      .to change(organization, :google_calender_id).to("calender_id")
-      .and change(organization, :google_calender_authorization_data)
-      .to(google_calender_authorization_data)
+      .to change(organization, :google_calendar_id).to("calendar_id")
+      .and change(organization, :google_calendar_authorization_data)
+      .to(google_calendar_authorization_data)
   end
 end

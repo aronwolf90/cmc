@@ -1,12 +1,11 @@
-import createWrapper from '../../helper'
-import CalendersGoogleSubscriptionBtn from '../../../../app/javascript/components/calenders/google-subscription-btn'
+import CalendarsGoogleSubscriptionBtn from 'components/calendars/google-subscription-btn'
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
 
-describe('CalendersGoogleSubscriptionBtn', () => {
-  it('show  "Integrate with google calender" when isGoogleIntegrated is false', () => {
-    const wrapper = createWrapper(CalendersGoogleSubscriptionBtn, {
+describe('CalendarsGoogleSubscriptionBtn', () => {
+  it('show  "Integrate with google calendar" when isGoogleIntegrated is false', () => {
+    const wrapper = createWrapper(CalendarsGoogleSubscriptionBtn, {
       propsData: {
         isGoogleIntegrated: false
       }
@@ -15,8 +14,8 @@ describe('CalendersGoogleSubscriptionBtn', () => {
     expect(wrapper.html()).to.include('Integrate with google')
   })
 
-  it('show  "Cancel google calender integration" when isGoogleIntegrated< is true', () => {
-    const wrapper = createWrapper(CalendersGoogleSubscriptionBtn, {
+  it('show  "Cancel google calendar integration" when isGoogleIntegrated< is true', () => {
+    const wrapper = createWrapper(CalendarsGoogleSubscriptionBtn, {
       propsData: {
         isGoogleIntegrated: true
       }

@@ -33,8 +33,8 @@ Feature: API: update context
                "user-count":3,
                "time-zone":"Madrid",
                "global-board":true,
-               "google-calender-authorization-url": "<.*>",
-               "google-calender-integrated": false
+               "google-calendar-authorization-url": "<.*>",
+               "google-calendar-integrated": false
             },
             "relationships":{
                "current-user":{
