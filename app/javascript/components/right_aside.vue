@@ -37,6 +37,10 @@ export default {
     border-left: 2px solid #e7e7e7
     width: 210px
     height: 100%
+    .right-aside-container
+      overflow-y: auto
+      overflow-x: hidden
+      height: 100%
     .arrow
       position: fixed
       bottom: 25px
