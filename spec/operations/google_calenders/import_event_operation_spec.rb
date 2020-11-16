@@ -2,15 +2,15 @@
 
 require "rails_helper"
 
-RSpec.describe GoogleCalenders::ImportEventOperation do
+RSpec.describe GoogleCalendars::ImportEventOperation do
   subject(:call) do
     described_class.(
-      google_calender_event: google_calender_event,
+      google_calendar_event: google_calendar_event,
       organization: organization
     )
   end
 
-  let(:organization) { Organization.new(google_calender_id: "id") }
+  let(:organization) { Organization.new(google_calendar_id: "id") }
   let(:google_authorization_data) do
     GoogleAuthorizationData.new(
       access_token: "token",
@@ -19,7 +19,7 @@ RSpec.describe GoogleCalenders::ImportEventOperation do
     )
   end
   let(:event) { Event.new }
-  let(:google_calender_event) do
+  let(:google_calendar_event) do
     Google::Apis::CalendarV3::Event.new(
       id: "id",
       updated: 1.hour.ago,
@@ -32,7 +32,7 @@ RSpec.describe GoogleCalenders::ImportEventOperation do
   end
 
   before do
-    allow(GoogleCalenderClient)
+    allow(GoogleCalendarClient)
       .to receive(:get_event)
       .and_return(double(
                     id: "id",
@@ -43,7 +43,7 @@ RSpec.describe GoogleCalenders::ImportEventOperation do
                     description: "description"
       )
     )
-    allow(GoogleCalenders::AuthorizeOperation).to receive(:call)
+    allow(GoogleCalendars::AuthorizeOperation).to receive(:call)
       .and_return(google_authorization_data: google_authorization_data)
     allow(Event).to receive(:find_or_initialize_by).and_return(event)
   end
@@ -67,7 +67,7 @@ RSpec.describe GoogleCalenders::ImportEventOperation do
   end
 
   context "when datetime is nil but date is present" do
-    let(:google_calender_event) do
+    let(:google_calendar_event) do
       Google::Apis::CalendarV3::Event.new(
         id: "id",
         updated: 1.hour.ago,

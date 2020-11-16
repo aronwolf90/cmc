@@ -2,11 +2,11 @@
 
 require "rails_helper"
 
-describe "administration/calenders/show" do
+describe "administration/calendars/show" do
   before do
     sign_in(Admin.new)
     render
   end
 
-  it { is_expected.to include "calender"  }
+  it { is_expected.to include "calendar"  }
 end

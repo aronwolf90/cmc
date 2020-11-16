@@ -39,7 +39,7 @@ import ProjectsShow from 'store/modules/projects-show'
 import issuesShow from 'store/modules/issues-show'
 import commentGetters from 'store/models/comment-getters'
 import documentGetters from 'store/models/document-getters'
-import CalenderActions from 'store/models/calender_actions'
+import CalendarActions from 'store/models/calendar_actions'
 import LabelActions from 'store/models/label-actions'
 import ProjectsLeftAside from 'store/modules/projects-left-aside'
 import ProjectsIndex from 'store/modules/projects-index'
@@ -160,7 +160,7 @@ export default {
     ...projectStatusActions,
     ...projectBoardListActions,
     ...projectCommentActions,
-    ...CalenderActions,
+    ...CalendarActions,
     ...LabelActions,
 
     initCurrentUser (context) {

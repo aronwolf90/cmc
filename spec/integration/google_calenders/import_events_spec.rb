@@ -18,9 +18,9 @@ RSpec.describe "Import events" do
 
   before do
     Timecop.travel "Thu, 23 Jul 2020 22:18:30 +0000"
-    allow(Settings.google_calender)
+    allow(Settings.google_calendar)
       .to receive(:client_id).and_return(ENV["GOOGLE_CALENDER_CLIENT_ID"])
-    allow(Settings.google_calender)
+    allow(Settings.google_calendar)
       .to receive(:client_secret).and_return(ENV["GOOGLE_CALENDER_CLIENT_SECRET"])
     allow(Apartment::Tenant).to receive(:switch).and_yield
   end
@@ -30,21 +30,21 @@ RSpec.describe "Import events" do
   end
 
   specify do
-    organization = create(:organization, google_calender_authorization_data: google_authorization_data)
-    google_calender = nil
+    organization = create(:organization, google_calendar_authorization_data: google_authorization_data)
+    google_calendar = nil
     authorization_data = nil
-    google_calender_event = nil
+    google_calendar_event = nil
 
-    VCR.use_cassette("google_calenders:integration:import_events:prepare_data") do
-      authorization_data = GoogleCalenderClient.authorize!(
+    VCR.use_cassette("google_calendars:integration:import_events:prepare_data") do
+      authorization_data = GoogleCalendarClient.authorize!(
         google_authorization_data: google_authorization_data
       )
-      google_calender = GoogleCalenderClient.create_calender(
+      google_calendar = GoogleCalendarClient.create_calendar(
         name: "Test",
         google_authorization_data: authorization_data
       )
-      google_calender_event = GoogleCalenderClient.create_event(
-        google_calender_id: google_calender.id,
+      google_calendar_event = GoogleCalendarClient.create_event(
+        google_calendar_id: google_calendar.id,
         title: "New event",
         description: "Test",
         start_time: {
@@ -57,20 +57,20 @@ RSpec.describe "Import events" do
       )
     end
 
-    organization.update!(google_calender_id: google_calender.id)
+    organization.update!(google_calendar_id: google_calendar.id)
 
-    VCR.use_cassette("google_calenders:integration:import_events:create_event") do
+    VCR.use_cassette("google_calendars:integration:import_events:create_event") do
       perform_enqueued_jobs do
-        expect { GoogleCalenders::ImportEventsJob.perform_now(organization) }
+        expect { GoogleCalendars::ImportEventsJob.perform_now(organization) }
           .to change(Event, :count).by(1)
       end
     end
 
-    VCR.use_cassette("google_calenders:integration:import_events:update_event") do
+    VCR.use_cassette("google_calendars:integration:import_events:update_event") do
       perform_enqueued_jobs do
-        GoogleCalenderClient.update_event(
-          google_calender_id: google_calender.id,
-          google_calender_event_id: google_calender_event.id,
+        GoogleCalendarClient.update_event(
+          google_calendar_id: google_calendar.id,
+          google_calendar_event_id: google_calendar_event.id,
           title: "Updated event",
           description: "Test",
           start_time: {
@@ -81,19 +81,19 @@ RSpec.describe "Import events" do
           },
           google_authorization_data: authorization_data
         )
-        GoogleCalenders::ImportEventsJob.perform_now(organization)
+        GoogleCalendars::ImportEventsJob.perform_now(organization)
         expect(Event.last).to have_attributes(title: "Updated event")
       end
     end
 
-    VCR.use_cassette("google_calenders:integration:import_events:destroy_event") do
+    VCR.use_cassette("google_calendars:integration:import_events:destroy_event") do
       perform_enqueued_jobs do
-        GoogleCalenderClient.delete_event(
-          google_calender_id: google_calender.id,
-          google_calender_event_id: google_calender_event.id,
+        GoogleCalendarClient.delete_event(
+          google_calendar_id: google_calendar.id,
+          google_calendar_event_id: google_calendar_event.id,
           google_authorization_data: authorization_data
         )
-        GoogleCalenders::ImportEventsJob.perform_now(organization)
+        GoogleCalendars::ImportEventsJob.perform_now(organization)
         expect(Event.unscoped.last.deleted_at).to be_present
       end
     end

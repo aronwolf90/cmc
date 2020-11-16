@@ -7,7 +7,7 @@ module Events
 
   private
     def exporters!(options, **)
-      options[:exporters] ||= [GoogleCalenders::ExportEventJob]
+      options[:exporters] ||= [GoogleCalendars::ExportEventJob]
     end
 
     def trigger_exporters(_, organization:, exporters:, event:, **)

@@ -2,11 +2,11 @@
 
 require "rails_helper"
 
-RSpec.describe Calenders::GoogleIntegrations::DestroyOperation do
+RSpec.describe Calendars::GoogleIntegrations::DestroyOperation do
   let(:organization) { Organization.new }
 
   specify do
-    expect(Calenders::GoogleIntegrations::DestroyMutation)
+    expect(Calendars::GoogleIntegrations::DestroyMutation)
       .to receive(:call)
       .with(organization: organization)
 

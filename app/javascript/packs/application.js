@@ -11,7 +11,7 @@ import WikiContent from '../wiki_content'
 import WikiPage from '../wiki_page'
 import ArchiveContent from '../archive_content'
 import ProjectSearchSelect from '../project_search_select'
-import Calender from '../calender'
+import Calendar from '../calendar'
 import Timepicker from '../components/timepicker'
 import Datepicker from '../components/datepicker'
 import Attendances from '../attendances'
@@ -87,7 +87,7 @@ Vue.component('wiki-content', WikiContent)
 Vue.component('wiki-page', WikiPage)
 Vue.component('archive-content', ArchiveContent)
 Vue.component('project-search-select', ProjectSearchSelect)
-Vue.component('calender', Calender)
+Vue.component('calendar', Calendar)
 Vue.component('timepicker', Timepicker)
 Vue.component('datepicker', Datepicker)
 Vue.component('attendances', Attendances)
@@ -157,8 +157,8 @@ const router = new Router({
       meta: { aside: 'global' }
     },
     {
-      path: '/administration/calender',
-      component: Calender,
+      path: '/administration/calendar',
+      component: Calendar,
       meta: { aside: 'global' }
     },
     {

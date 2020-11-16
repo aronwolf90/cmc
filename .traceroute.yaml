@@ -16,4 +16,5 @@ ignore_unused_routes:
 - user_tokens
 - /sidekiq
 - action_mailbox/inbound_emails
-
+- google_calenders#create_callback
+- google_calenders#notificatio

@@ -15,8 +15,8 @@ module Api
           user_count: User.count,
           time_zone: organization&.time_zone,
           global_board: organization&.global_board,
-          google_calender_integrated: organization&.google_calender_id.present?,
-          google_calender_authorization_url: GoogleCalenderClient.authentication_url(
+          google_calendar_integrated: organization&.google_calendar_id.present?,
+          google_calendar_authorization_url: GoogleCalendarClient.authentication_url(
             organization: organization
           )
         ), include: [

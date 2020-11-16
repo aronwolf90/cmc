@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :calender do
-    title { "Test calender" }
+  factory :calendar do
+    title { "Test calendar" }
   end
 end
