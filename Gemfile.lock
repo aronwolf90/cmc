@@ -141,7 +141,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise_invitable (2.0.2)
+    devise_invitable (2.0.3)
       actionmailer (>= 5.0)
       devise (>= 4.6)
     diff-lcs (1.4.4)
@@ -186,7 +186,7 @@ GEM
       dry-equalizer (~> 0.2)
       dry-logic (~> 0.4, >= 0.4.0)
       dry-types (~> 0.12.0)
-    erubi (1.9.0)
+    erubi (1.10.0)
     et-orbi (1.2.4)
       tzinfo
     excon (0.76.0)
@@ -546,7 +546,7 @@ GEM
       railties (>= 4.0.0)
       trailblazer (>= 2.1.0.beta1, < 2.2.0)
       trailblazer-loader (>= 0.1.0)
-    tzinfo (1.2.7)
+    tzinfo (1.2.8)
       thread_safe (~> 0.1)
     uber (0.0.15)
     uglifier (4.2.0)
