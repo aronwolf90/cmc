@@ -35,6 +35,7 @@ RestClient.delete(
   'https://ticktensio.com/api/v1/test_organizations'
 )
 
+# Create organization
 visit("https://about.ticktensio.com/")
 click_on "Register"
 visit("#{current_url}?recaptcha_ignore_key=#{ENV["RECAPTCHA_IGNORE_KEY"]}")
@@ -60,6 +61,8 @@ fill_in "Email", with: "test@ticktensio.com"
 fill_in "Password", with: "testtest"
 click_button "Login"
 raise "not loged in" unless page.has_text?("Dashboard")
+
+# Check tickets works
 click_on "Tickets"
 find(".list-issue a", match: :prefer_exact).click
 find("label", text: "Complexity", match: :prefer_exact)
@@ -80,5 +83,11 @@ find("label", text: "Complexity", match: :prefer_exact)
     break
   end
 end
+
+# Stripe is correctly integrated
+click_on "Admin"
+click_on "Payment"
+click_on "Add payment informations"
+raise "Stripe does not work" unless page.has_text?("Kartendaten speichern")
 
 puts "success"
