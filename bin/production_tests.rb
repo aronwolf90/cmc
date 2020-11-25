@@ -88,6 +88,8 @@ end
 click_on "Admin"
 click_on "Payment"
 click_on "Add payment informations"
-raise "Stripe does not work" unless page.has_text?("Kartendaten speichern")
+sleep 1
+!(page.has_text?("Kartendaten speichern") || page.has_text?("Card information")) &&
+  raise("Stripe does not work")
 
 puts "success"
