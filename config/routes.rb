@@ -21,8 +21,8 @@ Rails.application.routes.draw do
 
   resources :registrations, only: %i[new create]
   resource :terms, only: :show
-  get "google_calendars/create_callback", to: "google_calenders#create_callback"
-  post "google_calendars/notification", to: "google_calenders#notification"
+  get "google_calendars/create_callback", to: "google_calendars#create_callback"
+  post "google_calendars/notification", to: "google_calendars#notification"
   get "google_calenders/create_callback", to: "google_calendars#create_callback"
   post "google_calenders/notification", to: "google_calendars#notification"
 

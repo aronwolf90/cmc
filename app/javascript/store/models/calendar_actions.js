@@ -1,5 +1,5 @@
 export default {
-  destroyCalendeasGoogleIntegration (context) {
+  destroyCalendarsGoogleIntegration (context) {
     return context.dispatch('destroy', 'calendars/google_integration')
   }
 }
