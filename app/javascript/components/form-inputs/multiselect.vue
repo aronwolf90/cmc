@@ -5,7 +5,7 @@
     :label-for="id"
   )
     v-select(
-      :id="id",
+      :inputId="id",
       multiple="",
       :value="value",
       :options="options",
