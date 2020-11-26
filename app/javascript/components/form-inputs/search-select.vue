@@ -12,7 +12,7 @@
         :options='options',
         @search="search",
         :getOptionLabel="getOptionLabel",
-        :id="id",
+        :inputId="id",
       )
       b-form-invalid-feedback(
         v-for="(error, index) in selectedErrors",

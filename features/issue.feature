@@ -1,7 +1,7 @@
 Feature: Issue
 
 @javascript
-Scenario: Create Issue
+Scenario: Create Issue with minimal attributes
   Given a test-organization exists
   And I am signed in (multitenant)
   When I click on link "Tickets"
@@ -10,6 +10,28 @@ Scenario: Create Issue
   And I click on submit
   And I reload the page
   Then the page contain the text "issue name"
+
+@javascript
+Scenario: Create Issue with all attributes filled
+  Given a test-organization exists
+  And I am signed in (multitenant)
+  When I click on link "Tickets"
+  And I click on ".issues-board-body .fa-plus"
+  And I enter "New ticket" into input named "Title"
+  And I click on "#input-labels"
+  And I click on "li" with "Bug"
+  And I click on "#input-user"
+  And I click on "li" with "Aron Wolf"
+  And I replace the text "Test description" from the markdown editor "#input-description"
+  And I click on submit
+  And I click on link "New ticket"
+  Then the page contain the text "New ticket"
+  And the element ".vs__selected-options" contain the text "Bug"
+  And the page contain the text "Test description"
+  When I reload the page
+  Then the page contain the text "New ticket"
+  And the element ".vs__selected-options" contain the text "Bug"
+  And the page contain the text "Test description"
 
 @javascript
 Scenario: Create Issue on global board

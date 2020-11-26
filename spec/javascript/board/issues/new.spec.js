@@ -19,7 +19,8 @@ describe('board/issues/new.vue', () => {
     stubs: {
       MarkdownEditor: true,
       MultiselectInput: true,
-      textInput: true
+      textInput: true,
+      UserSelect: true
     },
     mocks: {
       $store: {
