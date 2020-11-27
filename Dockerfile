@@ -1,4 +1,4 @@
-FROM ruby:2.7.2-alpine3.9
+FROM ruby:2.7.2-alpine
 
 ENV DOCKER true
 
@@ -15,7 +15,8 @@ RUN echo "export PATH=/app/bin:$PATH" >> ~/.profile && \
   grep
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --jobs $(nproc)
+RUN gem install bundler:1.17.2 && \
+  bundle install --jobs $(nproc)
 COPY yarn.lock package.json ./
 RUN yarn install && yarn cache clean
 
