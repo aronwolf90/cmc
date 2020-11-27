@@ -8,7 +8,7 @@ gem "rails", "~> 5.2"
 # Fundamental
 gem "apartment"
 gem "pg"
-gem "puma", "~> 3.7"
+gem "puma", "~> 5.0"
 
 # Engines
 gem "devise"
