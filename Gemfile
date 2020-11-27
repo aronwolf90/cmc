@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 source "https://rails-assets.org"
 
-gem "rails", "~> 5.1"
+gem "rails", "~> 5.2"
 
 # Fundamental
 gem "apartment"
