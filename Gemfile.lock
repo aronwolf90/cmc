@@ -620,7 +620,7 @@ DEPENDENCIES
   pgreset
   puma (~> 3.7)
   pundit
-  rails (~> 5.1.3)
+  rails (~> 5.1)
   rails-controller-testing
   recaptcha
   reform (= 2.2)
