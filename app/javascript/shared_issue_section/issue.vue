@@ -1,5 +1,5 @@
 <template lang='pug'>
-  a.issue.row(v-bind:href='showPath', v-if="issue")
+  router-link.issue.row(:to='showPath', v-if="issue")
     .col-10.text-section
       | {{ issue.attributes.title }}
     .col-2
