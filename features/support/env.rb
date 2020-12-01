@@ -41,5 +41,4 @@ After do |scenario|
 
   page.save_screenshot(Rails.root.join("screenshots/error.png"))
   STDERR.puts page.driver.browser.manage.logs.get(:browser)
-  Cucumber.wants_to_quit = true
 end
