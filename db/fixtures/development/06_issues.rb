@@ -7,6 +7,7 @@ Issue.bulk_insert(
   :global_board_list_id,
   :complexity,
   :user_id,
+  :created_by_id,
   :title,
   :description,
   :ordinal_number,
@@ -22,14 +23,15 @@ Issue.bulk_insert(
     global_board_list_id:  1,
     complexity:            2,
     user_id:               1,
+    created_by_id:         1,
     title:                 "Test issue 1",
     description:           "description for the test issue",
     ordinal_number:        3,
     global_ordinal_number: 3,
     due_at:                Time.zone.parse("10-10-2020 00:00"),
     deadline_at:           Time.zone.parse("10-10-2020 00:00"),
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:00"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:00")
   )
 
   worker.add(
@@ -38,12 +40,13 @@ Issue.bulk_insert(
     global_board_list_id:  1,
     complexity:            2,
     user_id:               1,
+    created_by_id:         1,
     title:                 "Test issue 2",
     description:           "description for the test issue",
     ordinal_number:        2,
     global_ordinal_number: 2,
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:01"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:01")
   )
 
   worker.add(
@@ -51,12 +54,13 @@ Issue.bulk_insert(
     board_list_id:         4,
     global_board_list_id:  1,
     complexity:            3,
+    created_by_id:         1,
     title:                 "Test issue 3",
     description:           "description for the test issue",
     ordinal_number:        1,
     global_ordinal_number: 1,
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:02"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:02")
   )
 
   worker.add( 
@@ -64,12 +68,13 @@ Issue.bulk_insert(
     board_list_id:         4,
     global_board_list_id:  1,
     complexity:            5,
+    created_by_id:         1,
     title:                 "Test issue 4",
     description:           "description for the test issue",
     ordinal_number:        0,
     global_ordinal_number: 0,
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:03"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:03")
   )
 
   worker.add(
@@ -77,12 +82,13 @@ Issue.bulk_insert(
     board_list_id:         5,
     global_board_list_id:  2,
     complexity:            8,
+    created_by_id:         1,
     title:                 "Test issue 5",
     description:           "description for the test issue",
     ordinal_number:        2,
     global_ordinal_number: 2,
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:04"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:04")
   )
 
   worker.add(
@@ -90,12 +96,13 @@ Issue.bulk_insert(
     board_list_id:         5,
     global_board_list_id:  2,
     complexity:            2,
+    created_by_id:         1,
     title:                 "Test issue 6",
     description:           "description for the test issue",
     ordinal_number:        1,
     global_ordinal_number: 1,
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:05"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:05")
   )
 
   worker.add(
@@ -103,12 +110,13 @@ Issue.bulk_insert(
     board_list_id:         5,
     global_board_list_id:  2,
     complexity:            8,
+    created_by_id:         1,
     title:                 "Test issue 7",
     description:           "description for the test issue",
     ordinal_number:        0,
     global_ordinal_number: 0,
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:06"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:06")
   )
 
   worker.add(
@@ -116,12 +124,13 @@ Issue.bulk_insert(
     board_list_id:         6,
     global_board_list_id:  3,
     complexity:            1,
+    created_by_id:         1,
     title:                 "Test issue 8",
     description:           "description for the test issue",
     ordinal_number:        3,
     global_ordinal_number: 3,
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:07"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:07")
   )
 
   worker.add(
@@ -129,12 +138,13 @@ Issue.bulk_insert(
     board_list_id:         6,
     global_board_list_id:  3,
     complexity:            8,
+    created_by_id:         1,
     title:                 "Test issue 9",
     description:           "description for the test issue",
     ordinal_number:        2,
     global_ordinal_number: 2,
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:08"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:08")
   )
 
   worker.add(
@@ -142,12 +152,13 @@ Issue.bulk_insert(
     board_list_id:         6,
     global_board_list_id:  3,
     complexity:            3,
+    created_by_id:         1,
     title:                 "Test issue 10",
     description:           "description for the test issue",
     ordinal_number:        1,
     global_ordinal_number: 1,
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:09"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:09")
   )
 
   worker.add(
@@ -159,7 +170,7 @@ Issue.bulk_insert(
     description:           "description for the test issue",
     ordinal_number:        0,
     global_ordinal_number: 0,
-    created_at:            Time.zone.now,
-    updated_at:            Time.zone.now
+    created_at:            Time.zone.parse("9-10-2020 10:10:10"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:10")
   )
 end

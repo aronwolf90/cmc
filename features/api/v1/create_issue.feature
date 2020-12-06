@@ -26,7 +26,7 @@ Feature: API: create an issue
       }
       """
     Then the response status should be "201"
-    And the JSON response should be:
+    And the JSON response should match:
     """
     {
       "data": {
@@ -38,7 +38,8 @@ Feature: API: create an issue
           "complexity": null,
           "due-at": null,
           "deadline-at": null,
-          "status": "none"
+          "status": "none",
+          "created-at": "<.*>"
         },
         "relationships": {
           "user": { 

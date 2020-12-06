@@ -20,7 +20,8 @@ Scenario: Get /api/v1/projects/<id>/reminders
             "complexity":"2.0",
             "due-at": "10-10-2020 00:00",
             "deadline-at": "10-10-2020 00:00",
-            "status": "danger"
+            "status": "danger",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -36,7 +37,10 @@ Scenario: Get /api/v1/projects/<id>/reminders
               }]
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
