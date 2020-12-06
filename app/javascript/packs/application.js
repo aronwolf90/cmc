@@ -6,7 +6,7 @@ import Store from '../store'
 
 import IssuesBoard from '../board.vue'
 import Issue from '../issue.vue'
-import SharedIssueSection from '../shared_issue_section'
+import SharedIssueSection from 'components/shared-issue-section'
 import WikiContent from '../wiki_content'
 import WikiPage from '../wiki_page'
 import ArchiveContent from '../archive_content'
