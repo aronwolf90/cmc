@@ -1,13 +1,13 @@
 import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import CurrentIssue from '../../../app/javascript/shared_issue_section/current_issue'
+import CurrentIssue from 'components/shared-issue-section/current_issue'
 import sinon from 'sinon'
 import {
   helperState,
   helperMutations,
   helperGetters,
   helperActions
-} from '../../helpers/store'
+} from '../../../helpers/store'
 
 const localVue = createLocalVue()
 

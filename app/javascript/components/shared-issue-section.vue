@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import CurrentRecord from 'shared_issue_section/current_record'
-import CurrentIssue from 'shared_issue_section/current_issue'
-import IssuesSearchSection from 'shared_issue_section/issues_search_section'
+import CurrentRecord from 'components/shared-issue-section/current_record'
+import CurrentIssue from 'components/shared-issue-section/current_issue'
+import IssuesSearchSection from 'components/shared-issue-section/issues_search_section'
 
 export default {
   components: {
@@ -25,4 +25,5 @@ export default {
   border-top: 1px solid #e7e7e7
   position: relative
   width: 100%
+  border-right: 2px solid #e7e7e7
 </style>

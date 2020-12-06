@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Issue from 'shared_issue_section/issue'
+import Issue from 'components/shared-issue-section/issue'
 import { Utils } from 'vuex-jsonapi-client'
 
 export default {
