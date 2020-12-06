@@ -23,7 +23,8 @@ Scenario: Get /api/v1/issues
             "complexity":"2.0",
             "due-at": "10-10-2020 00:00",
             "deadline-at": "10-10-2020 00:00",
-            "status": "danger"
+            "status": "danger",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -39,7 +40,10 @@ Scenario: Get /api/v1/issues
               }]
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -67,7 +71,8 @@ Scenario: Get /api/v1/issues
             "complexity":"2.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -80,7 +85,10 @@ Scenario: Get /api/v1/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -108,7 +116,8 @@ Scenario: Get /api/v1/issues
             "complexity":"3.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -118,7 +127,10 @@ Scenario: Get /api/v1/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -146,7 +158,8 @@ Scenario: Get /api/v1/issues
             "complexity":"5.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -156,7 +169,10 @@ Scenario: Get /api/v1/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -184,7 +200,8 @@ Scenario: Get /api/v1/issues
             "complexity":"8.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -194,7 +211,10 @@ Scenario: Get /api/v1/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -222,7 +242,8 @@ Scenario: Get /api/v1/issues
             "complexity":"2.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -232,7 +253,10 @@ Scenario: Get /api/v1/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -260,7 +284,8 @@ Scenario: Get /api/v1/issues
             "complexity":"8.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -270,7 +295,10 @@ Scenario: Get /api/v1/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -298,7 +326,8 @@ Scenario: Get /api/v1/issues
             "complexity":"1.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -308,7 +337,10 @@ Scenario: Get /api/v1/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -336,7 +368,8 @@ Scenario: Get /api/v1/issues
             "complexity":"8.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -346,7 +379,10 @@ Scenario: Get /api/v1/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -374,7 +410,8 @@ Scenario: Get /api/v1/issues
             "complexity":"3.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -384,7 +421,10 @@ Scenario: Get /api/v1/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -412,7 +452,8 @@ Scenario: Get /api/v1/issues
             "complexity":"5.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -473,7 +514,8 @@ Scenario: Get /api/v1/issues
             "complexity": "5.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships": {
             "user": {
@@ -485,7 +527,7 @@ Scenario: Get /api/v1/issues
               ]
             },
             "created-by": {
-              "data": null
+						  "data": null
             },
             "board-list": {
               "data": {
@@ -513,7 +555,8 @@ Scenario: Get /api/v1/issues
             "complexity": "3.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships": {
             "user": {
@@ -525,7 +568,10 @@ Scenario: Get /api/v1/issues
               ]
             },
             "created-by": {
-              "data": null
+						  "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {
@@ -553,7 +599,8 @@ Scenario: Get /api/v1/issues
             "complexity": "2.0",
             "due-at": "10-10-2020 00:00",
             "deadline-at": "10-10-2020 00:00",
-            "status": "danger"
+            "status": "danger",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships": {
             "user": {
@@ -571,7 +618,10 @@ Scenario: Get /api/v1/issues
               ]
             },
             "created-by": {
-              "data": null
+						  "data": {
+							  "id": "1",
+								"type": "users"
+							}
             },
             "board-list": {
               "data": {

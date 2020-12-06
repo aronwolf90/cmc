@@ -13,6 +13,7 @@
       deadline-at(:issue-id='id')
       labels(:issue-ref='issueRef')
       created-by(:issue-ref='issueRef')
+      created-at(:issue-ref='issueRef')
 </template>
 
 <script>
@@ -28,6 +29,7 @@ import DueAt from 'components/ticket/due-at'
 import DeadlineAt from 'components/ticket/deadline-at'
 import Labels from 'components/ticket/labels'
 import CreatedBy from 'components/ticket/created-by'
+import CreatedAt from 'components/ticket/created-at'
 
 export default {
   props: ['id'],
@@ -43,7 +45,8 @@ export default {
     DueAt,
     DeadlineAt,
     Labels,
-    CreatedBy
+    CreatedBy,
+    CreatedAt
   },
   created () {
     this.$store.dispatch('issuesShow/fetch', this.id)

@@ -21,7 +21,8 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             "complexity":"5.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -31,7 +32,10 @@ Scenario: GET /api/v1/board_lists/<id>/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+                "id": "1",
+                "type": "users"
+              }
             },
             "board-list": {
               "data": {
@@ -59,7 +63,8 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             "complexity":"3.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -69,7 +74,10 @@ Scenario: GET /api/v1/board_lists/<id>/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+                "id": "1",
+                "type": "users"
+              }
             },
             "board-list": {
               "data": {
@@ -97,7 +105,8 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             "complexity":"2.0",
             "due-at": null,
             "deadline-at": null,
-            "status": "none"
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -110,7 +119,10 @@ Scenario: GET /api/v1/board_lists/<id>/issues
               "data": []
             },
             "created-by": {
-              "data": null
+              "data": {
+                "id": "1",
+                "type": "users"
+              }
             },
             "board-list": {
               "data": {
@@ -138,7 +150,8 @@ Scenario: GET /api/v1/board_lists/<id>/issues
             "complexity":"2.0",
             "due-at": "10-10-2020 00:00",
             "deadline-at": "10-10-2020 00:00",
-            "status": "danger"
+            "status": "danger",
+            "created-at": "09-10-2020 10:10"
           },
           "relationships":{ 
             "user":{ 
@@ -154,7 +167,10 @@ Scenario: GET /api/v1/board_lists/<id>/issues
               }]
             },
             "created-by": {
-              "data": null
+              "data": {
+                "id": "1",
+                "type": "users"
+              }
             },
             "board-list": {
               "data": {

@@ -68,6 +68,7 @@ Scenario: Show issue
   When I click on link "Test issue 1"
   Then the element "#side-body" contain the text "Test issue 1"
   And the element "#side-body" contain the text "description"
+  And the element "#side-body" contain the text "Created at"
 
 @javascript
 Scenario: Edit issue with all fields changed

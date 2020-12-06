@@ -9,6 +9,7 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
       due_at: "10-10-2120",
       deadline_at: "10-10-2120",
       created_by: User.new(id: 1),
+      created_at: "10-10-2020 10:10:00",
       board_list: BoardList.new(id: 1)
     )
   end
@@ -24,6 +25,7 @@ RSpec.describe Api::V1::IssueSerializer, type: :serializer do
         complexity: nil,
         "due-at": "10-10-2120 00:00",
         "deadline-at": "10-10-2120 00:00",
+        "created-at": "10-10-2020 10:10",
         status: :none
       },
       relationships: {

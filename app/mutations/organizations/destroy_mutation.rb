@@ -9,6 +9,9 @@ module Organizations
 
         model.destroy!
       end
+      (ActiveRecord::Base.connection.tables - %w[schema_migrations versions]).each do |table|
+        table.classify.constantize.reset_column_information rescue nil
+      end
     end
   end
 end

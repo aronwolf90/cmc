@@ -9,6 +9,7 @@ module Api
         :complexity,
         :due_at,
         :deadline_at,
+        :created_at,
         :status
       )
 
@@ -25,6 +26,10 @@ module Api
 
       def deadline_at
         object.deadline_at&.strftime("%d-%m-%Y %H:%M")
+      end
+
+      def created_at
+        object.created_at&.strftime("%d-%m-%Y %H:%M")
       end
 
       def self.eager_load_options

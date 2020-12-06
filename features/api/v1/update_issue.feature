@@ -55,7 +55,8 @@ Scenario: Put an valid issue using json in PUT body
           "complexity":"2.0",
           "due-at":"12-10-2020 00:00",
           "deadline-at":"12-10-2020 00:00",
-          "status": "danger"
+          "status": "danger",
+          "created-at": "09-10-2020 10:10"
         },
         "relationships":{ 
           "user":{ 
@@ -71,7 +72,10 @@ Scenario: Put an valid issue using json in PUT body
             }]
           },
           "created-by": {
-            "data": null
+            "data": {
+						  "id": "1",
+							"type": "users"
+						}
           },
           "board-list": {
             "data": {
