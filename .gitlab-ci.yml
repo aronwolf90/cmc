@@ -134,18 +134,6 @@ cucumber:
     - docker-compose -f docker-compose.gitlab.yml up -d
     - docker-compose -f docker-compose.gitlab.yml run -e CI_NODE_INDEX=$CI_NODE_INDEX -e CI_NODE_TOTAL=$CI_NODE_TOTAL app bin/ci_split_cucumber.sh
 
-backup:
-  stage: test
-  image: aronwolf/helm-doctl
-  environment:
-    name: production
-    url: https://ticktensio.com
-  script:
-    - doctl kubernetes cluster kubeconfig save webcloudpower
-    - velero backup create ticktensio-deploy-$(date +%Y%m%d%H%M%S) --include-namespaces cmc-production
-  only:
-    - master
-
 deploy:
   stage: deploy
   image: aronwolf/helm-doctl
