@@ -296,10 +296,9 @@ GEM
       bcrypt (~> 3.1)
       jwt (~> 1.5)
       rails (>= 4.2)
-    listen (3.1.5)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-      ruby_dep (~> 1.2)
+    listen (3.3.3)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.8.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -468,7 +467,6 @@ GEM
     ruby-vips (2.0.17)
       ffi (~> 1.9)
     ruby2_keywords (0.0.2)
-    ruby_dep (1.5.0)
     rubyzip (2.3.0)
     seed-fu (2.3.9)
       activerecord (>= 3.1)
@@ -619,7 +617,7 @@ DEPENDENCIES
   jsonpath
   kaminari (~> 1.2.1)
   knock
-  listen (>= 3.0.5, < 3.2)
+  listen (>= 3.0.5, <= 3.3.3)
   lp_csv_exportable
   migration_data
   numeric
