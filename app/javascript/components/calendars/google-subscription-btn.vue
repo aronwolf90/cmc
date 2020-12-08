@@ -1,26 +1,26 @@
 <template lang='pug'>
   b-button(
     variant="outline-secondary",
-    v-if="isGoogleIntegrated",
-    @click="$emit('destroy')"
+    @click="isGoogleIntegrated && $emit('destroy')",
+    :href="isGoogleIntegrated? undefined : authorizationUrl"
   )
-    i.fa.fa-google.d-md-none(aria-hidden="true")
-    .d-none.d-md-block Destroy google integration
-  b-button(
-    variant="outline-secondary",
-    v-else="",
-    :href="authorizationUrl"
-  )
-    i.fa.fa-google.d-md-none(aria-hidden="true")
-    .d-none.d-md-block Integrate with google
+    b-spinner.mr-2(small="", v-if="loading")
+    i.fa.fa-google.d-md-none(aria-hidden="true", v-else="")
+    .d-none.d-md-inline
+      template(v-if="isGoogleIntegrated") Destroy google integration
+      template(v-else="") Integrate with google
 </template>
 
 <script>
 
 export default {
-  props: [
-    'isGoogleIntegrated',
-    'authorizationUrl'
-  ]
+  props: {
+    isGoogleIntegrated: Boolean,
+    authorizationUrl: String,
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
