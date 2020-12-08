@@ -33,6 +33,8 @@
           :is-google-integrated="isGoogleIntegrated",
           :authorization-url="googleCalendarAuthorizationUrl",
           v-if="isAdmin",
+          :loading="calendarGoogleBtnLoading",
+          @click.native="calendarGoogleBtnLoading=true",
           @destroy="destroyCalendarsGoogleIntegration"
         )
         b-button(
@@ -180,7 +182,8 @@ export default {
     promptVisible: false,
     promptQuestion: '',
     promptCallback: null,
-    editEdventId: null
+    editEdventId: null,
+    calendarGoogleBtnLoading: false
   }),
   created () {
     this.$store.dispatch('initEvents')
@@ -287,7 +290,9 @@ export default {
   {
     destroyCalendarsGoogleIntegration () {
       this.$store.dispatch('destroyCalendarsGoogleIntegration').then(() => {
-        location.reload()
+        this.$store.dispatch('get', 'context').then(() => {
+          this.calendarGoogleBtnLoading = false
+        })
       })
     },
     setState (state) {
