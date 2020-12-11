@@ -42,7 +42,7 @@
     "@vue/test-utils": "^1.1.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-istanbul": "^4.1.6",
-    "bdd-lazy-var": "^2.5.5",
+    "bdd-lazy-var": "^2.6.0",
     "chai": "^4.2.0",
     "cross-env": "^5.2.1",
     "eslint": "^5.16.0",
