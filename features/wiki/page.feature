@@ -1,7 +1,7 @@
 Feature: Wiki page
 
 @javascript
-Scenario: Create wiki page
+Scenario: Create and edit wiki page
   Given a test-organization exists
   And I am signed in (multitenant)
   When I click on link "Wiki"
@@ -9,16 +9,8 @@ Scenario: Create wiki page
   And I enter "page title" into input named "data[title]"
   And select "category 1" from select box "data[wiki_category_id]"
   And I click on submit
+  And I reload the page
   Then the element "#side-body" contain the text "page title"
-
-@javascript
-Scenario: Show wiki page
-  Given a test-organization exists
-  And I am signed in (multitenant)
-  When I click on link "Wiki"
-  And I click on link "wiki page title"
-  Then the element "#side-body" contain the text "wiki page title"
-  And the element "#side-body" contain the text "test content"
 
 @javascript
 Scenario: Edit wiki page

@@ -9,7 +9,6 @@ Scenario: Records index
   And I click on link "Records"
   Then the element "#side-body" contain the text "Test issue 7"
 
-
 @javascript
 Scenario: Downlad csv
   Given a test-organization exists
