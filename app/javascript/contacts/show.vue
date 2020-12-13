@@ -7,12 +7,12 @@
             b-button-toolbar
               btn-edit.mr-1(
                 base-path="/administration/contacts",
-                :entry-type="result.data.type",
-                :entry-id="result.data.id"
+                :entry-type="contact.type",
+                :entry-id="contact.id"
               )
               show-btn-destroy(
                 @destroy="destroyContact",
-                :entry-ref="result.data",
+                :entry-ref="contact",
               )
           h4 {{ name }}
           .description {{ description }}
@@ -41,14 +41,13 @@ export default {
     ShowBtnDestroy
   },
   mounted () {
-    this.$store.dispatch('contact', this.contactId)
+    this.$store.dispatch('get', `contacts/${this.contactId}`)
   },
   computed: {
     contact () {
-      if (!this.result) return
       return this.$store.getters.entry({
-        type: this.result.data.type,
-        id: this.result.data.id
+        type: 'contacts',
+        id: this.contactId
       })
     },
     name () {
@@ -85,15 +84,11 @@ export default {
       return Utils.attribute(this.contact, 'address-country')
     }
   },
-  asyncComputed: {
-    result () {
-      return this.$store.dispatch('contact', this.contactId)
-    }
-  },
   methods: {
     destroyContact () {
-      this.$store.dispatch('destroyContact', this.contact)
-      this.$router.push('/administration/contacts')
+      this.$store.dispatch('destroy', this.contact).then(() => {
+        this.$router.push('/administration/contacts')
+      })
     }
   }
 }

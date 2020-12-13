@@ -44,6 +44,7 @@ import LabelActions from 'store/models/label-actions'
 import ProjectsLeftAside from 'store/modules/projects-left-aside'
 import ProjectsIndex from 'store/modules/projects-index'
 import recordsForm from 'store/modules/records-form'
+import contactsIndex from 'store/modules/contacts-index'
 
 export default {
   strict: true,
@@ -55,7 +56,8 @@ export default {
     issuesShow: issuesShow,
     projectsLeftAside: ProjectsLeftAside,
     projectsIndex: ProjectsIndex,
-    recordsForm
+    recordsForm,
+    contactsIndex
   },
   state: {
     aside: null,
