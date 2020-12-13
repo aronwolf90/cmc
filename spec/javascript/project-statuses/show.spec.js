@@ -14,12 +14,12 @@ localVue.use(VueRouter)
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
 
-describe('ShowIssue', () => {
+describe('project-statuses/show.vue', () => {
   let project = {
     id: 1,
     type: 'projects',
     attributes: {
-      name: 'Issue 1'
+      name: 'Project 1'
     }
   }
   let projectStatus = {
@@ -37,6 +37,9 @@ describe('ShowIssue', () => {
   let store = {
     getters: {
       project () {
+        return () => project
+      },
+      entry () {
         return () => project
       },
       projectStatus () {
@@ -63,15 +66,18 @@ describe('ShowIssue', () => {
     })
   })
 
-  it('show projects', (done) => {
+  it('show projects', async () => {
     const wrapper = mount(Index, { store: new Vuex.Store(store), localVue, router })
 
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        expect(wrapper.html()).to.include('Issue 1')
-        done()
-      })
-    })
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+
+    console.log(wrapper.vm.projects)
+    console.log(wrapper.vm.projectBoard)
+    expect(wrapper.html()).to.include('Project 1')
   })
 
   it('call destroyProjectStatus', (done) => {

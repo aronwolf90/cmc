@@ -1,5 +1,5 @@
 <template lang='pug'>
-  li.list-group-item
+  li.list-group-item(v-if="entry")
     router-link.text-dark(:to="`/administration/${resource}/${entryId}`")
       | {{ text || '---' }}
     router-link.btn.btn-secondary.btn-sm.pull-right(
@@ -22,6 +22,14 @@ export default {
   ],
   components: {
     BtnEdit
+  },
+  computed: {
+    entry () {
+      return this.$store.getters.entry({
+        id: this.entryId,
+        type: this.entryType
+      })
+    }
   }
 }
 </script>

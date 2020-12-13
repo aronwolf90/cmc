@@ -16,7 +16,8 @@
         :entry-type="contact.type",
         :entry-id="contact.id",
         :text="contact.attributes.name",
-        :editBtn="true"
+        :editBtn="true",
+        :key="contact.id"
       )
 </template>
 
@@ -29,19 +30,12 @@ export default {
     IndexTopSection,
     IndexListItem
   },
-  asyncComputed: {
-    result () {
-      return this.$store.dispatch('getContacts')
-    }
+  created () {
+    this.$store.dispatch('contactsIndex/fetch')
   },
   computed: {
     contacts () {
-      if (!this.result) return []
-      return this.result.data
-    },
-    apiLinks () {
-      if (!this.result) return
-      return this.result.links
+      return this.$store.getters['contactsIndex/contacts']
     }
   },
   methods: {

@@ -2,7 +2,6 @@ import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import Show from '../../../app/javascript/issue/show'
 import MarkdownViewer from '../../../app/javascript/markdown_viewer'
-import sinon from 'sinon'
 import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 
@@ -24,7 +23,6 @@ describe('Show', () => {
     destroy () { return Promise.resolve() }
   }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
-  def('Turbolinks', () => ({ visit: sinon.spy() }))
 
   describe('with issue', () => {
     def('issue', () => ({
