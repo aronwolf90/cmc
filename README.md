@@ -47,4 +47,4 @@ the helm package can be found [here](cmc/README.md)
 * RuboCop (Ruby): docker-compose run rubocop
 
 # Links
-homepage: https://about.cost-manager.com
+homepage: https://about.ticktensio.com/
