@@ -1,5 +1,5 @@
 <template lang='pug'>
-  .spent-time(v-if="contact")
+  .spent-time
     details-select-header-input(
       v-model="idValue",
       :editMode.sync="idEditMode",
@@ -39,32 +39,17 @@ import { Utils } from 'vuex-jsonapi-client'
 import DetailsStringInput from 'components/details-string-input'
 import DetailsSelectHeaderInput from 'components/details-select-header-input'
 
-const valueToAttribute = (key, value) => {
-  const result = {
-    attributes: {
-    }
-  }
-
-  result.attributes[key] = value
-  return result
-}
-
 export default {
   components: {
     DetailsStringInput,
     DetailsSelectHeaderInput
   },
-  data () {
-    return {
-      email: {
-        value: 'aron.wolf@sumcumo.com',
-        editMode: false
-      }
-    }
-  },
   computed: {
     contact () {
       return this.$store.getters['projectsShow/contact']
+    },
+    project () {
+      return this.$store.getters['projectsShow/project']
     },
     contactId () {
       if (!this.contact) return
@@ -154,31 +139,22 @@ export default {
       this.$store.dispatch('projectsShow/changeContact')
     },
     submitName () {
-      this.$store.dispatch('updateContact', {
-        entry: this.contact,
-        payload: valueToAttribute(
-          'name',
-          this.nameValue
-        )
+      this.$store.dispatch('projectsShow/updateContactAttributes', {
+        name: this.nameValue
       }).then(() => {
         this.nameEditMode = false
       })
     },
     submitTelephoneNumber () {
-      this.$store.dispatch('updateContact', {
-        entry: this.contact,
-        payload: valueToAttribute(
-          'telephone',
-          this.telephoneNumberValue
-        )
+      this.$store.dispatch('projectsShow/updateContactAttributes', {
+        telephone: this.telephoneNumberValue
       }).then(() => {
         this.telephoneNumberEditMode = false
       })
     },
     submitEmail () {
-      this.$store.dispatch('updateContact', {
-        entry: this.contact,
-        payload: valueToAttribute('email', this.emailValue)
+      this.$store.dispatch('projectsShow/updateContactAttributes', {
+        email: this.emailValue
       }).then(() => {
         this.emailEditMode = false
       })

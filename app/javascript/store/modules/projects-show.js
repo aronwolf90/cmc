@@ -226,6 +226,25 @@ export default {
         root: true
       })
     },
+    updateContactAttributes (context, attributes) {
+      return context.dispatch('update', {
+        entry: context.getters.project,
+        payload: {
+          relationships: {
+            contact: {
+              data: {
+                attributes
+              }
+            }
+          }
+        }
+      },
+      {
+        root: true
+      }).then(response => {
+        context.commit('contactIdValue', response.data.data.relationships.contact.data.id)
+      })
+    },
     changeContact (context) {
       return context.dispatch('update', {
         entry: context.getters.project,

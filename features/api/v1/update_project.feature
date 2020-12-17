@@ -26,7 +26,7 @@ Scenario: PATCH
       }
     }
     """
-  Then the response status should be "204"
+  Then the response status should be "200"
   When I send a GET request to "/api/v1/projects/1"
   Then the JSON response should be:
     """

@@ -94,13 +94,8 @@ describe('DetailsStringInput', () => {
       wrapper.vm.$nextTick(() => {
         wrapper.vm.$nextTick(() => {
           expect(detailsStringInput.vm.editMode).to.eq(false)
-          expect(dispatch).to.have.been.calledWith('updateContact', {
-            entry: contactRef,
-            payload: {
-              attributes: {
-                telephone: '+49 821 598-1111'
-              }
-            }
+          expect(dispatch).to.have.been.calledWith('projectsShow/updateContactAttributes', {
+            telephone: '+49 821 598-1111'
           })
           done()
         })
@@ -127,16 +122,9 @@ describe('DetailsStringInput', () => {
       wrapper.vm.$nextTick(() => {
         wrapper.vm.$nextTick(() => {
           expect(detailsStringInput.vm.editMode).to.eq(false)
-          expect(dispatch).to.have.been.calledWith(
-            'updateContact', {
-              entry: contactRef,
-              payload: {
-                attributes: {
-                  email: 'aron.wolf@test.com'
-                }
-              }
-            }
-          )
+          expect(dispatch).to.have.been.calledWith('projectsShow/updateContactAttributes', {
+            email: 'aron.wolf@test.com'
+          })
           done()
         })
       })

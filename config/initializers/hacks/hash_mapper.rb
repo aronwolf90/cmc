@@ -23,12 +23,32 @@ class HashMapper::Map
       v = if h.is_a?(Hash)
         [h[e.to_sym], h[e.to_s]].compact.first
       else
-        h[e]
+        h&.dig(e)
       end
       return :hash_mapper_no_value if hash_mapper_no_value?(e, v, h)
 
       v
     end
     delegated_mapper ? delegate_to_nested_mapper(value, e) : value
+  end
+
+  def add_value_to_hash!(hash, path, value)
+    path.inject_with_index(hash) do |h,e,i|
+      if !h[e].nil? # it can be FALSE
+        h[e]
+      else
+        h[e] = if i == path.size-1
+          local_value = path.apply_filter(value)
+          next if local_value == :hash_mapper_no_value 
+          local_value
+        else
+          if path.segments[i+1].is_a? Integer
+            []
+          else
+            {}
+          end
+        end
+      end
+    end
   end
 end

@@ -9,11 +9,16 @@ Scenario: Put /api/v1/contacts/<id>
   When I send a PUT request to "/api/v1/contacts/1" with the following:
     """
     {
-    "data": {
+      "data": {
         "id": 1,
         "type": "events",
         "attributes": {
           "kind": "company" 
+        },
+        "relationships": {
+          "contact": {
+            "name": "Contact" 
+          }
         }
       }
     }

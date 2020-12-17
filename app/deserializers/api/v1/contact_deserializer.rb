@@ -14,5 +14,7 @@ module Api::V1
     attribute :address_street
     attribute :address_number
     attribute :contact_avatar_id
+
+    has_many :projects
   end
 end
