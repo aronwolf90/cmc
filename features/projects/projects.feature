@@ -4,6 +4,7 @@ Feature: Projects
 Scenario: Create project
   Given a test-organization exists
   And I am signed in (multitenant)
+  # Create
   When I click on link "Projects"
   And I click on link "New project"
   And I enter "project title" into input named "Name"
@@ -11,43 +12,23 @@ Scenario: Create project
   Then the element "#side-body" contain the text "Test project 2"
   When I click on "[aria-label='Go to last page']"
   Then the element "#side-body" contain the text "project title"
-
-@javascript
-Scenario: Update project
-  Given a test-organization exists
-  And I am signed in (multitenant)
-  When I click on navbar link "Projects"
+  # Update
+  When I reload the page
+  And I click on navbar link "Projects"
+  And I click on "[aria-label='Go to last page']"
+  And I click on link "project title"
   And I click on ".fa-edit"
   And I enter "project title new" into input named "name-input"
   And I click on submit
   Then the element "#side-body" contain the text "project title new"
-
-@javascript
-Scenario: Show project
-  Given a test-organization exists
-  And I am signed in (multitenant)
-  When I click on navbar link "Projects"
-  And I click on link "Test project 2"
-
-@javascript
-Scenario: Comment
-  Given a test-organization exists
-  And I am signed in (multitenant)
-  When I click on navbar link "Projects"
-  And I click on link "Test project 2"
+  # Comment
   When I replace the text "test comment" from the markdown editor ".comments .markdown-editor"
   And I click on ".comments .btn"
   Then the element ".comment" contain the text "test comment"
   When I reload the page
   Then the element ".comment" contain the text "test comment"
-
-@javascript
-Scenario: Edit contact inputs
-  Given a test-organization exists
-  And I am signed in (multitenant)
-  When I click on navbar link "Projects"
-  And I click on link "Test project"
-  And I click on "#contact-name .fa-edit"
+  # Edit contact inputs
+  When I click on "#contact-name .fa-edit"
   And I enter "New name" into input named "contact-name-input"
   And I click on "#contact-name [type='submit']"
   And I click on "#contact-telephone-number .fa-edit"
@@ -60,19 +41,11 @@ Scenario: Edit contact inputs
   Then the element "#contact-name" contain the text "New name"
   And the element "#contact-telephone-number" contain the text "00000000"
   And the element "#contact-email" contain the text "new@example.com"
-
-@javascript
-Scenario: Change main responsable
-  Given a test-organization exists
-  And I am signed in (multitenant)
-  When I click on navbar link "Projects"
-  And I click on link "Test project"
-  And I click on "#main-responsable .text"
-  Then the element "#main-responsable .text" does not contain the text "user2"
+  When I click on "#main-responsable .text"
   And I click on "#main-responsable input"
   And I click on "#main-responsable .item:nth-child(2)"
   Then the element "#main-responsable .text" contain the text "user2"
-  And I reload the page
+  When I reload the page
   Then the element "#main-responsable .text" contain the text "user2"
 
 @javascript

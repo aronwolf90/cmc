@@ -7,6 +7,7 @@ class BelongsToMapper < BaseMapper
 
   def call
     map from(from_name), to(to_name) do |entry|
+      next :hash_mapper_no_value if entry.is_a?(Hash) && !entry.key?(:id)
       entry&.dig(:id)
     end
   end
