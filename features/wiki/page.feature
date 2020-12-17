@@ -4,6 +4,7 @@ Feature: Wiki page
 Scenario: Create and edit wiki page
   Given a test-organization exists
   And I am signed in (multitenant)
+  # Create
   When I click on link "Wiki"
   And I click on link "New wikipage"
   And I enter "page title" into input named "data[title]"
@@ -11,11 +12,7 @@ Scenario: Create and edit wiki page
   And I click on submit
   And I reload the page
   Then the element "#side-body" contain the text "page title"
-
-@javascript
-Scenario: Edit wiki page
-  Given a test-organization exists
-  And I am signed in (multitenant)
+  # Edit
   When I click on link "Wiki"
   And I click on link "wiki page title"
   And I click on ".fa-edit"
@@ -24,11 +21,7 @@ Scenario: Edit wiki page
   Then the element "#side-body" contain the text "wiki page test new"
   When I reload the page
   Then the element "#side-body" contain the text "wiki page test new"
-
-@javascript
-Scenario: Change category
-  Given a test-organization exists
-  And I am signed in (multitenant)
+  # Change category
   When I click on link "Wiki"
   And I click on link "wiki page title"
   Then the element "#category .text" does not contain the text "subcategory 1"
@@ -37,11 +30,7 @@ Scenario: Change category
   Then the element "#category .text" contain the text "subcategory 1"
   And I reload the page
   Then the element "#category .text" contain the text "subcategory 1"
-
-@javascript
-Scenario: Destroy wiki page
-  Given a test-organization exists
-  And I am signed in (multitenant)
+  # Destroy wiki page
   When I click on link "Wiki"
   And I click on link "wiki page title"
   And I click on ".fa-trash"

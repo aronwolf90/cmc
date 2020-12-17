@@ -47,14 +47,7 @@ Scenario: Create project
   Then the element "#main-responsable .text" contain the text "user2"
   When I reload the page
   Then the element "#main-responsable .text" contain the text "user2"
-
-@javascript
-Scenario: Create new reminder
-  Given a test-organization exists
-  And I am signed in (multitenant)
-  When I click on navbar link "Projects"
-  And I click on link "Test project"
-  Then the page contain the text "Test project"
+  # Create new reminder
   And I click on ".reminder-list .fa-plus"
   And I enter "New reminder" into input named "Title"
   And I click on "#input-group-due-at"
@@ -64,13 +57,7 @@ Scenario: Create new reminder
   Then the page contain the text "New reminder"
   When I reload the page
   Then the page contain the text "New reminder"
-
-@javascript
-Scenario: Change project status
-  Given a test-organization exists
-  And I am signed in (multitenant)
-  When I click on navbar link "Projects"
-  And I click on link "Test project"
+  # Change project status
   And I click on "#project-status-select .text"
   Then the element "#project-status-select .text" does not contain the text "Active"
   And I click on "#project-status-select input"
