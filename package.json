@@ -9,7 +9,7 @@
     "bootstrap-vue": "^2.21.1",
     "dateformat": "^3.0.3",
     "dayspan-vuetify": "^0.3.6",
-    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.49",
     "eslint-plugin-vue": "^4.7.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
