@@ -1,7 +1,7 @@
 Feature: Projects
 
 @javascript
-Scenario: Create project
+Scenario: Manage project
   Given a test-organization exists
   And I am signed in (multitenant)
   # Create

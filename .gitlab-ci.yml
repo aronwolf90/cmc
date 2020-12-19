@@ -8,7 +8,7 @@ stages:
   - tag_latest
 
 variables:
-  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   POSTGRES_PASSWORD: password
   POSTGRES_DB: root
   POSTGRES_USER: root
@@ -24,16 +24,15 @@ variables:
 
 build:
   stage: build
-  image: docker:latest
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   variables:
     GIT_STRATEGY: clone
-  services:
-    - docker:dind
   script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker pull $CI_REGISTRY_IMAGE
-    - docker build --cache-from $CI_REGISTRY_IMAGE -t $CONTAINER_RELEASE_IMAGE .
-    - docker push $CONTAINER_RELEASE_IMAGE
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CONTAINER_RELEASE_IMAGE --cache=true
 
 helm_lint:
   stage: test
@@ -61,15 +60,24 @@ rspec:
     paths:
       - coverage/
     expire_in: 30 days
+  cache:
+    paths:
+      - node_modules/
+      - .yarn
   script:
-    - cd /app
+    - cp -rT /app .
+    - yarn install --cache-folder .yarn
     - rspec
-    - mv /app/coverage/ $CI_PROJECT_DIR
 
 eslint:
   stage: test
+  cache:
+    paths:
+      - node_modules/
+      - .yarn
   script:
-    - cd /app
+    - cp -rT /app .
+    - yarn install --cache-folder .yarn
     - yarn eslint
 
 rubocop:
@@ -80,8 +88,13 @@ rubocop:
 
 mocha:
   stage: test
+  cache:
+    paths:
+    - node_modules/
+    - .yarn
   script:
-    - cd /app
+    - cp -rT /app .
+    - yarn install --cache-folder .yarn
     - yarn test
 
 cucumber_api:
@@ -107,9 +120,9 @@ cucumber_api:
     - apk add curl
     - export IMAGE=$CONTAINER_RELEASE_IMAGE
     - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
-    - docker-compose -f docker-compose.gitlab.yml run app bash -c "RAILS_ENV=production rake db:setup"
+    - docker-compose -f docker-compose.gitlab.yml run app rake db:setup
     - docker-compose -f docker-compose.gitlab.yml up -d
-    - docker-compose -f docker-compose.gitlab.yml run -e CI_NODE_INDEX=$CI_NODE_INDEX -e CI_NODE_TOTAL=$CI_NODE_TOTAL -e REGEX=$REGEX app bin/ci_split_cucumber.sh
+    - docker-compose -f docker-compose.gitlab.yml run -e CI_NODE_INDEX=$CI_NODE_INDEX -e CI_NODE_TOTAL=$CI_NODE_TOTAL -e REGEX=$REGEX -e RAILS_ENV=test app bin/ci_split_cucumber.sh
 
 cucumber:
   stage: test
@@ -134,9 +147,9 @@ cucumber:
     - apk add curl
     - export IMAGE=$CONTAINER_RELEASE_IMAGE
     - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
-    - docker-compose -f docker-compose.gitlab.yml run app bash -c "RAILS_ENV=production rake db:setup"
+    - docker-compose -f docker-compose.gitlab.yml run app rake db:setup
     - docker-compose -f docker-compose.gitlab.yml up -d
-    - docker-compose -f docker-compose.gitlab.yml run -e CI_NODE_INDEX=$CI_NODE_INDEX -e CI_NODE_TOTAL=$CI_NODE_TOTAL -e REGEX=$REGEX app bin/ci_split_cucumber.sh
+    - docker-compose -f docker-compose.gitlab.yml run -e CI_NODE_INDEX=$CI_NODE_INDEX -e CI_NODE_TOTAL=$CI_NODE_TOTAL -e REGEX=$REGEX -e RAILS_ENV=test app bin/ci_split_cucumber.sh
 
 deploy:
   stage: deploy
