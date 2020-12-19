@@ -13,11 +13,7 @@ Scenario: Create document
   Then the element ".progress-bar" contain the text "100"
   And I click on submit
   Then the element "#side-body" contain the text "document name"
-
-@javascript
-Scenario: Edit document
-  Given a test-organization exists
-  And I am signed in (multitenant)
+  # Edit document
   When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Documents"

@@ -65,6 +65,7 @@ services:
       - SECRET_KEY_BASE=5d1ee3590cdac32f527d1c4c835578859ecbd50ac1b03ff6d4689c19d732b5c9050ceb66d8b625cacadb1c1228095a7fd855933ce1881075a577e7cb8aea3432
       - MAILER_SMTP_DOMAIN=mail_hog
       - MAILER_PORT=1025 
+      - RAILS_ENV=production
     depends_on:
       db:
         condition: service_healthy
@@ -105,6 +106,7 @@ services:
       - SECRET_KEY_BASE=5d1ee3590cdac32f527d1c4c835578859ecbd50ac1b03ff6d4689c19d732b5c9050ceb66d8b625cacadb1c1228095a7fd855933ce1881075a577e7cb8aea3432
       - MAILER_SMTP_DOMAIN=mail_hog
       - MAILER_PORT=1025 
+      - RAILS_ENV=production
     ports:
       - "3000:3000"
     depends_on:

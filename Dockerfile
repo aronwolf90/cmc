@@ -1,6 +1,8 @@
-FROM ruby:2.6-alpine
+FROM ruby:2.6-alpine AS base
 
 ENV DOCKER true
+ENV DISABLE_SPRING true
+ENV DISABLE_BOOTSNAP true
 
 WORKDIR  /app
 
@@ -13,6 +15,8 @@ RUN echo "export PATH=/app/bin:$PATH" >> ~/.profile && \
   nodejs yarn vim tmux \
   postgresql-dev \
   grep curl
+
+FROM base AS builder
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --jobs $(nproc)
@@ -27,5 +31,11 @@ RUN SECRET_KEY_BASE='9479a648d2fb' \
   bundle exec rails assets:clean webpacker:compile && \
   rm -r tmp/ && \
   mkdir -p tmp/pids
+
+FROM base
+
+COPY . ./
+COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
+COPY --from=builder /app/public /app/public
 
 CMD bundle exec puma -C config/puma.rb
