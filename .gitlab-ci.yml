@@ -97,14 +97,11 @@ mocha:
     - yarn install --cache-folder .yarn
     - yarn test
 
-cucumber_api:
+.cucumber:
   stage: test
   variables:
     GIT_STRATEGY: clone
     DOCKER_HOST: tcp://docker:2375
-    REGEX: "features/api.*feature" 
-    CI_NODE_INDEX: 1
-    CI_NODE_TOTAL: 1
   image:
     name: docker/compose:1.24.1
     entrypoint: ["/bin/sh", "-c"]
@@ -114,42 +111,28 @@ cucumber_api:
       - screenshots
       - log
     expire_in: 30 days
+    expire_in: 30 days
   services:
     - docker:dind
   script:
-    - apk add curl
     - export IMAGE=$CONTAINER_RELEASE_IMAGE
     - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
     - docker-compose -f docker-compose.gitlab.yml run app rake db:setup
     - docker-compose -f docker-compose.gitlab.yml up -d
     - docker-compose -f docker-compose.gitlab.yml run -e CI_NODE_INDEX=$CI_NODE_INDEX -e CI_NODE_TOTAL=$CI_NODE_TOTAL -e REGEX=$REGEX -e RAILS_ENV=test app bin/ci_split_cucumber.sh
 
+cucumber_api:
+  extends: .cucumber
+  variables:
+    REGEX: "features/api.*feature" 
+    CI_NODE_INDEX: 1
+    CI_NODE_TOTAL: 1
+
 cucumber:
-  stage: test
+  extends: .cucumber
   parallel: 4
   variables:
-    GIT_STRATEGY: clone
-    DOCKER_HOST: tcp://docker:2375
     REGEX: "features/[^a][^p][^i].*feature" 
-  image:
-    name: docker/compose:1.24.1
-    entrypoint: ["/bin/sh", "-c"]
-  artifacts:
-    when: on_failure
-    paths:
-      - screenshots
-      - log
-    expire_in: 30 days
-    expire_in: 30 days
-  services:
-    - docker:dind
-  script:
-    - apk add curl
-    - export IMAGE=$CONTAINER_RELEASE_IMAGE
-    - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
-    - docker-compose -f docker-compose.gitlab.yml run app rake db:setup
-    - docker-compose -f docker-compose.gitlab.yml up -d
-    - docker-compose -f docker-compose.gitlab.yml run -e CI_NODE_INDEX=$CI_NODE_INDEX -e CI_NODE_TOTAL=$CI_NODE_TOTAL -e REGEX=$REGEX -e RAILS_ENV=test app bin/ci_split_cucumber.sh
 
 deploy:
   stage: deploy
