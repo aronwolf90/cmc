@@ -11570,10 +11570,10 @@ vue-search-select@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/vue-search-select/-/vue-search-select-2.4.0.tgz#de5d0c84f5d1818261ad9bf82fd53e5e726199ab"
 
-vue-select@^3.11.1:
-  version "3.11.1"
-  resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-3.11.1.tgz#f4a27dbef96f68fce2ea006a236f038809edc1ff"
-  integrity sha512-DgfT6JnShgfbukOQLRSZGbYAc5fGwD4JOYG+mjV0EYHtH1D+tQSkHBC4waqEs7zvjCJA5veNSAX0jMDt1acsEQ==
+vue-select@^3.11.2:
+  version "3.11.2"
+  resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-3.11.2.tgz#3ef93e3f2707e133c2df0b2920a05eea78764d18"
+  integrity sha512-pIOcY8ajWNSwg8Ns4eHVr5ZWwqKCSZeQRymTnlUI8i+3QiQXF6JIM4lylK6mVfbccs4S6vOyxB7zmJBpp7tDUg==
 
 vue-store@^0.3.1:
   version "0.3.1"
