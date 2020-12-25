@@ -144,7 +144,7 @@ deploy:
     url: https://ticktensio.com
   script:
     - doctl kubernetes cluster kubeconfig save webcloudpower
-    - helm init --client-only
+    - helm init --client-only --stable-repo-url https://charts.helm.sh/stable
     - kubectl delete jobs -n cmc-production --all
     - helm upgrade cmc-production chart --install --wait --force
         --timeout=800
