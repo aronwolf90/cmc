@@ -3,7 +3,7 @@
 module Api
   module V1
     class RecordSerializer < ApplicationSerializer
-      attributes :start_time, :end_time
+      attributes :start_time, :end_time, :description
 
       belongs_to :user, serializer: UserSerializer
       belongs_to :issue, serializer: IssueSerializer

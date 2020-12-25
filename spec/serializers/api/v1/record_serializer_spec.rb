@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::RecordSerializer, type: :serializer do
-  let(:issue) { build_stubbed(:issue) }
+  let(:issue) { build_stubbed(:issue, title: "Test") }
   let(:user) { build_stubbed(:user) }
   let(:record) { build_stubbed(:record, user: user, issue: issue) }
 
@@ -13,7 +13,8 @@ RSpec.describe Api::V1::RecordSerializer, type: :serializer do
       type: "records",
       attributes: {
         "start-time": record.start_time,
-        "end-time": record.end_time
+        "end-time": record.end_time,
+        description: "Test"
       },
       relationships: {
         user: { data: {

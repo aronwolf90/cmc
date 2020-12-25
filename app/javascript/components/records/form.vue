@@ -24,8 +24,7 @@
       :errors="errors"
     )
     br
-    b-button(type="submit", variant="success") {{ submitText }}
-    b-button.pull-right(variant="secondary", to=".") Cancel
+    slot
 </template>
 
 <script>

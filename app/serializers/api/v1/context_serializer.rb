@@ -10,7 +10,8 @@ module Api
         :time_zone,
         :global_board,
         :google_calendar_integrated,
-        :google_calendar_authorization_url
+        :google_calendar_authorization_url,
+        :month_spent_time
       )
 
       link(:self) { api_v1_context_path }

@@ -117,6 +117,7 @@ services:
       - REDIS_URL=redis://redis
       - MAILER_SMTP_DOMAIN=mail_hog
       - MAILER_PORT=1025 
+      - DISABLE_BOOTSNAP=false
     command:  /bin/sh -c "bin/install.sh; rm -r tmp/pids; bin/rails s -b '0.0.0.0'"
     ports:
       - "3000:3000"

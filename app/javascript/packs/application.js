@@ -69,6 +69,8 @@ import 'stylesheets/administration.sass'
 import WikiPageShow from 'wiki_page/show'
 import WikiPageEdit from 'wiki_page/edit'
 import RecordsNew from 'pages/records/new'
+import RecordsEdit from 'pages/records/edit'
+import RecordsIndex from 'pages/records/index'
 
 const $ = jQuery
 window.jQuery = jQuery
@@ -268,7 +270,7 @@ const router = new Router({
     },
     {
       path: '/administration/records',
-      component: RailsPage,
+      component: RecordsIndex,
       props: true,
       meta: { aside: 'global' }
     },
@@ -280,7 +282,7 @@ const router = new Router({
     },
     {
       path: '/administration/records/:id/edit',
-      component: RailsPage,
+      component: RecordsEdit,
       props: true,
       meta: { aside: 'global' }
     },
