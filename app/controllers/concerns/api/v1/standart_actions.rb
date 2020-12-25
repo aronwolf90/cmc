@@ -13,7 +13,7 @@ module Api
 
           render_json_api json: query.offset(per_page * (page - 1)).limit(per_page), meta: {
             count: query.count
-          }
+          }.merge(index_meta)
         rescue Pundit::NotAuthorizedError
           head :forbidden
         end
@@ -86,6 +86,10 @@ module Api
         end
 
         def scope
+          {}
+        end
+
+        def index_meta
           {}
         end
 

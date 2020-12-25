@@ -20,9 +20,9 @@ Scenario: Manage Records
   Then the element "#side-body" contain the text "Test issue 1"
   # Record edit
   And I click on ".fa-edit"
-  And I click on "#data_end_time"
+  And I click on "label" with "End time"
   And I click on "tr:last-of-type > [data-day]:last-of-type"
-  And I click on "label"
+  And I click on ".search-section"
   And I click on submit
   Then the page contain the year of one week ago
   # Downlad csv

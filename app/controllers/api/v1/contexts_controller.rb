@@ -18,6 +18,13 @@ module Api
           google_calendar_integrated: organization&.google_calendar_id.present?,
           google_calendar_authorization_url: GoogleCalendarClient.authentication_url(
             organization: organization
+          ),
+          month_spent_time: SpendedTimeCalculator.call(
+            RecordsIntervalQuery.call(
+              current_user.records,
+              start_time: Time.zone.now.beginning_of_month,
+              end_time: Time.zone.now.end_of_month
+            )
           )
         ), include: [
           :current_user,

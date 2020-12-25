@@ -25,6 +25,7 @@ Scenario: Post an valid record using json in POST body
         "id": "7",
         "type": "records",
         "attributes": {
+          "description": "Test issue 1",
           "start-time": "2018-02-04T13:00:00.000+01:00",
           "end-time": null
         },

@@ -45,6 +45,7 @@ import ProjectsLeftAside from 'store/modules/projects-left-aside'
 import ProjectsIndex from 'store/modules/projects-index'
 import recordsForm from 'store/modules/records-form'
 import contactsIndex from 'store/modules/contacts-index'
+import recordsIndex from 'store/modules/records-index'
 
 export default {
   strict: true,
@@ -57,7 +58,8 @@ export default {
     projectsLeftAside: ProjectsLeftAside,
     projectsIndex: ProjectsIndex,
     recordsForm,
-    contactsIndex
+    contactsIndex,
+    recordsIndex
   },
   state: {
     aside: null,

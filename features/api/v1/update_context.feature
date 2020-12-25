@@ -34,7 +34,8 @@ Feature: API: update context
                "time-zone":"Madrid",
                "global-board":true,
                "google-calendar-authorization-url": "<.*>",
-               "google-calendar-integrated": false
+               "google-calendar-integrated": false,
+               "month-spent-time": 0
             },
             "relationships":{
                "current-user":{

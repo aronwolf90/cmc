@@ -12,7 +12,8 @@ RSpec.describe Api::V1::ContextSerializer, type: :serializer do
       time_zone: "Berlin",
       global_board: true,
       google_calendar_integrated: true,
-      google_calendar_authorization_url: "http://test.com"
+      google_calendar_authorization_url: "http://test.com",
+      month_spent_time: 100
     )
   end
 
@@ -27,7 +28,8 @@ RSpec.describe Api::V1::ContextSerializer, type: :serializer do
           "time-zone": "Berlin",
           "global-board": true,
           "google-calendar-integrated": true,
-          "google-calendar-authorization-url": "http://test.com"
+          "google-calendar-authorization-url": "http://test.com",
+          "month-spent-time": 100
         },
         relationships: {
           "current-user": { data: { id: user.id.to_s, type: "users" } }

@@ -19,7 +19,8 @@ Scenario: Get
           "global-board": false,
           "time-zone": "Berlin",
           "google-calendar-integrated": false,
-					"google-calendar-authorization-url": "https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=<.*>&redirect_uri=http://lvh.me:3000/google_calenders/create_callback&response_type=code&scope=https://www.googleapis.com/auth/calendar&state=test-organization"
+          "google-calendar-authorization-url": "https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=<.*>&redirect_uri=http://lvh.me:3000/google_calenders/create_callback&response_type=code&scope=https://www.googleapis.com/auth/calendar&state=test-organization",
+          "month-spent-time": 0
         },
         "relationships": {
           "current-user": { "data": { "id": "1", "type": "users" } }

@@ -1,8 +1,7 @@
 <template lang='pug'>
-  records-form(
-    @submit="updateRecord",
-    submit-text="Create record"
-  )
+  records-form(@submit="updateRecord")
+    b-button(type="submit", variant="success") Create record
+    b-button.pull-right(variant="secondary", to="/administration/records") Cancel
 </template>
 
 <script>

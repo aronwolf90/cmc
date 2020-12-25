@@ -6,6 +6,6 @@ module Api::V1
     namespace ::Api::V1::Records
     model_class Record
 
-    public :create, :update
+    public :show, :create, :update, :destroy
   end
 end

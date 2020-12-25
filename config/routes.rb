@@ -100,7 +100,8 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :records, only: %i[create update]
+      resources :records, only: %i[show create update destroy]
+      resources :record_days, only: :index
 
       resources :projects, only: %i[index show create update destroy] do
         scope module: :projects do
