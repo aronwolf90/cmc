@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Page from './page'
+import Page from 'wiki_content/page'
 import { Utils } from 'vuex-jsonapi-client'
 
 export default {

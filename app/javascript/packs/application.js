@@ -4,58 +4,25 @@ import Vue from 'vue/dist/vue.common'
 import Vuex from 'vuex'
 import Store from '../store'
 
-import IssuesBoard from '../board.vue'
-import Issue from '../issue.vue'
+import WikiPageShow from 'wiki_page/show'
+import ProjectDefault from 'projects/default'
+import ProjectsEdit from 'pages/projects/_id/edit'
 import SharedIssueSection from 'components/shared-issue-section'
-import WikiContent from '../wiki_content'
-import WikiPage from '../wiki_page'
-import ArchiveContent from '../archive_content'
 import ProjectSearchSelect from '../project_search_select'
-import Calendar from '../calendar'
 import Timepicker from '../components/timepicker'
 import Datepicker from '../components/datepicker'
-import Attendances from '../attendances'
-import ProjectIndex from '../projects/index'
-import UserIndex from '../users/index'
-import ContactsIndex from '../contacts/index'
-import Contact from '../contacts/show'
-import ContactNew from '../contacts/new'
-import ContactEdit from '../contacts/edit'
-import DocumentNew from '../documents/new'
-import DocumentEdit from '../documents/edit'
-import AdminPayment from '../admin/payments/index.vue'
-import UserNew from '../users/new'
-import UserConfigurationEdit from '../users/configuration/edit.vue'
 import NotificationBell from '../components/notification_bell'
-import ContextEdit from '../admin/context/edit'
 import Router from 'vue-router'
 import IssueShow from 'issue/show'
-import IssueNew from 'board/issues/new'
 import IssueEdit from 'issue/edit'
 import ProjectsLeftAside from 'components/projects-left-aside'
-import ProjectsIndex from 'projects/index'
-import ProjectStatusShow from 'project-statuses/show'
-import ProjectStatusNew from 'project-statuses/new'
-import ProjectStatusEdit from 'project-statuses/edit'
-import ProjectNew from 'projects/new'
-import ProjectEdit from 'projects/edit'
-import ProjectShow from 'projects/show'
-import ProjectDefault from 'projects/default'
-import ProjectBoardListNew from 'project-statuses/project-board-lists/new'
-import ProjectBoardListEdit from 'project-board-lists/edit'
 import MarkdownEditor from 'markdown_editor'
 import ProjectsDetailLeftAside from 'components/projects-detail-left-aside'
-import ProjectsDocumentsIndex from 'projects/documents/index'
-import ProjectsDocumentsNew from 'projects/documents/new'
-import ProjectsDocumentsEdit from 'projects/documents/edit'
 import LeftAside from 'components/left-aside'
 import RailsPage from 'components/rails-page'
 import MenuItem from 'components/menu-item'
 import Asides from 'components/asides'
 import BtnSubmit from 'components/btn-submit'
-import ProjectTickets from 'projects/tickets'
-import BoardListNew from 'board_lists/new'
-import BoardListEdit from 'board_lists/edit'
 import 'vue-select/dist/vue-select.css'
 import LoadScript from 'vue-plugin-load-script'
 import VueAnalytics from 'vue-analytics'
@@ -66,11 +33,7 @@ import 'bootstrap'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import 'stylesheets/administration.sass'
-import WikiPageShow from 'wiki_page/show'
 import WikiPageEdit from 'wiki_page/edit'
-import RecordsNew from 'pages/records/new'
-import RecordsEdit from 'pages/records/edit'
-import RecordsIndex from 'pages/records/index'
 
 const $ = jQuery
 window.jQuery = jQuery
@@ -82,29 +45,11 @@ require.context('../images', true)
 require('../config')
 Vue.use(LoadScript)
 
-Vue.component('issues_board', IssuesBoard)
-Vue.component('issue', Issue)
 Vue.component('shared-issue-section', SharedIssueSection)
-Vue.component('wiki-content', WikiContent)
-Vue.component('wiki-page', WikiPage)
-Vue.component('archive-content', ArchiveContent)
 Vue.component('project-search-select', ProjectSearchSelect)
-Vue.component('calendar', Calendar)
 Vue.component('timepicker', Timepicker)
 Vue.component('datepicker', Datepicker)
-Vue.component('attendances', Attendances)
-Vue.component('project-index', ProjectIndex)
-Vue.component('user-index', UserIndex)
-Vue.component('contacts-index', ContactsIndex)
-Vue.component('contact', Contact)
-Vue.component('contact-new', ContactNew)
-Vue.component('contact-edit', ContactEdit)
-Vue.component('document-new', DocumentNew)
-Vue.component('document-edit', DocumentEdit)
-Vue.component('payment', AdminPayment)
-Vue.component('user-configuration-edit', UserConfigurationEdit)
 Vue.component('notification-bell', NotificationBell)
-Vue.component('context-edit', ContextEdit)
 Vue.component('projects-left-aside', ProjectsLeftAside)
 Vue.component('markdown-editor', MarkdownEditor)
 Vue.component('projects-detail-left-aside', ProjectsDetailLeftAside)
@@ -144,43 +89,43 @@ const router = new Router({
     },
     {
       path: '/administration/board_lists',
-      component: IssuesBoard,
+      component: () => import('pages/board-lists/index'),
       meta: { aside: 'global' }
     },
     {
       path: '/administration/board_lists/new',
-      component: BoardListNew,
+      component: () => import('pages/board-lists/new'),
       meta: { aside: 'global' }
     },
     {
       path: '/administration/board_lists/:id/edit',
-      component: BoardListEdit,
+      component: () => import('pages/board-lists/edit'),
       props: true,
       meta: { aside: 'global' }
     },
     {
       path: '/administration/calendar',
-      component: Calendar,
+      component: () => import('pages/calendars/index'),
       meta: { aside: 'global' }
     },
     {
       path: '/administration/attendances',
-      component: Attendances,
+      component: () => import('pages/attendances/index'),
       meta: { aside: 'global' }
     },
     {
       path: '/administration/projects',
-      component: ProjectsIndex,
+      component: () => import('pages/projects/index'),
       meta: { aside: 'projects' }
     },
     {
       path: '/administration/projects/new',
-      component: ProjectNew,
+      component: () => import('pages/projects/new'),
       meta: { aside: 'projects' }
     },
     {
       path: '/administration/projects/:id',
-      component: ProjectShow,
+      component: () => import('pages/projects/_id'),
       props: true,
       meta: { aside: 'projects-detail' },
       children: [
@@ -192,7 +137,7 @@ const router = new Router({
         },
         {
           path: 'edit',
-          component: ProjectEdit,
+          component: ProjectsEdit,
           props: true,
           meta: { aside: 'projects-detail' }
         }
@@ -205,55 +150,49 @@ const router = new Router({
       meta: { aside: 'projects-detail' }
     },
     {
-      path: '/administration/projects/:id/records/new',
-      component: RailsPage,
-      props: true,
-      meta: { aside: 'projects-detail' }
-    },
-    {
       path: '/administration/projects/:projectId/documents',
-      component: ProjectsDocumentsIndex,
+      component: () => import('pages/projects/_id/documents/index'),
       props: true,
       meta: { aside: 'projects-detail' }
     },
     {
       path: '/administration/projects/:projectId/documents/new',
-      component: ProjectsDocumentsNew,
+      component: () => import('pages/projects/_id/documents/new'),
       props: true,
       meta: { aside: 'projects-detail' }
     },
     {
       path: '/administration/projects/:projectId/documents/:id/edit',
-      component: ProjectsDocumentsEdit,
+      component: () => import('pages/projects/_id/documents/_id/edit'),
       props: true,
       meta: { aside: 'projects-detail' }
     },
     {
       path: '/administration/projects/:projectId/board_lists',
-      component: ProjectTickets,
+      component: () => import('pages/projects/_id/board-lists'),
       props: true,
       meta: { aside: 'projects-detail' }
     },
     {
       path: '/administration/projects/:projectId/board_lists/new',
-      component: BoardListNew,
+      component: () => import('pages/board-lists/new'),
       meta: { aside: 'projects-detail' }
     },
     {
       path: '/administration/projects/:projectId/board_lists/:boardListId/issues/new',
-      component: IssueNew,
+      component: () => import('pages/board-lists/issues/new'),
       props: true,
       meta: { aside: 'projects-detail' }
     },
     {
       path: '/administration/projects/:projectId/board_lists/:id/edit',
-      component: BoardListEdit,
+      component: () => import('pages/board-lists/edit'),
       props: true,
       meta: { aside: 'projects-detail' }
     },
     {
       path: '/administration/projects/:projectId/issues/:id',
-      component: Issue,
+      component: () => import('pages/issues/_id'),
       props: true,
       children: [
         {
@@ -270,60 +209,50 @@ const router = new Router({
     },
     {
       path: '/administration/records',
-      component: RecordsIndex,
+      component: () => import('pages/records/index'),
       props: true,
       meta: { aside: 'global' }
     },
     {
       path: '/administration/records/new',
-      component: RecordsNew,
+      component: () => import('pages/records/new'),
       props: true,
       meta: { aside: 'global' }
     },
     {
       path: '/administration/records/:id/edit',
-      component: RecordsEdit,
+      component: () => import('pages/records/edit'),
       props: true,
       meta: { aside: 'global' }
     },
     {
       path: '/administration/project_statuses/new',
-      component: ProjectStatusNew,
+      component: () => import('pages/project-statuses/new'),
       meta: { aside: 'projects' }
     },
     {
       path: '/administration/project_statuses/:id',
-      component: ProjectStatusShow,
+      component: () => import('pages/project-statuses/_id'),
       props: true,
       meta: { aside: 'projects' }
     },
     {
       path: '/administration/project_statuses/:id/edit',
-      component: ProjectStatusEdit,
+      component: () => import('pages/project-statuses/_id/edit'),
       props: true,
       meta: { aside: 'projects' }
     },
     {
       path: '/administration/project_statuses/:projectStatusId/project_board_lists/new',
-      component: ProjectBoardListNew,
+      component: () => import('pages/project-statuses/_id/project-board-lists/new'),
       props: true,
       meta: { aside: 'projects' }
     },
     {
       path: '/administration/project_board_lists/:id/edit',
-      component: ProjectBoardListEdit,
+      component: () => import('pages/project-board-lists/_id/edit'),
       props: true,
       meta: { aside: 'projects' }
-    },
-    {
-      path: '/administration/board_lists/',
-      component: IssuesBoard,
-      meta: { aside: 'global' }
-    },
-    {
-      path: '/administration/board_lists/new',
-      component: BoardListNew,
-      meta: { aside: 'global' }
     },
     {
       path: '/administration/board_lists/:id/edit',
@@ -332,13 +261,13 @@ const router = new Router({
     },
     {
       path: '/administration/board_lists/:boardListId/issues/new',
-      component: IssueNew,
+      component: () => import('pages/board-lists/issues/new'),
       props: true,
       meta: { aside: 'global' }
     },
     {
       path: '/administration/issues/:id',
-      component: Issue,
+      component: () => import('pages/issues/_id'),
       props: true,
       children: [
         {
@@ -355,7 +284,7 @@ const router = new Router({
     },
     {
       path: '/administration/wiki',
-      component: WikiContent,
+      component: () => import('pages/wiki/index'),
       props: true,
       meta: { aside: 'wiki' }
     },
@@ -367,7 +296,7 @@ const router = new Router({
     },
     {
       path: '/administration/wiki/pages/:wikiPageId',
-      component: WikiPage,
+      component: () => import('pages/wiki/pages/_id'),
       props: true,
       meta: { aside: 'wiki' },
       children: [
@@ -390,8 +319,14 @@ const router = new Router({
       meta: { aside: 'wiki' }
     },
     {
+      path: '/administration/wiki/categories/:id/edit',
+      component: RailsPage,
+      props: true,
+      meta: { aside: 'wiki' }
+    },
+    {
       path: '/administration/archive',
-      component: ArchiveContent,
+      component: () => import('pages/archive/index'),
       props: true,
       meta: { aside: 'archive' }
     },
@@ -409,61 +344,61 @@ const router = new Router({
     },
     {
       path: '/administration/archive/documents/new',
-      component: DocumentNew,
+      component: () => import('pages/archive/documents/new'),
       props: true,
       meta: { aside: 'archive' }
     },
     {
       path: '/administration/archive/documents/:documentId/edit',
-      component: DocumentEdit,
+      component: () => import('pages/archive/documents/_id/edit'),
       props: true,
       meta: { aside: 'archive' }
     },
     {
       path: '/administration/users',
-      component: UserIndex,
+      component: () => import('pages/users/index'),
       props: true,
       meta: { aside: 'users' }
     },
     {
       path: '/administration/users/new',
-      component: UserNew,
+      component: () => import('pages/users/new'),
       props: true,
       meta: { aside: 'users' }
     },
     {
       path: '/administration/contacts',
-      component: ContactsIndex,
+      component: () => import('pages/contacts/index'),
       props: true,
       meta: { aside: 'contacts' }
     },
     {
       path: '/administration/contacts/new',
-      component: ContactNew,
+      component: () => import('pages/contacts/new'),
       props: true,
       meta: { aside: 'contacts' }
     },
     {
       path: '/administration/contacts/:contactId',
-      component: Contact,
+      component: () => import('pages/contacts/_id'),
       props: true,
       meta: { aside: 'contacts' }
     },
     {
       path: '/administration/contacts/:contactId/edit',
-      component: ContactEdit,
+      component: () => import('pages/contacts/_id/edit'),
       props: true,
       meta: { aside: 'contacts' }
     },
     {
       path: '/administration/admin/context',
-      component: ContextEdit,
+      component: () => import('pages/admin/context/edit'),
       props: true,
       meta: { aside: 'admin' }
     },
     {
       path: '/administration/admin/payments',
-      component: AdminPayment,
+      component: () => import('pages/admin/payments/index'),
       props: true,
       meta: { aside: 'admin' }
     },
@@ -475,7 +410,7 @@ const router = new Router({
     },
     {
       path: '/administration/users/:userId/configuration/edit',
-      component: UserConfigurationEdit,
+      component: () => import('pages/users/configuration/edit'),
       props: true,
       meta: { aside: 'user-detail' }
     },

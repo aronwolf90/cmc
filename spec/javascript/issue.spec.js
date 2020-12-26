@@ -1,5 +1,5 @@
 import { mount, createLocalVue } from '@vue/test-utils'
-import Issue from '../../app/javascript/issue'
+import Issue from 'pages/issues/_id'
 import Vuex from 'vuex'
 
 const localVue = createLocalVue()
