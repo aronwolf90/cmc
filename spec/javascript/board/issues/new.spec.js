@@ -1,5 +1,4 @@
-import createWrapper from '../../helper'
-import BoardIssuesNew from 'board/issues/new'
+import BoardIssuesNew from 'pages/board-lists/issues/new'
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */

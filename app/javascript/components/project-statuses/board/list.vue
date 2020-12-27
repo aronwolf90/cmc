@@ -2,7 +2,7 @@
   .card.column(v-if='projectBoardList')
     .card-header
       .text.pull-left {{ name }}
-      a.btn.btn-sm.btn-link.pull-right.text-muted(:href="editLink")
+      router-link.btn.btn-sm.btn-link.pull-right.text-muted(:to="editLink")
         .fa.fa-edit
 
       .clearfix

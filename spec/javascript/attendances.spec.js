@@ -1,9 +1,9 @@
 import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Attendances from '../../app/javascript/attendances'
-import UserCell from '../../app/javascript/attendances/user_cell'
-import HeaderCell from '../../app/javascript/attendances/header_cell'
-import BodyCell from '../../app/javascript/attendances/body_cell'
+import Attendances from 'pages/attendances/index'
+import UserCell from 'attendances/user_cell'
+import HeaderCell from 'attendances/header_cell'
+import BodyCell from 'attendances/body_cell'
 import AsyncComputed from 'vue-async-computed'
 
 const localVue = createLocalVue()

@@ -1,7 +1,7 @@
 import { shallow, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import WikiContent from '../../app/javascript/wiki_content'
-import Category from '../../app/javascript/wiki_content/category'
+import WikiContent from 'pages/wiki/index'
+import Category from 'wiki_content/category'
 
 const localVue = createLocalVue()
 
