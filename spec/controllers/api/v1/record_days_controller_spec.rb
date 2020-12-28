@@ -7,7 +7,9 @@ RSpec.describe Api::V1::RecordDaysController, type: :controller do
   let(:model) { RecordDay.new(id: 1) }
 
   before do
-    allow(RecordDay).to receive(:ordered).and_return(Kaminari.paginate_array([model]))
+    result = double
+    allow(result).to receive(:where).and_return(Kaminari.paginate_array([model]))
+    allow(RecordDay).to receive(:ordered).and_return(result)
   end
 
   include_examples "standard api index action"

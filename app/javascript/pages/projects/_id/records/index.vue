@@ -2,13 +2,12 @@
   .records-index
     .align-items-center
       .pull-right.btn-group
-        b-button(variant="success", to="/administration/records/new") New record
-        b-button(variant="success", href="/administration/records.csv")
+        b-button(variant="success", :href="`/administration/projects/${projectId}/records.csv`")
           i.fa.fa-file-excel-o
       | {{ thisMonthSpendedTime }} hours has been spent this month
     br
     records-index-body(
-      :record-days="recordDays",
+      :record-days="projectRecordDays",
       :pagination-page-count="paginationPageCount",
       :pagination-current-page="paginationCurrentPage",
       :fetching-page="fetchingPage"
@@ -23,19 +22,25 @@ export default {
     RecordsIndexBody
   },
   async beforeRouteEnter (to, from, next) {
-    await window.store.dispatch('recordsIndex/fetch', { page: to.query.page })
+    await window.store.dispatch('projectsRecordsIndex/fetch', {
+      projectId: to.params.id,
+      page: to.query.page
+    })
     next()
   },
   async beforeRouteUpdate (to, from, next) {
-    await window.store.dispatch('recordsIndex/fetch', { page: to.query.page })
+    await window.store.dispatch('projectsRecordsIndex/fetch', {
+      projectId: to.params.id,
+      page: to.query.page
+    })
     next()
   },
   computed: {
-    recordDays () {
-      return this.$store.getters['recordsIndex/recordDays']
+    projectRecordDays () {
+      return this.$store.getters['projectsRecordsIndex/projectRecordDays']
     },
     thisMonthSpendedTime () {
-      const seconds = this.$store.getters['recordsIndex/monthSpentTime']
+      const seconds = this.$store.getters['projectsRecordsIndex/monthSpentTime']
       return [seconds / 3600, seconds / 60 % 60, seconds % 60].map(floatTime => {
         let time = Math.floor(floatTime)
         if (time < 60) {
@@ -46,13 +51,16 @@ export default {
       }).join(':')
     },
     paginationPageCount () {
-      return this.$store.getters['recordsIndex/paginationPageCount']
+      return this.$store.getters['projectsRecordsIndex/paginationPageCount']
     },
     paginationCurrentPage () {
-      return this.$store.getters['recordsIndex/paginationCurrentPage']
+      return this.$store.getters['projectsRecordsIndex/paginationCurrentPage']
     },
     fetchingPage () {
-      return this.$store.getters['recordsIndex/fetchingPage']
+      return this.$store.getters['projectsRecordsIndex/fetchingPage']
+    },
+    projectId () {
+      return this.$store.getters['projectsRecordsIndex/projectId']
     }
   },
   methods: {

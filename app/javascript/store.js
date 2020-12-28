@@ -46,6 +46,7 @@ import ProjectsIndex from 'store/modules/projects-index'
 import recordsForm from 'store/modules/records-form'
 import contactsIndex from 'store/modules/contacts-index'
 import recordsIndex from 'store/modules/records-index'
+import projectsRecordsIndex from 'store/modules/projects-records-index'
 
 export default {
   strict: true,
@@ -59,7 +60,8 @@ export default {
     projectsIndex: ProjectsIndex,
     recordsForm,
     contactsIndex,
-    recordsIndex
+    recordsIndex,
+    projectsRecordsIndex
   },
   state: {
     aside: null,

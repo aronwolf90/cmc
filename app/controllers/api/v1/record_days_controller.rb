@@ -9,7 +9,11 @@ module Api::V1
 
   private
     def query
-      model_class.ordered
+      model_class.ordered.where(filters)
+    end
+
+    def filters
+      params.permit(filter: [:user_id])[:filter]
     end
   end
 end

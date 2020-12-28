@@ -97,7 +97,7 @@ Then(/^the JSON response should match:$/) do |json|
 
   if ENV["PRINT_RESPONSE"]
     puts "The response is:"
-    puts JSON.pretty_generate(JSON.parse(json))
+    puts JSON.pretty_generate(JSON.parse(@response.body))
   end
 
   regexes = expected.scan(/<([^>]*)>/).map(&:first)
