@@ -47,11 +47,11 @@ export default {
     }
   },
   actions: {
-    async fetch (context, page) {
+    async fetch (context, { page, userId }) {
       context.commit('fetchingPage', page || 1)
-      const currentUser = await context.dispatch('getCurrentUser', null, { root: true })
+      const id = userId || (await context.dispatch('getCurrentUser', null, { root: true })).id
       return context.dispatch(
-        'get', `record_days?include=records&page=${page || 1}&user_id=${currentUser.id}`, { root: true }
+        'get', `record_days?include=records&page=${page || 1}&filter[user_id]=${id}`, { root: true }
       ).then(response => {
         context.commit('recordDays', response.data)
         context.commit('paginationCount', response.meta.count)

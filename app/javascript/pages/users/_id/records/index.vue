@@ -2,8 +2,7 @@
   .records-index
     .align-items-center
       .pull-right.btn-group
-        b-button(variant="success", to="/administration/records/new") New record
-        b-button(variant="success", href="/administration/records.csv")
+        b-button(variant="success", :href="`/administration/users/${userId}/records.csv`")
           i.fa.fa-file-excel-o
       | {{ thisMonthSpendedTime }} hours has been spent this month
     br
@@ -19,15 +18,22 @@
 import RecordsIndexBody from 'components/records/index-body'
 
 export default {
+  props: ['userId'],
   components: {
     RecordsIndexBody
   },
   async beforeRouteEnter (to, from, next) {
-    await window.store.dispatch('recordsIndex/fetch', { page: to.query.page })
+    await window.store.dispatch('recordsIndex/fetch', {
+      page: to.query.page,
+      userId: to.params.userId
+    })
     next()
   },
   async beforeRouteUpdate (to, from, next) {
-    await window.store.dispatch('recordsIndex/fetch', { page: to.query.page })
+    await window.store.dispatch('recordsIndex/fetch', {
+      page: to.query.page,
+      userId: to.params.userId
+    })
     next()
   },
   computed: {
