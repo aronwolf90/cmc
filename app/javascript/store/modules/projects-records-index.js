@@ -3,21 +3,18 @@ import { Utils } from 'vuex-jsonapi-client'
 export default {
   namespaced: true,
   state: {
-    recordDayRefs: null,
+    projectRecordDayRefs: null,
     paginationCount: null,
     paginationCurrentPage: null,
     fetchingPage: null
   },
   getters: {
-    recordDays (state, _getters, _rootState, rootGetters) {
-      if (!state.recordDayRefs) return null
+    projectRecordDays (state, _getters, _rootState, rootGetters) {
+      if (!state.projectRecordDayRefs) return null
 
-      return state.recordDayRefs.map(recordDayRef => {
-        return rootGetters.entry(recordDayRef)
+      return state.projectRecordDayRefs.map(projectRecordDayRef => {
+        return rootGetters.entry(projectRecordDayRef)
       })
-    },
-    monthSpentTime (state, _getters, _rootState, rootGetters) {
-      return Utils.attribute(rootGetters.context, 'month-spent-time')
     },
     paginationCount (state) {
       return state.paginationCount
@@ -30,11 +27,17 @@ export default {
     },
     paginationPageCount (state, getters) {
       return Math.ceil(getters.paginationCount / 10)
+    },
+    monthSpentTime (state) {
+      return state.monthSpentTime
+    },
+    projectId (state) {
+      return state.projectId
     }
   },
   mutations: {
-    recordDays (state, recordDays) {
-      state.recordDayRefs = Utils.entryArrayToRef(recordDays)
+    projectRecordDays (state, projectRecordDays) {
+      state.projectRecordDayRefs = Utils.entryArrayToRef(projectRecordDays)
     },
     paginationCount (state, paginationCount) {
       state.paginationCount = paginationCount
@@ -44,18 +47,25 @@ export default {
     },
     fetchingPage (state, fetchingPage) {
       state.fetchingPage = fetchingPage
+    },
+    monthSpentTime (state, monthSpentTime) {
+      state.monthSpentTime = monthSpentTime
+    },
+    projectId (state, projectId) {
+      state.projectId = projectId
     }
   },
   actions: {
-    async fetch (context, page) {
+    fetch (context, { projectId, page }) {
       context.commit('fetchingPage', page || 1)
-      const currentUser = await context.dispatch('getCurrentUser', null, { root: true })
       return context.dispatch(
-        'get', `record_days?include=records&page=${page || 1}&user_id=${currentUser.id}`, { root: true }
+        'get', `project_record_days?include=records&page=${page || 1}&filter[project_id]=${projectId}`, { root: true }
       ).then(response => {
-        context.commit('recordDays', response.data)
+        context.commit('projectRecordDays', response.data)
         context.commit('paginationCount', response.meta.count)
         context.commit('paginationCurrentPage', page || 1)
+        context.commit('monthSpentTime', response.meta['month-spent-time'])
+        context.commit('projectId', projectId)
       })
     }
   }

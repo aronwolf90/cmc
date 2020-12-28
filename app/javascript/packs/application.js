@@ -145,7 +145,7 @@ const router = new Router({
     },
     {
       path: '/administration/projects/:id/records',
-      component: RailsPage,
+      component: () => import('pages/projects/_id/records/index'),
       props: true,
       meta: { aside: 'projects-detail' }
     },

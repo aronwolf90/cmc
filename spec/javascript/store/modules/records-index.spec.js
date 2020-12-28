@@ -52,7 +52,8 @@ describe('store/modules/records-index.js', () => {
       meta: { count: 1 }
     }
 
-    dispatch.withArgs('get', 'record_days?include=records&page=1').returns(Promise.resolve(response))
+    dispatch.withArgs('getCurrentUser').returns(Promise.resolve({ id: '1', type: 'users' }))
+    dispatch.withArgs('get', 'record_days?include=records&page=1&user_id=1').returns(Promise.resolve(response))
     await RecordsIndexModule.actions.fetch({ dispatch, commit })
 
     expect(commit).to.have.been.calledWith('recordDays', [recordDay])

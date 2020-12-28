@@ -1,57 +1,24 @@
-import PagesRecordsIndex from 'pages/records/index'
+import PagesRecordsIndex from 'components/records/index-body'
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
 
-describe('pages/records/index', () => {
+describe('components/records/index-body', () => {
   const relationship = sandbox.stub()
   const factory = ({ monthSpentTime = 0, recordDays = [] }) => {
     return createWrapper(PagesRecordsIndex, {
+      propsData: {
+        recordDays: recordDays
+      },
       mocks: {
         $store: {
           getters: {
-            'recordsIndex/monthSpentTime': monthSpentTime,
-            'recordsIndex/recordDays': recordDays,
             relationship
           }
         }
       }
     })
   }
-
-  describe('monthSpentTime', () => {
-    it('renders correctly when monthSpentTime is one minute', () => {
-      const wrapper = factory({ monthSpentTime: 60 })
-
-      expect(wrapper.html()).to.include('00:01:00')
-    })
-
-    it('renders correctly when monthSpentTime is one hour', () => {
-      const wrapper = factory({ monthSpentTime: 3600 })
-
-      expect(wrapper.html()).to.include('01:00:00')
-    })
-
-    it('renders correctly when monthSpentTime is 100 hours', () => {
-      const wrapper = factory({ monthSpentTime: 100 * 3600 })
-
-      expect(wrapper.html()).to.include('100:00:00')
-    })
-  })
-
-  it('renders the new btn', () => {
-    const wrapper = factory(PagesRecordsIndex)
-
-    expect(wrapper.find('a[href="/administration/records/new"]').exists()).to.be.true
-    expect(wrapper.html()).to.include('New record')
-  })
-
-  it('renders the csv btn', () => {
-    const wrapper = factory(PagesRecordsIndex)
-
-    expect(wrapper.find('a[href="/administration/records.csv"]').exists()).to.be.true
-    expect(wrapper.html()).to.include('fa fa-file-excel-o')
-  })
 
   it('render record days with records', () => {
     const recordDay = {
