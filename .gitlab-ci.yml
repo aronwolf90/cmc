@@ -146,7 +146,7 @@ deploy:
     - mkdir -p ~/.kube/
     - cp $KUBE_CONFIG ~/.kube/config
     - kubectl delete jobs -n cmc-production --all
-    - helm upgrade cmc-production chart --install --wait --force
+    - helm upgrade cmc-production chart --install --wait
         --timeout=800s
         -f values.yaml
         --set image.tag=$CI_COMMIT_SHA
