@@ -66,6 +66,7 @@ services:
       - MAILER_SMTP_DOMAIN=mail_hog
       - MAILER_PORT=1025 
       - RAILS_ENV=production
+      - PAYMENT_TOKEN=YWRtaW46dGVzdHRlc3Q=
     depends_on:
       db:
         condition: service_healthy
@@ -107,6 +108,7 @@ services:
       - MAILER_SMTP_DOMAIN=mail_hog
       - MAILER_PORT=1025 
       - RAILS_ENV=production
+      - PAYMENT_TOKEN=YWRtaW46dGVzdHRlc3Q=
     ports:
       - "3000:3000"
     depends_on:

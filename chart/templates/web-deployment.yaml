@@ -33,6 +33,8 @@ spec:
               name: {{ .Release.Name }}-mailer
           - secretRef:
               name: {{ .Release.Name }}-google
+          - secretRef:
+              name: {{ .Release.Name }}-payment
           volumeMounts:
             {{- if .Values.webPersistence.enabled }}
             - name: files

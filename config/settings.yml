@@ -8,7 +8,7 @@ payment:
   enabled: <%= ENV["PAYMENT_ENABLED"] %>
   host: <%= ENV["PAYMENT_HOST"] || "http://payment:4000" %>
   headers:
-    "Authorization": Basic YWRtaW46dGVzdHRlc3Q=
+    "Authorization": Basic <%= ENV["PAYMENT_TOKEN"] %>
     "Content-Type": application/json
 redis_url: <%= ENV["REDIS_URL"]  %>
 organization_blacklist:

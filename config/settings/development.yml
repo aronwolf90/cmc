@@ -1,3 +1,6 @@
 admin_password: testtest
 payment:
   enabled: true
+  headers:
+    "Authorization": Basic YWRtaW46dGVzdHRlc3Q=
+    "Content-Type": application/json

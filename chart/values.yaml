@@ -53,6 +53,9 @@ mailer:
 payment:
   enabled: false
   host: https://example.com
+  secret:
+    create: true
+    token: ""
 
 google:
   webHook: "false"
