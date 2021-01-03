@@ -6,6 +6,9 @@ postgresql:
   master:
     podAnnotations:
       backup.velero.io/backup-volumes: data
+  resources:
+    requests:
+      memory: 200Mi
 ingress:
   enabled: true
   annotations:

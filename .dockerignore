@@ -8,3 +8,6 @@ log/
 .git/
 tmp/
 .nyc_output
+.gitlab-ci.yml
+chart/
+docker-compose.gitlab.yml

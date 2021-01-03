@@ -2,6 +2,9 @@ multi_tenant: false
 admin_password: testtest
 payment:
   enabled: true
+  headers:
+    "Authorization": Basic YWRtaW46dGVzdHRlc3Q=
+    "Content-Type": application/json
 google_calendar:
   client_id: "test"
   client_secret: "test"
