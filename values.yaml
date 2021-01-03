@@ -8,6 +8,7 @@ postgresql:
       backup.velero.io/backup-volumes: data
   resources:
     requests:
+      memory: 0Mi
       memory: 200Mi
 ingress:
   enabled: true
