@@ -8,3 +8,5 @@ log/
 .git/
 tmp/
 .nyc_output
+.gitlab-ci.yml
+chart/
