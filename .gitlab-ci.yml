@@ -163,7 +163,7 @@ deploy:
         --set reCaptcha.siteKey=$RECAPTCHA_SITE_KEY 
         --set reCaptcha.secretKey=$RECAPTCHA_SECRET_KEY
         --set reCaptcha.ignoreKey=$RECAPTCHA_IGNORE_KEY
-        --set payment.token=$PAYMENT_TOKEN
+        --set payment.secret.token=$PAYMENT_TOKEN
         --namespace cmc-production
   only:
     - master
