@@ -145,6 +145,10 @@ mocha:
       - Dockerfile
       - docker-compose.gitlab.yml
       - .dockerignore
+      - package.json
+      - Gemfile.lock
+      - Gemfile
+      - yarn.lock
     refs:
       - merge_requests
   script:
