@@ -62,10 +62,6 @@ rspec:
     - postgres:latest
   variables:
     COVERAGE: "true"
-  artifacts:
-    paths:
-      - coverage/
-    expire_in: 30 days
   cache:
     paths:
       - node_modules/
@@ -197,24 +193,6 @@ deploy:
         --namespace cmc-production
   only:
     - master
-
-pages:
-  stage: deploy
-  image: alpine:latest
-  variables:
-    GIT_STRATEGY: none
-  dependencies:
-    - rspec
-  script:
-    - mv coverage/ public/
-  artifacts:
-    paths:
-      - public
-    expire_in: 30 days
-  only:
-    - master
-  except:
-    - schedules
 
 test_production:
   stage: test_production
