@@ -34,7 +34,6 @@ build:
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CONTAINER_RELEASE_IMAGE --cache=true
   only:
-    - master
     - merge_requests
 
 helm_lint:
@@ -43,7 +42,6 @@ helm_lint:
   variables:
     GIT_STRATEGY: clone
   only:
-    - master
     - merge_requests
   script:
     - helm lint -f values.yaml chart/
@@ -53,7 +51,6 @@ traceroute:
   services:
     - postgres:latest
   only:
-    - master
     - merge_requests
   script:
     - cd /app
@@ -74,7 +71,6 @@ rspec:
       - node_modules/
       - .yarn
   only:
-    - master
     - merge_requests
   script:
     - cp -rT /app .
@@ -88,7 +84,6 @@ eslint:
       - node_modules/
       - .yarn
   only:
-    - master
     - merge_requests
   script:
     - cp -rT /app .
@@ -98,7 +93,6 @@ eslint:
 rubocop:
   stage: test
   only:
-    - master
     - merge_requests
   script:
     - cd /app
@@ -111,7 +105,6 @@ mocha:
     - node_modules/
     - .yarn
   only:
-    - master
     - merge_requests
   script:
     - cp -rT /app .
