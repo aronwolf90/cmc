@@ -33,6 +33,9 @@ build:
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CONTAINER_RELEASE_IMAGE --cache=true
+  only:
+    - branches
+    - merge_requests
 
 helm_lint:
   stage: test
@@ -116,15 +119,14 @@ mocha:
     - docker:dind
   only:
     changes:
-      - ./app/**
-      - ./config/**
-      - ./lib/**
-      - ./features/**
-      - ./bin/**
+      - app/**/*
+      - config/**/*
+      - lib/**/*
+      - features/**/*
+      - bin/**/*
       - Dockerfile
     refs:
-      - master
-
+      - merge_requests
   script:
     - export IMAGE=$CONTAINER_RELEASE_IMAGE
     - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
