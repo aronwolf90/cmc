@@ -33,12 +33,18 @@ build:
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CONTAINER_RELEASE_IMAGE --cache=true
+  only:
+    - master
+    - merge_requests
 
 helm_lint:
   stage: test
   image: aronwolf/helm-doctl
   variables:
     GIT_STRATEGY: clone
+  only:
+    - master
+    - merge_requests
   script:
     - helm lint -f values.yaml chart/
 
@@ -46,6 +52,9 @@ traceroute:
   stage: test
   services:
     - postgres:latest
+  only:
+    - master
+    - merge_requests
   script:
     - cd /app
     - FAIL_ON_ERROR=1 DATABASE_URL=postgres://root:password@postgres/root rake traceroute
@@ -64,6 +73,9 @@ rspec:
     paths:
       - node_modules/
       - .yarn
+  only:
+    - master
+    - merge_requests
   script:
     - cp -rT /app .
     - yarn install --cache-folder .yarn
@@ -75,6 +87,9 @@ eslint:
     paths:
       - node_modules/
       - .yarn
+  only:
+    - master
+    - merge_requests
   script:
     - cp -rT /app .
     - yarn install --cache-folder .yarn
@@ -82,6 +97,9 @@ eslint:
 
 rubocop:
   stage: test
+  only:
+    - master
+    - merge_requests
   script:
     - cd /app
     - rubocop
@@ -92,6 +110,9 @@ mocha:
     paths:
     - node_modules/
     - .yarn
+  only:
+    - master
+    - merge_requests
   script:
     - cp -rT /app .
     - yarn install --cache-folder .yarn
@@ -114,6 +135,18 @@ mocha:
     expire_in: 30 days
   services:
     - docker:dind
+  only:
+    changes:
+      - app/**/*
+      - config/**/*
+      - lib/**/*
+      - features/**/*
+      - bin/**/*
+      - Dockerfile
+      - docker-compose.gitlab.yml
+      - .dockerignore
+    refs:
+      - merge_requests
   script:
     - export IMAGE=$CONTAINER_RELEASE_IMAGE
     - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
@@ -183,8 +216,6 @@ pages:
     expire_in: 30 days
   only:
     - master
-  except:
-    - schedules
   except:
     - schedules
 
