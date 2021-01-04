@@ -114,6 +114,17 @@ mocha:
     expire_in: 30 days
   services:
     - docker:dind
+  only:
+    changes:
+      - ./app/**
+      - ./config/**
+      - ./lib/**
+      - ./features/**
+      - ./bin/**
+      - Dockerfile
+    refs:
+      - master
+
   script:
     - export IMAGE=$CONTAINER_RELEASE_IMAGE
     - docker-compose -f docker-compose.gitlab.yml run payment mix ecto.setup
