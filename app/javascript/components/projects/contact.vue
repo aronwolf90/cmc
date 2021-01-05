@@ -1,6 +1,7 @@
 <template lang='pug'>
-  .spent-time
-    details-select-header-input(
+  right-aside-item.spent-time
+    template(v-slot:header="")
+      details-select-header-input(
       v-model="idValue",
       :editMode.sync="idEditMode",
       :options="contactOptions",
@@ -11,38 +12,41 @@
       :link="contactLink",
       @search="searchForContact"
     )
-    details-string-input(
-      v-model="nameValue",
-      :editMode.sync="nameEditMode",
-      placeholder="Name",
-      @submit="submitName",
-      id="contact-name"
-    )
-    details-string-input(
-      v-model="telephoneNumberValue",
-      :editMode.sync="telephoneNumberEditMode",
-      placeholder="Telephone number",
-      @submit="submitTelephoneNumber",
-      id="contact-telephone-number"
-    )
-    details-string-input(
-      v-model="emailValue",
-      :editMode.sync="emailEditMode",
-      placeholder="E-Mail"
-      @submit="submitEmail",
-      id="contact-email"
-    )
+    template(v-slot:content="")
+      details-string-input(
+        v-model="nameValue",
+        :editMode.sync="nameEditMode",
+        placeholder="Name",
+        @submit="submitName",
+        id="contact-name"
+      )
+      details-string-input(
+        v-model="telephoneNumberValue",
+        :editMode.sync="telephoneNumberEditMode",
+        placeholder="Telephone number",
+        @submit="submitTelephoneNumber",
+        id="contact-telephone-number"
+      )
+      details-string-input(
+        v-model="emailValue",
+        :editMode.sync="emailEditMode",
+        placeholder="E-Mail"
+        @submit="submitEmail",
+        id="contact-email"
+      )
 </template>
 
 <script>
 import { Utils } from 'vuex-jsonapi-client'
 import DetailsStringInput from 'components/details-string-input'
 import DetailsSelectHeaderInput from 'components/details-select-header-input'
+import RightAsideItem from 'components/right-aside-item'
 
 export default {
   components: {
     DetailsStringInput,
-    DetailsSelectHeaderInput
+    DetailsSelectHeaderInput,
+    RightAsideItem
   },
   computed: {
     contact () {
@@ -164,6 +168,7 @@ export default {
 </script>
 
 <style lang='sass' scoped>
+.spent-time
   .header-text
     margin-bottom: 5px
 </style>

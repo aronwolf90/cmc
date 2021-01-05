@@ -1,8 +1,5 @@
 [![coverage report](https://gitlab.com/cmc_system/cmc/badges/master/coverage.svg)](https://gitlab.com/cmc_system/cmc/commits/master)
 
-* coverage: https://cmc_system.gitlab.io/cmc/coverage/
-* rubycritic: https://cmc_system.gitlab.io/cmc/rubycritic/code_index.html
-
 # About
 Ticktensio is a feature-rich time tracker. Its features include
 * easy time tracking

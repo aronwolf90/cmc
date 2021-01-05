@@ -70,7 +70,6 @@ export default {
 
 <style lang='sass' scoped>
   .details-string-input
-    margin-right: -11px
     .text
       word-break: break-word;
     .placeholder

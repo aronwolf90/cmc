@@ -1,5 +1,5 @@
 <template lang='pug'>
-  right-aside-item(
+  right-aside-item.detail-select(
     :label="label"
   )
     template(v-slot:content="")
@@ -37,7 +37,7 @@ export default {
 </style>
 
 <style lang='sass'>
-.dropdown
+.detail-select .dropdown
   background-color: #f8f8f8 !important
   border: none !important
   color: grey !important

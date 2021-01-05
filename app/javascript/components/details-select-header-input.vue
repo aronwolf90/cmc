@@ -27,7 +27,7 @@
         @click="internEditMode=true"
       )
           .fa.fa-edit
-      router-link(:to="link").font-weight-bold.text-dark {{ text }}
+      router-link(:to="link").font-weight-bold.text {{ text }}
       .clearfix
 </template>
 
@@ -81,11 +81,7 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-  .details-string-input
-    margin-right: -11px
-    .text
-      word-break: break-word;
-    input
-      padding: 3px
-      height: auto
+.details-select-header-input
+  .text
+    color: grey
 </style>
