@@ -8,7 +8,7 @@
               td(colspan=3)
                 .font-weight-bold {{ recordDay.attributes.day }}
               td
-                .pull-right {{ recordDay.attributes['spent-time'] }}
+                .pull-right {{ formatSpentTime(recordDay.attributes['spent-time']) }}
             tr(
               v-for="record in $store.getters.relationship(recordDay, 'records')",
               :key="`record-${record.id}`"
@@ -52,6 +52,16 @@ export default {
   methods: {
     linkGen (page) {
       return page === 1 ? '?' : `?page=${page}`
+    },
+    formatSpentTime (seconds) {
+      return [seconds / 3600, seconds / 60 % 60, seconds % 60].map(floatTime => {
+        let time = Math.floor(floatTime)
+        if (time < 60) {
+          return `00${time}`.slice(-2)
+        } else {
+          return time
+        }
+      }).join(':')
     }
   }
 }

@@ -102,7 +102,7 @@ Then(/^the JSON response should match:$/) do |json|
 
   regexes = expected.scan(/<([^>]*)>/).map(&:first)
 
-  literal_parts = expected.split(/<[^>]*>/).map do |part|
+  literal_parts = expected.split(/"?<[^>]*>"?/).map do |part|
     Regexp.quote(part)
   end
 

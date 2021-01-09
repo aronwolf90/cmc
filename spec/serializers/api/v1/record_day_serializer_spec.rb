@@ -3,7 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::RecordDaySerializer, type: :serializer do
-  let(:record) { Record.new(id: 1) }
+  let(:record) do
+    Record.new(id: 1, start_time: "10.10.2020", end_time: "10.10.2020")
+  end
   let(:user) { User.new(id: 1) }
   let(:record_day) do
     RecordDay.new(day: "01-01-2020", user: user)
@@ -20,6 +22,7 @@ RSpec.describe Api::V1::RecordDaySerializer, type: :serializer do
         type: "record-days",
         attributes: {
           day: "01-01-2020",
+          "spent-time": 0
         },
         relationships: {
           records: {

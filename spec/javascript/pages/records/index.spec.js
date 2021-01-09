@@ -59,7 +59,7 @@ describe('pages/records/index', () => {
       type: 'record-days',
       attributes: {
         day: '10-10-2020',
-        'spent-time': '01:00:00'
+        'spent-time': 3600
       }
     }
     const record = {

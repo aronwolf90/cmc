@@ -15,7 +15,8 @@ Scenario: Get /api/v1/record_days
           "id": "<.+>",
           "type": "record-days",
           "attributes": {
-            "day": "<.+>"
+            "day": "<.+>",
+            "spent-time": "<.+>"
           },
           "relationships": {
             "user": {
@@ -44,7 +45,8 @@ Scenario: Get /api/v1/record_days
           "id": "<.+>",
           "type": "record-days",
           "attributes": {
-            "day": "<.+>"
+            "day": "<.+>",
+            "spent-time": "<.+>"
           },
           "relationships": {
             "user": {
@@ -73,7 +75,8 @@ Scenario: Get /api/v1/record_days
           "id": "<.+>",
           "type": "record-days",
           "attributes": {
-            "day": "<.+>"
+            "day": "<.+>",
+            "spent-time": "<.+>"
           },
           "relationships": {
             "user": {
@@ -102,7 +105,8 @@ Scenario: Get /api/v1/record_days
           "id": "<.+>",
           "type": "record-days",
           "attributes": {
-            "day": "<.+>"
+            "day": "<.+>",
+            "spent-time": "<.+>"
           },
           "relationships": {
             "user": {
@@ -131,7 +135,8 @@ Scenario: Get /api/v1/record_days
           "id": "<.+>",
           "type": "record-days",
           "attributes": {
-            "day": "<.+>"
+            "day": "<.+>",
+            "spent-time": "<.+>"
           },
           "relationships": {
             "user": {
@@ -160,7 +165,8 @@ Scenario: Get /api/v1/record_days
           "id": "<.+>",
           "type": "record-days",
           "attributes": {
-            "day": "<.+>"
+            "day": "<.+>",
+            "spent-time": "<.+>"
           },
           "relationships": {
             "user": {
