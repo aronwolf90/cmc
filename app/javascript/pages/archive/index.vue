@@ -14,13 +14,15 @@
 
 <script>
 import Folder from 'archive_content/folder'
+import store from 'store'
 
 export default {
   components: {
     Folder
   },
-  created () {
-    this.$store.dispatch('getArchiveFolders')
+  async beforeRouteEnter (to, _from, next) {
+    await store.dispatch('getArchiveFolders')
+    next()
   },
   computed: {
     rootFolders () {

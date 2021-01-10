@@ -114,7 +114,7 @@ Rails.application.routes.draw do
 
       resources :wiki_categories, only: :index
       resources :wiki_pages, only: %i[show update destroy]
-      resources :folders, only: %i[index show]
+      resources :folders, only: %i[index show create update destroy]
       resources :user_issues, only: %i[index show]
       resources :events, only: %i[index create update destroy]
       resources :attendance_days, only: :index

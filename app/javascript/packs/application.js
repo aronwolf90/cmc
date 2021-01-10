@@ -1,8 +1,7 @@
 import 'stylesheets/devise.sass'
 
 import Vue from 'vue/dist/vue.common'
-import Vuex from 'vuex'
-import Store from '../store'
+import store from '../store'
 import router from 'router'
 
 import SharedIssueSection from 'components/shared-issue-section'
@@ -52,7 +51,6 @@ Vue.component('asides', Asides)
 Vue.component('btn-submit', BtnSubmit)
 Vue.component('v-select', vSelect)
 
-let store = new Vuex.Store(Store)
 store.commit('setEndpoint', '/api/v1/')
 store.commit('vue', Vue)
 window.store = store

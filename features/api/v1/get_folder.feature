@@ -38,6 +38,9 @@ Scenario: Get
             "update": true, 
             "destroy": true
           }
+        },
+        "links": {
+          "self": "/api/v1/folders/3"
         }
       }
     }

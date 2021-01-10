@@ -265,13 +265,13 @@ const router = new Router({
     },
     {
       path: '/administration/archive/folders/new',
-      component: RailsPage,
+      component: () => import('pages/archive/folders/new'),
       props: true,
       meta: { aside: 'archive' }
     },
     {
       path: '/administration/archive/folders/:id/edit',
-      component: RailsPage,
+      component: () => import('pages/archive/folders/_id/edit'),
       props: true,
       meta: { aside: 'archive' }
     },

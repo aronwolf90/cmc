@@ -41,6 +41,9 @@ Scenario: Get
               "update": true,
               "destroy": true
             }
+          },
+          "links": {
+            "self": "/api/v1/folders/1"
           }
         },
         {
@@ -73,6 +76,9 @@ Scenario: Get
               "update": true,
               "destroy": true
             }
+          },
+          "links": {
+            "self": "/api/v1/folders/2"
           }
         },
         {
@@ -108,6 +114,9 @@ Scenario: Get
               "update": true,
               "destroy": true
             }
+          },
+          "links": {
+            "self": "/api/v1/folders/3"
           }
         },
         {
@@ -140,6 +149,9 @@ Scenario: Get
               "update": true,
               "destroy": true
             }
+          },
+          "links": {
+            "self": "/api/v1/folders/4"
           }
         },
         {
@@ -169,6 +181,9 @@ Scenario: Get
               "update": true,
               "destroy": true
             }
+          },
+          "links": {
+            "self": "/api/v1/folders/5"
           }
         },
         {
@@ -198,6 +213,9 @@ Scenario: Get
               "update": true,
               "destroy": true
             }
+          },
+          "links": {
+            "self": "/api/v1/folders/6"
           }
         },
         {
@@ -227,6 +245,9 @@ Scenario: Get
               "update": true,
               "destroy": true
             }
+          },
+          "links": {
+            "self": "/api/v1/folders/7"
           }
         },
         {
@@ -256,6 +277,9 @@ Scenario: Get
               "update": true,
               "destroy": true
             }
+          },
+          "links": {
+            "self": "/api/v1/folders/8"
           }
         },
         {
@@ -285,6 +309,9 @@ Scenario: Get
               "update": true,
               "destroy": true
             }
+          },
+          "links": {
+            "self": "/api/v1/folders/9"
           }
         },
         {
@@ -314,6 +341,9 @@ Scenario: Get
               "update": true,
               "destroy": true
             }
+          },
+          "links": {
+            "self": "/api/v1/folders/10"
           }
         }
       ],

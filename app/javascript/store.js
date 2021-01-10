@@ -1,4 +1,6 @@
 import JsonApi from 'vuex-jsonapi-client'
+import Vuex from 'vuex'
+import Vue from 'vue/dist/vue.common'
 
 import recordActions from 'store/models/record_actions'
 import issueActions from 'store/models/issue_actions'
@@ -47,8 +49,11 @@ import recordsForm from 'store/modules/records-form'
 import contactsIndex from 'store/modules/contacts-index'
 import recordsIndex from 'store/modules/records-index'
 import projectsRecordsIndex from 'store/modules/projects-records-index'
+import foldersForm from 'store/modules/folders-form'
 
-export default {
+Vue.use(Vuex)
+
+export default new Vuex.Store({
   strict: true,
   modules: {
     json_api: JsonApi,
@@ -61,7 +66,8 @@ export default {
     recordsForm,
     contactsIndex,
     recordsIndex,
-    projectsRecordsIndex
+    projectsRecordsIndex,
+    foldersForm
   },
   state: {
     aside: null,
@@ -194,4 +200,4 @@ export default {
       })
     }
   }
-}
+})

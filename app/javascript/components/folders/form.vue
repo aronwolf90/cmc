@@ -1,75 +1,51 @@
 <template lang='pug'>
   b-form(@submit.prevent="$emit('submit')")
-    b-form-group(
-      id="input-name-label",
-      label="Name:",
-      label-for="input-name"
+    form-inputs-text(
+      id="name-input",
+      v-model="formName",
+      label="Name",
+      error-path="attributes/name",
+      :errors="errors"
     )
-      b-form-input(
-        id="input-name",
-        v-model="value.attributes.name",
-        :state="errorStatus('attributes/name')",
-        type="text"
-      )
-      b-form-invalid-feedback(
-        v-for="error in findErrors('attributes/name')"
-      )
-        | {{ error.detail }}
-    b-form-group(
-      id="folder-label",
-      label="Folder:",
-      label-for="folder"
+    form-inputs-folder-select(
+      id="folder-input",
+      v-model="formFolderRef",
+      label="Folder",
+      errorPath="relationships/folder",
+      :errors="errors"
     )
-      b-form-select(
-        v-model='value.folder',
-        id='folder',
-        :state="errorStatus('data/relationships/folder')",
-        :options='folders'
-      )
-      b-form-invalid-feedback(
-        v-for="error in findErrors('data/relationships/folder')"
-      )
-        | {{ error.detail }}
-
     slot
-    br
-    br
 </template>
 
 <script>
-import InputFile from 'components/inputs/file'
+import FormInputsText from 'components/form-inputs/text'
+import FormInputsFolderSelect from 'components/form-inputs/folder-select'
 
 export default {
   components: {
-    InputFile
+    FormInputsText,
+    FormInputsFolderSelect
   },
-  props: ['value', 'errors', 'folders', 'projectFolder'],
-  methods: {
-    errorStatus (pointer) {
-      let errors = this.findErrors(pointer)
-      return errors.length === 0 ? null : false
+  computed: {
+    formName: {
+      get () {
+        return this.$store.getters['foldersForm/formName']
+      },
+      set (name) {
+        this.$store.commit('foldersForm/formName', name)
+      }
     },
-    findErrors (pointer) {
-      return this.errors.filter(error => {
-        return error.source.pointer.includes(pointer)
-      })
-        .filter((error, index, self) => {
-          return self.findIndex(value => value.detail === error.detail) === index
-        })
+    formFolderRef: {
+      get () {
+        return this.$store.getters['foldersForm/formFolderRef']
+      },
+      set (folderRef) {
+        this.$store.commit('foldersForm/formFolderRef', folderRef)
+      }
     },
-    setDocumentFile (documentFile) {
-      this.documentFile = documentFile
-    }
-  },
-  watch: {
-    value () {
-      this.$emit('input', this.value)
+    errors () {
+      return this.$store.getters['foldersForm/errors']
     }
   }
 }
 </script>
-
-<style lang='sass'>
-.b-form-file.is-invalid+.invalid-feedback
-  display: block
-</style>

@@ -8,4 +8,9 @@ RSpec.describe Api::V1::FoldersController, type: :controller do
 
   include_examples "standard api index action"
   include_examples "standard api show action"
+  include_examples "standard api create action",
+                   Api::V1::Folders::CreateOperation
+  include_examples "standard api update action",
+                   Api::V1::Folders::UpdateOperation
+  include_examples "standard api destroy action"
 end

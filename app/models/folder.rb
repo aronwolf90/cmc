@@ -6,6 +6,14 @@ class Folder < ApplicationRecord
   has_many :folders, -> { order(:name) }, dependent: :destroy
   has_many :documents, -> { order(:name) }, dependent: :destroy
 
+  pg_search_scope(
+    :search,
+    against: [:name],
+    using: {
+      tsearch: { prefix: true }
+    }
+  )
+
   def root?
     folder_id.nil?
   end
