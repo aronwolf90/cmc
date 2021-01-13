@@ -15,6 +15,7 @@
 <script>
 import Folder from 'archive_content/folder'
 import store from 'store'
+import { Utils } from 'vuex-jsonapi-client'
 
 export default {
   components: {
@@ -26,7 +27,9 @@ export default {
   },
   computed: {
     rootFolders () {
-      return this.$store.getters.rootFolders
+      return this.$store.getters.rootFolders.filter(folder => {
+        return !Utils.relationship(folder, 'project')
+      })
     }
   }
 }

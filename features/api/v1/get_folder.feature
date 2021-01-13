@@ -19,6 +19,9 @@ Scenario: Get
           "root": true
         },
         "relationships": {
+          "project": {
+            "data": null
+          },
           "folder": {
             "data": null
           },

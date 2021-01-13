@@ -41,6 +41,9 @@ Scenario: Create a folder
               "type": "folders"
             }
           },
+          "project": {
+            "data": null
+          },
           "folders": {
             "data": []
           },

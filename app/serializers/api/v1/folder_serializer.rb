@@ -6,6 +6,7 @@ module Api
       attributes :name, :root
 
       belongs_to :folder, serializer: FolderSerializer
+      belongs_to :project, serializer: ProjectSerializer
       has_many :folders, serializer: FolderSerializer
       has_many :documents, serializer: DocumentSerializer
 

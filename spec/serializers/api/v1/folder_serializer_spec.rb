@@ -17,6 +17,7 @@ RSpec.describe Api::V1::FolderSerializer, type: :serializer do
           root: true
         },
         relationships: {
+          "project": { data: nil },
           "folder": { data: nil },
           "folders": {
             data: [{

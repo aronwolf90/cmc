@@ -19,6 +19,12 @@ Scenario: Get
             "root": true
           },
           "relationships": {
+            "project": {
+              "data": {
+                "id": "1",
+                "type": "projects"
+              }
+            },
             "folder": {
               "data": null
             },
@@ -54,6 +60,12 @@ Scenario: Get
             "root": true
           },
           "relationships": {
+            "project": {
+              "data": {
+                "id": "2",
+                "type": "projects"
+              }
+            },
             "folder": {
               "data": null
             },
@@ -89,6 +101,9 @@ Scenario: Get
             "root": true
           },
           "relationships": {
+            "project": {
+              "data": null
+            },
             "folder": {
               "data": null
             },
@@ -127,6 +142,9 @@ Scenario: Get
             "root": false
           },
           "relationships": {
+            "project": {
+              "data": null
+            },
             "folder": {
               "data": {
                 "id": "3",
@@ -162,6 +180,12 @@ Scenario: Get
             "root": true
           },
           "relationships": {
+            "project": {
+              "data": {
+                "id": "3",
+                "type": "projects"
+              }
+            },
             "folder": {
               "data": null
             },
@@ -194,6 +218,12 @@ Scenario: Get
             "root": true
           },
           "relationships": {
+            "project": {
+              "data": {
+                "id": "4",
+                "type": "projects"
+              }
+            },
             "folder": {
               "data": null
             },
@@ -226,6 +256,12 @@ Scenario: Get
             "root": true
           },
           "relationships": {
+            "project": {
+              "data": {
+                "id": "5",
+                "type": "projects"
+              }
+            },
             "folder": {
               "data": null
             },
@@ -258,6 +294,12 @@ Scenario: Get
             "root": true
           },
           "relationships": {
+            "project": {
+              "data": {
+                "id": "6",
+                "type": "projects"
+              }
+            },
             "folder": {
               "data": null
             },
@@ -290,6 +332,12 @@ Scenario: Get
             "root": true
           },
           "relationships": {
+            "project": {
+              "data": {
+                "id": "7",
+                "type": "projects"
+              }
+            },
             "folder": {
               "data": null
             },
@@ -322,6 +370,12 @@ Scenario: Get
             "root": true
           },
           "relationships": {
+            "project": {
+              "data": {
+                "id": "8",
+                "type": "projects"
+              }
+            },
             "folder": {
               "data": null
             },
