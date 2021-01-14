@@ -107,7 +107,8 @@ GEM
       deep_merge (~> 1.2.1)
       dry-validation (>= 0.10.4)
     connection_pool (2.2.3)
-    crack (0.4.4)
+    crack (0.4.5)
+      rexml
     crass (1.0.6)
     cucumber (3.2.0)
       builder (>= 2.1.2)
@@ -569,7 +570,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webmock (3.11.0)
+    webmock (3.11.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
