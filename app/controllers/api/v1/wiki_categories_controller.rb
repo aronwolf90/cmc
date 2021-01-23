@@ -5,9 +5,10 @@ module Api::V1
     include StandartActions
     model_class WikiCategory
     serializer WikiCategorySerializer
+    namespace WikiCategories
 
     per_page 400
 
-    public :index
+    public :index, :show, :update, :create, :destroy
   end
 end

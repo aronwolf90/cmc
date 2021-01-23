@@ -8,24 +8,29 @@ RSpec.describe Api::V1::WikiCategorySerializer, type: :serializer do
     build_stubbed(:wiki_category, wiki_categories: [child_wiki_category])
   end
   let(:expected_result) do
-    { data: {
-      id: wiki_category.id.to_s,
-      type: "wiki-categories",
-      attributes: {
-        title: wiki_category.title,
-        root: true
-      },
-      relationships: {
-        "wiki-category": { data: nil },
-        "wiki-categories": {
-          data: [{
-            id: child_wiki_category.id.to_s,
-            type: "wiki-categories"
-          }]
+    {
+      data: {
+        id: wiki_category.id.to_s,
+        type: "wiki-categories",
+        attributes: {
+          title: wiki_category.title,
+          root: true
         },
-        "wiki-pages": { data: []  }
+        relationships: {
+          "wiki-category": { data: nil },
+          "wiki-categories": {
+            data: [{
+              id: child_wiki_category.id.to_s,
+              type: "wiki-categories"
+            }]
+          },
+          "wiki-pages": { data: []  }
+        },
+        links: {
+          self: "/api/v1/wiki_categories/#{wiki_category.id}"
+        }
       }
-    } }
+    }
   end
 
   it "serialize record in the correct way" do

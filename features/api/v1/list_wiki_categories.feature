@@ -43,6 +43,9 @@ Scenario: Get
               ]
             }
           },
+          "links": { 
+            "self": "/api/v1/wiki_categories/1"
+          },
           "meta":{ 
             "permissions":{ 
               "update":true,
@@ -74,6 +77,9 @@ Scenario: Get
     
               ]
             }
+          },
+          "links": { 
+            "self": "/api/v1/wiki_categories/2"
           },
           "meta":{ 
             "permissions":{ 
@@ -109,6 +115,9 @@ Scenario: Get
                 }
               ]
             }
+          },
+          "links": { 
+            "self": "/api/v1/wiki_categories/3"
           },
           "meta":{ 
             "permissions":{ 

@@ -247,13 +247,13 @@ const router = new Router({
     },
     {
       path: '/administration/wiki/categories/new',
-      component: RailsPage,
+      component: () => import('pages/wiki/categories/new'),
       props: true,
       meta: { aside: 'wiki' }
     },
     {
       path: '/administration/wiki/categories/:id/edit',
-      component: RailsPage,
+      component: () => import('pages/wiki/categories/_id/edit'),
       props: true,
       meta: { aside: 'wiki' }
     },

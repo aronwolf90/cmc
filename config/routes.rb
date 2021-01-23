@@ -112,7 +112,7 @@ Rails.application.routes.draw do
       end
       resources :project_comments, only: %i[create]
 
-      resources :wiki_categories, only: :index
+      resources :wiki_categories, only: %i[index show create update destroy]
       resources :wiki_pages, only: %i[show update destroy]
       resources :folders, only: %i[index show create update destroy]
       resources :user_issues, only: %i[index show]

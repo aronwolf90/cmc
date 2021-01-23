@@ -50,6 +50,7 @@ import contactsIndex from 'store/modules/contacts-index'
 import recordsIndex from 'store/modules/records-index'
 import projectsRecordsIndex from 'store/modules/projects-records-index'
 import foldersForm from 'store/modules/folders-form'
+import wikiCategoriesForm from 'store/modules/wiki-categories-form'
 
 Vue.use(Vuex)
 
@@ -67,7 +68,8 @@ export default new Vuex.Store({
     contactsIndex,
     recordsIndex,
     projectsRecordsIndex,
-    foldersForm
+    foldersForm,
+    wikiCategoriesForm
   },
   state: {
     aside: null,
