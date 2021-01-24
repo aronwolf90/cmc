@@ -1,7 +1,6 @@
 multiTenant: true
 installJobDelay: 60
 url: ticktensio.com
-deprecatedUrl: cost-manager.com
 postgresql:
   master:
     podAnnotations:
@@ -18,17 +17,12 @@ ingress:
     kubernetes.io/tls-acme: true
     nginx.ingress.kubernetes.io/proxy-body-size: "10m"
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      if ($host ~ ^(.*)cost-manager\.com$) {
-        return 301 https://$1ticktensio.com$request_uri;
-      }
       if ($host ~ ^www.(.*)ticktensio\.com$) {
         return 301 https://$1ticktensio.com$request_uri;
       }
   tls:
     - secretName: cost-manager-tls
       hosts:
-        - "*.cost-manager.com"
-        - "cost-manager.com"
         - "*.ticktensio.com"
         - "ticktensio.com"
 webAws:
