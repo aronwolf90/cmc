@@ -16,22 +16,8 @@ spec:
             backend:
               serviceName: {{ .Release.Name }}-service
               servicePort: 80
-    - host: {{ .Values.deprecatedUrl }}
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: {{ .Release.Name }}-service
-              servicePort: 80
     {{- if .Values.multiTenant }}
     - host: "*.{{ .Values.url }}"
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: {{ .Release.Name }}-service
-              servicePort: 80
-    - host: "*.{{ .Values.deprecatedUrl }}"
       http:
         paths:
           - path: /
