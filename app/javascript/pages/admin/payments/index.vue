@@ -6,6 +6,10 @@
           td Iban: **** **** **** {{ subscription.attributes['iban-last4'] }}
         tr
           td Cost/Month: {{ subscription.attributes.premia }}€
+    template(v-if="!subscriptionResult")
+      .text-center
+        b-spinner(label="Spinning")
+        .mb-2
     .table-responsive
       table.table
         thead
@@ -19,6 +23,10 @@
               @click="click"
             ) Add payment informations
         tbody
+          spec/javascript/pages/admin/payments/index.spec.js
+          tr(v-if="!invoicesResult")
+            td.text-center(colspan="5")
+              b-spinner(label="Spinning")
           tr(v-for="invoice in invoices")
             td {{ invoice.attributes['created-at'] }}
             td {{ formatMoney(invoice.attributes['amount-paid']) }}
@@ -33,15 +41,19 @@
 import Vue from 'vue/dist/vue.common'
 
 export default {
-  asyncComputed: {
-    subscriptionResult () {
-      return this.$store.dispatch('subscription')
-    },
-    invoicesResult () {
-      return this.$store.dispatch('invoices')
+  data () {
+    return {
+      subscriptionResult: null,
+      invoicesResult: null
     }
   },
   mounted () {
+    this.$store.dispatch('subscription').then(response => {
+      this.subscriptionResult = response
+    })
+    this.$store.dispatch('invoices').then(response => {
+      this.invoicesResult = response
+    })
     if (Vue.loadScript) {
       Vue.loadScript('https://js.stripe.com/v3/')
     }
