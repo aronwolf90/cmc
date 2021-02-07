@@ -5,6 +5,7 @@
         v-bind:style="{ 'background-color': label.attributes.color }"
       ) {{ label.attributes.name }}
       |&nbsp;
+      b-badge(v-if="showComplexity") {{ complexity }}
     b-img.pull-right.border(
       :src="avatarUrl",
       rounded="circle",
@@ -38,6 +39,13 @@ export default {
     },
     user () {
       return this.$store.getters.relationship(this.issue, 'user')
+    },
+    showComplexity () {
+      return Utils.attribute(this.issue, 'complexity') &&
+        Utils.attribute(this.issue, 'complexity') !== '0.0'
+    },
+    complexity () {
+      return Utils.attribute(this.issue, 'complexity')
     }
   }
 }

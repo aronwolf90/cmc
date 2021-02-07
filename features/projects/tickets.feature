@@ -50,7 +50,7 @@ Scenario: change issues order
   When I click on navbar link "Projects"
   And I click on link "Test project"
   And I click on link "Tickets"
-  And I drag "#list-issue-4" to "#list-issue-1 .badge"
+  And I drag "#list-issue-4" to "#list-issue-1 .badge:last-of-type"
   Then the element "#column-4 .list-issue:last-of-type" contain the text "Test issue 4"
   When I reload the page
   Then the element "#column-4 .list-issue:last-of-type" contain the text "Test issue 4"

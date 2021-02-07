@@ -70,7 +70,8 @@ Scenario: Get
         "type":"board-lists",
         "attributes":{ 
           "name":"Open",
-          "kind":"open"
+          "kind":"open",
+          "complexity": "12.0"
         },
         "relationships":{ 
           "issues":{ 

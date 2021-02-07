@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import List from '../../../app/javascript/board/list'
 import Issue from '../../../app/javascript/board/issue'
 import draggable from 'vuedraggable'
-import sinon from 'sinon'
 import BootstrapVue from 'bootstrap-vue'
 
 const localVue = createLocalVue()
@@ -25,16 +24,16 @@ describe('List', () => {
   }))
   def('actions', () => ({ initBoardsLists () {} }))
   def('store', () => (new Vuex.Store({ state: {}, getters: $getters, actions: $actions })))
-  def('Turbolinks', () => ({ visit: sinon.spy() }))
-
-  beforeEach(() => (global.Turbolinks = $Turbolinks))
 
   describe('when the boardList is present and his data is correct', () => {
     def('boardList', () => ({
       id: 1,
       type: 'boardLists',
       name: 'name',
-      attributes: { name: 'board list name' },
+      attributes: {
+        name: 'board list name',
+        complexity: '1.0'
+      },
       relationships: { issues: { data: $issues } }
     }))
     def('issue1', () => ({ id: 1, type: 'issues', attributes: { name: 'name1' } }))
@@ -43,6 +42,10 @@ describe('List', () => {
 
     it('contain the title', () => {
       expect($subject.html()).to.include('board list name')
+    })
+
+    it('contain the complexity', () => {
+      expect($subject.html()).to.include('1.0')
     })
 
     it('contain the Issue element with correct issueId', () => {

@@ -15,7 +15,8 @@ Scenario: Get
         "type":"board-lists",
         "attributes":{ 
           "name":"Backlog",
-          "kind":"open"
+          "kind":"open",
+          "complexity": "12.0"
         },
         "relationships":{ 
           "issues":{ 
@@ -77,7 +78,8 @@ Scenario: Get
         "type":"board-lists",
         "attributes":{ 
           "name":"Open",
-          "kind":"open"
+          "kind":"open",
+          "complexity": "12.0"
         },
         "relationships":{ 
           "issues":{ 

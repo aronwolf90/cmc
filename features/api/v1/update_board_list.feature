@@ -26,7 +26,11 @@ Scenario: Put an valid board lists using json in PUT body
       "data": {
         "id": "7",
         "type": "board-lists",
-        "attributes": { "name": "New name", "kind": "open" },
+        "attributes": {
+          "name": "New name",
+          "kind": "open",
+          "complexity": "0.0"
+        },
         "relationships": {
           "issues": {
             "data": [],

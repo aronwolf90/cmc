@@ -16,6 +16,10 @@ RSpec.describe Api::V1::BoardListSerializer, type: :serializer do
     end
   end
 
+  before do
+    allow(board_list).to receive(:complexity).and_return(3)
+  end
+
   let(:expected_result) do
     {
       data: {
@@ -23,7 +27,8 @@ RSpec.describe Api::V1::BoardListSerializer, type: :serializer do
         type: "board-lists",
         attributes: {
           name: "name",
-          kind: "other"
+          kind: "other",
+          complexity: 3
         },
         relationships: {
           issues: {

@@ -11,11 +11,8 @@ Scenario: create board list
   Then the page contain the text "board list name"
   When I reload the page
   Then the page contain the text "board list name"
-
-@javascript
-Scenario: edit board list
-  Given a test-organization exists with global board lists
-  And I am signed in (multitenant)
+  Then the page contain the text "12.0"
+  # edit board list
   When I click on link "Tickets"
   And I click on ".column:first-of-type .fa-edit"
   And I enter "new board list name" into input named "Name"
@@ -41,7 +38,7 @@ Scenario: change issues order
   And I am signed in (multitenant)
   When I click on link "Tickets"
   Then the page contain the text "Test project"
-  When I drag "#list-issue-4" to "#list-issue-1 .badge"
+  When I drag "#list-issue-4" to "#list-issue-1 .badge:last-of-type"
   Then the element "#column-1 .list-issue:last-of-type" contain the text "Test issue 4"
   When I reload the page
   Then the element "#column-1 .list-issue:last-of-type" contain the text "Test issue 4"

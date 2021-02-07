@@ -8,7 +8,8 @@
         .fa.fa-plus
       router-link.btn.btn-sm.btn-link.pull-right.text-muted(:to="editLink")
         .fa.fa-edit
-
+      div.pull-right(v-if="showComplexity")
+        b-badge {{ complexity }}
       .clearfix
     draggable.body(v-model="issues", :options="{group:'issues'}")
       issue(
@@ -58,6 +59,13 @@ export default {
       if (!this.boardList) return false
       if (!this.boardList.relationships['issues'].links) return false
       return !!this.boardList.relationships['issues'].links.next
+    },
+    complexity () {
+      return Utils.attribute(this.boardList, 'complexity')
+    },
+    showComplexity () {
+      return Utils.attribute(this.boardList, 'complexity') &&
+        Utils.attribute(this.boardList, 'complexity') !== '0.0'
     },
     issues: {
       get () {

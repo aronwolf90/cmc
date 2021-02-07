@@ -27,4 +27,13 @@ class BoardList < ApplicationRecord
           .order(:ordinal_number, created_at: :desc, id: :desc)
       end
   end
+
+  def complexity
+    @complexity ||=
+      if project_id.nil?
+        Issue.where(global_board_list_id: id).sum(:complexity)
+      else
+        Issue.where(board_list_id: id).sum(:complexity)
+      end
+  end
 end
