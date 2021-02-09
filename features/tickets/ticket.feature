@@ -110,6 +110,7 @@ Scenario: Change user
   And I click on "#assigen .text"
   Then the element "#assigen .text" does not contain the text "user2"
   When I click on "#assigen input"
+  And I sleep "1" seconds
   And I click on "#assigen .item:nth-child(2)"
   Then the element "#assigen .text" contain the text "user2"
   When I reload the page
@@ -123,6 +124,7 @@ Scenario: Change complexity
   And I am signed in (multitenant)
   When I click on link "Test issue 1"
   And I click on "#complexity .text"
+  And I sleep "1" seconds
   And I click on "#complexity .item:nth-child(2)"
   Then the element "#complexity .text" contain the text "0.5"
   And I reload the page

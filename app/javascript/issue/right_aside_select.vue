@@ -1,13 +1,14 @@
 <template lang='pug'>
-  right-aside-item(:label="label")
-    template(v-slot:content="")
-      .select
-        basic-select(
-          :options="options",
-          :selected-option="item",
-          placeholder="select item",
-          @select="select"
-        )
+  .right-aside-select
+    right-aside-item(:label="label")
+      template(v-slot:content="")
+        .select
+          basic-select(
+            :options="options",
+            :selected-option="item",
+            placeholder="select item",
+            @select="select"
+          )
 </template>
 
 <script>
@@ -36,8 +37,9 @@ export default {
 </style>
 
 <style lang='sass'>
-.dropdown
-  background-color: #f8f8f8 !important
-  border: none !important
-  color: grey !important
+.right-aside-select
+  .dropdown
+    background-color: #f8f8f8 !important
+    border: none !important
+    color: grey !important
 </style>
