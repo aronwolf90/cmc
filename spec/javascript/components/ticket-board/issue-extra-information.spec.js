@@ -11,7 +11,8 @@ describe('IssueExtraInformation', () => {
     id: '1',
     type: 'issues',
     attributes: {
-      title: 'Test title'
+      title: 'Test title',
+      complexity: '1.0'
     },
     relationships: {
       labels: [{
@@ -83,6 +84,7 @@ describe('IssueExtraInformation', () => {
 
     expect(wrapper.html()).to.include('Test label')
     expect(wrapper.html()).to.include('avatar.png')
+    expect(wrapper.html()).to.include('1.0')
     expect(wrapper.html()).to.include('Lara Croft')
     expect(wrapper.html()).to.include('img')
   })

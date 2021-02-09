@@ -5,7 +5,7 @@
         v-bind:style="{ 'background-color': label.attributes.color }"
       ) {{ label.attributes.name }}
       |&nbsp;
-      b-badge(v-if="showComplexity") {{ complexity }}
+    b-badge(v-if="showComplexity") {{ complexity }}
     b-img.pull-right.border(
       :src="avatarUrl",
       rounded="circle",
