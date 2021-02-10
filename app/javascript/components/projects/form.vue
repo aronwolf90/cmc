@@ -23,7 +23,7 @@
       label-for="input-project-status"
     )
       b-form-select(
-        id="input-name",
+        id="input-project-status",
         v-model="value.relationships['project-status'].data",
         :options="projectStatuses",
         :state="errorStatus('attributes/relationships/project-status')",

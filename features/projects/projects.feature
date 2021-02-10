@@ -65,6 +65,13 @@ Scenario: Manage project
   Then the element "#project-status-select .text" contain the text "Active"
   And I reload the page
   Then the element "#project-status-select .text" contain the text "Active"
+  # Create project with project status
+  When I click on link "Projects"
+  And I click on link "New project"
+  And I enter "New project with status" into input named "Name"
+  And select "New" from select box "Project status"
+  And I click on submit
+  Then the element "#side-body" contain the text "New project with status"
 
 @javascript
 Scenario: Paggination
