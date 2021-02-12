@@ -17,12 +17,20 @@
       | Save
     .btn-group.float-right
       router-link.btn.btn-sm.btn-secondary(to='.') Cancel
-      .btn.btn-sm.btn-danger(v-on:click='deleteIssue($event)') Delete
+      form-btn-destroy(
+        :entry-ref="project",
+        @destroy="destroy"
+      ) Destroy
 </template>
 
 <script>
+import FormBtnDestroy from 'components/form-btn-destroy'
+
 export default {
   params: ['id'],
+  components: {
+    FormBtnDestroy
+  },
   computed: {
     formLoaded () {
       return this.$store.getters['projectsShow/formLoaded']
@@ -52,6 +60,10 @@ export default {
       this.$store.dispatch('projectsShow/updateProject').then(() => {
         this.$router.push('.')
       })
+    },
+    async destroy () {
+      await this.$store.dispatch('destroy', this.project)
+      this.$router.push('..')
     }
   }
 }
