@@ -27,7 +27,6 @@ RSpec.describe Projects::CreateMutation do
 
   specify do
     expect { subject }.to change(Project, :count).by(1)
-    expect(current_user.reload.selected_project).to eq model
     expect(BoardList.all.map(&:kind)).to eq(%w[open other closed])
     expect(subject.project_board_list.project_status).to eq(project_status)
     expect(subject.folder).to be_present

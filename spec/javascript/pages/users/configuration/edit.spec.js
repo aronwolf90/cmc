@@ -15,7 +15,10 @@ describe('Edit', () => {
   subject(() => mount(Edit, {
     store: $store,
     localVue,
-    attachToDocument: true
+    attachToDocument: true,
+    stubs: {
+      FormBtnDestroy: true
+    }
   }))
 
   def('getters', () => ({
@@ -51,21 +54,6 @@ describe('Edit', () => {
         expect($subject.vm.data.attributes.active).to.eq(true)
         expect($subject.find('input').element.value).to.eq('true')
         done()
-      })
-    })
-  })
-
-  it('call destroyUser when click on delete btn and records.count==0', (done) => {
-    $actions['destroyUser'] = (_context, user) => {
-      expect(user).to.eq($user)
-      done()
-      return new Promise(() => {})
-    }
-    $subject.vm.$nextTick(() => {
-      $subject.vm.$nextTick(() => {
-        $subject.find('button.btn-destroy').trigger('click')
-        expect($subject.vm.data.attributes.type).to.eq('Admin')
-        expect($subject.find('select').element.value).to.eq('Admin')
       })
     })
   })

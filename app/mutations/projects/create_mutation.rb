@@ -16,8 +16,6 @@ module Projects
             sort_key: :ordinal_number,
             model: model
           )
-          User.where(selected_project_id: nil)
-              .update_all(selected_project_id: model.id)
           mutation(BoardList, :create).call(
             model: BoardList.new,
             kind: "open",
