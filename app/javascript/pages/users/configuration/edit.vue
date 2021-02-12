@@ -1,5 +1,5 @@
 <template lang='pug'>
-  b-form(@submit="submit")
+  b-form(@submit="submit", v-if="user")
     b-form-group(
       id="input-group-type",
       label="Type",
@@ -20,13 +20,13 @@
     ) Active
     br
     b-button(type="submit", variant="success") Update configuration
-    b-button.pull-right(
-      variant="destroy",
-      @click="destroy",
+    form-btn-destroy.pull-right(
+      :entry-ref="boardList",
+      @destroy="destroy",
       v-if="user.attributes['records-count'] == 0"
     ) Destroy
     b-button.pull-right(
-      variant="destroy",
+      variant="danger",
       v-b-modal.warning-modal="",
       v-else=""
     ) Destroy
@@ -45,9 +45,13 @@
 </template>
 
 <script>
+import FormBtnDestroy from 'components/form-btn-destroy'
 
 export default {
   props: ['userId'],
+  components: {
+    FormBtnDestroy
+  },
   data () {
     return {
       data: {
@@ -77,10 +81,9 @@ export default {
         location.reload()
       })
     },
-    destroy (event) {
-      this.$store.dispatch('destroyUser', this.user).then(() => {
-        location.replace('/administration/users')
-      })
+    async destroy (event) {
+      await this.$store.dispatch('destroyUser', this.user)
+      this.$router.push('/administration/users')
     }
   }
 }

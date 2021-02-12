@@ -27,7 +27,7 @@
      br
      b-list-group(flush="")
        b-list-group-item.list-lines(v-for="user in users")
-         b-link.text-dark(:href="`/administration/users/${user.id}`")
+         b-link.text-dark(:to="`/administration/users/${user.id}`")
           | {{ user.attributes.firstname }} {{ user.attributes.lastname }}
          b-badge.pull-right(
            variant="warning",
