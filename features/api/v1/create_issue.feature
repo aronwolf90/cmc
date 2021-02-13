@@ -30,7 +30,7 @@ Feature: API: create an issue
     """
     {
       "data": {
-        "id": "12",
+        "id": "13",
         "type": "issues",
         "attributes": {
           "title": "title",
@@ -62,7 +62,7 @@ Feature: API: create an issue
           }
         },
         "links": {
-          "self": "/api/v1/issues/12"
+          "self": "/api/v1/issues/13"
         },
         "meta": {
           "permissions": {

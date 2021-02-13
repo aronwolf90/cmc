@@ -160,13 +160,14 @@ Scenario: Get
           "attributes":{ 
             "name":"Test project 2 open",
             "kind":"open",
-            "complexity": "0.0"
+            "complexity": "5.0"
           },
           "relationships":{ 
             "issues":{ 
-              "data":[ 
-    
-              ],
+              "data":[{
+							  "id": "12",
+								"type": "issues"
+							}],
               "links":{ 
                 "self":"/api/v1/board_lists/7/issues"
               }
@@ -263,3 +264,156 @@ Scenario: Get
     }
     """
   And the response status should be "200"
+
+@javascript
+  Scenario: Get filter[project_id]=<project_id>
+  Given a test-organization with global board_list exits and is loaded
+  And I set headers:
+   | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
+   | Content-Type | application/vnd.api+json |
+  And I send a GET request to "/api/v1/board_lists?filter[project_id]=1"
+  Then the response status should be "200"
+  And the JSON response should be:
+    """
+      {
+        "data": [
+          {
+            "id": "1",
+            "type": "board-lists",
+            "attributes": {
+              "name": "Open",
+              "kind": "open",
+              "complexity": "12.0"
+            },
+            "relationships": {
+              "issues": {
+                "data": [
+                  {
+                    "id": "4",
+                    "type": "issues"
+                  },
+                  {
+                    "id": "3",
+                    "type": "issues"
+                  },
+                  {
+                    "id": "2",
+                    "type": "issues"
+                  },
+                  {
+                    "id": "1",
+                    "type": "issues"
+                  }
+                ],
+                "links": {
+                  "self": "/api/v1/board_lists/1/issues"
+                }
+              },
+              "project": {
+                "data": null
+              }
+            },
+            "links": {
+              "self": "/api/v1/board_lists/1"
+            },
+            "meta": {
+              "permissions": {
+                "update": true,
+                "destroy": false
+              }
+            }
+          },
+          {
+            "id": "2",
+            "type": "board-lists",
+            "attributes": {
+              "name": "In progress",
+              "kind": "other",
+              "complexity": "18.0"
+            },
+            "relationships": {
+              "issues": {
+                "data": [
+                  {
+                    "id": "7",
+                    "type": "issues"
+                  },
+                  {
+                    "id": "6",
+                    "type": "issues"
+                  },
+                  {
+                    "id": "5",
+                    "type": "issues"
+                  }
+                ],
+                "links": {
+                  "self": "/api/v1/board_lists/2/issues"
+                }
+              },
+              "project": {
+                "data": null
+              }
+            },
+            "links": {
+              "self": "/api/v1/board_lists/2"
+            },
+            "meta": {
+              "permissions": {
+                "update": true,
+                "destroy": false
+              }
+            }
+          },
+          {
+            "id": "3",
+            "type": "board-lists",
+            "attributes": {
+              "name": "Closed",
+              "kind": "closed",
+              "complexity": "17.0"
+            },
+            "relationships": {
+              "issues": {
+                "data": [
+                  {
+                    "id": "11",
+                    "type": "issues"
+                  },
+                  {
+                    "id": "10",
+                    "type": "issues"
+                  },
+                  {
+                    "id": "9",
+                    "type": "issues"
+                  },
+                  {
+                    "id": "8",
+                    "type": "issues"
+                  }
+                ],
+                "links": {
+                  "self": "/api/v1/board_lists/3/issues"
+                }
+              },
+              "project": {
+                "data": null
+              }
+            },
+            "links": {
+              "self": "/api/v1/board_lists/3"
+            },
+            "meta": {
+              "permissions": {
+                "update": true,
+                "destroy": false
+              }
+            }
+          }
+        ],
+        "links": {
+          "self": "/api/v1/board_lists"
+        }
+      }
+    """

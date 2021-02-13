@@ -69,7 +69,7 @@ module Api
             json: json,
             include: params[:include],
             links: ({ self: request.path_info } if links),
-            option_name: params[:filter] || {},
+            filter: params[:filter] || {},
             meta: meta
           }.merge(serializer_hash))
         end

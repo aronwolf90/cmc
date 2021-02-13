@@ -13,6 +13,15 @@ Given(/^a test-organization exists and is loaded$/) do
   allow(Capybara).to receive(:app_host).and_return "http://test-organization.#{Settings.test_host}:#{Settings.test_port}"
 end
 
+Given(/^a test-organization with global board_list exits and is loaded$/) do
+  allow(Settings).to receive(:multi_tenant).and_return(true)
+  RestClient.post(
+    "#{Capybara.app_host}/api/v1/test_organizations",
+    { data: { attributes: { "global-board": true } } }.to_json, content_type: :json, accept: :json
+  )
+  allow(Capybara).to receive(:app_host).and_return "http://test-organization.#{Settings.test_host}:#{Settings.test_port}"
+end
+
 Given(/^I am an user with an id of 1$/) do
   Admin.create!(id: 1, email: "test@localhost.de", password: "testtest", password_confirmation: "testtest")
 end

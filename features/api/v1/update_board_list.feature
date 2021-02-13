@@ -29,11 +29,14 @@ Scenario: Put an valid board lists using json in PUT body
         "attributes": {
           "name": "New name",
           "kind": "open",
-          "complexity": "0.0"
+          "complexity": "5.0"
         },
         "relationships": {
           "issues": {
-            "data": [],
+            "data": [{
+              "id": "12",
+              "type": "issues"
+            }],
             "links": { "self": "/api/v1/board_lists/7/issues" }
           },
           "project": { "data": { "id": "2", "type": "projects" } }

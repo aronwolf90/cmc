@@ -63,7 +63,7 @@ Scenario: change selected project
   Then the element "#side-body" contain the text "Open"
   When I click on "#project-select" 
   And I click on "[role='option']" with "Test project 2"
-  Then the element "#side-body" does not contain the text "Test issue 1"
+  Then the element "#side-body" does not contain the text "Test issue 2"
 
 @javascript
 Scenario: search and change selected project

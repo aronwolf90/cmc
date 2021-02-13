@@ -167,13 +167,14 @@ Scenario: valid data
           "attributes":{ 
             "name":"Test project 2 open",
             "kind":"open",
-            "complexity": "0.0"
+            "complexity": "5.0"
           },
           "relationships":{ 
             "issues":{ 
-              "data":[ 
-    
-              ],
+              "data":[{ 
+                "id": "12",
+                "type": "issues"
+              }],
               "links":{ 
                 "self":"/api/v1/board_lists/7/issues"
               }

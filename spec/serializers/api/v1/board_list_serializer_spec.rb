@@ -17,7 +17,8 @@ RSpec.describe Api::V1::BoardListSerializer, type: :serializer do
   end
 
   before do
-    allow(board_list).to receive(:complexity).and_return(3)
+    allow(Api::V1::BoardLists::ComplexityQuery)
+      .to receive(:call).with(board_list: board_list, project_id: 1).and_return(3)
   end
 
   let(:expected_result) do
@@ -62,6 +63,6 @@ RSpec.describe Api::V1::BoardListSerializer, type: :serializer do
   end
 
   it "serialize in the correct way" do
-    expect(serialize(board_list)).to eq expected_result
+    expect(serialize(board_list, filter: { project_id: 1 })).to eq expected_result
   end
 end

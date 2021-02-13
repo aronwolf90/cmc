@@ -173,4 +173,17 @@ Issue.bulk_insert(
     created_at:            Time.zone.parse("9-10-2020 10:10:10"),
     updated_at:            Time.zone.parse("9-10-2020 10:10:10")
   )
+
+  worker.add(
+    id:                    12,
+    board_list_id:         7,
+    global_board_list_id:  1,
+    complexity:            5,
+    title:                 "Test issue 12",
+    description:           "description for the test issue",
+    ordinal_number:        0,
+    global_ordinal_number: 4,
+    created_at:            Time.zone.parse("9-10-2020 10:10:11"),
+    updated_at:            Time.zone.parse("9-10-2020 10:10:11")
+  )
 end

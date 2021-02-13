@@ -11,7 +11,7 @@ Scenario: Get /api/v1/issues
     """
     { 
       "meta": {
-        "count": 11
+        "count": 12
       },
       "data":[ 
         { 
@@ -481,6 +481,45 @@ Scenario: Get /api/v1/issues
               "destroy":true
             }
           }
+        },
+        { 
+          "id":"12",
+          "type":"issues",
+          "attributes":{ 
+            "title":"Test issue 12",
+            "description":"description for the test issue",
+            "complexity":"5.0",
+            "due-at": null,
+            "deadline-at": null,
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
+          },
+          "relationships":{ 
+            "user":{ 
+              "data":null
+            },
+            "labels": {
+              "data": []
+            },
+            "created-by": {
+              "data": null
+            },
+            "board-list": {
+              "data": {
+                "id": "7",
+                "type": "board-lists"
+              }
+            }
+          },
+          "links":{ 
+            "self":"/api/v1/issues/12"
+          },
+          "meta":{ 
+            "permissions":{ 
+              "update":true,
+              "destroy":true
+            }
+          }
         }
       ],
       "links":{ 
@@ -505,6 +544,47 @@ Scenario: Get /api/v1/issues
     """
     {
       "data": [
+        {
+          "id": "12",
+          "type": "issues",
+          "attributes": {
+            "title": "Test issue 12",
+            "description": "description for the test issue",
+            "complexity": "5.0",
+            "due-at": null,
+            "deadline-at": null,
+            "status": "none",
+            "created-at": "09-10-2020 10:10"
+          },
+          "relationships": {
+            "user": {
+              "data": null
+            },
+            "labels": {
+              "data": [
+
+              ]
+            },
+            "created-by": {
+						  "data": null
+            },
+            "board-list": {
+              "data": {
+                "id": "7",
+                "type": "board-lists"
+              }
+            }
+          },
+          "links": {
+            "self": "/api/v1/issues/12"
+          },
+          "meta": {
+            "permissions": {
+              "update": true,
+              "destroy": true
+            }
+          }
+        },
         {
           "id": "11",
           "type": "issues",
@@ -649,7 +729,7 @@ Scenario: Get /api/v1/issues
         "last": "/api/v1/issues?page%5Bnumber%5D=1&page%5Bsize%5D=15&query=1&sort%5Bcreated_at%5D=desc"
       },
       "meta": {
-        "count": 3
+        "count": 4
       }
     }
     """

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module SerializerSpecHelper
-  def serialize(obj, opts = {})
+  def serialize(obj, scope: nil, **opts)
     obje = ActiveModelSerializers::Adapter.create(
-      described_class.send(:new, obj), opts
+      described_class.new(obj, **opts), scope: scope
     )
     obje.as_json
   end

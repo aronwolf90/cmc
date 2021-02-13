@@ -71,12 +71,14 @@ Scenario: Get
         "attributes":{ 
           "name":"Open",
           "kind":"open",
-          "complexity": "12.0"
+          "complexity": "5.0"
         },
         "relationships":{ 
           "issues":{ 
-            "data":[ 
-            ],
+            "data":[{
+              "id": "12",
+              "type": "issues"
+            }],
             "links":{ 
               "self":"/api/v1/board_lists/1/issues"
             }

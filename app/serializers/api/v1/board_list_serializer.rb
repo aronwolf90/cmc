@@ -19,6 +19,13 @@ module Api
 
       link(:self) { api_v1_board_list_path(object) }
 
+      def complexity
+        Api::V1::BoardLists::ComplexityQuery.call(
+          board_list: object,
+          project_id: @instance_options.dig(:filter, :project_id)
+        )
+      end
+
       def self.eager_load_options
         %i[project]
       end
