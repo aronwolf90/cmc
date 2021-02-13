@@ -21,7 +21,7 @@
     br
     b-button(type="submit", variant="success") Update configuration
     form-btn-destroy.pull-right(
-      :entry-ref="boardList",
+      :entry-ref="user",
       @destroy="destroy",
       v-if="user.attributes['records-count'] == 0"
     ) Destroy
