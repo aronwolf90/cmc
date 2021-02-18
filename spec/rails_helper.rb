@@ -65,6 +65,8 @@ RSpec.configure do |config|
   config.include SerializerSpecHelper, type: :serializer
   config.include Shoulda::Matchers::ActiveModel, type: :model
   config.include Shoulda::Matchers::ActiveRecord, type: :model
+
+  config.filter_run_when_matching :focus
 end
 
 Fog.mock!

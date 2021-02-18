@@ -1,5 +1,4 @@
-import Board from '../../../../app/javascript/store/modules/board.js'
-import sinon from 'sinon'
+import Board from 'store/modules/board.js'
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
@@ -60,7 +59,7 @@ describe('Modules.Board', () => {
             expect(boardLists).to.eql([boardList1, boardList2])
             done()
           },
-          dispatch: sinon
+          dispatch: sandbox
             .stub()
             .withArgs('getBoardLists', null, { root: true })
             .returns(Promise.resolve({ data: [boardList1, boardList2] }))
@@ -172,9 +171,9 @@ describe('Modules.Board', () => {
       })
     })
     describe('.updateBoardListIssuesOnServer', () => {
-      const issue1 = { id: 1, type: 'issues' }
-      const issue2 = { id: 2, type: 'issues' }
-      const issue3 = { id: 3, type: 'issues' }
+      const issue1 = { id: 1, type: 'issues', links: { self: '/api/v1/issues/1' } }
+      const issue2 = { id: 2, type: 'issues', links: { self: '/api/v1/issues/2' } }
+      const issue3 = { id: 3, type: 'issues', links: { self: '/api/v1/issues/3' } }
 
       it('do not call updateIssue when a issue is removed', () => {
         const context = {
@@ -191,39 +190,49 @@ describe('Modules.Board', () => {
         })
       })
 
-      it('call updateIssue when a issue is added', (done) => {
+      it('call updateIssue when a issue is added', () => {
         const context = {
           rootGetters: {
-            associatedEntries: () => [issue1, issue2, issue3]
-          },
-          dispatch: (context, { entry, attributes }) => {
-            expect(entry.id).to.eq(4)
-            expect(attributes['ordinal-number']).to.eq(3)
-            done()
+            associatedEntries: () => [issue1, issue2, issue3],
+            axios: {
+              post: sandbox.stub()
+            }
           }
         }
-        const issue4 = { id: 4, type: 'issues' }
+        const issue4 = { id: 4, type: 'issues', links: { self: '/api/v1/issues/4' } }
 
         Board.actions.updateBoardListIssuesOnServer(context, {
-          issues: [issue1, issue2, issue3, issue4]
+          issues: [issue1, issue2, issue3, issue4],
+          boardList: { id: '1', type: 'board-lists' }
         })
+        expect(context.rootGetters.axios.post)
+          .to.have.been.calledWith('/api/v1/issues/4/move', {
+            issue_id: 4,
+            before_issue_id: 3,
+            board_list_id: '1'
+          })
       })
 
-      it('call updateIssue when a issue is sorted', (done) => {
+      it('call updateIssue when a issue is sorted', () => {
         const context = {
           rootGetters: {
-            associatedEntries: () => [issue1, issue2, issue3]
-          },
-          dispatch: (context, { entry, attributes }) => {
-            expect(entry.id).to.eq(3)
-            expect(attributes['ordinal-number']).to.eq(0)
-            done()
+            associatedEntries: () => [issue1, issue2, issue3],
+            axios: {
+              post: sandbox.stub()
+            }
           }
         }
 
         Board.actions.updateBoardListIssuesOnServer(context, {
-          issues: [issue3, issue2, issue1]
+          issues: [issue3, issue2, issue1],
+          boardList: { id: '1', type: 'board-lists' }
         })
+        expect(context.rootGetters.axios.post)
+          .to.have.been.calledWith('/api/v1/issues/1/move', {
+            issue_id: 1,
+            before_issue_id: 2,
+            board_list_id: '1'
+          })
       })
     })
   })

@@ -57,11 +57,14 @@ export default {
       let oldIssues = context.rootGetters.associatedEntries({ entry: boardList, name: 'issues' })
       for (let i = 0, j = 0; i < issues.length; i++, j++) {
         if (issues[i] === oldIssues[j]) continue
-        context.dispatch('updateIssue', {
-          entry: issues[i],
-          attributes: { 'ordinal-number': i },
-          boardList: boardList
-        }, { root: true })
+        context.rootGetters.axios.post(
+          `${issues[i].links.self}/move`,
+          {
+            issue_id: issues[i].id,
+            before_issue_id: i === 0 ? null : issues[i - 1].id,
+            board_list_id: boardList.id
+          }
+        )
         if (issues[i + 1] === oldIssues[j]) i++
         if (issues[i] === oldIssues[j + 1]) j++
       }

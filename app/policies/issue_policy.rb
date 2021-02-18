@@ -13,6 +13,10 @@ class IssuePolicy < ApplicationPolicy
     true
   end
 
+  def move?
+    true
+  end
+
   def destroy?
     true
   end

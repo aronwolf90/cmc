@@ -33,7 +33,7 @@ describe IssuePolicy do
     end
   end
 
-  permissions :edit?, :update? do
+  permissions :edit?, :update?, :move? do
     it "grant access to the admins" do
       is_expected.to permit(Admin.new, Issue.new)
     end

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       ::Digest::SHA256.hexdigest(Settings.admin_password)
     )
   end
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => "/sidekiq"
 
   devise_for :users, controllers: { sessions: "sessions" }
 
@@ -88,6 +88,7 @@ Rails.application.routes.draw do
       resources :issues, only: %i[index show create update destroy] do
         scope module: :issues do
           resource :close, only: :create
+          resource :move, only: :create
           resources :comments, only: :index
         end
       end
