@@ -44,7 +44,7 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-istanbul": "^4.1.6",
     "bdd-lazy-var": "^2.6.0",
-    "chai": "^4.3.0",
+    "chai": "^4.3.3",
     "cross-env": "^5.2.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^12.1.0",
