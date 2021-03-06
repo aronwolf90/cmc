@@ -26,13 +26,12 @@ export default {
       errors: []
     }
   },
-  created () {
-    this.$store.dispatch('getProjectStatus', this.id).then(response => {
-      this.form.attributes.name = response.data.attributes.name
-      this.form.attributes['display-as'] =
-        response.data.attributes['display-as']
-      this.show = true
-    })
+  async created () {
+    const response = await this.$store.dispatch('getProjectStatus', this.id)
+    this.form.attributes.name = response.data.attributes.name
+    this.form.attributes['display-as'] =
+      response.data.attributes['display-as']
+    this.show = true
   },
   computed: {
     projectStatus () {

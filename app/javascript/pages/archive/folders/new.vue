@@ -8,6 +8,11 @@
 <script>
 import ArchiveFoldersForm from 'components/folders/form'
 import store from 'store'
+import foldersForm from 'store/modules/folders-form'
+
+if (!store.hasModule('foldersForm')) {
+  store.registerModule('foldersForm', foldersForm)
+}
 
 export default {
   components: {

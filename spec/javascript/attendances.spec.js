@@ -54,24 +54,17 @@ describe('Attendances', () => {
       })
     })
   })
-  it('render HeaderCell', done => {
-    $subject.vm.$nextTick(() => {
-      $subject.vm.$nextTick(() => {
-        $subject.vm.$nextTick(() => {
-          expect($subject.find(HeaderCell).exists()).to.be.true
-          done()
-        })
-      })
-    })
+  it('render HeaderCell', async () => {
+    await $subject.vm.$nextTick()
+    await $subject.vm.$nextTick()
+    await $subject.vm.$nextTick()
+    expect($subject.find(HeaderCell).exists()).to.be.true
   })
-  it('render BodyCell', done => {
-    $subject.vm.$nextTick(() => {
-      $subject.vm.$nextTick(() => {
-        $subject.vm.$nextTick(() => {
-          expect($subject.find(BodyCell).exists()).to.be.true
-          done()
-        })
-      })
-    })
+
+  it('render BodyCell', async () => {
+    await $subject.vm.$nextTick()
+    await $subject.vm.$nextTick()
+    await $subject.vm.$nextTick()
+    expect($subject.find(BodyCell).exists()).to.be.true
   })
 })

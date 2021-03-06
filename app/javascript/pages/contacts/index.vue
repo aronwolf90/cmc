@@ -24,6 +24,12 @@
 <script>
 import IndexTopSection from 'components/index-top-section'
 import IndexListItem from 'components/index-list-item'
+import contactsIndex from 'store/modules/contacts-index'
+import store from 'store'
+
+if (!store.hasModule('contactsIndex')) {
+  store.registerModule('contactsIndex', contactsIndex)
+}
 
 export default {
   components: {

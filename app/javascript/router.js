@@ -337,7 +337,7 @@ const router = new Router({
     },
     {
       path: '/administration/users/:id',
-      component: RailsPage,
+      component: () => import('pages/users/_id/edit'),
       props: true,
       meta: { aside: 'user-detail' }
     },

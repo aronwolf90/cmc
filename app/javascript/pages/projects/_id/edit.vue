@@ -25,6 +25,12 @@
 
 <script>
 import FormBtnDestroy from 'components/form-btn-destroy'
+import store from 'store'
+import projectsShow from 'store/modules/projects-show'
+
+if (!store.hasModule('projectsShow')) {
+  store.registerModule('projectsShow', projectsShow)
+}
 
 export default {
   params: ['id'],

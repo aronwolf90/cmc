@@ -13,13 +13,20 @@ describe Api::V1::Users::UpdateDeserializer do
         attributes: {
           firstname: "Lara",
           lastname: "Croft",
-          email: "test@lvh.me"
+          email: "test@lvh.me",
+          "telephone-number": "0867899ß876"
         },
         relationships: {
           "selected-project": {
             data: {
               id: "1",
               type: "projects"
+            }
+          },
+          "user-avatar": {
+            data: {
+              id: "1",
+              type: "user-avatars"
             }
           }
         }
@@ -30,7 +37,9 @@ describe Api::V1::Users::UpdateDeserializer do
         selected_project_id: "1",
         firstname: "Lara",
         lastname: "Croft",
-        email: "test@lvh.me"
+        email: "test@lvh.me",
+        telephone_number: "0867899ß876",
+        user_avatar_id: "1"
       }
     end
 

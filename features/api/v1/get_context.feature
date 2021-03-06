@@ -37,7 +37,8 @@ Scenario: Get
           "type": "Admin",
           "active": true,
           "records-count": 4,
-          "avatar-url": "/packs/images/avatar_placeholder<.+>" 
+          "avatar-url": "/api/v1/user_avatars/placeholder",
+          "telephone-number": null
         },
         "relationships": {
           "selected-project": { "data": { "id": "1", "type": "projects" } },

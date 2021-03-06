@@ -1,78 +1,56 @@
-import { mount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
 import ProjectStatusNew from 'pages/project-statuses/new'
-import BootstrapVue from 'bootstrap-vue'
-import sinon from 'sinon'
-import VueRouter from 'vue-router'
-
-const localVue = createLocalVue()
-const router = new VueRouter()
-
-localVue.use(Vuex)
-localVue.use(BootstrapVue)
-localVue.use(VueRouter)
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable prefer-promise-reject-errors */
 
-const sandbox = sinon.createSandbox()
-
-describe('ProjectStatusNew', () => {
+describe('pages/project-statuses/new.vue', () => {
   afterEach(() => sandbox.restore())
 
-  it('calls createProjectStatus when submit is clicked', (done) => {
-    let wrapper = mount(ProjectStatusNew, {
-      router,
-      store: new Vuex.Store({
-        actions: {
-          createProjectStatus (_, { attributes }) {
-            expect(attributes).to.eql({
-              name: 'New',
-              'display-as': 'list'
-            })
-            done()
-            return Promise.resolve()
-          }
+  const dispatch = sandbox.stub()
+  const factory = () => {
+    return createWrapper(ProjectStatusNew, {
+      mocks: {
+        $store: {
+          dispatch
         }
-      }),
-      localVue,
+      },
       attachToDocument: true
     })
+  }
+
+  beforeEach(() => {
+    dispatch.returns(Promise.resolve())
+  })
+
+  it('calls createProjectStatus when submit is clicked', async () => {
+    const wrapper = factory()
     wrapper.find('#input-name').element.value = 'New'
     wrapper.find('#input-name').trigger('input')
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        wrapper.find('[type="submit"]').trigger('click')
-      })
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    wrapper.find('[type="submit"]').trigger('click')
+    expect(dispatch).to.have.been.calledWith('createProjectStatus', {
+      attributes: {
+        name: 'New',
+        'display-as': 'list'
+      }
     })
   })
 
-  it('show errors when they are present', (done) => {
-    let wrapper = mount(ProjectStatusNew, {
-      store: new Vuex.Store({
-        actions: {
-          createProjectStatus ({ attributes }) {
-            return Promise.reject({
-              status: 'fail',
-              data: {
-                errors: [{ source: { pointer: 'attributes/name' } }]
-              }
-            })
-          }
+  it('show errors when they are present', async () => {
+    const wrapper = factory()
+    dispatch.withArgs('createProjectStatus')
+      .returns(Promise.reject({
+        status: 'fail',
+        data: {
+          errors: [{ source: { pointer: 'attributes/name' } }]
         }
-      }),
-      localVue,
-      attachToDocument: true
-    })
+      }))
     wrapper.find('[type="submit"]').trigger('click')
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        wrapper.vm.$nextTick(() => {
-          expect(wrapper.vm.errors).to.eql([{ source: { pointer: 'attributes/name' } }])
-          done()
-        })
-      })
-    })
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.errors).to.eql([{ source: { pointer: 'attributes/name' } }])
   })
 })

@@ -40,7 +40,8 @@ Scenario: change issues order
   Then the page contain the text "Test project"
   When I drag "#list-issue-4" to "#list-issue-1 .badge:last-of-type"
   Then the element "#column-1 .list-issue:last-of-type" contain the text "Test issue 4"
-  When I reload the page
+  When I sleep "1" seconds
+  And I reload the page
   Then the element "#column-1 .list-issue:last-of-type" contain the text "Test issue 4"
 
 @javascript

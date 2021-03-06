@@ -7,7 +7,8 @@ Scenario: Get
    | Authorization | Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjF9.ClWbiKD35AyiLHuBiDeCTeDwseNvX4WxFlZqdar37TU |
    | Content-Type | application/vnd.api+json |
   And I send a GET request to "/api/v1/users"
-  Then the JSON response should match:
+  Then the response status should be "200"
+  And the JSON response should match:
     """
     { 
       "meta": {
@@ -24,7 +25,8 @@ Scenario: Get
             "type": "Admin",
             "active": true,
             "records-count": 4,
-            "avatar-url": "/packs/images/avatar_placeholder<.+>" 
+            "avatar-url": "/api/v1/user_avatars/placeholder",
+            "telephone-number": null
           },
           "relationships":{ 
             "selected-project":{ 
@@ -69,7 +71,8 @@ Scenario: Get
             "type":"Employee",
             "active":true,
             "records-count":2,
-            "avatar-url": "/packs/images/avatar_placeholder<.+>" 
+            "avatar-url": "/api/v1/user_avatars/placeholder",
+            "telephone-number": null
           },
           "relationships":{ 
             "selected-project":{ 
@@ -107,7 +110,8 @@ Scenario: Get
             "type":"Customer",
             "active":true,
             "records-count":0,
-            "avatar-url": "/packs/images/avatar_placeholder<.+>" 
+            "avatar-url": "/api/v1/user_avatars/placeholder",
+            "telephone-number": null
           },
           "relationships":{ 
             "selected-project":{ 
@@ -141,4 +145,3 @@ Scenario: Get
       }
     }
     """
-  And the response status should be "200"

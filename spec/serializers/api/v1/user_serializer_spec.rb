@@ -17,7 +17,9 @@ RSpec.describe Api::V1::UserSerializer, type: :serializer do
       firstname: "Tom",
       email: "test@lvh.me",
       type: "Admin",
-      active: true
+      active: true,
+      telephone_number: "0867899ß876",
+      user_avatar_id: 1
     )
   end
 
@@ -32,8 +34,9 @@ RSpec.describe Api::V1::UserSerializer, type: :serializer do
           email: "test@lvh.me",
           type: "Admin",
           active: true,
-          'records-count': 0,
-          "avatar-url": "test.png"
+          "records-count": 0,
+          "avatar-url": "/api/v1/user_avatars/#{user.user_avatar_id}",
+          "telephone-number": "0867899ß876"
         },
         relationships: {
           "selected-project": {

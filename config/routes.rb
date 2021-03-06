@@ -100,6 +100,7 @@ Rails.application.routes.draw do
           resource :configuration, only: :update
         end
       end
+      resources :user_avatars, only: %i[show create]
 
       resources :records, only: %i[show create update destroy]
       resources :record_days, only: :index

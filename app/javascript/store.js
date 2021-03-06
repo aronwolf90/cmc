@@ -37,20 +37,13 @@ import projectBoardListGetters from 'store/models/project-board-list-getters'
 import projectBoardListActions from 'store/models/project-board-list-actions'
 import projectCommentActions from 'store/models/project-comment-actions'
 import projectCommentGetters from 'store/models/project-comment-getters'
-import ProjectsShow from 'store/modules/projects-show'
-import issuesShow from 'store/modules/issues-show'
 import commentGetters from 'store/models/comment-getters'
 import documentGetters from 'store/models/document-getters'
 import CalendarActions from 'store/models/calendar_actions'
 import LabelActions from 'store/models/label-actions'
 import ProjectsLeftAside from 'store/modules/projects-left-aside'
-import ProjectsIndex from 'store/modules/projects-index'
 import recordsForm from 'store/modules/records-form'
-import contactsIndex from 'store/modules/contacts-index'
-import recordsIndex from 'store/modules/records-index'
 import projectsRecordsIndex from 'store/modules/projects-records-index'
-import foldersForm from 'store/modules/folders-form'
-import wikiCategoriesForm from 'store/modules/wiki-categories-form'
 
 Vue.use(Vuex)
 
@@ -60,16 +53,9 @@ export default new Vuex.Store({
     json_api: JsonApi,
     board: Board,
     'projects-board': ProjectsBoard,
-    projectsShow: ProjectsShow,
-    issuesShow: issuesShow,
     projectsLeftAside: ProjectsLeftAside,
-    projectsIndex: ProjectsIndex,
     recordsForm,
-    contactsIndex,
-    recordsIndex,
-    projectsRecordsIndex,
-    foldersForm,
-    wikiCategoriesForm
+    projectsRecordsIndex
   },
   state: {
     aside: null,

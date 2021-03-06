@@ -32,7 +32,13 @@
 import IndexTopSection from 'components/index-top-section'
 import IndexSearchSectionItem from 'components/index-list-item'
 import ProjectIndexItem from 'components/projects/project-index-item'
+import projectsIndex from 'store/modules/projects-index'
+import store from 'store'
 import { Utils } from 'vuex-jsonapi-client'
+
+if (!store.hasModule('projectsIndex')) {
+  store.registerModule('projectsIndex', projectsIndex)
+}
 
 export default {
   components: {

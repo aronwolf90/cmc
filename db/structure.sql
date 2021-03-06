@@ -27,8 +27,6 @@ CREATE TYPE board_list_kind_enum AS ENUM (
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
-
 --
 -- Name: ar_internal_metadata; Type: TABLE; Schema: test-organization; Owner: -
 --
@@ -745,6 +743,37 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: user_avatars; Type: TABLE; Schema: test-organization; Owner: -
+--
+
+CREATE TABLE user_avatars (
+    id bigint NOT NULL,
+    file character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: user_avatars_id_seq; Type: SEQUENCE; Schema: test-organization; Owner: -
+--
+
+CREATE SEQUENCE user_avatars_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_avatars_id_seq; Type: SEQUENCE OWNED BY; Schema: test-organization; Owner: -
+--
+
+ALTER SEQUENCE user_avatars_id_seq OWNED BY user_avatars.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: test-organization; Owner: -
 --
 
@@ -777,7 +806,8 @@ CREATE TABLE users (
     selected_project_id integer,
     telephone_number character varying,
     type character varying NOT NULL,
-    active boolean DEFAULT true NOT NULL
+    active boolean DEFAULT true NOT NULL,
+    user_avatar_id bigint
 );
 
 
@@ -1046,6 +1076,13 @@ ALTER TABLE ONLY records ALTER COLUMN id SET DEFAULT nextval('records_id_seq'::r
 
 
 --
+-- Name: user_avatars id; Type: DEFAULT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY user_avatars ALTER COLUMN id SET DEFAULT nextval('user_avatars_id_seq'::regclass);
+
+
+--
 -- Name: user_projects id; Type: DEFAULT; Schema: test-organization; Owner: -
 --
 
@@ -1239,6 +1276,14 @@ ALTER TABLE ONLY records
 
 ALTER TABLE ONLY schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: user_avatars user_avatars_pkey; Type: CONSTRAINT; Schema: test-organization; Owner: -
+--
+
+ALTER TABLE ONLY user_avatars
+    ADD CONSTRAINT user_avatars_pkey PRIMARY KEY (id);
 
 
 --
@@ -1547,6 +1592,13 @@ CREATE INDEX index_users_on_selected_project_id ON users USING btree (selected_p
 
 
 --
+-- Name: index_users_on_user_avatar_id; Type: INDEX; Schema: test-organization; Owner: -
+--
+
+CREATE INDEX index_users_on_user_avatar_id ON users USING btree (user_avatar_id);
+
+
+--
 -- Name: index_wiki_categories_on_wiki_category_id; Type: INDEX; Schema: test-organization; Owner: -
 --
 
@@ -1730,6 +1782,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200919103321'),
 ('20201018132403'),
 ('20201110190116'),
-('20201115001108');
+('20201115001108'),
+('20210227140958'),
+('20210228135137');
 
 

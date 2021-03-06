@@ -1,21 +1,10 @@
-import { mount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
-import ProjectBoardListEdit from 'pages/project-board-lists/_id/edit'
-import BootstrapVue from 'bootstrap-vue'
-import VueRouter from 'vue-router'
-
-const localVue = createLocalVue()
-const router = new VueRouter()
-
-localVue.use(Vuex)
-localVue.use(BootstrapVue)
-localVue.use(VueRouter)
+import PagesProjectBoardListsIdEdit from 'pages/project-board-lists/_id/edit'
 
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable prefer-promise-reject-errors */
 
-describe('ProjectStatusEdit', () => {
+describe('pages/project-board-lists/_id/edit.vue', () => {
   const projectBoardList = {
     id: 1,
     type: 'project-board-lists',
@@ -33,89 +22,71 @@ describe('ProjectStatusEdit', () => {
       }
     }
   }
-  const store = {
-    getters: {
-      projectBoardList () {
-        return () => projectBoardList
-      }
-    },
-    actions: {
-      getProjectBoardList () {
-        return Promise.resolve({ data: projectBoardList })
+  const dispatch = sandbox.stub()
+  const factory = () => {
+    return createWrapper(PagesProjectBoardListsIdEdit, {
+      mocks: {
+        $store: {
+          dispatch,
+          getters: {
+            projectBoardList: () => projectBoardList
+          }
+        }
       },
-      updateProjectBoardList (_, { attributes }) {
-        return Promise.resolve()
-      }
-    }
-  }
-
-  it('calls updateProjectBoardList when submit is clicked', (done) => {
-    store.actions['updateProjectBoardList'] = (_, { payload }) => {
-      expect(payload.attributes).to.eql({ name: 'New' })
-      done()
-      return Promise.resolve()
-    }
-    const wrapper = mount(ProjectBoardListEdit, {
-      router,
-      store: new Vuex.Store(store),
-      localVue,
       attachToDocument: true
     })
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        wrapper.vm.$nextTick(() => {
-          wrapper.find('#input-name').element.value = 'New'
-          wrapper.find('#input-name').trigger('input')
-          wrapper.vm.$nextTick(() => {
-            wrapper.vm.$nextTick(() => {
-              wrapper.find('[type="submit"]').trigger('click')
-            })
-          })
-        })
-      })
+  }
+
+  beforeEach(() => {
+    dispatch.returns(Promise.resolve())
+    dispatch.withArgs('getProjectBoardList').returns(
+      Promise.resolve({ data: projectBoardList }))
+  })
+
+  it('calls updateProjectBoardList when submit is clicked', async () => {
+    const wrapper = factory()
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    wrapper.find('#input-name').element.value = 'New'
+    wrapper.find('#input-name').trigger('input')
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    wrapper.find('[type="submit"]').trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(dispatch).to.have.been.calledWith('updateProjectBoardList', {
+      projectBoardList: projectBoardList,
+      payload: {
+        attributes: {
+          name: 'New'
+        }
+      }
     })
   })
 
-  it('initialize inputs', (done) => {
-    const wrapper = mount(ProjectBoardListEdit, {
-      router,
-      store: new Vuex.Store(store),
-      localVue
-    })
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        expect(wrapper.find('#input-name').element.value).to.eq('New')
-        done()
-      })
-    })
+  it('initialize inputs', async () => {
+    const wrapper = factory()
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('#input-name').element.value).to.eq('New')
   })
 
-  it('show errors when they are present', (done) => {
-    store.actions['updateProjectBoardList'] = (_, { attributes }) => {
-      return Promise.reject({
+  it('show errors when they are present', async () => {
+    const wrapper = factory()
+    dispatch.withArgs('updateProjectBoardList').returns(
+      Promise.reject({
         status: 'fail',
         data: {
           errors: [{ source: { pointer: 'attributes/name' } }]
         }
       })
-    }
-    const wrapper = mount(ProjectBoardListEdit, {
-      store: new Vuex.Store(store),
-      localVue,
-      attachToDocument: true
-    })
-    wrapper.vm.$nextTick(() => {
-      wrapper.vm.$nextTick(() => {
-        wrapper.find('[type="submit"]').trigger('click')
-        wrapper.vm.$nextTick(() => {
-          wrapper.vm.$nextTick(() => {
-            wrapper.vm.$nextTick(() => {
-              expect(wrapper.vm.errors).to.eql([{ source: { pointer: 'attributes/name' } }])
-              done()
-            })
-          })
-        })
-      })
-    })
+    )
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    wrapper.find('[type="submit"]').trigger('click')
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.errors).to.eql([{ source: { pointer: 'attributes/name' } }])
   })
 })

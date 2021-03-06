@@ -32,7 +32,8 @@ Scenario: Update successfully user type when updater is a admin
           "type": "Customer",
           "active": false,
           "records-count": 2,
-          "avatar-url": "/packs/images/avatar_placeholder<.+>" 
+          "avatar-url": "/api/v1/user_avatars/placeholder",
+          "telephone-number": null
         },
         "relationships": {
           "selected-project": {

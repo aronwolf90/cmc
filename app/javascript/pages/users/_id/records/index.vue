@@ -16,6 +16,12 @@
 
 <script>
 import RecordsIndexBody from 'components/records/index-body'
+import recordsIndex from 'store/modules/records-index'
+import store from 'store'
+
+if (!store.hasModule('recordsIndex')) {
+  store.registerModule('recordsIndex', recordsIndex)
+}
 
 export default {
   props: ['userId'],

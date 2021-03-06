@@ -5,6 +5,7 @@ Scenario: Start record time
   Given a test-organization exists
   And I am signed in (multitenant)
   When I click on link "Tickets"
+  And I sleep "1" seconds
   And I click on "#shared-issue-section .fa-play"
   Then the page contain the element "#shared-issue-section .fa-stop"
 

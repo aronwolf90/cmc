@@ -11,6 +11,11 @@
 import ArchiveFoldersForm from 'components/folders/form'
 import FormBtnDestroy from 'components/form-btn-destroy'
 import store from 'store'
+import foldersForm from 'store/modules/folders-form'
+
+if (!store.hasModule('foldersForm')) {
+  store.registerModule('foldersForm', foldersForm)
+}
 
 export default {
   components: {

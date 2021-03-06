@@ -1,41 +1,41 @@
 <template lang='pug'>
-  b-nav-item-dropdown(
-    id="bell-dropdown",
-    class="bg-transparent",
-    @show="notificationsReaded",
-    toggle-class="notification-bell" size="sm" menu-class="bell-menu" right
-  )
-    <template v-slot:button-content>
-        i.fa.fa-bell
-        b-badge.bell-badge(
-          pill="",
-          variant="danger",
-          v-if="unreadCount || unreadCount != 0"
-        ) {{ unreadCount }}
-    </template>
-    b-card.bell-item.accordion(no-body="", v-if="notifications == null")
-      b-card-header.text-center
-        .fa.fa-spinner.fa-spin.text-dark
-    b-card.bell-item.accordion(no-body="", v-else-if="notifications.length == 0")
-      b-card-header.text-center There are no notifications yet
-    b-card.bell-item.accordion(no-body="", v-else="")
-      div(v-for="notification in notifications", :key="notification.id")
-        b-card-header(
-          :aria-controls="`notification-${notification.id}`",
-          data-toggle="collapse",
-          :data-target="`#notification-${notification.id}`",
-          class="bell-item-header"
-        ) {{ notification.attributes.subject }}
-        .collapse(
-          :id="`notification-${notification.id}`",
-          accordion="notifications",
-          aria-expanded="true",
-          role="tabpanel",
-          class="text-muted bell-collapse",
-          data-parent=".accordion"
-        )
-          b-card-body {{ notification.attributes.body }}
-      b-card-footer.text-center(@click="loadMore", v-if="loadMorePath") more
+b-nav-item-dropdown(
+  id="bell-dropdown",
+  class="bg-transparent",
+  @show="notificationsReaded",
+  toggle-class="notification-bell" size="sm" menu-class="bell-menu" right
+)
+  <template v-slot:button-content>
+      i.fa.fa-bell
+      b-badge.bell-badge(
+        pill="",
+        variant="danger",
+        v-if="unreadCount || unreadCount != 0"
+      ) {{ unreadCount }}
+  </template>
+  b-card.bell-item.accordion(no-body="", v-if="notifications == null")
+    b-card-header.text-center
+      .fa.fa-spinner.fa-spin.text-dark
+  b-card.bell-item.accordion(no-body="", v-else-if="notifications.length == 0")
+    b-card-header.text-center There are no notifications yet
+  b-card.bell-item.accordion(no-body="", v-else="")
+    div(v-for="notification in notifications", :key="notification.id")
+      b-card-header(
+        :aria-controls="`notification-${notification.id}`",
+        data-toggle="collapse",
+        :data-target="`#notification-${notification.id}`",
+        class="bell-item-header"
+      ) {{ notification.attributes.subject }}
+      .collapse(
+        :id="`notification-${notification.id}`",
+        accordion="notifications",
+        aria-expanded="true",
+        role="tabpanel",
+        class="text-muted bell-collapse",
+        data-parent=".accordion"
+      )
+        b-card-body {{ notification.attributes.body }}
+    b-card-footer.text-center(@click="loadMore", v-if="loadMorePath") more
 </template>
 
 <script>

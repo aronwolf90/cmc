@@ -55,9 +55,10 @@ export default {
       let that = this
       this.progress = 40
 
-      this.$store.getters.axios.post('/api/v1/contact_avatars', formData, { headers })
+      this.$store.getters.axios.post(this.apiUrl, formData, { headers })
         .then(response => {
           that.$emit('change', response.data.data)
+          that.$emit('input', response.data.data)
           this.progress = 100
         })
     }

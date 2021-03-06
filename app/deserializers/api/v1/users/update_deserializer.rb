@@ -6,7 +6,9 @@ module Api::V1
       attribute :firstname
       attribute :lastname
       attribute :email
+      attribute :telephone_number
       belongs_to :selected_project
+      belongs_to :user_avatar
     end
   end
 end

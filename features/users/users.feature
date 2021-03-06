@@ -64,11 +64,11 @@ Scenario: Edit user
   When I click on ".navbar-nav img"
   And I click on link "Users"
   And I click on link "user2 simson"
-  And I enter "new firstname" into input named "data_firstname"
+  And I enter "new firstname" into input named "Firstname"
   And I click on submit
-  Then the input "data_firstname" has the value "new firstname"
+  Then the input "Firstname" has the value "new firstname"
   When I reload the page
-  Then the input "data_firstname" has the value "new firstname"
+  Then the input "Firstname" has the value "new firstname"
 
 @javascript
 Scenario: Change employee to admin

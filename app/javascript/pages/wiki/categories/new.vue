@@ -8,6 +8,11 @@
 <script>
 import WikiCategoriesForm from 'components/wiki/categories/form'
 import store from 'store'
+import wikiCategoriesForm from 'store/modules/wiki-categories-form'
+
+if (!store.hasModule('wikiCategoriesForm')) {
+  store.registerModule('wikiCategoriesForm', wikiCategoriesForm)
+}
 
 export default {
   components: {

@@ -30,6 +30,12 @@ import DeadlineAt from 'components/ticket/deadline-at'
 import Labels from 'components/ticket/labels'
 import CreatedBy from 'components/ticket/created-by'
 import CreatedAt from 'components/ticket/created-at'
+import store from 'store'
+import issuesShow from 'store/modules/issues-show'
+
+if (!store.hasModule('issuesShow')) {
+  store.registerModule('issuesShow', issuesShow)
+}
 
 export default {
   props: ['id'],
